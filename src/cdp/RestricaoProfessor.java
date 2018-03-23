@@ -1,37 +1,30 @@
 package cdp;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class RestricaoProfessor implements Serializable{
     
     private int id;
     private String nome;
-    private int dia;
-    private List intervaloTempo;
     private int prioridade;
-    private int turno;
     private Professor professor;
+    private Dia dia;
     
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, int dia, List intervaloTempo, int prioridade, int turno, Professor professor) {
+    public RestricaoProfessor(int id, String nome, int prioridade, int turno, Professor professor, Dia dia) {
         this.id = id;
         this.nome = nome;
         this.dia = dia;
-        this.intervaloTempo = intervaloTempo;
         this.prioridade = prioridade;
-        this.turno = turno;
         this.professor = professor;
     }
 
-    public RestricaoProfessor(String nome, int dia, List intervaloTempo, int prioridade, int turno, Professor professor) {
+    public RestricaoProfessor(String nome, int prioridade, int turno, Professor professor, Dia dia) {
         this.nome = nome;
         this.dia = dia;
-        this.intervaloTempo = intervaloTempo;
         this.prioridade = prioridade;
-        this.turno = turno;
         this.professor = professor;
     }
 
@@ -51,36 +44,20 @@ public class RestricaoProfessor implements Serializable{
         this.nome = nome;
     }
 
-    public int getDia() {
+    public Dia getDia() {
         return dia;
     }
 
-    public void setDia(int dia) {
+    public void setDia(Dia dia) {
         this.dia = dia;
     }
-
-    public List getIntervaloTempo() {
-        return intervaloTempo;
-    }
-
-    public void setIntervaloTempo(List intervaloTempo) {
-        this.intervaloTempo = intervaloTempo;
-    }
-
+    
     public int getPrioridade() {
         return prioridade;
     }
 
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
-    }
-
-    public int getTurno() {
-        return turno;
-    }
-
-    public void setTurno(int turno) {
-        this.turno = turno;
     }
 
     public Professor getProfessor() {
