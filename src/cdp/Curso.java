@@ -7,22 +7,25 @@ public class Curso {
     private int id;
     private String nome;
     private int qtPeriodos;
+    private String nivel;
     private Collection<Turma> turmas;
 
     public Curso() {
     }
 
-    public Curso(int id, String nome, int qtPeriodos, Collection<Turma> turmas) {
+    public Curso(int id, String nome, int qtPeriodos, Collection<Turma> turmas, String nivel) {
         this.id = id;
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.turmas = turmas;
+        this.nivel = nivel;
     }
 
-    public Curso(String nome, int qtPeriodos, Collection<Turma> turmas) {
+    public Curso(String nome, int qtPeriodos, Collection<Turma> turmas, String nivel) {
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.turmas = turmas;
+        this.nivel = nivel;
     }
 
     public int getId() {
@@ -55,5 +58,13 @@ public class Curso {
 
     public void setTurmas(Collection<Turma> turmas) {
         this.turmas = turmas;
-    }  
+    } 
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
 }

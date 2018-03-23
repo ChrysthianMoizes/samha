@@ -8,21 +8,27 @@ public class Turma {
     private String nome;
     private String anoCriacao;
     private MatrizCurricular matriz;
+    private Turno turno;
+    private Horario horario;
 
     public Turma() {
     }
 
-    public Turma(int id, String nome, String anoCriacao, MatrizCurricular matriz) {
+    public Turma(int id, String nome, String anoCriacao, MatrizCurricular matriz, Turno turno, Horario horario) {
         this.id = id;
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
+        this.turno = turno;
+        this.horario = horario;
     }
 
-    public Turma(String nome, String anoCriacao, MatrizCurricular matriz) {
+    public Turma(String nome, String anoCriacao, MatrizCurricular matriz, Turno turno,  Horario horario) {
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
+        this.turno = turno;
+        this.horario = horario;
     }
 
     public int getId() {
@@ -56,6 +62,20 @@ public class Turma {
     public void setMatriz(MatrizCurricular matriz) {
         this.matriz = matriz;
     }
-    
-    
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    } 
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
 }
