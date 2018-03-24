@@ -1,8 +1,26 @@
 package cdp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+@Entity
+@Table(name = "coordenador")
+@PrimaryKeyJoinColumn(name = "coordenador_id")
 public class Coordenador extends Servidor{
     
+    @Column(nullable = false)
     private String tipo;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Usuario usuario;
             
 

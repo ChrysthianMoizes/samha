@@ -1,13 +1,31 @@
 package cdp;
 
-public class Aula {
-    
-    private int id;
-    private double horarioInicio;
-    private double horarioTermino;
-    private DisciplinaProfessor disciplina;
-    private boolean disponivel = true;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Aula implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @Column(nullable = false, precision = 2)
+    private double horarioInicio;
+    
+    @Column(nullable = false, precision = 2)
+    private double horarioTermino;
+    
+    @Column(nullable = false)
+    private boolean disponivel = true;
+    
+    
+    private DisciplinaProfessor disciplina;
+    
     public Aula() {
     }
 

@@ -1,13 +1,37 @@
 package cdp;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-public class Coordenadoria {
+
+@Entity
+public class Coordenadoria implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false, unique = true)
     private String nome;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curso_id", nullable = true)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Curso curso;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordenador_id", nullable = true)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private ProfessorCoordenador coordenador;
+    
+    @OneToMany(mappedBy = "coordenadoria_id", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Professor> professores;
 
     public Coordenadoria() {

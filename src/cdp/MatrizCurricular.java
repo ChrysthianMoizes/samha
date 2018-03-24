@@ -1,13 +1,43 @@
 package cdp;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
-public class MatrizCurricular {
+@Entity
+public class MatrizCurricular implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false)
     private String anoCriacao;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "matriz_curricular_disciplina",
+            joinColumns = @JoinColumn(name = "matriz_curricular_id", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Disciplina> disciplinas;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curso_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Curso curso;
 
     public MatrizCurricular() {

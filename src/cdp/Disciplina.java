@@ -1,13 +1,40 @@
 package cdp;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
-public class Disciplina {
+@Entity
+public class Disciplina implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false)
     private int tipo;
+    
+    @Column(nullable = false, precision = 2)
     private double cargaHoraria;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "disciplina_professor",
+            joinColumns = @JoinColumn(name = "disciplina_id", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "professor_id"))
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Professor> professoresHabilitados;
 
     public Disciplina() {

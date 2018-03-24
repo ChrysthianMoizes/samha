@@ -1,28 +1,52 @@
 package cdp;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-public class Horario {
+@Entity
+public class Horario implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false, unique = false)
     private String ano;
-    private Turma turma;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restricao_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private RestricaoInstituicao restricoes;
+    
+    @OneToMany(mappedBy = "horario_id", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Dia> dias;
 
     public Horario() {
     }
 
-    public Horario(int id, String ano, Turma turma, RestricaoInstituicao restricoes, Collection<Dia> dias) {
+    public Horario(int id, String ano, RestricaoInstituicao restricoes, Collection<Dia> dias) {
         this.id = id;
         this.ano = ano;
-        this.turma = turma;
         this.restricoes = restricoes;
     }
 
-    public Horario(String ano, Turma turma, RestricaoInstituicao restricoes, Collection<Dia> dias) {
+    public Horario(String ano, RestricaoInstituicao restricoes, Collection<Dia> dias) {
         this.ano = ano;
-        this.turma = turma;
         this.restricoes = restricoes;
     }
 
@@ -40,14 +64,6 @@ public class Horario {
 
     public void setAno(String ano) {
         this.ano = ano;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
     }
 
     public RestricaoInstituicao getRestricoes() {

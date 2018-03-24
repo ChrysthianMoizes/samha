@@ -1,11 +1,21 @@
 package cdp;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.*;
 
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Servidor implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false, unique = true)
     private String matricula;
 
     public Servidor() {

@@ -1,33 +1,58 @@
 package cdp;
 
-import java.util.Collection;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-public class Turma {
+@Entity
+public class Turma implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false, unique = true)
     private String nome;
+    
+    @Column(nullable = false, unique = false)
     private String anoCriacao;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "matriz_curricular_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private MatrizCurricular matriz;
-    private Turno turno;
+    
+    @OneToMany(mappedBy = "turma_id", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Horario horario;
 
     public Turma() {
     }
 
-    public Turma(int id, String nome, String anoCriacao, MatrizCurricular matriz, Turno turno, Horario horario) {
+    public Turma(int id, String nome, String anoCriacao, MatrizCurricular matriz, Horario horario) {
         this.id = id;
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.turno = turno;
         this.horario = horario;
     }
 
-    public Turma(String nome, String anoCriacao, MatrizCurricular matriz, Turno turno,  Horario horario) {
+    public Turma(String nome, String anoCriacao, MatrizCurricular matriz, Horario horario) {
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.turno = turno;
         this.horario = horario;
     }
 
@@ -62,14 +87,6 @@ public class Turma {
     public void setMatriz(MatrizCurricular matriz) {
         this.matriz = matriz;
     }
-
-    public Turno getTurno() {
-        return turno;
-    }
-
-    public void setTurno(Turno turno) {
-        this.turno = turno;
-    } 
 
     public Horario getHorario() {
         return horario;
