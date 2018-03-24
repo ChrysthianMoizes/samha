@@ -6,6 +6,7 @@ public class Aula {
     private double horarioInicio;
     private double horarioTermino;
     private DisciplinaProfessor disciplina;
+    private boolean disponivel = true;
 
     public Aula() {
     }
@@ -52,4 +53,12 @@ public class Aula {
     public void setDisciplina(DisciplinaProfessor disciplina) {
         this.disciplina = disciplina;
     } 
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
 }
