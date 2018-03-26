@@ -27,7 +27,7 @@ public class Curso implements Serializable {
     @Column(nullable = false)
     private int qtPeriodos;
     
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String nivel;
     
     @OneToMany(mappedBy = "curso_id", fetch = FetchType.EAGER)

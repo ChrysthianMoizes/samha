@@ -8,9 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
@@ -26,8 +24,8 @@ public class Horario implements Serializable {
     @Column(nullable = false, unique = false)
     private String ano;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restricao_id", nullable = false)
+    @OneToMany(mappedBy = "restricao_id", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private RestricaoInstituicao restricoes;
     

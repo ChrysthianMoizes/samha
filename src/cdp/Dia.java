@@ -21,7 +21,7 @@ public class Dia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String nome;
     
     @OneToMany(mappedBy = "dia_id", fetch = FetchType.EAGER)

@@ -3,9 +3,17 @@ package cdp;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Aula implements Serializable {
@@ -23,19 +31,26 @@ public class Aula implements Serializable {
     @Column(nullable = false)
     private boolean disponivel = true;
     
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "disciplina_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Disciplina disciplina;
     
-    private DisciplinaProfessor disciplina;
+    @OneToMany(mappedBy = "professor_id", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Professor professor;
     
     public Aula() {
     }
 
-    public Aula(int id, double horarioInicio, double horarioTermino, DisciplinaProfessor disciplina) {
+    public Aula(int id, double horarioInicio, double horarioTermino, Disciplina disciplina) {
         this.id = id;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
     }
 
-    public Aula(double horarioInicio, double horarioTermino, DisciplinaProfessor disciplina) {
+    public Aula(double horarioInicio, double horarioTermino, Disciplina disciplina) {
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
     }
@@ -64,13 +79,21 @@ public class Aula implements Serializable {
         this.horarioTermino = horarioTermino;
     }
 
-    public DisciplinaProfessor getDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(DisciplinaProfessor disciplina) {
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     } 
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
 
     public boolean isDisponivel() {
         return disponivel;

@@ -8,5 +8,22 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">create</property>
+    <mapping class="cdp.Aula"/>
+    <mapping class="cdp.Coordenador"/>
+    <mapping class="cdp.Coordenadoria"/>
+    <mapping class="cdp.Curso"/>
+    <mapping class="cdp.Dia"/>
+    <mapping class="cdp.Disciplina"/>
+    <mapping class="cdp.Eixo"/>
+    <mapping class="cdp.Horario"/>
+    <mapping class="cdp.MatrizCurricular"/>
+    <mapping class="cdp.Professor"/>
+    <mapping class="cdp.ProfessorCoordenador"/>
+    <mapping class="cdp.RestricaoInstituicao"/>
+    <mapping class="cdp.RestricaoProfessor"/>
+    <mapping class="cdp.Servidor"/>
+    <mapping class="cdp.Turma"/>
+    <mapping class="cdp.Turno"/>
+    <mapping class="cdp.Usuario"/>
   </session-factory>
 </hibernate-configuration>
