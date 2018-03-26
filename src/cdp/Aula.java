@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
@@ -22,17 +22,30 @@ public class Aula implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(nullable = false)
+    private int numero;
+    
+    @Column(nullable = false)
+    private String dia;
+    
+    @Column(nullable = false)
+    private String turno;
+    
+    @Column(nullable = false)
+    private String ano;
+    
     @Column(nullable = false, precision = 2)
     private double horarioInicio;
     
     @Column(nullable = false, precision = 2)
     private double horarioTermino;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean disponivel = true;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "disciplina_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "disciplina_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Disciplina disciplina;
     
@@ -41,18 +54,38 @@ public class Aula implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "turma_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Turma turma;
+    
     public Aula() {
     }
 
-    public Aula(int id, double horarioInicio, double horarioTermino, Disciplina disciplina) {
+    public Aula(int id, int numero, String dia, String turno, String ano, double horarioInicio, double horarioTermino, Disciplina disciplina, Professor professor, Turma turma) {
         this.id = id;
+        this.numero = numero;
+        this.dia = dia;
+        this.turno = turno;
+        this.ano = ano;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
+        this.disciplina = disciplina;
+        this.professor = professor;
+        this.turma = turma;
     }
 
-    public Aula(double horarioInicio, double horarioTermino, Disciplina disciplina) {
+    public Aula(int numero, String dia, String turno, String ano, double horarioInicio, double horarioTermino, Disciplina disciplina, Professor professor, Turma turma) {
+        this.numero = numero;
+        this.dia = dia;
+        this.turno = turno;
+        this.ano = ano;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
+        this.disciplina = disciplina;
+        this.professor = professor;
+        this.turma = turma;
     }
 
     public int getId() {
@@ -61,6 +94,38 @@ public class Aula implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
     }
 
     public double getHorarioInicio() {
@@ -101,5 +166,13 @@ public class Aula implements Serializable {
 
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 }

@@ -33,15 +33,15 @@ public class ProfessorCoordenador extends Professor{
     public ProfessorCoordenador() {
     }
 
-    public ProfessorCoordenador(Coordenador coordenador, Coordenadoria coordenadoria, Eixo eixo, String email, double cargaHoraria, int id, String nome, String matricula, Collection restricoes, Collection<Turma> turmas) {
-        super(email, cargaHoraria, id, nome, matricula, restricoes, turmas);
+    public ProfessorCoordenador(Coordenador coordenador, Coordenadoria coordenadoria, Eixo eixo, String email, double cargaHoraria, int id, String nome, String matricula, Collection restricoes) {
+        super(email, cargaHoraria, id, nome, matricula, restricoes);
         this.coordenador = coordenador;
         this.coordenadoria = coordenadoria;
         this.eixo = eixo;
     }
 
-    public ProfessorCoordenador(Coordenador coordenador, Coordenadoria coordenadoria, Eixo eixo, String email, double cargaHoraria, String nome, String matricula, Collection restricoes, Collection<Turma> turmas) {
-        super(email, cargaHoraria, nome, matricula, restricoes, turmas);
+    public ProfessorCoordenador(Coordenador coordenador, Coordenadoria coordenadoria, Eixo eixo, String email, double cargaHoraria, String nome, String matricula, Collection restricoes) {
+        super(email, cargaHoraria, nome, matricula, restricoes);
         this.coordenador = coordenador;
         this.coordenadoria = coordenadoria;
         this.eixo = eixo;

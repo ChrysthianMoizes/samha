@@ -1,6 +1,7 @@
 package cdp;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
@@ -34,26 +35,25 @@ public class RestricaoProfessor implements Serializable{
     @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dia_id", nullable = false)
+    @OneToMany(mappedBy = "restricao_professor_id", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Dia dia;
+    private Collection<Aula> aulas;
     
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, int prioridade, int turno, Professor professor, Dia dia) {
+    public RestricaoProfessor(int id, String nome, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
         this.id = id;
         this.nome = nome;
-        this.dia = dia;
+        this.aulas = aulas;
         this.prioridade = prioridade;
         this.professor = professor;
     }
 
-    public RestricaoProfessor(String nome, int prioridade, int turno, Professor professor, Dia dia) {
+    public RestricaoProfessor(String nome, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
         this.nome = nome;
-        this.dia = dia;
+        this.aulas = aulas;
         this.prioridade = prioridade;
         this.professor = professor;
     }
@@ -74,14 +74,14 @@ public class RestricaoProfessor implements Serializable{
         this.nome = nome;
     }
 
-    public Dia getDia() {
-        return dia;
+    public Collection<Aula> getAulas() {
+        return aulas;
     }
 
-    public void setDia(Dia dia) {
-        this.dia = dia;
+    public void setAulas(Collection<Aula> aulas) {
+        this.aulas = aulas;
     }
-    
+
     public int getPrioridade() {
         return prioridade;
     }

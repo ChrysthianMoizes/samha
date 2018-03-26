@@ -3,7 +3,6 @@ package cdp;
 import java.util.Collection;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,30 +22,21 @@ public class Professor extends Servidor{
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Collection<RestricaoProfessor> restricoes;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "professor_turma",
-            joinColumns = @JoinColumn(name = "professor_id", nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "turma_id"))
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Turma> turmas;
-    
     public Professor() {
     }
     
-    public Professor(String email, double cargaHoraria, int id, String nome, String matricula, Collection restricoes, Collection<Turma> turmas) {
+    public Professor(String email, double cargaHoraria, int id, String nome, String matricula, Collection restricoes) {
         super(id, nome, matricula);
         this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
-        this.turmas = turmas;
     }
 
-    public Professor(String email, double cargaHoraria, String nome, String matricula, Collection restricoes, Collection<Turma> turmas) {
+    public Professor(String email, double cargaHoraria, String nome, String matricula, Collection restricoes) {
         super(nome, matricula);
         this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
-        this.turmas = turmas;
     }
 
     public String getEmail() {
@@ -71,13 +61,5 @@ public class Professor extends Servidor{
 
     public void setRestricoes(Collection restricoes) {
         this.restricoes = restricoes;
-    }
-
-    public Collection<Turma> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(Collection<Turma> turmas) {
-        this.turmas = turmas;
     }
 }

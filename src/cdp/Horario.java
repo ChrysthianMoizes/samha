@@ -32,20 +32,22 @@ public class Horario implements Serializable {
     @OneToMany(mappedBy = "horario_id", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Dia> dias;
+    private Collection<Aula> aulas;
 
     public Horario() {
     }
 
-    public Horario(int id, String ano, RestricaoInstituicao restricoes, Collection<Dia> dias) {
+    public Horario(int id, String ano, RestricaoInstituicao restricoes, Collection<Aula> aulas) {
         this.id = id;
         this.ano = ano;
         this.restricoes = restricoes;
+        this.aulas = aulas;
     }
 
-    public Horario(String ano, RestricaoInstituicao restricoes, Collection<Dia> dias) {
+    public Horario(String ano, RestricaoInstituicao restricoes, Collection<Aula> aulas) {
         this.ano = ano;
         this.restricoes = restricoes;
+        this.aulas = aulas;
     }
 
     public int getId() {
@@ -72,11 +74,11 @@ public class Horario implements Serializable {
         this.restricoes = restricoes;
     }
 
-    public Collection<Dia> getDias() {
-        return dias;
+    public Collection<Aula> getAulas() {
+        return aulas;
     }
 
-    public void setDias(Collection<Dia> dias) {
-        this.dias = dias;
+    public void setAulas(Collection<Aula> aulas) {
+        this.aulas = aulas;
     }
 }
