@@ -11,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
+@Table(name = "restricao_professor")
 public class RestricaoProfessor implements Serializable{
     
     @Id
@@ -26,36 +28,39 @@ public class RestricaoProfessor implements Serializable{
     @Column(nullable = false)
     private String nome;
     
+    @Column(nullable = true)
+    private String descricao;
+    
     @Column(nullable = false)
     private int prioridade;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor;
     
-    @OneToMany(mappedBy = "restricao_professor_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restricao", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Aula> aulas;
-    
+     
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
+    public RestricaoProfessor(int id, String nome, String descricao, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
         this.id = id;
         this.nome = nome;
         this.aulas = aulas;
         this.prioridade = prioridade;
         this.professor = professor;
+        this.descricao = descricao;
     }
 
-    public RestricaoProfessor(String nome, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
+    public RestricaoProfessor(String nome, String descricao, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
         this.nome = nome;
         this.aulas = aulas;
         this.prioridade = prioridade;
         this.professor = professor;
+        this.descricao = descricao;
     }
 
     public int getId() {
@@ -96,5 +101,13 @@ public class RestricaoProfessor implements Serializable{
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

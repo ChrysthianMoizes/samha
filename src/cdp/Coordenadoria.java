@@ -29,27 +29,33 @@ public class Coordenadoria implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private ProfessorCoordenador coordenador;
     
-    @OneToMany(mappedBy = "coordenadoria_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "coordenadoria", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Professor> professores;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "eixo_id", nullable = false)
+    private Eixo eixo;
 
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores) {
+    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
         this.professores = professores;
+        this.eixo = eixo;
     }
 
-    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores) {
+    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
         this.professores = professores;
+        this.eixo = eixo;
     }
 
     public int getId() {
@@ -90,5 +96,13 @@ public class Coordenadoria implements Serializable {
 
     public void setProfessores(Collection<Professor> professores) {
         this.professores = professores;
+    }
+
+    public Eixo getEixo() {
+        return eixo;
+    }
+
+    public void setEixo(Eixo eixo) {
+        this.eixo = eixo;
     }
 }

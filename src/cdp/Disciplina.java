@@ -25,7 +25,7 @@ public class Disciplina implements Serializable {
     private String nome;
     
     @Column(nullable = false)
-    private int tipo;
+    private String tipo;
     
     @Column(nullable = false, precision = 2)
     private double cargaHoraria;
@@ -40,7 +40,7 @@ public class Disciplina implements Serializable {
     public Disciplina() {
     }
 
-    public Disciplina(int id, String nome, int tipo, double cargaHoraria, Collection professoresHabilitados) {
+    public Disciplina(int id, String nome, String tipo, double cargaHoraria, Collection professoresHabilitados) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -48,7 +48,7 @@ public class Disciplina implements Serializable {
         this.professoresHabilitados = professoresHabilitados;
     }
 
-    public Disciplina(String nome, int tipo, double cargaHoraria, Collection professoresHabilitados) {
+    public Disciplina(String nome, String tipo, double cargaHoraria, Collection professoresHabilitados) {
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
@@ -71,11 +71,11 @@ public class Disciplina implements Serializable {
         this.nome = nome;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

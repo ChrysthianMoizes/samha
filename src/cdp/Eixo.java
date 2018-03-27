@@ -24,7 +24,7 @@ public class Eixo implements Serializable {
     @Column(nullable = false, unique = true)
     private String nome;
     
-    @OneToMany(mappedBy = "eixo_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "eixo", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Coordenadoria> coordenadorias;

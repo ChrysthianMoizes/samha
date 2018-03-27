@@ -1,6 +1,7 @@
 package cdp;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,27 +35,46 @@ public class Turma implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private MatrizCurricular matriz;
     
-    @OneToMany(mappedBy = "turma_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "turma", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Horario horario;
+    private Collection<Horario> horarios;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curso_id", nullable = false)
+    private Curso curso;
+    
+    @Column(nullable = false)
+    private String turno;
 
     public Turma() {
     }
 
-    public Turma(int id, String nome, String anoCriacao, MatrizCurricular matriz, Horario horario) {
+    public Turma(int id, String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Horario> horarios, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.horario = horario;
+        this.horarios = horarios;
+        this.curso = curso;
+        this.turno = turno;
     }
 
-    public Turma(String nome, String anoCriacao, MatrizCurricular matriz, Horario horario) {
+    public Turma(String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Horario> horarios, Curso curso) {
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.horario = horario;
+        this.horarios = horarios;
+        this.curso = curso;
+        this.turno = turno;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     public int getId() {
@@ -89,11 +109,19 @@ public class Turma implements Serializable {
         this.matriz = matriz;
     }
 
-    public Horario getHorario() {
-        return horario;
+    public Collection<Horario> getHorarios() {
+        return horarios;
     }
 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
+    public void setHorarios(Collection<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 }

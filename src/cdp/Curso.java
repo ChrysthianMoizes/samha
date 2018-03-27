@@ -30,7 +30,7 @@ public class Curso implements Serializable {
     @Column(nullable = false)
     private String nivel;
     
-    @OneToMany(mappedBy = "curso_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Turma> turmas;

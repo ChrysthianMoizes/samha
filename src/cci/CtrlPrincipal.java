@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cci;
 
-/**
- *
- * @author chrys
- */
+import cgd.Config;
+
 public class CtrlPrincipal {
+    
+    private Config config;
+
+    public CtrlPrincipal() {
+        config = new Config();
+    
+    }
     
     public static void main(String args[]){
         try {
@@ -23,7 +23,7 @@ public class CtrlPrincipal {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new CIInterface();
+                new CtrlPrincipal();
             }   
         });
     }

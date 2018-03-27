@@ -17,26 +17,32 @@ public class Professor extends Servidor{
     @Column(nullable = false, precision = 2)
     private double cargaHoraria;
     
-    @OneToMany(mappedBy = "professor_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Collection<RestricaoProfessor> restricoes;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordenadoria_id", nullable = false)
+    private Coordenadoria coordenadoria;
+    
     public Professor() {
     }
-    
-    public Professor(String email, double cargaHoraria, int id, String nome, String matricula, Collection restricoes) {
+
+    public Professor(String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, int id, String nome, String matricula) {
         super(id, nome, matricula);
         this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
+        this.coordenadoria = coordenadoria;
     }
 
-    public Professor(String email, double cargaHoraria, String nome, String matricula, Collection restricoes) {
+    public Professor(String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
         super(nome, matricula);
         this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
+        this.coordenadoria = coordenadoria;
     }
 
     public String getEmail() {
@@ -61,5 +67,13 @@ public class Professor extends Servidor{
 
     public void setRestricoes(Collection restricoes) {
         this.restricoes = restricoes;
+    }
+
+    public Coordenadoria getCoordenadoria() {
+        return coordenadoria;
+    }
+
+    public void setCoordenadoria(Coordenadoria coordenadoria) {
+        this.coordenadoria = coordenadoria;
     }
 }
