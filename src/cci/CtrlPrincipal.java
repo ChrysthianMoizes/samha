@@ -1,20 +1,24 @@
 package cci;
 
 import cgd.Config;
+import cih.FrmPrincipal;
+import cih.FrmValidarAcesso;
+import java.awt.Frame;
 
-public class CtrlPrincipal {
+public final class CtrlPrincipal {
     
-    private Config config;
+    private final Config config;
+    private Frame frmValidarAcesso;
 
     public CtrlPrincipal() {
         config = new Config();
-    
+        instanciarFrameValidarAcesso();
     }
     
     public static void main(String args[]){
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -28,4 +32,8 @@ public class CtrlPrincipal {
         });
     }
     
+    public void instanciarFrameValidarAcesso(){
+        frmValidarAcesso = new FrmValidarAcesso(this);
+        frmValidarAcesso.setVisible(true);
+    }  
 }
