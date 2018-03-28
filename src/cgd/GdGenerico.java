@@ -7,14 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 
-public abstract class GDGenerico {
+public abstract class GdGenerico {
 
     protected Session sessao;
     private final int CADASTRAR = 0;
     private final int ALTERAR = 1;
     private final int EXCLUIR = 3;
     
-    public GDGenerico() {
+    public GdGenerico() {
         
     }
     

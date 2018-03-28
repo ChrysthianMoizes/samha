@@ -11,8 +11,8 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
-        //ImageIcon icone = ciInterface.setarIconesJanela();
-        //setIconImage(icone.getImage());
+        ImageIcon icone = ctrlPrincipal.setarIconesJanela();
+        setIconImage(icone.getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -105,7 +105,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         String login = jTextFieldLogin.getText();
         String senha = jPasswordFieldSenha.getText();
         
-        //ciInterface.getCiGeral().validarAcesso(login, senha);
+        ctrlPrincipal.validarAcesso(login, senha);
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jPasswordFieldSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaKeyPressed
