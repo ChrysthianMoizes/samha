@@ -25,7 +25,7 @@ public final class CtrlPrincipal {
     public static void main(String args[]){
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -46,6 +46,7 @@ public final class CtrlPrincipal {
     
     public void instanciarFramePrincipal(){
         frmPrincipal = new FrmPrincipal();
+        frmPrincipal.setExtendedState(Frame.MAXIMIZED_BOTH);
         frmPrincipal.setVisible(true);
     }
     
