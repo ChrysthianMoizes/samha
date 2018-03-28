@@ -11,9 +11,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @PrimaryKeyJoinColumn(name = "professor_id")
 public class Professor extends Servidor{
     
-    @Column(nullable = false, unique = true)
-    private String email;
-    
     @Column(nullable = false, precision = 2)
     private double cargaHoraria;
     
@@ -29,28 +26,18 @@ public class Professor extends Servidor{
     public Professor() {
     }
 
-    public Professor(String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, int id, String nome, String matricula) {
+    public Professor(double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, int id, String nome, String matricula) {
         super(id, nome, matricula);
-        this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
         this.coordenadoria = coordenadoria;
     }
 
-    public Professor(String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
+    public Professor(double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
         super(nome, matricula);
-        this.email = email;
         this.cargaHoraria = cargaHoraria;
         this.restricoes = restricoes;
         this.coordenadoria = coordenadoria;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public double getCargaHoraria() {

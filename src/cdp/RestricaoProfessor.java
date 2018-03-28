@@ -10,12 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "restricao_professor")
@@ -32,35 +27,121 @@ public class RestricaoProfessor implements Serializable{
     private String descricao;
     
     @Column(nullable = false)
+    private String dia;
+    
+    @Column(nullable = false)
+    private String turno;
+    
+    @Column(nullable = false)
+    private String semestre;
+    
+    @Column(nullable = false)
+    private boolean aula1;
+    
+    @Column(nullable = false)
+    private boolean aula2;
+    
+    @Column(nullable = false)
+    private boolean aula3;
+    
+    @Column(nullable = false)
+    private boolean aula4;
+    
+    @Column(nullable = false)
+    private boolean aula5;
+    
+    @Column(nullable = false)
+    private boolean aula6;
+    
+    @Column(nullable = false)
     private int prioridade;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
     
-    @OneToMany(mappedBy = "restricao", fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Aula> aulas;
-     
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, String descricao, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
+    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, String semestre, boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, int prioridade, Professor professor) {
         this.id = id;
         this.nome = nome;
-        this.aulas = aulas;
+        this.descricao = descricao;
+        this.dia = dia;
+        this.turno = turno;
+        this.semestre = semestre;
+        this.aula1 = aula1;
+        this.aula2 = aula2;
+        this.aula3 = aula3;
+        this.aula4 = aula4;
+        this.aula5 = aula5;
+        this.aula6 = aula6;
         this.prioridade = prioridade;
         this.professor = professor;
-        this.descricao = descricao;
     }
 
-    public RestricaoProfessor(String nome, String descricao, int prioridade, int turno, Professor professor, Collection<Aula> aulas) {
+    public RestricaoProfessor(String nome, String descricao, String dia, String turno, String semestre, boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, int prioridade, Professor professor) {
         this.nome = nome;
-        this.aulas = aulas;
+        this.descricao = descricao;
+        this.dia = dia;
+        this.turno = turno;
+        this.semestre = semestre;
+        this.aula1 = aula1;
+        this.aula2 = aula2;
+        this.aula3 = aula3;
+        this.aula4 = aula4;
+        this.aula5 = aula5;
+        this.aula6 = aula6;
         this.prioridade = prioridade;
         this.professor = professor;
-        this.descricao = descricao;
+    }
+
+    public boolean isAula1() {
+        return aula1;
+    }
+
+    public void setAula1(boolean aula1) {
+        this.aula1 = aula1;
+    }
+
+    public boolean isAula2() {
+        return aula2;
+    }
+
+    public void setAula2(boolean aula2) {
+        this.aula2 = aula2;
+    }
+
+    public boolean isAula3() {
+        return aula3;
+    }
+
+    public void setAula3(boolean aula3) {
+        this.aula3 = aula3;
+    }
+
+    public boolean isAula4() {
+        return aula4;
+    }
+
+    public void setAula4(boolean aula4) {
+        this.aula4 = aula4;
+    }
+
+    public boolean isAula5() {
+        return aula5;
+    }
+
+    public void setAula5(boolean aula5) {
+        this.aula5 = aula5;
+    }
+
+    public boolean isAula6() {
+        return aula6;
+    }
+
+    public void setAula6(boolean aula6) {
+        this.aula6 = aula6;
     }
 
     public int getId() {
@@ -79,12 +160,36 @@ public class RestricaoProfessor implements Serializable{
         this.nome = nome;
     }
 
-    public Collection<Aula> getAulas() {
-        return aulas;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setAulas(Collection<Aula> aulas) {
-        this.aulas = aulas;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
     public int getPrioridade() {
@@ -101,13 +206,5 @@ public class RestricaoProfessor implements Serializable{
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+    } 
 }

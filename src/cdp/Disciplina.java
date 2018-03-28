@@ -1,7 +1,6 @@
 package cdp;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Disciplina implements Serializable {
@@ -30,29 +26,31 @@ public class Disciplina implements Serializable {
     @Column(nullable = false, precision = 2)
     private double cargaHoraria;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "disciplina_professor",
-            joinColumns = @JoinColumn(name = "disciplina_id", nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "professor_id"))
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Professor> professoresHabilitados;
+    @Column(nullable = false)
+    private int qtAulas;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "matriz_id", nullable = false)
+    private MatrizCurricular matriz;
 
     public Disciplina() {
     }
 
-    public Disciplina(int id, String nome, String tipo, double cargaHoraria, Collection professoresHabilitados) {
+    public Disciplina(int id, String nome, String tipo, double cargaHoraria, int qtAulas, MatrizCurricular matriz) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
-        this.professoresHabilitados = professoresHabilitados;
+        this.qtAulas = qtAulas;
+        this.matriz = matriz;
     }
 
-    public Disciplina(String nome, String tipo, double cargaHoraria, Collection professoresHabilitados) {
+    public Disciplina(String nome, String tipo, double cargaHoraria, int qtAulas, MatrizCurricular matriz) {
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
-        this.professoresHabilitados = professoresHabilitados;
+        this.qtAulas = qtAulas;
+        this.matriz = matriz;
     }
 
     public int getId() {
@@ -87,11 +85,19 @@ public class Disciplina implements Serializable {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public Collection<Professor> getProfessoresHabilitados() {
-        return professoresHabilitados;
+    public int getQtAulas() {
+        return qtAulas;
     }
 
-    public void setProfessoresHabilitados(Collection<Professor> professoresHabilitados) {
-        this.professoresHabilitados = professoresHabilitados;
-    } 
+    public void setQtAulas(int qtAulas) {
+        this.qtAulas = qtAulas;
+    }
+
+    public MatrizCurricular getMatriz() {
+        return matriz;
+    }
+
+    public void setMatriz(MatrizCurricular matriz) {
+        this.matriz = matriz;
+    }
 }

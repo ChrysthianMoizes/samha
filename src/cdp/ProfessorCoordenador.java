@@ -28,14 +28,14 @@ public class ProfessorCoordenador extends Professor{
     public ProfessorCoordenador() {
     }
 
-    public ProfessorCoordenador(Coordenador coordenador, Eixo eixo, String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, int id, String nome, String matricula) {
-        super(email, cargaHoraria, restricoes, coordenadoria, id, nome, matricula);
+    public ProfessorCoordenador(Coordenador coordenador, Eixo eixo, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, int id, String nome, String matricula) {
+        super(cargaHoraria, restricoes, coordenadoria, id, nome, matricula);
         this.coordenador = coordenador;
         this.eixo = eixo;
     }
 
-    public ProfessorCoordenador(Coordenador coordenador, Eixo eixo, String email, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
-        super(email, cargaHoraria, restricoes, coordenadoria, nome, matricula);
+    public ProfessorCoordenador(Coordenador coordenador, Eixo eixo, double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
+        super(cargaHoraria, restricoes, coordenadoria, nome, matricula);
         this.coordenador = coordenador;
         this.eixo = eixo;
     }

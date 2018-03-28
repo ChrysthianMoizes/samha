@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -32,10 +33,8 @@ public class MatrizCurricular implements Serializable {
     @Column(nullable = false)
     private String anoCriacao;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "matriz_curricular_disciplina",
-            joinColumns = @JoinColumn(name = "matriz_curricular_id", nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
+    @OneToMany(mappedBy = "matriz", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Disciplina> disciplinas;
     

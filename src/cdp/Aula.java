@@ -29,75 +29,47 @@ public class Aula implements Serializable {
     
     @Column(nullable = false)
     private String turno;
-    
-    @Column(nullable = false)
-    private String ano;
-    
+  
     @Column(nullable = false, precision = 2)
     private double horarioInicio;
     
     @Column(nullable = false, precision = 2)
     private double horarioTermino;
     
-    @Column(nullable = true)
-    private boolean disponivel = true;
-    
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "disciplina_id")
+    @JoinColumn(name = "alocacao_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Disciplina disciplina;
-    
+    private Alocacao alocacao;
+     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "professor_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Professor professor;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "turma_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Turma turma;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "horario_id", nullable = false)
-    private Horario horario;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restricao_professor_id")
-    private RestricaoProfessor restricao;
+    @JoinColumn(name = "oferta_id", nullable = false)
+    private Oferta oferta;
     
     public Aula() {
     }
 
-    public Aula(int id, int numero, String dia, String turno, String ano, double horarioInicio, double horarioTermino, Disciplina disciplina, Professor professor, Turma turma, Horario horario, RestricaoProfessor restricao) {
+    public Aula(int id, int numero, String dia, String turno, double horarioInicio, double horarioTermino, Alocacao alocacao, Oferta oferta) {
         this.id = id;
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
-        this.ano = ano;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
-        this.disciplina = disciplina;
-        this.professor = professor;
-        this.turma = turma;
-        this.restricao = restricao;
+        this.alocacao = alocacao;
+        this.oferta = oferta;
     }
 
-    public Aula(int numero, String dia, String turno, String ano, double horarioInicio, double horarioTermino, Disciplina disciplina, Professor professor, Turma turma, Horario horario, RestricaoProfessor restricao) {
+    public Aula(int numero, String dia, String turno, double horarioInicio, double horarioTermino, Alocacao alocacao, Oferta oferta) {
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
-        this.ano = ano;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
-        this.disciplina = disciplina;
-        this.professor = professor;
-        this.turma = turma;
-        this.restricao = restricao;
+        this.alocacao = alocacao;
+        this.oferta = oferta;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -130,14 +102,6 @@ public class Aula implements Serializable {
         this.turno = turno;
     }
 
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
-
     public double getHorarioInicio() {
         return horarioInicio;
     }
@@ -154,51 +118,19 @@ public class Aula implements Serializable {
         this.horarioTermino = horarioTermino;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
+    public Alocacao getAlocacao() {
+        return alocacao;
     }
 
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    } 
-
-    public Professor getProfessor() {
-        return professor;
+    public void setAlocacao(Alocacao alocacao) {
+        this.alocacao = alocacao;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public Oferta getOferta() {
+        return oferta;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
-    public RestricaoProfessor getRestricao() {
-        return restricao;
-    }
-
-    public void setRestricao(RestricaoProfessor restricao) {
-        this.restricao = restricao;
+    public void setOferta(Oferta oferta) {
+        this.oferta = oferta;
     }
 }

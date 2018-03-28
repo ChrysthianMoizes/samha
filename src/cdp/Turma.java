@@ -38,7 +38,7 @@ public class Turma implements Serializable {
     @OneToMany(mappedBy = "turma", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Horario> horarios;
+    private Collection<Oferta> ofertas;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "curso_id", nullable = false)
@@ -50,21 +50,21 @@ public class Turma implements Serializable {
     public Turma() {
     }
 
-    public Turma(int id, String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Horario> horarios, Curso curso) {
+    public Turma(int id, String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Oferta> ofertas, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.horarios = horarios;
+        this.ofertas = ofertas;
         this.curso = curso;
         this.turno = turno;
     }
 
-    public Turma(String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Horario> horarios, Curso curso) {
+    public Turma(String nome, String anoCriacao, String turno, MatrizCurricular matriz, Collection<Oferta> ofertas, Curso curso) {
         this.nome = nome;
         this.anoCriacao = anoCriacao;
         this.matriz = matriz;
-        this.horarios = horarios;
+        this.ofertas = ofertas;
         this.curso = curso;
         this.turno = turno;
     }
@@ -109,12 +109,12 @@ public class Turma implements Serializable {
         this.matriz = matriz;
     }
 
-    public Collection<Horario> getHorarios() {
-        return horarios;
+    public Collection<Oferta> getOfertas() {
+        return ofertas;
     }
 
-    public void setHorarios(Collection<Horario> horarios) {
-        this.horarios = horarios;
+    public void setOfertas(Collection<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 
     public String getTurno() {
