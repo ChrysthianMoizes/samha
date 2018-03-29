@@ -5,6 +5,7 @@ import cgt.GtPrincipal;
 import cgt.Permissao;
 import cih.FrmPrincipal;
 import cih.FrmValidarAcesso;
+import cih.JPInicio;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
 
@@ -13,12 +14,17 @@ public final class CtrlPrincipal {
     private Config config;
     private Frame frmValidarAcesso;
     private Frame frmPrincipal;
+    private JPInicio inicio;
     private static int permissao;
     private GtPrincipal gtPrincipal;
+    private CtrlProfessor ctrlProfessor;
+    private CtrlCoordenador ctrlCoordenador;
     
     public CtrlPrincipal() {
         //config = new Config();
         gtPrincipal = new GtPrincipal();
+        ctrlCoordenador = new CtrlCoordenador(this);
+        ctrlProfessor = new CtrlProfessor();
         instanciarFrameValidarAcesso();
     }
     
@@ -45,9 +51,14 @@ public final class CtrlPrincipal {
     }
     
     public void instanciarFramePrincipal(){
-        frmPrincipal = new FrmPrincipal();
+        frmPrincipal = new FrmPrincipal(this);
         frmPrincipal.setExtendedState(Frame.MAXIMIZED_BOTH);
         frmPrincipal.setVisible(true);
+    }
+    
+    public JPInicio instanciarPainelInicio(FrmPrincipal pai){
+        inicio = new JPInicio(pai, this); 
+        return inicio;
     }
     
     public ImageIcon setarIconesJanela(){  
@@ -99,5 +110,29 @@ public final class CtrlPrincipal {
 
     public static void setPermissao(int permissao) {
         CtrlPrincipal.permissao = permissao;
+    }
+
+    public GtPrincipal getGtPrincipal() {
+        return gtPrincipal;
+    }
+
+    public void setGtPrincipal(GtPrincipal gtPrincipal) {
+        this.gtPrincipal = gtPrincipal;
+    }
+
+    public CtrlProfessor getCtrlProfessor() {
+        return ctrlProfessor;
+    }
+
+    public void setCtrlProfessor(CtrlProfessor ctrlProfessor) {
+        this.ctrlProfessor = ctrlProfessor;
+    }
+
+    public CtrlCoordenador getCtrlCoordenador() {
+        return ctrlCoordenador;
+    }
+
+    public void setCtrlCoordenador(CtrlCoordenador ctrlCoordenador) {
+        this.ctrlCoordenador = ctrlCoordenador;
     }
 }

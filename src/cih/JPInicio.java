@@ -1,16 +1,15 @@
 package cih;
 
-//import cci.CIInterface;
-//import cci.util.Modulo;
+import cci.CtrlPrincipal;
 
 public class JPInicio extends javax.swing.JPanel {
       
-    //private CIInterface ciInterface;
+    private CtrlPrincipal ctrlPrincipal;
     private FrmPrincipal frmPrincipal;
 
-    public JPInicio(FrmPrincipal frmPrincipal) {
+    public JPInicio(FrmPrincipal frmPrincipal, CtrlPrincipal ctrl) {
         initComponents();
-        //this.ciInterface = ciInterface;
+        this.ctrlPrincipal = ctrl;
         this.frmPrincipal = frmPrincipal;
         identificarPermissaoJPInicio();
     }
@@ -19,178 +18,186 @@ public class JPInicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonProdutor = new javax.swing.JButton();
-        jButtonServico = new javax.swing.JButton();
-        jButtonMaquina = new javax.swing.JButton();
-        jButtonTipoMaquina = new javax.swing.JButton();
-        jButtonPropriedade = new javax.swing.JButton();
-        jButtonTipoServico = new javax.swing.JButton();
-        jButtonFuncionario = new javax.swing.JButton();
-        jButtonConfiguracoes = new javax.swing.JButton();
+        btnProfessor = new javax.swing.JButton();
+        btnCoordenador = new javax.swing.JButton();
+        btnCurso = new javax.swing.JButton();
+        btnDisciplina = new javax.swing.JButton();
+        btnCoordenadoria = new javax.swing.JButton();
+        btnEixo = new javax.swing.JButton();
+        btnMatriz = new javax.swing.JButton();
+        btnTurma = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
-        jButtonProdutor.setText("Professores");
-        jButtonProdutor.setToolTipText("");
-        jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonProdutor.addActionListener(new java.awt.event.ActionListener() {
+        btnProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/professor.png"))); // NOI18N
+        btnProfessor.setText("Professores");
+        btnProfessor.setToolTipText("");
+        btnProfessor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProfessor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProdutorActionPerformed(evt);
+                btnProfessorActionPerformed(evt);
             }
         });
-        add(jButtonProdutor);
+        add(btnProfessor);
 
-        jButtonServico.setText("Coordenadores");
-        jButtonServico.setToolTipText("");
-        jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonServico.addActionListener(new java.awt.event.ActionListener() {
+        btnCoordenador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/coordenador.png"))); // NOI18N
+        btnCoordenador.setText("Coordenadores");
+        btnCoordenador.setToolTipText("");
+        btnCoordenador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCoordenador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCoordenador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonServicoActionPerformed(evt);
+                btnCoordenadorActionPerformed(evt);
             }
         });
-        add(jButtonServico);
+        add(btnCoordenador);
 
-        jButtonMaquina.setText("Cursos");
-        jButtonMaquina.setToolTipText("");
-        jButtonMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
+        btnCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/curso.png"))); // NOI18N
+        btnCurso.setText("Cursos");
+        btnCurso.setToolTipText("");
+        btnCurso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCurso.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMaquinaActionPerformed(evt);
+                btnCursoActionPerformed(evt);
             }
         });
-        add(jButtonMaquina);
+        add(btnCurso);
 
-        jButtonTipoMaquina.setText("Disciplinas");
-        jButtonTipoMaquina.setToolTipText("");
-        jButtonTipoMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonTipoMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
+        btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/disciplina.png"))); // NOI18N
+        btnDisciplina.setText("Disciplinas");
+        btnDisciplina.setToolTipText("");
+        btnDisciplina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDisciplina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDisciplina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTipoMaquinaActionPerformed(evt);
+                btnDisciplinaActionPerformed(evt);
             }
         });
-        add(jButtonTipoMaquina);
+        add(btnDisciplina);
 
-        jButtonPropriedade.setText("Coordenadorias");
-        jButtonPropriedade.setToolTipText("");
-        jButtonPropriedade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonPropriedade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonPropriedade.addActionListener(new java.awt.event.ActionListener() {
+        btnCoordenadoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/corrdenadoria.png"))); // NOI18N
+        btnCoordenadoria.setText("Coordenadorias");
+        btnCoordenadoria.setToolTipText("");
+        btnCoordenadoria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCoordenadoria.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPropriedadeActionPerformed(evt);
+                btnCoordenadoriaActionPerformed(evt);
             }
         });
-        add(jButtonPropriedade);
+        add(btnCoordenadoria);
 
-        jButtonTipoServico.setText("Eixos");
-        jButtonTipoServico.setToolTipText("");
-        jButtonTipoServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonTipoServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonTipoServico.addActionListener(new java.awt.event.ActionListener() {
+        btnEixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/eixo.png"))); // NOI18N
+        btnEixo.setText("Eixos");
+        btnEixo.setToolTipText("");
+        btnEixo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEixo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTipoServicoActionPerformed(evt);
+                btnEixoActionPerformed(evt);
             }
         });
-        add(jButtonTipoServico);
+        add(btnEixo);
 
-        jButtonFuncionario.setText("Matrizes Curriculares");
-        jButtonFuncionario.setToolTipText("");
-        jButtonFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        btnMatriz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/matriz_curricular.png"))); // NOI18N
+        btnMatriz.setText("Matrizes Curriculares");
+        btnMatriz.setToolTipText("");
+        btnMatriz.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMatriz.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFuncionarioActionPerformed(evt);
+                btnMatrizActionPerformed(evt);
             }
         });
-        add(jButtonFuncionario);
+        add(btnMatriz);
 
-        jButtonConfiguracoes.setText("Turmas");
-        jButtonConfiguracoes.setToolTipText("");
-        jButtonConfiguracoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonConfiguracoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+        btnTurma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/turma.png"))); // NOI18N
+        btnTurma.setText("Turmas");
+        btnTurma.setToolTipText("");
+        btnTurma.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTurma.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfiguracoesActionPerformed(evt);
+                btnTurmaActionPerformed(evt);
             }
         });
-        add(jButtonConfiguracoes);
+        add(btnTurma);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadeActionPerformed
+    private void btnCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoordenadoriaActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.PROPRIEDADE));
-    }//GEN-LAST:event_jButtonPropriedadeActionPerformed
+    }//GEN-LAST:event_btnCoordenadoriaActionPerformed
 
-    private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
+    private void btnCoordenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoordenadorActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPServico(frmPrincipal, Modulo.SERVICO));
-    }//GEN-LAST:event_jButtonServicoActionPerformed
+    }//GEN-LAST:event_btnCoordenadorActionPerformed
 
-    private void jButtonTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoMaquinaActionPerformed
+    private void btnDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplinaActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.TIPO_MAQUINA));
-    }//GEN-LAST:event_jButtonTipoMaquinaActionPerformed
+    }//GEN-LAST:event_btnDisciplinaActionPerformed
 
-    private void jButtonFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFuncionarioActionPerformed
+    private void btnMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.FUNCIONARIO));
-    }//GEN-LAST:event_jButtonFuncionarioActionPerformed
+    }//GEN-LAST:event_btnMatrizActionPerformed
 
-    private void jButtonMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaquinaActionPerformed
+    private void btnCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCursoActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.MAQUINA));
-    }//GEN-LAST:event_jButtonMaquinaActionPerformed
+    }//GEN-LAST:event_btnCursoActionPerformed
 
-    private void jButtonTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServicoActionPerformed
+    private void btnEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEixoActionPerformed
        //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.TIPO_SERVICO));
-    }//GEN-LAST:event_jButtonTipoServicoActionPerformed
+    }//GEN-LAST:event_btnEixoActionPerformed
 
-    private void jButtonProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutorActionPerformed
+    private void btnProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessorActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPCrud(frmPrincipal, Modulo.PRODUTOR));
-    }//GEN-LAST:event_jButtonProdutorActionPerformed
+    }//GEN-LAST:event_btnProfessorActionPerformed
 
-    private void jButtonConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfiguracoesActionPerformed
+    private void btnTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurmaActionPerformed
         //frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPConfiguracoes(frmPrincipal));
-    }//GEN-LAST:event_jButtonConfiguracoesActionPerformed
+    }//GEN-LAST:event_btnTurmaActionPerformed
  
     private void identificarPermissaoJPInicio(){
         //jButtonConfiguracoes.setEnabled(ciInterface.getCiGeral().identificarPermissaoJPInicio());
     }
     
     public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
-        jButtonProdutorActionPerformed(evt);
+        //jButtonProdutorActionPerformed(evt);
     }
     
     public void setjButtonPropriedade(java.awt.event.ActionEvent evt) {
-        jButtonPropriedadeActionPerformed(evt);
+        //jButtonPropriedadeActionPerformed(evt);
     }
 
     public void setjButtonFuncionario(java.awt.event.ActionEvent evt) {
-        jButtonFuncionarioActionPerformed(evt);
+        //jButtonFuncionarioActionPerformed(evt);
     }
 
     public void setjButtonMaquina(java.awt.event.ActionEvent evt) {
-        jButtonMaquinaActionPerformed(evt);
+        //jButtonMaquinaActionPerformed(evt);
     }
 
     public void setjButtonServico(java.awt.event.ActionEvent evt) {
-        jButtonServicoActionPerformed(evt);
+        //jButtonServicoActionPerformed(evt);
     }
 
     public void setjButtonTipoMaquina(java.awt.event.ActionEvent evt) {
-        jButtonTipoMaquinaActionPerformed(evt);
+        //jButtonTipoMaquinaActionPerformed(evt);
     }
 
     public void setjButtonTipoServico(java.awt.event.ActionEvent evt) {
-        jButtonTipoServicoActionPerformed(evt);
+        //jButtonTipoServicoActionPerformed(evt);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConfiguracoes;
-    private javax.swing.JButton jButtonFuncionario;
-    private javax.swing.JButton jButtonMaquina;
-    private javax.swing.JButton jButtonProdutor;
-    private javax.swing.JButton jButtonPropriedade;
-    private javax.swing.JButton jButtonServico;
-    private javax.swing.JButton jButtonTipoMaquina;
-    private javax.swing.JButton jButtonTipoServico;
+    private javax.swing.JButton btnCoordenador;
+    private javax.swing.JButton btnCoordenadoria;
+    private javax.swing.JButton btnCurso;
+    private javax.swing.JButton btnDisciplina;
+    private javax.swing.JButton btnEixo;
+    private javax.swing.JButton btnMatriz;
+    private javax.swing.JButton btnProfessor;
+    private javax.swing.JButton btnTurma;
     // End of variables declaration//GEN-END:variables
 }
