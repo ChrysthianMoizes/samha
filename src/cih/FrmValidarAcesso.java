@@ -19,7 +19,6 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelLogo = new javax.swing.JLabel();
         jPanelLogin = new javax.swing.JPanel();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelSenha = new javax.swing.JLabel();
@@ -30,23 +29,26 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Validar Acesso");
         setResizable(false);
-        getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 
-        jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelLogo);
-
+        jPanelLogin.setBackground(new java.awt.Color(0, 204, 0));
         jPanelLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabelUsuario.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         jLabelUsuario.setText("Usuário:");
 
+        jLabelSenha.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         jLabelSenha.setText("Senha:");
 
+        jTextFieldLogin.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+
+        jPasswordFieldSenha.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         jPasswordFieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPasswordFieldSenhaKeyPressed(evt);
             }
         });
 
+        jButtonEntrar.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         jButtonEntrar.setText("Entrar");
         jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +96,18 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanelLogin);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -123,7 +136,6 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEntrar;
-    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanelLogin;

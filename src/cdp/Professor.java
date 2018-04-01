@@ -63,4 +63,8 @@ public class Professor extends Servidor{
     public void setCoordenadoria(Coordenadoria coordenadoria) {
         this.coordenadoria = coordenadoria;
     }
+    
+    public Object[] toArray() {
+        return new Object[] {this};
+    }
 }

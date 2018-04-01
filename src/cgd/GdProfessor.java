@@ -1,5 +1,5 @@
 package cgd;
 
-public class GdProfessor {
+public class GdProfessor extends GdGenerico{
     
 }

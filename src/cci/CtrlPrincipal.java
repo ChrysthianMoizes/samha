@@ -19,12 +19,15 @@ public final class CtrlPrincipal {
     private GtPrincipal gtPrincipal;
     private CtrlProfessor ctrlProfessor;
     private CtrlCoordenador ctrlCoordenador;
+    private CtrlMensagem ctrlMensagem;
+    private CtrlCoordenadoria ctrlCoordenadoria;
     
     public CtrlPrincipal() {
         //config = new Config();
         gtPrincipal = new GtPrincipal();
         ctrlCoordenador = new CtrlCoordenador(this);
         ctrlProfessor = new CtrlProfessor();
+        ctrlCoordenadoria = new CtrlCoordenadoria();
         instanciarFrameValidarAcesso();
     }
     
@@ -134,5 +137,21 @@ public final class CtrlPrincipal {
 
     public void setCtrlCoordenador(CtrlCoordenador ctrlCoordenador) {
         this.ctrlCoordenador = ctrlCoordenador;
+    }
+
+    public CtrlMensagem getCtrlMensagem() {
+        return ctrlMensagem;
+    }
+
+    public void setCtrlMensagem(CtrlMensagem ctrlMensagem) {
+        this.ctrlMensagem = ctrlMensagem;
+    }
+
+    public CtrlCoordenadoria getCtrlCoordenadoria() {
+        return ctrlCoordenadoria;
+    }
+
+    public void setCtrlCoordenadoria(CtrlCoordenadoria ctrlCoordenadoria) {
+        this.ctrlCoordenadoria = ctrlCoordenadoria;
     }
 }

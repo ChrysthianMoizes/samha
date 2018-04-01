@@ -41,7 +41,7 @@ public class JPGrade extends javax.swing.JPanel {
         lblVespertino = new javax.swing.JLabel();
         lblMatutino = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(51, 255, 0));
+        setBackground(new java.awt.Color(0, 204, 0));
 
         tblTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

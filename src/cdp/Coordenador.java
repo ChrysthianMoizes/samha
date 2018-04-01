@@ -54,4 +54,8 @@ public class Coordenador extends Servidor{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getNome(), getMatricula(), getTipo() };
+    }
 }

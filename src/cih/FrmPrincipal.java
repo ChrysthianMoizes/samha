@@ -98,7 +98,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio e Montagem de Horários Acadêmicos");
 
-        toolBar.setBackground(new java.awt.Color(102, 204, 255));
+        toolBar.setBackground(new java.awt.Color(0, 204, 0));
         toolBar.setBorder(null);
         toolBar.setFloatable(false);
         toolBar.setRollover(true);
@@ -219,39 +219,42 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
-        pnlLateral.setBackground(new java.awt.Color(153, 204, 255));
+        pnlLateral.setBackground(new java.awt.Color(0, 204, 0));
 
-        cbxCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbxCurso.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um curso...", "ARQUITETURA E URBANISMO", "SANEAMENTO AMBIENTAL", "SISTEMAS DE INFORMAÇÃO" }));
 
-        cbxTurma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbxTurma.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         cbxTurma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma turma...", "M20", "M15", "V05", "V07", "N09", "N10" }));
 
-        cbxSemestre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbxSemestre.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         cbxSemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um semestre...", "2015/1", "2015/2", "2016/1", "2016/2", "2017/1", "2017/2", "2018/1", "2018/2" }));
 
-        lblTempoMaximo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTempoMaximo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         lblTempoMaximo.setText("Tempo Máximo de Trabalho:");
         lblTempoMaximo.setToolTipText("");
 
-        lblIntervaloMinimo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblIntervaloMinimo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         lblIntervaloMinimo.setText("Intervalo Mínimo de Descanso:");
 
+        txtTempoMaximo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         txtTempoMaximo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTempoMaximo.setText("11");
 
+        txtIntervaloMinimo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         txtIntervaloMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIntervaloMinimo.setText("11");
 
         txtAreaAlocacoes.setColumns(20);
+        txtAreaAlocacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         txtAreaAlocacoes.setRows(5);
         jScrollPane2.setViewportView(txtAreaAlocacoes);
 
-        lblAlocacoes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblAlocacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         lblAlocacoes.setText("Alocações");
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,12 +262,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblCoordenador.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
         lblCoordenador.setText("Coordenador:");
 
+        lblData.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
         lblData.setText("Data:");
 
+        lblNomeCoordenador.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
         lblNomeCoordenador.setText("User");
 
+        lblDataAtual.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
         lblDataAtual.setText("00/00/0000");
 
         javax.swing.GroupLayout pnlLateralLayout = new javax.swing.GroupLayout(pnlLateral);
@@ -280,28 +287,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
-                    .addGroup(pnlLateralLayout.createSequentialGroup()
-                        .addComponent(lblData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDataAtual))
+                    .addComponent(cbxTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLateralLayout.createSequentialGroup()
+                        .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTempoMaximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlLateralLayout.createSequentialGroup()
                         .addComponent(lblCoordenador)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNomeCoordenador))
                     .addGroup(pnlLateralLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblIntervaloMinimo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbxTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAlocacoes)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlLateralLayout.createSequentialGroup()
-                        .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAlocacoes)
-                            .addGroup(pnlLateralLayout.createSequentialGroup()
-                                .addComponent(lblTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDataAtual)))
                 .addContainerGap())
         );
         pnlLateralLayout.setVerticalGroup(
@@ -326,7 +331,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlocacoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -348,14 +353,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCentral.setLayout(pnlCentralLayout);
         pnlCentralLayout.setHorizontalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 819, Short.MAX_VALUE)
+            .addGap(0, 727, Short.MAX_VALUE)
         );
         pnlCentralLayout.setVerticalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 723, Short.MAX_VALUE)
         );
 
-        pnlNotificacoes.setBackground(new java.awt.Color(153, 204, 255));
+        pnlNotificacoes.setBackground(new java.awt.Color(0, 204, 0));
 
         txtAreaNotificacoes.setEditable(false);
         txtAreaNotificacoes.setColumns(20);
@@ -364,7 +369,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtAreaNotificacoes.setBorder(null);
         jScrollPane1.setViewportView(txtAreaNotificacoes);
 
-        lblNotificacoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNotificacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
         lblNotificacoes.setText("Notificações:");
 
         javax.swing.GroupLayout pnlNotificacoesLayout = new javax.swing.GroupLayout(pnlNotificacoes);
@@ -372,21 +377,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlNotificacoesLayout.setHorizontalGroup(
             pnlNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNotificacoesLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(lblNotificacoes)
-                .addContainerGap(49, Short.MAX_VALUE))
-            .addGroup(pnlNotificacoesLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
+            .addGroup(pnlNotificacoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNotificacoes)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlNotificacoesLayout.setVerticalGroup(
             pnlNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNotificacoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addComponent(lblNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

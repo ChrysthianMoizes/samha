@@ -19,6 +19,9 @@ public class Coordenadoria implements Serializable {
     @Column(nullable = false, unique = true)
     private String nome;
     
+    @Column(nullable = false, unique = false)
+    private String eixo;
+    
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "curso_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -33,15 +36,11 @@ public class Coordenadoria implements Serializable {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Professor> professores;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "eixo_id", nullable = false)
-    private Eixo eixo;
-
+  
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
+    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, String eixo) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
@@ -50,7 +49,7 @@ public class Coordenadoria implements Serializable {
         this.eixo = eixo;
     }
 
-    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
+    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, String eixo) {
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
@@ -98,11 +97,20 @@ public class Coordenadoria implements Serializable {
         this.professores = professores;
     }
 
-    public Eixo getEixo() {
+    public String getEixo() {
         return eixo;
     }
 
-    public void setEixo(Eixo eixo) {
+    public void setEixo(String eixo) {
         this.eixo = eixo;
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this };
     }
 }
