@@ -49,6 +49,15 @@ public class CtrlCoordenador {
        } 
     }
     
+    public void excluir(Coordenador coordenador){
+        try{   
+            gtCoordenador.excluir(coordenador); 
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaCoord, "Excluído com sucesso!");
+        }catch(Exception e){
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaCoord, e.getMessage());
+        }
+    }
+    
     public List<Coordenador> buscar(String coluna, String texto) {
        return gtCoordenador.buscar(coluna, texto);
     }

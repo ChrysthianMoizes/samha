@@ -1,9 +1,9 @@
 package cih;
 
+import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
 import cdp.Coordenador;
-import cdp.ProfessorCoordenador;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -19,12 +19,14 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        btnBuscarActionPerformed(null);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup = new javax.swing.ButtonGroup();
         pnlGeral = new javax.swing.JPanel();
         pnlRodape = new javax.swing.JPanel();
         btnAlterar = new javax.swing.JButton();
@@ -34,10 +36,13 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         pnlBuscarCoordenador = new javax.swing.JPanel();
         jLabelFiltrar = new javax.swing.JLabel();
         cbxFiltro = new javax.swing.JComboBox<>();
-        jTextFieldFiltro = new javax.swing.JTextField();
+        txtFiltro = new javax.swing.JTextField();
         jScrollPaneCoordenadores = new javax.swing.JScrollPane();
         tblCoordenador = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
+        rdbCoordenadorAcademico = new javax.swing.JRadioButton();
+        rdbCoordenadorCurso = new javax.swing.JRadioButton();
+        rdbCoordenadorPedagogico = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Coordenador");
@@ -140,11 +145,16 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         jLabelFiltrar.setText("Filtrar por:");
 
         cbxFiltro.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Matrícula", "Tipo" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Matricula", "Tipo" }));
+        cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxFiltroItemStateChanged(evt);
+            }
+        });
 
-        jTextFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldFiltroKeyPressed(evt);
+                txtFiltroKeyPressed(evt);
             }
         });
 
@@ -180,6 +190,25 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             }
         });
 
+        rdbCoordenadorAcademico.setBackground(new java.awt.Color(0, 204, 0));
+        btnGroup.add(rdbCoordenadorAcademico);
+        rdbCoordenadorAcademico.setMnemonic('a');
+        rdbCoordenadorAcademico.setText("COORDENADOR ACADÊMICO");
+        rdbCoordenadorAcademico.setEnabled(false);
+
+        rdbCoordenadorCurso.setBackground(new java.awt.Color(0, 204, 0));
+        btnGroup.add(rdbCoordenadorCurso);
+        rdbCoordenadorCurso.setMnemonic('c');
+        rdbCoordenadorCurso.setSelected(true);
+        rdbCoordenadorCurso.setText("COORDENADOR DE CURSO");
+        rdbCoordenadorCurso.setEnabled(false);
+
+        rdbCoordenadorPedagogico.setBackground(new java.awt.Color(0, 204, 0));
+        btnGroup.add(rdbCoordenadorPedagogico);
+        rdbCoordenadorPedagogico.setMnemonic('p');
+        rdbCoordenadorPedagogico.setText("COORDENADOR PEDAGÓGICO");
+        rdbCoordenadorPedagogico.setEnabled(false);
+
         javax.swing.GroupLayout pnlBuscarCoordenadorLayout = new javax.swing.GroupLayout(pnlBuscarCoordenador);
         pnlBuscarCoordenador.setLayout(pnlBuscarCoordenadorLayout);
         pnlBuscarCoordenadorLayout.setHorizontalGroup(
@@ -193,22 +222,35 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlBuscarCoordenadorLayout.createSequentialGroup()
+                                .addComponent(rdbCoordenadorAcademico)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rdbCoordenadorCurso)
+                                .addGap(34, 34, 34)
+                                .addComponent(rdbCoordenadorPedagogico))
+                            .addGroup(pnlBuscarCoordenadorLayout.createSequentialGroup()
+                                .addComponent(txtFiltro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         pnlBuscarCoordenadorLayout.setVerticalGroup(
             pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarCoordenadorLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltro)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlBuscarCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbCoordenadorAcademico)
+                    .addComponent(rdbCoordenadorCurso)
+                    .addComponent(rdbCoordenadorPedagogico))
+                .addGap(13, 13, 13)
                 .addComponent(jScrollPaneCoordenadores, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -246,23 +288,44 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
+    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             btnBuscarActionPerformed(null);
         }
-    }//GEN-LAST:event_jTextFieldFiltroKeyPressed
+    }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = jTextFieldFiltro.getText();
-
-        lista = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
+        String filtro = txtFiltro.getText();
+        
+        if(colunaFiltro.toLowerCase().equals("tipo")){
+            
+            char tipo = (char) btnGroup.getSelection().getMnemonic();
+            
+            switch (tipo) {
+                case 'A':
+                    filtro = "COORDENADOR ACADÊMICO";
+                    break;
+                case 'C':
+                    filtro = "COORDENADOR DE CURSO";
+                    break;
+                default:
+                    filtro = "COORDENADOR PEDAGÓGICO";
+                    break;
+            }  
+            lista = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
+        }else
+            lista = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
+ 
         JTableUtil.limparTabela(tblCoordenador);
-
-        lista.forEach((coordenador) -> {
-            JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
-        });
+        
+        if(lista != null){
+            lista.forEach((coordenador) -> {
+                JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
+            });
+        }else
+            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
@@ -276,9 +339,9 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         try {
             Coordenador coord = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tblCoordenador);
             ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(coord, pai);
-            
+            btnBuscarActionPerformed(null);
         } catch (Exception ex) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(this, "Selecione um coordenador");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione um coordenador");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -307,7 +370,18 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            Coordenador coord = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tblCoordenador);
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+            if (confirmacao == 0) {
+            ctrlPrincipal.getCtrlCoordenador().excluir(coord);
+                btnBuscarActionPerformed(null);
+            }
+            
+        } catch (Exception ex) {
+            CtrlMensagem.exibirMensagemErro(this, "Selecione um coordenador");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed
@@ -316,19 +390,38 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnExcluirKeyPressed
 
+    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        if(cbxFiltro.getSelectedIndex() == 2){
+            rdbCoordenadorAcademico.setEnabled(true);
+            rdbCoordenadorCurso.setEnabled(true);
+            rdbCoordenadorPedagogico.setEnabled(true);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+        }else{
+            rdbCoordenadorAcademico.setEnabled(false);
+            rdbCoordenadorCurso.setEnabled(false);
+            rdbCoordenadorPedagogico.setEnabled(false);
+            txtFiltro.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbxFiltroItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JScrollPane jScrollPaneCoordenadores;
-    private javax.swing.JTextField jTextFieldFiltro;
     private javax.swing.JPanel pnlBuscarCoordenador;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;
+    private javax.swing.JRadioButton rdbCoordenadorAcademico;
+    private javax.swing.JRadioButton rdbCoordenadorCurso;
+    private javax.swing.JRadioButton rdbCoordenadorPedagogico;
     private javax.swing.JTable tblCoordenador;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

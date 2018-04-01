@@ -327,32 +327,39 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     public void selecionarTipoCoordenador(){
         
-        if(coordenador.getTipo().equals("COORDENADOR ACADÊMICO")){
-            cbxTipo.setSelectedIndex(0);
-            cbxProfessor.setEnabled(false);       
-        }else if(coordenador.getTipo().equals("COORDENADOR DE CURSO")){      
-            preencherComboProfessor();           
-            ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(profCoord.getCoordenadoria().toArray()));
-            cbxCoordenadoria.setSelectedIndex(0);
-            preencherComboCoordenadorias();
-            cbxTipo.setSelectedIndex(1);
-            cbxTipo.setEnabled(false);
-            txtNome.setEditable(false);
-            txtMatricula.setEditable(false);
+        switch (coordenador.getTipo()) {
             
-        }else{
-            cbxTipo.setSelectedIndex(2);
-            cbxProfessor.setEditable(false);
-        } 
+            case "COORDENADOR ACADÊMICO":
+                cbxTipo.setSelectedIndex(0);
+                cbxProfessor.setEnabled(false);
+                cbxCoordenadoria.setEnabled(false);
+                break;
+                
+            case "COORDENADOR DE CURSO":
+                preencherComboProfessor();
+                ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
+                cbxCoordenadoria.setModel(new DefaultComboBoxModel(profCoord.getCoordenadoria().toArray()));
+                cbxCoordenadoria.setSelectedIndex(0);
+                preencherComboCoordenadorias();
+                cbxTipo.setSelectedIndex(1);
+                cbxTipo.setEnabled(false);
+                txtNome.setEditable(false);
+                txtMatricula.setEditable(false);
+                break;
+                
+            default:
+                cbxTipo.setSelectedIndex(2); 
+                cbxProfessor.setEditable(false);
+                break;
+        }
     }
    
     public void preencherComboProfessor() {
         
-        if(listaProfessores == null)
-            listaProfessores = null;//ctrlPrincipal.getCtrlProfessor().consultar();
-        
-        if(listaProfessores != null)
+        if(listaProfessores == null){
+            listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
+            cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
+        }else
             cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
         
         if(coordenador != null){
@@ -369,10 +376,10 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     public void preencherComboCoordenadorias(){
         
-        if(listaCoordenadorias == null)
-            listaCoordenadorias = null;//ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
-        
-        if(listaCoordenadorias != null)
+        if(listaCoordenadorias == null){
+            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
+            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
+        }else
             cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
     }
 
@@ -410,12 +417,6 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
 
     private void cbxTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTipoItemStateChanged
         switch (cbxTipo.getSelectedIndex()) {
-            case 0:
-                cbxProfessor.setEnabled(false);
-                cbxCoordenadoria.setEnabled(false);
-                txtNome.setEditable(true);
-                txtMatricula.setEditable(true);
-                break;
             case 1:
                 preencherComboCoordenadorias();
                 preencherComboProfessor();
@@ -425,6 +426,8 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 txtMatricula.setEditable(false);
                 break;
             default:
+                cbxCoordenadoria.removeAllItems();
+                cbxProfessor.removeAllItems();
                 cbxProfessor.setEnabled(false);
                 cbxCoordenadoria.setEnabled(false);
                 txtNome.setEditable(true);

@@ -19,20 +19,21 @@ public class Coordenadoria implements Serializable {
     @Column(nullable = false, unique = true)
     private String nome;
     
-    @Column(nullable = false, unique = false)
-    private String eixo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eixo_id", nullable = false)
+    private Eixo eixo;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Curso curso;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coordenador_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private ProfessorCoordenador coordenador;
     
-    @OneToMany(mappedBy = "coordenadoria", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "coordenadoria", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Professor> professores;
@@ -40,7 +41,7 @@ public class Coordenadoria implements Serializable {
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, String eixo) {
+    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
@@ -49,7 +50,7 @@ public class Coordenadoria implements Serializable {
         this.eixo = eixo;
     }
 
-    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, String eixo) {
+    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
@@ -97,11 +98,11 @@ public class Coordenadoria implements Serializable {
         this.professores = professores;
     }
 
-    public String getEixo() {
+    public Eixo getEixo() {
         return eixo;
     }
 
-    public void setEixo(String eixo) {
+    public void setEixo(Eixo eixo) {
         this.eixo = eixo;
     }
     

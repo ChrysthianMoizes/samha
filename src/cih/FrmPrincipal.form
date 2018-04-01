@@ -100,38 +100,12 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator4">
         </Component>
-        <Component class="javax.swing.JButton" name="btnCoordenadoria">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/cih/img/corrdenadoria.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Coordenadoria"/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">
-        </Component>
         <Component class="javax.swing.JButton" name="btnCurso">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/cih/img/curso.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Curso"/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator6">
-        </Component>
-        <Component class="javax.swing.JButton" name="btnEixo">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/cih/img/eixo.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Eixo"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>

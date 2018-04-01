@@ -81,7 +81,7 @@ public class JPGrade extends javax.swing.JPanel {
         lblNoturno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNoturno.setText("Noturno");
 
-        lblVespertino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblVespertino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblVespertino.setText("Vespertino");
 
         lblMatutino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -107,7 +107,7 @@ public class JPGrade extends javax.swing.JPanel {
                         .addComponent(lblMatutino)
                         .addGap(81, 81, 81)
                         .addComponent(lblVespertino)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(lblNoturno)
                         .addGap(118, 118, 118))
                     .addGroup(layout.createSequentialGroup()

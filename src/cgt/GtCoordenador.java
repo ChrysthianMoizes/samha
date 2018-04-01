@@ -6,6 +6,7 @@ import cdp.Professor;
 import cdp.ProfessorCoordenador;
 import cdp.Usuario;
 import cgd.GdCoordenador;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GtCoordenador {
@@ -47,10 +48,19 @@ public class GtCoordenador {
             gdCoordenador.alterar(profCoord);
         }else
             gdCoordenador.alterar(coordenador);   
-    } 
+    }
+    
+    public void excluir(Coordenador coordenador) throws SQLException, ClassNotFoundException{
+        if(coordenador.getTipo().equals("COORDENADOR DE CURSO")){
+            ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
+            //profCoord.setCoordenadoria(null);
+            gdCoordenador.excluir(profCoord);
+        }else
+            gdCoordenador.excluir(coordenador);
+    }
     
     public List<Coordenador> buscar(String coluna, String texto) {
-        return gdCoordenador.buscar(coluna, texto);
+        return gdCoordenador.buscar(coluna.toLowerCase(), texto);
     }
 
     public void validarCampos(String nome, String matricula, String login, String senha) throws Exception {

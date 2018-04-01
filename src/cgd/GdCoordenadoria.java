@@ -10,7 +10,7 @@ public class GdCoordenadoria extends GdGenerico{
     public List filtrarCoordenadoresNulos(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
         coluna = coluna.toLowerCase();
-        crit.add( Restrictions.eq(coluna, texto) );
+        crit.add( Restrictions.like(coluna, "%"+texto+"%") );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();

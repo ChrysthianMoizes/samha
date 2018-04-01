@@ -23,7 +23,7 @@ public final class CtrlPrincipal {
     private CtrlCoordenadoria ctrlCoordenadoria;
     
     public CtrlPrincipal() {
-        //config = new Config();
+        config = new Config();
         gtPrincipal = new GtPrincipal();
         ctrlCoordenador = new CtrlCoordenador(this);
         ctrlProfessor = new CtrlProfessor();

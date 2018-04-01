@@ -13,7 +13,7 @@ public class GtCoordenadoria {
     }
     
     public List<Coordenadoria> filtrarCoordenadoresNulos() {
-        return gdCoordenadoria.filtrarCoordenadoresNulos("coordenador_id", "NULO");
+        return gdCoordenadoria.filtrarCoordenadoresNulos("nome", "");
     }
     
     

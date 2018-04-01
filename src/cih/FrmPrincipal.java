@@ -52,11 +52,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnCoordenador = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        btnCoordenadoria = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
         btnCurso = new javax.swing.JButton();
-        jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnEixo = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnDisciplina = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
@@ -144,28 +140,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         toolBar.add(btnCoordenador);
         toolBar.add(jSeparator4);
 
-        btnCoordenadoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/corrdenadoria.png"))); // NOI18N
-        btnCoordenadoria.setToolTipText("Coordenadoria");
-        btnCoordenadoria.setFocusable(false);
-        btnCoordenadoria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCoordenadoria.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBar.add(btnCoordenadoria);
-        toolBar.add(jSeparator5);
-
         btnCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/curso.png"))); // NOI18N
         btnCurso.setToolTipText("Curso");
         btnCurso.setFocusable(false);
         btnCurso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCurso.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(btnCurso);
-        toolBar.add(jSeparator6);
-
-        btnEixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/eixo.png"))); // NOI18N
-        btnEixo.setToolTipText("Eixo");
-        btnEixo.setFocusable(false);
-        btnEixo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEixo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBar.add(btnEixo);
         toolBar.add(jSeparator7);
 
         btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/disciplina.png"))); // NOI18N
@@ -444,10 +424,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocacao;
     private javax.swing.JButton btnCoordenador;
-    private javax.swing.JButton btnCoordenadoria;
     private javax.swing.JButton btnCurso;
     private javax.swing.JButton btnDisciplina;
-    private javax.swing.JButton btnEixo;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnMatriz;
     private javax.swing.JButton btnOferta;
@@ -470,8 +448,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
