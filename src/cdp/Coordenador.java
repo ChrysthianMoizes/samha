@@ -56,6 +56,6 @@ public class Coordenador extends Servidor{
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getNome(), getMatricula(), getTipo() };
+        return new Object[] { this, getMatricula(), getTipo() };
     }
 }

@@ -7,6 +7,8 @@ import cih.FrmPrincipal;
 import cih.FrmValidarAcesso;
 import cih.JPInicio;
 import java.awt.Frame;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public final class CtrlPrincipal {
@@ -64,23 +66,35 @@ public final class CtrlPrincipal {
         return inicio;
     }
     
-    public ImageIcon setarIconesJanela(){  
+    public ImageIcon setarIconeJanela(){  
         ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.jpg");
         return icone;
     }
     
     public void validarAcesso(String login, String senha) {
  
-        int permissao = 1;//gtPrincipal.validarAcesso(login, senha);
-        setPermissao(permissao);
-        
-        if(permissao == Permissao.PERMISSAO_NEGADA){
-            CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
-            
+        try {
+            int permissao = gtPrincipal.validarAcesso(login, senha);
+            setPermissao(permissao);
+            if(permissao == Permissao.PERMISSAO_NEGADA){
+            CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");        
         }else{
             instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
         } 
+        } catch (Exception ex) {
+            CtrlMensagem.exibirMensagemErro(frmValidarAcesso, ex.getMessage());
+        }  
+    }
+    
+    public void encerrarSessao() {
+
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmPrincipal, "Deseja Sair ?");
+        if (confirmacao == 0) {
+            gtPrincipal.encerrarSessao();
+            instanciarFrameValidarAcesso();
+            frmPrincipal.dispose();
+        }
     }
 
     public Config getConfig() {

@@ -5,6 +5,7 @@ import cdp.Coordenador;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class FrmPrincipal extends javax.swing.JFrame {
@@ -19,6 +20,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         btnInicioActionPerformed(null);
         atualizarInfoSistema();
+        ImageIcon icone = ctrlPrincipal.setarIconeJanela();
+        setIconImage(icone.getImage());
     }
     
     public void trocarPanel(JPanel jPanel) {
@@ -192,6 +195,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnSair.setFocusable(false);
         btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
         toolBar.add(btnSair);
         toolBar.add(jSeparator13);
 
@@ -420,6 +428,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCoordenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoordenadorActionPerformed
         ctrlPrincipal.getCtrlCoordenador().instanciarTelaBuscaCoordenador(this);
     }//GEN-LAST:event_btnCoordenadorActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        ctrlPrincipal.encerrarSessao();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocacao;

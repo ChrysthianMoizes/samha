@@ -11,7 +11,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
-        ImageIcon icone = ctrlPrincipal.setarIconesJanela();
+        ImageIcon icone = ctrlPrincipal.setarIconeJanela();
         setIconImage(icone.getImage());
     }
 

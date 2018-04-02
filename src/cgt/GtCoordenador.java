@@ -53,7 +53,6 @@ public class GtCoordenador {
     public void excluir(Coordenador coordenador) throws SQLException, ClassNotFoundException{
         if(coordenador.getTipo().equals("COORDENADOR DE CURSO")){
             ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
-            //profCoord.setCoordenadoria(null);
             gdCoordenador.excluir(profCoord);
         }else
             gdCoordenador.excluir(coordenador);
