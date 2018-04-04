@@ -13,51 +13,57 @@ public class GtPrincipal {
     public GtPrincipal() {
         gdPrincipal = new GdPrincipal();
         coordAtual = null;
-        permissao = Permissao.PERMISSAO_NEGADA;
+        permissao = Constantes.PERMISSAO_NEGADA;
     }
 
-    public int validarAcesso(String login, String senha) throws Exception {
-        
-        validarCampos(login, senha);
-        Usuario usuario = gdPrincipal.validarAcesso(login, senha);
+    public int validarAcesso(String login, String senha) {
 
-        if (usuario == null) {
-            throw  new SAMHAException(0);
+        try {
+            validarCampos(login, senha);
+            Usuario usuario = gdPrincipal.validarAcesso(login, senha);
 
-        } else {
-
-            Coordenador coordenador = gdPrincipal.identificarCoordenador(usuario.getId());
-            
-            if (coordenador == null) {
-                throw  new SAMHAException(0);
+            if (usuario == null) {
+                return Constantes.PERMISSAO_NEGADA;
             } else {
-                setCoordAtual(coordenador);
 
-                if (coordenador.getTipo().toLowerCase().equals("coordenador acadêmico")) {
-                    setPermissao(Permissao.PERMISSAO_ADMIN);
-                    return Permissao.PERMISSAO_ADMIN;
-                } else if (coordenador.getTipo().toLowerCase().equals("coordenador de curso")) {
-                    setPermissao(Permissao.PERMISSAO_COORD);
-                    return Permissao.PERMISSAO_COORD;
+                Coordenador coordenador = gdPrincipal.identificarCoordenador(usuario.getId());
+
+                if (coordenador == null) {
+                    return Constantes.PERMISSAO_NEGADA;
                 } else {
-                    setPermissao(Permissao.PERMISSAO_VIEW);
-                    return Permissao.PERMISSAO_VIEW;
+                    setCoordAtual(coordenador);
+
+                    if (coordenador.getTipo().toLowerCase().equals("coordenador acadêmico")) {
+                        setPermissao(Constantes.PERMISSAO_ADMIN);
+                        return Constantes.PERMISSAO_ADMIN;
+                    } else if (coordenador.getTipo().toLowerCase().equals("coordenador de curso")) {
+                        setPermissao(Constantes.PERMISSAO_COORD);
+                        return Constantes.PERMISSAO_COORD;
+                    } else {
+                        setPermissao(Constantes.PERMISSAO_VIEW);
+                        return Constantes.PERMISSAO_VIEW;
+                    }
                 }
             }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return Constantes.PERMISSAO_NEGADA;
         }
     }
 
     public void encerrarSessao() {
         setCoordAtual(null);
-        setPermissao(Permissao.PERMISSAO_NEGADA);
+        setPermissao(Constantes.PERMISSAO_NEGADA);
     }
-    
+
     public void validarCampos(String login, String senha) throws Exception {
-            if(login.equals(""))
-                throw new SAMHAException(3);
-            if(senha.equals(""))
-                throw new SAMHAException(4);
+        if (login.equals("")) {
+            throw new SAMHAException(3);
         }
+        if (senha.equals("")) {
+            throw new SAMHAException(4);
+        }
+    }
 
     public Coordenador getCoordAtual() {
         return coordAtual;

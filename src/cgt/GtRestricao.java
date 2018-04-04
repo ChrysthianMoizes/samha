@@ -1,20 +1,15 @@
 package cgt;
 
-import cdp.Coordenadoria;
-import cdp.Professor;
-import cdp.RestricaoProfessor;
-import cgd.GdProfessor;
-import java.sql.SQLException;
-import java.util.List;
+import cgd.GdRestricao;
 
-public class GtProfessor {
-
-    private GdProfessor gdProfessor;
-
-    public GtProfessor() {
-        gdProfessor = new GdProfessor();
+public class GtRestricao {
+    
+    private GdRestricao gdRestricao;
+    
+    public GtRestricao(){
+        gdRestricao = new GdRestricao();
     }
-
+    
     public String cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes) {
 
         try {
@@ -70,7 +65,7 @@ public class GtProfessor {
             return ex.getMessage();
         }
     }
-
+    
     public void validarCampos(String nome, String matricula, String cargaHoraria) throws Exception {
         if (nome.equals("")) {
             throw new SAMHAException(1);
@@ -82,4 +77,5 @@ public class GtProfessor {
             throw new SAMHAException(5);
         }
     }
+    
 }

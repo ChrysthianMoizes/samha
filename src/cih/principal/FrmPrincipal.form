@@ -211,15 +211,15 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="pnlLateral" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnlAlocacoes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="pnlCentral" max="32767" attributes="0"/>
+                  <Component id="pnlTurma" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlNotificacoes" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="284" pref="284" max="-2" attributes="0"/>
-                  <Component id="pnlCentral1" max="32767" attributes="0"/>
+                  <Component id="pnlProfessor" max="32767" attributes="0"/>
                   <EmptySpace min="216" pref="216" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -230,11 +230,11 @@
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="pnlNotificacoes" max="32767" attributes="0"/>
-                      <Component id="pnlLateral" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnlAlocacoes" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="pnlCentral" max="32767" attributes="0"/>
+                          <Component id="pnlTurma" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnlCentral1" max="32767" attributes="0"/>
+                          <Component id="pnlProfessor" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -243,7 +243,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="pnlLateral">
+        <Container class="javax.swing.JPanel" name="pnlAlocacoes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="cc" red="0" type="rgb"/>
@@ -522,7 +522,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pnlCentral">
+        <Container class="javax.swing.JPanel" name="pnlTurma">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -607,7 +607,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pnlCentral1">
+        <Container class="javax.swing.JPanel" name="pnlProfessor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>

@@ -25,10 +25,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
     public void trocarPanel(JPanel jPanel) {
-        pnlCentral.removeAll();
-        pnlCentral.add(jPanel);
-        pnlCentral.validate();
-        pnlCentral.repaint();
+        pnlTurma.removeAll();
+        pnlTurma.add(jPanel);
+        pnlTurma.validate();
+        pnlTurma.repaint();
     }
     
     private void atualizarInfoSistema(){
@@ -70,7 +70,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
         pnlPrincipal = new javax.swing.JPanel();
-        pnlLateral = new javax.swing.JPanel();
+        pnlAlocacoes = new javax.swing.JPanel();
         cbxCurso = new javax.swing.JComboBox<>();
         cbxTurma = new javax.swing.JComboBox<>();
         cbxSemestre = new javax.swing.JComboBox<>();
@@ -88,12 +88,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        pnlCentral = new javax.swing.JPanel();
+        pnlTurma = new javax.swing.JPanel();
         pnlNotificacoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaNotificacoes = new javax.swing.JTextArea();
         lblNotificacoes = new javax.swing.JLabel();
-        pnlCentral1 = new javax.swing.JPanel();
+        pnlProfessor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio e Montagem de Horários Acadêmicos");
@@ -208,7 +208,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
 
-        pnlLateral.setBackground(new java.awt.Color(0, 204, 102));
+        pnlAlocacoes.setBackground(new java.awt.Color(0, 204, 102));
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um curso...", "ARQUITETURA E URBANISMO", "SANEAMENTO AMBIENTAL", "SISTEMAS DE INFORMAÇÃO" }));
@@ -262,44 +262,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jList1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jScrollPane3.setViewportView(jList1);
 
-        javax.swing.GroupLayout pnlLateralLayout = new javax.swing.GroupLayout(pnlLateral);
-        pnlLateral.setLayout(pnlLateralLayout);
-        pnlLateralLayout.setHorizontalGroup(
-            pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLateralLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
+        pnlAlocacoes.setLayout(pnlAlocacoesLayout);
+        pnlAlocacoesLayout.setHorizontalGroup(
+            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxSemestre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(separadorLateral, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addComponent(cbxTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLateralLayout.createSequentialGroup()
-                        .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
+                        .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTempoMaximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlLateralLayout.createSequentialGroup()
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(lblCoordenador)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNomeCoordenador))
-                    .addGroup(pnlLateralLayout.createSequentialGroup()
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(lblData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDataAtual))
-                    .addGroup(pnlLateralLayout.createSequentialGroup()
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(lblAlocacoes)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3))
                 .addContainerGap())
         );
-        pnlLateralLayout.setVerticalGroup(
-            pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLateralLayout.createSequentialGroup()
+        pnlAlocacoesLayout.setVerticalGroup(
+            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -307,11 +307,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIntervaloMinimo)
                     .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -325,27 +325,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCoordenador)
                     .addComponent(lblNomeCoordenador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
                     .addComponent(lblDataAtual))
                 .addContainerGap())
         );
 
-        pnlCentral.setBackground(new java.awt.Color(204, 204, 204));
+        pnlTurma.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout pnlCentralLayout = new javax.swing.GroupLayout(pnlCentral);
-        pnlCentral.setLayout(pnlCentralLayout);
-        pnlCentralLayout.setHorizontalGroup(
-            pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
+        pnlTurma.setLayout(pnlTurmaLayout);
+        pnlTurmaLayout.setHorizontalGroup(
+            pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 721, Short.MAX_VALUE)
         );
-        pnlCentralLayout.setVerticalGroup(
-            pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+        pnlTurmaLayout.setVerticalGroup(
+            pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         pnlNotificacoes.setBackground(new java.awt.Color(0, 204, 102));
@@ -383,17 +383,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlCentral1.setBackground(new java.awt.Color(204, 204, 204));
+        pnlProfessor.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout pnlCentral1Layout = new javax.swing.GroupLayout(pnlCentral1);
-        pnlCentral1.setLayout(pnlCentral1Layout);
-        pnlCentral1Layout.setHorizontalGroup(
-            pnlCentral1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlProfessorLayout = new javax.swing.GroupLayout(pnlProfessor);
+        pnlProfessor.setLayout(pnlProfessorLayout);
+        pnlProfessorLayout.setHorizontalGroup(
+            pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 721, Short.MAX_VALUE)
         );
-        pnlCentral1Layout.setVerticalGroup(
-            pnlCentral1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+        pnlProfessorLayout.setVerticalGroup(
+            pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -401,14 +401,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addComponent(pnlLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAlocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGap(284, 284, 284)
-                .addComponent(pnlCentral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(216, 216, 216))
         );
         pnlPrincipalLayout.setVerticalGroup(
@@ -417,11 +417,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlLateral, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlAlocacoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlCentral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
 
@@ -492,11 +492,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeCoordenador;
     private javax.swing.JLabel lblNotificacoes;
     private javax.swing.JLabel lblTempoMaximo;
-    private javax.swing.JPanel pnlCentral;
-    private javax.swing.JPanel pnlCentral1;
-    private javax.swing.JPanel pnlLateral;
+    private javax.swing.JPanel pnlAlocacoes;
     private javax.swing.JPanel pnlNotificacoes;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JPanel pnlProfessor;
+    private javax.swing.JPanel pnlTurma;
     private javax.swing.JSeparator separadorLateral;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JTextArea txtAreaNotificacoes;

@@ -2,17 +2,15 @@ package cci;
 
 import cgd.Config;
 import cgt.GtPrincipal;
-import cgt.Permissao;
+import cgt.Constantes;
 import cih.principal.FrmPrincipal;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
 import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public final class CtrlPrincipal {
-    
+
     private Config config;
     private Frame frmValidarAcesso;
     private Frame frmPrincipal;
@@ -23,70 +21,69 @@ public final class CtrlPrincipal {
     private CtrlCoordenador ctrlCoordenador;
     private CtrlMensagem ctrlMensagem;
     private CtrlCoordenadoria ctrlCoordenadoria;
-    
+    private CtrlRestricao ctrlRestricao;
+
     public CtrlPrincipal() {
         config = new Config();
         gtPrincipal = new GtPrincipal();
         ctrlCoordenador = new CtrlCoordenador(this);
         ctrlProfessor = new CtrlProfessor(this);
         ctrlCoordenadoria = new CtrlCoordenadoria();
+        ctrlRestricao = new CtrlRestricao();
         instanciarFrameValidarAcesso();
     }
-    
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }   
-        }catch(Exception e){}
-        
+            }
+        } catch (Exception e) {
+        }
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CtrlPrincipal();
-            }   
+            }
         });
     }
-    
-    public void instanciarFrameValidarAcesso(){
+
+    public void instanciarFrameValidarAcesso() {
         frmValidarAcesso = new FrmValidarAcesso(this);
         frmValidarAcesso.setVisible(true);
     }
-    
-    public void instanciarFramePrincipal(){
+
+    public void instanciarFramePrincipal() {
         frmPrincipal = new FrmPrincipal(this);
         frmPrincipal.setExtendedState(Frame.MAXIMIZED_BOTH);
         frmPrincipal.setVisible(true);
     }
-    
-    public JPInicio instanciarPainelInicio(FrmPrincipal pai){
-        inicio = new JPInicio(pai, this); 
+
+    public JPInicio instanciarPainelInicio(FrmPrincipal pai) {
+        inicio = new JPInicio(pai, this);
         return inicio;
     }
-    
-    public ImageIcon setarIconeJanela(){  
+
+    public ImageIcon setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.jpg");
         return icone;
     }
-    
+
     public void validarAcesso(String login, String senha) {
- 
-        try {
-            int permissao = gtPrincipal.validarAcesso(login, senha);
-            setPermissao(permissao);
-            if(permissao == Permissao.PERMISSAO_NEGADA){
-            CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");        
-        }else{
+
+        int permissao = gtPrincipal.validarAcesso(login, senha);
+        setPermissao(permissao);
+        if (permissao == Constantes.PERMISSAO_NEGADA) {
+            CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
+        } else {
             instanciarFramePrincipal();
-            frmValidarAcesso.dispose(); 
-        } 
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(frmValidarAcesso, ex.getMessage());
-        }  
+            frmValidarAcesso.dispose();
+        }
     }
-    
+
     public void encerrarSessao() {
 
         int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmPrincipal, "Deseja Sair ?");
@@ -167,5 +164,13 @@ public final class CtrlPrincipal {
 
     public void setCtrlCoordenadoria(CtrlCoordenadoria ctrlCoordenadoria) {
         this.ctrlCoordenadoria = ctrlCoordenadoria;
+    }
+
+    public CtrlRestricao getCtrlRestricao() {
+        return ctrlRestricao;
+    }
+
+    public void setCtrlRestricao(CtrlRestricao ctrlRestricao) {
+        this.ctrlRestricao = ctrlRestricao;
     }
 }

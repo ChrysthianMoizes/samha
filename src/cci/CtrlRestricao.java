@@ -1,41 +1,15 @@
 package cci;
 
-import cdp.Coordenadoria;
-import cdp.Professor;
-import cdp.RestricaoProfessor;
-import cgt.Constantes;
-import cgt.GtProfessor;
-import cih.professor.JDBuscarProfessor;
-import cih.professor.JDCadastrarProfessor;
-import java.awt.Frame;
-import java.util.List;
+import cgt.GtRestricao;
 
-public class CtrlProfessor {
+public class CtrlRestricao {
+    
+    private GtRestricao gtRestricao;
 
-    private GtProfessor gtProfessor;
-    private JDBuscarProfessor buscaProf;
-    private JDCadastrarProfessor cadastraProf;
-    private CtrlPrincipal ctrlPrincipal;
-
-    public CtrlProfessor(CtrlPrincipal ctrl) {
-        gtProfessor = new GtProfessor();
-        ctrlPrincipal = ctrl;
+    public CtrlRestricao() {
+        gtRestricao = new GtRestricao();
     }
-
-    public void instanciarTelaBuscaProfessor(Frame pai) {
-        buscaProf = new JDBuscarProfessor(pai, true, ctrlPrincipal);
-        buscaProf.setVisible(true);
-    }
-
-    public void instanciarTelaCadastroProfessor(Professor prof, Frame pai) {
-        cadastraProf = new JDCadastrarProfessor(pai, true, ctrlPrincipal, prof);
-        cadastraProf.setVisible(true);
-    }
-
-    public List<Professor> buscar(String coluna, String texto) {
-        return gtProfessor.buscar(coluna, texto);
-    }
-
+    
     public void cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes) {
 
         String resposta = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes);
@@ -66,4 +40,5 @@ public class CtrlProfessor {
             else
                 ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaProf, resposta);
     }
+    
 }
