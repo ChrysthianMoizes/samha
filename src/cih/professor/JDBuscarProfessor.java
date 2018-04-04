@@ -154,7 +154,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         );
 
         pnlBuscarProfessor.setBackground(new java.awt.Color(0, 204, 102));
-        pnlBuscarProfessor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
+        pnlBuscarProfessor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         jLabelFiltrar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabelFiltrar.setText("Filtrar por:");

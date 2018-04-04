@@ -4,6 +4,7 @@ import cdp.Coordenadoria;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -39,6 +40,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnRestricoes = new javax.swing.JButton();
         pnlRestricoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -78,7 +80,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
 
         pnlDadosPessoais.setBackground(new java.awt.Color(0, 204, 102));
-        pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
+        pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         lblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCargaHoraria.setText("Carga Horária:");
@@ -105,7 +107,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCoordenadoria)
@@ -178,12 +180,23 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             }
         });
 
+        btnRestricoes.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnRestricoes.setText("Gerenciar Restrições");
+        btnRestricoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRestricoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestricoesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlRodapeLayout = new javax.swing.GroupLayout(pnlRodape);
         pnlRodape.setLayout(pnlRodapeLayout);
         pnlRodapeLayout.setHorizontalGroup(
             pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRodapeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,16 +204,17 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         );
         pnlRodapeLayout.setVerticalGroup(
             pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRodapeLayout.createSequentialGroup()
+            .addGroup(pnlRodapeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(btnRestricoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pnlRestricoes.setBackground(new java.awt.Color(0, 204, 102));
-        pnlRestricoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Restrições", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
+        pnlRestricoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Restrições", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         jList1.setBackground(new java.awt.Color(204, 255, 204));
         jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -235,7 +249,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         lblBarra.setText("/");
 
         pnlAulas.setBackground(new java.awt.Color(0, 204, 102));
-        pnlAulas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aulas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MV Boli", 0, 14))); // NOI18N
+        pnlAulas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aulas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         chxAula1.setBackground(new java.awt.Color(0, 204, 102));
         chxAula1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -338,7 +352,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtNomeRestricao.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
         pnlPrioridade.setBackground(new java.awt.Color(0, 204, 102));
-        pnlPrioridade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
+        pnlPrioridade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         rbtnBaixa.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnBaixa);
@@ -431,39 +445,36 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRestricoesLayout.createSequentialGroup()
                 .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxDias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlAulas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbxDias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlAulas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pnlDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jScrollPane1)
         );
 
         javax.swing.GroupLayout pnlGeralLayout = new javax.swing.GroupLayout(pnlGeral);
@@ -485,7 +496,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -509,21 +520,16 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         if(professor != null){
             setarCamposComInstancia();
         }else{
-           
+           listaRestricoes = new ArrayList<RestricaoProfessor>();
         }
     }
     
     public void setarCamposComInstancia(){
-        selecionarTipoCoordenador();
+        
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
        
     }
-    
-    public void selecionarTipoCoordenador(){
-        
-       
-    }  
     
     public void preencherComboCoordenadorias(){
         
@@ -574,16 +580,16 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
         
         switch (priori) {
-                case 'A':
-                    prioridade = "BAIXA";
-                    break;
-                case 'C':
-                    prioridade = "MÉDIA";
-                    break;
-                default:
-                    prioridade = "ALTA";
-                    break;
-            }
+            case 'B':
+                prioridade = "BAIXA";
+                break;
+            case 'M':
+                prioridade = "MÉDIA";
+                break;
+            default:
+                prioridade = "ALTA";
+                break;
+        }
         
         boolean aula1 = chxAula1.isSelected();
         boolean aula2 = chxAula2.isSelected();
@@ -592,8 +598,20 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         boolean aula5 = chxAula5.isSelected();
         boolean aula6 = chxAula6.isSelected();
         
+        RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().montarRestricao(nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6); 
+            
+        if(professor == null){
+            listaRestricoes.add(restricao);
+        }else{
+            //ctrlPrincipal.getCtrlRestricao().cadastrar(restricao, professor);
+        }
+        
         
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnRestricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestricoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRestricoesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -601,6 +619,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGroupPrioridade;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnRestricoes;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxDias;

@@ -54,7 +54,7 @@ public class RestricaoProfessor implements Serializable{
     private boolean aula6;
     
     @Column(nullable = false)
-    private int prioridade;
+    private String prioridade;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor_id", nullable = false)
@@ -63,7 +63,8 @@ public class RestricaoProfessor implements Serializable{
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, String semestre, boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, int prioridade, Professor professor) {
+    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, String semestre, 
+            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -80,7 +81,8 @@ public class RestricaoProfessor implements Serializable{
         this.professor = professor;
     }
 
-    public RestricaoProfessor(String nome, String descricao, String dia, String turno, String semestre, boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, int prioridade, Professor professor) {
+    public RestricaoProfessor(String nome, String descricao, String dia, String turno, String semestre,
+            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.nome = nome;
         this.descricao = descricao;
         this.dia = dia;
@@ -192,11 +194,11 @@ public class RestricaoProfessor implements Serializable{
         this.semestre = semestre;
     }
 
-    public int getPrioridade() {
+    public String getPrioridade() {
         return prioridade;
     }
 
-    public void setPrioridade(int prioridade) {
+    public void setPrioridade(String prioridade) {
         this.prioridade = prioridade;
     }
 
