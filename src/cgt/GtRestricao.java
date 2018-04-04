@@ -14,7 +14,7 @@ public class GtRestricao {
         gdRestricao = new GdRestricao();
     }
 
-    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String semestre, String descricao, String prioridade,
+    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String ano, String semestre, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
         try {
@@ -37,7 +37,7 @@ public class GtRestricao {
             restricao.setDia(dia.toUpperCase());
             restricao.setNome(nome);
             restricao.setPrioridade(prioridade.toUpperCase());
-            restricao.setSemestre(semestre);
+            restricao.setSemestre(ano + "/" + semestre);
             restricao.setTurno(turno);
             restricao.setProfessor(professor);
             gdRestricao.cadastrar(restricao);
@@ -47,20 +47,8 @@ public class GtRestricao {
         }
     }
 
-    public List<Professor> buscar(String coluna, String texto) {
-        return null;
-
-        //if (coluna.toLowerCase().equals("coordenadoria")) {
-        //coluna = "coordenadoria_id";
-        // return gdProfessor.filtrarPorCoordenadoria(coluna, texto);
-        //} else {
-        // return gdProfessor.buscar(coluna.toLowerCase(), texto);
-        //}
-    }
-
-    public List<Professor> consultar() {
-        return null;
-        //return gdProfessor.consultar(Professor.class);
+    public List<RestricaoProfessor> filtrarPorProfessor(int id) {
+        return gdRestricao.filtrarPorProfessor("professor.id", id);
     }
 
     public String excluir(RestricaoProfessor restricao) {

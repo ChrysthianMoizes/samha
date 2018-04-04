@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class CtrlMensagem {
     
     public static void exibirMensagemSucesso(Component janela, String mensagem){
-        JOptionPane.showMessageDialog(janela, mensagem, "Ok!:", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(janela, mensagem, "Sucesso:", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public static void exibirMensagemErro(Component janela, String mensagem){

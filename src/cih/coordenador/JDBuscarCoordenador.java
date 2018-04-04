@@ -21,6 +21,18 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         btnBuscarActionPerformed(null);
     }
+    
+    public void atualizarTabela(){
+        
+        JTableUtil.limparTabela(tblCoordenador);
+        
+        if(listaCoordenadores != null){
+            listaCoordenadores.forEach((coordenador) -> {
+                JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
+            });
+        }else
+            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -326,18 +338,9 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                     filtro = "COORDENADOR PEDAGÓGICO";
                     break;
             }  
-            listaCoordenadores = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
-        }else
-            listaCoordenadores = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
- 
-        JTableUtil.limparTabela(tblCoordenador);
-        
-        if(listaCoordenadores != null){
-            listaCoordenadores.forEach((coordenador) -> {
-                JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
-            });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+        }    
+        listaCoordenadores = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
+        atualizarTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed

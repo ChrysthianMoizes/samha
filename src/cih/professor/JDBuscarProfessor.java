@@ -3,7 +3,6 @@ package cih.professor;
 import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.Coordenador;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import java.awt.Frame;
@@ -28,11 +27,22 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     
     public void preencherComboCoordenadorias(){
         
-        if(listaCoordenadorias == null){
+        if(listaCoordenadorias == null)
             listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().listar();
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
+           
+        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));       
+    }
+    
+    public void atualizarTabela(){
+        
+        JTableUtil.limparTabela(tblProfessor);
+        
+        if(listaProfessores != null){
+            listaProfessores.forEach((professor) -> {
+                JTableUtil.addLinha(tblProfessor, professor.toArray() );
+            });
         }else
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));       
+            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
     }
 
     @SuppressWarnings("unchecked")
@@ -302,15 +312,8 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         }
         
         listaProfessores = ctrlPrincipal.getCtrlProfessor().buscar(colunaFiltro, filtro);
-      
-        JTableUtil.limparTabela(tblProfessor);
+        atualizarTabela();
         
-        if(listaProfessores != null){
-            listaProfessores.forEach((professor) -> {
-                JTableUtil.addLinha(tblProfessor, professor.toArray() );
-            });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed

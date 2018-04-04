@@ -2,7 +2,6 @@ package cgt;
 
 import cdp.Coordenadoria;
 import cdp.Professor;
-import cdp.RestricaoProfessor;
 import cgd.GdProfessor;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +14,7 @@ public class GtProfessor {
         gdProfessor = new GdProfessor();
     }
 
-    public String cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
+    public Professor cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
 
         try {
             validarCampos(nome, matricula, cargaHoraria);
@@ -25,13 +24,13 @@ public class GtProfessor {
             professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
             professor.setCoordenadoria(coordenadoria);
             gdProfessor.cadastrar(professor);
-            return Constantes.CADASTRADO;
+            return professor;
         } catch (Exception ex) {
-            return ex.getMessage();
+            return null;
         }
     }
     
-    public String alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public Professor alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         try {
             validarCampos(nome, matricula, cargaHoraria);
@@ -40,9 +39,9 @@ public class GtProfessor {
             professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
             professor.setCoordenadoria(coordenadoria);
             gdProfessor.alterar(professor);
-            return Constantes.ALTERADO;
+            return professor;
         } catch (Exception ex) {
-            return ex.getMessage();
+            return null;
         }
     }
 
@@ -50,10 +49,9 @@ public class GtProfessor {
 
         if (coluna.toLowerCase().equals("coordenadoria")) {
             coluna = "coordenadoria_id";
-            return gdProfessor.filtrarPorCoordenadoria(coluna, texto);
-        } else {
-            return gdProfessor.buscar(coluna.toLowerCase(), texto);
-        }
+            return gdProfessor.filtrarPorCoordenadoria(coluna, Integer.parseInt(texto));
+        } else 
+            return gdProfessor.buscar(coluna.toLowerCase(), texto);      
     }
 
     public List<Professor> consultar() {

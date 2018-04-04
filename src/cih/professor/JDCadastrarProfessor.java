@@ -1,4 +1,6 @@
 package cih.professor;
+
+import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Coordenadoria;
 import cdp.Professor;
@@ -9,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public class JDCadastrarProfessor extends javax.swing.JDialog {
-    
+
     private CtrlPrincipal ctrlPrincipal;
     private Professor professor;
     private List<RestricaoProfessor> listaRestricoes;
@@ -20,8 +22,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.professor = professor;
+        habilitarCamposRestricao(false);
         identificarOrigem();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,6 +41,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtCargaHoraria = new javax.swing.JTextField();
         lblCoordenadoria = new javax.swing.JLabel();
         cbxCoordenadoria = new javax.swing.JComboBox<>();
+        pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         pnlRestricoes = new javax.swing.JPanel();
@@ -69,6 +74,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         rbtnBaixa = new javax.swing.JRadioButton();
         rbtnMedia = new javax.swing.JRadioButton();
         rbtnAlta = new javax.swing.JRadioButton();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Professor");
@@ -100,6 +106,53 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
+        javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
+        pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
+        pnlDadosPessoaisLayout.setHorizontalGroup(
+            pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCoordenadoria)
+                    .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNome)
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addComponent(txtMatricula)
+                        .addGap(26, 26, 26)
+                        .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlDadosPessoaisLayout.setVerticalGroup(
+            pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        pnlRodape.setBackground(new java.awt.Color(0, 204, 102));
+        pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         btnSalvar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -128,62 +181,25 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
-        pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
-        pnlDadosPessoaisLayout.setHorizontalGroup(
-            pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                                .addComponent(txtMatricula)
-                                .addGap(26, 26, 26)
-                                .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(lblCoordenadoria)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        javax.swing.GroupLayout pnlRodapeLayout = new javax.swing.GroupLayout(pnlRodape);
+        pnlRodape.setLayout(pnlRodapeLayout);
+        pnlRodapeLayout.setHorizontalGroup(
+            pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        pnlDadosPessoaisLayout.setVerticalGroup(
-            pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        pnlRodapeLayout.setVerticalGroup(
+            pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRodapeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnlRestricoes.setBackground(new java.awt.Color(0, 204, 102));
@@ -191,13 +207,17 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         lstRestricoes.setBackground(new java.awt.Color(204, 255, 204));
         lstRestricoes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        lstRestricoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lstRestricoes.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         lstRestricoes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        lstRestricoes.setEnabled(false);
+        lstRestricoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstRestricoesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstRestricoes);
 
         lblDia.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -205,23 +225,21 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         cbxDias.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxDias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SEGUNDA-FEIRA", "TERÇA-FEIRA", "QUARTA-FEIRA", "QUINTA-FEIRA", "SEXTA-FEIRA" }));
-        cbxDias.setEnabled(false);
 
         lblTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblTurno.setText("Turno:");
 
         cbxTurnos.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
-        cbxTurnos.setEnabled(false);
 
         lblSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblSemestre.setText("Semestre:");
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnAno.setEnabled(false);
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
 
         spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnSemestre.setEnabled(false);
+        spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
 
         lblBarra.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblBarra.setText("/");
@@ -232,32 +250,26 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         chxAula1.setBackground(new java.awt.Color(0, 204, 102));
         chxAula1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula1.setText("Aula 1");
-        chxAula1.setEnabled(false);
 
         chxAula2.setBackground(new java.awt.Color(0, 204, 102));
         chxAula2.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula2.setText("Aula 2");
-        chxAula2.setEnabled(false);
 
         chxAula3.setBackground(new java.awt.Color(0, 204, 102));
         chxAula3.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula3.setText("Aula 3");
-        chxAula3.setEnabled(false);
 
         chxAula4.setBackground(new java.awt.Color(0, 204, 102));
         chxAula4.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula4.setText("Aula 4");
-        chxAula4.setEnabled(false);
 
         chxAula5.setBackground(new java.awt.Color(0, 204, 102));
         chxAula5.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula5.setText("Aula 5");
-        chxAula5.setEnabled(false);
 
         chxAula6.setBackground(new java.awt.Color(0, 204, 102));
         chxAula6.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula6.setText("Aula 6");
-        chxAula6.setEnabled(false);
 
         javax.swing.GroupLayout pnlAulasLayout = new javax.swing.GroupLayout(pnlAulas);
         pnlAulas.setLayout(pnlAulasLayout);
@@ -298,7 +310,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         btnRemover.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnRemover.setText("Remover");
         btnRemover.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnRemover.setEnabled(false);
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -308,7 +319,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         btnAdicionar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
         btnAdicionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAdicionar.setEnabled(false);
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -320,14 +330,13 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         txtAreaDescricao.setColumns(20);
         txtAreaDescricao.setRows(5);
-        txtAreaDescricao.setEnabled(false);
         jScrollPane2.setViewportView(txtAreaDescricao);
 
         javax.swing.GroupLayout pnlDescricaoLayout = new javax.swing.GroupLayout(pnlDescricao);
         pnlDescricao.setLayout(pnlDescricaoLayout);
         pnlDescricaoLayout.setHorizontalGroup(
             pnlDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
         );
         pnlDescricaoLayout.setVerticalGroup(
             pnlDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,7 +347,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         lblNomeRestricao.setText("Nome:");
 
         txtNomeRestricao.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtNomeRestricao.setEnabled(false);
 
         pnlPrioridade.setBackground(new java.awt.Color(0, 204, 102));
         pnlPrioridade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
@@ -347,22 +355,20 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         btnGroupPrioridade.add(rbtnBaixa);
         rbtnBaixa.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnBaixa.setMnemonic('b');
+        rbtnBaixa.setSelected(true);
         rbtnBaixa.setText("Baixa");
-        rbtnBaixa.setEnabled(false);
 
         rbtnMedia.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnMedia);
         rbtnMedia.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnMedia.setMnemonic('m');
         rbtnMedia.setText("Média");
-        rbtnMedia.setEnabled(false);
 
         rbtnAlta.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnAlta);
         rbtnAlta.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnAlta.setMnemonic('a');
         rbtnAlta.setText("Alta");
-        rbtnAlta.setEnabled(false);
 
         javax.swing.GroupLayout pnlPrioridadeLayout = new javax.swing.GroupLayout(pnlPrioridade);
         pnlPrioridade.setLayout(pnlPrioridadeLayout);
@@ -388,14 +394,23 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
+        btnLimpar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlRestricoesLayout = new javax.swing.GroupLayout(pnlRestricoes);
         pnlRestricoes.setLayout(pnlRestricoesLayout);
         pnlRestricoesLayout.setHorizontalGroup(
             pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRestricoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,13 +432,14 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                                 .addComponent(lblTurno)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxTurnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxDias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cbxTurnos, 0, 134, Short.MAX_VALUE)
+                            .addComponent(cbxDias, 0, 1, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
@@ -458,15 +474,17 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlAulas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlRestricoesLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
                                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31))
-                            .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1))
                 .addGap(10, 10, 10))
         );
@@ -478,6 +496,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlRestricoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -489,7 +508,9 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -500,49 +521,60 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void identificarOrigem(){
+    public void identificarOrigem() {
         preencherComboCoordenadorias();
-        if(professor != null){
+        if (professor != null) {
             setarCamposComInstancia();
-            //buscar restricoes com professor_id
+            listaRestricoes = ctrlPrincipal.getCtrlRestricao().filtrarPorProfessor(professor.getId());
+            preencherListaRestricoes();
         }
     }
-    
-    public void setarCamposComInstancia(){
-        
+
+    public void setarCamposComInstancia() {
+
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
         txtCargaHoraria.setText(String.valueOf(professor.getCargaHoraria()));
         Coordenadoria coordenadoria;
-        
-        for(int i = 0; i < listaCoordenadorias.size(); i++){
-            
+
+        for (int i = 0; i < listaCoordenadorias.size(); i++) {
+
             coordenadoria = listaCoordenadorias.get(i);
-            if(coordenadoria.getId() == professor.getCoordenadoria().getId()){
+            if (coordenadoria.getId() == professor.getCoordenadoria().getId()) {
                 cbxCoordenadoria.setSelectedIndex(i);
                 break;
             }
-            i++;      
-        }      
+        }
     }
-    
-    public void preencherComboCoordenadorias(){
-        
-        if(listaCoordenadorias == null){
+
+    public void preencherComboCoordenadorias() {
+
+        if (listaCoordenadorias == null) {
             listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
-        }else
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
+        }
+
+        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
     }
-    
-    public void desabilitarCamposProfessor(boolean opcao){
+
+    public void preencherListaRestricoes() {
+        if (listaRestricoes != null) {
+            DefaultListModel defaultListModel = new DefaultListModel();
+            lstRestricoes.removeAll();
+            for (int i = 0; i < listaRestricoes.size(); i++) {
+                defaultListModel.addElement(listaRestricoes.get(i).toString());
+            }
+            lstRestricoes.setModel(defaultListModel);
+        }
+    }
+
+    public void desabilitarCamposProfessor(boolean opcao) {
         txtNome.setEnabled(opcao);
         txtMatricula.setEnabled(opcao);
         txtCargaHoraria.setEnabled(opcao);
@@ -550,8 +582,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         btnSalvar.setEnabled(opcao);
         btnCancelar.setText("Sair");
     }
-    
-    public void habilitarCamposRestricao(boolean opcao){
+
+    public void habilitarCamposRestricao(boolean opcao) {
         txtNomeRestricao.setEnabled(opcao);
         cbxTurnos.setEnabled(opcao);
         spnAno.setEnabled(opcao);
@@ -569,33 +601,31 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         rbtnMedia.setEnabled(opcao);
         btnAdicionar.setEnabled(opcao);
         btnRemover.setEnabled(opcao);
-        txtAreaDescricao.setEnabled(opcao);    
+        btnLimpar.setEnabled(opcao);
+        txtAreaDescricao.setEnabled(opcao);
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+
         String nome = txtNome.getText();
         String matricula = txtMatricula.getText();
-        String cargaHoraria = txtCargaHoraria.getText();       
-        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem(); 
-        
-        if(professor == null){   
-            int resposta = ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
-            if(resposta == 0){
-                desabilitarCamposProfessor(false);
-                habilitarCamposRestricao(true);
-            }
-        }else{
-            int resposta = ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
-            if(resposta == 0){
-                desabilitarCamposProfessor(false);
-                habilitarCamposRestricao(true);
-            }
-        }    
+        String cargaHoraria = txtCargaHoraria.getText();
+        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+
+        if (professor == null) {
+            professor = ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        } else {
+            professor = ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        }
+
+        if (professor != null) {
+            desabilitarCamposProfessor(false);
+            habilitarCamposRestricao(true);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnSalvarActionPerformed(null);
         }
     }//GEN-LAST:event_btnSalvarKeyPressed
@@ -605,21 +635,22 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        
+
         String nome = txtNomeRestricao.getText();
         String turno = cbxTurnos.getSelectedItem().toString();
         String dia = cbxDias.getSelectedItem().toString();
-        String semestre = String.valueOf(spnAno.getValue()) + String.valueOf(spnSemestre.getValue());
+        String ano = String.valueOf(spnAno.getValue());
+        String semestre = String.valueOf(spnSemestre.getValue());
         String descricao = txtAreaDescricao.getText();
         String prioridade;
         char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
-        
+
         switch (priori) {
             case 'B':
                 prioridade = "BAIXA";
@@ -631,38 +662,150 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 prioridade = "ALTA";
                 break;
         }
-        
+
         boolean aula1 = chxAula1.isSelected();
         boolean aula2 = chxAula2.isSelected();
         boolean aula3 = chxAula3.isSelected();
         boolean aula4 = chxAula4.isSelected();
         boolean aula5 = chxAula5.isSelected();
         boolean aula6 = chxAula6.isSelected();
-        
+
         RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
-                nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor); 
-            
-        if(restricao != null){
+                nome, turno, dia, ano, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+
+        if (restricao != null) {
             listaRestricoes.add(restricao);
-            DefaultListModel defaultListModel = new DefaultListModel();
-            defaultListModel.addElement(restricao);
-            lstRestricoes.setModel(defaultListModel);
-        }     
+            preencherListaRestricoes();
+        }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        int posicao=  lstRestricoes.getSelectedIndex();
+
+        int posicao = lstRestricoes.getSelectedIndex();
         RestricaoProfessor restricao = listaRestricoes.get(posicao);
-        int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
-        if(resposta == 0){
-            listaRestricoes.remove(posicao);
+
+        if (restricao != null) {
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Remoção ?");
+            if (confirmacao == 0) {
+
+                int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
+                if (resposta == 0) {
+                    listaRestricoes.remove(posicao);
+                    preencherListaRestricoes();
+                }
+            }
+        } else {
+            CtrlMensagem.exibirMensagemAviso(this, "Selecione uma Restrição para remover");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        txtNomeRestricao.setText("");
+        cbxTurnos.setSelectedIndex(0);
+        spnAno.setValue(2018);
+        spnSemestre.setValue(1);
+        cbxDias.setSelectedIndex(0);
+        chxAula1.setSelected(false);
+        chxAula2.setSelected(false);
+        chxAula3.setSelected(false);
+        chxAula4.setSelected(false);
+        chxAula5.setSelected(false);
+        chxAula6.setSelected(false);
+        rbtnBaixa.setSelected(true);
+        txtAreaDescricao.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void lstRestricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstRestricoesMouseClicked
+
+        if (lstRestricoes.isEnabled()) {
+            
+            if (!listaRestricoes.isEmpty()) {
+                
+                int posicao = lstRestricoes.getSelectedIndex();
+                RestricaoProfessor restricao = listaRestricoes.get(posicao);
+
+                if (restricao != null) {
+                    txtNomeRestricao.setText(restricao.getNome());
+                    chxAula1.setSelected(restricao.isAula1());
+                    chxAula2.setSelected(restricao.isAula2());
+                    chxAula3.setSelected(restricao.isAula3());
+                    chxAula4.setSelected(restricao.isAula4());
+                    chxAula5.setSelected(restricao.isAula5());
+                    chxAula6.setSelected(restricao.isAula6());
+                    txtAreaDescricao.setText(restricao.getDescricao());
+
+                    String turno = restricao.getTurno();
+
+                    switch (turno) {
+                        case "MATUTINO":
+                            cbxTurnos.setSelectedIndex(0);
+                            break;
+                        case "VESPERTINO":
+                            cbxTurnos.setSelectedIndex(1);
+                            break;
+                        default:
+                            cbxTurnos.setSelectedIndex(2);
+                            break;
+                    }
+
+                    String dia = restricao.getDia();
+
+                    switch (dia) {
+                        case "SEGUNDA-FEIRA":
+                            cbxDias.setSelectedIndex(0);
+                            break;
+                        case "TERÇA-FEIRA":
+                            cbxDias.setSelectedIndex(1);
+                            break;
+                        case "QUARTA-FEIRA":
+                            cbxDias.setSelectedIndex(2);
+                            break;
+                        case "QUINTA-FEIRA":
+                            cbxDias.setSelectedIndex(3);
+                            break;
+                        default:
+                            cbxDias.setSelectedIndex(4);
+                            break;
+                    }
+
+                    /*String anoCompleto = restricao.getSemestre();
+                    String ano = "";
+                    String semestre = "";
+                    for (int i = 0; i < anoCompleto.length(); i++) {
+
+                        if (anoCompleto.charAt(i) != '/') {
+                            ano = ano + ano.charAt(i);
+                        } else {
+                            i++;
+                            semestre = String.valueOf(anoCompleto.charAt(i));
+                        }
+                    }
+                    spnAno.setValue(ano);
+                    spnSemestre.setValue(semestre);*/
+
+                    String prioridade = restricao.getPrioridade();
+
+                    switch (prioridade) {
+                        case "BAIXA":
+                            rbtnBaixa.setSelected(true);
+                            break;
+                        case "MÉDIA":
+                            rbtnMedia.setSelected(true);
+                            break;
+                        default:
+                            rbtnAlta.setSelected(true);
+                            break;
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_lstRestricoesMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGroupPrioridade;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
@@ -693,6 +836,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlPrioridade;
     private javax.swing.JPanel pnlRestricoes;
+    private javax.swing.JPanel pnlRodape;
     private javax.swing.JRadioButton rbtnAlta;
     private javax.swing.JRadioButton rbtnBaixa;
     private javax.swing.JRadioButton rbtnMedia;

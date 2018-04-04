@@ -36,27 +36,27 @@ public class CtrlProfessor {
         return gtProfessor.buscar(coluna, texto);
     }
 
-    public int cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
+    public Professor cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
 
-        String resposta = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
-        if (resposta.equals(Constantes.CADASTRADO)) {
+        Professor professor = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        if (professor != null) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
-            return 0;
+            return professor;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
-            return 1;
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, "Erro ao cadastrar");
+            return null;
         }
     }
 
-    public int alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public Professor alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
-        String resposta = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
-        if (resposta.equals(Constantes.ALTERADO)) {
+        Professor prof = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        if (prof != null) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
-            return 0;
+            return prof;
         }else{
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
-            return 1;
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, "Erro ao alterar");
+            return null;
         }
     }
 
