@@ -16,5 +16,11 @@ public class GtCoordenadoria {
         return gdCoordenadoria.filtrarCoordenadoresNulos("nome", "");
     }
     
-    
+    public List<Coordenadoria> buscar(String coluna, String texto) {
+        return gdCoordenadoria.buscar(coluna.toLowerCase(), texto);
+    }
+
+    public List<Coordenadoria> listar() {
+       return gdCoordenadoria.consultar(Coordenadoria.class);
+    }    
 }

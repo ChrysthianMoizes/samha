@@ -15,5 +15,14 @@ public class GdCoordenadoria extends GdGenerico{
         List lista = crit.list();
         sessao.close();
         return lista;
-    } 
+    }
+    
+    public List buscar(String coluna, String texto) {
+        Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
+        crit.add( Restrictions.like(coluna, "%"+texto+"%") );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.close();
+        return lista;
+    }
 }

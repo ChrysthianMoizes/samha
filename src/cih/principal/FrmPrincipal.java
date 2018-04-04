@@ -1,4 +1,4 @@
-package cih;
+package cih.principal;
 
 import cci.CtrlPrincipal;
 import cdp.Coordenador;
@@ -79,8 +79,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtTempoMaximo = new javax.swing.JTextField();
         txtIntervaloMinimo = new javax.swing.JTextField();
         separadorLateral = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAreaAlocacoes = new javax.swing.JTextArea();
         lblAlocacoes = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         lblCoordenador = new javax.swing.JLabel();
@@ -88,16 +86,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblNomeCoordenador = new javax.swing.JLabel();
         lblDataAtual = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         pnlCentral = new javax.swing.JPanel();
         pnlNotificacoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaNotificacoes = new javax.swing.JTextArea();
         lblNotificacoes = new javax.swing.JLabel();
+        pnlCentral1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio e Montagem de Horários Acadêmicos");
 
-        toolBar.setBackground(new java.awt.Color(0, 204, 0));
+        toolBar.setBackground(new java.awt.Color(0, 204, 102));
         toolBar.setBorder(null);
         toolBar.setFloatable(false);
         toolBar.setRollover(true);
@@ -205,62 +206,61 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
 
-        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
 
-        pnlLateral.setBackground(new java.awt.Color(0, 204, 0));
+        pnlLateral.setBackground(new java.awt.Color(0, 204, 102));
 
-        cbxCurso.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um curso...", "ARQUITETURA E URBANISMO", "SANEAMENTO AMBIENTAL", "SISTEMAS DE INFORMAÇÃO" }));
 
-        cbxTurma.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTurma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma turma...", "M20", "M15", "V05", "V07", "N09", "N10" }));
 
-        cbxSemestre.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxSemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um semestre...", "2015/1", "2015/2", "2016/1", "2016/2", "2017/1", "2017/2", "2018/1", "2018/2" }));
 
-        lblTempoMaximo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblTempoMaximo.setText("Tempo Máximo de Trabalho:");
         lblTempoMaximo.setToolTipText("");
 
-        lblIntervaloMinimo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
-        lblIntervaloMinimo.setText("Intervalo Mínimo de Descanso:");
+        lblIntervaloMinimo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblIntervaloMinimo.setText("Intervalo Mínimo:");
 
-        txtTempoMaximo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtTempoMaximo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTempoMaximo.setText("11");
 
-        txtIntervaloMinimo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtIntervaloMinimo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtIntervaloMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIntervaloMinimo.setText("11");
 
-        txtAreaAlocacoes.setColumns(20);
-        txtAreaAlocacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
-        txtAreaAlocacoes.setRows(5);
-        jScrollPane2.setViewportView(txtAreaAlocacoes);
-
-        lblAlocacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblAlocacoes.setText("Alocações");
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btnSalvar.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
             }
         });
 
-        lblCoordenador.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
+        lblCoordenador.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCoordenador.setText("Coordenador:");
 
-        lblData.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
+        lblData.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblData.setText("Data:");
 
-        lblNomeCoordenador.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
+        lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblNomeCoordenador.setText("User");
 
-        lblDataAtual.setFont(new java.awt.Font("MV Boli", 0, 12)); // NOI18N
+        lblDataAtual.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblDataAtual.setText("00/00/0000");
+
+        jList1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        jScrollPane3.setViewportView(jList1);
 
         javax.swing.GroupLayout pnlLateralLayout = new javax.swing.GroupLayout(pnlLateral);
         pnlLateral.setLayout(pnlLateralLayout);
@@ -272,7 +272,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(cbxSemestre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(separadorLateral, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addComponent(cbxTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -289,12 +288,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNomeCoordenador))
                     .addGroup(pnlLateralLayout.createSequentialGroup()
-                        .addComponent(lblAlocacoes)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlLateralLayout.createSequentialGroup()
                         .addComponent(lblData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDataAtual)))
+                        .addComponent(lblDataAtual))
+                    .addGroup(pnlLateralLayout.createSequentialGroup()
+                        .addComponent(lblAlocacoes)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
         );
         pnlLateralLayout.setVerticalGroup(
@@ -318,8 +318,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(separadorLateral, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlocacoes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,14 +341,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCentral.setLayout(pnlCentralLayout);
         pnlCentralLayout.setHorizontalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 727, Short.MAX_VALUE)
+            .addGap(0, 721, Short.MAX_VALUE)
         );
         pnlCentralLayout.setVerticalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 723, Short.MAX_VALUE)
         );
 
-        pnlNotificacoes.setBackground(new java.awt.Color(0, 204, 0));
+        pnlNotificacoes.setBackground(new java.awt.Color(0, 204, 102));
 
         txtAreaNotificacoes.setEditable(false);
         txtAreaNotificacoes.setColumns(20);
@@ -357,7 +357,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtAreaNotificacoes.setBorder(null);
         jScrollPane1.setViewportView(txtAreaNotificacoes);
 
-        lblNotificacoes.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblNotificacoes.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblNotificacoes.setText("Notificações:");
 
         javax.swing.GroupLayout pnlNotificacoesLayout = new javax.swing.GroupLayout(pnlNotificacoes);
@@ -376,11 +376,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlNotificacoesLayout.setVerticalGroup(
             pnlNotificacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNotificacoesLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(10, 10, 10)
                 .addComponent(lblNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
+        );
+
+        pnlCentral1.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout pnlCentral1Layout = new javax.swing.GroupLayout(pnlCentral1);
+        pnlCentral1.setLayout(pnlCentral1Layout);
+        pnlCentral1Layout.setHorizontalGroup(
+            pnlCentral1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 721, Short.MAX_VALUE)
+        );
+        pnlCentral1Layout.setVerticalGroup(
+            pnlCentral1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 723, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -393,6 +406,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(pnlCentral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(216, 216, 216))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +418,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlLateral, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlCentral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
 
@@ -412,7 +432,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfessorActionPerformed
-        
+        ctrlPrincipal.getCtrlProfessor().instanciarTelaBuscaProfessor(this);
     }//GEN-LAST:event_btnProfessorActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -448,8 +468,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxSemestre;
     private javax.swing.JComboBox<String> cbxTurma;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator11;
@@ -472,12 +493,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblNotificacoes;
     private javax.swing.JLabel lblTempoMaximo;
     private javax.swing.JPanel pnlCentral;
+    private javax.swing.JPanel pnlCentral1;
     private javax.swing.JPanel pnlLateral;
     private javax.swing.JPanel pnlNotificacoes;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JSeparator separadorLateral;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JTextArea txtAreaAlocacoes;
     private javax.swing.JTextArea txtAreaNotificacoes;
     private javax.swing.JTextField txtIntervaloMinimo;
     private javax.swing.JTextField txtTempoMaximo;

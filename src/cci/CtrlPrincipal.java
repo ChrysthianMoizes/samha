@@ -3,9 +3,9 @@ package cci;
 import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Permissao;
-import cih.FrmPrincipal;
-import cih.FrmValidarAcesso;
-import cih.JPInicio;
+import cih.principal.FrmPrincipal;
+import cih.principal.FrmValidarAcesso;
+import cih.principal.JPInicio;
 import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public final class CtrlPrincipal {
         config = new Config();
         gtPrincipal = new GtPrincipal();
         ctrlCoordenador = new CtrlCoordenador(this);
-        ctrlProfessor = new CtrlProfessor();
+        ctrlProfessor = new CtrlProfessor(this);
         ctrlCoordenadoria = new CtrlCoordenadoria();
         instanciarFrameValidarAcesso();
     }

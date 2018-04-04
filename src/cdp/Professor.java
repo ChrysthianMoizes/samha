@@ -15,7 +15,7 @@ public class Professor extends Servidor{
     private double cargaHoraria;
     
     @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Collection<RestricaoProfessor> restricoes;
     
@@ -65,6 +65,6 @@ public class Professor extends Servidor{
     }
     
     public Object[] toArray() {
-        return new Object[] {this};
+        return new Object[] { this, getMatricula(), getCoordenadoria().getNome()};
     }
 }

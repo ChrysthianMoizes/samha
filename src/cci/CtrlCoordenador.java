@@ -4,8 +4,8 @@ import cdp.Coordenador;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import cgt.GtCoordenador;
-import cih.JDBuscarCoordenador;
-import cih.JDCadastrarCoordenador;
+import cih.coordenador.JDBuscarCoordenador;
+import cih.coordenador.JDCadastrarCoordenador;
 import java.awt.Frame;
 import java.util.List;
 

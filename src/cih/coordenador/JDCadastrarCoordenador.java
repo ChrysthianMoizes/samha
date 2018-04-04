@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package cih;
+package cih.coordenador;
 
 import cci.CtrlPrincipal;
 import cdp.Coordenador;
@@ -58,20 +53,20 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         setTitle("Cadastrar Coordenador");
         setResizable(false);
 
-        pnlGeral.setBackground(new java.awt.Color(0, 204, 0));
+        pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
 
-        pnlAcesso.setBackground(new java.awt.Color(0, 204, 0));
-        pnlAcesso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados de Acesso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MV Boli", 0, 14))); // NOI18N
+        pnlAcesso.setBackground(new java.awt.Color(0, 204, 102));
+        pnlAcesso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados de Acesso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
-        lblLogin.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblLogin.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblLogin.setText("Login:");
 
-        lblSenha.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblSenha.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
 
-        txtSenha.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtSenha.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        txtUsuario.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlAcessoLayout = new javax.swing.GroupLayout(pnlAcesso);
         pnlAcesso.setLayout(pnlAcessoLayout);
@@ -97,18 +92,18 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
-        pnlCoordenador.setBackground(new java.awt.Color(0, 204, 0));
-        pnlCoordenador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Coordenador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MV Boli", 0, 14))); // NOI18N
+        pnlCoordenador.setBackground(new java.awt.Color(0, 204, 102));
+        pnlCoordenador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Coordenador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
         cbxTipo.setBackground(new java.awt.Color(0, 204, 0));
-        cbxTipo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxTipo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COORDENADOR ACADÊMICO", "COORDENADOR DE CURSO", "COORDENADOR PEDAGÓGICO" }));
         cbxTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -117,18 +112,18 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         });
 
         cbxProfessor.setBackground(new java.awt.Color(0, 204, 0));
-        cbxProfessor.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxProfessor.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
         cbxCoordenadoria.setBackground(new java.awt.Color(0, 204, 0));
-        cbxCoordenadoria.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        lblCoordenadoria.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCoordenadoria.setText("Coordenadoria:");
 
-        lblTipo.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblTipo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblTipo.setText("Tipo:");
 
-        lblProfessor.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblProfessor.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblProfessor.setText("Professor:");
 
         javax.swing.GroupLayout pnlCoordenadorLayout = new javax.swing.GroupLayout(pnlCoordenador);
@@ -171,17 +166,17 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlDadosPessoais.setBackground(new java.awt.Color(0, 204, 0));
-        pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MV Boli", 0, 14))); // NOI18N
+        pnlDadosPessoais.setBackground(new java.awt.Color(0, 204, 102));
+        pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
-        lblMatricula.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblMatricula.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblMatricula.setText("Matrícula:");
 
-        txtMatricula.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtMatricula.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        txtNome.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        lblNome1.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        lblNome1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblNome1.setText("Nome:");
 
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
@@ -216,11 +211,12 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlRodape.setBackground(new java.awt.Color(0, 204, 0));
+        pnlRodape.setBackground(new java.awt.Color(0, 204, 102));
         pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnSalvar.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -232,8 +228,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("MV Boli", 0, 14)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -287,7 +284,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -301,7 +298,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 529, Short.MAX_VALUE)
+            .addComponent(pnlGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

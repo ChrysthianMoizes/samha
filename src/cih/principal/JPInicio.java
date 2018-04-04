@@ -1,5 +1,6 @@
-package cih;
+package cih.principal;
 
+import cih.principal.FrmPrincipal;
 import cci.CtrlPrincipal;
 
 public class JPInicio extends javax.swing.JPanel {

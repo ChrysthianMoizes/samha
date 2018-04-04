@@ -16,4 +16,11 @@ public class CtrlCoordenadoria {
         return gtCoordenadoria.filtrarCoordenadoresNulos();
     }
     
+    public List<Coordenadoria> buscar(String coluna, String texto) {
+       return gtCoordenadoria.buscar(coluna, texto);
+    }
+    
+    public List<Coordenadoria> listar() {
+       return gtCoordenadoria.listar();
+    }
 }
