@@ -16,10 +16,10 @@ public class CtrlRestricao {
         this.ctrlPrincipal = ctrl;
     }
 
-    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String ano, String semestre, String descricao, String prioridade,
+    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
-        RestricaoProfessor restricao = gtRestricao.cadastrar(nome, turno, dia, ano, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+        RestricaoProfessor restricao = gtRestricao.cadastrar(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
 
         if (restricao == null) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, "Erro ao adicionar restrição");
@@ -35,10 +35,9 @@ public class CtrlRestricao {
 
         String resposta = gtRestricao.excluir(restricao);
         if (resposta.equals(Constantes.EXCLUIDO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(null, "Excluído com sucesso!");
             return 0;
         } else {
-            //ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
             return 1;
         }
     }

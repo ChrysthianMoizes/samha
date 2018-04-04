@@ -51,10 +51,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxDias = new javax.swing.JComboBox<>();
         lblTurno = new javax.swing.JLabel();
         cbxTurnos = new javax.swing.JComboBox<>();
-        lblSemestre = new javax.swing.JLabel();
-        spnAno = new javax.swing.JSpinner();
-        spnSemestre = new javax.swing.JSpinner();
-        lblBarra = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         pnlAulas = new javax.swing.JPanel();
         chxAula1 = new javax.swing.JCheckBox();
@@ -232,18 +228,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxTurnos.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
 
-        lblSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblSemestre.setText("Semestre:");
-
-        spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
-
-        spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
-
-        lblBarra.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblBarra.setText("/");
-
         pnlAulas.setBackground(new java.awt.Color(0, 204, 102));
         pnlAulas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aulas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
@@ -413,39 +397,29 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                                .addComponent(lblSemestre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
-                                .addComponent(lblNomeRestricao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTurno)))
+                        .addComponent(lblTurno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxTurnos, 0, 134, Short.MAX_VALUE)
-                            .addComponent(cbxDias, 0, 1, Short.MAX_VALUE)))
+                        .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
                         .addComponent(pnlAulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlRestricoesLayout.createSequentialGroup()
+                        .addComponent(lblNomeRestricao)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNomeRestricao)))
                 .addContainerGap())
         );
         pnlRestricoesLayout.setVerticalGroup(
@@ -453,38 +427,32 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             .addGroup(pnlRestricoesLayout.createSequentialGroup()
                 .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cbxDias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlAulas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
                                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
                 .addGap(10, 10, 10))
         );
@@ -586,8 +554,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     public void habilitarCamposRestricao(boolean opcao) {
         txtNomeRestricao.setEnabled(opcao);
         cbxTurnos.setEnabled(opcao);
-        spnAno.setEnabled(opcao);
-        spnSemestre.setEnabled(opcao);
         cbxDias.setEnabled(opcao);
         lstRestricoes.setEnabled(opcao);
         chxAula1.setEnabled(opcao);
@@ -645,8 +611,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         String nome = txtNomeRestricao.getText();
         String turno = cbxTurnos.getSelectedItem().toString();
         String dia = cbxDias.getSelectedItem().toString();
-        String ano = String.valueOf(spnAno.getValue());
-        String semestre = String.valueOf(spnSemestre.getValue());
         String descricao = txtAreaDescricao.getText();
         String prioridade;
         char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
@@ -671,7 +635,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         boolean aula6 = chxAula6.isSelected();
 
         RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
-                nome, turno, dia, ano, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+                nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
 
         if (restricao != null) {
             listaRestricoes.add(restricao);
@@ -694,6 +658,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                     preencherListaRestricoes();
                 }
             }
+            btnLimparActionPerformed(null);
         } else {
             CtrlMensagem.exibirMensagemAviso(this, "Selecione uma Restrição para remover");
         }
@@ -702,8 +667,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         txtNomeRestricao.setText("");
         cbxTurnos.setSelectedIndex(0);
-        spnAno.setValue(2018);
-        spnSemestre.setValue(1);
         cbxDias.setSelectedIndex(0);
         chxAula1.setSelected(false);
         chxAula2.setSelected(false);
@@ -768,21 +731,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                             break;
                     }
 
-                    /*String anoCompleto = restricao.getSemestre();
-                    String ano = "";
-                    String semestre = "";
-                    for (int i = 0; i < anoCompleto.length(); i++) {
-
-                        if (anoCompleto.charAt(i) != '/') {
-                            ano = ano + ano.charAt(i);
-                        } else {
-                            i++;
-                            semestre = String.valueOf(anoCompleto.charAt(i));
-                        }
-                    }
-                    spnAno.setValue(ano);
-                    spnSemestre.setValue(semestre);*/
-
                     String prioridade = restricao.getPrioridade();
 
                     switch (prioridade) {
@@ -820,14 +768,12 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblBarra;
     private javax.swing.JLabel lblCargaHoraria;
     private javax.swing.JLabel lblCoordenadoria;
     private javax.swing.JLabel lblDia;
     private javax.swing.JLabel lblMatricula1;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNomeRestricao;
-    private javax.swing.JLabel lblSemestre;
     private javax.swing.JLabel lblTurno;
     private javax.swing.JList<String> lstRestricoes;
     private javax.swing.JPanel pnlAulas;
@@ -840,8 +786,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbtnAlta;
     private javax.swing.JRadioButton rbtnBaixa;
     private javax.swing.JRadioButton rbtnMedia;
-    private javax.swing.JSpinner spnAno;
-    private javax.swing.JSpinner spnSemestre;
     private javax.swing.JTextArea txtAreaDescricao;
     private javax.swing.JTextField txtCargaHoraria;
     private javax.swing.JTextField txtMatricula;

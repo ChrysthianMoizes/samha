@@ -32,9 +32,6 @@ public class RestricaoProfessor implements Serializable{
     private String turno;
     
     @Column(nullable = false)
-    private String semestre;
-    
-    @Column(nullable = false)
     private boolean aula1;
     
     @Column(nullable = false)
@@ -62,14 +59,13 @@ public class RestricaoProfessor implements Serializable{
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, String semestre, 
+    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, 
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.dia = dia;
         this.turno = turno;
-        this.semestre = semestre;
         this.aula1 = aula1;
         this.aula2 = aula2;
         this.aula3 = aula3;
@@ -80,13 +76,12 @@ public class RestricaoProfessor implements Serializable{
         this.professor = professor;
     }
 
-    public RestricaoProfessor(String nome, String descricao, String dia, String turno, String semestre,
+    public RestricaoProfessor(String nome, String descricao, String dia, String turno,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.nome = nome;
         this.descricao = descricao;
         this.dia = dia;
         this.turno = turno;
-        this.semestre = semestre;
         this.aula1 = aula1;
         this.aula2 = aula2;
         this.aula3 = aula3;
@@ -185,14 +180,6 @@ public class RestricaoProfessor implements Serializable{
         this.turno = turno;
     }
 
-    public String getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(String semestre) {
-        this.semestre = semestre;
-    }
-
     public String getPrioridade() {
         return prioridade;
     }
@@ -211,7 +198,6 @@ public class RestricaoProfessor implements Serializable{
 
     @Override
     public String toString() {
-        return nome + "-" + dia + "-" + turno + "-" + semestre;
+        return nome + " - " + dia + " - " + turno;
     }
-
 }

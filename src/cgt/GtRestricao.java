@@ -14,7 +14,7 @@ public class GtRestricao {
         gdRestricao = new GdRestricao();
     }
 
-    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String ano, String semestre, String descricao, String prioridade,
+    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
         try {
@@ -22,7 +22,7 @@ public class GtRestricao {
             try {
                 validarCampos(nome, descricao);
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                return null;
             }
 
             RestricaoProfessor restricao = new RestricaoProfessor();
@@ -37,7 +37,6 @@ public class GtRestricao {
             restricao.setDia(dia.toUpperCase());
             restricao.setNome(nome);
             restricao.setPrioridade(prioridade.toUpperCase());
-            restricao.setSemestre(ano + "/" + semestre);
             restricao.setTurno(turno);
             restricao.setProfessor(professor);
             gdRestricao.cadastrar(restricao);
