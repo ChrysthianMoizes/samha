@@ -15,7 +15,7 @@ public class GtProfessor {
         gdProfessor = new GdProfessor();
     }
 
-    public String cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes) {
+    public String cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
 
         try {
             validarCampos(nome, matricula, cargaHoraria);
@@ -24,7 +24,6 @@ public class GtProfessor {
             professor.setMatricula(matricula);
             professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
             professor.setCoordenadoria(coordenadoria);
-            professor.setRestricoes(listaRestricoes);
             gdProfessor.cadastrar(professor);
             return Constantes.CADASTRADO;
         } catch (Exception ex) {
@@ -32,7 +31,7 @@ public class GtProfessor {
         }
     }
     
-    public String alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes, Professor professor) {
+    public String alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         try {
             validarCampos(nome, matricula, cargaHoraria);
@@ -40,7 +39,6 @@ public class GtProfessor {
             professor.setMatricula(matricula);
             professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
             professor.setCoordenadoria(coordenadoria);
-            professor.setRestricoes(listaRestricoes);
             gdProfessor.alterar(professor);
             return Constantes.ALTERADO;
         } catch (Exception ex) {

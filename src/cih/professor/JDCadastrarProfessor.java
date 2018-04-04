@@ -4,9 +4,9 @@ import cdp.Coordenadoria;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 public class JDCadastrarProfessor extends javax.swing.JDialog {
     
@@ -38,11 +38,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         lblCoordenadoria = new javax.swing.JLabel();
         cbxCoordenadoria = new javax.swing.JComboBox<>();
         btnSalvar = new javax.swing.JButton();
-        btnRestricoes = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         pnlRestricoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstRestricoes = new javax.swing.JList<>();
         lblDia = new javax.swing.JLabel();
         cbxDias = new javax.swing.JComboBox<>();
         lblTurno = new javax.swing.JLabel();
@@ -61,7 +60,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         chxAula6 = new javax.swing.JCheckBox();
         btnRemover = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
         pnlDescricao = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaDescricao = new javax.swing.JTextArea();
@@ -116,16 +114,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             }
         });
 
-        btnRestricoes.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnRestricoes.setText("Gerenciar Restrições");
-        btnRestricoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnRestricoes.setEnabled(false);
-        btnRestricoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRestricoesActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -167,8 +155,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -196,24 +182,23 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlRestricoes.setBackground(new java.awt.Color(0, 204, 102));
         pnlRestricoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Restrições", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
-        jList1.setBackground(new java.awt.Color(204, 255, 204));
-        jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jList1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstRestricoes.setBackground(new java.awt.Color(204, 255, 204));
+        lstRestricoes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lstRestricoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lstRestricoes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList1.setEnabled(false);
-        jScrollPane1.setViewportView(jList1);
+        lstRestricoes.setEnabled(false);
+        jScrollPane1.setViewportView(lstRestricoes);
 
         lblDia.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblDia.setText("Dia:");
@@ -314,6 +299,11 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         btnRemover.setText("Remover");
         btnRemover.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRemover.setEnabled(false);
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnAdicionar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
@@ -324,11 +314,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 btnAdicionarActionPerformed(evt);
             }
         });
-
-        btnAlterar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnAlterar.setText("Alterar");
-        btnAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlterar.setEnabled(false);
 
         pnlDescricao.setBackground(new java.awt.Color(0, 204, 102));
         pnlDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
@@ -436,7 +421,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                             .addComponent(cbxDias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
@@ -478,10 +462,9 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                         .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlRestricoesLayout.createSequentialGroup()
                                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13)
-                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31))
                             .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
@@ -524,11 +507,11 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void identificarOrigem(){    
+    public void identificarOrigem(){
+        preencherComboCoordenadorias();
         if(professor != null){
             setarCamposComInstancia();
-        }else{
-           listaRestricoes = new ArrayList<RestricaoProfessor>();
+            //buscar restricoes com professor_id
         }
     }
     
@@ -536,7 +519,18 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
-       
+        txtCargaHoraria.setText(String.valueOf(professor.getCargaHoraria()));
+        Coordenadoria coordenadoria;
+        
+        for(int i = 0; i < listaCoordenadorias.size(); i++){
+            
+            coordenadoria = listaCoordenadorias.get(i);
+            if(coordenadoria.getId() == professor.getCoordenadoria().getId()){
+                cbxCoordenadoria.setSelectedIndex(i);
+                break;
+            }
+            i++;      
+        }      
     }
     
     public void preencherComboCoordenadorias(){
@@ -547,6 +541,36 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         }else
             cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
     }
+    
+    public void desabilitarCamposProfessor(boolean opcao){
+        txtNome.setEnabled(opcao);
+        txtMatricula.setEnabled(opcao);
+        txtCargaHoraria.setEnabled(opcao);
+        cbxCoordenadoria.setEnabled(opcao);
+        btnSalvar.setEnabled(opcao);
+        btnCancelar.setText("Sair");
+    }
+    
+    public void habilitarCamposRestricao(boolean opcao){
+        txtNomeRestricao.setEnabled(opcao);
+        cbxTurnos.setEnabled(opcao);
+        spnAno.setEnabled(opcao);
+        spnSemestre.setEnabled(opcao);
+        cbxDias.setEnabled(opcao);
+        lstRestricoes.setEnabled(opcao);
+        chxAula1.setEnabled(opcao);
+        chxAula2.setEnabled(opcao);
+        chxAula3.setEnabled(opcao);
+        chxAula4.setEnabled(opcao);
+        chxAula5.setEnabled(opcao);
+        chxAula6.setEnabled(opcao);
+        rbtnAlta.setEnabled(opcao);
+        rbtnBaixa.setEnabled(opcao);
+        rbtnMedia.setEnabled(opcao);
+        btnAdicionar.setEnabled(opcao);
+        btnRemover.setEnabled(opcao);
+        txtAreaDescricao.setEnabled(opcao);    
+    }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
@@ -555,10 +579,19 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         String cargaHoraria = txtCargaHoraria.getText();       
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem(); 
         
-        if(professor == null)   
-            ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes);  
-        else
-            ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes, professor);   
+        if(professor == null){   
+            int resposta = ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+            if(resposta == 0){
+                desabilitarCamposProfessor(false);
+                habilitarCamposRestricao(true);
+            }
+        }else{
+            int resposta = ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+            if(resposta == 0){
+                desabilitarCamposProfessor(false);
+                habilitarCamposRestricao(true);
+            }
+        }    
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -606,28 +639,31 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         boolean aula5 = chxAula5.isSelected();
         boolean aula6 = chxAula6.isSelected();
         
-        RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().montarRestricao(nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6); 
+        RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
+                nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor); 
             
-        if(professor == null){
+        if(restricao != null){
             listaRestricoes.add(restricao);
-        }else{
-            //ctrlPrincipal.getCtrlRestricao().cadastrar(restricao, professor);
-        }
-        
-        
+            DefaultListModel defaultListModel = new DefaultListModel();
+            defaultListModel.addElement(restricao);
+            lstRestricoes.setModel(defaultListModel);
+        }     
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void btnRestricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestricoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRestricoesActionPerformed
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        int posicao=  lstRestricoes.getSelectedIndex();
+        RestricaoProfessor restricao = listaRestricoes.get(posicao);
+        int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
+        if(resposta == 0){
+            listaRestricoes.remove(posicao);
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGroupPrioridade;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton btnRestricoes;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxDias;
@@ -638,7 +674,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JCheckBox chxAula4;
     private javax.swing.JCheckBox chxAula5;
     private javax.swing.JCheckBox chxAula6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -651,6 +686,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JLabel lblNomeRestricao;
     private javax.swing.JLabel lblSemestre;
     private javax.swing.JLabel lblTurno;
+    private javax.swing.JList<String> lstRestricoes;
     private javax.swing.JPanel pnlAulas;
     private javax.swing.JPanel pnlDadosPessoais;
     private javax.swing.JPanel pnlDescricao;

@@ -7,9 +7,11 @@ import java.util.List;
 public class CtrlCoordenadoria {
     
     private GtCoordenadoria gtCoordenadoria;
+    private CtrlPrincipal ctrlPrincipal;
 
-    public CtrlCoordenadoria() {
+    public CtrlCoordenadoria(CtrlPrincipal ctrl) {
         gtCoordenadoria = new GtCoordenadoria();
+        this.ctrlPrincipal = ctrl;
     }
    
     public List<Coordenadoria> filtrarCoordenadoresNulos() {

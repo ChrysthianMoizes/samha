@@ -17,7 +17,8 @@ public class SAMHAException extends Exception {
         msgsErro[2] = "Campo MATRICULA inválido";
         msgsErro[3] = "Campo LOGIN inválido";
         msgsErro[4] = "Campo SENHA inválido";
-        msgsErro[5] = "Campo CARGA HORÁRIA inválido";    
+        msgsErro[5] = "Campo CARGA HORÁRIA inválido"; 
+        msgsErro[6] = "Campo DESCRIÇÃO inválido";
     }
     
     @Override

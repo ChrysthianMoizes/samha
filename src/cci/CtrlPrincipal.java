@@ -28,8 +28,8 @@ public final class CtrlPrincipal {
         gtPrincipal = new GtPrincipal();
         ctrlCoordenador = new CtrlCoordenador(this);
         ctrlProfessor = new CtrlProfessor(this);
-        ctrlCoordenadoria = new CtrlCoordenadoria();
-        ctrlRestricao = new CtrlRestricao();
+        ctrlCoordenadoria = new CtrlCoordenadoria(this);
+        ctrlRestricao = new CtrlRestricao(this);
         instanciarFrameValidarAcesso();
     }
 

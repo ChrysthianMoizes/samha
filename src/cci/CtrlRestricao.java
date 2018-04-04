@@ -1,47 +1,40 @@
 package cci;
 
+import cdp.Professor;
 import cdp.RestricaoProfessor;
+import cgt.Constantes;
 import cgt.GtRestricao;
 
 public class CtrlRestricao {
-    
+
     private GtRestricao gtRestricao;
+    private CtrlPrincipal ctrlPrincipal;
 
-    public CtrlRestricao() {
+    public CtrlRestricao(CtrlPrincipal ctrl) {
         gtRestricao = new GtRestricao();
-    }
-    
-    public RestricaoProfessor montarRestricao(String nome, String turno, String dia, String semestre, String descricao, String prioridade, 
-            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6){
-        
-        return gtRestricao.montarRestricao(nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6);
-    }
-    
-    public void cadastrar() {
-
-        //String resposta = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes);
-        //if (resposta.equals(Constantes.CADASTRADO))
-            //ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
-        //else
-            //ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
-    }
-    
-    public void alterar() {
-
-        //String resposta = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes, professor);
-        //if (resposta.equals(Constantes.ALTERADO))
-          //  ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
-       // else
-         //   ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
+        this.ctrlPrincipal = ctrl;
     }
 
-    public void excluir() {
-        
-            //String resposta = gtProfessor.excluir(professor);
-            //if(resposta.equals(Constantes.EXCLUIDO))
-                //ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
-           // else
-               //ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaProf, resposta);
+    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String semestre, String descricao, String prioridade,
+            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
+
+        RestricaoProfessor restricao = gtRestricao.cadastrar(nome, turno, dia, semestre, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+
+        if (restricao == null) {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, "Erro ao adicionar restrição");
+        }
+        return restricao;
     }
-    
+
+    public int excluir(RestricaoProfessor restricao) {
+
+        String resposta = gtRestricao.excluir(restricao);
+        if (resposta.equals(Constantes.EXCLUIDO)) {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(null, "Excluído com sucesso!");
+            return 0;
+        } else {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            return 1;
+        }
+    }
 }

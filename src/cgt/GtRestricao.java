@@ -3,63 +3,47 @@ package cgt;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import cgd.GdRestricao;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GtRestricao {
-    
+
     private GdRestricao gdRestricao;
-    
-    public GtRestricao(){
+
+    public GtRestricao() {
         gdRestricao = new GdRestricao();
     }
-    
-    public RestricaoProfessor montarRestricao(String nome, String turno, String dia, String semestre, String descricao, String prioridade, 
-            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6){
-  
-        RestricaoProfessor restricao = new RestricaoProfessor();
-        restricao.setAula1(aula1);
-        restricao.setAula2(aula2);
-        restricao.setAula3(aula3);
-        restricao.setAula4(aula4);
-        restricao.setAula5(aula5);
-        restricao.setAula6(aula6);
-        
-        restricao.setDescricao(descricao);
-        restricao.setDia(dia.toUpperCase());
-        restricao.setNome(nome);
-        restricao.setPrioridade(prioridade.toUpperCase());
-        restricao.setSemestre(semestre);
-        restricao.setTurno(turno);
-        restricao.setProfessor(null);
-        
-        return restricao;
-    }
-    
-    public String cadastrar() {
+
+    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String semestre, String descricao, String prioridade,
+            boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
         try {
-            //validarCampos(nome, matricula, cargaHoraria);
-            //Professor professor = new Professor();
-            //professor.setNome(nome);
-            //professor.setMatricula(matricula);
-            //professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
-            //professor.setCoordenadoria(coordenadoria);
-            //professor.setRestricoes(listaRestricoes);
-            //gdProfessor.cadastrar(professor);
-            return Constantes.CADASTRADO;
-        } catch (Exception ex) {
-            return ex.getMessage();
-        }
-    }
-    
-    public String alterar() {
 
-        try {
-            //validarCampos(nome, matricula, cargaHoraria);
-            
-            return Constantes.ALTERADO;
-        } catch (Exception ex) {
-            return ex.getMessage();
+            try {
+                validarCampos(nome, descricao);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            RestricaoProfessor restricao = new RestricaoProfessor();
+            restricao.setAula1(aula1);
+            restricao.setAula2(aula2);
+            restricao.setAula3(aula3);
+            restricao.setAula4(aula4);
+            restricao.setAula5(aula5);
+            restricao.setAula6(aula6);
+
+            restricao.setDescricao(descricao);
+            restricao.setDia(dia.toUpperCase());
+            restricao.setNome(nome);
+            restricao.setPrioridade(prioridade.toUpperCase());
+            restricao.setSemestre(semestre);
+            restricao.setTurno(turno);
+            restricao.setProfessor(professor);
+            gdRestricao.cadastrar(restricao);
+            return restricao;
+        } catch (SQLException | ClassNotFoundException ex) {
+            return null;
         }
     }
 
@@ -67,10 +51,10 @@ public class GtRestricao {
         return null;
 
         //if (coluna.toLowerCase().equals("coordenadoria")) {
-            //coluna = "coordenadoria_id";
-           // return gdProfessor.filtrarPorCoordenadoria(coluna, texto);
+        //coluna = "coordenadoria_id";
+        // return gdProfessor.filtrarPorCoordenadoria(coluna, texto);
         //} else {
-           // return gdProfessor.buscar(coluna.toLowerCase(), texto);
+        // return gdProfessor.buscar(coluna.toLowerCase(), texto);
         //}
     }
 
@@ -79,26 +63,21 @@ public class GtRestricao {
         //return gdProfessor.consultar(Professor.class);
     }
 
-    public String excluir(Professor professor){
-        return null;
-        //try {
-            //gdProfessor.excluir(professor);
-            //return Constantes.EXCLUIDO;
-        //} catch (SQLException | ClassNotFoundException ex) {
-            //return ex.getMessage();
-        //}
+    public String excluir(RestricaoProfessor restricao) {
+        try {
+            gdRestricao.excluir(restricao);
+            return Constantes.EXCLUIDO;
+        } catch (SQLException | ClassNotFoundException ex) {
+            return ex.getMessage();
+        }
     }
-    
-    public void validarCampos(String nome, String matricula, String cargaHoraria) throws Exception {
+
+    public void validarCampos(String nome, String descricao) throws Exception {
         if (nome.equals("")) {
             throw new SAMHAException(1);
         }
-        if (matricula.equals("")) {
-            throw new SAMHAException(2);
-        }
-        if (cargaHoraria.equals("")) {
-            throw new SAMHAException(5);
+        if (descricao.equals("")) {
+            throw new SAMHAException(6);
         }
     }
-    
 }

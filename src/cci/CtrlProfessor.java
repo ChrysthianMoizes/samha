@@ -36,22 +36,28 @@ public class CtrlProfessor {
         return gtProfessor.buscar(coluna, texto);
     }
 
-    public void cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes) {
+    public int cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
 
-        String resposta = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes);
-        if (resposta.equals(Constantes.CADASTRADO))
+        String resposta = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        if (resposta.equals(Constantes.CADASTRADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
-        else
+            return 0;
+        } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
+            return 1;
+        }
     }
-    
-    public void alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, List<RestricaoProfessor> listaRestricoes, Professor professor) {
 
-        String resposta = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, listaRestricoes, professor);
-        if (resposta.equals(Constantes.ALTERADO))
+    public int alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+
+        String resposta = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        if (resposta.equals(Constantes.ALTERADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
-        else
+            return 0;
+        }else{
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, resposta);
+            return 1;
+        }
     }
 
     public List<Professor> consultar() {
@@ -59,11 +65,12 @@ public class CtrlProfessor {
     }
 
     public void excluir(Professor professor) {
-        
-            String resposta = gtProfessor.excluir(professor);
-            if(resposta.equals(Constantes.EXCLUIDO))
-                ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
-            else
-                ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaProf, resposta);
+
+        String resposta = gtProfessor.excluir(professor);
+        if (resposta.equals(Constantes.EXCLUIDO)) {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
+        } else {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaProf, resposta);
+        }
     }
 }
