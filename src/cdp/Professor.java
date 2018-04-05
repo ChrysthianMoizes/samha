@@ -2,6 +2,10 @@ package cdp;
 
 import java.util.Collection;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "professor")
@@ -12,6 +16,8 @@ public class Professor extends Servidor{
     private double cargaHoraria;
     
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "coordenadoria_id", nullable = false)
     private Coordenadoria coordenadoria;
     

@@ -3,15 +3,18 @@ package cgt;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import cgd.GdProfessor;
+import cgd.GdRestricao;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GtProfessor {
 
     private GdProfessor gdProfessor;
+    private GdRestricao gdRestricao;
 
     public GtProfessor() {
         gdProfessor = new GdProfessor();
+        gdRestricao = new GdRestricao();
     }
 
     public Professor cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
@@ -60,6 +63,7 @@ public class GtProfessor {
 
     public String excluir(Professor professor){
         try {
+            gdRestricao.excluirRestricoes("professor.id", professor.getId());
             gdProfessor.excluir(professor);
             return Constantes.EXCLUIDO;
         } catch (SQLException | ClassNotFoundException ex) {
