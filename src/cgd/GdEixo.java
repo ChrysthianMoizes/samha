@@ -1,5 +1,5 @@
 package cgd;
 
-public class GdEixo {
+public class GdEixo extends GdGenerico{
     
 }

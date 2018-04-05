@@ -22,6 +22,8 @@ public final class CtrlPrincipal {
     private CtrlMensagem ctrlMensagem;
     private CtrlCoordenadoria ctrlCoordenadoria;
     private CtrlRestricao ctrlRestricao;
+    private CtrlCurso ctrlCurso;
+    private CtrlEixo ctrlEixo;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -30,6 +32,8 @@ public final class CtrlPrincipal {
         ctrlProfessor = new CtrlProfessor(this);
         ctrlCoordenadoria = new CtrlCoordenadoria(this);
         ctrlRestricao = new CtrlRestricao(this);
+        ctrlCurso = new CtrlCurso(this);
+        ctrlEixo = new CtrlEixo(this);
         instanciarFrameValidarAcesso();
     }
 
