@@ -7,9 +7,11 @@ import java.util.List;
 public class GtEixo {
     
     private GdEixo gdEixo;
+    private GtCoordenadoria gtCoordenadoria;
 
     public GtEixo() {  
         gdEixo = new GdEixo();
+        gtCoordenadoria = new GtCoordenadoria();
     }
     
     public String cadastrar(String nome) {
@@ -29,16 +31,16 @@ public class GtEixo {
     public String excluir(Eixo eixo) {
 
         try {
-            if (coordenador.getTipo().equals("COORDENADOR DE CURSO")) {
-
-                ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
-                gdCoordenador.excluir(profCoord);
-
-            } else {
-                gdCoordenador.excluir(coordenador);
-            }
-            return Constantes.EXCLUIDO;
-        } catch (SQLException | ClassNotFoundException ex) {
+            
+            List coordenadorias = gtCoordenadoria.filtrarCoordenadoriasEixo(eixo.getId());
+            
+            if(coordenadorias == null){
+                gdEixo.excluir(eixo);
+                return Constantes.EXCLUIDO;
+            }else
+                return "Eixo possui coordenadorias associadas";
+            
+        } catch (Exception ex) {
             return ex.getMessage();
         }
     }

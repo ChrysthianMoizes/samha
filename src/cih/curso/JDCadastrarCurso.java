@@ -487,17 +487,20 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
                 Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-                int posicaoEixo = cbxEixo.getSelectedIndex();
                 int resposta = ctrlPrincipal.getCtrlEixo().excluir(eixo);
                 if(resposta == 0){
                     preencherComboEixos();
                     cbxCoordenadoria.removeAllItems();
-                    
+                    cbxEixoItemStateChanged(null);     
                 }
             }
     }//GEN-LAST:event_btnRemoverEixoActionPerformed
 
     private void btnAdicionarCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCoordenadoriaActionPerformed
+        
+        String nome = txtNomeCoordenadoria.getText();
+        
+        //int resposta = ctrlPrincipal.getCtrlCoordenadoria()
         
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 
@@ -510,7 +513,8 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
 
     private void cbxEixoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxEixoItemStateChanged
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-        preencherComboCoordenadorias(eixo.getId());
+        if(eixo != null)
+            preencherComboCoordenadorias(eixo.getId());
     }//GEN-LAST:event_cbxEixoItemStateChanged
 
     private void btnAdicionarEixoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarEixoKeyPressed
