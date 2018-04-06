@@ -1,5 +1,6 @@
 package cci;
 
+import cdp.Coordenadoria;
 import cdp.Curso;
 import cgt.Constantes;
 import cgt.GtCurso;
@@ -30,6 +31,32 @@ public class CtrlCurso {
         cadastraCurso.setVisible(true);
     }
     
+    public int cadastrar(String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
+
+        String resposta = gtCurso.cadastrar(nome, nivel, periodos, coordenadoria);
+
+        if (resposta.equals(Constantes.CADASTRADO)) {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
+            return 0;
+        } else {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
+            return 1;
+        }
+    }
+    
+    public int alterar(Curso curso, String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
+
+        String resposta = gtCurso.alterar(curso, nome, nivel, periodos, coordenadoria);
+        
+        if (resposta.equals(Constantes.ALTERADO)) {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Alterado Com sucesso!");
+            return 0;
+        } else {
+            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
+            return 1;
+        }
+    }
+    
     public List<Curso> buscar(String coluna, String texto) {
         return gtCurso.buscar(coluna, texto);
     }
@@ -42,31 +69,5 @@ public class CtrlCurso {
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaCurso, resposta);
         }
-    }
-    
-    /*public void cadastrar(Professor professor, Coordenadoria coordenadoria, String tipo, String login, String senha, String nome, String matricula) {
-
-        String resposta = gtCoordenador.cadastrar(professor, coordenadoria, tipo, login, senha, nome, matricula);
-
-        if (resposta.equals(Constantes.CADASTRADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
-        } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
-        }
-    }
-
-    public void alterar(Coordenador coordenador, Coordenadoria coordenadoria, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
-
-        String resposta = gtCoordenador.alterar(coordenador, coordenadoria, professor, tipo, login, senha, nome, matricula);
-        if (resposta.equals(Constantes.ALTERADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
-        } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
-        }
-    }
-
-    
-
-    */
-    
+    }    
 }

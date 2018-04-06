@@ -17,6 +17,16 @@ public class GdCoordenadoria extends GdGenerico{
         return lista;
     }
     
+    public List filtrarCoordenadoriasEixo(String coluna, int id) {
+        Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
+        coluna = coluna.toLowerCase();
+        crit.add( Restrictions.eq(coluna, id) );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.close();
+        return lista;
+    }
+    
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
         crit.add( Restrictions.like(coluna, "%"+texto+"%") );

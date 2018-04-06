@@ -3,9 +3,14 @@ package cdp;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Curso implements Serializable {
@@ -22,21 +27,28 @@ public class Curso implements Serializable {
     
     @Column(nullable = false)
     private String nivel;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordenadoria_id", nullable = true)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Coordenadoria coordenadoria;
 
     public Curso() {
     }
 
-    public Curso(int id, String nome, int qtPeriodos, String nivel) {
+    public Curso(int id, String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria) {
         this.id = id;
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.nivel = nivel;
+        this.coordenadoria = coordenadoria;
     }
 
-    public Curso(String nome, int qtPeriodos, String nivel) {
+    public Curso(String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria) {
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.nivel = nivel;
+        this.coordenadoria = coordenadoria;
     }
 
     public int getId() {
@@ -69,6 +81,14 @@ public class Curso implements Serializable {
 
     public void setNivel(String nivel) {
         this.nivel = nivel;
+    }
+
+    public Coordenadoria getCoordenadoria() {
+        return coordenadoria;
+    }
+
+    public void setCoordenadoria(Coordenadoria coordenadoria) {
+        this.coordenadoria = coordenadoria;
     }
 
     @Override

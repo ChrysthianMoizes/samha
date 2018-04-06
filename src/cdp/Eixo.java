@@ -1,18 +1,11 @@
 package cdp;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Eixo implements Serializable {
@@ -23,24 +16,17 @@ public class Eixo implements Serializable {
     
     @Column(nullable = false, unique = true)
     private String nome;
-    
-    @OneToMany(mappedBy = "eixo", fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Coordenadoria> coordenadorias;
 
     public Eixo() {
     }
 
-    public Eixo(int id, String nome, Collection<Coordenadoria> coordenadorias) {
+    public Eixo(int id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.coordenadorias = coordenadorias;
     }
 
-    public Eixo(String nome, Collection<Coordenadoria> coordenadorias) {
+    public Eixo(String nome) {
         this.nome = nome;
-        this.coordenadorias = coordenadorias;
     }
 
     public int getId() {
@@ -59,11 +45,12 @@ public class Eixo implements Serializable {
         this.nome = nome;
     }
 
-    public Collection<Coordenadoria> getCoordenadorias() {
-        return coordenadorias;
+    @Override
+    public String toString() {
+        return nome;
     }
-
-    public void setCoordenadorias(Collection<Coordenadoria> coordenadorias) {
-        this.coordenadorias = coordenadorias;
-    } 
+    
+    public Object[] toArray() {
+        return new Object[] { this };
+    }   
 }

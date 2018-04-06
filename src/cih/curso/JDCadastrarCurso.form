@@ -103,7 +103,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cbxCoordenadoria" pref="400" max="32767" attributes="0"/>
+                          <Component id="cbxEixo" pref="400" max="32767" attributes="0"/>
                           <Component id="txtNomeEixo" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -119,10 +119,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxCoordenadoria" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnAdicionarEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbxEixo" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btnAdicionarEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -151,7 +153,7 @@
                 <Property name="text" type="java.lang.String" value="Eixo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbxCoordenadoria">
+            <Component class="javax.swing.JComboBox" name="cbxEixo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
@@ -162,6 +164,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxEixoItemStateChanged"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -180,6 +185,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarEixoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnAdicionarEixoKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnRemoverEixo">
@@ -196,6 +202,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverEixoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnRemoverEixoKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNomeEixo">
@@ -427,7 +434,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cbxCoordenadoria1" pref="400" max="32767" attributes="0"/>
+                          <Component id="cbxCoordenadoria" pref="400" max="32767" attributes="0"/>
                           <Component id="txtNomeCoordenadoria" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -443,10 +450,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxCoordenadoria1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnAdicionarCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbxCoordenadoria" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btnAdicionarCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -476,7 +485,7 @@
                 <Property name="text" type="java.lang.String" value="Coord.:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbxCoordenadoria1">
+            <Component class="javax.swing.JComboBox" name="cbxCoordenadoria">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
@@ -505,6 +514,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarCoordenadoriaActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnAdicionarCoordenadoriaKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnRemoverCoordenadoria">
@@ -521,6 +531,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverCoordenadoriaActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnRemoverCoordenadoriaKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNomeCoordenadoria">

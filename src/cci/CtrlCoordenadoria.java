@@ -18,6 +18,10 @@ public class CtrlCoordenadoria {
         return gtCoordenadoria.filtrarCoordenadoresNulos();
     }
     
+    public List<Coordenadoria> filtrarCoordenadoriasEixo(int id) {
+        return gtCoordenadoria.filtrarCoordenadoriasEixo(id);
+    }
+    
     public List<Coordenadoria> buscar(String coluna, String texto) {
        return gtCoordenadoria.buscar(coluna, texto);
     }

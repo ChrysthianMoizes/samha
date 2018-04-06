@@ -4,29 +4,26 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Coordenadoria;
 import cdp.Curso;
-import cdp.Professor;
-import cdp.RestricaoProfessor;
+import cdp.Eixo;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 
 public class JDCadastrarCurso extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private Professor professor;
-    private List<RestricaoProfessor> listaRestricoes;
+    private Curso curso;
     private List<Coordenadoria> listaCoordenadorias;
+    private List<Eixo> listaEixos;
 
     public JDCadastrarCurso(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Curso curso) {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.professor = professor;
-        habilitarCamposRestricao(false);
+        this.curso = curso;
         identificarOrigem();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,7 +33,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         pnlEixo = new javax.swing.JPanel();
         txtNomeEixo = new javax.swing.JTextField();
         lblEixo = new javax.swing.JLabel();
-        cbxCoordenadoria = new javax.swing.JComboBox<>();
+        cbxEixo = new javax.swing.JComboBox<>();
         btnAdicionarEixo = new javax.swing.JButton();
         btnRemoverEixo = new javax.swing.JButton();
         lblNomeEixo = new javax.swing.JLabel();
@@ -53,7 +50,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         pnlCoordenadoria = new javax.swing.JPanel();
         txtNomeCoordenadoria = new javax.swing.JTextField();
         lblCoordenadoria = new javax.swing.JLabel();
-        cbxCoordenadoria1 = new javax.swing.JComboBox<>();
+        cbxCoordenadoria = new javax.swing.JComboBox<>();
         btnAdicionarCoordenadoria = new javax.swing.JButton();
         btnRemoverCoordenadoria = new javax.swing.JButton();
         lblNomeCoordenadoria = new javax.swing.JLabel();
@@ -72,8 +69,13 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         lblEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblEixo.setText("Eixo:");
 
-        cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxEixo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxEixo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxEixoItemStateChanged(evt);
+            }
+        });
 
         btnAdicionarEixo.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnAdicionarEixo.setText("Adicionar");
@@ -83,6 +85,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                 btnAdicionarEixoActionPerformed(evt);
             }
         });
+        btnAdicionarEixo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAdicionarEixoKeyPressed(evt);
+            }
+        });
 
         btnRemoverEixo.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnRemoverEixo.setText("Remover");
@@ -90,6 +97,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         btnRemoverEixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverEixoActionPerformed(evt);
+            }
+        });
+        btnRemoverEixo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnRemoverEixoKeyPressed(evt);
             }
         });
 
@@ -107,7 +119,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                     .addComponent(lblEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxCoordenadoria, 0, 400, Short.MAX_VALUE)
+                    .addComponent(cbxEixo, 0, 400, Short.MAX_VALUE)
                     .addComponent(txtNomeEixo))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,10 +131,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEixoLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionarEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxEixo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdicionarEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,8 +260,8 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         lblCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCoordenadoria.setText("Coord.:");
 
-        cbxCoordenadoria1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCoordenadoria1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         btnAdicionarCoordenadoria.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnAdicionarCoordenadoria.setText("Adicionar");
@@ -258,6 +271,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                 btnAdicionarCoordenadoriaActionPerformed(evt);
             }
         });
+        btnAdicionarCoordenadoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAdicionarCoordenadoriaKeyPressed(evt);
+            }
+        });
 
         btnRemoverCoordenadoria.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnRemoverCoordenadoria.setText("Remover");
@@ -265,6 +283,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         btnRemoverCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCoordenadoriaActionPerformed(evt);
+            }
+        });
+        btnRemoverCoordenadoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnRemoverCoordenadoriaKeyPressed(evt);
             }
         });
 
@@ -282,7 +305,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                     .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxCoordenadoria1, 0, 400, Short.MAX_VALUE)
+                    .addComponent(cbxCoordenadoria, 0, 400, Short.MAX_VALUE)
                     .addComponent(txtNomeCoordenadoria))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,10 +317,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoordenadoriaLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCoordenadoria1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionarCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdicionarCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,97 +373,85 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void identificarOrigem() {
-        preencherComboCoordenadorias();
-        if (professor != null) {
+        preencherComboEixos();
+        if (curso != null) 
             setarCamposComInstancia();
-            listaRestricoes = ctrlPrincipal.getCtrlRestricao().filtrarPorProfessor(professor.getId());
-            preencherListaRestricoes();
-        }
     }
 
     public void setarCamposComInstancia() {
 
-        txtNomeEixo.setText(professor.getNome());
-        txtMatricula.setText(professor.getMatricula());
-        txtCargaHoraria.setText(String.valueOf(professor.getCargaHoraria()));
-        Coordenadoria coordenadoria;
+        txtNomeCurso.setText(curso.getNome());
+        spnPeriodos.setValue(curso.getQtPeriodos());
+        setarEixo();   
+    }
+    
+    public void setarEixo(){
+        
+        Eixo eixo;
 
+        for (int i = 0; i < listaEixos.size(); i++) {
+
+            eixo = listaEixos.get(i);
+            if (eixo.getId() == curso.getCoordenadoria().getEixo().getId()) {
+                cbxEixo.setSelectedIndex(i);
+                preencherComboCoordenadorias(eixo.getId());
+                break;
+            }
+        }
+    }
+    
+    public void setarCoordenadoria(){
+        
+        Coordenadoria coordenadoria;
+        
         for (int i = 0; i < listaCoordenadorias.size(); i++) {
 
             coordenadoria = listaCoordenadorias.get(i);
-            if (coordenadoria.getId() == professor.getCoordenadoria().getId()) {
+            if (coordenadoria.getId() == curso.getCoordenadoria().getId()) {
                 cbxCoordenadoria.setSelectedIndex(i);
                 break;
             }
         }
     }
 
-    public void preencherComboCoordenadorias() {
-
-        if (listaCoordenadorias == null) {
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
-        }
-
+    public void preencherComboCoordenadorias(int id) {
+        listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
+        cbxCoordenadoria.removeAllItems();
         cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
+        cbxCoordenadoria.setSelectedIndex(0);
     }
-
-    public void preencherListaRestricoes() {
-        if (listaRestricoes != null) {
-            DefaultListModel defaultListModel = new DefaultListModel();
-            lstRestricoes.removeAll();
-            for (int i = 0; i < listaRestricoes.size(); i++) {
-                defaultListModel.addElement(listaRestricoes.get(i).toString());
-            }
-            lstRestricoes.setModel(defaultListModel);
-        }
+    
+    public void preencherComboEixos(){ 
+        listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
+        cbxEixo.removeAllItems();
+        cbxEixo.setModel(new DefaultComboBoxModel(listaEixos.toArray()));
     }
-
-    public void desabilitarCamposProfessor(boolean opcao) {
-        txtNomeEixo.setEnabled(opcao);
-        txtMatricula.setEnabled(opcao);
-        txtCargaHoraria.setEnabled(opcao);
-        cbxCoordenadoria.setEnabled(opcao);
-        btnSalvar.setEnabled(opcao);
+    
+    public void desabilitarCampos(){
+        txtNomeCurso.setEnabled(false);
+        cbxNivel.setEnabled(false);
+        spnPeriodos.setEnabled(false);
+        btnSalvar.setEnabled(false);
         btnCancelar.setText("Sair");
-    }
-
-    public void habilitarCamposRestricao(boolean opcao) {
-        txtNomeCurso.setEnabled(opcao);
-        cbxNivel.setEnabled(opcao);
-        cbxDias.setEnabled(opcao);
-        lstRestricoes.setEnabled(opcao);
-        chxAula1.setEnabled(opcao);
-        chxAula2.setEnabled(opcao);
-        chxAula3.setEnabled(opcao);
-        chxAula4.setEnabled(opcao);
-        chxAula5.setEnabled(opcao);
-        chxAula6.setEnabled(opcao);
-        rbtnAlta.setEnabled(opcao);
-        rbtnBaixa.setEnabled(opcao);
-        rbtnMedia.setEnabled(opcao);
-        btnAdicionarEixo.setEnabled(opcao);
-        btnRemoverEixo.setEnabled(opcao);
-        btnLimpar.setEnabled(opcao);
-        txtAreaDescricao.setEnabled(opcao);
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        String nome = txtNomeEixo.getText();
-        String matricula = txtMatricula.getText();
-        String cargaHoraria = txtCargaHoraria.getText();
+        String nome = txtNomeCurso.getText();
+        String nivel = cbxNivel.getSelectedItem().toString();
+        int periodos = (int) spnPeriodos.getValue();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-
-        if (professor == null) {
-            professor = ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
-        } else {
-            professor = ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        int resposta;
+        
+        if(curso == null){
+            resposta = ctrlPrincipal.getCtrlCurso().cadastrar(nome, nivel, periodos, coordenadoria);  
+        }else{
+            resposta = ctrlPrincipal.getCtrlCurso().alterar(curso, nome, nivel, periodos, coordenadoria);
         }
-
-        if (professor != null) {
-            desabilitarCamposProfessor(false);
-            habilitarCamposRestricao(true);
-        }
+        
+        if (resposta == 0) {
+            desabilitarCampos();
+        }  
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -459,70 +471,71 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnAdicionarEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEixoActionPerformed
-
-        String nome = txtNomeCurso.getText();
-        String turno = cbxNivel.getSelectedItem().toString();
-        String dia = cbxDias.getSelectedItem().toString();
-        String descricao = txtAreaDescricao.getText();
-        String prioridade;
-        char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
-
-        switch (priori) {
-            case 'B':
-                prioridade = "BAIXA";
-                break;
-            case 'M':
-                prioridade = "MÉDIA";
-                break;
-            default:
-                prioridade = "ALTA";
-                break;
-        }
-
-        boolean aula1 = chxAula1.isSelected();
-        boolean aula2 = chxAula2.isSelected();
-        boolean aula3 = chxAula3.isSelected();
-        boolean aula4 = chxAula4.isSelected();
-        boolean aula5 = chxAula5.isSelected();
-        boolean aula6 = chxAula6.isSelected();
-
-        RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
-                nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
-
-        if (restricao != null) {
-            listaRestricoes.add(restricao);
-            preencherListaRestricoes();
-        }
+        
+        String nome = txtNomeEixo.getText(); 
+        int resposta = ctrlPrincipal.getCtrlEixo().cadastrar(nome);
+        
+        if(resposta == 0){
+            preencherComboEixos();
+            int posicao = listaEixos.size();
+            cbxEixo.setSelectedIndex(posicao);
+            cbxEixoItemStateChanged(null);
+        }      
     }//GEN-LAST:event_btnAdicionarEixoActionPerformed
 
     private void btnRemoverEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEixoActionPerformed
-
-        int posicao = lstRestricoes.getSelectedIndex();
-        RestricaoProfessor restricao = listaRestricoes.get(posicao);
-
-        if (restricao != null) {
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Remoção ?");
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-
-                int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
-                if (resposta == 0) {
-                    listaRestricoes.remove(posicao);
-                    preencherListaRestricoes();
+                Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+                int posicaoEixo = cbxEixo.getSelectedIndex();
+                int resposta = ctrlPrincipal.getCtrlEixo().excluir(eixo);
+                if(resposta == 0){
+                    preencherComboEixos();
+                    cbxCoordenadoria.removeAllItems();
+                    
                 }
             }
-            btnLimparActionPerformed(null);
-        } else {
-            CtrlMensagem.exibirMensagemAviso(this, "Selecione uma Restrição para remover");
-        }
     }//GEN-LAST:event_btnRemoverEixoActionPerformed
 
     private void btnAdicionarCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCoordenadoriaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 
     private void btnRemoverCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCoordenadoriaActionPerformed
-        // TODO add your handling code here:
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+            if (confirmacao == 0) {
+                
+            }
     }//GEN-LAST:event_btnRemoverCoordenadoriaActionPerformed
+
+    private void cbxEixoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxEixoItemStateChanged
+        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+        preencherComboCoordenadorias(eixo.getId());
+    }//GEN-LAST:event_cbxEixoItemStateChanged
+
+    private void btnAdicionarEixoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarEixoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAdicionarEixoActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnAdicionarEixoKeyPressed
+
+    private void btnRemoverEixoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRemoverEixoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnRemoverEixoActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnRemoverEixoKeyPressed
+
+    private void btnAdicionarCoordenadoriaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarCoordenadoriaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAdicionarCoordenadoriaActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnAdicionarCoordenadoriaKeyPressed
+
+    private void btnRemoverCoordenadoriaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRemoverCoordenadoriaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnRemoverCoordenadoriaActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnRemoverCoordenadoriaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarCoordenadoria;
@@ -533,7 +546,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
     private javax.swing.JButton btnRemoverEixo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
-    private javax.swing.JComboBox<String> cbxCoordenadoria1;
+    private javax.swing.JComboBox<String> cbxEixo;
     private javax.swing.JComboBox<String> cbxNivel;
     private javax.swing.JLabel lblCoordenadoria;
     private javax.swing.JLabel lblEixo;

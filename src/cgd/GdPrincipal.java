@@ -6,6 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 public class GdPrincipal extends GdGenerico{
+
+    public GdPrincipal() {
+    }
     
     public Usuario validarAcesso(String login, String senha){
         Criteria crit = criarSessao().createCriteria(Usuario.class);

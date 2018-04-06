@@ -19,6 +19,10 @@ public class GtCoordenadoria {
     public List<Coordenadoria> buscar(String coluna, String texto) {
         return gdCoordenadoria.buscar(coluna.toLowerCase(), texto);
     }
+    
+    public List<Coordenadoria> filtrarCoordenadoriasEixo(int id) {
+        return gdCoordenadoria.filtrarCoordenadoriasEixo("eixo.id", id);
+    }
 
     public List<Coordenadoria> listar() {
        return gdCoordenadoria.consultar(Coordenadoria.class);
