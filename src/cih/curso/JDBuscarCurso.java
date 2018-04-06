@@ -1,21 +1,17 @@
 package cih.curso;
 
-import cih.professor.*;
 import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.Coordenadoria;
-import cdp.Professor;
+import cdp.Curso;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDBuscarCurso extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private List<Professor> listaProfessores;
-    private List<Coordenadoria> listaCoordenadorias;
+    private List<Curso> listaCursos;
     private Frame pai;
     
     public JDBuscarCurso(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -26,21 +22,13 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         btnBuscarActionPerformed(null);
     }
     
-    public void preencherComboCoordenadorias(){
-        
-        if(listaCoordenadorias == null)
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().listar();
-           
-        cbxEixo.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));       
-    }
-    
     public void atualizarTabela(){
         
         JTableUtil.limparTabela(tblCurso);
         
-        if(listaProfessores != null){
-            listaProfessores.forEach((professor) -> {
-                JTableUtil.addLinha(tblCurso, professor.toArray() );
+        if(listaCursos != null){
+            listaCursos.forEach((curso) -> {
+                JTableUtil.addLinha(tblCurso, curso.toArray() );
             });
         }else
             CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
@@ -64,7 +52,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         jScrollPaneProfessores = new javax.swing.JScrollPane();
         tblCurso = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        cbxEixo = new javax.swing.JComboBox<>();
+        rbtnPosGraduacao = new javax.swing.JRadioButton();
+        rbtnEnsinoMedio = new javax.swing.JRadioButton();
+        rbtnGraduacao = new javax.swing.JRadioButton();
+        rbtnMestrado = new javax.swing.JRadioButton();
+        rbtnDoutorado = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Professor");
@@ -171,7 +163,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         jLabelFiltrar.setText("Filtrar por:");
 
         cbxFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Eixo" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Nivel" }));
         cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxFiltroItemStateChanged(evt);
@@ -193,11 +185,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Matrícula", "Coordenadoria"
+                "Nome", "Nível"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -219,8 +211,40 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             }
         });
 
-        cbxEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxEixo.setEnabled(false);
+        rbtnPosGraduacao.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnPosGraduacao);
+        rbtnPosGraduacao.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnPosGraduacao.setMnemonic('p');
+        rbtnPosGraduacao.setText("Pós-Graduação");
+        rbtnPosGraduacao.setEnabled(false);
+
+        rbtnEnsinoMedio.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnEnsinoMedio);
+        rbtnEnsinoMedio.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnEnsinoMedio.setMnemonic('e');
+        rbtnEnsinoMedio.setText("Ensino Médio");
+        rbtnEnsinoMedio.setEnabled(false);
+
+        rbtnGraduacao.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnGraduacao);
+        rbtnGraduacao.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnGraduacao.setMnemonic('g');
+        rbtnGraduacao.setText("Graduação");
+        rbtnGraduacao.setEnabled(false);
+
+        rbtnMestrado.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnMestrado);
+        rbtnMestrado.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnMestrado.setMnemonic('m');
+        rbtnMestrado.setText("Mestrado");
+        rbtnMestrado.setEnabled(false);
+
+        rbtnDoutorado.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnDoutorado);
+        rbtnDoutorado.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnDoutorado.setMnemonic('d');
+        rbtnDoutorado.setText("Doutorado");
+        rbtnDoutorado.setEnabled(false);
 
         javax.swing.GroupLayout pnlBuscarCursoLayout = new javax.swing.GroupLayout(pnlBuscarCurso);
         pnlBuscarCurso.setLayout(pnlBuscarCursoLayout);
@@ -229,19 +253,28 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBuscarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlBuscarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
+                                .addComponent(rbtnEnsinoMedio)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnGraduacao)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnPosGraduacao)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnMestrado)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnDoutorado)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
                                 .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFiltro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2))
-                            .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         pnlBuscarCursoLayout.setVerticalGroup(
@@ -254,7 +287,12 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                     .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlBuscarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtnPosGraduacao)
+                    .addComponent(rbtnGraduacao)
+                    .addComponent(rbtnEnsinoMedio)
+                    .addComponent(rbtnMestrado)
+                    .addComponent(rbtnDoutorado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -307,12 +345,32 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(cbxEixo.getSelectedIndex() == 2){
-            Coordenadoria coordenadoria = (Coordenadoria) cbxEixo.getSelectedItem();
-            filtro = String.valueOf(coordenadoria.getId());
-        }
-        
-        listaProfessores = ctrlPrincipal.getCtrlProfessor().buscar(colunaFiltro, filtro);
+        if(colunaFiltro.toLowerCase().equals("tipo")){
+            
+            char tipo = (char) btnGroup.getSelection().getMnemonic();
+            
+            switch (tipo) {
+                case 'E':
+                    filtro = "ENSINO MÉDIO INTEGRADO";
+                    break;
+                case 'G':
+                    filtro = "GRADUAÇÃO";
+                    break;
+                case 'P':
+                    filtro = "PÓS-GRADUAÇÃO";
+                    break;
+                    
+                case 'M':
+                    filtro = "MESTRADO";
+                    break;
+                    
+                default:
+                    filtro = "DOUTORADO";
+                    break;
+            }  
+        } 
+
+        listaCursos = ctrlPrincipal.getCtrlCurso().buscar(colunaFiltro, filtro);
         atualizarTabela();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -326,11 +384,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
         try {
-            Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tblCurso);
-            ctrlPrincipal.getCtrlProfessor().instanciarTelaCadastroProfessor(professor, pai);
+            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblCurso);
+            ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(curso, pai);
             btnBuscarActionPerformed(null);
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um professor");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -351,7 +409,8 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ctrlPrincipal.getCtrlProfessor().instanciarTelaCadastroProfessor(null, pai);
+        ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(null, pai);
+        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
@@ -361,15 +420,15 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
         try {
-            Professor prof = (Professor) JTableUtil.getDadosLinhaSelecionada(tblCurso);
+            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblCurso);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlProfessor().excluir(prof);
+                ctrlPrincipal.getCtrlCurso().excluir(curso);
                 btnBuscarActionPerformed(null);
             }
             
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um professor");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -380,14 +439,20 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        if(cbxFiltro.getSelectedIndex() == 2){
-            cbxEixo.setEnabled(true);
-            preencherComboCoordenadorias();
+        if(cbxFiltro.getSelectedIndex() == 1){
+            rbtnEnsinoMedio.setEnabled(true);
+            rbtnGraduacao.setEnabled(true);
+            rbtnPosGraduacao.setEnabled(true);
+            rbtnMestrado.setEnabled(true);
+            rbtnDoutorado.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
         }else{
-            cbxEixo.removeAllItems();
-            cbxEixo.setEnabled(false);
+            rbtnEnsinoMedio.setEnabled(false);
+            rbtnGraduacao.setEnabled(false);
+            rbtnPosGraduacao.setEnabled(false);
+            rbtnMestrado.setEnabled(false);
+            rbtnDoutorado.setEnabled(false);
             txtFiltro.setEnabled(true);
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
@@ -399,13 +464,17 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.ButtonGroup btnGroup;
-    private javax.swing.JComboBox<String> cbxEixo;
     private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JScrollPane jScrollPaneProfessores;
     private javax.swing.JPanel pnlBuscarCurso;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;
+    private javax.swing.JRadioButton rbtnDoutorado;
+    private javax.swing.JRadioButton rbtnEnsinoMedio;
+    private javax.swing.JRadioButton rbtnGraduacao;
+    private javax.swing.JRadioButton rbtnMestrado;
+    private javax.swing.JRadioButton rbtnPosGraduacao;
     private javax.swing.JTable tblCurso;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables

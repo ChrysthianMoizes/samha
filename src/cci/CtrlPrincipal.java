@@ -134,47 +134,31 @@ public final class CtrlPrincipal {
         return gtPrincipal;
     }
 
-    public void setGtPrincipal(GtPrincipal gtPrincipal) {
-        this.gtPrincipal = gtPrincipal;
-    }
-
     public CtrlProfessor getCtrlProfessor() {
         return ctrlProfessor;
-    }
-
-    public void setCtrlProfessor(CtrlProfessor ctrlProfessor) {
-        this.ctrlProfessor = ctrlProfessor;
     }
 
     public CtrlCoordenador getCtrlCoordenador() {
         return ctrlCoordenador;
     }
 
-    public void setCtrlCoordenador(CtrlCoordenador ctrlCoordenador) {
-        this.ctrlCoordenador = ctrlCoordenador;
-    }
-
     public CtrlMensagem getCtrlMensagem() {
         return ctrlMensagem;
-    }
-
-    public void setCtrlMensagem(CtrlMensagem ctrlMensagem) {
-        this.ctrlMensagem = ctrlMensagem;
     }
 
     public CtrlCoordenadoria getCtrlCoordenadoria() {
         return ctrlCoordenadoria;
     }
 
-    public void setCtrlCoordenadoria(CtrlCoordenadoria ctrlCoordenadoria) {
-        this.ctrlCoordenadoria = ctrlCoordenadoria;
-    }
-
     public CtrlRestricao getCtrlRestricao() {
         return ctrlRestricao;
     }
 
-    public void setCtrlRestricao(CtrlRestricao ctrlRestricao) {
-        this.ctrlRestricao = ctrlRestricao;
+    public CtrlCurso getCtrlCurso() {
+        return ctrlCurso;
+    }
+
+    public CtrlEixo getCtrlEixo() {
+        return ctrlEixo;
     }
 }

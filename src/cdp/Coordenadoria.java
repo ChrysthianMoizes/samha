@@ -1,12 +1,9 @@
 package cdp;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -32,29 +29,22 @@ public class Coordenadoria implements Serializable {
     @JoinColumn(name = "coordenador_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private ProfessorCoordenador coordenador;
-    
-    @OneToMany(mappedBy = "coordenadoria", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Professor> professores;
   
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
+    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Eixo eixo) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
-        this.professores = professores;
         this.eixo = eixo;
     }
 
-    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Collection<Professor> professores, Eixo eixo) {
+    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Eixo eixo) {
         this.nome = nome;
         this.curso = curso;
         this.coordenador = coordenador;
-        this.professores = professores;
         this.eixo = eixo;
     }
 
@@ -88,14 +78,6 @@ public class Coordenadoria implements Serializable {
 
     public void setCoordenador(ProfessorCoordenador coordenador) {
         this.coordenador = coordenador;
-    }
-
-    public Collection<Professor> getProfessores() {
-        return professores;
-    }
-
-    public void setProfessores(Collection<Professor> professores) {
-        this.professores = professores;
     }
 
     public Eixo getEixo() {

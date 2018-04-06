@@ -323,7 +323,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(colunaFiltro.toLowerCase().equals("tipo")){
+        if(colunaFiltro.toLowerCase().equals("nivel")){
             
             char tipo = (char) btnGroup.getSelection().getMnemonic();
             
