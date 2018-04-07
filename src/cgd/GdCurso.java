@@ -15,4 +15,14 @@ public class GdCurso extends GdGenerico{
         sessao.close();
         return lista;
     }
+    
+    public Curso filtrarCursoUnico(String colunaFiltro, int id) {
+        Criteria crit = criarSessao().createCriteria(Curso.class);
+        colunaFiltro = colunaFiltro.toLowerCase();
+        crit.add( Restrictions.eq(colunaFiltro, id));
+        crit.setMaxResults(1);
+        Curso curso = (Curso) crit.uniqueResult();
+        sessao.close();
+        return curso;
+    }
 }

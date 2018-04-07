@@ -59,7 +59,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnDoutorado = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Buscar Professor");
+        setTitle("Buscar Curso");
         setIconImage(null);
         setResizable(false);
 
@@ -345,7 +345,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(colunaFiltro.toLowerCase().equals("tipo")){
+        if(colunaFiltro.toLowerCase().equals("nivel")){
             
             char tipo = (char) btnGroup.getSelection().getMnemonic();
             

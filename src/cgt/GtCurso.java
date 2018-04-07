@@ -2,6 +2,7 @@ package cgt;
 
 import cdp.Coordenadoria;
 import cdp.Curso;
+import cgd.GdCoordenadoria;
 import cgd.GdCurso;
 import java.util.List;
 
@@ -9,10 +10,12 @@ public class GtCurso {
     
     private GdCurso gdCurso;
     private GtTurma gtTurma;
+    private GdCoordenadoria gdCoordenadoria;
 
     public GtCurso() {
         gdCurso = new GdCurso();
         gtTurma = new GtTurma();
+        gdCoordenadoria = new GdCoordenadoria();
     }
     
     public String cadastrar(String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
@@ -20,12 +23,14 @@ public class GtCurso {
         try {
            
             Curso curso = new Curso();
-            curso.setNome(nome);
+            curso.setNome(nome.toUpperCase());
             curso.setNivel(nivel);
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);
             
             gdCurso.cadastrar(curso);
+            coordenadoria.setCurso(curso);
+            gdCoordenadoria.alterar(coordenadoria);
             
             return Constantes.CADASTRADO;
         } catch (Exception ex) {
@@ -37,7 +42,7 @@ public class GtCurso {
         
         try {
           
-            curso.setNome(nome);
+            curso.setNome(nome.toUpperCase());
             curso.setNivel(nivel);
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);

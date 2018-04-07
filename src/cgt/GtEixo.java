@@ -18,7 +18,7 @@ public class GtEixo {
 
         try {
             Eixo eixo = new Eixo();
-            eixo.setNome(nome);
+            eixo.setNome(nome.toUpperCase());
             
             gdEixo.cadastrar(eixo);
             return Constantes.CADASTRADO;

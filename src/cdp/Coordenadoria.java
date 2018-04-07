@@ -16,7 +16,7 @@ public class Coordenadoria implements Serializable {
     @Column(nullable = false, unique = true)
     private String nome;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "eixo_id", nullable = false)
     private Eixo eixo;
     
@@ -24,27 +24,20 @@ public class Coordenadoria implements Serializable {
     @JoinColumn(name = "curso_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Curso curso;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coordenador_id", nullable = true)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private ProfessorCoordenador coordenador;
   
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Curso curso, ProfessorCoordenador coordenador, Eixo eixo) {
+    public Coordenadoria(int id, String nome, Curso curso, Eixo eixo) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
-        this.coordenador = coordenador;
         this.eixo = eixo;
     }
 
-    public Coordenadoria(String nome, Curso curso, ProfessorCoordenador coordenador, Eixo eixo) {
+    public Coordenadoria(String nome, Curso curso, Eixo eixo) {
         this.nome = nome;
         this.curso = curso;
-        this.coordenador = coordenador;
         this.eixo = eixo;
     }
 
@@ -70,14 +63,6 @@ public class Coordenadoria implements Serializable {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
-    }
-
-    public ProfessorCoordenador getCoordenador() {
-        return coordenador;
-    }
-
-    public void setCoordenador(ProfessorCoordenador coordenador) {
-        this.coordenador = coordenador;
     }
 
     public Eixo getEixo() {

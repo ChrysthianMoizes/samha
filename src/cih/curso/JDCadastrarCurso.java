@@ -255,7 +255,6 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         pnlCoordenadoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Coordenadoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         txtNomeCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtNomeCoordenadoria.setEnabled(false);
 
         lblCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCoordenadoria.setText("Coord.:");
@@ -425,6 +424,8 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
         cbxEixo.removeAllItems();
         cbxEixo.setModel(new DefaultComboBoxModel(listaEixos.toArray()));
+        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+        preencherComboCoordenadorias(eixo.getId());
     }
     
     public void desabilitarCampos(){
@@ -480,6 +481,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             int posicao = listaEixos.size();
             cbxEixo.setSelectedIndex(posicao);
             cbxEixoItemStateChanged(null);
+            txtNomeEixo.setText("");
         }      
     }//GEN-LAST:event_btnAdicionarEixoActionPerformed
 
@@ -499,16 +501,27 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
     private void btnAdicionarCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCoordenadoriaActionPerformed
         
         String nome = txtNomeCoordenadoria.getText();
+        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+        int resposta = ctrlPrincipal.getCtrlCoordenadoria().cadastrar(nome, eixo);
         
-        //int resposta = ctrlPrincipal.getCtrlCoordenadoria()
-        
+        if(resposta == 0){
+            preencherComboCoordenadorias(eixo.getId());
+            int posicao = listaCoordenadorias.size();
+            cbxCoordenadoria.setSelectedIndex(posicao);
+            txtNomeCoordenadoria.setText("");
+        }       
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 
     private void btnRemoverCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCoordenadoriaActionPerformed
         int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                
+        if (confirmacao == 0) {
+            Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+            int resposta = ctrlPrincipal.getCtrlCoordenadoria().excluir(coordenadoria);
+            if (resposta == 0) {
+                Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+                preencherComboCoordenadorias(eixo.getId());
             }
+        }
     }//GEN-LAST:event_btnRemoverCoordenadoriaActionPerformed
 
     private void cbxEixoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxEixoItemStateChanged

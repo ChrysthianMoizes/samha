@@ -15,13 +15,11 @@ import org.hibernate.annotations.CascadeType;
 public class ProfessorCoordenador extends Coordenador{
     
     @OneToOne(fetch = FetchType.LAZY)
-    //@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     @JoinColumn(name = "professor_id", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor;
     
     @OneToOne(fetch = FetchType.LAZY)
-    //@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     @JoinColumn(name = "coordenadoria_id", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Coordenadoria coordenadoria;
