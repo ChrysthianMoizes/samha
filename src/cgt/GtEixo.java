@@ -34,7 +34,7 @@ public class GtEixo {
             
             List coordenadorias = gtCoordenadoria.filtrarCoordenadoriasEixo(eixo.getId());
             
-            if(coordenadorias == null){
+            if(coordenadorias.size() == 0){
                 gdEixo.excluir(eixo);
                 return Constantes.EXCLUIDO;
             }else

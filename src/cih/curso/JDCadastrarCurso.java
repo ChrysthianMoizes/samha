@@ -373,8 +373,15 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
 
     public void identificarOrigem() {
         preencherComboEixos();
-        if (curso != null) 
+        if (curso != null){ 
             setarCamposComInstancia();
+            txtNomeEixo.setEnabled(false);
+            txtNomeCoordenadoria.setEnabled(false);
+            btnAdicionarEixo.setEnabled(false);
+            btnAdicionarCoordenadoria.setEnabled(false);
+            btnRemoverEixo.setEnabled(false);
+            btnRemoverCoordenadoria.setEnabled(false);
+        }
     }
 
     public void setarCamposComInstancia() {
@@ -477,11 +484,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         int resposta = ctrlPrincipal.getCtrlEixo().cadastrar(nome);
         
         if(resposta == 0){
+            txtNomeEixo.setText("");
             preencherComboEixos();
             int posicao = listaEixos.size();
             cbxEixo.setSelectedIndex(posicao);
-            cbxEixoItemStateChanged(null);
-            txtNomeEixo.setText("");
+            cbxEixoItemStateChanged(null);  
         }      
     }//GEN-LAST:event_btnAdicionarEixoActionPerformed
 
@@ -505,10 +512,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         int resposta = ctrlPrincipal.getCtrlCoordenadoria().cadastrar(nome, eixo);
         
         if(resposta == 0){
+            txtNomeCoordenadoria.setText("");
             preencherComboCoordenadorias(eixo.getId());
             int posicao = listaCoordenadorias.size();
             cbxCoordenadoria.setSelectedIndex(posicao);
-            txtNomeCoordenadoria.setText("");
+            
         }       
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 
