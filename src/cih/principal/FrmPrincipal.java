@@ -162,6 +162,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnDisciplina.setFocusable(false);
         btnDisciplina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDisciplina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisciplinaActionPerformed(evt);
+            }
+        });
         toolBar.add(btnDisciplina);
         toolBar.add(jSeparator8);
 
@@ -461,6 +466,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCursoActionPerformed
         ctrlPrincipal.getCtrlCurso().instanciarTelaBuscaCurso(this);
     }//GEN-LAST:event_btnCursoActionPerformed
+
+    private void btnDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplinaActionPerformed
+        
+    }//GEN-LAST:event_btnDisciplinaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocacao;
