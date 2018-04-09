@@ -16,7 +16,7 @@ public class GdDisciplina extends GdGenerico{
         return lista;
     }
     
-    public List filtrarPorCurso(String coluna, String texto) {
+    public List filtrarPorCurso(String coluna, int texto) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         crit.add( Restrictions.eq(coluna, texto) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);

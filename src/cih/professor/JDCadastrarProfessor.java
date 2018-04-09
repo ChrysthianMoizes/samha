@@ -575,7 +575,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         String nome = txtNome.getText();
         String matricula = txtMatricula.getText();
-        String cargaHoraria = txtCargaHoraria.getText();
+        int cargaHoraria = Integer.valueOf(txtCargaHoraria.getText());
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
 
         if (professor == null) {

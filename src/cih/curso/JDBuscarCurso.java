@@ -30,8 +30,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             listaCursos.forEach((curso) -> {
                 JTableUtil.addLinha(tblCurso, curso.toArray() );
             });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+        }
     }
 
     @SuppressWarnings("unchecked")

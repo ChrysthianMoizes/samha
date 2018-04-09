@@ -8,11 +8,13 @@ import cdp.Disciplina;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private List<Disciplina> listaDisciplinas;
+    private List<Curso> listaCursos;
     private Frame pai;
     
     public JDBuscarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -31,8 +33,15 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             listaDisciplinas.forEach((disciplina) -> {
                 JTableUtil.addLinha(tblDisciplina, disciplina.toArray() );
             });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+        }
+    }
+    
+    public void preencherComboCurso(){
+        
+        if(listaCursos == null)
+            listaCursos = ctrlPrincipal.getCtrlCurso().listar();
+           
+        cbxCurso.setModel(new DefaultComboBoxModel(listaCursos.toArray()));       
     }
 
     @SuppressWarnings("unchecked")
@@ -349,7 +358,8 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                     break;
             }  
         }else if(colunaFiltro.toLowerCase().equals("curso")){
-            filtro = cbxCurso.getSelectedItem().toString();
+            Curso curso = (Curso) cbxCurso.getSelectedItem();
+            filtro = String.valueOf(curso.getId());
         } 
 
         listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().buscar(colunaFiltro, filtro);
@@ -425,6 +435,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         if(cbxFiltro.getSelectedIndex() == 0){
             
             btnBuscar.setEnabled(true);
+            cbxCurso.removeAllItems();
             cbxCurso.setEnabled(false);
             rbtnObrigatoria.setEnabled(false);
             rbtnOptativa.setEnabled(false);
@@ -434,6 +445,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         }else if(cbxFiltro.getSelectedIndex() == 1){
             
             cbxCurso.setEnabled(true);
+            preencherComboCurso();
             rbtnObrigatoria.setEnabled(false);
             rbtnOptativa.setEnabled(false);
             rbtnPosEspecial.setEnabled(false);
@@ -443,6 +455,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             
         }else{
             
+            cbxCurso.removeAllItems();
             cbxCurso.setEnabled(false);
             rbtnObrigatoria.setEnabled(true);
             rbtnOptativa.setEnabled(true);

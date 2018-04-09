@@ -41,8 +41,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
             listaProfessores.forEach((professor) -> {
                 JTableUtil.addLinha(tblProfessor, professor.toArray() );
             });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+        }
     }
 
     @SuppressWarnings("unchecked")

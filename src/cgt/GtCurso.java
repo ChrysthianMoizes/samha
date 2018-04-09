@@ -59,6 +59,10 @@ public class GtCurso {
         return gdCurso.buscar(coluna.toLowerCase(), texto);
     }
     
+    public List<Curso> listar() {
+       return gdCurso.consultar(Curso.class);
+    }
+    
     public String excluir(Curso curso) {
 
         try {

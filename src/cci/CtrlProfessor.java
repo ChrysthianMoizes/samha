@@ -36,7 +36,7 @@ public class CtrlProfessor {
         return gtProfessor.buscar(coluna, texto);
     }
 
-    public Professor cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
+    public Professor cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
         Professor professor = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
         if (professor != null) {
@@ -48,7 +48,7 @@ public class CtrlProfessor {
         }
     }
 
-    public Professor alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public Professor alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         Professor prof = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
         if (prof != null) {

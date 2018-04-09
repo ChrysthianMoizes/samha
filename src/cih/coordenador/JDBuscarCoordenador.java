@@ -30,8 +30,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             listaCoordenadores.forEach((coordenador) -> {
                 JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
             });
-        }else
-            CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
+        }
     }
 
     @SuppressWarnings("unchecked")

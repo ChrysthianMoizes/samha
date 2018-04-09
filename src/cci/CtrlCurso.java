@@ -61,6 +61,10 @@ public class CtrlCurso {
         return gtCurso.buscar(coluna, texto);
     }
     
+    public List<Curso> listar() {
+       return gtCurso.listar();
+    }
+    
     public void excluir(Curso curso) {
 
         String resposta = gtCurso.excluir(curso);
