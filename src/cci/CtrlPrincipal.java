@@ -24,6 +24,8 @@ public final class CtrlPrincipal {
     private CtrlRestricao ctrlRestricao;
     private CtrlCurso ctrlCurso;
     private CtrlEixo ctrlEixo;
+    private CtrlDisciplina ctrlDisciplina;
+    private CtrlMatriz ctrlMatriz;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -34,6 +36,8 @@ public final class CtrlPrincipal {
         ctrlRestricao = new CtrlRestricao(this);
         ctrlCurso = new CtrlCurso(this);
         ctrlEixo = new CtrlEixo(this);
+        ctrlDisciplina = new CtrlDisciplina(this);
+        ctrlMatriz = new CtrlMatriz(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -160,5 +164,13 @@ public final class CtrlPrincipal {
 
     public CtrlEixo getCtrlEixo() {
         return ctrlEixo;
+    }
+
+    public CtrlDisciplina getCtrlDisciplina() {
+        return ctrlDisciplina;
+    }
+
+    public CtrlMatriz getCtrlMatriz() {
+        return ctrlMatriz;
     }
 }

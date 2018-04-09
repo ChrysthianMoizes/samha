@@ -12,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Professor extends Servidor{
     
     @Column(nullable = false, precision = 2)
-    private double cargaHoraria;
+    private int cargaHoraria;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -23,13 +23,13 @@ public class Professor extends Servidor{
     public Professor() {
     }
 
-    public Professor(double cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula) {
+    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula) {
         super(id, nome, matricula);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
     }
 
-    public Professor(double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
+    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
         super(nome, matricula);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
@@ -39,7 +39,7 @@ public class Professor extends Servidor{
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(double cargaHoraria) {
+    public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 

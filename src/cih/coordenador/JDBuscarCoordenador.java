@@ -26,7 +26,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         
         JTableUtil.limparTabela(tblCoordenador);
         
-        if(listaCoordenadores != null){
+        if(listaCoordenadores.size() > 0){
             listaCoordenadores.forEach((coordenador) -> {
                 JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
             });

@@ -22,7 +22,10 @@ public class Alocacao implements Serializable{
     private int id;
     
     @Column(nullable = false)
-    private String semestre;
+    private int ano;
+    
+    @Column(nullable = false)
+    private int semestre;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "turma_id")
@@ -45,15 +48,17 @@ public class Alocacao implements Serializable{
     public Alocacao() {
     }
 
-    public Alocacao(int id, String semestre, Turma turma, Disciplina disciplina, Professor professor) {
+    public Alocacao(int id, int ano, int semestre, Turma turma, Disciplina disciplina, Professor professor) {
         this.id = id;
+        this.ano = ano;
         this.semestre = semestre;
         this.turma = turma;
         this.disciplina = disciplina;
         this.professor = professor;
     }
 
-    public Alocacao(String semestre, Turma turma, Disciplina disciplina, Professor professor) {
+    public Alocacao(int ano, int semestre, Turma turma, Disciplina disciplina, Professor professor) {
+        this.ano = ano;
         this.semestre = semestre;
         this.turma = turma;
         this.disciplina = disciplina;
@@ -68,11 +73,19 @@ public class Alocacao implements Serializable{
         this.id = id;
     }
 
-    public String getSemestre() {
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public int getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(String semestre) {
+    public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
 

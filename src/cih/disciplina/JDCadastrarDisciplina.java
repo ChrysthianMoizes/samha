@@ -4,6 +4,7 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Coordenadoria;
 import cdp.Curso;
+import cdp.Disciplina;
 import cdp.Eixo;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -16,7 +17,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     private List<Coordenadoria> listaCoordenadorias;
     private List<Eixo> listaEixos;
 
-    public JDCadastrarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Curso curso) {
+    public JDCadastrarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Disciplina disciplina) {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;

@@ -37,7 +37,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         
         JTableUtil.limparTabela(tblProfessor);
         
-        if(listaProfessores != null){
+        if(listaProfessores.size() > 0){
             listaProfessores.forEach((professor) -> {
                 JTableUtil.addLinha(tblProfessor, professor.toArray() );
             });

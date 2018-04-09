@@ -23,11 +23,14 @@ public class Disciplina implements Serializable {
     @Column(nullable = false)
     private String tipo;
     
-    @Column(nullable = false, precision = 2)
-    private double cargaHoraria;
+    @Column(nullable = false)
+    private int cargaHoraria;
     
     @Column(nullable = false)
     private int qtAulas;
+    
+    @Column(nullable = false)
+    private int periodo;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "matriz_id", nullable = false)
@@ -36,21 +39,23 @@ public class Disciplina implements Serializable {
     public Disciplina() {
     }
 
-    public Disciplina(int id, String nome, String tipo, double cargaHoraria, int qtAulas, MatrizCurricular matriz) {
+    public Disciplina(int id, String nome, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
         this.qtAulas = qtAulas;
         this.matriz = matriz;
+        this.periodo = periodo;
     }
 
-    public Disciplina(String nome, String tipo, double cargaHoraria, int qtAulas, MatrizCurricular matriz) {
+    public Disciplina(String nome, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
         this.qtAulas = qtAulas;
         this.matriz = matriz;
+        this.periodo = periodo;
     }
 
     public int getId() {
@@ -81,13 +86,22 @@ public class Disciplina implements Serializable {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(double cargaHoraria) {
+    public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
     public int getQtAulas() {
         return qtAulas;
     }
+
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
+
 
     public void setQtAulas(int qtAulas) {
         this.qtAulas = qtAulas;
@@ -100,4 +114,14 @@ public class Disciplina implements Serializable {
     public void setMatriz(MatrizCurricular matriz) {
         this.matriz = matriz;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTipo() };
+    }
+    
 }

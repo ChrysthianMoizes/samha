@@ -468,7 +468,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCursoActionPerformed
 
     private void btnDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplinaActionPerformed
-        
+        ctrlPrincipal.getCtrlDisciplina().instanciarTelaBuscaDisciplina(this);
     }//GEN-LAST:event_btnDisciplinaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

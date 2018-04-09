@@ -4,6 +4,7 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
 import cdp.Curso;
+import cdp.Disciplina;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private List<Curso> listaCursos;
+    private List<Disciplina> listaDisciplinas;
     private Frame pai;
     
     public JDBuscarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -26,9 +27,9 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         JTableUtil.limparTabela(tblDisciplina);
         
-        if(listaCursos != null){
-            listaCursos.forEach((curso) -> {
-                JTableUtil.addLinha(tblDisciplina, curso.toArray() );
+        if(listaDisciplinas.size() > 0){
+            listaDisciplinas.forEach((disciplina) -> {
+                JTableUtil.addLinha(tblDisciplina, disciplina.toArray() );
             });
         }else
             CtrlMensagem.exibirMensagemErro(this, "Nenhum registro encontrado!");
@@ -184,11 +185,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Curso", "Tipo"
+                "Nome", "Matriz Curricular", "Curso", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -213,31 +214,27 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         rbtnPosEspecial.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnPosEspecial);
         rbtnPosEspecial.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnPosEspecial.setMnemonic('p');
+        rbtnPosEspecial.setMnemonic('e');
         rbtnPosEspecial.setText("Especial");
         rbtnPosEspecial.setEnabled(false);
 
         rbtnObrigatoria.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnObrigatoria);
         rbtnObrigatoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnObrigatoria.setMnemonic('e');
+        rbtnObrigatoria.setMnemonic('b');
+        rbtnObrigatoria.setSelected(true);
         rbtnObrigatoria.setText("Obrigatória");
         rbtnObrigatoria.setEnabled(false);
 
         rbtnOptativa.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnOptativa);
         rbtnOptativa.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnOptativa.setMnemonic('g');
+        rbtnOptativa.setMnemonic('p');
         rbtnOptativa.setText("Optativa");
         rbtnOptativa.setEnabled(false);
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setEnabled(false);
-        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCursoItemStateChanged(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlBuscarDisciplinaLayout = new javax.swing.GroupLayout(pnlBuscarDisciplina);
         pnlBuscarDisciplina.setLayout(pnlBuscarDisciplinaLayout);
@@ -336,32 +333,26 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(colunaFiltro.toLowerCase().equals("nivel")){
+        if(colunaFiltro.toLowerCase().equals("tipo")){
             
             char tipo = (char) btnGroup.getSelection().getMnemonic();
             
             switch (tipo) {
-                case 'E':
-                    filtro = "ENSINO MÉDIO INTEGRADO";
+                case 'B':
+                    filtro = "OBRIGATÓRIA";
                     break;
-                case 'G':
-                    filtro = "GRADUAÇÃO";
-                    break;
-                case 'P':
-                    filtro = "PÓS-GRADUAÇÃO";
-                    break;
-                    
-                case 'M':
-                    filtro = "MESTRADO";
-                    break;
-                    
+                case 'O':
+                    filtro = "OPTATIVA";
+                    break;          
                 default:
-                    filtro = "DOUTORADO";
+                    filtro = "ESPECIAL";
                     break;
             }  
+        }else if(colunaFiltro.toLowerCase().equals("curso")){
+            filtro = cbxCurso.getSelectedItem().toString();
         } 
 
-        listaCursos = ctrlPrincipal.getCtrlCurso().buscar(colunaFiltro, filtro);
+        listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().buscar(colunaFiltro, filtro);
         atualizarTabela();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -375,11 +366,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
         try {
-            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
-            ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(curso, pai);
+            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
+            ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(disciplina, pai);
             btnBuscarActionPerformed(null);
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -400,7 +391,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(null, pai);
+        ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(null, pai);
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -411,15 +402,15 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
         try {
-            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
+            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlCurso().excluir(curso);
+                ctrlPrincipal.getCtrlDisciplina().excluir(disciplina);
                 btnBuscarActionPerformed(null);
             }
             
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -430,34 +421,37 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        if(cbxFiltro.getSelectedIndex() == 1){
+        
+        if(cbxFiltro.getSelectedIndex() == 0){
+            
+            btnBuscar.setEnabled(true);
+            cbxCurso.setEnabled(false);
+            rbtnObrigatoria.setEnabled(false);
+            rbtnOptativa.setEnabled(false);
+            rbtnPosEspecial.setEnabled(false);
+            txtFiltro.setEnabled(true);
+            
+        }else if(cbxFiltro.getSelectedIndex() == 1){
+            
             cbxCurso.setEnabled(true);
             rbtnObrigatoria.setEnabled(false);
             rbtnOptativa.setEnabled(false);
             rbtnPosEspecial.setEnabled(false);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
+            btnBuscar.setEnabled(false);
             
-        }else if(cbxFiltro.getSelectedIndex() == 2){
+        }else{
+            
             cbxCurso.setEnabled(false);
             rbtnObrigatoria.setEnabled(true);
             rbtnOptativa.setEnabled(true);
             rbtnPosEspecial.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
-            
-        }else{
-            cbxCurso.setEnabled(false);
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnPosEspecial.setEnabled(false);
-            txtFiltro.setEnabled(true);
+            btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
-
-    private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCursoItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

@@ -1,7 +1,6 @@
 package cdp;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,13 +27,11 @@ public class MatrizCurricular implements Serializable {
     private String nome;
     
     @Column(nullable = false)
-    private String anoCriacao;
+    private int ano;
     
-    @OneToMany(mappedBy = "matriz", fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Disciplina> disciplinas;
-    
+    @Column(nullable = false)
+    private int semestre;
+       
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "curso_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -47,18 +41,18 @@ public class MatrizCurricular implements Serializable {
     public MatrizCurricular() {
     }
 
-    public MatrizCurricular(int id, String nome, String anoCriacao, Collection<Disciplina> disciplinas, Curso curso) {
+    public MatrizCurricular(int id, String nome, int ano, int semestre, Curso curso) {
         this.id = id;
         this.nome = nome;
-        this.anoCriacao = anoCriacao;
-        this.disciplinas = disciplinas;
+        this.ano = ano;
+        this.semestre = semestre;
         this.curso = curso;
     }
 
-    public MatrizCurricular(String nome, String anoCriacao, Collection<Disciplina> disciplinas, Curso curso) {
+    public MatrizCurricular(String nome, int ano, int semestre, Curso curso) {
         this.nome = nome;
-        this.anoCriacao = anoCriacao;
-        this.disciplinas = disciplinas;
+        this.ano = ano;
+        this.semestre = semestre;
         this.curso = curso;
     }
 
@@ -78,20 +72,20 @@ public class MatrizCurricular implements Serializable {
         this.nome = nome;
     }
 
-    public String getAnoCriacao() {
-        return anoCriacao;
+    public int getAno() {
+        return ano;
     }
 
-    public void setAnoCriacao(String anoCriacao) {
-        this.anoCriacao = anoCriacao;
+    public void setAno(int anoCriacao) {
+        this.ano = anoCriacao;
     }
 
-    public Collection<Disciplina> getDisciplinas() {
-        return disciplinas;
+    public int getSemestre() {
+        return semestre;
     }
 
-    public void setDisciplinas(Collection<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
     }
 
     public Curso getCurso() {

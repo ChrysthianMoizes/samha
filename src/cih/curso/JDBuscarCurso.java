@@ -26,7 +26,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         
         JTableUtil.limparTabela(tblCurso);
         
-        if(listaCursos != null){
+        if(listaCursos.size() > 0){
             listaCursos.forEach((curso) -> {
                 JTableUtil.addLinha(tblCurso, curso.toArray() );
             });

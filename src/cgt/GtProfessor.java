@@ -17,14 +17,14 @@ public class GtProfessor {
         gdRestricao = new GdRestricao();
     }
 
-    public Professor cadastrar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria) {
+    public Professor cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
         try {
-            validarCampos(nome, matricula, cargaHoraria);
+            validarCampos(nome, matricula);
             Professor professor = new Professor();
             professor.setNome(nome);
             professor.setMatricula(matricula);
-            professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
+            professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gdProfessor.cadastrar(professor);
             return professor;
@@ -33,13 +33,13 @@ public class GtProfessor {
         }
     }
     
-    public Professor alterar(String nome, String matricula, String cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public Professor alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         try {
-            validarCampos(nome, matricula, cargaHoraria);
+            validarCampos(nome, matricula);
             professor.setNome(nome);
             professor.setMatricula(matricula);
-            professor.setCargaHoraria(Double.parseDouble(cargaHoraria));
+            professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gdProfessor.alterar(professor);
             return professor;
@@ -71,15 +71,12 @@ public class GtProfessor {
         }
     }
 
-    public void validarCampos(String nome, String matricula, String cargaHoraria) throws Exception {
+    public void validarCampos(String nome, String matricula) throws Exception {
         if (nome.equals("")) {
             throw new SAMHAException(1);
         }
         if (matricula.equals("")) {
             throw new SAMHAException(2);
-        }
-        if (cargaHoraria.equals("")) {
-            throw new SAMHAException(5);
         }
     }
 }
