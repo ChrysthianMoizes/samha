@@ -57,7 +57,7 @@ public class GtDisciplina {
         
         if(coluna.toLowerCase().equals("curso")){
             coluna = "matriz.curso.id";
-            return gdDisciplina.filtrarPorCurso(coluna.toLowerCase(), Integer.valueOf(texto));
+            return gdDisciplina.filtrar(coluna.toLowerCase(), Integer.valueOf(texto));
         }
         return gdDisciplina.buscar(coluna.toLowerCase(), texto);
     }
@@ -67,7 +67,7 @@ public class GtDisciplina {
         try {
             //verificar se a disciplina está associada a alguma alocação = criar gdLocacao
             List turmas = null; //gtTurma.filtrarPorCurso(disciplina.getId());
-            if(turmas == null){
+            if(turmas.size() == 0){
                 gdDisciplina.excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else

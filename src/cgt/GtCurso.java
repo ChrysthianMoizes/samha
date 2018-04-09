@@ -68,7 +68,7 @@ public class GtCurso {
         try {
             
             List turmas = gtTurma.filtrarPorCurso(curso.getId());
-            if(turmas == null){
+            if(turmas.size() == 0){
                 gdCurso.excluir(curso);
                 return Constantes.EXCLUIDO;
             }else

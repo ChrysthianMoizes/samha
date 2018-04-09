@@ -383,7 +383,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblPeriodo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="spnPeriodos" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="spnPeriodo" min="-2" pref="42" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -421,7 +421,7 @@
                           <Component id="lblAulasSemanais" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="spnAulas" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="lblPeriodo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="spnPeriodos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="spnPeriodo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -477,7 +477,7 @@
                 <Property name="text" type="java.lang.String" value="Per&#xed;odo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="spnPeriodos">
+            <Component class="javax.swing.JSpinner" name="spnPeriodo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
