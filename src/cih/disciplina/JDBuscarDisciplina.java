@@ -434,7 +434,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         if(cbxFiltro.getSelectedIndex() == 0){
             
-            btnBuscar.setEnabled(true);
             cbxCurso.removeAllItems();
             cbxCurso.setEnabled(false);
             rbtnObrigatoria.setEnabled(false);
@@ -451,7 +450,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             rbtnPosEspecial.setEnabled(false);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
-            btnBuscar.setEnabled(false);
             
         }else{
             
@@ -462,7 +460,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             rbtnPosEspecial.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
-            btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 

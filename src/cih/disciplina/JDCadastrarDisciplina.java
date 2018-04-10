@@ -262,7 +262,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         spnAulas.setModel(new javax.swing.SpinnerNumberModel(4, 0, null, 1));
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 0, null, 5));
+        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 0, null, 30));
 
         lblHoras.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblHoras.setText("Hrs.");
@@ -473,8 +473,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
      public void preencherComboMatriz(int id) {
         listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
         cbxMatriz.removeAllItems();
-        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray()));
-        cbxMatriz.setSelectedIndex(0);
+        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray())); 
     }
     
     public void desabilitarCampos(){
@@ -537,7 +536,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
             txtNomeMatriz.setText("");
             preencherComboMatriz(curso.getId());
             int posicao = listaMatriz.size();
-            cbxMatriz.setSelectedIndex(posicao);  
+            cbxMatriz.setSelectedIndex(posicao-1);  
         }      
     }//GEN-LAST:event_btnAdicionarMatrizActionPerformed
 

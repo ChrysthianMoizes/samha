@@ -221,6 +221,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         btnGroup.add(rbtnEnsinoMedio);
         rbtnEnsinoMedio.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnEnsinoMedio.setMnemonic('e');
+        rbtnEnsinoMedio.setSelected(true);
         rbtnEnsinoMedio.setText("Ensino Médio");
         rbtnEnsinoMedio.setEnabled(false);
 

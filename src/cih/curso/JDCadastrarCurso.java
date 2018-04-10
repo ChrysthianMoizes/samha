@@ -487,7 +487,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             txtNomeEixo.setText("");
             preencherComboEixos();
             int posicao = listaEixos.size();
-            cbxEixo.setSelectedIndex(posicao);
+            cbxEixo.setSelectedIndex(posicao-1);
             cbxEixoItemStateChanged(null);  
         }      
     }//GEN-LAST:event_btnAdicionarEixoActionPerformed
@@ -515,7 +515,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             txtNomeCoordenadoria.setText("");
             preencherComboCoordenadorias(eixo.getId());
             int posicao = listaCoordenadorias.size();
-            cbxCoordenadoria.setSelectedIndex(posicao);
+            cbxCoordenadoria.setSelectedIndex(posicao-1);
             
         }       
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed

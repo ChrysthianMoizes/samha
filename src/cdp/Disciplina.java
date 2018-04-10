@@ -82,7 +82,7 @@ public class Disciplina implements Serializable {
         this.tipo = tipo;
     }
 
-    public double getCargaHoraria() {
+    public int getCargaHoraria() {
         return cargaHoraria;
     }
 

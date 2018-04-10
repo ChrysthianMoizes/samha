@@ -56,7 +56,10 @@ public class GtCurso {
     }
     
     public List<Curso> buscar(String coluna, String texto) {
-        return gdCurso.buscar(coluna.toLowerCase(), texto);
+        if(coluna.toLowerCase().equals("nome"))
+            return gdCurso.buscar(coluna.toLowerCase(), texto);
+        else
+            return gdCurso.buscarPorNivel(coluna.toLowerCase(), texto);  
     }
     
     public List<Curso> listar() {
