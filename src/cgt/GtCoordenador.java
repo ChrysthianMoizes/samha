@@ -96,7 +96,10 @@ public class GtCoordenador {
     }
 
     public List<Coordenador> buscar(String coluna, String texto) {
-        return gdCoordenador.buscar(coluna.toLowerCase(), texto);
+        if(coluna.toLowerCase().equals("tipo"))
+            return gdCoordenador.filtrarPorTipo(coluna.toLowerCase(), texto);
+        else
+            return gdCoordenador.buscar(coluna.toLowerCase(), texto);
     }
 
     public void validarCampos(String nome, String matricula, String login, String senha) throws Exception {
