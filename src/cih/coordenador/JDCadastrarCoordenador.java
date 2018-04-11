@@ -353,11 +353,10 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
    
     public void preencherComboProfessor() {
         
-        if(listaProfessores == null){
+        if(listaProfessores == null)
             listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
-            cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
-        }else
-            cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
+
+        cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
         
         if(coordenador != null){
             Professor profAtual;
@@ -373,11 +372,10 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     public void preencherComboCoordenadorias(){
         
-        if(listaCoordenadorias == null){
+        if(listaCoordenadorias == null)
             listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
-        }else
-            cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
+
+        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed

@@ -424,15 +424,18 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
         cbxCoordenadoria.removeAllItems();
         cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
-        cbxCoordenadoria.setSelectedIndex(0);
+        if(listaCoordenadorias.size() > 0)
+            cbxCoordenadoria.setSelectedIndex(0);
     }
     
     public void preencherComboEixos(){ 
         listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
         cbxEixo.removeAllItems();
         cbxEixo.setModel(new DefaultComboBoxModel(listaEixos.toArray()));
-        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-        preencherComboCoordenadorias(eixo.getId());
+        if(listaEixos.size() > 0){
+            Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+            preencherComboCoordenadorias(eixo.getId());
+        }
     }
     
     public void desabilitarCampos(){
@@ -515,8 +518,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             txtNomeCoordenadoria.setText("");
             preencherComboCoordenadorias(eixo.getId());
             int posicao = listaCoordenadorias.size();
-            cbxCoordenadoria.setSelectedIndex(posicao-1);
-            
+            cbxCoordenadoria.setSelectedIndex(posicao-1);  
         }       
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 

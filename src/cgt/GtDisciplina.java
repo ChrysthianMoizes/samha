@@ -56,7 +56,7 @@ public class GtDisciplina {
     public List<Disciplina> buscar(String coluna, String texto) {
         
         if(coluna.toLowerCase().equals("curso")){
-            coluna = "matriz.curso.id";
+            coluna = "matriz.id";
             return gdDisciplina.filtrar(coluna.toLowerCase(), Integer.valueOf(texto));
         }
         return gdDisciplina.buscar(coluna.toLowerCase(), texto);
