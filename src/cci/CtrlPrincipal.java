@@ -3,7 +3,8 @@ package cci;
 import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Constantes;
-import cih.principal.FrmPrincipal;
+import cih.principal.FrmInicio;
+import cih.principal.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
 import java.awt.Frame;
@@ -13,7 +14,8 @@ public final class CtrlPrincipal {
 
     private Config config;
     private Frame frmValidarAcesso;
-    private Frame frmPrincipal;
+    private Frame frmInicio;
+    private Frame frmOferta;
     private JPInicio inicio;
     private static int permissao;
     private GtPrincipal gtPrincipal;
@@ -64,19 +66,28 @@ public final class CtrlPrincipal {
         frmValidarAcesso.setVisible(true);
     }
 
-    public void instanciarFramePrincipal() {
-        frmPrincipal = new FrmPrincipal(this);
-        frmPrincipal.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frmPrincipal.setVisible(true);
+    public void instanciarFrameOferta() {
+        frmOferta = new FrmOferta(this);
+        frmOferta.setVisible(true);
+    }
+    
+    public void instanciarFrameInicio() {
+        frmInicio = new FrmInicio(this);
+        frmInicio.setVisible(true);
     }
 
-    public JPInicio instanciarPainelInicio(FrmPrincipal pai) {
+    public JPInicio instanciarPainelInicio(FrmOferta pai) {
         inicio = new JPInicio(pai, this);
         return inicio;
     }
 
     public ImageIcon setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.jpg");
+        return icone;
+    }
+    
+    public ImageIcon setarBackground() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/background.jpg");
         return icone;
     }
 
@@ -87,18 +98,18 @@ public final class CtrlPrincipal {
         if (permissao == Constantes.PERMISSAO_NEGADA) {
             CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
         } else {
-            instanciarFramePrincipal();
+            instanciarFrameOferta();
             frmValidarAcesso.dispose();
         }
     }
 
     public void encerrarSessao() {
 
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmPrincipal, "Deseja Sair ?");
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmOferta, "Deseja Sair ?");
         if (confirmacao == 0) {
             gtPrincipal.encerrarSessao();
             instanciarFrameValidarAcesso();
-            frmPrincipal.dispose();
+            frmOferta.dispose();
         }
     }
 
@@ -118,12 +129,12 @@ public final class CtrlPrincipal {
         this.frmValidarAcesso = frmValidarAcesso;
     }
 
-    public Frame getFrmPrincipal() {
-        return frmPrincipal;
+    public Frame getFrmOferta() {
+        return frmOferta;
     }
 
-    public void setFrmPrincipal(Frame frmPrincipal) {
-        this.frmPrincipal = frmPrincipal;
+    public void setFrmOferta(Frame frmOferta) {
+        this.frmOferta = frmOferta;
     }
 
     public static int getPermissao() {

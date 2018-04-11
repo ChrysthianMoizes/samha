@@ -1,17 +1,16 @@
 package cih.principal;
 
-import cih.principal.FrmPrincipal;
 import cci.CtrlPrincipal;
 
 public class JPInicio extends javax.swing.JPanel {
       
     private CtrlPrincipal ctrlPrincipal;
-    private FrmPrincipal frmPrincipal;
+    private FrmOferta frmOferta;
 
-    public JPInicio(FrmPrincipal frmPrincipal, CtrlPrincipal ctrl) {
+    public JPInicio(FrmOferta frmPrincipal, CtrlPrincipal ctrl) {
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.frmPrincipal = frmPrincipal;
+        this.frmOferta = frmPrincipal;
         identificarPermissaoJPInicio();
     }
 

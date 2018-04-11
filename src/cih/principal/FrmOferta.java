@@ -2,26 +2,28 @@ package cih.principal;
 
 import cci.CtrlPrincipal;
 import cdp.Coordenador;
+import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class FrmPrincipal extends javax.swing.JFrame {
+public class FrmOferta extends javax.swing.JFrame {
     
     private JPGrade gradeTurma;
     private JPGrade gradeProfessor;
     private JPInicio inicio;
     private CtrlPrincipal ctrlPrincipal;
 
-    public FrmPrincipal(CtrlPrincipal ctrlPrincipal) {
+    public FrmOferta(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
         btnInicioActionPerformed(null);
         atualizarInfoSistema();
         ImageIcon icone = ctrlPrincipal.setarIconeJanela();
         setIconImage(icone.getImage());
+        this.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
     
     public void trocarPanel(JPanel jPanel) {
@@ -198,6 +200,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnOferta.setFocusable(false);
         btnOferta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnOferta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOferta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOfertaActionPerformed(evt);
+            }
+        });
         toolBar.add(btnOferta);
         toolBar.add(jSeparator15);
 
@@ -470,6 +477,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplinaActionPerformed
         ctrlPrincipal.getCtrlDisciplina().instanciarTelaBuscaDisciplina(this);
     }//GEN-LAST:event_btnDisciplinaActionPerformed
+
+    private void btnOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaActionPerformed
+       ctrlPrincipal.instanciarFrameInicio();
+    }//GEN-LAST:event_btnOfertaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocacao;
