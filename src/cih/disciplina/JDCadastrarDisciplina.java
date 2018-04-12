@@ -474,7 +474,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         }  
     }
     
-     public void preencherComboMatriz(int id) {
+    public void preencherComboMatriz(int id) {
         listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
         cbxMatriz.removeAllItems();
         cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray())); 

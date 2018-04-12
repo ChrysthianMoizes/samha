@@ -2,8 +2,7 @@ package cih.oferta;
 
 import cci.CtrlPrincipal;
 import cdp.Curso;
-import cih.principal.JPGrade;
-import cih.principal.JPInicio;
+import cdp.Turma;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -14,6 +13,7 @@ public class FrmOferta extends javax.swing.JFrame {
     
     private CtrlPrincipal ctrlPrincipal;
     private List<Curso> listaCursos;
+    private List<Turma> listaTurma;
 
     public FrmOferta(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
@@ -31,8 +31,14 @@ public class FrmOferta extends javax.swing.JFrame {
         
         if(listaCursos.size() > 0){
             Curso curso = (Curso) cbxCurso.getSelectedItem();
-            //preencherComboMatriz(curso.getId());
+            preencherComboTurma(curso.getId());
         }  
+    }
+    
+    public void preencherComboTurma(int id) {
+        listaTurma = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(id));
+        cbxTurma.removeAllItems();
+        cbxTurma.setModel(new DefaultComboBoxModel(listaTurma.toArray())); 
     }
     
     public void trocarPanel(JPanel jPanel) {

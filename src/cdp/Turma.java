@@ -127,6 +127,6 @@ public class Turma implements Serializable {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getTurno(), getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
+        return new Object[] { this, getMatriz().getNome(), getCurso().getNome(), getTurno() };
     }
 }

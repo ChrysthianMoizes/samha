@@ -251,9 +251,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         preencherComboCurso();
         if (turma != null){ 
             setarCamposComInstancia();
-            txtNomeTurma.setEnabled(false);          
-            spnAno.setEnabled(false);
-            spnSemestre.setEnabled(false);
         }
     }
 
