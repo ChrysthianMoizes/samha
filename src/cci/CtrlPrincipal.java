@@ -3,12 +3,18 @@ package cci;
 import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Constantes;
+import cih.principal.Background;
 import cih.principal.FrmInicio;
 import cih.principal.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
 import java.awt.Frame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public final class CtrlPrincipal {
 
@@ -70,11 +76,6 @@ public final class CtrlPrincipal {
         frmOferta = new FrmOferta(this);
         frmOferta.setVisible(true);
     }
-    
-    public void instanciarFrameInicio() {
-        frmInicio = new FrmInicio(this);
-        frmInicio.setVisible(true);
-    }
 
     public JPInicio instanciarPainelInicio(FrmOferta pai) {
         inicio = new JPInicio(pai, this);
@@ -85,10 +86,19 @@ public final class CtrlPrincipal {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.jpg");
         return icone;
     }
+            
+    public void instanciarFrameInicio() {
+        frmInicio = new FrmInicio(this);
+        frmInicio.setVisible(true);
+    }
     
-    public ImageIcon setarBackground() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/background.jpg");
-        return icone;
+    public BufferedImage setarBackground() {
+        try {
+            return ImageIO.read(new File("build/classes/cih/img/background.jpg"));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     public void validarAcesso(String login, String senha) {
@@ -98,7 +108,7 @@ public final class CtrlPrincipal {
         if (permissao == Constantes.PERMISSAO_NEGADA) {
             CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
         } else {
-            instanciarFrameOferta();
+            instanciarFrameInicio();
             frmValidarAcesso.dispose();
         }
     }
