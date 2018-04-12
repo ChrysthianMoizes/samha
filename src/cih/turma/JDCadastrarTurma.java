@@ -1,9 +1,7 @@
 package cih.turma;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Curso;
-import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.MatrizCurricular;
 import cdp.Turma;
@@ -15,8 +13,7 @@ import javax.swing.ImageIcon;
 public class JDCadastrarTurma extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private Curso curso;
-    private Disciplina disciplina;
+    private Turma turma;
     private List<MatrizCurricular> listaMatriz;
     private List<Curso> listaCursos;
 
@@ -24,8 +21,7 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.curso = curso;
-        this.disciplina = disciplina;
+        this.turma = turma;
         ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
         setIconImage(icone.getImage());
         identificarOrigem();
@@ -37,35 +33,22 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
 
         btnGroupPrioridade = new javax.swing.ButtonGroup();
         pnlGeral = new javax.swing.JPanel();
-        pnlMatrizCurricular = new javax.swing.JPanel();
-        txtNomeMatriz = new javax.swing.JTextField();
-        btnAdicionarMatriz = new javax.swing.JButton();
-        btnRemoverMatriz = new javax.swing.JButton();
-        lblMatriz = new javax.swing.JLabel();
-        lblNomeMatriz = new javax.swing.JLabel();
-        cbxMatriz = new javax.swing.JComboBox<>();
+        pnlTurma = new javax.swing.JPanel();
+        txtNomeTurma = new javax.swing.JTextField();
+        lblNomeTurma = new javax.swing.JLabel();
         lblAno = new javax.swing.JLabel();
         spnAno = new javax.swing.JSpinner();
         spnSemestre = new javax.swing.JSpinner();
         lblNomeCurso3 = new javax.swing.JLabel();
+        lblTturno = new javax.swing.JLabel();
+        cbxCurso = new javax.swing.JComboBox<>();
+        cbxMatriz = new javax.swing.JComboBox<>();
+        cbxTurno = new javax.swing.JComboBox<>();
+        lblCurso = new javax.swing.JLabel();
+        lblMatriz = new javax.swing.JLabel();
         pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        pnlDisciplina = new javax.swing.JPanel();
-        lblTipo = new javax.swing.JLabel();
-        cbxTipo = new javax.swing.JComboBox<>();
-        lblNomeDisciplina = new javax.swing.JLabel();
-        txtNomeDisciplina = new javax.swing.JTextField();
-        lblPeriodo = new javax.swing.JLabel();
-        spnPeriodo = new javax.swing.JSpinner();
-        lblAulasSemanais = new javax.swing.JLabel();
-        lblCargaHoraria = new javax.swing.JLabel();
-        spnAulas = new javax.swing.JSpinner();
-        spnCargaHoraria = new javax.swing.JSpinner();
-        lblHoras = new javax.swing.JLabel();
-        pnlCurso = new javax.swing.JPanel();
-        cbxCurso = new javax.swing.JComboBox<>();
-        lblNomeCurso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Turma");
@@ -73,52 +56,13 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
 
         pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
 
-        pnlMatrizCurricular.setBackground(new java.awt.Color(0, 204, 102));
-        pnlMatrizCurricular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Matriz Curricular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
+        pnlTurma.setBackground(new java.awt.Color(0, 204, 102));
+        pnlTurma.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Turma", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
-        txtNomeMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txtNomeTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        btnAdicionarMatriz.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnAdicionarMatriz.setText("Adicionar");
-        btnAdicionarMatriz.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAdicionarMatriz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarMatrizActionPerformed(evt);
-            }
-        });
-        btnAdicionarMatriz.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnAdicionarMatrizKeyPressed(evt);
-            }
-        });
-
-        btnRemoverMatriz.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnRemoverMatriz.setText("Remover");
-        btnRemoverMatriz.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnRemoverMatriz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverMatrizActionPerformed(evt);
-            }
-        });
-        btnRemoverMatriz.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnRemoverMatrizKeyPressed(evt);
-            }
-        });
-
-        lblMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblMatriz.setText("Matriz:");
-
-        lblNomeMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblNomeMatriz.setText("Nome:");
-
-        cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxMatriz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxMatrizItemStateChanged(evt);
-            }
-        });
+        lblNomeTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblNomeTurma.setText("Nome:");
 
         lblAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblAno.setText("Ano/Semestre:");
@@ -132,55 +76,86 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         lblNomeCurso3.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblNomeCurso3.setText("/");
 
-        javax.swing.GroupLayout pnlMatrizCurricularLayout = new javax.swing.GroupLayout(pnlMatrizCurricular);
-        pnlMatrizCurricular.setLayout(pnlMatrizCurricularLayout);
-        pnlMatrizCurricularLayout.setHorizontalGroup(
-            pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
+        lblTturno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblTturno.setText("Turno:");
+
+        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCursoItemStateChanged(evt);
+            }
+        });
+
+        cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxMatriz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMatrizItemStateChanged(evt);
+            }
+        });
+
+        cbxTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
+
+        lblCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblCurso.setText("Curso:");
+
+        lblMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblMatriz.setText("Matriz Curricular:");
+
+        javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
+        pnlTurma.setLayout(pnlTurmaLayout);
+        pnlTurmaLayout.setHorizontalGroup(
+            pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTurmaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMatriz)
-                            .addComponent(lblNomeMatriz))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxMatriz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomeMatriz))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdicionarMatriz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNomeTurma)
+                    .addComponent(lblTturno)
+                    .addComponent(lblCurso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTurmaLayout.createSequentialGroup()
+                        .addComponent(txtNomeTurma)
+                        .addGap(18, 18, 18)
                         .addComponent(lblAno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNomeCurso3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTurmaLayout.createSequentialGroup()
+                        .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMatriz)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxMatriz, 0, 126, Short.MAX_VALUE))
+                    .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        pnlMatrizCurricularLayout.setVerticalGroup(
-            pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
+        pnlTurmaLayout.setVerticalGroup(
+            pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTurmaLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdicionarMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNomeCurso3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTturno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,132 +211,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlDisciplina.setBackground(new java.awt.Color(0, 204, 102));
-        pnlDisciplina.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disciplina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
-
-        lblTipo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblTipo.setText("Tipo:");
-
-        cbxTipo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBRIGATÓRIA", "OPTATIVA", "ESPECIAL" }));
-
-        lblNomeDisciplina.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblNomeDisciplina.setText("Nome:");
-
-        txtNomeDisciplina.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-
-        lblPeriodo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblPeriodo.setText("Período:");
-
-        spnPeriodo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
-
-        lblAulasSemanais.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblAulasSemanais.setText("Aulas semanais:");
-
-        lblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblCargaHoraria.setText("Carga Horária:");
-
-        spnAulas.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnAulas.setModel(new javax.swing.SpinnerNumberModel(4, 0, null, 1));
-
-        spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 0, null, 30));
-
-        lblHoras.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblHoras.setText("Hrs.");
-
-        javax.swing.GroupLayout pnlDisciplinaLayout = new javax.swing.GroupLayout(pnlDisciplina);
-        pnlDisciplina.setLayout(pnlDisciplinaLayout);
-        pnlDisciplinaLayout.setHorizontalGroup(
-            pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNomeDisciplina)
-                    .addComponent(lblTipo))
-                .addGap(12, 12, 12)
-                .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                        .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                                .addComponent(lblAulasSemanais)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnAulas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                                .addComponent(lblPeriodo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                                .addComponent(lblCargaHoraria)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblHoras, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))))
-                    .addComponent(txtNomeDisciplina))
-                .addContainerGap())
-        );
-        pnlDisciplinaLayout.setVerticalGroup(
-            pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAulasSemanais, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnAulas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlCurso.setBackground(new java.awt.Color(0, 204, 102));
-        pnlCurso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
-
-        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCursoItemStateChanged(evt);
-            }
-        });
-
-        lblNomeCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblNomeCurso.setText("Nome:");
-
-        javax.swing.GroupLayout pnlCursoLayout = new javax.swing.GroupLayout(pnlCurso);
-        pnlCurso.setLayout(pnlCursoLayout);
-        pnlCursoLayout.setHorizontalGroup(
-            pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCursoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNomeCurso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlCursoLayout.setVerticalGroup(
-            pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCursoLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout pnlGeralLayout = new javax.swing.GroupLayout(pnlGeral);
         pnlGeral.setLayout(pnlGeralLayout);
         pnlGeralLayout.setHorizontalGroup(
@@ -369,22 +218,16 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlMatrizCurricular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlGeralLayout.setVerticalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMatrizCurricular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -393,7 +236,7 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,11 +249,9 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
 
     public void identificarOrigem() {
         preencherComboCurso();
-        if (disciplina != null){ 
+        if (turma != null){ 
             setarCamposComInstancia();
-            txtNomeMatriz.setEnabled(false);          
-            btnAdicionarMatriz.setEnabled(false);
-            btnRemoverMatriz.setEnabled(false);
+            txtNomeTurma.setEnabled(false);          
             spnAno.setEnabled(false);
             spnSemestre.setEnabled(false);
         }
@@ -419,11 +260,10 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
     public void setarCamposComInstancia() {
         setarCurso();
         setarMatriz();
-        setarTipo();
-        txtNomeDisciplina.setText(disciplina.getNome());
-        spnCargaHoraria.setValue(disciplina.getCargaHoraria());
-        spnAulas.setValue(disciplina.getQtAulas());
-        spnPeriodo.setValue(disciplina.getPeriodo());           
+        setarTurno();
+        txtNomeTurma.setText(turma.getNome());
+        spnAno.setValue(turma.getAno());
+        spnSemestre.setValue(turma.getSemestre());        
     }
     
     public void setarCurso(){
@@ -433,7 +273,7 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         for (int i = 0; i < listaCursos.size(); i++) {
 
             curso = listaCursos.get(i);
-            if (curso.getId() == disciplina.getMatriz().getCurso().getId()) {
+            if (curso.getId() == turma.getCurso().getId()) {
                 cbxCurso.setSelectedIndex(i);
                 preencherComboMatriz(curso.getId());
                 break;
@@ -448,21 +288,21 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         for (int i = 0; i < listaMatriz.size(); i++) {
 
             matriz = listaMatriz.get(i);
-            if (matriz.getId() == disciplina.getMatriz().getId()) {
+            if (matriz.getId() == turma.getMatriz().getId()) {
                 cbxMatriz.setSelectedIndex(i);
                 break;
             }
         }
     }
     
-    public void setarTipo(){
+    public void setarTurno(){
         
-        if(disciplina.getTipo().equals("OBRIGATÓRIA")){
-            cbxTipo.setSelectedIndex(0);
-        }else if(disciplina.getTipo().equals("OPTATIVA")){
-            cbxTipo.setSelectedIndex(1);
+        if(turma.getTurno().equals("MATUTINO")){
+            cbxTurno.setSelectedIndex(0);
+        }else if(turma.getTurno().equals("VESPERTINO")){
+            cbxTurno.setSelectedIndex(1);
         }else{
-            cbxTipo.setSelectedIndex(2);
+            cbxTurno.setSelectedIndex(2);
         } 
     }
  
@@ -484,30 +324,31 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
     }
     
     public void desabilitarCampos(){
-        txtNomeDisciplina.setEnabled(false);
-        cbxTipo.setEnabled(false);
-        spnPeriodo.setEnabled(false);
-        spnAulas.setEnabled(false);
-        spnCargaHoraria.setEnabled(false);
+        txtNomeTurma.setEnabled(false);
+        cbxTurno.setEnabled(false);
+        cbxCurso.setEnabled(false);
+        cbxMatriz.setEnabled(false);
+        spnAno.setEnabled(false);
+        spnSemestre.setEnabled(false);
         btnSalvar.setEnabled(false);
         btnCancelar.setText("Sair");
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        String nome = txtNomeDisciplina.getText();
-        String tipo = cbxTipo.getSelectedItem().toString();
-        int cargaHoraria = (int) spnCargaHoraria.getValue();
-        int periodo = (int) spnPeriodo.getValue();
-        int qtAulas = (int) spnAulas.getValue();
+        String nome = txtNomeTurma.getText();
+        String turno = cbxTurno.getSelectedItem().toString();
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        Curso curso = (Curso) cbxCurso.getSelectedItem();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
         int resposta = 0;
         
-        if(disciplina == null){
-            resposta = ctrlPrincipal.getCtrlDisciplina().cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);  
+        if(turma == null){
+            resposta = ctrlPrincipal.getCtrlTurma().cadastrar(nome, turno, ano, semestre, curso, matriz);  
         }else{
-            resposta = ctrlPrincipal.getCtrlDisciplina().alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
+            resposta = ctrlPrincipal.getCtrlTurma().alterar(nome, turno, ano, semestre, curso, matriz, turma);
         }
         
         if (resposta == 0) {
@@ -531,51 +372,11 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCancelarKeyPressed
 
-    private void btnAdicionarMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMatrizActionPerformed
-        
-        String nome = txtNomeMatriz.getText();
-        int ano = (int) spnAno.getValue();
-        int semestre = (int) spnSemestre.getValue();
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
-        int resposta = ctrlPrincipal.getCtrlMatriz().cadastrar(nome, ano, semestre, curso);
-        
-        if(resposta == 0){
-            txtNomeMatriz.setText("");
-            preencherComboMatriz(curso.getId());
-            int posicao = listaMatriz.size();
-            cbxMatriz.setSelectedIndex(posicao-1);  
-        }      
-    }//GEN-LAST:event_btnAdicionarMatrizActionPerformed
-
-    private void btnRemoverMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMatrizActionPerformed
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-                int resposta = ctrlPrincipal.getCtrlMatriz().excluir(matriz);
-                if(resposta == 0){
-                    Curso curso = (Curso) cbxCurso.getSelectedItem();
-                    preencherComboMatriz(curso.getId());
-                }
-            }
-    }//GEN-LAST:event_btnRemoverMatrizActionPerformed
-
     private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
         Eixo eixo = (Eixo) cbxMatriz.getSelectedItem();
         if(eixo != null)
             preencherComboMatriz(eixo.getId());
     }//GEN-LAST:event_cbxMatrizItemStateChanged
-
-    private void btnAdicionarMatrizKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarMatrizKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnAdicionarMatrizActionPerformed(null);
-        }
-    }//GEN-LAST:event_btnAdicionarMatrizKeyPressed
-
-    private void btnRemoverMatrizKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRemoverMatrizKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnRemoverMatrizActionPerformed(null);
-        }
-    }//GEN-LAST:event_btnRemoverMatrizKeyPressed
 
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         Curso curso = (Curso) cbxCurso.getSelectedItem();
@@ -584,36 +385,23 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarMatriz;
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGroupPrioridade;
-    private javax.swing.JButton btnRemoverMatriz;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxMatriz;
-    private javax.swing.JComboBox<String> cbxTipo;
+    private javax.swing.JComboBox<String> cbxTurno;
     private javax.swing.JLabel lblAno;
-    private javax.swing.JLabel lblAulasSemanais;
-    private javax.swing.JLabel lblCargaHoraria;
-    private javax.swing.JLabel lblHoras;
+    private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblMatriz;
-    private javax.swing.JLabel lblNomeCurso;
     private javax.swing.JLabel lblNomeCurso3;
-    private javax.swing.JLabel lblNomeDisciplina;
-    private javax.swing.JLabel lblNomeMatriz;
-    private javax.swing.JLabel lblPeriodo;
-    private javax.swing.JLabel lblTipo;
-    private javax.swing.JPanel pnlCurso;
-    private javax.swing.JPanel pnlDisciplina;
+    private javax.swing.JLabel lblNomeTurma;
+    private javax.swing.JLabel lblTturno;
     private javax.swing.JPanel pnlGeral;
-    private javax.swing.JPanel pnlMatrizCurricular;
     private javax.swing.JPanel pnlRodape;
+    private javax.swing.JPanel pnlTurma;
     private javax.swing.JSpinner spnAno;
-    private javax.swing.JSpinner spnAulas;
-    private javax.swing.JSpinner spnCargaHoraria;
-    private javax.swing.JSpinner spnPeriodo;
     private javax.swing.JSpinner spnSemestre;
-    private javax.swing.JTextField txtNomeDisciplina;
-    private javax.swing.JTextField txtNomeMatriz;
+    private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 }

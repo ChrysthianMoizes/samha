@@ -66,12 +66,12 @@ public class GtDisciplina {
 
         try {
             //verificar se a disciplina está associada a alguma alocação = criar gdLocacao
-            List turmas = null; //gtTurma.filtrarPorCurso(disciplina.getId());
-            if(turmas.size() == 0){
+            List alocacao = null; 
+            if(alocacao.size() == 0){
                 gdDisciplina.excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else
-                return "Curso possui turmas associadas";
+                return "Disciplina está associada a uma alocação";
         } catch (Exception ex) {
             return ex.getMessage();
         }

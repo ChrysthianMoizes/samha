@@ -4,17 +4,18 @@ import cdp.Coordenadoria;
 import cdp.Curso;
 import cgd.GdCoordenadoria;
 import cgd.GdCurso;
+import cgd.GdTurma;
 import java.util.List;
 
 public class GtCurso {
     
     private GdCurso gdCurso;
-    private GtTurma gtTurma;
+    private GdTurma gdTurma;
     private GdCoordenadoria gdCoordenadoria;
 
     public GtCurso() {
         gdCurso = new GdCurso();
-        gtTurma = new GtTurma();
+        gdTurma = new GdTurma();
         gdCoordenadoria = new GdCoordenadoria();
     }
     
@@ -70,7 +71,7 @@ public class GtCurso {
 
         try {
             
-            List turmas = gtTurma.filtrarPorCurso(curso.getId());
+            List turmas = gdTurma.filtrarPorCurso("curso.id", curso.getId());
             if(turmas.size() == 0){
                 gdCurso.excluir(curso);
                 return Constantes.EXCLUIDO;

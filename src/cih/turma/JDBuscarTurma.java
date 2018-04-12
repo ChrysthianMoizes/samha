@@ -4,8 +4,7 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
 import cdp.Curso;
-import cdp.Disciplina;
-import cdp.MatrizCurricular;
+import cdp.Turma;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -15,9 +14,8 @@ import javax.swing.ImageIcon;
 public class JDBuscarTurma extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private List<Disciplina> listaDisciplinas;
+    private List<Turma> listaTurmas;
     private List<Curso> listaCursos;
-    private List<MatrizCurricular> listaMatriz;
     private Frame pai;
     
     public JDBuscarTurma(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -32,11 +30,11 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     
     public void atualizarTabela(){
         
-        JTableUtil.limparTabela(tblDisciplina);
+        JTableUtil.limparTabela(tblTurma);
         
-        if(listaDisciplinas.size() > 0){
-            listaDisciplinas.forEach((disciplina) -> {
-                JTableUtil.addLinha(tblDisciplina, disciplina.toArray() );
+        if(listaTurmas.size() > 0){
+            listaTurmas.forEach((turma) -> {
+                JTableUtil.addLinha(tblTurma, turma.toArray() );
             });
         }
     }
@@ -48,19 +46,8 @@ public class JDBuscarTurma extends javax.swing.JDialog {
            
         cbxCurso.setModel(new DefaultComboBoxModel(listaCursos.toArray()));
         
-        if(listaCursos.size() > 0){
+        if(listaCursos.size() > 0)
             cbxCurso.setSelectedIndex(0);
-            Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(curso.getId());
-        }
-    }
-    
-    public void preencherComboMatriz(int id) {
-        listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        cbxMatriz.removeAllItems();
-        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray()));
-        if(listaMatriz.size() > 0)
-            cbxMatriz.setSelectedIndex(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,18 +61,14 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        pnlBuscarDisciplina = new javax.swing.JPanel();
+        pnlBuscarTurma = new javax.swing.JPanel();
         jLabelFiltrar = new javax.swing.JLabel();
         cbxFiltro = new javax.swing.JComboBox<>();
         txtFiltro = new javax.swing.JTextField();
-        jScrollPaneDisciplinas = new javax.swing.JScrollPane();
-        tblDisciplina = new javax.swing.JTable();
+        jScrollPaneTurmas = new javax.swing.JScrollPane();
+        tblTurma = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        rbtnPosEspecial = new javax.swing.JRadioButton();
-        rbtnObrigatoria = new javax.swing.JRadioButton();
-        rbtnOptativa = new javax.swing.JRadioButton();
         cbxCurso = new javax.swing.JComboBox<>();
-        cbxMatriz = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Turma");
@@ -185,14 +168,14 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlBuscarDisciplina.setBackground(new java.awt.Color(0, 204, 102));
-        pnlBuscarDisciplina.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
+        pnlBuscarTurma.setBackground(new java.awt.Color(0, 204, 102));
+        pnlBuscarTurma.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         jLabelFiltrar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabelFiltrar.setText("Filtrar por:");
 
         cbxFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Curso", "Tipo" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Curso" }));
         cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxFiltroItemStateChanged(evt);
@@ -206,15 +189,15 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             }
         });
 
-        jScrollPaneDisciplinas.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        jScrollPaneTurmas.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        tblDisciplina.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        tblDisciplina.setModel(new javax.swing.table.DefaultTableModel(
+        tblTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        tblTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Matriz Curricular", "Curso", "Tipo"
+                "Nome", "Matriz Curricular", "Curso", "Turno"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -225,7 +208,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPaneDisciplinas.setViewportView(tblDisciplina);
+        jScrollPaneTurmas.setViewportView(tblTurma);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
         btnBuscar.setToolTipText("Filtrar");
@@ -240,92 +223,45 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             }
         });
 
-        rbtnPosEspecial.setBackground(new java.awt.Color(0, 204, 102));
-        btnGroup.add(rbtnPosEspecial);
-        rbtnPosEspecial.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnPosEspecial.setMnemonic('e');
-        rbtnPosEspecial.setText("Especial");
-        rbtnPosEspecial.setEnabled(false);
-
-        rbtnObrigatoria.setBackground(new java.awt.Color(0, 204, 102));
-        btnGroup.add(rbtnObrigatoria);
-        rbtnObrigatoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnObrigatoria.setMnemonic('b');
-        rbtnObrigatoria.setSelected(true);
-        rbtnObrigatoria.setText("Obrigatória");
-        rbtnObrigatoria.setEnabled(false);
-
-        rbtnOptativa.setBackground(new java.awt.Color(0, 204, 102));
-        btnGroup.add(rbtnOptativa);
-        rbtnOptativa.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnOptativa.setMnemonic('p');
-        rbtnOptativa.setText("Optativa");
-        rbtnOptativa.setEnabled(false);
-
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setEnabled(false);
-        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCursoItemStateChanged(evt);
-            }
-        });
 
-        cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxMatriz.setEnabled(false);
-
-        javax.swing.GroupLayout pnlBuscarDisciplinaLayout = new javax.swing.GroupLayout(pnlBuscarDisciplina);
-        pnlBuscarDisciplina.setLayout(pnlBuscarDisciplinaLayout);
-        pnlBuscarDisciplinaLayout.setHorizontalGroup(
-            pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlBuscarTurmaLayout = new javax.swing.GroupLayout(pnlBuscarTurma);
+        pnlBuscarTurma.setLayout(pnlBuscarTurmaLayout);
+        pnlBuscarTurmaLayout.setHorizontalGroup(
+            pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
+                        .addComponent(jScrollPaneTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
+                    .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
-                                .addComponent(rbtnObrigatoria)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnOptativa)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnPosEspecial)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
-                                .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
+                        .addGroup(pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                                 .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro)))
-                        .addGap(11, 11, 11)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFiltro)
+                                .addGap(11, 11, 11)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
-        pnlBuscarDisciplinaLayout.setVerticalGroup(
-            pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
+        pnlBuscarTurmaLayout.setVerticalGroup(
+            pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnPosEspecial)
-                    .addComponent(rbtnOptativa)
-                    .addComponent(rbtnObrigatoria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -336,7 +272,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlBuscarDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlBuscarTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -344,7 +280,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlBuscarDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlBuscarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -376,30 +312,11 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(colunaFiltro.toLowerCase().equals("tipo")){
-            
-            char tipo = (char) btnGroup.getSelection().getMnemonic();
-            
-            switch (tipo) {
-                case 'B':
-                    filtro = "OBRIGATÓRIA";
-                    break;
-                case 'P':
-                    filtro = "OPTATIVA";
-                    break;          
-                default:
-                    filtro = "ESPECIAL";
-                    break;
-            }  
-        }else if(colunaFiltro.toLowerCase().equals("curso")){
-            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-            if(matriz != null)
-                filtro = String.valueOf(matriz.getId());
-            else
-                CtrlMensagem.exibirMensagemAviso(pai, "Matriz não cadastrada");
+        if(colunaFiltro.toLowerCase().equals("curso")){
+            Curso curso = (Curso) cbxCurso.getSelectedItem();
+            filtro = String.valueOf(curso.getId());
         } 
-
-        listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().buscar(colunaFiltro, filtro);
+        listaTurmas = ctrlPrincipal.getCtrlTurma().buscar(colunaFiltro, filtro);
         atualizarTabela();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -413,11 +330,11 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
         try {
-            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
-            ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(disciplina, pai);
+            Turma turma = (Turma) JTableUtil.getDadosLinhaSelecionada(tblTurma);
+            ctrlPrincipal.getCtrlTurma().instanciarTelaCadastroTurma(turma, pai);
             btnBuscarActionPerformed(null);
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione uma turma");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -449,15 +366,15 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
         try {
-            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
+            Turma turma = (Turma) JTableUtil.getDadosLinhaSelecionada(tblTurma);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlDisciplina().excluir(disciplina);
+                ctrlPrincipal.getCtrlTurma().excluir(turma);
                 btnBuscarActionPerformed(null);
             }
             
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
+            CtrlMensagem.exibirMensagemErro(this, "Selecione uma turma");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -472,45 +389,17 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         if(cbxFiltro.getSelectedIndex() == 0){
             
             cbxCurso.removeAllItems();
-            cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(false);
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnPosEspecial.setEnabled(false);
+            cbxCurso.setEnabled(false); 
             txtFiltro.setEnabled(true);
             
         }else if(cbxFiltro.getSelectedIndex() == 1){
             
             cbxCurso.setEnabled(true);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(true);
             preencherComboCurso();
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnPosEspecial.setEnabled(false);
             txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-            
-        }else{
-            
-            cbxCurso.removeAllItems();
-            cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(false);
-            rbtnObrigatoria.setEnabled(true);
-            rbtnOptativa.setEnabled(true);
-            rbtnPosEspecial.setEnabled(true);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
+            txtFiltro.setEnabled(false);    
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
-
-    private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
-       Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null)
-            preencherComboMatriz(curso.getId());
-    }//GEN-LAST:event_cbxCursoItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -521,16 +410,12 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxFiltro;
-    private javax.swing.JComboBox<String> cbxMatriz;
     private javax.swing.JLabel jLabelFiltrar;
-    private javax.swing.JScrollPane jScrollPaneDisciplinas;
-    private javax.swing.JPanel pnlBuscarDisciplina;
+    private javax.swing.JScrollPane jScrollPaneTurmas;
+    private javax.swing.JPanel pnlBuscarTurma;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;
-    private javax.swing.JRadioButton rbtnObrigatoria;
-    private javax.swing.JRadioButton rbtnOptativa;
-    private javax.swing.JRadioButton rbtnPosEspecial;
-    private javax.swing.JTable tblDisciplina;
+    private javax.swing.JTable tblTurma;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

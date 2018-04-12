@@ -16,4 +16,12 @@ public class GdTurma extends GdGenerico{
         return lista;
     }
     
+    public List buscar(String coluna, String texto) {
+        Criteria crit = criarSessao().createCriteria(Turma.class);
+        crit.add( Restrictions.like(coluna, "%"+texto+"%") );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.close();
+        return lista;
+    }
 }

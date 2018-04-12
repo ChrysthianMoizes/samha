@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 public class JDCadastrarDisciplina extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private Curso curso;
     private Disciplina disciplina;
     private List<MatrizCurricular> listaMatriz;
     private List<Curso> listaCursos;
@@ -23,7 +22,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.curso = curso;
         this.disciplina = disciplina;
         ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
         setIconImage(icone.getImage());

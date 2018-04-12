@@ -25,6 +25,9 @@ public class Turma implements Serializable {
     private String nome;
     
     @Column(nullable = false)
+    private String turno;
+    
+    @Column(nullable = false)
     private int ano;
     
     @Column(nullable = false)
@@ -36,13 +39,16 @@ public class Turma implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private MatrizCurricular matriz;
     
-    @Column(nullable = false)
-    private String turno;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curso_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Curso curso;
 
     public Turma() {
     }
 
-    public Turma(int id, String nome, int ano, int semestre, String turno, MatrizCurricular matriz) {
+    public Turma(int id, String nome, int ano, int semestre, String turno, MatrizCurricular matriz, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.ano = ano;
@@ -51,7 +57,7 @@ public class Turma implements Serializable {
         this.turno = turno;
     }
 
-    public Turma(String nome, int ano, int semestre, String turno, MatrizCurricular matriz) {
+    public Turma(String nome, int ano, int semestre, String turno, MatrizCurricular matriz, Curso curso) {
         this.nome = nome;
         this.ano = ano;
         this.semestre = semestre;
@@ -105,5 +111,22 @@ public class Turma implements Serializable {
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+   
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getTurno(), getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
     }
 }
