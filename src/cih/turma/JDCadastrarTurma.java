@@ -1,4 +1,4 @@
-package cih.disciplina;
+package cih.turma;
 
 import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
@@ -6,12 +6,13 @@ import cdp.Curso;
 import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.MatrizCurricular;
+import cdp.Turma;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
-public class JDCadastrarDisciplina extends javax.swing.JDialog {
+public class JDCadastrarTurma extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private Curso curso;
@@ -19,13 +20,13 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     private List<MatrizCurricular> listaMatriz;
     private List<Curso> listaCursos;
 
-    public JDCadastrarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Disciplina disciplina) {
+    public JDCadastrarTurma(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Turma turma) {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.curso = curso;
         this.disciplina = disciplina;
-        ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
+        ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
         setIconImage(icone.getImage());
         identificarOrigem();
     }
@@ -67,7 +68,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         lblNomeCurso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Disciplina");
+        setTitle("Cadastrar Turma");
         setResizable(false);
 
         pnlGeral.setBackground(new java.awt.Color(53, 151, 48));

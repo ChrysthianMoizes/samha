@@ -3,9 +3,8 @@ package cci;
 import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Constantes;
-import cih.principal.Background;
 import cih.principal.FrmInicio;
-import cih.principal.FrmOferta;
+import cih.oferta.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
 import java.awt.Frame;
@@ -14,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
 public final class CtrlPrincipal {
 
@@ -34,6 +32,7 @@ public final class CtrlPrincipal {
     private CtrlEixo ctrlEixo;
     private CtrlDisciplina ctrlDisciplina;
     private CtrlMatriz ctrlMatriz;
+    private CtrlTurma ctrlTurma;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -46,6 +45,7 @@ public final class CtrlPrincipal {
         ctrlEixo = new CtrlEixo(this);
         ctrlDisciplina = new CtrlDisciplina(this);
         ctrlMatriz = new CtrlMatriz(this);
+        ctrlTurma = new CtrlTurma(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -193,5 +193,9 @@ public final class CtrlPrincipal {
 
     public CtrlMatriz getCtrlMatriz() {
         return ctrlMatriz;
+    }
+
+    public CtrlTurma getCtrlTurma() {
+        return ctrlTurma;
     }
 }

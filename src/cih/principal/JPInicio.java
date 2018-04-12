@@ -1,5 +1,6 @@
 package cih.principal;
 
+import cih.oferta.FrmOferta;
 import cci.CtrlPrincipal;
 
 public class JPInicio extends javax.swing.JPanel {

@@ -8,6 +8,7 @@ import cih.curso.JDBuscarCurso;
 import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class CtrlCurso {
     
@@ -19,6 +20,11 @@ public class CtrlCurso {
     public CtrlCurso(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
         gtCurso = new GtCurso();
+    }
+    
+    public ImageIcon setarIconeJanela() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/curso.png");
+        return icone;
     }
     
     public void instanciarTelaBuscaCurso(Frame pai) {

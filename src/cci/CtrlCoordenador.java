@@ -9,6 +9,7 @@ import cih.coordenador.JDBuscarCoordenador;
 import cih.coordenador.JDCadastrarCoordenador;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class CtrlCoordenador {
 
@@ -20,6 +21,11 @@ public class CtrlCoordenador {
     public CtrlCoordenador(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
         gtCoordenador = new GtCoordenador();
+    }
+    
+    public ImageIcon setarIconeJanela() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/coordenador.png");
+        return icone;
     }
 
     public void instanciarTelaBuscaCoordenador(Frame pai) {

@@ -1,4 +1,4 @@
-package cih.disciplina;
+package cih.turma;
 
 import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
-public class JDBuscarDisciplina extends javax.swing.JDialog {
+public class JDBuscarTurma extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private List<Disciplina> listaDisciplinas;
@@ -20,12 +20,12 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private List<MatrizCurricular> listaMatriz;
     private Frame pai;
     
-    public JDBuscarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
+    public JDBuscarTurma(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
-        ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
+        ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
         setIconImage(icone.getImage());
         btnBuscarActionPerformed(null);
     }
@@ -88,7 +88,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         cbxMatriz = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Buscar Disciplina");
+        setTitle("Buscar Turma");
         setIconImage(null);
         setResizable(false);
 
@@ -438,7 +438,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(null, pai);
+        ctrlPrincipal.getCtrlTurma().instanciarTelaCadastroTurma(null, pai);
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

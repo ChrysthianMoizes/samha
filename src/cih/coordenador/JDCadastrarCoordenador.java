@@ -8,6 +8,7 @@ import cdp.ProfessorCoordenador;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
@@ -20,7 +21,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.coordenador = coord; // SE O COORDENADOR VIER NULO SIGNIFICA Q O CENARIO É CADASTRAR
+        this.coordenador = coord;
+        ImageIcon icone = ctrlPrincipal.getCtrlCoordenador().setarIconeJanela();
+        setIconImage(icone.getImage());
         identificarOrigem();
     }
     @SuppressWarnings("unchecked")

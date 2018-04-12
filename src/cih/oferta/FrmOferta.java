@@ -1,7 +1,9 @@
-package cih.principal;
+package cih.oferta;
 
 import cci.CtrlPrincipal;
 import cdp.Curso;
+import cih.principal.JPGrade;
+import cih.principal.JPInicio;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -10,9 +12,6 @@ import javax.swing.JPanel;
 
 public class FrmOferta extends javax.swing.JFrame {
     
-    private JPGrade gradeTurma;
-    private JPGrade gradeProfessor;
-    private JPInicio inicio;
     private CtrlPrincipal ctrlPrincipal;
     private List<Curso> listaCursos;
 

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 public class JDCadastrarProfessor extends javax.swing.JDialog {
 
@@ -22,6 +23,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.professor = professor;
+        ImageIcon icone = ctrlPrincipal.getCtrlProfessor().setarIconeJanela();
+        setIconImage(icone.getImage());
         habilitarCamposRestricao(false);
         identificarOrigem();
     }

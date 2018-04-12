@@ -7,6 +7,7 @@ import cdp.Coordenador;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class JDBuscarCoordenador extends javax.swing.JDialog {
 
@@ -19,6 +20,8 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        ImageIcon icone = ctrlPrincipal.getCtrlCoordenador().setarIconeJanela();
+        setIconImage(icone.getImage());
         btnBuscarActionPerformed(null);
     }
     

@@ -8,6 +8,7 @@ import cdp.Eixo;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class JDCadastrarCurso extends javax.swing.JDialog {
 
@@ -21,6 +22,8 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.curso = curso;
+        ImageIcon icone = ctrlPrincipal.getCtrlCurso().setarIconeJanela();
+        setIconImage(icone.getImage());
         identificarOrigem();
     }
     

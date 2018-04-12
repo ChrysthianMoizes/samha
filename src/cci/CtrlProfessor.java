@@ -2,13 +2,13 @@ package cci;
 
 import cdp.Coordenadoria;
 import cdp.Professor;
-import cdp.RestricaoProfessor;
 import cgt.Constantes;
 import cgt.GtProfessor;
 import cih.professor.JDBuscarProfessor;
 import cih.professor.JDCadastrarProfessor;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class CtrlProfessor {
 
@@ -20,6 +20,11 @@ public class CtrlProfessor {
     public CtrlProfessor(CtrlPrincipal ctrl) {
         gtProfessor = new GtProfessor();
         ctrlPrincipal = ctrl;
+    }
+    
+    public ImageIcon setarIconeJanela() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/professor.png");
+        return icone;
     }
 
     public void instanciarTelaBuscaProfessor(Frame pai) {

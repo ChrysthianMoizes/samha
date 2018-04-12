@@ -53,10 +53,8 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JToolBar.Separator();
         btnTurma = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
-        btnMatriz = new javax.swing.JButton();
+        btnAlocar = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
-        btnAlocacao = new javax.swing.JButton();
-        jSeparator11 = new javax.swing.JToolBar.Separator();
         btnOferta = new javax.swing.JButton();
         jSeparator15 = new javax.swing.JToolBar.Separator();
         btnSair = new javax.swing.JButton();
@@ -116,7 +114,7 @@ public class FrmInicio extends javax.swing.JFrame {
         toolBar.add(btnCurso);
         toolBar.add(jSeparator7);
 
-        btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/disciplina.png"))); // NOI18N
+        btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/matriz_curricular.png"))); // NOI18N
         btnDisciplina.setToolTipText("Disciplina");
         btnDisciplina.setFocusable(false);
         btnDisciplina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -134,23 +132,21 @@ public class FrmInicio extends javax.swing.JFrame {
         btnTurma.setFocusable(false);
         btnTurma.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTurma.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTurmaActionPerformed(evt);
+            }
+        });
         toolBar.add(btnTurma);
         toolBar.add(jSeparator9);
 
-        btnMatriz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/matriz_curricular.png"))); // NOI18N
-        btnMatriz.setToolTipText("Matriz Curricular");
-        btnMatriz.setFocusable(false);
-        btnMatriz.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMatriz.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBar.add(btnMatriz);
+        btnAlocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/alocacao.png"))); // NOI18N
+        btnAlocar.setToolTipText("Alocação");
+        btnAlocar.setFocusable(false);
+        btnAlocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBar.add(btnAlocar);
         toolBar.add(jSeparator10);
-
-        btnAlocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/alocacao.png"))); // NOI18N
-        btnAlocacao.setFocusable(false);
-        btnAlocacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAlocacao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBar.add(btnAlocacao);
-        toolBar.add(jSeparator11);
 
         btnOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/oferta.png"))); // NOI18N
         btnOferta.setToolTipText("Oferta");
@@ -183,15 +179,19 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 102));
 
         lblCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        lblCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblCoordenador.setText("Coordenador:");
 
         lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblNomeCoordenador.setText("User");
 
         lblData.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        lblData.setForeground(new java.awt.Color(240, 240, 240));
         lblData.setText("Data:");
 
         lblDataAtual.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        lblDataAtual.setForeground(new java.awt.Color(240, 240, 240));
         lblDataAtual.setText("00/00/0000");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -199,7 +199,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(894, Short.MAX_VALUE)
+                .addContainerGap(840, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblData)
@@ -255,19 +255,21 @@ public class FrmInicio extends javax.swing.JFrame {
         ctrlPrincipal.encerrarSessao();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurmaActionPerformed
+        ctrlPrincipal.getCtrlTurma().instanciarTelaBuscaTurma(this);
+    }//GEN-LAST:event_btnTurmaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlocacao;
+    private javax.swing.JButton btnAlocar;
     private javax.swing.JButton btnCoordenador;
     private javax.swing.JButton btnCurso;
     private javax.swing.JButton btnDisciplina;
-    private javax.swing.JButton btnMatriz;
     private javax.swing.JButton btnOferta;
     private javax.swing.JButton btnProfessor;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTurma;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator10;
-    private javax.swing.JToolBar.Separator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JToolBar.Separator jSeparator15;

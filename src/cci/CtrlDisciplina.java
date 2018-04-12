@@ -8,6 +8,7 @@ import cih.disciplina.JDBuscarDisciplina;
 import cih.disciplina.JDCadastrarDisciplina;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class CtrlDisciplina {
     
@@ -19,6 +20,11 @@ public class CtrlDisciplina {
     public CtrlDisciplina(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
         gtDisciplina = new GtDisciplina();
+    }
+    
+    public ImageIcon setarIconeJanela() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/matriz_curricular.png");
+        return icone;
     }
     
     public void instanciarTelaBuscaDisciplina(Frame pai) {
