@@ -38,9 +38,9 @@ public class CtrlTurma {
         cadastraTurma.setVisible(true);
     }
     
-    public int cadastrar(String nome, String turno, int ano, int semestre, Curso curso, MatrizCurricular matriz) {
+    public int cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
 
-        String resposta = gtTurma.cadastrar(nome, turno, ano, semestre, curso, matriz);
+        String resposta = gtTurma.cadastrar(nome, turno, ano, semestre, matriz);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraTurma, "Cadastrado com sucesso!");
@@ -51,9 +51,9 @@ public class CtrlTurma {
         }
     }
     
-    public int alterar(String nome, String turno ,int ano, int semestre, Curso curso, MatrizCurricular matriz, Turma turma) {
+    public int alterar(String nome, String turno ,int ano, int semestre, MatrizCurricular matriz, Turma turma) {
 
-        String resposta = gtTurma.alterar(nome, turno, ano, semestre, curso, matriz, turma);
+        String resposta = gtTurma.alterar(nome, turno, ano, semestre, matriz, turma);
         
         if (resposta.equals(Constantes.ALTERADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraTurma, "Alterado Com sucesso!");

@@ -270,7 +270,7 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         for (int i = 0; i < listaCursos.size(); i++) {
 
             curso = listaCursos.get(i);
-            if (curso.getId() == turma.getCurso().getId()) {
+            if (curso.getId() == turma.getMatriz().getCurso().getId()) {
                 cbxCurso.setSelectedIndex(i);
                 preencherComboMatriz(curso.getId());
                 break;
@@ -337,15 +337,14 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         String turno = cbxTurno.getSelectedItem().toString();
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
         int resposta = 0;
         
         if(turma == null){
-            resposta = ctrlPrincipal.getCtrlTurma().cadastrar(nome, turno, ano, semestre, curso, matriz);  
+            resposta = ctrlPrincipal.getCtrlTurma().cadastrar(nome, turno, ano, semestre, matriz);  
         }else{
-            resposta = ctrlPrincipal.getCtrlTurma().alterar(nome, turno, ano, semestre, curso, matriz, turma);
+            resposta = ctrlPrincipal.getCtrlTurma().alterar(nome, turno, ano, semestre, matriz, turma);
         }
         
         if (resposta == 0) {

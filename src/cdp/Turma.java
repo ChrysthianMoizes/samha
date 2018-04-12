@@ -39,16 +39,10 @@ public class Turma implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private MatrizCurricular matriz;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "curso_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Curso curso;
-
     public Turma() {
     }
 
-    public Turma(int id, String nome, int ano, int semestre, String turno, MatrizCurricular matriz, Curso curso) {
+    public Turma(int id, String nome, int ano, int semestre, String turno, MatrizCurricular matriz) {
         this.id = id;
         this.nome = nome;
         this.ano = ano;
@@ -57,7 +51,7 @@ public class Turma implements Serializable {
         this.turno = turno;
     }
 
-    public Turma(String nome, int ano, int semestre, String turno, MatrizCurricular matriz, Curso curso) {
+    public Turma(String nome, int ano, int semestre, String turno, MatrizCurricular matriz) {
         this.nome = nome;
         this.ano = ano;
         this.semestre = semestre;
@@ -112,14 +106,6 @@ public class Turma implements Serializable {
     public void setTurno(String turno) {
         this.turno = turno;
     }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
    
     @Override
     public String toString() {
@@ -127,6 +113,6 @@ public class Turma implements Serializable {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getMatriz().getNome(), getCurso().getNome(), getTurno() };
+        return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
     }
 }

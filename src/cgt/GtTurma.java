@@ -14,14 +14,13 @@ public class GtTurma {
         gdTurma = new GdTurma();
     }
     
-    public String cadastrar(String nome, String turno, int ano, int semestre, Curso curso, MatrizCurricular matriz) {
+    public String cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
 
         try {
            
             Turma turma = new Turma();
            
             turma.setAno(ano);
-            turma.setCurso(curso);
             turma.setMatriz(matriz);
             turma.setNome(nome.toUpperCase());
             turma.setSemestre(semestre);
@@ -35,12 +34,11 @@ public class GtTurma {
         }
     }
     
-    public String alterar(String nome, String turno, int ano, int semestre, Curso curso, MatrizCurricular matriz, Turma turma){
+    public String alterar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz, Turma turma){
         
         try {
             
             turma.setAno(ano);
-            turma.setCurso(curso);
             turma.setMatriz(matriz);
             turma.setNome(nome.toUpperCase());
             turma.setSemestre(semestre);
@@ -57,8 +55,8 @@ public class GtTurma {
     public List<Turma> buscar(String coluna, String texto) {
         
         if(coluna.toLowerCase().equals("curso")){
-            coluna = "curso.id";
-            return gdTurma.filtrarPorCurso(coluna.toLowerCase(), Integer.valueOf(texto));
+            coluna = "matriz.id";
+            return gdTurma.filtrarPorMatriz(coluna.toLowerCase(), Integer.valueOf(texto));
         }
         return gdTurma.buscar(coluna.toLowerCase(), texto);
     }
