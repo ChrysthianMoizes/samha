@@ -60,9 +60,7 @@ public class FrmInicio extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
-        lblCoordenador = new javax.swing.JLabel();
         lblNomeCoordenador = new javax.swing.JLabel();
-        lblData = new javax.swing.JLabel();
         lblDataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,17 +176,9 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 102));
 
-        lblCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        lblCoordenador.setForeground(new java.awt.Color(240, 240, 240));
-        lblCoordenador.setText("Coordenador:");
-
         lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblNomeCoordenador.setText("User");
-
-        lblData.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        lblData.setForeground(new java.awt.Color(240, 240, 240));
-        lblData.setText("Data:");
 
         lblDataAtual.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblDataAtual.setForeground(new java.awt.Color(240, 240, 240));
@@ -199,29 +189,19 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(840, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDataAtual))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCoordenador)
-                        .addGap(65, 65, 65)
-                        .addComponent(lblNomeCoordenador)))
+                .addContainerGap(953, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDataAtual)
+                    .addComponent(lblNomeCoordenador))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(387, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCoordenador)
-                    .addComponent(lblNomeCoordenador))
+                .addComponent(lblNomeCoordenador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblData)
-                    .addComponent(lblDataAtual))
+                .addComponent(lblDataAtual)
                 .addContainerGap())
         );
 
@@ -279,8 +259,6 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
-    private javax.swing.JLabel lblCoordenador;
-    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDataAtual;
     private javax.swing.JLabel lblNomeCoordenador;
     private javax.swing.JToolBar toolBar;
