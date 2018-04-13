@@ -115,11 +115,11 @@ public final class CtrlPrincipal {
 
     public void encerrarSessao() {
 
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmOferta, "Deseja Sair ?");
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(frmInicio, "Deseja Sair ?");
         if (confirmacao == 0) {
             gtPrincipal.encerrarSessao();
             instanciarFrameValidarAcesso();
-            frmOferta.dispose();
+            frmInicio.dispose();
         }
     }
 

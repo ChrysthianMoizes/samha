@@ -51,11 +51,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="pnlCurso" alignment="0" max="32767" attributes="0"/>
                       <Component id="pnlCoordenadoria" alignment="0" max="32767" attributes="0"/>
                       <Component id="pnlEixo" alignment="0" max="32767" attributes="0"/>
                       <Component id="pnlRodape" max="32767" attributes="0"/>
-                      <Component id="pnlCurso" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -66,9 +66,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlEixo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlCoordenadoria" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlCurso" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="pnlRodape" min="-2" max="-2" attributes="0"/>
@@ -97,11 +97,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNomeEixo" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEixo" min="-2" pref="56" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblNomeEixo" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cbxEixo" pref="400" max="32767" attributes="0"/>
                           <Component id="txtNomeEixo" max="32767" attributes="0"/>
@@ -119,18 +116,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbxEixo" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="btnAdicionarEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAdicionarEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnRemoverEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="cbxEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -143,14 +137,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblEixo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DialogInput" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Eixo:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxEixo">
@@ -309,21 +295,21 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNomeCurso" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNivel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNivel" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNomeCurso" min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="cbxNivel" min="-2" pref="280" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="lblPeriodos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="spnPeriodos" pref="61" max="32767" attributes="0"/>
+                              <Component id="spnPeriodos" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtNomeCurso" max="32767" attributes="0"/>
+                          <Component id="txtNomeCurso" min="-2" pref="519" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -428,11 +414,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNomeCoordenadoria" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCoordenadoria" min="-2" pref="56" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblNomeCoordenadoria" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cbxCoordenadoria" pref="400" max="32767" attributes="0"/>
                           <Component id="txtNomeCoordenadoria" max="32767" attributes="0"/>
@@ -450,18 +433,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbxCoordenadoria" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="btnAdicionarCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAdicionarCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnRemoverCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="cbxCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -474,14 +454,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblCoordenadoria">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DialogInput" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Coord.:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxCoordenadoria">

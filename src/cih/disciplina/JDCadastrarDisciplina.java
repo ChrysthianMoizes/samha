@@ -38,7 +38,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         txtNomeMatriz = new javax.swing.JTextField();
         btnAdicionarMatriz = new javax.swing.JButton();
         btnRemoverMatriz = new javax.swing.JButton();
-        lblMatriz = new javax.swing.JLabel();
         lblNomeMatriz = new javax.swing.JLabel();
         cbxMatriz = new javax.swing.JComboBox<>();
         lblAno = new javax.swing.JLabel();
@@ -103,9 +102,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
             }
         });
 
-        lblMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblMatriz.setText("Matriz:");
-
         lblNomeMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblNomeMatriz.setText("Nome:");
 
@@ -135,19 +131,9 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
             pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMatriz)
-                            .addComponent(lblNomeMatriz))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxMatriz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomeMatriz))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdicionarMatriz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlMatrizCurricularLayout.createSequentialGroup()
                         .addComponent(lblAno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -156,7 +142,15 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
                         .addComponent(lblNomeCurso3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMatrizCurricularLayout.createSequentialGroup()
+                        .addComponent(txtNomeMatriz)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAdicionarMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMatrizCurricularLayout.createSequentialGroup()
+                        .addComponent(cbxMatriz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlMatrizCurricularLayout.setVerticalGroup(
@@ -165,13 +159,12 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionarMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRemoverMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlMatrizCurricularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,14 +284,14 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
                             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                                 .addComponent(lblPeriodo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                                 .addComponent(lblCargaHoraria)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblHoras, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))))
+                                .addComponent(lblHoras)))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addComponent(txtNomeDisciplina))
                 .addContainerGap())
         );
@@ -593,7 +586,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     private javax.swing.JLabel lblAulasSemanais;
     private javax.swing.JLabel lblCargaHoraria;
     private javax.swing.JLabel lblHoras;
-    private javax.swing.JLabel lblMatriz;
     private javax.swing.JLabel lblNomeCurso;
     private javax.swing.JLabel lblNomeCurso3;
     private javax.swing.JLabel lblNomeDisciplina;

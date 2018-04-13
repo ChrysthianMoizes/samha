@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @PrimaryKeyJoinColumn(name = "professor_id")
 public class Professor extends Servidor{
     
-    @Column(nullable = false, precision = 2)
+    @Column(nullable = false)
     private int cargaHoraria;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,7 +35,7 @@ public class Professor extends Servidor{
         this.coordenadoria = coordenadoria;
     }
 
-    public double getCargaHoraria() {
+    public int getCargaHoraria() {
         return cargaHoraria;
     }
 

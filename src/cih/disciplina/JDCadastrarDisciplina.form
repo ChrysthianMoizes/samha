@@ -95,26 +95,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblNomeMatriz" min="-2" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMatriz" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNomeMatriz" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbxMatriz" max="32767" attributes="0"/>
-                                  <Component id="txtNomeMatriz" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnAdicionarMatriz" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="btnRemoverMatriz" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="lblAno" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="spnAno" min="-2" pref="60" max="-2" attributes="0"/>
@@ -123,6 +109,16 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnSemestre" min="-2" pref="50" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="txtNomeMatriz" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnAdicionarMatriz" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="cbxMatriz" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnRemoverMatriz" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -135,14 +131,13 @@
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAdicionarMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtNomeMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblNomeMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNomeMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtNomeMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnRemoverMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="cbxMatriz" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -197,14 +192,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverMatrizActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnRemoverMatrizKeyPressed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblMatriz">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DialogInput" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Matriz:"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNomeMatriz">
               <Properties>
@@ -380,20 +367,20 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblPeriodo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="spnPeriodo" min="-2" pref="42" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblCargaHoraria" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="spnCargaHoraria" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="spnCargaHoraria" min="-2" pref="50" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblHoras" pref="42" max="32767" attributes="0"/>
+                                      <Component id="lblHoras" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                           </Group>
                           <Component id="txtNomeDisciplina" max="32767" attributes="0"/>
                       </Group>
