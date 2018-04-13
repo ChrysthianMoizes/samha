@@ -64,6 +64,7 @@ public class FrmInicio extends javax.swing.JFrame {
         lblDataAtual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
 
         toolBar.setBackground(new java.awt.Color(0, 153, 102));
         toolBar.setBorder(null);
@@ -143,6 +144,11 @@ public class FrmInicio extends javax.swing.JFrame {
         btnAlocar.setFocusable(false);
         btnAlocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAlocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAlocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlocarActionPerformed(evt);
+            }
+        });
         toolBar.add(btnAlocar);
         toolBar.add(jSeparator10);
 
@@ -238,6 +244,10 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurmaActionPerformed
         ctrlPrincipal.getCtrlTurma().instanciarTelaBuscaTurma(this);
     }//GEN-LAST:event_btnTurmaActionPerformed
+
+    private void btnAlocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlocarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlocarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocar;
