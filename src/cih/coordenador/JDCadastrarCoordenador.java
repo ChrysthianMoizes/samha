@@ -6,25 +6,16 @@ import cdp.Coordenadoria;
 import cdp.Professor;
 import cdp.ProfessorCoordenador;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 
 public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
-    private Coordenador coordenador;
-    private List<Professor> listaProfessores;
-    private List<Coordenadoria> listaCoordenadorias;
 
-    public JDCadastrarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl, Coordenador coord) {
+    public JDCadastrarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
-        this.coordenador = coord;
-        ImageIcon icone = ctrlPrincipal.getCtrlCoordenador().setarIconeJanela();
-        setIconImage(icone.getImage());
-        identificarOrigem();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -305,25 +296,20 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public void identificarOrigem(){    
-        if(coordenador != null){
-            setarCamposComInstancia();
-        }else{
-            cbxProfessor.setEnabled(false);
-            cbxCoordenadoria.setEnabled(false);
-        }
-    }
-    
-    public void setarCamposComInstancia(){
-        selecionarTipoCoordenador();
+   
+    public void setarCamposComInstancia(Coordenador coordenador){
         txtNome.setText(coordenador.getNome());
         txtMatricula.setText(coordenador.getMatricula());
         txtUsuario.setText(coordenador.getUsuario().getLogin());
         txtSenha.setText(coordenador.getUsuario().getSenha());
     }
     
-    public void selecionarTipoCoordenador(){
+    public void desabilitarCombos(){
+        cbxProfessor.setEnabled(false);
+        cbxCoordenadoria.setEnabled(false);
+    }
+    
+    public void selecionarTipoCoordenador(Coordenador coordenador){
         
         switch (coordenador.getTipo()) {
             
@@ -334,11 +320,11 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 break;
                 
             case "COORDENADOR DE CURSO":
-                preencherComboProfessor();
+                ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
                 ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
                 cbxCoordenadoria.setModel(new DefaultComboBoxModel(profCoord.getCoordenadoria().toArray()));
                 cbxCoordenadoria.setSelectedIndex(0);
-                preencherComboCoordenadorias();
+                ctrlPrincipal.getCtrlCoordenador().preencherComboCoordenadoria(cbxCoordenadoria);
                 cbxTipo.setSelectedIndex(1);
                 cbxTipo.setEnabled(false);
                 txtNome.setEditable(false);
@@ -351,33 +337,6 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 break;
         }
     }
-   
-    public void preencherComboProfessor() {
-        
-        if(listaProfessores == null)
-            listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
-
-        cbxProfessor.setModel(new DefaultComboBoxModel(listaProfessores.toArray()));
-        
-        if(coordenador != null){
-            Professor profAtual;
-            for(int i = 0; i < listaProfessores.size(); i++){
-                profAtual = (Professor) listaProfessores.get(i);
-                if(profAtual.getMatricula().equals(coordenador.getMatricula())){
-                    cbxProfessor.setSelectedIndex(i);
-                    break;
-                }
-            }
-        }
-    }
-    
-    public void preencherComboCoordenadorias(){
-        
-        if(listaCoordenadorias == null)
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoresNulos();
-
-        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray())); 
-    }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
@@ -389,10 +348,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         
-        if(coordenador == null)   
-            ctrlPrincipal.getCtrlCoordenador().cadastrar(professor, coordenadoria, tipo, login, senha, nome, matricula);  
-        else
-            ctrlPrincipal.getCtrlCoordenador().alterar(coordenador, coordenadoria, professor, tipo, login, senha, nome, matricula);   
+        ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, coordenadoria, tipo, login, senha, nome, matricula);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -412,10 +368,11 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void cbxTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTipoItemStateChanged
+        
         switch (cbxTipo.getSelectedIndex()) {
             case 1:
-                preencherComboCoordenadorias();
-                preencherComboProfessor();
+                ctrlPrincipal.getCtrlCoordenador().preencherComboCoordenadoria(cbxCoordenadoria);
+                ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
                 cbxProfessor.setEnabled(true);
                 cbxCoordenadoria.setEnabled(true);
                 txtNome.setEditable(false);
@@ -431,7 +388,6 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 break;
         }
     }//GEN-LAST:event_cbxTipoItemStateChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;

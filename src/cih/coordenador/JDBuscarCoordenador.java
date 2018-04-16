@@ -1,18 +1,13 @@
 package cih.coordenador;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.Coordenador;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import java.util.List;
-import javax.swing.ImageIcon;
 
 public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
-    private List<Coordenador> listaCoordenadores;
     private Frame pai;
     
     public JDBuscarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -20,20 +15,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
-        ImageIcon icone = ctrlPrincipal.getCtrlCoordenador().setarIconeJanela();
-        setIconImage(icone.getImage());
-        btnBuscarActionPerformed(null);
-    }
-    
-    public void atualizarTabela(){
-        
-        JTableUtil.limparTabela(tblCoordenador);
-        
-        if(listaCoordenadores.size() > 0){
-            listaCoordenadores.forEach((coordenador) -> {
-                JTableUtil.addLinha(tblCoordenador, coordenador.toArray() );
-            });
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -213,16 +194,26 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         btnGroup.add(rdbCoordenadorAcademico);
         rdbCoordenadorAcademico.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rdbCoordenadorAcademico.setMnemonic('a');
+        rdbCoordenadorAcademico.setSelected(true);
         rdbCoordenadorAcademico.setText("COORDENADOR ACADÊMICO");
         rdbCoordenadorAcademico.setEnabled(false);
+        rdbCoordenadorAcademico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbCoordenadorAcademicoActionPerformed(evt);
+            }
+        });
 
         rdbCoordenadorCurso.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rdbCoordenadorCurso);
         rdbCoordenadorCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rdbCoordenadorCurso.setMnemonic('c');
-        rdbCoordenadorCurso.setSelected(true);
         rdbCoordenadorCurso.setText("COORDENADOR DE CURSO");
         rdbCoordenadorCurso.setEnabled(false);
+        rdbCoordenadorCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbCoordenadorCursoActionPerformed(evt);
+            }
+        });
 
         rdbCoordenadorPedagogico.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rdbCoordenadorPedagogico);
@@ -230,6 +221,11 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         rdbCoordenadorPedagogico.setMnemonic('p');
         rdbCoordenadorPedagogico.setText("COORDENADOR PEDAGÓGICO");
         rdbCoordenadorPedagogico.setEnabled(false);
+        rdbCoordenadorPedagogico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbCoordenadorPedagogicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarCoordenadorLayout = new javax.swing.GroupLayout(pnlBuscarCoordenador);
         pnlBuscarCoordenador.setLayout(pnlBuscarCoordenadorLayout);
@@ -340,9 +336,8 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                     filtro = "COORDENADOR PEDAGÓGICO";
                     break;
             }  
-        }    
-        listaCoordenadores = ctrlPrincipal.getCtrlCoordenador().buscar(colunaFiltro, filtro);
-        atualizarTabela();
+        }
+        ctrlPrincipal.getCtrlCoordenador().listarCoordenadores(colunaFiltro, filtro, tblCoordenador);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
@@ -352,14 +347,8 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarKeyPressed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
-        try {
-            Coordenador coord = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tblCoordenador);
-            ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(coord, pai);
-            btnBuscarActionPerformed(null);
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um coordenador");
-        }
+        ctrlPrincipal.getCtrlCoordenador().transitarTelas(tblCoordenador, pai);
+        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -379,7 +368,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(null, pai);
+        ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai);
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -388,18 +377,8 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
-        try {
-            Coordenador coord = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tblCoordenador);
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlCoordenador().excluir(coord);
-                btnBuscarActionPerformed(null);
-            }
-            
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um coordenador");
-        }
+        ctrlPrincipal.getCtrlCoordenador().excluir(tblCoordenador);
+        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed
@@ -409,19 +388,36 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        
+        JTableUtil.limparTabela(tblCoordenador);
+        
         if(cbxFiltro.getSelectedIndex() == 2){
             rdbCoordenadorAcademico.setEnabled(true);
             rdbCoordenadorCurso.setEnabled(true);
             rdbCoordenadorPedagogico.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
+            btnBuscar.setEnabled(false);
         }else{
             rdbCoordenadorAcademico.setEnabled(false);
             rdbCoordenadorCurso.setEnabled(false);
             rdbCoordenadorPedagogico.setEnabled(false);
             txtFiltro.setEnabled(true);
-        }
+            btnBuscar.setEnabled(true);
+        }    
     }//GEN-LAST:event_cbxFiltroItemStateChanged
+
+    private void rdbCoordenadorAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorAcademicoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rdbCoordenadorAcademicoActionPerformed
+
+    private void rdbCoordenadorCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorCursoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rdbCoordenadorCursoActionPerformed
+
+    private void rdbCoordenadorPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorPedagogicoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rdbCoordenadorPedagogicoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

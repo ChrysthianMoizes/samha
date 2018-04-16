@@ -25,12 +25,12 @@ public class GtCoordenador {
             usuario.setLogin(login);
             usuario.setSenha(senha);
 
-            if (tipo.equals("COORDENADOR DE CURSO")) {
+            if (tipo.toLowerCase().equals(Constantes.COORD_CURSO)) {
 
                 ProfessorCoordenador profCoord = new ProfessorCoordenador();
                 profCoord.setProfessor(professor);
                 profCoord.setCoordenadoria(coordenadoria);
-                profCoord.setTipo(tipo);
+                profCoord.setTipo(tipo.toUpperCase());
                 profCoord.setUsuario(usuario);
                 profCoord.setNome(nome);
                 profCoord.setMatricula(matricula);
@@ -41,7 +41,7 @@ public class GtCoordenador {
                 Coordenador coordenador = new Coordenador();
                 coordenador.setMatricula(matricula);
                 coordenador.setNome(nome);
-                coordenador.setTipo(tipo);
+                coordenador.setTipo(tipo.toUpperCase());
                 coordenador.setUsuario(usuario);
                 gdCoordenador.cadastrar(coordenador);
             }
@@ -59,9 +59,9 @@ public class GtCoordenador {
             coordenador.setMatricula(matricula);
             coordenador.getUsuario().setLogin(login);
             coordenador.getUsuario().setSenha(senha);
-            coordenador.setTipo(tipo);
+            coordenador.setTipo(tipo.toUpperCase());
 
-            if (tipo.equals("COORDENADOR DE CURSO")) {
+            if (tipo.toLowerCase().equals(Constantes.COORD_CURSO)) {
 
                 ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
                 profCoord.setId(coordenador.getId());
@@ -81,7 +81,7 @@ public class GtCoordenador {
     public String excluir(Coordenador coordenador) {
 
         try {
-            if (coordenador.getTipo().equals("COORDENADOR DE CURSO")) {
+            if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)) {
 
                 ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
                 gdCoordenador.excluir(profCoord);

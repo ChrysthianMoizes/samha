@@ -1,5 +1,6 @@
 package cci;
 
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JTable;
@@ -79,5 +80,20 @@ public class JTableUtil {
         int qtdLinhas = jTable.getRowCount() - 1;
         for (int i = qtdLinhas; i >= 0; i--)
             getModel(jTable).removeRow(i);
+    }
+    
+    /**
+     * Preenche a tabela com os dados da lista
+     * @param jTable 
+     */
+    
+    public static void preencherTabela(List lista, JTable tabela) throws Exception{
+     
+        Method metodo;
+
+        for(Object obj : lista){
+            metodo = obj.getClass().getMethod("toArray", null);
+            JTableUtil.addLinha(tabela, (Object[]) metodo.invoke(obj, null));  
+        }            
     }
 }
