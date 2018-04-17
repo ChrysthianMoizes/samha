@@ -38,10 +38,6 @@ public class CtrlCoordenadoria {
             return 1;
         }
     }
-   
-    public List<Coordenadoria> filtrarCoordenadoresNulos() {
-        return gtCoordenadoria.filtrarCoordenadoresNulos();
-    }
     
     public List<Coordenadoria> filtrarCoordenadoriasEixo(int id) {
         return gtCoordenadoria.filtrarCoordenadoriasEixo(id);

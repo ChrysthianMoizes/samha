@@ -1,9 +1,7 @@
 package cgt;
 
 import cdp.Coordenador;
-import cdp.Coordenadoria;
 import cdp.Professor;
-import cdp.ProfessorCoordenador;
 import cdp.Usuario;
 import cgd.GdCoordenador;
 import java.sql.SQLException;
@@ -17,61 +15,50 @@ public class GtCoordenador {
         gdCoordenador = new GdCoordenador();
     }
 
-    public String cadastrar(Professor professor, Coordenadoria coordenadoria, String tipo, String login, String senha, String nome, String matricula) {
+    public String cadastrar(Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
         try {
-            validarCampos(nome, matricula, login, senha);
+            validarCampos(nome, matricula, login, senha, tipo, professor);
             Usuario usuario = new Usuario();
             usuario.setLogin(login);
             usuario.setSenha(senha);
-
-            if (tipo.toLowerCase().equals(Constantes.COORD_CURSO)) {
-
-                ProfessorCoordenador profCoord = new ProfessorCoordenador();
-                profCoord.setProfessor(professor);
-                profCoord.setCoordenadoria(coordenadoria);
-                profCoord.setTipo(tipo.toUpperCase());
-                profCoord.setUsuario(usuario);
-                profCoord.setNome(nome);
-                profCoord.setMatricula(matricula);
-                gdCoordenador.cadastrar(profCoord);
-
-            } else {
-
-                Coordenador coordenador = new Coordenador();
-                coordenador.setMatricula(matricula);
-                coordenador.setNome(nome);
-                coordenador.setTipo(tipo.toUpperCase());
-                coordenador.setUsuario(usuario);
-                gdCoordenador.cadastrar(coordenador);
+            
+            Coordenador coordenador = new Coordenador();
+            coordenador.setMatricula(matricula);
+            coordenador.setNome(nome);
+            coordenador.setTipo(tipo.toUpperCase());
+            coordenador.setUsuario(usuario);
+            
+            if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
+                coordenador.setProfessor(professor);
+                professor.getCoordenadoria().setCoordenador(coordenador);
             }
+            gdCoordenador.cadastrar(coordenador);
+            
             return Constantes.CADASTRADO;
         } catch (Exception ex) {
             return ex.getMessage();
         }
     }
 
-    public String alterar(Coordenador coordenador, Coordenadoria coordenadoria, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public String alterar(Coordenador coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
         try {
-            validarCampos(nome, matricula, login, senha);
+            
+            validarCampos(nome, matricula, login, senha, tipo, professor);
             coordenador.setNome(nome);
             coordenador.setMatricula(matricula);
             coordenador.getUsuario().setLogin(login);
             coordenador.getUsuario().setSenha(senha);
             coordenador.setTipo(tipo.toUpperCase());
 
-            if (tipo.toLowerCase().equals(Constantes.COORD_CURSO)) {
-
-                ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
-                profCoord.setId(coordenador.getId());
-                profCoord.setCoordenadoria(coordenadoria);
-                profCoord.setProfessor(professor);
-                gdCoordenador.alterar(profCoord);
-
-            } else {
-                gdCoordenador.alterar(coordenador);
+            if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
+                coordenador.setProfessor(professor);
+                professor.getCoordenadoria().setCoordenador(coordenador);
             }
+            
+            gdCoordenador.alterar(coordenador);
+            
             return Constantes.ALTERADO;
         } catch (Exception ex) {
             return ex.getMessage();
@@ -81,14 +68,9 @@ public class GtCoordenador {
     public String excluir(Coordenador coordenador) {
 
         try {
-            if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)) {
-
-                ProfessorCoordenador profCoord = (ProfessorCoordenador) coordenador;
-                gdCoordenador.excluir(profCoord);
-
-            } else {
-                gdCoordenador.excluir(coordenador);
-            }
+            //verificar erro de campo pertencente a outro cadastro
+            gdCoordenador.excluir(coordenador);
+            
             return Constantes.EXCLUIDO;
         } catch (SQLException | ClassNotFoundException ex) {
             return ex.getMessage();
@@ -102,7 +84,7 @@ public class GtCoordenador {
             return gdCoordenador.buscar(coluna.toLowerCase(), texto);
     }
 
-    public void validarCampos(String nome, String matricula, String login, String senha) throws Exception {
+    public void validarCampos(String nome, String matricula, String login, String senha, String tipo, Professor professor) throws Exception {
         if (nome.equals("")) {
             throw new SAMHAException(1);
         }
@@ -114,6 +96,12 @@ public class GtCoordenador {
         }
         if (senha.equals("")) {
             throw new SAMHAException(4);
+        }
+        
+        if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
+            if(professor == null){
+                throw new SAMHAException(7);
+            }
         }
     }
 }

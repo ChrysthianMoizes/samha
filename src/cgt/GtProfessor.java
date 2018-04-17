@@ -78,5 +78,11 @@ public class GtProfessor {
         if (matricula.equals("")) {
             throw new SAMHAException(2);
         }
+        //if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
+            //if(coordenadoria == null){
+              //  throw new SAMHAException(7); VERIFICAR SE A COORDENADORIA É NULA
+            //}
+       // }
+        
     }
 }

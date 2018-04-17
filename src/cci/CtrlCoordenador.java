@@ -1,20 +1,14 @@
 package cci;
 
 import cdp.Coordenador;
-import cdp.Coordenadoria;
 import cdp.Professor;
-import cdp.ProfessorCoordenador;
 import cgt.Constantes;
 import cgt.GtCoordenador;
 import cih.coordenador.JDBuscarCoordenador;
 import cih.coordenador.JDCadastrarCoordenador;
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -25,11 +19,6 @@ public class CtrlCoordenador extends CtrlGenerica{
     private JDCadastrarCoordenador cadastraCoord;
     private CtrlPrincipal ctrlPrincipal;
     private GtCoordenador gtCoordenador;
-    
-    private Coordenador coordenador;
-    private List<Professor> listaProfessores;
-    private List<Coordenadoria> listaCoordenadorias;
-    private List<Coordenador> listaCoordenadores;
 
     public CtrlCoordenador(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
@@ -44,9 +33,8 @@ public class CtrlCoordenador extends CtrlGenerica{
     public void transitarTelas(JTable tabela, Frame pai){
         
         try {
-            Coordenador coord = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tabela);
-            setCoordenador(coord);
-            ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai);
+            Coordenador coordenador = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tabela);  
+            ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai, coordenador);
             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -60,31 +48,36 @@ public class CtrlCoordenador extends CtrlGenerica{
         buscaCoord.setVisible(true);
     }
 
-    public void instanciarTelaCadastroCoordenador(Frame pai) {
+    public void instanciarTelaCadastroCoordenador(Frame pai, Coordenador coordenador) {
         cadastraCoord = new JDCadastrarCoordenador(pai, true, ctrlPrincipal);
-        identificarOrigem();
+        cadastraCoord.setCoordenador(coordenador);
+        identificarOrigem(coordenador);
         cadastraCoord.setIconImage(setarIconeJanela());
         cadastraCoord.setVisible(true);  
     }
 
-    public void cadastrar(Professor professor, Coordenadoria coordenadoria, String tipo, String login, String senha, String nome, String matricula) {
+    public void cadastrar(Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
-        String resposta = gtCoordenador.cadastrar(professor, coordenadoria, tipo, login, senha, nome, matricula);
+        String resposta = gtCoordenador.cadastrar(professor, tipo, login, senha, nome, matricula);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
+            cadastraCoord.desabilitarCombos();
+            cadastraCoord.desabilitarCampos();
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
         }
     }
 
-    public void alterar(Coordenador coordenador, Coordenadoria coordenadoria, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public void alterar(Coordenador coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
-        String resposta = gtCoordenador.alterar(coordenador, coordenadoria, professor, tipo, login, senha, nome, matricula);
+        String resposta = gtCoordenador.alterar(coordenador, professor, tipo, login, senha, nome, matricula);
         if (resposta.equals(Constantes.ALTERADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
+            cadastraCoord.desabilitarCombos();
+            cadastraCoord.desabilitarCampos();
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraCoord, resposta);
         }
     }
 
@@ -108,10 +101,13 @@ public class CtrlCoordenador extends CtrlGenerica{
 
     public void listarCoordenadores(String coluna, String texto, JTable tabela) {
         
+        List listaCoordenadores = buscaCoord.getListaCoordenadores();
+        
         listaCoordenadores = buscar(coluna, texto);
         JTableUtil.limparTabela(tabela);
         
         if(listaCoordenadores.size() > 0){
+   
             try {
                 JTableUtil.preencherTabela(listaCoordenadores, tabela);
             } catch (Exception ex) {
@@ -124,58 +120,48 @@ public class CtrlCoordenador extends CtrlGenerica{
     public List<Coordenador> buscar(String coluna, String texto) {
         return gtCoordenador.buscar(coluna, texto);
     }
-
-    public Coordenador getCoordenador() {
-        return coordenador;
-    }
-
-    public void setCoordenador(Coordenador coordenador) {
-        this.coordenador = coordenador;
-    }
-
-    public List<Professor> getListaProfessores() {
-        return listaProfessores;
-    }
-
-    public void setListaProfessores(List<Professor> listaProfessores) {
-        this.listaProfessores = listaProfessores;
-    }
-
-    public List<Coordenadoria> getListaCoordenadorias() {
-        return listaCoordenadorias;
-    }
-
-    public void setListaCoordenadorias(List<Coordenadoria> listaCoordenadorias) {
-        this.listaCoordenadorias = listaCoordenadorias;
-    }
     
     //============================ TELA DE CADASTRO ============================================================
     
-    public void identificarOrigem(){      
+    public void identificarOrigem(Coordenador coordenador){
+        
         if(coordenador != null){
             cadastraCoord.selecionarTipoCoordenador(coordenador);
             cadastraCoord.setarCamposComInstancia(coordenador);
-        }else{
-            cadastraCoord.desabilitarCombos();
+            if(coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)){
+                cadastraCoord.getCbxProfessor().setEnabled(true);
+            }else
+                cadastraCoord.desabilitarCombos();
         }
     }
     
-    public void validarOperacao(Professor professor, Coordenadoria coordenadoria, String tipo, String login, String senha, String nome, String matricula){  
+    public void validarOperacao(Professor professor, String tipo, String login, String senha, String nome, String matricula){  
+        
+        Coordenador coordenador = cadastraCoord.getCoordenador();
         
         if(validarCampos(nome, matricula, login, senha)){
             
             if(coordenador == null)   
-                ctrlPrincipal.getCtrlCoordenador().cadastrar(professor, coordenadoria, tipo, login, senha, nome, matricula);  
+                cadastrar(professor, tipo, login, senha, nome, matricula);  
             else
-                ctrlPrincipal.getCtrlCoordenador().alterar(coordenador, coordenadoria, professor, tipo, login, senha, nome, matricula);
+                alterar(coordenador, professor, tipo, login, senha, nome, matricula);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraCoord, "Todos os campos devem ser preenchidos");
     }
     
     public void preencherComboProfessor(JComboBox cbxProfessor) {
         
+        List listaProfessores = cadastraCoord.getListaProfessores();
+        
+        if(listaProfessores == null)
+            listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
         preencherCombo(cbxProfessor, listaProfessores);
-             
+        
+        Professor prof = (Professor) cbxProfessor.getSelectedItem();
+        cadastraCoord.setarCamposProfessor(prof); 
+        
+        Coordenador coordenador = cadastraCoord.getCoordenador();
+        
         if(coordenador != null){
             Professor profAtual;
             for(int i = 0; i < listaProfessores.size(); i++){
@@ -189,6 +175,11 @@ public class CtrlCoordenador extends CtrlGenerica{
     }
     
     public void preencherComboCoordenadoria(JComboBox cbxCoordenadoras) {
+        
+        List listaCoordenadorias = cadastraCoord.getListaCoordenadorias();
+        
+        if(listaCoordenadorias == null)
+            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().listar();
         preencherCombo(cbxCoordenadoras, listaCoordenadorias);
     }
     
@@ -199,7 +190,7 @@ public class CtrlCoordenador extends CtrlGenerica{
 
         if((login.equals("")) || (senha.equals("")))
             return false;
-  
+        
         return true;  
     }    
 }

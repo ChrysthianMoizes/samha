@@ -127,11 +127,9 @@
                       </Group>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCargaHoraria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="spnCargaHoraria" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="spnCargaHoraria" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblCargaHoraria" min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Component id="txtMatricula" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="lblMatricula1" min="-2" pref="30" max="-2" attributes="0"/>

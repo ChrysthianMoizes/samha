@@ -18,7 +18,6 @@
     <mapping class="cdp.Oferta"/>
     <mapping class="cdp.MatrizCurricular"/>
     <mapping class="cdp.Professor"/>
-    <mapping class="cdp.ProfessorCoordenador"/>
     <mapping class="cdp.RestricaoProfessor"/>
     <mapping class="cdp.Servidor"/>
     <mapping class="cdp.Turma"/>

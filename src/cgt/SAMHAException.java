@@ -19,6 +19,7 @@ public class SAMHAException extends Exception {
         msgsErro[4] = "Campo SENHA inválido";
         msgsErro[5] = "Campo CARGA HORÁRIA inválido"; 
         msgsErro[6] = "Campo DESCRIÇÃO inválido";
+        msgsErro[7] = "Professor não selecionado"; 
     }
     
     @Override

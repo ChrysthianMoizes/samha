@@ -20,23 +20,29 @@ public class Coordenador extends Servidor{
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = false)
+    @Cascade(CascadeType.ALL)
+    private Usuario usuario;           
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "professor_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Usuario usuario;
-            
+    private Professor professor;
 
     public Coordenador() {
     }
 
-    public Coordenador(String tipo, Usuario usuario, int id, String nome, String matricula) {
+    public Coordenador(String tipo, Usuario usuario, Professor professor, int id, String nome, String matricula) {
         super(id, nome, matricula);
         this.tipo = tipo;
         this.usuario = usuario;
+        this.professor = professor;
     }
 
-    public Coordenador(String tipo, Usuario usuario, String nome, String matricula) {
+    public Coordenador(String tipo, Usuario usuario, Professor professor, String nome, String matricula) {
         super(nome, matricula);
         this.tipo = tipo;
         this.usuario = usuario;
+        this.professor = professor;
     }
 
     public String getTipo() {
@@ -53,6 +59,14 @@ public class Coordenador extends Servidor{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
     
     public Object[] toArray() {

@@ -15,7 +15,7 @@ public abstract class Servidor implements Serializable{
     @Column(nullable = false)
     private String nome;
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     private String matricula;
 
     public Servidor() {

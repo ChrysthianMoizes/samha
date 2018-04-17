@@ -1,9 +1,9 @@
 package cgt;
 
+import cdp.Coordenador;
 import cdp.Coordenadoria;
 import cdp.Curso;
 import cdp.Eixo;
-import cdp.ProfessorCoordenador;
 import cgd.GdCoordenador;
 import cgd.GdCoordenadoria;
 import cgd.GdCurso;
@@ -40,9 +40,9 @@ public class GtCoordenadoria {
 
         try {
             
-            ProfessorCoordenador profCoord = gdCoordenador.filtrarCoordenadorUnico("coordenadoria.id", coordenadoria.getId());
+            //Coordenador coordenador = gdCoordenador.filtrarProfessorCoordenadorUnico("coordenadoria.id", coordenadoria.getId());
             
-            if(profCoord == null){
+            if(coordenadoria.getCoordenador() == null){
                 
                 Curso curso = gdCurso.filtrarCursoUnico("coordenadoria.id", coordenadoria.getId());
                 
@@ -57,10 +57,6 @@ public class GtCoordenadoria {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-    }
-    
-    public List<Coordenadoria> filtrarCoordenadoresNulos() {
-        return gdCoordenadoria.filtrarCoordenadoresNulos("nome", "");
     }
     
     public List<Coordenadoria> buscar(String coluna, String texto) {

@@ -2,19 +2,41 @@ package cih.coordenador;
 
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
+import cdp.Coordenador;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private Frame pai;
+    private List<Coordenador> listaCoordenadores;
     
     public JDBuscarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+    }
+    
+    public void alterarComboFiltro(){
+        
+        if(cbxFiltro.getSelectedIndex() == 2){
+            rdbCoordenadorAcademico.setEnabled(true);
+            rdbCoordenadorCurso.setEnabled(true);
+            rdbCoordenadorPedagogico.setEnabled(true);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnBuscar.setEnabled(false);
+        }else{
+            rdbCoordenadorAcademico.setEnabled(false);
+            rdbCoordenadorCurso.setEnabled(false);
+            rdbCoordenadorPedagogico.setEnabled(false);
+            txtFiltro.setEnabled(true);
+            btnBuscar.setEnabled(true);
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -368,7 +390,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai);
+        ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai, null);
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -388,23 +410,8 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        
         JTableUtil.limparTabela(tblCoordenador);
-        
-        if(cbxFiltro.getSelectedIndex() == 2){
-            rdbCoordenadorAcademico.setEnabled(true);
-            rdbCoordenadorCurso.setEnabled(true);
-            rdbCoordenadorPedagogico.setEnabled(true);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-            btnBuscar.setEnabled(false);
-        }else{
-            rdbCoordenadorAcademico.setEnabled(false);
-            rdbCoordenadorCurso.setEnabled(false);
-            rdbCoordenadorPedagogico.setEnabled(false);
-            txtFiltro.setEnabled(true);
-            btnBuscar.setEnabled(true);
-        }    
+        alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     private void rdbCoordenadorAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorAcademicoActionPerformed
@@ -418,6 +425,14 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     private void rdbCoordenadorPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorPedagogicoActionPerformed
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_rdbCoordenadorPedagogicoActionPerformed
+
+    public List<Coordenador> getListaCoordenadores() {
+        return listaCoordenadores;
+    }
+
+    public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
+        this.listaCoordenadores = listaCoordenadores;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
