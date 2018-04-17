@@ -23,9 +23,16 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlProfessor().setarIconeJanela();
         setIconImage(icone.getImage());
         btnBuscarActionPerformed(null);
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlBuscarProfessor.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void preencherComboCoordenadorias(){

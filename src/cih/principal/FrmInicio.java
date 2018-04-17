@@ -13,7 +13,13 @@ public class FrmInicio extends javax.swing.JFrame {
     public FrmInicio(CtrlPrincipal ctrlPrincipal){
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
+        setarBackground();
     } 
+    
+     private void setarBackground(){
+         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
+         toolBar.setBackground(ctrlPrincipal.setarCorPanelExterior());
+     }
     
     public void atualizarInfoSistema(){
         Coordenador coord = ctrlPrincipal.getGtPrincipal().getCoordAtual();
@@ -64,7 +70,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator15 = new javax.swing.JToolBar.Separator();
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
+        pnlPrincipal = new javax.swing.JPanel();
         lblNomeCoordenador = new javax.swing.JLabel();
         lblDataAtual = new javax.swing.JLabel();
 
@@ -185,7 +191,7 @@ public class FrmInicio extends javax.swing.JFrame {
 
         getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
+        pnlPrincipal.setBackground(new java.awt.Color(0, 153, 102));
 
         lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
@@ -195,20 +201,20 @@ public class FrmInicio extends javax.swing.JFrame {
         lblDataAtual.setForeground(new java.awt.Color(240, 240, 240));
         lblDataAtual.setText("00/00/0000");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap(953, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDataAtual)
                     .addComponent(lblNomeCoordenador))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap(387, Short.MAX_VALUE)
                 .addComponent(lblNomeCoordenador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -216,7 +222,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -263,7 +269,6 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnProfessor;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTurma;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
@@ -276,6 +281,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JLabel lblDataAtual;
     private javax.swing.JLabel lblNomeCoordenador;
+    private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

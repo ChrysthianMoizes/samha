@@ -6,7 +6,6 @@ import cdp.Coordenadoria;
 import cdp.Professor;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.JComboBox;
 
 public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
@@ -19,7 +18,17 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
+        setarBackground();
     }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlAcesso.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlCoordenador.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlDadosPessoais.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

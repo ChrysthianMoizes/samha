@@ -23,10 +23,30 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.professor = professor;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlProfessor().setarIconeJanela();
         setIconImage(icone.getImage());
         habilitarCamposRestricao(false);
         identificarOrigem();
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlAulas.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlDadosPessoais.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlDescricao.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlPrioridade.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRestricoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula1.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula2.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula3.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula4.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula5.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        chxAula6.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnAlta.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnBaixa.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnMedia.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
 
     @SuppressWarnings("unchecked")

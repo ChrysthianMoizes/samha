@@ -25,9 +25,19 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
         setIconImage(icone.getImage());
         btnBuscarActionPerformed(null);
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlBuscarDisciplina.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnObrigatoria.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnOptativa.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnPosEspecial.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void atualizarTabela(){

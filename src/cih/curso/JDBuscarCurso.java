@@ -7,7 +7,6 @@ import cdp.Curso;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.ImageIcon;
 
 public class JDBuscarCurso extends javax.swing.JDialog {
 
@@ -20,9 +19,18 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
-        ImageIcon icone = ctrlPrincipal.getCtrlCurso().setarIconeJanela();
-        setIconImage(icone.getImage());
-        btnBuscarActionPerformed(null);
+        setarBackground();
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlBuscarCurso.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnDoutorado.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnEnsinoMedio.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnGraduacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnMestrado.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnPosGraduacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void atualizarTabela(){

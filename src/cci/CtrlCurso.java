@@ -7,6 +7,7 @@ import cgt.GtCurso;
 import cih.curso.JDBuscarCurso;
 import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 
@@ -22,18 +23,20 @@ public class CtrlCurso {
         gtCurso = new GtCurso();
     }
     
-    public ImageIcon setarIconeJanela() {
+    public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/curso.png");
-        return icone;
+        return icone.getImage();
     }
     
     public void instanciarTelaBuscaCurso(Frame pai) {
         buscaCurso = new JDBuscarCurso(pai, true, ctrlPrincipal);
+        buscaCurso.setIconImage(setarIconeJanela());
         buscaCurso.setVisible(true);
     }
 
     public void instanciarTelaCadastroCurso(Curso curso, Frame pai) {
         cadastraCurso = new JDCadastrarCurso(pai, true, ctrlPrincipal, curso);
+        cadastraCurso.setIconImage(setarIconeJanela());
         cadastraCurso.setVisible(true);
     }
     

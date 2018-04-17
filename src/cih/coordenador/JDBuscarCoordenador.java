@@ -18,6 +18,16 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        setarBackground();
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlBuscarCoordenador.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rdbCoordenadorAcademico.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rdbCoordenadorCurso.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rdbCoordenadorPedagogico.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void alterarComboFiltro(){
@@ -35,8 +45,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             rdbCoordenadorPedagogico.setEnabled(false);
             txtFiltro.setEnabled(true);
             btnBuscar.setEnabled(true);
-        }
-        
+        }     
     }
 
     @SuppressWarnings("unchecked")
@@ -66,9 +75,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         setIconImage(null);
         setResizable(false);
 
-        pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
-
-        pnlRodape.setBackground(new java.awt.Color(0, 204, 102));
         pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAlterar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
@@ -159,7 +165,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                 .addGap(6, 6, 6))
         );
 
-        pnlBuscarCoordenador.setBackground(new java.awt.Color(0, 204, 102));
         pnlBuscarCoordenador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
         jLabelFiltrar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -212,7 +217,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             }
         });
 
-        rdbCoordenadorAcademico.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rdbCoordenadorAcademico);
         rdbCoordenadorAcademico.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rdbCoordenadorAcademico.setMnemonic('a');
@@ -225,7 +229,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             }
         });
 
-        rdbCoordenadorCurso.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rdbCoordenadorCurso);
         rdbCoordenadorCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rdbCoordenadorCurso.setMnemonic('c');
@@ -237,7 +240,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             }
         });
 
-        rdbCoordenadorPedagogico.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rdbCoordenadorPedagogico);
         rdbCoordenadorPedagogico.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rdbCoordenadorPedagogico.setMnemonic('p');

@@ -7,6 +7,7 @@ import cih.principal.FrmInicio;
 import cih.oferta.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -71,6 +72,16 @@ public final class CtrlPrincipal {
     public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.png");
         return icone.getImage();
+    }
+    
+    public Color setarCorPanelExterior(){
+        Color cor = new Color(0, 153, 102);
+        return cor;
+    }
+    
+    public Color setarCorPanelInterior(){
+        Color cor = new Color(240, 240, 240);
+        return cor;
     }
 
     public void instanciarFrameValidarAcesso() {

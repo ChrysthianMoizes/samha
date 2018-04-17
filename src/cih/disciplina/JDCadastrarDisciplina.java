@@ -23,9 +23,18 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.disciplina = disciplina;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
         setIconImage(icone.getImage());
         identificarOrigem();
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlCurso.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlDisciplina.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlMatrizCurricular.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     @SuppressWarnings("unchecked")
