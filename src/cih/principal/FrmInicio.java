@@ -2,11 +2,9 @@ package cih.principal;
 
 import cci.CtrlPrincipal;
 import cdp.Coordenador;
-import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.ImageIcon;
 
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -15,17 +13,9 @@ public class FrmInicio extends javax.swing.JFrame {
     public FrmInicio(CtrlPrincipal ctrlPrincipal){
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
-        atualizarInfoSistema();
-        ImageIcon icone = ctrlPrincipal.setarIconeJanela();
-        setIconImage(icone.getImage());
-        this.setExtendedState(Frame.MAXIMIZED_BOTH);
-        
-        //ImageIcon icon = new ImageIcon("build/classes/cih/img/background.jpg");
-        //icon.setImage(icon.getImage().getScaledInstance(lblBackground.getWidth(),lblBackground.getHeight() , 1));
-        //lblBackground.setIcon(icon);
     } 
     
-    private void atualizarInfoSistema(){
+    public void atualizarInfoSistema(){
         Coordenador coord = ctrlPrincipal.getGtPrincipal().getCoordAtual();
         Date dataAtual = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -33,6 +23,21 @@ public class FrmInicio extends javax.swing.JFrame {
         if(coord != null){
             lblNomeCoordenador.setText(coord.getNome());
             lblDataAtual.setText(data);
+        }
+    }
+    
+    public void identificarUsuario(int permissao){
+        
+        if(permissao == 2){
+            btnCoordenador.setEnabled(false);
+            btnCurso.setEnabled(false); 
+        }else if(permissao == 3){
+            btnAlocar.setEnabled(false);
+            btnCoordenador.setEnabled(false);
+            btnCurso.setEnabled(false);
+            btnDisciplina.setEnabled(false);
+            btnProfessor.setEnabled(false);
+            btnTurma.setEnabled(false);
         }
     }
     
@@ -248,7 +253,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnAlocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlocarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlocarActionPerformed
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocar;
     private javax.swing.JButton btnCoordenador;

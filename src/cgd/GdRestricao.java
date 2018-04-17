@@ -33,14 +33,10 @@ public class GdRestricao extends GdGenerico{
             sessao.getTransaction().commit();
             sessao.close();
 
-        } catch (ConstraintViolationException ce) {
+        } catch (Exception e) {
             sessao.getTransaction().rollback();
             sessao.close();
-
-        } catch (HibernateException he) {
-            sessao.getTransaction().rollback();
-            sessao.close();
-            throw he;
-        }
+            throw e;
+        } 
     }
 }

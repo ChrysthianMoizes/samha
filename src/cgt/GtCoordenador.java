@@ -68,11 +68,13 @@ public class GtCoordenador {
     public String excluir(Coordenador coordenador) {
 
         try {
-            //verificar erro de campo pertencente a outro cadastro
-            gdCoordenador.excluir(coordenador);
+            if(coordenador.getTipo().equals(Constantes.COORD_CURSO))
+                gdCoordenador.excluirCoordenador(coordenador);
+            else
+                gdCoordenador.excluir(coordenador);
             
             return Constantes.EXCLUIDO;
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             return ex.getMessage();
         }
     }

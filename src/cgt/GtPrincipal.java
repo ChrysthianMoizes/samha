@@ -33,10 +33,10 @@ public class GtPrincipal {
                 } else {
                     setCoordAtual(coordenador);
 
-                    if (coordenador.getTipo().toLowerCase().equals("coordenador acadêmico")) {
+                    if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_ACAD)) {
                         setPermissao(Constantes.PERMISSAO_ADMIN);
                         return Constantes.PERMISSAO_ADMIN;
-                    } else if (coordenador.getTipo().toLowerCase().equals("coordenador de curso")) {
+                    } else if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)) {
                         setPermissao(Constantes.PERMISSAO_COORD);
                         return Constantes.PERMISSAO_COORD;
                     } else {

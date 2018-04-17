@@ -3,10 +3,8 @@ package cih.oferta;
 import cci.CtrlPrincipal;
 import cdp.Curso;
 import cdp.Turma;
-import java.awt.Frame;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class FrmOferta extends javax.swing.JFrame {
@@ -18,9 +16,6 @@ public class FrmOferta extends javax.swing.JFrame {
     public FrmOferta(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
-        ImageIcon icone = ctrlPrincipal.setarIconeJanela();
-        setIconImage(icone.getImage());
-        this.setExtendedState(Frame.MAXIMIZED_BOTH);
         preencherComboCurso();
     }
     

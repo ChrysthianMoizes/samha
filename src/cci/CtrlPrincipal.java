@@ -8,6 +8,7 @@ import cih.oferta.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JPInicio;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +18,8 @@ import javax.swing.ImageIcon;
 public final class CtrlPrincipal {
 
     private Config config;
-    private Frame frmValidarAcesso;
-    private Frame frmInicio;
+    private FrmValidarAcesso frmValidarAcesso;
+    private FrmInicio frmInicio;
     private Frame frmOferta;
     private JPInicio inicio;
     private static int permissao;
@@ -66,9 +67,15 @@ public final class CtrlPrincipal {
             }
         });
     }
+    
+    public Image setarIconeJanela() {
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.png");
+        return icone.getImage();
+    }
 
     public void instanciarFrameValidarAcesso() {
         frmValidarAcesso = new FrmValidarAcesso(this);
+        frmValidarAcesso.setIconImage(setarIconeJanela());
         frmValidarAcesso.setVisible(true);
     }
 
@@ -81,14 +88,13 @@ public final class CtrlPrincipal {
         inicio = new JPInicio(pai, this);
         return inicio;
     }
-
-    public ImageIcon setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.jpg");
-        return icone;
-    }
-            
+     
     public void instanciarFrameInicio() {
         frmInicio = new FrmInicio(this);
+        frmInicio.identificarUsuario(getPermissao());
+        frmInicio.setIconImage(setarIconeJanela());
+        frmInicio.atualizarInfoSistema();
+        frmInicio.setExtendedState(Frame.MAXIMIZED_BOTH);
         frmInicio.setVisible(true);
     }
     
@@ -130,15 +136,7 @@ public final class CtrlPrincipal {
     public void setConfig(Config config) {
         this.config = config;
     }
-
-    public Frame getFrmValidarAcesso() {
-        return frmValidarAcesso;
-    }
-
-    public void setFrmValidarAcesso(Frame frmValidarAcesso) {
-        this.frmValidarAcesso = frmValidarAcesso;
-    }
-
+    
     public Frame getFrmOferta() {
         return frmOferta;
     }

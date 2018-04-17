@@ -433,6 +433,10 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
         this.listaCoordenadores = listaCoordenadores;
     }
+    
+    public void atulizarTabela(){
+        btnBuscarActionPerformed(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

@@ -88,9 +88,10 @@ public class CtrlCoordenador extends CtrlGenerica{
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaCoord, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
                 String resposta = gtCoordenador.excluir(coordenadorSelecionado);
-                if (resposta.equals(Constantes.EXCLUIDO)) 
+                if (resposta.equals(Constantes.EXCLUIDO)){ 
                     CtrlMensagem.exibirMensagemSucesso(buscaCoord, "Excluído com sucesso!");
-                else 
+                    buscaCoord.atulizarTabela();
+                }else 
                     CtrlMensagem.exibirMensagemErro(buscaCoord, resposta);   
             }    
         } catch (Exception ex) {
@@ -128,10 +129,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         if(coordenador != null){
             cadastraCoord.selecionarTipoCoordenador(coordenador);
             cadastraCoord.setarCamposComInstancia(coordenador);
-            if(coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)){
-                cadastraCoord.getCbxProfessor().setEnabled(true);
-            }else
-                cadastraCoord.desabilitarCombos();
+            cadastraCoord.desabilitarCombos();
         }
     }
     

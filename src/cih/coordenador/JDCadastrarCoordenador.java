@@ -297,6 +297,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     public void desabilitarCombos(){
         cbxProfessor.setEnabled(false);
+        cbxTipo.setEnabled(false);
     }
     
     public void desabilitarCampos(){
@@ -362,10 +363,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     public void setListaCoordenadorias(List<Coordenadoria> listaCoordenadorias) {
         this.listaCoordenadorias = listaCoordenadorias;
     }
-
-    public JComboBox<String> getCbxProfessor() {
-        return cbxProfessor;
-    }
+  
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
         String tipo = (String) cbxTipo.getSelectedItem();

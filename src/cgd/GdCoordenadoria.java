@@ -25,4 +25,14 @@ public class GdCoordenadoria extends GdGenerico{
         sessao.close();
         return lista;
     }
+    
+    public Coordenadoria filtrarCoordenadoriaUnica(String colunaFiltro, int id) {
+        Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
+        colunaFiltro = colunaFiltro.toLowerCase();
+        crit.add( Restrictions.eq(colunaFiltro, id));
+        crit.setMaxResults(1);
+        Coordenadoria coordenadoria = (Coordenadoria) crit.uniqueResult();
+        sessao.close();
+        return coordenadoria;
+    }
 }

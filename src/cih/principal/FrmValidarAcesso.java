@@ -2,7 +2,6 @@ package cih.principal;
 
 import cci.CtrlPrincipal;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 
 public class FrmValidarAcesso extends javax.swing.JFrame {
 
@@ -11,8 +10,6 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(CtrlPrincipal ctrlPrincipal) {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
-        ImageIcon icone = ctrlPrincipal.setarIconeJanela();
-        setIconImage(icone.getImage());
     }
 
     @SuppressWarnings("unchecked")
