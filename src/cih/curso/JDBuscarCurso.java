@@ -32,15 +32,35 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnMestrado.setBackground(ctrlPrincipal.setarCorPanelInterior());
         rbtnPosGraduacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
+
+    public List<Curso> getListaCursos() {
+        return listaCursos;
+    }
+
+    public void setListaCursos(List<Curso> listaCursos) {
+        this.listaCursos = listaCursos;
+    }
     
     public void atualizarTabela(){
-        
-        JTableUtil.limparTabela(tblCurso);
-        
-        if(listaCursos.size() > 0){
-            listaCursos.forEach((curso) -> {
-                JTableUtil.addLinha(tblCurso, curso.toArray() );
-            });
+        btnBuscarActionPerformed(null);
+    }
+    
+    private void alterarComboFiltro(){
+        if(cbxFiltro.getSelectedIndex() == 1){
+            rbtnEnsinoMedio.setEnabled(true);
+            rbtnGraduacao.setEnabled(true);
+            rbtnPosGraduacao.setEnabled(true);
+            rbtnMestrado.setEnabled(true);
+            rbtnDoutorado.setEnabled(true);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+        }else{
+            rbtnEnsinoMedio.setEnabled(false);
+            rbtnGraduacao.setEnabled(false);
+            rbtnPosGraduacao.setEnabled(false);
+            rbtnMestrado.setEnabled(false);
+            rbtnDoutorado.setEnabled(false);
+            txtFiltro.setEnabled(true);
         }
     }
 
@@ -379,11 +399,8 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                     filtro = "DOUTORADO";
                     break;
             }  
-        } 
-
-        listaCursos = ctrlPrincipal.getCtrlCurso().buscar(colunaFiltro, filtro);
-        atualizarTabela();
-        
+        }  
+        ctrlPrincipal.getCtrlCurso().listarCursos(colunaFiltro, filtro, tblCurso);    
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
@@ -393,14 +410,8 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarKeyPressed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
-        try {
-            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblCurso);
-            ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(curso, pai);
-            btnBuscarActionPerformed(null);
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
-        }
+        ctrlPrincipal.getCtrlCurso().transitarTelas(tblCurso, pai);
+        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -450,22 +461,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        if(cbxFiltro.getSelectedIndex() == 1){
-            rbtnEnsinoMedio.setEnabled(true);
-            rbtnGraduacao.setEnabled(true);
-            rbtnPosGraduacao.setEnabled(true);
-            rbtnMestrado.setEnabled(true);
-            rbtnDoutorado.setEnabled(true);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-        }else{
-            rbtnEnsinoMedio.setEnabled(false);
-            rbtnGraduacao.setEnabled(false);
-            rbtnPosGraduacao.setEnabled(false);
-            rbtnMestrado.setEnabled(false);
-            rbtnDoutorado.setEnabled(false);
-            txtFiltro.setEnabled(true);
-        }
+        alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

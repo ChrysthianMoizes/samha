@@ -90,7 +90,7 @@ public class CtrlCoordenador extends CtrlGenerica{
                 String resposta = gtCoordenador.excluir(coordenadorSelecionado);
                 if (resposta.equals(Constantes.EXCLUIDO)){ 
                     CtrlMensagem.exibirMensagemSucesso(buscaCoord, "Excluído com sucesso!");
-                    buscaCoord.atulizarTabela();
+                    buscaCoord.atualizarTabela();
                 }else 
                     CtrlMensagem.exibirMensagemErro(buscaCoord, resposta);   
             }    
@@ -177,7 +177,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         List listaCoordenadorias = cadastraCoord.getListaCoordenadorias();
         
         if(listaCoordenadorias == null)
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().listar();
+            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
         preencherCombo(cbxCoordenadoras, listaCoordenadorias);
     }
     

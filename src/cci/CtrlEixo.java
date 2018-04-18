@@ -17,14 +17,20 @@ public class CtrlEixo {
     
     public int cadastrar(String nome){
         
-        String resposta = gtEixo.cadastrar(nome);
+        if(validarCampos(nome)){
+        
+            String resposta = gtEixo.cadastrar(nome);
 
-        if (resposta.equals(Constantes.CADASTRADO)) {
-            return 0;
-        } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            if (resposta.equals(Constantes.CADASTRADO)) {
+                return 0;
+            } else {
+                ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+                return 1;
+            } 
+        }else{
+            CtrlMensagem.exibirMensagemAviso(null, "Campo NOME inválido");
             return 1;
-        }   
+        }
     }
     
     public int excluir(Eixo eixo) {
@@ -40,5 +46,12 @@ public class CtrlEixo {
     
     public List<Eixo> consultar() {
         return gtEixo.consultar();
+    }
+    
+    public boolean validarCampos(String nome){
+        
+        if((nome.equals("")))
+            return true;
+        return false;
     }
 }

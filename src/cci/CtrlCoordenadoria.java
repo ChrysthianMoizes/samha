@@ -18,6 +18,8 @@ public class CtrlCoordenadoria {
     
     public int cadastrar(String nome, Eixo eixo){
         
+        if(validarCampos(nome)){
+        
         String resposta = gtCoordenadoria.cadastrar(nome, eixo);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
@@ -25,7 +27,11 @@ public class CtrlCoordenadoria {
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
             return 1;
-        }   
+        } 
+        }else{
+            CtrlMensagem.exibirMensagemAviso(null, "Campo NOME inválido");
+            return 1;
+        }
     }
     
     public int excluir(Coordenadoria coordenadoria) {
@@ -47,7 +53,14 @@ public class CtrlCoordenadoria {
        return gtCoordenadoria.buscar(coluna, texto);
     }
     
-    public List<Coordenadoria> listar() {
+    public List<Coordenadoria> consultar() {
        return gtCoordenadoria.listar();
+    }
+    
+    public boolean validarCampos(String nome){
+        
+        if((nome.equals("")))
+            return true;
+        return false;
     }
 }

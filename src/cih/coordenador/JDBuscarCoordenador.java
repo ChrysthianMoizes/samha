@@ -436,7 +436,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         this.listaCoordenadores = listaCoordenadores;
     }
     
-    public void atulizarTabela(){
+    public void atualizarTabela(){
         btnBuscarActionPerformed(null);
     }
 

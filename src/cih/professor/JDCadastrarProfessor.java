@@ -560,7 +560,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     public void preencherComboCoordenadorias() {
 
         if (listaCoordenadorias == null) {
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().listar();
+            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
         }
 
         cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
