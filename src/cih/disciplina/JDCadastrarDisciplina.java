@@ -9,7 +9,6 @@ import cdp.MatrizCurricular;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 
 public class JDCadastrarDisciplina extends javax.swing.JDialog {
 
@@ -24,8 +23,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.disciplina = disciplina;
         setarBackground();
-        ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
-        setIconImage(icone.getImage());
         identificarOrigem();
     }
     

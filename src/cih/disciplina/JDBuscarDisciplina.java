@@ -10,7 +10,6 @@ import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 
 public class JDBuscarDisciplina extends javax.swing.JDialog {
 
@@ -26,9 +25,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
         setarBackground();
-        ImageIcon icone = ctrlPrincipal.getCtrlDisciplina().setarIconeJanela();
-        setIconImage(icone.getImage());
-        btnBuscarActionPerformed(null);
     }
     
     private void setarBackground(){

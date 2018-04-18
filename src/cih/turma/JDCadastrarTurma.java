@@ -8,7 +8,6 @@ import cdp.Turma;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 
 public class JDCadastrarTurma extends javax.swing.JDialog {
 
@@ -23,8 +22,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.turma = turma;
         setarBackground();
-        ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
-        setIconImage(icone.getImage());
         identificarOrigem();
     }
     

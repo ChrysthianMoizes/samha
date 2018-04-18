@@ -7,6 +7,7 @@ import cgt.GtDisciplina;
 import cih.disciplina.JDBuscarDisciplina;
 import cih.disciplina.JDCadastrarDisciplina;
 import java.awt.Frame;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 
@@ -22,18 +23,20 @@ public class CtrlDisciplina {
         gtDisciplina = new GtDisciplina();
     }
     
-    public ImageIcon setarIconeJanela() {
+    public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/matriz_curricular.png");
-        return icone;
+        return icone.getImage();
     }
     
     public void instanciarTelaBuscaDisciplina(Frame pai) {
         buscaDisciplina = new JDBuscarDisciplina(pai, true, ctrlPrincipal);
+        buscaDisciplina.setIconImage(setarIconeJanela());
         buscaDisciplina.setVisible(true);
     }
 
     public void instanciarTelaCadastroDisciplina(Disciplina disciplina, Frame pai) {
         cadastraDisciplina = new JDCadastrarDisciplina(pai, true, ctrlPrincipal, disciplina);
+        cadastraDisciplina.setIconImage(setarIconeJanela());
         cadastraDisciplina.setVisible(true);
     }
     

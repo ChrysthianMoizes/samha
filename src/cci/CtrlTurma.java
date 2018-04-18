@@ -1,6 +1,5 @@
 package cci;
 
-import cdp.Curso;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import cgt.Constantes;
@@ -8,6 +7,7 @@ import cgt.GtTurma;
 import cih.turma.JDBuscarTurma;
 import cih.turma.JDCadastrarTurma;
 import java.awt.Frame;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 
@@ -23,18 +23,20 @@ public class CtrlTurma {
         gtTurma = new GtTurma();
     }
     
-    public ImageIcon setarIconeJanela() {
+    public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/turma.png");
-        return icone;
+        return icone.getImage();
     }
     
     public void instanciarTelaBuscaTurma(Frame pai) {
         buscaTurma = new JDBuscarTurma(pai, true, ctrlPrincipal);
+        buscaTurma.setIconImage(setarIconeJanela());
         buscaTurma.setVisible(true);
     }
 
     public void instanciarTelaCadastroTurma(Turma turma, Frame pai) {
         cadastraTurma = new JDCadastrarTurma(pai, true, ctrlPrincipal, turma);
+        cadastraTurma.setIconImage(setarIconeJanela());
         cadastraTurma.setVisible(true);
     }
     

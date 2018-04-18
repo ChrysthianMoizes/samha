@@ -7,6 +7,7 @@ import cgt.GtProfessor;
 import cih.professor.JDBuscarProfessor;
 import cih.professor.JDCadastrarProfessor;
 import java.awt.Frame;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 
@@ -22,18 +23,20 @@ public class CtrlProfessor {
         ctrlPrincipal = ctrl;
     }
     
-    public ImageIcon setarIconeJanela() {
+    public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("build/classes/cih/img/professor.png");
-        return icone;
+        return icone.getImage();
     }
 
     public void instanciarTelaBuscaProfessor(Frame pai) {
         buscaProf = new JDBuscarProfessor(pai, true, ctrlPrincipal);
+        buscaProf.setIconImage(setarIconeJanela());
         buscaProf.setVisible(true);
     }
 
     public void instanciarTelaCadastroProfessor(Professor prof, Frame pai) {
         cadastraProf = new JDCadastrarProfessor(pai, true, ctrlPrincipal, prof);
+        cadastraProf.setIconImage(setarIconeJanela());
         cadastraProf.setVisible(true);
     }
 
