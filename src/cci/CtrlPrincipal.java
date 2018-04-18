@@ -6,7 +6,6 @@ import cgt.Constantes;
 import cih.principal.FrmInicio;
 import cih.oferta.FrmOferta;
 import cih.principal.FrmValidarAcesso;
-import cih.principal.JPInicio;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
@@ -22,7 +21,6 @@ public final class CtrlPrincipal {
     private FrmValidarAcesso frmValidarAcesso;
     private FrmInicio frmInicio;
     private Frame frmOferta;
-    private JPInicio inicio;
     private static int permissao;
     private GtPrincipal gtPrincipal;
     private CtrlProfessor ctrlProfessor;
@@ -93,11 +91,6 @@ public final class CtrlPrincipal {
     public void instanciarFrameOferta() {
         frmOferta = new FrmOferta(this);
         frmOferta.setVisible(true);
-    }
-
-    public JPInicio instanciarPainelInicio(FrmOferta pai) {
-        inicio = new JPInicio(pai, this);
-        return inicio;
     }
      
     public void instanciarFrameInicio() {

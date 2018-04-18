@@ -25,9 +25,16 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         initComponents();
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
         setIconImage(icone.getImage());
         btnBuscarActionPerformed(null);
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlBuscarTurma.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void atualizarTabela(){

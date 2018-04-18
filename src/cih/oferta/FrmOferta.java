@@ -14,9 +14,18 @@ public class FrmOferta extends javax.swing.JFrame {
     private List<Turma> listaTurma;
 
     public FrmOferta(CtrlPrincipal ctrlPrincipal) {
-        this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
+        this.ctrlPrincipal = ctrlPrincipal;
+        setarBackground();
         preencherComboCurso();
+    }
+    
+    private void setarBackground(){
+        pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlAlocacoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlNotificacoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlProfessor.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlTurma.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void preencherComboCurso(){ 
@@ -227,11 +236,11 @@ public class FrmOferta extends javax.swing.JFrame {
         pnlTurma.setLayout(pnlTurmaLayout);
         pnlTurmaLayout.setHorizontalGroup(
             pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGap(0, 515, Short.MAX_VALUE)
         );
         pnlTurmaLayout.setVerticalGroup(
             pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 351, Short.MAX_VALUE)
         );
 
         pnlNotificacoes.setBackground(new java.awt.Color(0, 204, 102));
@@ -279,7 +288,7 @@ public class FrmOferta extends javax.swing.JFrame {
         );
         pnlProfessorLayout.setVerticalGroup(
             pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);

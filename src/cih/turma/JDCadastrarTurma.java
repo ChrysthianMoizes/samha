@@ -22,9 +22,16 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         initComponents();
         this.ctrlPrincipal = ctrl;
         this.turma = turma;
+        setarBackground();
         ImageIcon icone = ctrlPrincipal.getCtrlTurma().setarIconeJanela();
         setIconImage(icone.getImage());
         identificarOrigem();
+    }
+    
+    private void setarBackground(){
+        pnlGeral.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlTurma.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     @SuppressWarnings("unchecked")
