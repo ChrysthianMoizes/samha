@@ -4,7 +4,6 @@ import cdp.Coordenador;
 import cdp.Professor;
 import cdp.Usuario;
 import cgd.GdCoordenador;
-import java.sql.SQLException;
 import java.util.List;
 
 public class GtCoordenador {
@@ -68,7 +67,7 @@ public class GtCoordenador {
     public String excluir(Coordenador coordenador) {
 
         try {
-            if(coordenador.getTipo().equals(Constantes.COORD_CURSO))
+            if(coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO))
                 gdCoordenador.excluirCoordenador(coordenador);
             else
                 gdCoordenador.excluir(coordenador);

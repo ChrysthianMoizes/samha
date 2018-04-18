@@ -48,6 +48,14 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         }     
     }
 
+    public List<Coordenador> getListaCoordenadores() {
+        return listaCoordenadores;
+    }
+
+    public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
+        this.listaCoordenadores = listaCoordenadores;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -427,19 +435,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     private void rdbCoordenadorPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorPedagogicoActionPerformed
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_rdbCoordenadorPedagogicoActionPerformed
-
-    public List<Coordenador> getListaCoordenadores() {
-        return listaCoordenadores;
-    }
-
-    public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
-        this.listaCoordenadores = listaCoordenadores;
-    }
-    
-    public void atualizarTabela(){
-        btnBuscarActionPerformed(null);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;

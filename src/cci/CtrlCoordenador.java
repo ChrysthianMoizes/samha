@@ -90,7 +90,6 @@ public class CtrlCoordenador extends CtrlGenerica{
                 String resposta = gtCoordenador.excluir(coordenadorSelecionado);
                 if (resposta.equals(Constantes.EXCLUIDO)){ 
                     CtrlMensagem.exibirMensagemSucesso(buscaCoord, "Excluído com sucesso!");
-                    buscaCoord.atualizarTabela();
                 }else 
                     CtrlMensagem.exibirMensagemErro(buscaCoord, resposta);   
             }    
@@ -102,9 +101,7 @@ public class CtrlCoordenador extends CtrlGenerica{
 
     public void listarCoordenadores(String coluna, String texto, JTable tabela) {
         
-        List listaCoordenadores = buscaCoord.getListaCoordenadores();
-        
-        listaCoordenadores = buscar(coluna, texto);
+        List listaCoordenadores = buscar(coluna, texto);
         JTableUtil.limparTabela(tabela);
         
         if(listaCoordenadores.size() > 0){
