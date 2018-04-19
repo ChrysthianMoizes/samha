@@ -18,6 +18,7 @@ public class Coordenadoria implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "eixo_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Eixo eixo;
     
     @OneToOne(fetch = FetchType.LAZY)

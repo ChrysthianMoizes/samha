@@ -97,6 +97,6 @@ public class Curso implements Serializable {
     }
    
     public Object[] toArray() {
-        return new Object[] { this, getNivel() };
+        return new Object[] { this, getNivel(), getCoordenadoria().getEixo().getNome() };
     }
 }

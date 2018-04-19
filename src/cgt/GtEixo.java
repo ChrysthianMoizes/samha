@@ -17,6 +17,7 @@ public class GtEixo {
     public String cadastrar(String nome) {
 
         try {
+            validarCampos(nome);
             Eixo eixo = new Eixo();
             eixo.setNome(nome.toUpperCase());
             
@@ -47,5 +48,11 @@ public class GtEixo {
    
     public List<Eixo> consultar() {
         return gdEixo.consultar(Eixo.class);
+    }
+    
+    public void validarCampos(String nome) throws SAMHAException{
+        
+        if((nome.equals("")))
+            throw new SAMHAException(1);
     }
 }

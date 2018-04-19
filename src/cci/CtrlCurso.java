@@ -10,7 +10,6 @@ import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -65,6 +64,7 @@ public class CtrlCurso extends CtrlGenerica{
         if (resposta.equals(Constantes.CADASTRADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
             cadastraCurso.desabilitarCampos();
+            buscaCurso.atualizarTabela();
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
         }
@@ -77,6 +77,8 @@ public class CtrlCurso extends CtrlGenerica{
         if (resposta.equals(Constantes.ALTERADO)) {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Alterado Com sucesso!");
             cadastraCurso.desabilitarCampos();
+            cadastraCurso.desabilitarCombos();
+            buscaCurso.atualizarTabela();
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
         }
@@ -108,14 +110,23 @@ public class CtrlCurso extends CtrlGenerica{
        return gtCurso.listar();
     }
     
-    public void excluir(Curso curso) {
+    public void excluir(JTable tabela) {
 
-        String resposta = gtCurso.excluir(curso);
-        if (resposta.equals(Constantes.EXCLUIDO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaCurso, "Excluído com sucesso!");
-        } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaCurso, resposta);
-        }
+        try {
+            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tabela);
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaCurso, "Confirmar Exclusão ?");
+            if (confirmacao == 0) {
+                String resposta = gtCurso.excluir(curso);
+                if (resposta.equals(Constantes.EXCLUIDO)) {
+                    ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaCurso, "Excluído com sucesso!");
+                    buscaCurso.atualizarTabela();
+                } else {
+                    ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaCurso, resposta);
+                }
+            }
+        } catch (Exception ex) {
+            CtrlMensagem.exibirMensagemErro(buscaCurso, "Selecione um curso");
+        }   
     }
 
     //======================================= TELA DE CADASTRO ===============================================
@@ -137,17 +148,18 @@ public class CtrlCurso extends CtrlGenerica{
     public void identificarOrigem(Curso curso){
         cadastraCurso.preencherComboEixos();
         if(curso != null){
+            cadastraCurso.setCurso(curso);
             cadastraCurso.setarCamposComInstancia(curso);
-            cadastraCurso.setarEixo();
+            cadastraCurso.setarEixo(curso);
             cadastraCurso.setarCoordenadoria();
+            cadastraCurso.setarNivel();
             cadastraCurso.desabilitarCamposIniciais();
         }
     }
     
-    public void setarEixo(JComboBox cbxEixo, JComboBox cbxCoordenadoria){
+    public void setarEixo(Curso curso, JComboBox cbxEixo, JComboBox cbxCoordenadoria){
         
         List listaEixos = cadastraCurso.getListaEixos();
-        Curso curso = cadastraCurso.getCurso();
         Eixo eixo;
 
         for (int i = 0; i < listaEixos.size(); i++) {
@@ -177,10 +189,27 @@ public class CtrlCurso extends CtrlGenerica{
         }
     }
     
+    public void setarNivel(JComboBox cbxNivel){
+        
+        Curso curso = cadastraCurso.getCurso();
+        
+        if(curso.getNivel().equals("ENSINO MÉDIO INTEGRADO"))
+            cbxNivel.setSelectedIndex(0);
+        else if(curso.getNivel().equals("GRADUAÇÃO"))
+            cbxNivel.setSelectedIndex(1);
+        else if(curso.getNivel().equals("PÓS-GRADUAÇÃO"))
+            cbxNivel.setSelectedIndex(2);
+        else if(curso.getNivel().equals("MESTRADO"))
+            cbxNivel.setSelectedIndex(3);
+        else
+            cbxNivel.setSelectedIndex(4);
+    }
+    
     public void preencherComboEixos(JComboBox cbxEixo, JComboBox cbxCoordenadoria){ 
         
         List listaEixos = cadastraCurso.getListaEixos();
         listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
+        cadastraCurso.setListaEixos(listaEixos);
         preencherCombo(cbxEixo, listaEixos);
         
         if(listaEixos.size() > 0){
@@ -193,6 +222,7 @@ public class CtrlCurso extends CtrlGenerica{
         
         List listaCoordenadorias = cadastraCurso.getListaCoordenadorias();
         listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
+        cadastraCurso.setListaCoordenadorias(listaCoordenadorias);
         preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
     }
     
@@ -205,12 +235,12 @@ public class CtrlCurso extends CtrlGenerica{
         } 
     }
     
-    public void adicionarCoordenadoria(JTextField nome, Eixo eixo, JComboBox cbxCoordenadoria){
+    public void adicionarCoordenadoria(JTextField txtNome, Eixo eixo, JComboBox cbxCoordenadoria){
         
-        int resposta = ctrlPrincipal.getCtrlCoordenadoria().cadastrar(nome.getText(), eixo);
+        int resposta = ctrlPrincipal.getCtrlCoordenadoria().cadastrar(txtNome.getText(), eixo);
         
         if(resposta == 0){
-            nome.setText("");
+            txtNome.setText("");
             preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);  
         }    
     }
@@ -241,7 +271,7 @@ public class CtrlCurso extends CtrlGenerica{
     public boolean validarCampos(String nome){
         
         if((nome.equals("")))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 }

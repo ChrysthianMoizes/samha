@@ -64,6 +64,7 @@ public class CtrlCoordenador extends CtrlGenerica{
             ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
             cadastraCoord.desabilitarCombos();
             cadastraCoord.desabilitarCampos();
+            buscaCoord.atualizarTabela();
         } else {
             ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
         }
@@ -76,6 +77,7 @@ public class CtrlCoordenador extends CtrlGenerica{
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
             cadastraCoord.desabilitarCombos();
             cadastraCoord.desabilitarCampos();
+            buscaCoord.atualizarTabela();
         } else {
             CtrlMensagem.exibirMensagemErro(cadastraCoord, resposta);
         }
@@ -90,6 +92,7 @@ public class CtrlCoordenador extends CtrlGenerica{
                 String resposta = gtCoordenador.excluir(coordenadorSelecionado);
                 if (resposta.equals(Constantes.EXCLUIDO)){ 
                     CtrlMensagem.exibirMensagemSucesso(buscaCoord, "Excluído com sucesso!");
+                    buscaCoord.atualizarTabela();
                 }else 
                     CtrlMensagem.exibirMensagemErro(buscaCoord, resposta);   
             }    

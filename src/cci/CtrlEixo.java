@@ -22,9 +22,10 @@ public class CtrlEixo {
             String resposta = gtEixo.cadastrar(nome);
 
             if (resposta.equals(Constantes.CADASTRADO)) {
+                CtrlMensagem.exibirMensagemSucesso(null, "Cadastrado Com sucesso!");
                 return 0;
             } else {
-                ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+                CtrlMensagem.exibirMensagemErro(null, resposta);
                 return 1;
             } 
         }else{
@@ -51,7 +52,7 @@ public class CtrlEixo {
     public boolean validarCampos(String nome){
         
         if((nome.equals("")))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 }

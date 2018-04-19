@@ -47,6 +47,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     
     private void alterarComboFiltro(){
         if(cbxFiltro.getSelectedIndex() == 1){
+            rbtnEnsinoMedio.setSelected(true);
             rbtnEnsinoMedio.setEnabled(true);
             rbtnGraduacao.setEnabled(true);
             rbtnPosGraduacao.setEnabled(true);
@@ -54,6 +55,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             rbtnDoutorado.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
+            btnBuscar.setEnabled(false);
         }else{
             rbtnEnsinoMedio.setEnabled(false);
             rbtnGraduacao.setEnabled(false);
@@ -61,6 +63,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             rbtnMestrado.setEnabled(false);
             rbtnDoutorado.setEnabled(false);
             txtFiltro.setEnabled(true);
+            btnBuscar.setEnabled(true);
         }
     }
 
@@ -215,11 +218,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Nível"
+                "Nome", "Nível", "Eixo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -247,6 +250,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnPosGraduacao.setMnemonic('p');
         rbtnPosGraduacao.setText("Pós-Graduação");
         rbtnPosGraduacao.setEnabled(false);
+        rbtnPosGraduacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnPosGraduacaoActionPerformed(evt);
+            }
+        });
 
         rbtnEnsinoMedio.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnEnsinoMedio);
@@ -255,6 +263,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnEnsinoMedio.setSelected(true);
         rbtnEnsinoMedio.setText("Ensino Médio");
         rbtnEnsinoMedio.setEnabled(false);
+        rbtnEnsinoMedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEnsinoMedioActionPerformed(evt);
+            }
+        });
 
         rbtnGraduacao.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnGraduacao);
@@ -262,6 +275,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnGraduacao.setMnemonic('g');
         rbtnGraduacao.setText("Graduação");
         rbtnGraduacao.setEnabled(false);
+        rbtnGraduacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnGraduacaoActionPerformed(evt);
+            }
+        });
 
         rbtnMestrado.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnMestrado);
@@ -269,6 +287,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnMestrado.setMnemonic('m');
         rbtnMestrado.setText("Mestrado");
         rbtnMestrado.setEnabled(false);
+        rbtnMestrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnMestradoActionPerformed(evt);
+            }
+        });
 
         rbtnDoutorado.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnDoutorado);
@@ -276,6 +299,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnDoutorado.setMnemonic('d');
         rbtnDoutorado.setText("Doutorado");
         rbtnDoutorado.setEnabled(false);
+        rbtnDoutorado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnDoutoradoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarCursoLayout = new javax.swing.GroupLayout(pnlBuscarCurso);
         pnlBuscarCurso.setLayout(pnlBuscarCursoLayout);
@@ -411,7 +439,6 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         ctrlPrincipal.getCtrlCurso().transitarTelas(tblCurso, pai);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -432,7 +459,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(null, pai);
-        btnBuscarActionPerformed(null);
+        //btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
@@ -440,18 +467,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
-        try {
-            Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tblCurso);
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlCurso().excluir(curso);
-                btnBuscarActionPerformed(null);
-            }
-            
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um curso");
-        }
+        ctrlPrincipal.getCtrlCurso().excluir(tblCurso);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed
@@ -461,8 +477,29 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        JTableUtil.limparTabela(tblCurso);
         alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
+
+    private void rbtnEnsinoMedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEnsinoMedioActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rbtnEnsinoMedioActionPerformed
+
+    private void rbtnGraduacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnGraduacaoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rbtnGraduacaoActionPerformed
+
+    private void rbtnPosGraduacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnPosGraduacaoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rbtnPosGraduacaoActionPerformed
+
+    private void rbtnMestradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMestradoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rbtnMestradoActionPerformed
+
+    private void rbtnDoutoradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDoutoradoActionPerformed
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_rbtnDoutoradoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

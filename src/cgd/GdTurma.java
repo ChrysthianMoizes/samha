@@ -7,9 +7,9 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdTurma extends GdGenerico{
     
-    public List filtrarPorMatriz(String coluna, int texto) {
+    public List filtrarPorMatriz(String coluna, int id) {
         Criteria crit = criarSessao().createCriteria(Turma.class);
-        crit.add( Restrictions.eq(coluna, texto) );
+        crit.add( Restrictions.eq(coluna, id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();

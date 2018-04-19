@@ -33,6 +33,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     public void alterarComboFiltro(){
         
         if(cbxFiltro.getSelectedIndex() == 2){
+            rdbCoordenadorAcademico.setSelected(true);
             rdbCoordenadorAcademico.setEnabled(true);
             rdbCoordenadorCurso.setEnabled(true);
             rdbCoordenadorPedagogico.setEnabled(true);
@@ -54,6 +55,10 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
         this.listaCoordenadores = listaCoordenadores;
+    }
+    
+    public void atualizarTabela(){
+        btnBuscarActionPerformed(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -380,7 +385,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         ctrlPrincipal.getCtrlCoordenador().transitarTelas(tblCoordenador, pai);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -401,7 +405,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai, null);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
@@ -410,7 +413,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         ctrlPrincipal.getCtrlCoordenador().excluir(tblCoordenador);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed

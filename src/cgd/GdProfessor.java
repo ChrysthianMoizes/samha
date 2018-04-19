@@ -16,9 +16,9 @@ public class GdProfessor extends GdGenerico{
         return lista;
     }
     
-    public List filtrarPorCoordenadoria(String coluna, int texto) {
+    public List filtrarPorCoordenadoria(String coluna, int id) {
         Criteria crit = criarSessao().createCriteria(Professor.class);
-        crit.add( Restrictions.eq(coluna, texto) );
+        crit.add( Restrictions.eq(coluna, id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();

@@ -376,12 +376,16 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         btnRemoverCoordenadoria.setEnabled(false);  
     }
     
-    public void setarEixo(){
-        ctrlPrincipal.getCtrlCurso().setarEixo(cbxEixo, cbxCoordenadoria);
+    public void setarEixo(Curso curso){
+        ctrlPrincipal.getCtrlCurso().setarEixo(curso, cbxEixo, cbxCoordenadoria);
     }
     
     public void setarCoordenadoria(){
         ctrlPrincipal.getCtrlCurso().setarCoordenadoria(cbxCoordenadoria);
+    }
+    
+    public void setarNivel(){
+        ctrlPrincipal.getCtrlCurso().setarNivel(cbxNivel);
     }
     
     public void preencherComboEixos(){ 
@@ -394,6 +398,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         spnPeriodos.setEnabled(false);
         btnSalvar.setEnabled(false);
         btnCancelar.setText("Sair");
+    }
+    
+    public void desabilitarCombos(){
+        cbxEixo.setEnabled(false);
+        cbxCoordenadoria.setEnabled(false);
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -432,7 +441,7 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
 
     private void btnAdicionarCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCoordenadoriaActionPerformed
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-        ctrlPrincipal.getCtrlCurso().adicionarCoordenadoria(txtNomeEixo, eixo, cbxCoordenadoria);       
+        ctrlPrincipal.getCtrlCurso().adicionarCoordenadoria(txtNomeCoordenadoria, eixo, cbxCoordenadoria);       
     }//GEN-LAST:event_btnAdicionarCoordenadoriaActionPerformed
 
     private void btnRemoverCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCoordenadoriaActionPerformed
