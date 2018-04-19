@@ -48,10 +48,10 @@ public class CtrlProfessor {
 
         Professor professor = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
         if (professor != null) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
             return professor;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, "Erro ao cadastrar");
+            CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao cadastrar");
             return null;
         }
     }
@@ -60,10 +60,10 @@ public class CtrlProfessor {
 
         Professor prof = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
         if (prof != null) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
             return prof;
         }else{
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraProf, "Erro ao alterar");
+            CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao alterar");
             return null;
         }
     }
@@ -76,9 +76,9 @@ public class CtrlProfessor {
 
         String resposta = gtProfessor.excluir(professor);
         if (resposta.equals(Constantes.EXCLUIDO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaProf, resposta);
+            CtrlMensagem.exibirMensagemErro(buscaProf, resposta);
         }
     }
 }

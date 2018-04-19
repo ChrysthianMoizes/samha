@@ -45,10 +45,10 @@ public class CtrlTurma {
         String resposta = gtTurma.cadastrar(nome, turno, ano, semestre, matriz);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraTurma, "Cadastrado com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraTurma, "Cadastrado com sucesso!");
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraTurma, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraTurma, resposta);
             return 1;
         }
     }
@@ -58,10 +58,10 @@ public class CtrlTurma {
         String resposta = gtTurma.alterar(nome, turno, ano, semestre, matriz, turma);
         
         if (resposta.equals(Constantes.ALTERADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraTurma, "Alterado Com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraTurma, "Alterado Com sucesso!");
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraTurma, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraTurma, resposta);
             return 1;
         }
     }
@@ -78,9 +78,9 @@ public class CtrlTurma {
 
         String resposta = gtTurma.excluir(turma);
         if (resposta.equals(Constantes.EXCLUIDO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaTurma, "Excluído com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(buscaTurma, "Excluído com sucesso!");
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaTurma, resposta);
+            CtrlMensagem.exibirMensagemErro(buscaTurma, resposta);
         }
     } 
 }

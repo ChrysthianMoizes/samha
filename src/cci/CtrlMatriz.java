@@ -23,7 +23,7 @@ public class CtrlMatriz {
         if (resposta.equals(Constantes.CADASTRADO)) {
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            CtrlMensagem.exibirMensagemErro(null, resposta);
             return 1;
         }   
     }
@@ -34,7 +34,7 @@ public class CtrlMatriz {
         if (resposta.equals(Constantes.EXCLUIDO)) {
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            CtrlMensagem.exibirMensagemErro(null, resposta);
             return 1;
         }
     }

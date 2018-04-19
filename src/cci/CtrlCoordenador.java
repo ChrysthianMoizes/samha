@@ -61,12 +61,12 @@ public class CtrlCoordenador extends CtrlGenerica{
         String resposta = gtCoordenador.cadastrar(professor, tipo, login, senha, nome, matricula);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
             cadastraCoord.desabilitarCombos();
             cadastraCoord.desabilitarCampos();
             buscaCoord.atualizarTabela();
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCoord, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraCoord, resposta);
         }
     }
 

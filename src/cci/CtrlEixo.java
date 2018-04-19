@@ -40,7 +40,7 @@ public class CtrlEixo {
         if (resposta.equals(Constantes.EXCLUIDO)) {
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            CtrlMensagem.exibirMensagemErro(null, resposta);
             return 1;
         }
     }

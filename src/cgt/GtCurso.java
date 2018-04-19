@@ -76,13 +76,16 @@ public class GtCurso {
         try {
             List matrizes = gdMatriz.filtrarMatrizCurso("curso.id", curso.getId());
             
-            if (matrizes.size() == 0) {
+            if (matrizes.size() == 0) {        
                 
-                //select * from turma t join matriz_curricular m on t.matriz_id = m.id where m.curso_id = ?;
-                
-                List turmas = null;//gdTurma.filtrarPorCurso("curso.id", curso.getId());
-                if (turmas == null) {
+                List turmas = gdTurma.filtrarPorCurso(curso.getId());
+                if (turmas.size() == 0) {
+                    
+                    Coordenadoria coordenadoria = curso.getCoordenadoria();
+                    coordenadoria.setCurso(null);
+                    gdCoordenadoria.alterar(coordenadoria);
                     gdCurso.excluir(curso);
+                    
                     return Constantes.EXCLUIDO;
                 } else {
                     return "Curso possui turmas associadas";

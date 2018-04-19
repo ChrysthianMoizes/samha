@@ -22,7 +22,7 @@ public class CtrlRestricao {
         RestricaoProfessor restricao = gtRestricao.cadastrar(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
 
         if (restricao == null) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, "Erro ao adicionar restrição");
+            CtrlMensagem.exibirMensagemErro(null, "Erro ao adicionar restrição");
         }
         return restricao;
     }
@@ -37,7 +37,7 @@ public class CtrlRestricao {
         if (resposta.equals(Constantes.EXCLUIDO)) {
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(null, resposta);
+            CtrlMensagem.exibirMensagemErro(null, resposta);
             return 1;
         }
     }

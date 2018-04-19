@@ -45,10 +45,10 @@ public class CtrlDisciplina {
         String resposta = gtDisciplina.cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraDisciplina, "Cadastrado com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Cadastrado com sucesso!");
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraDisciplina, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
             return 1;
         }
     }
@@ -58,10 +58,10 @@ public class CtrlDisciplina {
         String resposta = gtDisciplina.alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
         
         if (resposta.equals(Constantes.ALTERADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraDisciplina, "Alterado Com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Alterado Com sucesso!");
             return 0;
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraDisciplina, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
             return 1;
         }
     }
@@ -74,9 +74,9 @@ public class CtrlDisciplina {
 
         String resposta = gtDisciplina.excluir(disciplina);
         if (resposta.equals(Constantes.EXCLUIDO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaDisciplina, "Excluído com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(buscaDisciplina, "Excluído com sucesso!");
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaDisciplina, resposta);
+            CtrlMensagem.exibirMensagemErro(buscaDisciplina, resposta);
         }
     } 
 }

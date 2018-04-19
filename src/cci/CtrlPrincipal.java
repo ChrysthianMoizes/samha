@@ -25,7 +25,6 @@ public final class CtrlPrincipal {
     private GtPrincipal gtPrincipal;
     private CtrlProfessor ctrlProfessor;
     private CtrlCoordenador ctrlCoordenador;
-    private CtrlMensagem ctrlMensagem;
     private CtrlCoordenadoria ctrlCoordenadoria;
     private CtrlRestricao ctrlRestricao;
     private CtrlCurso ctrlCurso;
@@ -167,10 +166,6 @@ public final class CtrlPrincipal {
 
     public CtrlCoordenador getCtrlCoordenador() {
         return ctrlCoordenador;
-    }
-
-    public CtrlMensagem getCtrlMensagem() {
-        return ctrlMensagem;
     }
 
     public CtrlCoordenadoria getCtrlCoordenadoria() {

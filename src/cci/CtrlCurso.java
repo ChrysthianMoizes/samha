@@ -62,11 +62,11 @@ public class CtrlCurso extends CtrlGenerica{
         String resposta = gtCurso.cadastrar(nome, nivel, periodos, coordenadoria);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
             cadastraCurso.desabilitarCampos();
             buscaCurso.atualizarTabela();
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraCurso, resposta);
         }
     }
     
@@ -75,12 +75,12 @@ public class CtrlCurso extends CtrlGenerica{
         String resposta = gtCurso.alterar(curso, nome, nivel, periodos, coordenadoria);
         
         if (resposta.equals(Constantes.ALTERADO)) {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(cadastraCurso, "Alterado Com sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(cadastraCurso, "Alterado Com sucesso!");
             cadastraCurso.desabilitarCampos();
             cadastraCurso.desabilitarCombos();
             buscaCurso.atualizarTabela();
         } else {
-            ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(cadastraCurso, resposta);
+            CtrlMensagem.exibirMensagemErro(cadastraCurso, resposta);
         }
     }
     
@@ -118,10 +118,10 @@ public class CtrlCurso extends CtrlGenerica{
             if (confirmacao == 0) {
                 String resposta = gtCurso.excluir(curso);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
-                    ctrlPrincipal.getCtrlMensagem().exibirMensagemSucesso(buscaCurso, "Excluído com sucesso!");
+                    CtrlMensagem.exibirMensagemSucesso(buscaCurso, "Excluído com sucesso!");
                     buscaCurso.atualizarTabela();
                 } else {
-                    ctrlPrincipal.getCtrlMensagem().exibirMensagemErro(buscaCurso, resposta);
+                    CtrlMensagem.exibirMensagemErro(buscaCurso, resposta);
                 }
             }
         } catch (Exception ex) {

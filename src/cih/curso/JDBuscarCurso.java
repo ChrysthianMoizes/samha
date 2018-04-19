@@ -1,6 +1,5 @@
 package cih.curso;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
 import cdp.Curso;
