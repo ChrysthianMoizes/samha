@@ -75,7 +75,11 @@ public class GtCurso {
 
         try {
             List matrizes = gdMatriz.filtrarMatrizCurso("curso.id", curso.getId());
+            
             if (matrizes.size() == 0) {
+                
+                //select * from turma t join matriz_curricular m on t.matriz_id = m.id where m.curso_id = ?;
+                
                 List turmas = null;//gdTurma.filtrarPorCurso("curso.id", curso.getId());
                 if (turmas == null) {
                     gdCurso.excluir(curso);

@@ -4,6 +4,7 @@ import cdp.Coordenador;
 import cdp.Coordenadoria;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 public class GdCoordenador extends GdGenerico{
@@ -16,7 +17,7 @@ public class GdCoordenador extends GdGenerico{
     
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Coordenador.class);
-        crit.add( Restrictions.like(coluna, "%"+texto+"%") );
+        crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();
