@@ -71,11 +71,14 @@ public class FrmInicio extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
         pnlPrincipal = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         lblNomeCoordenador = new javax.swing.JLabel();
         lblDataAtual = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         toolBar.setBackground(new java.awt.Color(0, 153, 102));
         toolBar.setBorder(null);
@@ -192,37 +195,32 @@ public class FrmInicio extends javax.swing.JFrame {
         getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
 
         pnlPrincipal.setBackground(new java.awt.Color(0, 153, 102));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(800, 400));
+        pnlPrincipal.setLayout(new javax.swing.OverlayLayout(pnlPrincipal));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
+        jPanel1.setLayout(null);
 
         lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblNomeCoordenador.setText("User");
+        jPanel1.add(lblNomeCoordenador);
+        lblNomeCoordenador.setBounds(1540, 900, 40, 20);
 
         lblDataAtual.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblDataAtual.setForeground(new java.awt.Color(240, 240, 240));
         lblDataAtual.setText("00/00/0000");
+        jPanel1.add(lblDataAtual);
+        lblDataAtual.setBounds(1500, 930, 80, 20);
 
-        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
-        pnlPrincipal.setLayout(pnlPrincipalLayout);
-        pnlPrincipalLayout.setHorizontalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(953, Short.MAX_VALUE)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDataAtual)
-                    .addComponent(lblNomeCoordenador))
-                .addContainerGap())
-        );
-        pnlPrincipalLayout.setVerticalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(387, Short.MAX_VALUE)
-                .addComponent(lblNomeCoordenador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDataAtual)
-                .addContainerGap())
-        );
+        pnlPrincipal.add(jPanel1);
 
         getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/background.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -269,6 +267,8 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnProfessor;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTurma;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;

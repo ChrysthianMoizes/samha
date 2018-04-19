@@ -61,6 +61,10 @@ public class GtTurma {
         return gdTurma.buscar(coluna.toLowerCase(), texto);
     }
     
+    public List<Turma> buscarPorCurso(int id) {  
+        return gdTurma.filtrarPorCurso(id);
+    }
+    
     public String excluir(Turma turma) {
 
         try {

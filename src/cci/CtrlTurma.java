@@ -70,6 +70,10 @@ public class CtrlTurma {
         return gtTurma.buscar(coluna, texto);
     }
     
+    public List<Turma> buscarPorCurso(int id) {
+        return gtTurma.buscarPorCurso(id);
+    }
+    
     public void excluir(Turma turma) {
 
         String resposta = gtTurma.excluir(turma);

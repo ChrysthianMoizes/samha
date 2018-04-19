@@ -254,6 +254,11 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                 cbxMatrizItemStateChanged(evt);
             }
         });
+        cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMatrizActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarTurmaLayout = new javax.swing.GroupLayout(pnlBuscarTurma);
         pnlBuscarTurma.setLayout(pnlBuscarTurmaLayout);
@@ -448,13 +453,20 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         JTableUtil.limparTabela(tblTurma);    
         Curso curso = (Curso) cbxCurso.getSelectedItem();
-            if(curso != null)
+            if(curso != null){
+                listaTurmas = ctrlPrincipal.getCtrlTurma().buscarPorCurso(curso.getId());
                 preencherComboMatriz(curso.getId());
+            }
+        atualizarTabela();
     }//GEN-LAST:event_cbxCursoItemStateChanged
 
     private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
-       JTableUtil.limparTabela(tblTurma); 
+       JTableUtil.limparTabela(tblTurma);
     }//GEN-LAST:event_cbxMatrizItemStateChanged
+
+    private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxMatrizActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
