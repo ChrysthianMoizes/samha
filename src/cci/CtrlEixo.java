@@ -29,7 +29,7 @@ public class CtrlEixo {
                 return 1;
             } 
         }else{
-            CtrlMensagem.exibirMensagemAviso(null, "Campo NOME inválido");
+            CtrlMensagem.exibirMensagemAviso(null, "Campo nome do EIXO inválido");
             return 1;
         }
     }

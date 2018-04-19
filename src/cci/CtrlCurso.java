@@ -246,25 +246,43 @@ public class CtrlCurso extends CtrlGenerica{
     }
     
     public void removerEixo(JComboBox cbxEixo){
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(cadastraCurso, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-                int resposta = ctrlPrincipal.getCtrlEixo().excluir(eixo);
-                if(resposta == 0){
-                    cadastraCurso.preencherComboEixos();    
-                }
-            }
+        
+        try{
+            Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+            if(eixo != null){
+                int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(cadastraCurso, "Confirmar Exclusão ?");
+                    if (confirmacao == 0) {
+
+                        int resposta = ctrlPrincipal.getCtrlEixo().excluir(eixo);
+                        if(resposta == 0){
+                            cadastraCurso.preencherComboEixos();    
+                        }
+                    }
+            }else
+                CtrlMensagem.exibirMensagemAviso(cadastraCurso, "Lista de eixos vazia");
+        }catch(Exception e){
+            CtrlMensagem.exibirMensagemAviso(cadastraCurso, "Lista de eixos vazia");
+        }    
     }
     
     public void removerCoordenadoria(JComboBox cbxEixo, JComboBox cbxCoordenadoria){
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(cadastraCurso, "Confirmar Exclusão ?");
-        if (confirmacao == 0) {
+        
+        try{
             Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-            int resposta = ctrlPrincipal.getCtrlCoordenadoria().excluir(coordenadoria);
-            if (resposta == 0) {
-                Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-                preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);
-            }
+            if(coordenadoria != null){
+                int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(cadastraCurso, "Confirmar Exclusão ?");
+                if (confirmacao == 0) {
+
+                    int resposta = ctrlPrincipal.getCtrlCoordenadoria().excluir(coordenadoria);
+                    if (resposta == 0) {
+                        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+                        preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);
+                    }
+                }
+            }else
+                CtrlMensagem.exibirMensagemAviso(cadastraCurso, "Lista de coordenadorias vazia");
+        }catch(Exception e){
+            CtrlMensagem.exibirMensagemAviso(cadastraCurso, "Lista de coordenadorias vazia");
         }
     }
     

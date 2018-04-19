@@ -406,13 +406,15 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
-        String nome = txtNomeCurso.getText();
-        String nivel = cbxNivel.getSelectedItem().toString();
-        int periodos = (int) spnPeriodos.getValue();
-        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-        
-        ctrlPrincipal.getCtrlCurso().validarOperacao(coordenadoria, nome, nivel, periodos);
+        try{
+            String nome = txtNomeCurso.getText();
+            String nivel = cbxNivel.getSelectedItem().toString();
+            int periodos = (int) spnPeriodos.getValue();
+            Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+            ctrlPrincipal.getCtrlCurso().validarOperacao(coordenadoria, nome, nivel, periodos);
+        }catch(Exception e){
+            CtrlMensagem.exibirMensagemAviso(this, "Todos os campos devem ser preenchidos");
+        }     
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
