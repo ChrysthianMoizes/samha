@@ -2,7 +2,7 @@ package cgt;
 
 import cdp.Coordenadoria;
 import cdp.Eixo;
-import cgd.GdCoordenador;
+import cgd.GdUsuario;
 import cgd.GdCoordenadoria;
 import cgd.GdCurso;
 import cgd.GdProfessor;
@@ -11,13 +11,13 @@ import java.util.List;
 public class GtCoordenadoria {
     
     private GdCoordenadoria gdCoordenadoria;
-    private GdCoordenador gdCoordenador;
+    private GdUsuario gdCoordenador;
     private GdCurso gdCurso;
     private GdProfessor gdProfessor;
 
     public GtCoordenadoria() {        
         gdCoordenadoria = new GdCoordenadoria();
-        gdCoordenador = new GdCoordenador();
+        gdCoordenador = new GdUsuario();
         gdCurso = new GdCurso();
         gdProfessor = new GdProfessor();
     }

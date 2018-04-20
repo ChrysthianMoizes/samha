@@ -1,13 +1,14 @@
 package cgt;
 
-import cdp.Coordenador;
+import cdp.CoordenadorAcademico;
+import cdp.CoordenadorCurso;
 import cdp.Usuario;
 import cgd.GdPrincipal;
 
 public class GtPrincipal {
 
     private GdPrincipal gdPrincipal;
-    private Coordenador coordAtual;
+    private CoordenadorCurso coordAtual;
     private int permissao;
 
     public GtPrincipal() {
@@ -26,29 +27,19 @@ public class GtPrincipal {
                 return Constantes.PERMISSAO_NEGADA;
             } else {
 
-                Coordenador coordenador = gdPrincipal.identificarCoordenador(usuario.getId());
-
-                if (coordenador == null) {
-                    return Constantes.PERMISSAO_NEGADA;
-                } else {
-                    setCoordAtual(coordenador);
-
-                    if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_ACAD)) {
-                        setPermissao(Constantes.PERMISSAO_ADMIN);
-                        return Constantes.PERMISSAO_ADMIN;
-                    } else if (coordenador.getTipo().toLowerCase().equals(Constantes.COORD_CURSO)) {
-                        setPermissao(Constantes.PERMISSAO_COORD);
-                        return Constantes.PERMISSAO_COORD;
-                    } else {
-                        setPermissao(Constantes.PERMISSAO_VIEW);
-                        return Constantes.PERMISSAO_VIEW;
-                    }
+                if(usuario instanceof CoordenadorCurso){
+                    setPermissao(Constantes.PERMISSAO_COORD);
+                    return Constantes.PERMISSAO_COORD;
+                }else if(usuario instanceof CoordenadorAcademico){
+                    setPermissao(Constantes.PERMISSAO_ADMIN);
+                    return Constantes.PERMISSAO_ADMIN;
                 }
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return Constantes.PERMISSAO_NEGADA;
         }
+        return Constantes.PERMISSAO_NEGADA;
     }
 
     public void encerrarSessao() {
@@ -65,11 +56,11 @@ public class GtPrincipal {
         }
     }
 
-    public Coordenador getCoordAtual() {
+    public CoordenadorCurso getCoordAtual() {
         return coordAtual;
     }
 
-    public void setCoordAtual(Coordenador coordAtual) {
+    public void setCoordAtual(CoordenadorCurso coordAtual) {
         this.coordAtual = coordAtual;
     }
 

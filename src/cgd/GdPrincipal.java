@@ -1,6 +1,6 @@
 package cgd;
 
-import cdp.Coordenador;
+import cdp.CoordenadorCurso;
 import cdp.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -18,14 +18,5 @@ public class GdPrincipal extends GdGenerico{
         Usuario usuario = (Usuario) crit.uniqueResult();
         sessao.close();
         return usuario;   
-    }
-    
-    public Coordenador identificarCoordenador(int id){
-        Criteria crit = criarSessao().createCriteria(Coordenador.class);
-        crit.add(Restrictions.eq("usuario.id", id));
-        crit.setMaxResults(1);
-        Coordenador coordenador = (Coordenador) crit.uniqueResult();
-        sessao.close();
-        return coordenador;   
     }
 }

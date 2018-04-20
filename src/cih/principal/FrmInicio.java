@@ -1,7 +1,7 @@
 package cih.principal;
 
 import cci.CtrlPrincipal;
-import cdp.Coordenador;
+import cdp.CoordenadorCurso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,12 +22,12 @@ public class FrmInicio extends javax.swing.JFrame {
      }
     
     public void atualizarInfoSistema(){
-        Coordenador coord = ctrlPrincipal.getGtPrincipal().getCoordAtual();
+        CoordenadorCurso coord = ctrlPrincipal.getGtPrincipal().getCoordAtual();
         Date dataAtual = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String data = formatter.format(dataAtual);
         if(coord != null){
-            lblNomeCoordenador.setText(coord.getNome());
+            lblNomeCoordenador.setText(coord.getProfessor().getNome());
             lblDataAtual.setText(data);
         }
     }

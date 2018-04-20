@@ -29,12 +29,12 @@ public class Coordenadoria implements Serializable {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coordenador_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Coordenador coordenador;
+    private CoordenadorCurso coordenador;
   
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Eixo eixo, Curso curso, Coordenador coordenador) {
+    public Coordenadoria(int id, String nome, Eixo eixo, Curso curso, CoordenadorCurso coordenador) {
         this.id = id;
         this.nome = nome;
         this.eixo = eixo;
@@ -42,7 +42,7 @@ public class Coordenadoria implements Serializable {
         this.coordenador = coordenador;
     }
 
-    public Coordenadoria(String nome, Eixo eixo, Curso curso, Coordenador coordenador) {
+    public Coordenadoria(String nome, Eixo eixo, Curso curso, CoordenadorCurso coordenador) {
         this.nome = nome;
         this.eixo = eixo;
         this.curso = curso;
@@ -81,11 +81,11 @@ public class Coordenadoria implements Serializable {
         this.eixo = eixo;
     }
 
-    public Coordenador getCoordenador() {
+    public CoordenadorCurso getCoordenador() {
         return coordenador;
     }
 
-    public void setCoordenador(Coordenador coordenador) {
+    public void setCoordenador(CoordenadorCurso coordenador) {
         this.coordenador = coordenador;
     }
     

@@ -2,7 +2,7 @@ package cih.coordenador;
 
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.Coordenador;
+import cdp.CoordenadorCurso;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -11,7 +11,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private Frame pai;
-    private List<Coordenador> listaCoordenadores;
+    private List<CoordenadorCurso> listaCoordenadores;
     
     public JDBuscarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
@@ -49,11 +49,11 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         }     
     }
 
-    public List<Coordenador> getListaCoordenadores() {
+    public List<CoordenadorCurso> getListaCoordenadores() {
         return listaCoordenadores;
     }
 
-    public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
+    public void setListaCoordenadores(List<CoordenadorCurso> listaCoordenadores) {
         this.listaCoordenadores = listaCoordenadores;
     }
     

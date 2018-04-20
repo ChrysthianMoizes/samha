@@ -1,7 +1,7 @@
 package cih.coordenador;
 
 import cci.CtrlPrincipal;
-import cdp.Coordenador;
+import cdp.CoordenadorCurso;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import java.awt.event.KeyEvent;
@@ -10,7 +10,7 @@ import java.util.List;
 public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
-    private Coordenador coordenador;
+    private CoordenadorCurso coordenador;
     private List<Professor> listaProfessores;
     private List<Coordenadoria> listaCoordenadorias;
 
@@ -297,11 +297,11 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
-    public void setarCamposComInstancia(Coordenador coordenador){
-        txtNome.setText(coordenador.getNome());
-        txtMatricula.setText(coordenador.getMatricula());
-        txtUsuario.setText(coordenador.getUsuario().getLogin());
-        txtSenha.setText(coordenador.getUsuario().getSenha());
+    public void setarCamposComInstancia(CoordenadorCurso coordenador){
+        txtNome.setText(coordenador.getProfessor().getNome());
+        txtMatricula.setText(coordenador.getProfessor().getMatricula());
+        txtUsuario.setText(coordenador.getLogin());
+        txtSenha.setText(coordenador.getSenha());
     }
     
     public void desabilitarCombos(){
@@ -320,7 +320,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         btnCancelar.setText("Sair");
     }
     
-    public void selecionarTipoCoordenador(Coordenador coordenador){
+    public void selecionarTipoCoordenador(CoordenadorCurso coordenador){
         
         switch (coordenador.getTipo()) {
             
@@ -349,11 +349,11 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         }   
     }
 
-    public Coordenador getCoordenador() {
+    public CoordenadorCurso getCoordenador() {
         return coordenador;
     }
 
-    public void setCoordenador(Coordenador coordenador) {
+    public void setCoordenador(CoordenadorCurso coordenador) {
         this.coordenador = coordenador;
     }
 

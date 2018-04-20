@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Servidor implements Serializable{
+public class Servidor implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
