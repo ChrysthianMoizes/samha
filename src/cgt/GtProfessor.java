@@ -51,7 +51,7 @@ public class GtProfessor {
     public List<Professor> buscar(String coluna, String texto) {
 
         if (coluna.toLowerCase().equals("coordenadoria")) {
-            coluna = "coordenadoria_id";
+            coluna = "coordenadoria.id";
             return gdProfessor.filtrarPorCoordenadoria(coluna, Integer.parseInt(texto));
         } else 
             return gdProfessor.buscar(coluna.toLowerCase(), texto);      
@@ -67,7 +67,7 @@ public class GtProfessor {
             gdProfessor.excluir(professor);
             return Constantes.EXCLUIDO;
         } catch (SQLException | ClassNotFoundException ex) {
-            return ex.getMessage();
+            return "Professor não pode ser excluído pois também é um coordenador";
         }
     }
 

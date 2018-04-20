@@ -52,7 +52,6 @@ public class FrmInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         toolBar = new javax.swing.JToolBar();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         jSeparator12 = new javax.swing.JSeparator();
         btnProfessor = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -71,8 +70,8 @@ public class FrmInicio extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
         pnlPrincipal = new javax.swing.JPanel();
-        lblNomeCoordenador = new javax.swing.JLabel();
         lblDataAtual = new javax.swing.JLabel();
+        lblNomeCoordenador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
@@ -83,7 +82,6 @@ public class FrmInicio extends javax.swing.JFrame {
         toolBar.setFloatable(false);
         toolBar.setRollover(true);
         toolBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        toolBar.add(jSeparator3);
         toolBar.add(jSeparator12);
 
         btnProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/professor.png"))); // NOI18N
@@ -194,20 +192,20 @@ public class FrmInicio extends javax.swing.JFrame {
 
         pnlPrincipal.setBackground(new java.awt.Color(0, 153, 102));
 
-        lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
-        lblNomeCoordenador.setText("User");
-
         lblDataAtual.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblDataAtual.setForeground(new java.awt.Color(240, 240, 240));
         lblDataAtual.setText("00/00/0000");
+
+        lblNomeCoordenador.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
+        lblNomeCoordenador.setText("User");
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(1033, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(927, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDataAtual, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNomeCoordenador, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -215,10 +213,10 @@ public class FrmInicio extends javax.swing.JFrame {
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(588, Short.MAX_VALUE)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(471, Short.MAX_VALUE)
                 .addComponent(lblNomeCoordenador)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDataAtual)
                 .addContainerGap())
         );
@@ -275,7 +273,6 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;

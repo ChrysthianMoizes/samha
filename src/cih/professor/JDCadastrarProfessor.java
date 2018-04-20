@@ -1,14 +1,11 @@
 package cih.professor;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 
 public class JDCadastrarProfessor extends javax.swing.JDialog {
 
@@ -736,7 +733,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         boolean aula5 = chxAula5.isSelected();
         boolean aula6 = chxAula6.isSelected();
 
-        ctrlPrincipal.getCtrlProfessor().adicionarRestricao(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+        ctrlPrincipal.getCtrlProfessor().adicionarRestricao(nome, turno, dia, descricao, prioridade, 
+                aula1, aula2, aula3, aula4, aula5, aula6, professor);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed

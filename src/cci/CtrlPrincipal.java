@@ -116,6 +116,7 @@ public final class CtrlPrincipal {
         setPermissao(permissao);
         if (permissao == Constantes.PERMISSAO_NEGADA) {
             CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
+            frmValidarAcesso.limparCampos();
         } else {
             instanciarFrameInicio();
             frmValidarAcesso.dispose();

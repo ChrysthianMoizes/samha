@@ -69,6 +69,7 @@ public class CtrlProfessor extends CtrlGenerica{
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
             cadastraProf.desabilitarCamposProfessor(false);
             cadastraProf.habilitarCamposRestricao(true);
+            buscaProf.atualizarTabela();
         } else {
             CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao cadastrar");
         }
@@ -82,6 +83,7 @@ public class CtrlProfessor extends CtrlGenerica{
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
             cadastraProf.desabilitarCamposProfessor(false);
             cadastraProf.habilitarCamposRestricao(true);
+            buscaProf.atualizarTabela();
         }else{
             CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao alterar");
         }
@@ -133,9 +135,9 @@ public class CtrlProfessor extends CtrlGenerica{
     
     public void identificarOrigem(Professor professor){
         cadastraProf.habilitarCamposRestricao(false);
+        cadastraProf.preencherComboCoordenadorias();
         if(professor != null){
             cadastraProf.setProfessor(professor);
-            cadastraProf.preencherComboCoordenadorias();
             cadastraProf.setarCoordenadoria();
             cadastraProf.setarCamposComInstancia(professor);
             cadastraProf.preencherListaRestricoes();
@@ -152,15 +154,15 @@ public class CtrlProfessor extends CtrlGenerica{
     
     public void preencherComboCoordenadorias(JComboBox cbxCoordenadoria) {
         
-        List listaCoordenadorias = buscaProf.getListaCoordenadorias();
-        listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
+        List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
         buscaProf.setListaCoordenadorias(listaCoordenadorias);
         preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
     }
     
     public void setarCoordenadoria(JComboBox cbxCoordenadoria){
         
-        List listaCoordenadorias = cadastraProf.getListaCoordenadorias();
+        List listaCoordenadorias = buscaProf.getListaCoordenadorias();
+        cadastraProf.setListaCoordenadorias(listaCoordenadorias);
         Professor professor = cadastraProf.getProfessor();
         Coordenadoria coordenadoria;
         

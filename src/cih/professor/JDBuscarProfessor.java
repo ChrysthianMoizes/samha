@@ -1,6 +1,7 @@
 package cih.professor;
 
 import cci.CtrlPrincipal;
+import cci.JTableUtil;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import java.awt.Frame;
@@ -43,6 +44,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
             txtFiltro.setEnabled(false);
             btnBuscar.setEnabled(false);
             preencherComboCoordenadorias();
+            btnBuscarActionPerformed(null);
         }else{
             cbxCoordenadoria.removeAllItems();
             cbxCoordenadoria.setEnabled(false);
@@ -241,9 +243,9 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
 
         cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCoordenadoria.setEnabled(false);
-        cbxCoordenadoria.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCoordenadoriaItemStateChanged(evt);
+        cbxCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCoordenadoriaActionPerformed(evt);
             }
         });
 
@@ -332,7 +334,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
-        if(cbxCoordenadoria.getSelectedIndex() == 2){
+        if(cbxFiltro.getSelectedIndex() == 2){
             Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
             filtro = String.valueOf(coordenadoria.getId());
         }
@@ -385,12 +387,13 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        JTableUtil.limparTabela(tblProfessor);
         alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
-    private void cbxCoordenadoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaItemStateChanged
+    private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
         btnBuscarActionPerformed(null);
-    }//GEN-LAST:event_cbxCoordenadoriaItemStateChanged
+    }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
