@@ -34,7 +34,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         
         try {
             Coordenador coordenador = (Coordenador) JTableUtil.getDadosLinhaSelecionada(tabela);  
-            ctrlPrincipal.getCtrlCoordenador().instanciarTelaCadastroCoordenador(pai, coordenador);
+            instanciarTelaCadastroCoordenador(pai, coordenador);
             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -50,7 +50,6 @@ public class CtrlCoordenador extends CtrlGenerica{
 
     public void instanciarTelaCadastroCoordenador(Frame pai, Coordenador coordenador) {
         cadastraCoord = new JDCadastrarCoordenador(pai, true, ctrlPrincipal);
-        cadastraCoord.setCoordenador(coordenador);
         identificarOrigem(coordenador);
         cadastraCoord.setIconImage(setarIconeJanela());
         cadastraCoord.setVisible(true);  
@@ -103,19 +102,8 @@ public class CtrlCoordenador extends CtrlGenerica{
     }
 
     public void listarCoordenadores(String coluna, String texto, JTable tabela) {
-        
         List listaCoordenadores = buscar(coluna, texto);
-        JTableUtil.limparTabela(tabela);
-        
-        if(listaCoordenadores.size() > 0){
-   
-            try {
-                JTableUtil.preencherTabela(listaCoordenadores, tabela);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-         }else
-            CtrlMensagem.exibirMensagemAviso(buscaCoord, "Nenhum registro encontrado");
+        listarEmTabela(listaCoordenadores, tabela, buscaCoord);
     }
     
     public List<Coordenador> buscar(String coluna, String texto) {
@@ -127,6 +115,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     public void identificarOrigem(Coordenador coordenador){
         
         if(coordenador != null){
+            cadastraCoord.setCoordenador(coordenador);
             cadastraCoord.selecionarTipoCoordenador(coordenador);
             cadastraCoord.setarCamposComInstancia(coordenador);
             cadastraCoord.desabilitarCombos();

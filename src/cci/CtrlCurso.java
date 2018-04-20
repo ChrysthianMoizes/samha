@@ -36,7 +36,7 @@ public class CtrlCurso extends CtrlGenerica{
         
         try {
             Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tabela);
-            ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(curso, pai);
+            instanciarTelaCadastroCurso(curso, pai);
             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -84,32 +84,6 @@ public class CtrlCurso extends CtrlGenerica{
         }
     }
     
-    public List<Curso> buscar(String coluna, String texto) {
-        return gtCurso.buscar(coluna, texto);
-    }
-    
-    public void listarCursos(String coluna, String texto, JTable tabela){
-        
-        List listaCursos = buscaCurso.getListaCursos();
-        
-        listaCursos = buscar(coluna, texto);
-        JTableUtil.limparTabela(tabela);
-        
-        if(listaCursos.size() > 0){
-   
-            try {
-                JTableUtil.preencherTabela(listaCursos, tabela);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-         }else
-            CtrlMensagem.exibirMensagemAviso(buscaCurso, "Nenhum registro encontrado");
-    }
-    
-    public List<Curso> listar() {
-       return gtCurso.listar();
-    }
-    
     public void excluir(JTable tabela) {
 
         try {
@@ -128,7 +102,20 @@ public class CtrlCurso extends CtrlGenerica{
             CtrlMensagem.exibirMensagemErro(buscaCurso, "Selecione um curso");
         }   
     }
-
+    
+    public List<Curso> buscar(String coluna, String texto) {
+        return gtCurso.buscar(coluna, texto);
+    }
+    
+    public void listarCursos(String coluna, String texto, JTable tabela){
+        List listaCursos = buscar(coluna, texto);
+        listarEmTabela(listaCursos, tabela, buscaCurso);
+    }
+    
+    public List<Curso> listar() {
+       return gtCurso.listar();
+    }
+    
     //======================================= TELA DE CADASTRO ===============================================
     
     public void validarOperacao(Coordenadoria coordenadoria, String nome, String nivel, int periodos){  

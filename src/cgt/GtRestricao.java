@@ -37,7 +37,7 @@ public class GtRestricao {
             restricao.setDia(dia.toUpperCase());
             restricao.setNome(nome);
             restricao.setPrioridade(prioridade.toUpperCase());
-            restricao.setTurno(turno);
+            restricao.setTurno(turno.toUpperCase());
             restricao.setProfessor(professor);
             gdRestricao.cadastrar(restricao);
             return restricao;

@@ -86,6 +86,7 @@ public class GtCoordenador {
     }
 
     public void validarCampos(String nome, String matricula, String login, String senha, String tipo, Professor professor) throws Exception {
+        
         if (nome.equals("")) {
             throw new SAMHAException(1);
         }

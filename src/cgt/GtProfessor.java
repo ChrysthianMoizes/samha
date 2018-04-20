@@ -20,7 +20,7 @@ public class GtProfessor {
     public Professor cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
         try {
-            validarCampos(nome, matricula);
+            validarCampos(nome, matricula, coordenadoria);
             Professor professor = new Professor();
             professor.setNome(nome);
             professor.setMatricula(matricula);
@@ -36,7 +36,7 @@ public class GtProfessor {
     public Professor alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         try {
-            validarCampos(nome, matricula);
+            validarCampos(nome, matricula, coordenadoria);
             professor.setNome(nome);
             professor.setMatricula(matricula);
             professor.setCargaHoraria(cargaHoraria);
@@ -71,18 +71,15 @@ public class GtProfessor {
         }
     }
 
-    public void validarCampos(String nome, String matricula) throws Exception {
-        if (nome.equals("")) {
-            throw new SAMHAException(1);
-        }
-        if (matricula.equals("")) {
-            throw new SAMHAException(2);
-        }
-        //if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
-            //if(coordenadoria == null){
-              //  throw new SAMHAException(7); VERIFICAR SE A COORDENADORIA É NULA
-            //}
-       // }
+    public void validarCampos(String nome, String matricula, Coordenadoria coordenadoria) throws Exception {
         
+        if (nome.equals(""))
+            throw new SAMHAException(1);
+        
+        if (matricula.equals("")) 
+            throw new SAMHAException(2);
+        
+        if(coordenadoria == null)
+            throw new SAMHAException(11);    
     }
 }

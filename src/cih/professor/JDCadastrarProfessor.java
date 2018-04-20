@@ -23,8 +23,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.professor = professor;
         setarBackground();
-        habilitarCamposRestricao(false);
-        identificarOrigem();
     }
     
     private void setarBackground(){
@@ -122,7 +120,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jLabel1.setText("Hs.");
+        jLabel1.setText("Hrs.");
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(20, 20, 40, 5));
@@ -143,10 +141,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                         .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(2, 2, 2)
                         .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNome))
                 .addContainerGap())
@@ -161,11 +159,11 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addGap(5, 5, 5)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnCargaHoraria)
                     .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnCargaHoraria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -530,191 +528,17 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void identificarOrigem() {
-        preencherComboCoordenadorias();
-        if (professor != null) {
-            setarCamposComInstancia();
-            listaRestricoes = ctrlPrincipal.getCtrlRestricao().filtrarPorProfessor(professor.getId());
-            preencherListaRestricoes();
-        }
-    }
-
-    public void setarCamposComInstancia() {
-
+    public void setarCamposComInstancia(Professor professor) {
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
-        //txtCargaHoraria.setText(String.valueOf(professor.getCargaHoraria()));
-        spnCargaHoraria.setValue(professor.getCargaHoraria());
-        Coordenadoria coordenadoria;
-
-        for (int i = 0; i < listaCoordenadorias.size(); i++) {
-
-            coordenadoria = listaCoordenadorias.get(i);
-            if (coordenadoria.getId() == professor.getCoordenadoria().getId()) {
-                cbxCoordenadoria.setSelectedIndex(i);
-                break;
-            }
-        }
+        spnCargaHoraria.setValue(professor.getCargaHoraria());   
     }
-
-    public void preencherComboCoordenadorias() {
-
-        if (listaCoordenadorias == null) {
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
-        }
-
-        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));
+    
+    public void setarCoordenadoria(){
+        ctrlPrincipal.getCtrlProfessor().setarCoordenadoria(cbxCoordenadoria);
     }
-
-    public void preencherListaRestricoes() {
-        if (listaRestricoes != null) {
-            DefaultListModel defaultListModel = new DefaultListModel();
-            lstRestricoes.removeAll();
-            for (int i = 0; i < listaRestricoes.size(); i++) {
-                defaultListModel.addElement(listaRestricoes.get(i).toString());
-            }
-            lstRestricoes.setModel(defaultListModel);
-        }
-    }
-
-    public void desabilitarCamposProfessor(boolean opcao) {
-        txtNome.setEnabled(opcao);
-        txtMatricula.setEnabled(opcao);
-        spnCargaHoraria.setEnabled(opcao);
-        cbxCoordenadoria.setEnabled(opcao);
-        btnSalvar.setEnabled(opcao);
-        btnCancelar.setText("Sair");
-    }
-
-    public void habilitarCamposRestricao(boolean opcao) {
-        txtNomeRestricao.setEnabled(opcao);
-        cbxTurnos.setEnabled(opcao);
-        cbxDias.setEnabled(opcao);
-        lstRestricoes.setEnabled(opcao);
-        chxAula1.setEnabled(opcao);
-        chxAula2.setEnabled(opcao);
-        chxAula3.setEnabled(opcao);
-        chxAula4.setEnabled(opcao);
-        chxAula5.setEnabled(opcao);
-        chxAula6.setEnabled(opcao);
-        rbtnAlta.setEnabled(opcao);
-        rbtnBaixa.setEnabled(opcao);
-        rbtnMedia.setEnabled(opcao);
-        btnAdicionar.setEnabled(opcao);
-        btnRemover.setEnabled(opcao);
-        btnLimpar.setEnabled(opcao);
-        txtAreaDescricao.setEnabled(opcao);
-    }
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
-        String nome = txtNome.getText();
-        String matricula = txtMatricula.getText();
-        int cargaHoraria = (int) spnCargaHoraria.getValue();
-        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-
-        if (professor == null) {
-            professor = ctrlPrincipal.getCtrlProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
-        } else {
-            professor = ctrlPrincipal.getCtrlProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
-        }
-
-        if (professor != null) {
-            desabilitarCamposProfessor(false);
-            habilitarCamposRestricao(true);
-        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnSalvarActionPerformed(null);
-        }
-    }//GEN-LAST:event_btnSalvarKeyPressed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnCancelarKeyPressed
-
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
-        String nome = txtNomeRestricao.getText();
-        String turno = cbxTurnos.getSelectedItem().toString();
-        String dia = cbxDias.getSelectedItem().toString();
-        String descricao = txtAreaDescricao.getText();
-        String prioridade;
-        char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
-
-        switch (priori) {
-            case 'B':
-                prioridade = "BAIXA";
-                break;
-            case 'M':
-                prioridade = "MÉDIA";
-                break;
-            default:
-                prioridade = "ALTA";
-                break;
-        }
-
-        boolean aula1 = chxAula1.isSelected();
-        boolean aula2 = chxAula2.isSelected();
-        boolean aula3 = chxAula3.isSelected();
-        boolean aula4 = chxAula4.isSelected();
-        boolean aula5 = chxAula5.isSelected();
-        boolean aula6 = chxAula6.isSelected();
-
-        RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
-                nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
-
-        if (restricao != null) {
-            listaRestricoes.add(restricao);
-            preencherListaRestricoes();
-        }
-    }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-
-        int posicao = lstRestricoes.getSelectedIndex();
-        RestricaoProfessor restricao = listaRestricoes.get(posicao);
-
-        if (restricao != null) {
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Remoção ?");
-            if (confirmacao == 0) {
-
-                int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
-                if (resposta == 0) {
-                    listaRestricoes.remove(posicao);
-                    preencherListaRestricoes();
-                }
-            }
-            btnLimparActionPerformed(null);
-        } else {
-            CtrlMensagem.exibirMensagemAviso(this, "Selecione uma Restrição para remover");
-        }
-    }//GEN-LAST:event_btnRemoverActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        txtNomeRestricao.setText("");
-        cbxTurnos.setSelectedIndex(0);
-        cbxDias.setSelectedIndex(0);
-        chxAula1.setSelected(false);
-        chxAula2.setSelected(false);
-        chxAula3.setSelected(false);
-        chxAula4.setSelected(false);
-        chxAula5.setSelected(false);
-        chxAula6.setSelected(false);
-        rbtnBaixa.setSelected(true);
-        txtAreaDescricao.setText("");
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void lstRestricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstRestricoesMouseClicked
-
+    
+    private void setarRestricaoTela(){
         if (lstRestricoes.isEnabled()) {
             
             if (!listaRestricoes.isEmpty()) {
@@ -782,6 +606,149 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 }
             }
         }
+    }
+
+    public void preencherComboCoordenadorias() {
+        ctrlPrincipal.getCtrlProfessor().preencherComboCoordenadorias(cbxCoordenadoria);
+    }
+
+    public void preencherListaRestricoes() {
+        ctrlPrincipal.getCtrlProfessor().preencherListaRestricoes(lstRestricoes);
+    }
+
+    public void desabilitarCamposProfessor(boolean opcao) {
+        txtNome.setEnabled(opcao);
+        txtMatricula.setEnabled(opcao);
+        spnCargaHoraria.setEnabled(opcao);
+        cbxCoordenadoria.setEnabled(opcao);
+        btnSalvar.setEnabled(opcao);
+        btnCancelar.setText("Sair");
+    }
+
+    public void habilitarCamposRestricao(boolean opcao) {
+        txtNomeRestricao.setEnabled(opcao);
+        cbxTurnos.setEnabled(opcao);
+        cbxDias.setEnabled(opcao);
+        lstRestricoes.setEnabled(opcao);
+        chxAula1.setEnabled(opcao);
+        chxAula2.setEnabled(opcao);
+        chxAula3.setEnabled(opcao);
+        chxAula4.setEnabled(opcao);
+        chxAula5.setEnabled(opcao);
+        chxAula6.setEnabled(opcao);
+        rbtnAlta.setEnabled(opcao);
+        rbtnBaixa.setEnabled(opcao);
+        rbtnMedia.setEnabled(opcao);
+        btnAdicionar.setEnabled(opcao);
+        btnRemover.setEnabled(opcao);
+        btnLimpar.setEnabled(opcao);
+        txtAreaDescricao.setEnabled(opcao);
+    }
+    
+    private void limparTelaRestricao(){
+        txtNomeRestricao.setText("");
+        cbxTurnos.setSelectedIndex(0);
+        cbxDias.setSelectedIndex(0);
+        chxAula1.setSelected(false);
+        chxAula2.setSelected(false);
+        chxAula3.setSelected(false);
+        chxAula4.setSelected(false);
+        chxAula5.setSelected(false);
+        chxAula6.setSelected(false);
+        rbtnBaixa.setSelected(true);
+        txtAreaDescricao.setText("");
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public List<RestricaoProfessor> getListaRestricoes() {
+        return listaRestricoes;
+    }
+
+    public void setListaRestricoes(List<RestricaoProfessor> listaRestricoes) {
+        this.listaRestricoes = listaRestricoes;
+    }
+
+    public List<Coordenadoria> getListaCoordenadorias() {
+        return listaCoordenadorias;
+    }
+
+    public void setListaCoordenadorias(List<Coordenadoria> listaCoordenadorias) {
+        this.listaCoordenadorias = listaCoordenadorias;
+    }
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
+        String nome = txtNome.getText();
+        String matricula = txtMatricula.getText();
+        int cargaHoraria = (int) spnCargaHoraria.getValue();
+        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+        ctrlPrincipal.getCtrlProfessor().validarOperacao(nome, matricula, cargaHoraria, coordenadoria);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnSalvarActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnSalvarKeyPressed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelarKeyPressed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+
+        String nome = txtNomeRestricao.getText();
+        String turno = cbxTurnos.getSelectedItem().toString();
+        String dia = cbxDias.getSelectedItem().toString();
+        String descricao = txtAreaDescricao.getText();
+        String prioridade;
+        char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
+
+        switch (priori) {
+            case 'B':
+                prioridade = "BAIXA";
+                break;
+            case 'M':
+                prioridade = "MÉDIA";
+                break;
+            default:
+                prioridade = "ALTA";
+                break;
+        }
+
+        boolean aula1 = chxAula1.isSelected();
+        boolean aula2 = chxAula2.isSelected();
+        boolean aula3 = chxAula3.isSelected();
+        boolean aula4 = chxAula4.isSelected();
+        boolean aula5 = chxAula5.isSelected();
+        boolean aula6 = chxAula6.isSelected();
+
+        ctrlPrincipal.getCtrlProfessor().adicionarRestricao(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        ctrlPrincipal.getCtrlProfessor().removerRestricao(lstRestricoes);
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparTelaRestricao();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void lstRestricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstRestricoesMouseClicked
+        setarRestricaoTela();
     }//GEN-LAST:event_lstRestricoesMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

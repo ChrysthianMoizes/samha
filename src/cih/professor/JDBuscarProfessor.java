@@ -1,14 +1,11 @@
 package cih.professor;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
-import cci.JTableUtil;
 import cdp.Coordenadoria;
 import cdp.Professor;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDBuscarProfessor extends javax.swing.JDialog {
 
@@ -32,24 +29,43 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }
     
     public void preencherComboCoordenadorias(){
-        
-        if(listaCoordenadorias == null)
-            listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
-           
-        cbxCoordenadoria.setModel(new DefaultComboBoxModel(listaCoordenadorias.toArray()));       
+        ctrlPrincipal.getCtrlProfessor().preencherComboCoordenadorias(cbxCoordenadoria);
     }
     
     public void atualizarTabela(){
-        
-        JTableUtil.limparTabela(tblProfessor);
-        
-        if(listaProfessores.size() > 0){
-            listaProfessores.forEach((professor) -> {
-                JTableUtil.addLinha(tblProfessor, professor.toArray() );
-            });
+        btnBuscarActionPerformed(null);
+    }
+    
+    private void alterarComboFiltro(){
+        if(cbxFiltro.getSelectedIndex() == 2){
+            cbxCoordenadoria.setEnabled(true);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnBuscar.setEnabled(false);
+            preencherComboCoordenadorias();
+        }else{
+            cbxCoordenadoria.removeAllItems();
+            cbxCoordenadoria.setEnabled(false);
+            txtFiltro.setEnabled(true);
+            btnBuscar.setEnabled(true);
         }
     }
 
+    public List<Professor> getListaProfessores() {
+        return listaProfessores;
+    }
+
+    public void setListaProfessores(List<Professor> listaProfessores) {
+        this.listaProfessores = listaProfessores;
+    }
+
+    public List<Coordenadoria> getListaCoordenadorias() {
+        return listaCoordenadorias;
+    }
+
+    public void setListaCoordenadorias(List<Coordenadoria> listaCoordenadorias) {
+        this.listaCoordenadorias = listaCoordenadorias;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,6 +241,11 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
 
         cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCoordenadoria.setEnabled(false);
+        cbxCoordenadoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCoordenadoriaItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarProfessorLayout = new javax.swing.GroupLayout(pnlBuscarProfessor);
         pnlBuscarProfessor.setLayout(pnlBuscarProfessorLayout);
@@ -240,7 +261,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                             .addGroup(pnlBuscarProfessorLayout.createSequentialGroup()
                                 .addComponent(cbxFiltro, 0, 0, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2))
@@ -316,9 +337,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
             filtro = String.valueOf(coordenadoria.getId());
         }
         
-        listaProfessores = ctrlPrincipal.getCtrlProfessor().buscar(colunaFiltro, filtro);
-        atualizarTabela();
-        
+        ctrlPrincipal.getCtrlProfessor().listarProfessores(colunaFiltro, filtro, tblProfessor);        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
@@ -328,14 +347,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarKeyPressed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
-        try {
-            Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tblProfessor);
-            ctrlPrincipal.getCtrlProfessor().instanciarTelaCadastroProfessor(professor, pai);
-            btnBuscarActionPerformed(null);
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um professor");
-        }
+        ctrlPrincipal.getCtrlProfessor().transitarTelas(tblProfessor, pai);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -356,7 +368,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlProfessor().instanciarTelaCadastroProfessor(null, pai);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
@@ -364,18 +375,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
-        try {
-            Professor prof = (Professor) JTableUtil.getDadosLinhaSelecionada(tblProfessor);
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlProfessor().excluir(prof);
-                btnBuscarActionPerformed(null);
-            }
-            
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione um professor");
-        }
+        ctrlPrincipal.getCtrlProfessor().excluir(tblProfessor);    
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed
@@ -385,17 +385,12 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        if(cbxFiltro.getSelectedIndex() == 2){
-            cbxCoordenadoria.setEnabled(true);
-            preencherComboCoordenadorias();
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-        }else{
-            cbxCoordenadoria.removeAllItems();
-            cbxCoordenadoria.setEnabled(false);
-            txtFiltro.setEnabled(true);
-        }
+        alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
+
+    private void cbxCoordenadoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaItemStateChanged
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_cbxCoordenadoriaItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
