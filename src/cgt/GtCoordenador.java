@@ -2,18 +2,19 @@ package cgt;
 
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
+import cdp.CoordenadorPedagogico;
 import cdp.Professor;
 import cdp.Servidor;
 import cdp.Usuario;
-import cgd.GdUsuario;
+import cgd.GdCoordenador;
 import java.util.List;
 
 public class GtCoordenador {
 
-    private GdUsuario gdCoordenador;
+    private GdCoordenador gdCoordenador;
 
     public GtCoordenador() {
-        gdCoordenador = new GdUsuario();
+        gdCoordenador = new GdCoordenador();
     }
 
     public String cadastrar(Professor professor, String tipo, String login, String senha, String nome, String matricula) {
@@ -34,36 +35,52 @@ public class GtCoordenador {
                 
                 servidor.setMatricula(matricula);
                 servidor.setNome(nome);
-                
-                CoordenadorAcademico coordAcademico = new CoordenadorAcademico();
-                coordAcademico.setLogin(login);
-                coordAcademico.setSenha(senha);
-                coordAcademico.setServidor(servidor);
-                gdCoordenador.cadastrar(coordAcademico);
-            }
-                   
+                            
+                if(tipo.toLowerCase().equals(Constantes.COORD_ACAD)){
+
+                    CoordenadorAcademico coordAcademico = new CoordenadorAcademico();
+                    coordAcademico.setLogin(login);
+                    coordAcademico.setSenha(senha);
+                    coordAcademico.setServidor(servidor);
+                    gdCoordenador.cadastrar(coordAcademico);
+
+                }else{
+                    
+                    CoordenadorPedagogico coorPedagogico = new CoordenadorPedagogico();
+                    coorPedagogico.setLogin(login);
+                    coorPedagogico.setSenha(senha);
+                    coorPedagogico.setServidor(servidor);
+                    gdCoordenador.cadastrar(coorPedagogico);
+                }
+            }            
             return Constantes.CADASTRADO;
         } catch (Exception ex) {
             return ex.getMessage();
         }
     }
 
-    public String alterar(CoordenadorCurso coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public String alterar(Usuario coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
         try {
             
             validarCampos(nome, matricula, login, senha, tipo, professor);
-            //coordenador.setNome(nome);
-            //coordenador.setMatricula(matricula);
             coordenador.setLogin(login);
             coordenador.setSenha(senha);
-            coordenador.setProfessor(professor);
 
-            if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
-                coordenador.setProfessor(professor);
-                professor.getCoordenadoria().setCoordenador(coordenador);
-            }
+            if(coordenador instanceof CoordenadorAcademico){
+                
+                ((CoordenadorAcademico) coordenador).getServidor().setMatricula(matricula);
+                ((CoordenadorAcademico) coordenador).getServidor().setNome(nome);
+                
+            }else if(coordenador instanceof CoordenadorCurso){
+                ((CoordenadorCurso) coordenador).setProfessor(professor);
+                ((CoordenadorCurso) coordenador).getProfessor().getCoordenadoria().setCoordenador(((CoordenadorCurso) coordenador));        
             
+            }else{
+                ((CoordenadorPedagogico) coordenador).getServidor().setMatricula(matricula);
+                ((CoordenadorPedagogico) coordenador).getServidor().setNome(nome);
+            }
+                             
             gdCoordenador.alterar(coordenador);
             
             return Constantes.ALTERADO;
@@ -87,17 +104,25 @@ public class GtCoordenador {
     }
 
     public List<CoordenadorCurso> buscarCoordenadoresCurso(String coluna, String texto) {
-        if(coluna.toLowerCase().equals("tipo"))
-            return gdCoordenador.filtrarPorTipo(coluna.toLowerCase(), texto);
-        else
-            return gdCoordenador.buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
+        return gdCoordenador.buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
     }
     
     public List<CoordenadorAcademico> buscarCoordenadoresAcademicos(String coluna, String texto) {
-        if(coluna.toLowerCase().equals("tipo"))
-            return gdCoordenador.filtrarPorTipo(coluna.toLowerCase(), texto);
+        return gdCoordenador.buscarCoordenadoresAcademicos(coluna.toLowerCase(), texto);
+    }
+    
+    public List<CoordenadorPedagogico> buscarCoordenadoresPedagogicos(String coluna, String texto) {
+        return gdCoordenador.buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
+    }
+    
+    public List buscarCoordenadoresPorTipo(String coluna, String texto){
+        
+        if(texto.toLowerCase().equals(Constantes.COORD_ACAD))
+            return gdCoordenador.consultar(CoordenadorAcademico.class);
+        else if(texto.toLowerCase().equals(Constantes.COORD_CURSO))
+            return gdCoordenador.consultar(CoordenadorCurso.class);
         else
-            return gdCoordenador.buscarCoordenadoresAcademico(coluna.toLowerCase(), texto);
+            return gdCoordenador.consultar(CoordenadorPedagogico.class);
     }
 
     public void validarCampos(String nome, String matricula, String login, String senha, String tipo, Professor professor) throws Exception {

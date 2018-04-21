@@ -34,7 +34,15 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }
     
     public void atualizarTabela(){
-        btnBuscarActionPerformed(null);
+        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = txtFiltro.getText();
+        
+        if(cbxFiltro.getSelectedIndex() == 2){
+            Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+            filtro = String.valueOf(coordenadoria.getId());
+        }
+        
+        ctrlPrincipal.getCtrlProfessor().listarProfessores(colunaFiltro, filtro, tblProfessor);        
     }
     
     private void alterarComboFiltro(){
@@ -44,7 +52,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
             txtFiltro.setEnabled(false);
             btnBuscar.setEnabled(false);
             preencherComboCoordenadorias();
-            btnBuscarActionPerformed(null);
+            cbxCoordenadoriaActionPerformed(null);
         }else{
             cbxCoordenadoria.removeAllItems();
             cbxCoordenadoria.setEnabled(false);
@@ -325,26 +333,17 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = txtFiltro.getText();
-        
-        if(cbxFiltro.getSelectedIndex() == 2){
-            Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-            filtro = String.valueOf(coordenadoria.getId());
-        }
-        
-        ctrlPrincipal.getCtrlProfessor().listarProfessores(colunaFiltro, filtro, tblProfessor);        
+        atualizarTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_btnBuscarKeyPressed
 
@@ -392,7 +391,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,12 +3,14 @@ package cci;
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.Professor;
+import cdp.Usuario;
 import cgt.Constantes;
 import cgt.GtCoordenador;
 import cih.coordenador.JDBuscarCoordenador;
 import cih.coordenador.JDCadastrarCoordenador;
 import java.awt.Frame;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -34,7 +36,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     public void transitarTelas(JTable tabela, Frame pai){
         
         try {
-            CoordenadorCurso coordenador = (CoordenadorCurso) JTableUtil.getDadosLinhaSelecionada(tabela);  
+            Usuario coordenador = (Usuario) JTableUtil.getDadosLinhaSelecionada(tabela);  
             instanciarTelaCadastroCoordenador(pai, coordenador);
             
         } catch (Exception ex) {
@@ -49,7 +51,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         buscaCoord.setVisible(true);
     }
 
-    public void instanciarTelaCadastroCoordenador(Frame pai, CoordenadorCurso coordenador) {
+    public void instanciarTelaCadastroCoordenador(Frame pai, Usuario coordenador) {
         cadastraCoord = new JDCadastrarCoordenador(pai, true, ctrlPrincipal);
         identificarOrigem(coordenador);
         cadastraCoord.setIconImage(setarIconeJanela());
@@ -70,7 +72,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         }
     }
 
-    public void alterar(CoordenadorCurso coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public void alterar(Usuario coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
 
         String resposta = gtCoordenador.alterar(coordenador, professor, tipo, login, senha, nome, matricula);
         if (resposta.equals(Constantes.ALTERADO)) {
@@ -86,7 +88,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     public void excluir(JTable tabela) {
         
         try {
-            CoordenadorCurso coordenadorSelecionado = (CoordenadorCurso) JTableUtil.getDadosLinhaSelecionada(tabela);
+            Usuario coordenadorSelecionado = (Usuario) JTableUtil.getDadosLinhaSelecionada(tabela);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaCoord, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
                 String resposta = gtCoordenador.excluir(coordenadorSelecionado);
@@ -103,10 +105,26 @@ public class CtrlCoordenador extends CtrlGenerica{
     }
 
     public void listarCoordenadores(String coluna, String texto, JTable tabela) {
-        List listaCoordenadoresCurso = gtCoordenador.buscarCoordenadoresCurso(coluna, texto);
-        List listaCoordenadoresAcademicos = gtCoordenador.buscarCoordenadoresAcademicos(coluna, texto);
-        listaCoordenadoresAcademicos.addAll(listaCoordenadoresCurso);
-        listarEmTabela(listaCoordenadoresAcademicos, tabela, buscaCoord);
+        
+        if(coluna.toLowerCase().equals("tipo")){
+            
+            List listaCoordenadores = gtCoordenador.buscarCoordenadoresPorTipo(coluna, texto);
+            listarEmTabela(listaCoordenadores, tabela, buscaCoord);
+            
+        }else{
+        
+            List listaCoordenadoresCurso = gtCoordenador.buscarCoordenadoresCurso(coluna, texto);
+            List listaCoordenadoresAcademicos = gtCoordenador.buscarCoordenadoresAcademicos(coluna, texto);
+            List listaCoordenadoresPedagogicos = gtCoordenador.buscarCoordenadoresPedagogicos(coluna, texto);
+
+            List listaCoordenadores = new ArrayList<>();
+
+            listaCoordenadores.addAll(listaCoordenadoresAcademicos);
+            listaCoordenadores.addAll(listaCoordenadoresCurso);
+            listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
+
+            listarEmTabela(listaCoordenadores, tabela, buscaCoord);
+        }
     }
     
     public List<CoordenadorAcademico> buscarCoordenadoresAcademicos(String coluna, String texto) {
@@ -115,7 +133,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     
     //============================ TELA DE CADASTRO ============================================================
     
-    public void identificarOrigem(CoordenadorCurso coordenador){
+    public void identificarOrigem(Usuario coordenador){
         
         if(coordenador != null){
             cadastraCoord.setCoordenador(coordenador);
@@ -127,7 +145,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     
     public void validarOperacao(Professor professor, String tipo, String login, String senha, String nome, String matricula){  
         
-        CoordenadorCurso coordenador = cadastraCoord.getCoordenador();
+        Usuario coordenador = cadastraCoord.getCoordenador();
         
         if(validarCampos(nome, matricula, login, senha)){
             
@@ -150,13 +168,13 @@ public class CtrlCoordenador extends CtrlGenerica{
         Professor prof = (Professor) cbxProfessor.getSelectedItem();
         cadastraCoord.setarCamposProfessor(prof); 
         
-        CoordenadorCurso coordenador = cadastraCoord.getCoordenador();
+        Usuario coordenador = cadastraCoord.getCoordenador();
         
         if(coordenador != null){
             Professor profAtual;
             for(int i = 0; i < listaProfessores.size(); i++){
                 profAtual = (Professor) listaProfessores.get(i);
-                if(profAtual.getMatricula().equals(coordenador.getProfessor().getMatricula())){
+                if(profAtual.getMatricula().equals(((CoordenadorCurso)coordenador).getProfessor().getMatricula())){
                     cbxProfessor.setSelectedIndex(i);
                     break;
                 }

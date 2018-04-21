@@ -1,16 +1,19 @@
 package cih.coordenador;
 
 import cci.CtrlPrincipal;
+import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
+import cdp.CoordenadorPedagogico;
 import cdp.Coordenadoria;
 import cdp.Professor;
+import cdp.Usuario;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class JDCadastrarCoordenador extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
-    private CoordenadorCurso coordenador;
+    private Usuario coordenador;
     private List<Professor> listaProfessores;
     private List<Coordenadoria> listaCoordenadorias;
 
@@ -297,11 +300,21 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
-    public void setarCamposComInstancia(CoordenadorCurso coordenador){
-        txtNome.setText(coordenador.getProfessor().getNome());
-        txtMatricula.setText(coordenador.getProfessor().getMatricula());
+    public void setarCamposComInstancia(Usuario coordenador){
+        
         txtUsuario.setText(coordenador.getLogin());
         txtSenha.setText(coordenador.getSenha());
+        
+        if(coordenador instanceof CoordenadorAcademico){
+            txtNome.setText(((CoordenadorAcademico) coordenador).getServidor().getNome());
+            txtMatricula.setText(((CoordenadorAcademico) coordenador).getServidor().getMatricula());
+        }else if(coordenador instanceof CoordenadorCurso){
+            txtNome.setText(((CoordenadorCurso) coordenador).getProfessor().getNome());
+            txtMatricula.setText(((CoordenadorCurso) coordenador).getProfessor().getMatricula());
+        }else{
+            txtNome.setText(((CoordenadorPedagogico) coordenador).getServidor().getNome());
+            txtMatricula.setText(((CoordenadorPedagogico) coordenador).getServidor().getMatricula());
+        }
     }
     
     public void desabilitarCombos(){
@@ -320,26 +333,18 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         btnCancelar.setText("Sair");
     }
     
-    public void selecionarTipoCoordenador(CoordenadorCurso coordenador){
+    public void selecionarTipoCoordenador(Usuario coordenador){
         
-        switch (coordenador.getTipo()) {
-            
-            case "COORDENADOR ACADÊMICO":
-                cbxTipo.setSelectedIndex(0);
-                break;
-                
-            case "COORDENADOR DE CURSO":
-                ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
-                cbxTipo.setSelectedIndex(1);
-                cbxTipo.setEnabled(false);
-                txtNome.setEditable(false);
-                txtMatricula.setEditable(false);
-                break;
-                
-            default:
-                cbxTipo.setSelectedIndex(2); 
-                break;
-        }
+        if(coordenador instanceof CoordenadorAcademico){
+            cbxTipo.setSelectedIndex(0);
+        }else if( coordenador instanceof CoordenadorCurso){
+            ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
+            cbxTipo.setSelectedIndex(1);
+            cbxTipo.setEnabled(false);
+            txtNome.setEditable(false);
+            txtMatricula.setEditable(false);
+        }else
+            cbxTipo.setSelectedIndex(2); 
     }
     
     public void setarCamposProfessor(Professor professor){
@@ -349,11 +354,11 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         }   
     }
 
-    public CoordenadorCurso getCoordenador() {
+    public Usuario getCoordenador() {
         return coordenador;
     }
 
-    public void setCoordenador(CoordenadorCurso coordenador) {
+    public void setCoordenador(Usuario coordenador) {
         this.coordenador = coordenador;
     }
 

@@ -33,13 +33,15 @@ public class GtPrincipal {
                 }else if(usuario instanceof CoordenadorAcademico){
                     setPermissao(Constantes.PERMISSAO_ADMIN);
                     return Constantes.PERMISSAO_ADMIN;
+                }else{
+                    setPermissao(Constantes.PERMISSAO_VIEW);
+                    return  Constantes.PERMISSAO_VIEW;
                 }
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return Constantes.PERMISSAO_NEGADA;
         }
-        return Constantes.PERMISSAO_NEGADA;
     }
 
     public void encerrarSessao() {

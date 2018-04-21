@@ -12,6 +12,7 @@
     <mapping class="cdp.Aula"/>
     <mapping class="cdp.CoordenadorCurso"/>
     <mapping class="cdp.CoordenadorAcademico"/>
+    <mapping class="cdp.CoordenadorPedagogico"/>
     <mapping class="cdp.Coordenadoria"/>
     <mapping class="cdp.Curso"/>
     <mapping class="cdp.Disciplina"/>

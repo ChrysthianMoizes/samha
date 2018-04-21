@@ -123,7 +123,7 @@ public class CtrlProfessor extends CtrlGenerica{
         
         Professor professor = cadastraProf.getProfessor();
         
-        if(validarCampos(nome, matricula, cargaHoraria)){
+        if(validarCampos(nome, matricula, cargaHoraria, coordenadoria)){
             
             if(professor == null)   
                 cadastrar(nome, matricula, cargaHoraria, coordenadoria);
@@ -156,7 +156,12 @@ public class CtrlProfessor extends CtrlGenerica{
         
         List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().consultar();
         buscaProf.setListaCoordenadorias(listaCoordenadorias);
-        preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
+        
+        if(cadastraProf != null)
+            cadastraProf.setListaCoordenadorias(listaCoordenadorias);
+        if(listaCoordenadorias.size() > 0){
+            preencherCombo(cbxCoordenadoria, listaCoordenadorias);
+        }    
     }
     
     public void setarCoordenadoria(JComboBox cbxCoordenadoria){
@@ -214,7 +219,7 @@ public class CtrlProfessor extends CtrlGenerica{
         }
     }
     
-    public boolean validarCampos(String nome, String matricula, int cargaHoraria){
+    public boolean validarCampos(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria){
         
         if((nome.equals("")))
             return false;
@@ -222,7 +227,8 @@ public class CtrlProfessor extends CtrlGenerica{
             return false;
         if(cargaHoraria < 20)
             return false;
-        
+        if(coordenadoria == null)
+            return false;
         return true;
     }
 }

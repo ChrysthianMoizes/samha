@@ -2,17 +2,18 @@ package cgd;
 
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
+import cdp.CoordenadorPedagogico;
 import cdp.Coordenadoria;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-public class GdUsuario extends GdGenerico{
+public class GdCoordenador extends GdGenerico{
     
     private GdCoordenadoria gdCoordenadoria;
 
-    public GdUsuario() {
+    public GdCoordenador() {
         gdCoordenadoria = new GdCoordenadoria();
     }
     
@@ -20,27 +21,26 @@ public class GdUsuario extends GdGenerico{
         Criteria crit = criarSessao().createCriteria(CoordenadorCurso.class);
         crit.createAlias("professor", "p");
         crit.add( Restrictions.like("p." + coluna, texto, MatchMode.ANYWHERE));
-        //crit.add( Restrictions.like("nome", texto, MatchMode.ANYWHERE) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();
         return lista;
     }
     
-    public List buscarCoordenadoresAcademico(String coluna, String texto) {
+    public List buscarCoordenadoresAcademicos(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(CoordenadorAcademico.class);
         crit.createAlias("servidor", "s");
         crit.add( Restrictions.like("s." + coluna, texto, MatchMode.ANYWHERE));
-        //crit.add( Restrictions.like("nome", texto, MatchMode.ANYWHERE) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();
         return lista;
     }
     
-    public List filtrarPorTipo(String coluna, String texto) {
-        Criteria crit = criarSessao().createCriteria(CoordenadorCurso.class);
-        crit.add( Restrictions.eq(coluna, texto) );
+    public List buscarCoordenadoresPedagogicos(String coluna, String texto) {
+        Criteria crit = criarSessao().createCriteria(CoordenadorPedagogico.class);
+        crit.createAlias("servidor", "s");
+        crit.add( Restrictions.like("s." + coluna, texto, MatchMode.ANYWHERE));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();
@@ -53,7 +53,7 @@ public class GdUsuario extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
             
-            Coordenadoria coordenadoria = gdCoordenadoria.filtrarCoordenadoriaUnica("coordenador.id", coordenador.getId());
+            Coordenadoria coordenadoria = coordenador.getProfessor().getCoordenadoria();
             
             coordenadoria.setCoordenador(null);
             sessao.update(coordenadoria);
