@@ -1,6 +1,5 @@
 package cgt;
 
-import cdp.Curso;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import cgd.GdTurma;
@@ -17,7 +16,7 @@ public class GtTurma {
     public String cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
 
         try {
-           
+            validarCampos(nome, turno, matriz);
             Turma turma = new Turma();
            
             turma.setAno(ano);
@@ -37,7 +36,7 @@ public class GtTurma {
     public String alterar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz, Turma turma){
         
         try {
-            
+            validarCampos(nome, turno, matriz);
             turma.setAno(ano);
             turma.setMatriz(matriz);
             turma.setNome(nome.toUpperCase());
@@ -55,8 +54,7 @@ public class GtTurma {
     public List<Turma> buscar(String coluna, String texto) {
         
         if(coluna.toLowerCase().equals("curso")){
-            coluna = "matriz.id";
-            return gdTurma.filtrarPorMatriz(coluna.toLowerCase(), Integer.valueOf(texto));
+            return gdTurma.filtrarPorCurso(Integer.valueOf(texto));
         }
         return gdTurma.buscar(coluna.toLowerCase(), texto);
     }
@@ -70,7 +68,7 @@ public class GtTurma {
         try {
             //verificar se a turma possui oferta
             List oferta = null; 
-            if(oferta.size() == 0){
+            if(oferta == null){
                 gdTurma.excluir(turma);
                 return Constantes.EXCLUIDO;
             }else
@@ -78,6 +76,18 @@ public class GtTurma {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-    }  
+    }
+    
+    public void validarCampos(String nome, String turno, MatrizCurricular matriz) throws SAMHAException{
+        
+        if((nome.equals("")))
+            throw new SAMHAException(1);
+        
+        if(turno.equals(""))
+            throw new SAMHAException(15);
+        
+        if(matriz == null)
+            throw new SAMHAException(13);
+    }
     
 }

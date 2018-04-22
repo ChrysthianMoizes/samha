@@ -347,11 +347,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                 cbxMatrizItemStateChanged(evt);
             }
         });
-        cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxMatrizActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlBuscarDisciplinaLayout = new javax.swing.GroupLayout(pnlBuscarDisciplina);
         pnlBuscarDisciplina.setLayout(pnlBuscarDisciplinaLayout);
@@ -505,10 +500,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         JTableUtil.limparTabela(tblDisciplina);
         alterarComboFiltro();       
     }//GEN-LAST:event_cbxFiltroItemStateChanged
-
-    private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
-        //atualizarTabela();
-    }//GEN-LAST:event_cbxMatrizActionPerformed
 
     private void rbtnObrigatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnObrigatoriaActionPerformed
         atualizarTabela();

@@ -64,10 +64,8 @@ public class CtrlDisciplina extends CtrlGenerica{
             CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Cadastrado com sucesso!");
             cadastraDisciplina.limparCampos();
             buscaDisciplina.atualizarTabela();
-        } else {
+        } else
             CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
-
-        }
     }
     
     public void alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina) {
@@ -79,10 +77,8 @@ public class CtrlDisciplina extends CtrlGenerica{
             cadastraDisciplina.desabilitarCampos();
             cadastraDisciplina.desabilitarCombos();
             buscaDisciplina.atualizarTabela();
-        } else {
+        } else 
             CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
-  
-        }
     }
     
     public List<Disciplina> buscar(String coluna, String texto) {
@@ -99,9 +95,8 @@ public class CtrlDisciplina extends CtrlGenerica{
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaDisciplina, "Excluído com sucesso!");
                     buscaDisciplina.atualizarTabela();
-                } else {
+                } else 
                     CtrlMensagem.exibirMensagemErro(buscaDisciplina, resposta);
-                }
             }
         } catch (Exception ex) {
             CtrlMensagem.exibirMensagemErro(buscaDisciplina, "Selecione uma disciplina");
@@ -112,6 +107,7 @@ public class CtrlDisciplina extends CtrlGenerica{
         List listaDisciplinas = gtDisciplina.buscar(coluna, texto);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina);
     }
+    
     //======================================= TELA DE CADASTRO ===============================================
     
     public void validarOperacao(MatrizCurricular matriz, String nome, String tipo, int periodo, int cargaHoraria, int qtAulas){  

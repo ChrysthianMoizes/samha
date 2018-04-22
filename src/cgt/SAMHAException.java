@@ -27,6 +27,10 @@ public class SAMHAException extends Exception {
         msgsErro[11] = "Coordenadoria não selecionada";
         
         msgsErro[12] = "Curso não selecionado";
+        msgsErro[13] = "Matriz Curricular não selecionada";
+        msgsErro[14] = "Campo Quantidade de Aulas inválido";
+        msgsErro[15] = "Campo TURNO inválido";
+        msgsErro[16] = "Campo TIPO inválido";
     }
     
     @Override

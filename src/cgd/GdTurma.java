@@ -9,15 +9,6 @@ import org.hibernate.sql.JoinType;
 
 public class GdTurma extends GdGenerico{
     
-    public List filtrarPorMatriz(String coluna, int id) {
-        Criteria crit = criarSessao().createCriteria(Turma.class);
-        crit.add( Restrictions.eq(coluna, id) );
-        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        List lista = crit.list();
-        sessao.close();
-        return lista;
-    }
-    
     public List filtrarPorCurso(int id) {
         Criteria crit = criarSessao().createCriteria(Turma.class);
         crit.createAlias("matriz", "m");

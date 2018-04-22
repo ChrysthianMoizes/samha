@@ -1,13 +1,12 @@
 package cih.turma;
 
+import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Curso;
-import cdp.Eixo;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDCadastrarTurma extends javax.swing.JDialog {
 
@@ -22,7 +21,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.turma = turma;
         setarBackground();
-        identificarOrigem();
     }
     
     private void setarBackground(){
@@ -35,7 +33,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGroupPrioridade = new javax.swing.ButtonGroup();
         pnlGeral = new javax.swing.JPanel();
         pnlTurma = new javax.swing.JPanel();
         txtNomeTurma = new javax.swing.JTextField();
@@ -93,11 +90,6 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxMatriz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxMatrizItemStateChanged(evt);
-            }
-        });
 
         cbxTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
@@ -251,77 +243,26 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void identificarOrigem() {
-        preencherComboCurso();
-        if (turma != null){ 
-            setarCamposComInstancia();
-        }
-    }
-
-    public void setarCamposComInstancia() {
-        setarCurso();
-        setarMatriz();
-        setarTurno();
+    public void setarCamposComInstancia(Turma turma) {    
         txtNomeTurma.setText(turma.getNome());
         spnAno.setValue(turma.getAno());
         spnSemestre.setValue(turma.getSemestre());        
     }
     
-    public void setarCurso(){
-        
-        Curso curso;
-
-        for (int i = 0; i < listaCursos.size(); i++) {
-
-            curso = listaCursos.get(i);
-            if (curso.getId() == turma.getMatriz().getCurso().getId()) {
-                cbxCurso.setSelectedIndex(i);
-                preencherComboMatriz(curso.getId());
-                break;
-            }
-        }
+    public void setarCurso(Turma turma){ 
+        ctrlPrincipal.getCtrlTurma().setarCurso(turma, cbxCurso, cbxMatriz);
     }
     
-    public void setarMatriz(){
-        
-        MatrizCurricular matriz;
-        
-        for (int i = 0; i < listaMatriz.size(); i++) {
-
-            matriz = listaMatriz.get(i);
-            if (matriz.getId() == turma.getMatriz().getId()) {
-                cbxMatriz.setSelectedIndex(i);
-                break;
-            }
-        }
+    public void setarMatriz(){       
+        ctrlPrincipal.getCtrlTurma().setarMatriz(cbxMatriz);
     }
     
     public void setarTurno(){
-        
-        if(turma.getTurno().equals("MATUTINO")){
-            cbxTurno.setSelectedIndex(0);
-        }else if(turma.getTurno().equals("VESPERTINO")){
-            cbxTurno.setSelectedIndex(1);
-        }else{
-            cbxTurno.setSelectedIndex(2);
-        } 
+        ctrlPrincipal.getCtrlTurma().setarTurno(cbxTurno);
     }
  
     public void preencherComboCurso(){ 
-        listaCursos = ctrlPrincipal.getCtrlCurso().listar();
-        cbxCurso.removeAllItems();
-        cbxCurso.setModel(new DefaultComboBoxModel(listaCursos.toArray()));
-        
-        if(listaCursos.size() > 0){
-            Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(curso.getId());
-        }  
-    }
-    
-     public void preencherComboMatriz(int id) {
-        listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        cbxMatriz.removeAllItems();
-        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray())); 
+        ctrlPrincipal.getCtrlTurma().preencherComboCurso(cbxCurso, cbxMatriz);
     }
     
     public void desabilitarCampos(){
@@ -335,25 +276,41 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         btnCancelar.setText("Sair");
     }
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    public Turma getTurma() {
+        return turma;
+    }
 
-        String nome = txtNomeTurma.getText();
-        String turno = cbxTurno.getSelectedItem().toString();
-        int ano = (int) spnAno.getValue();
-        int semestre = (int) spnSemestre.getValue();
-        MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-        
-        int resposta = 0;
-        
-        if(turma == null){
-            resposta = ctrlPrincipal.getCtrlTurma().cadastrar(nome, turno, ano, semestre, matriz);  
-        }else{
-            resposta = ctrlPrincipal.getCtrlTurma().alterar(nome, turno, ano, semestre, matriz, turma);
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    public List<MatrizCurricular> getListaMatriz() {
+        return listaMatriz;
+    }
+
+    public void setListaMatriz(List<MatrizCurricular> listaMatriz) {
+        this.listaMatriz = listaMatriz;
+    }
+
+    public List<Curso> getListaCursos() {
+        return listaCursos;
+    }
+
+    public void setListaCursos(List<Curso> listaCursos) {
+        this.listaCursos = listaCursos;
+    }
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        try{
+            String nome = txtNomeTurma.getText();
+            String turno = cbxTurno.getSelectedItem().toString();
+            int ano = (int) spnAno.getValue();
+            int semestre = (int) spnSemestre.getValue();
+            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
+            ctrlPrincipal.getCtrlTurma().validarOperacao(matriz, nome, turno, ano, semestre);
+        }catch(Exception e){
+            CtrlMensagem.exibirMensagemAviso(this, "Todos os campos devem ser preenchidos");
         }
-        
-        if (resposta == 0) {
-            desabilitarCampos();
-        }  
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -372,21 +329,14 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCancelarKeyPressed
 
-    private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
-        Eixo eixo = (Eixo) cbxMatriz.getSelectedItem();
-        if(eixo != null)
-            preencherComboMatriz(eixo.getId());
-    }//GEN-LAST:event_cbxMatrizItemStateChanged
-
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null)
-            preencherComboMatriz(curso.getId());
+            ctrlPrincipal.getCtrlTurma().preencherComboMatriz(curso.getId(), cbxMatriz);
     }//GEN-LAST:event_cbxCursoItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.ButtonGroup btnGroupPrioridade;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxMatriz;
