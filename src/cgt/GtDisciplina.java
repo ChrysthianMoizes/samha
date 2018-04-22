@@ -67,7 +67,7 @@ public class GtDisciplina {
         try {
             //verificar se a disciplina está associada a alguma alocação = criar gdLocacao
             List alocacao = null; 
-            if(alocacao.size() == 0){
+            if(alocacao == null){
                 gdDisciplina.excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else
