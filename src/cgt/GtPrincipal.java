@@ -35,7 +35,7 @@ public class GtPrincipal {
                     return Constantes.PERMISSAO_ADMIN;
                 }else{
                     setPermissao(Constantes.PERMISSAO_VIEW);
-                    return  Constantes.PERMISSAO_VIEW;
+                    return Constantes.PERMISSAO_VIEW;
                 }
             }
         } catch (Exception ex) {

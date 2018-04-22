@@ -25,6 +25,8 @@ public class SAMHAException extends Exception {
         msgsErro[9] = "Campo NÍVEL inválido";
         msgsErro[10] = "Campo PERÍODOS inválido";
         msgsErro[11] = "Coordenadoria não selecionada";
+        
+        msgsErro[12] = "Curso não selecionado";
     }
     
     @Override

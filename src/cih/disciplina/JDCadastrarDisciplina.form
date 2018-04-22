@@ -212,9 +212,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMatrizItemStateChanged"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -506,7 +503,7 @@
                   <Font name="DialogInput" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="60" minimum="0" numberType="java.lang.Integer" stepSize="30" type="number"/>
+                  <SpinnerModel initial="60" minimum="0" numberType="java.lang.Integer" stepSize="15" type="number"/>
                 </Property>
               </Properties>
             </Component>

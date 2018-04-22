@@ -115,11 +115,11 @@ public class GtCoordenador {
         return gdCoordenador.buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
     }
     
-    public List buscarCoordenadoresPorTipo(String coluna, String texto){
+    public List buscarCoordenadoresPorTipo(String tipo){
         
-        if(texto.toLowerCase().equals(Constantes.COORD_ACAD))
+        if(tipo.toLowerCase().equals(Constantes.COORD_ACAD))
             return gdCoordenador.consultar(CoordenadorAcademico.class);
-        else if(texto.toLowerCase().equals(Constantes.COORD_CURSO))
+        else if(tipo.toLowerCase().equals(Constantes.COORD_CURSO))
             return gdCoordenador.consultar(CoordenadorCurso.class);
         else
             return gdCoordenador.consultar(CoordenadorPedagogico.class);

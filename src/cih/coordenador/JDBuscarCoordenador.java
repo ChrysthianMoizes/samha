@@ -2,10 +2,8 @@ package cih.coordenador;
 
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.CoordenadorCurso;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 public class JDBuscarCoordenador extends javax.swing.JDialog {
 

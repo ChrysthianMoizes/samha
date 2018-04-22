@@ -18,14 +18,20 @@ public class CtrlMatriz {
     
     public int cadastrar(String nome, int ano, int semestre, Curso curso){
         
-        String resposta = gtMatriz.cadastrar(nome, ano, semestre, curso);
+        if(validarCampos(nome)){
+            
+            String resposta = gtMatriz.cadastrar(nome, ano, semestre, curso);
 
-        if (resposta.equals(Constantes.CADASTRADO)) {
-            return 0;
-        } else {
-            CtrlMensagem.exibirMensagemErro(null, resposta);
+            if (resposta.equals(Constantes.CADASTRADO)) {
+                return 0;
+            } else {
+                CtrlMensagem.exibirMensagemErro(null, resposta);
+                return 1;
+            }   
+        }else{
+            CtrlMensagem.exibirMensagemAviso(null, "Campo nome da MATRIZ inválido");
             return 1;
-        }   
+        }
     }
     
     public int excluir(MatrizCurricular matriz) {
@@ -43,4 +49,10 @@ public class CtrlMatriz {
         return gtMatriz.filtrarMatrizCurso(id);
     }
     
+    public boolean validarCampos(String nome){
+        
+        if((nome.equals("")))
+            return false;
+        return true;
+    } 
 }

@@ -68,9 +68,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         cbxTipo.setBackground(new java.awt.Color(0, 204, 0));
         cbxTipo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COORDENADOR ACADÊMICO", "COORDENADOR DE CURSO", "COORDENADOR PEDAGÓGICO" }));
-        cbxTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxTipoItemStateChanged(evt);
+        cbxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTipoActionPerformed(evt);
             }
         });
 
@@ -317,9 +317,38 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         }
     }
     
-    public void desabilitarCombos(){
-        cbxProfessor.setEnabled(false);
+    public void limparCampos(){
+        cbxTipo.setSelectedIndex(0);
+        alterarComboTipo();
+        txtSenha.setText("");
+        txtUsuario.setText("");
+    }
+    
+    public void alterarComboTipo(){
+        switch (cbxTipo.getSelectedIndex()) {
+            case 1:
+                ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
+                cbxProfessor.setEnabled(true);
+                txtNome.setEditable(false);
+                txtMatricula.setEditable(false);
+                break;
+            default:
+                cbxProfessor.removeAllItems();
+                cbxProfessor.setEnabled(false);
+                txtNome.setEditable(true);
+                txtMatricula.setEditable(true);
+                txtMatricula.setText("");
+                txtNome.setText("");
+                break;
+        }
+    }
+    
+    public void desabilitarComboTipoCoordenador(){
         cbxTipo.setEnabled(false);
+    }
+    
+     public void desabilitarComboProfessor(boolean opcao){ 
+        cbxProfessor.setEnabled(opcao);    
     }
     
     public void desabilitarCampos(){
@@ -388,6 +417,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
         ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, tipo, login, senha, nome, matricula);
+        ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -406,30 +436,14 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCancelarKeyPressed
 
-    private void cbxTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTipoItemStateChanged
-        
-        switch (cbxTipo.getSelectedIndex()) {
-            case 1:
-                ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
-                cbxProfessor.setEnabled(true);
-                txtNome.setEditable(false);
-                txtMatricula.setEditable(false);
-                break;
-            default:
-                cbxProfessor.removeAllItems();
-                cbxProfessor.setEnabled(false);
-                txtNome.setEditable(true);
-                txtMatricula.setEditable(true);
-                txtMatricula.setText("");
-                txtNome.setText("");
-                break;
-        }
-    }//GEN-LAST:event_cbxTipoItemStateChanged
-
     private void cbxProfessorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxProfessorItemStateChanged
         Professor prof = (Professor) cbxProfessor.getSelectedItem();
         setarCamposProfessor(prof); 
     }//GEN-LAST:event_cbxProfessorItemStateChanged
+
+    private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
+        alterarComboTipo();
+    }//GEN-LAST:event_cbxTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

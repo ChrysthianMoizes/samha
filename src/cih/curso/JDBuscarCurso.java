@@ -41,7 +41,34 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }
     
     public void atualizarTabela(){
-        btnBuscarActionPerformed(null);
+        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = txtFiltro.getText();
+        
+        if(colunaFiltro.toLowerCase().equals("nivel")){
+            
+            char tipo = (char) btnGroup.getSelection().getMnemonic();
+            
+            switch (tipo) {
+                case 'E':
+                    filtro = "ENSINO MÉDIO INTEGRADO";
+                    break;
+                case 'G':
+                    filtro = "GRADUAÇÃO";
+                    break;
+                case 'P':
+                    filtro = "PÓS-GRADUAÇÃO";
+                    break;
+                    
+                case 'M':
+                    filtro = "MESTRADO";
+                    break;
+                    
+                default:
+                    filtro = "DOUTORADO";
+                    break;
+            }  
+        }  
+        ctrlPrincipal.getCtrlCurso().listarCursos(colunaFiltro, filtro, tblCurso);
     }
     
     private void alterarComboFiltro(){
@@ -394,45 +421,17 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = txtFiltro.getText();
-        
-        if(colunaFiltro.toLowerCase().equals("nivel")){
-            
-            char tipo = (char) btnGroup.getSelection().getMnemonic();
-            
-            switch (tipo) {
-                case 'E':
-                    filtro = "ENSINO MÉDIO INTEGRADO";
-                    break;
-                case 'G':
-                    filtro = "GRADUAÇÃO";
-                    break;
-                case 'P':
-                    filtro = "PÓS-GRADUAÇÃO";
-                    break;
-                    
-                case 'M':
-                    filtro = "MESTRADO";
-                    break;
-                    
-                default:
-                    filtro = "DOUTORADO";
-                    break;
-            }  
-        }  
-        ctrlPrincipal.getCtrlCurso().listarCursos(colunaFiltro, filtro, tblCurso);    
+        atualizarTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_btnBuscarKeyPressed
 
@@ -458,11 +457,12 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlCurso().instanciarTelaCadastroCurso(null, pai);
-        //btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
-        btnCadastrarActionPerformed(null);
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnCadastrarActionPerformed(null);
+        }
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -475,30 +475,30 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnExcluirKeyPressed
 
-    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        JTableUtil.limparTabela(tblCurso);
-        alterarComboFiltro();
-    }//GEN-LAST:event_cbxFiltroItemStateChanged
-
     private void rbtnEnsinoMedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEnsinoMedioActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rbtnEnsinoMedioActionPerformed
 
     private void rbtnGraduacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnGraduacaoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rbtnGraduacaoActionPerformed
 
     private void rbtnPosGraduacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnPosGraduacaoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rbtnPosGraduacaoActionPerformed
 
     private void rbtnMestradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMestradoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rbtnMestradoActionPerformed
 
     private void rbtnDoutoradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDoutoradoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rbtnDoutoradoActionPerformed
+
+    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        JTableUtil.limparTabela(tblCurso);
+        atualizarTabela();
+    }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

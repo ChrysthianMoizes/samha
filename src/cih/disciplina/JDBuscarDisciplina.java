@@ -9,14 +9,11 @@ import cdp.MatrizCurricular;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private List<Disciplina> listaDisciplinas;
-    private List<Curso> listaCursos;
-    private List<MatrizCurricular> listaMatriz;
     private Frame pai;
     
     public JDBuscarDisciplina(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
@@ -33,42 +30,94 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         pnlRodape.setBackground(ctrlPrincipal.setarCorPanelInterior());
         rbtnObrigatoria.setBackground(ctrlPrincipal.setarCorPanelInterior());
         rbtnOptativa.setBackground(ctrlPrincipal.setarCorPanelInterior());
-        rbtnPosEspecial.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnEspecial.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void atualizarTabela(){
         
-        JTableUtil.limparTabela(tblDisciplina);
+        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = txtFiltro.getText();
         
-        if(listaDisciplinas.size() > 0){
-            listaDisciplinas.forEach((disciplina) -> {
-                JTableUtil.addLinha(tblDisciplina, disciplina.toArray() );
-            });
-        }
+        if(colunaFiltro.toLowerCase().equals("tipo")){
+            
+            char tipo = (char) btnGroup.getSelection().getMnemonic();
+            
+            switch (tipo) {
+                case 'B':
+                    filtro = "OBRIGATÓRIA";
+                    break;
+                case 'P':
+                    filtro = "OPTATIVA";
+                    break;          
+                default:
+                    filtro = "ESPECIAL";
+                    break;
+            }  
+        }else if(colunaFiltro.toLowerCase().equals("curso")){
+            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
+            if(matriz != null)
+                filtro = String.valueOf(matriz.getId());
+            else
+                CtrlMensagem.exibirMensagemAviso(pai, "Curso não possui matriz cadastrada");
+        } 
+        ctrlPrincipal.getCtrlDisciplina().listarDisciplinas(colunaFiltro, filtro, tblDisciplina); 
     }
     
     public void preencherComboCurso(){
-        
-        if(listaCursos == null)
-            listaCursos = ctrlPrincipal.getCtrlCurso().listar();
-           
-        cbxCurso.setModel(new DefaultComboBoxModel(listaCursos.toArray()));
-        
-        if(listaCursos.size() > 0){
-            cbxCurso.setSelectedIndex(0);
-            Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(curso.getId());
-        }
+        ctrlPrincipal.getCtrlDisciplina().preencherComboCurso(cbxCurso, cbxMatriz);
     }
     
-    public void preencherComboMatriz(int id) {
-        listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        cbxMatriz.removeAllItems();
-        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray()));
-        if(listaMatriz.size() > 0)
-            cbxMatriz.setSelectedIndex(0);
+    public void alterarComboFiltro(){
+        
+        if(cbxFiltro.getSelectedIndex() == 0){
+            
+            cbxCurso.removeAllItems();
+            cbxCurso.setEnabled(false);
+            cbxMatriz.removeAllItems();
+            cbxMatriz.setEnabled(false);
+            rbtnObrigatoria.setEnabled(false);
+            rbtnOptativa.setEnabled(false);
+            rbtnEspecial.setEnabled(false);
+            txtFiltro.setEnabled(true);
+            btnBuscar.setEnabled(true);
+            
+        }else if(cbxFiltro.getSelectedIndex() == 1){
+            
+            btnBuscar.setEnabled(false);
+            cbxCurso.setEnabled(true);
+            cbxMatriz.setEnabled(true);
+            preencherComboCurso();
+            rbtnObrigatoria.setEnabled(false);
+            rbtnOptativa.setEnabled(false);
+            rbtnEspecial.setEnabled(false);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            atualizarTabela();
+      
+        }else{
+            
+            btnBuscar.setEnabled(false);
+            cbxCurso.removeAllItems();
+            cbxCurso.setEnabled(false);
+            cbxMatriz.removeAllItems();
+            cbxMatriz.setEnabled(false);
+            rbtnObrigatoria.setEnabled(true);
+            rbtnObrigatoria.setSelected(true);
+            rbtnOptativa.setEnabled(true);
+            rbtnEspecial.setEnabled(true);
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+        }
     }
 
+    public List<Disciplina> getListaDisciplinas() {
+        return listaDisciplinas;
+    }
+
+    public void setListaDisciplinas(List<Disciplina> listaDisciplinas) {
+        this.listaDisciplinas = listaDisciplinas;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,7 +136,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         jScrollPaneDisciplinas = new javax.swing.JScrollPane();
         tblDisciplina = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        rbtnPosEspecial = new javax.swing.JRadioButton();
+        rbtnEspecial = new javax.swing.JRadioButton();
         rbtnObrigatoria = new javax.swing.JRadioButton();
         rbtnOptativa = new javax.swing.JRadioButton();
         cbxCurso = new javax.swing.JComboBox<>();
@@ -246,12 +295,17 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             }
         });
 
-        rbtnPosEspecial.setBackground(new java.awt.Color(0, 204, 102));
-        btnGroup.add(rbtnPosEspecial);
-        rbtnPosEspecial.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnPosEspecial.setMnemonic('e');
-        rbtnPosEspecial.setText("Especial");
-        rbtnPosEspecial.setEnabled(false);
+        rbtnEspecial.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnEspecial);
+        rbtnEspecial.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnEspecial.setMnemonic('e');
+        rbtnEspecial.setText("Especial");
+        rbtnEspecial.setEnabled(false);
+        rbtnEspecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEspecialActionPerformed(evt);
+            }
+        });
 
         rbtnObrigatoria.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnObrigatoria);
@@ -260,6 +314,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         rbtnObrigatoria.setSelected(true);
         rbtnObrigatoria.setText("Obrigatória");
         rbtnObrigatoria.setEnabled(false);
+        rbtnObrigatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnObrigatoriaActionPerformed(evt);
+            }
+        });
 
         rbtnOptativa.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnOptativa);
@@ -267,6 +326,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         rbtnOptativa.setMnemonic('p');
         rbtnOptativa.setText("Optativa");
         rbtnOptativa.setEnabled(false);
+        rbtnOptativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnOptativaActionPerformed(evt);
+            }
+        });
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setEnabled(false);
@@ -278,6 +342,16 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxMatriz.setEnabled(false);
+        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMatrizItemStateChanged(evt);
+            }
+        });
+        cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMatrizActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarDisciplinaLayout = new javax.swing.GroupLayout(pnlBuscarDisciplina);
         pnlBuscarDisciplina.setLayout(pnlBuscarDisciplinaLayout);
@@ -298,7 +372,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(rbtnOptativa)
                                 .addGap(18, 18, 18)
-                                .addComponent(rbtnPosEspecial)
+                                .addComponent(rbtnEspecial)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
                                 .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,7 +401,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                     .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnPosEspecial)
+                    .addComponent(rbtnEspecial)
                     .addComponent(rbtnOptativa)
                     .addComponent(rbtnObrigatoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -373,58 +447,22 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = txtFiltro.getText();
-        
-        if(colunaFiltro.toLowerCase().equals("tipo")){
-            
-            char tipo = (char) btnGroup.getSelection().getMnemonic();
-            
-            switch (tipo) {
-                case 'B':
-                    filtro = "OBRIGATÓRIA";
-                    break;
-                case 'P':
-                    filtro = "OPTATIVA";
-                    break;          
-                default:
-                    filtro = "ESPECIAL";
-                    break;
-            }  
-        }else if(colunaFiltro.toLowerCase().equals("curso")){
-            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-            if(matriz != null)
-                filtro = String.valueOf(matriz.getId());
-            else
-                CtrlMensagem.exibirMensagemAviso(pai, "Matriz não cadastrada");
-        } 
-
-        listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().buscar(colunaFiltro, filtro);
         atualizarTabela();
-        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_btnBuscarKeyPressed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
-        try {
-            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
-            ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(disciplina, pai);
-            btnBuscarActionPerformed(null);
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
-        }
+        ctrlPrincipal.getCtrlDisciplina().transitarTelas(tblDisciplina, pai);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAlterarKeyPressed
@@ -445,26 +483,16 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlDisciplina().instanciarTelaCadastroDisciplina(null, pai);
-        btnBuscarActionPerformed(null);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
-        btnCadastrarActionPerformed(null);
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnCadastrarActionPerformed(null);
+        }
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
-        try {
-            Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tblDisciplina);
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                ctrlPrincipal.getCtrlDisciplina().excluir(disciplina);
-                btnBuscarActionPerformed(null);
-            }
-            
-        } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(this, "Selecione uma disciplina");
-        }
+        ctrlPrincipal.getCtrlDisciplina().excluir(tblDisciplina);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnExcluirKeyPressed
@@ -474,49 +502,37 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        
-        if(cbxFiltro.getSelectedIndex() == 0){
-            
-            cbxCurso.removeAllItems();
-            cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(false);
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnPosEspecial.setEnabled(false);
-            txtFiltro.setEnabled(true);
-            
-        }else if(cbxFiltro.getSelectedIndex() == 1){
-            
-            cbxCurso.setEnabled(true);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(true);
-            preencherComboCurso();
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnPosEspecial.setEnabled(false);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-            
-        }else{
-            
-            cbxCurso.removeAllItems();
-            cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(false);
-            rbtnObrigatoria.setEnabled(true);
-            rbtnOptativa.setEnabled(true);
-            rbtnPosEspecial.setEnabled(true);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-        }
+        JTableUtil.limparTabela(tblDisciplina);
+        alterarComboFiltro();       
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
+    private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
+        //atualizarTabela();
+    }//GEN-LAST:event_cbxMatrizActionPerformed
+
+    private void rbtnObrigatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnObrigatoriaActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_rbtnObrigatoriaActionPerformed
+
+    private void rbtnOptativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnOptativaActionPerformed
+       atualizarTabela();
+    }//GEN-LAST:event_rbtnOptativaActionPerformed
+
+    private void rbtnEspecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEspecialActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_rbtnEspecialActionPerformed
+
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
-       Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null)
-            preencherComboMatriz(curso.getId());
+        Curso curso = (Curso) cbxCurso.getSelectedItem();
+        if(curso != null){
+           ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
+           atualizarTabela();
+        }   
     }//GEN-LAST:event_cbxCursoItemStateChanged
+
+    private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
+        atualizarTabela();
+    }//GEN-LAST:event_cbxMatrizItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -533,9 +549,9 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private javax.swing.JPanel pnlBuscarDisciplina;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;
+    private javax.swing.JRadioButton rbtnEspecial;
     private javax.swing.JRadioButton rbtnObrigatoria;
     private javax.swing.JRadioButton rbtnOptativa;
-    private javax.swing.JRadioButton rbtnPosEspecial;
     private javax.swing.JTable tblDisciplina;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables

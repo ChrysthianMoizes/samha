@@ -19,6 +19,7 @@ public class GtMatriz {
     public String cadastrar(String nome, int ano, int semestre, Curso curso) {
 
         try {
+            validarCampos(nome, curso);
             MatrizCurricular matriz = new MatrizCurricular();
             matriz.setNome(nome.toUpperCase());
             matriz.setAno(ano);
@@ -55,4 +56,12 @@ public class GtMatriz {
         return gdMatriz.filtrarMatrizCurso("curso.id", id);
     }
     
+    public void validarCampos(String nome, Curso curso) throws SAMHAException{
+        
+        if((nome.equals("")))
+            throw new SAMHAException(1);
+        
+        if(curso == null)
+            throw new SAMHAException(8);
+    }     
 }
