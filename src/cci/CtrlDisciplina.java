@@ -46,6 +46,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     public void instanciarTelaBuscaDisciplina(Frame pai) {
         buscaDisciplina = new JDBuscarDisciplina(pai, true, ctrlPrincipal);
         buscaDisciplina.setIconImage(setarIconeJanela());
+        new Thread(new AtualizarInterface(buscaDisciplina)).start();
         buscaDisciplina.setVisible(true);
     }
 

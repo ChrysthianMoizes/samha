@@ -86,7 +86,6 @@ public class FrmInicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
-        setPreferredSize(new java.awt.Dimension(800, 400));
 
         toolBar.setBackground(new java.awt.Color(0, 153, 102));
         toolBar.setBorder(null);
