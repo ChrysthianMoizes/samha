@@ -5,26 +5,29 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 
 public class GdTurma extends GdGenerico{
     
     public List filtrarPorCurso(int id) {
         Criteria crit = criarSessao().createCriteria(Turma.class);
+        sessao.beginTransaction();
         crit.createAlias("matriz", "m");
         crit.createAlias("m.curso", "c");
         crit.add( Restrictions.eq("c.id", id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Turma.class);
+        sessao.beginTransaction();
         crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }

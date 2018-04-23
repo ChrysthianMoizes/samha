@@ -19,7 +19,7 @@ public abstract class GdGenerico {
     }
     
     private void persistir(Object obj, int cenario) throws SQLException {
-        
+
         try {
             sessao = criarSessao();
             sessao.beginTransaction();
@@ -32,7 +32,8 @@ public abstract class GdGenerico {
                     sessao.delete(obj); break;
                 default: break;    
             }
-            sessao.getTransaction().commit();
+
+            sessao.getTransaction().commit(); 
             sessao.close();
         } catch (ConstraintViolationException ce) {
             sessao.getTransaction().rollback();
@@ -65,10 +66,9 @@ public abstract class GdGenerico {
         
         Criteria cons = sessao.createCriteria(classe);
         lista = cons.list();
-        
         sessao.getTransaction().commit();
         sessao.close();
-        
+ 
         return lista;
     }
 

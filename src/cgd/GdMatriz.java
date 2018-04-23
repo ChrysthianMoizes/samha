@@ -9,10 +9,12 @@ public class GdMatriz extends GdGenerico{
     
     public List filtrarMatrizCurso(String coluna, int id) {
         Criteria crit = criarSessao().createCriteria(MatrizCurricular.class);
+        sessao.beginTransaction();
         coluna = coluna.toLowerCase();
         crit.add( Restrictions.eq(coluna, id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }

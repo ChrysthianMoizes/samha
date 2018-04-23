@@ -1,5 +1,6 @@
 package cgd.hibernate;
 
+import java.io.File;
 import org.hibernate.Session;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
@@ -11,8 +12,9 @@ public class HibernateConfig {
     
     static {
         try {
-            
-            sessionFactory = new AnnotationConfiguration().configure("/cgd/hibernate/Hibernate.cfg.xml").buildSessionFactory();
+            File absoluto = new File("../src/cgd/hibernate/hibernate.cfg.xml");
+            File netbeans = new File("src/cgd/hibernate/hibernate.cfg.xml");
+            sessionFactory = new AnnotationConfiguration().configure(netbeans).buildSessionFactory();
             Session session = sessionFactory.openSession(); 
             Transaction tx = session.beginTransaction();
             tx.commit();

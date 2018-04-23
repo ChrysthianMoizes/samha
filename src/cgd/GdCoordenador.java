@@ -19,30 +19,36 @@ public class GdCoordenador extends GdGenerico{
     
     public List buscarCoordenadoresCurso(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(CoordenadorCurso.class);
+        sessao.beginTransaction();
         crit.createAlias("professor", "p");
         crit.add( Restrictions.like("p." + coluna, texto, MatchMode.ANYWHERE));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
     public List buscarCoordenadoresAcademicos(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(CoordenadorAcademico.class);
+        sessao.beginTransaction();
         crit.createAlias("servidor", "s");
         crit.add( Restrictions.like("s." + coluna, texto, MatchMode.ANYWHERE));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
     public List buscarCoordenadoresPedagogicos(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(CoordenadorPedagogico.class);
+        sessao.beginTransaction();
         crit.createAlias("servidor", "s");
         crit.add( Restrictions.like("s." + coluna, texto, MatchMode.ANYWHERE));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
@@ -59,7 +65,7 @@ public class GdCoordenador extends GdGenerico{
             sessao.update(coordenadoria);
             sessao.delete(coordenador);
             
-            sessao.getTransaction().commit();
+            sessao.getTransaction().commit();        
             sessao.close();
 
         } catch (Exception e) {

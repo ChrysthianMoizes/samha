@@ -417,7 +417,6 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
         ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, tipo, login, senha, nome, matricula);
-        ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed

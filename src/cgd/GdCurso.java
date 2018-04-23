@@ -10,28 +10,34 @@ public class GdCurso extends GdGenerico{
     
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Curso.class);
+        sessao.beginTransaction();
         crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
     public List buscarPorNivel(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Curso.class);
+        sessao.beginTransaction();
         crit.add( Restrictions.eq(coluna, texto) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
     public Curso filtrarCursoUnico(String colunaFiltro, int id) {
         Criteria crit = criarSessao().createCriteria(Curso.class);
+        sessao.beginTransaction();
         colunaFiltro = colunaFiltro.toLowerCase();
         crit.add( Restrictions.eq(colunaFiltro, id));
         crit.setMaxResults(1);
         Curso curso = (Curso) crit.uniqueResult();
+        sessao.getTransaction().commit();
         sessao.close();
         return curso;
     }

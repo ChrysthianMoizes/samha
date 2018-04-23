@@ -3,17 +3,18 @@ package cgd;
 import cdp.RestricaoProfessor;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.exception.ConstraintViolationException;
 
 public class GdRestricao extends GdGenerico{
     
     public List filtrarPorProfessor(String coluna, int texto) {
         Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
+        sessao.beginTransaction();
         crit.add( Restrictions.eq(coluna, texto) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        sessao.beginTransaction();
         List lista = crit.list();
+        sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
@@ -30,6 +31,7 @@ public class GdRestricao extends GdGenerico{
                 restricao = (RestricaoProfessor) lista.get(i);
                 sessao.delete(restricao);
             }
+            sessao.flush();
             sessao.getTransaction().commit();
             sessao.close();
 

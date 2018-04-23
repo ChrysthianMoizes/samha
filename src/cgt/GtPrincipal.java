@@ -8,7 +8,7 @@ import cgd.GdPrincipal;
 public class GtPrincipal {
 
     private GdPrincipal gdPrincipal;
-    private CoordenadorCurso coordAtual;
+    private Usuario coordAtual;
     private int permissao;
 
     public GtPrincipal() {
@@ -26,7 +26,7 @@ public class GtPrincipal {
             if (usuario == null) {
                 return Constantes.PERMISSAO_NEGADA;
             } else {
-
+                setCoordAtual(usuario);
                 if(usuario instanceof CoordenadorCurso){
                     setPermissao(Constantes.PERMISSAO_COORD);
                     return Constantes.PERMISSAO_COORD;
@@ -58,11 +58,11 @@ public class GtPrincipal {
         }
     }
 
-    public CoordenadorCurso getCoordAtual() {
+    public Usuario getCoordAtual() {
         return coordAtual;
     }
 
-    public void setCoordAtual(CoordenadorCurso coordAtual) {
+    public void setCoordAtual(Usuario coordAtual) {
         this.coordAtual = coordAtual;
     }
 
