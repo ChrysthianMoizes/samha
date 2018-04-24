@@ -4,11 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.swing.JDialog;
 
-public class AtualizarInterface implements Runnable{
+public class AtualizaInterface implements Runnable{
 
     private JDialog janela;
+    private boolean executar = true;
     
-    public AtualizarInterface(JDialog janela) {
+    public AtualizaInterface(JDialog janela) {
         this.janela = janela;   
     }
 
@@ -16,20 +17,19 @@ public class AtualizarInterface implements Runnable{
     public void run() {
         
         try {
-            Thread.sleep(5 * 1000);
-            boolean rodar = true;
+            Thread.sleep(30 * 1000);
             
             if(janela.isVisible()){
-                rodar = true;
+                executar = true;
                 
                 janela.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                 Method metodo = janela.getClass().getMethod("atualizarTabela", null);
                 metodo.invoke(janela, null);     
                 janela.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);   
             }else
-                rodar = false;
+                executar = false;
 
-            if(rodar)
+            if(executar)
                 this.run();
             
         } catch (InterruptedException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {

@@ -11,12 +11,15 @@ public class HibernateConfig {
     static {
         try {
             //File absoluto = new File("../src/cgd/hibernate/hibernate.cfg.xml");
-            File netbeans = new File("src/cgd/hibernate/hibernate.cfg.xml");
             //File funciona = new File("C:\\Users\\chrys\\Desktop\\Projetos\\SAMHA\\src\\cgd\\hibernate\\hibernate.cfg.xml");
             //String pastaRaiz = System.getProperty("user.dir");
-            sessionFactory = new AnnotationConfiguration().configure(netbeans).buildSessionFactory();
+            //System.out.println(pastaRaiz);
+            
+            File arquivo = new File("src/cgd/hibernate/hibernate.cfg.xml");
+            sessionFactory = new AnnotationConfiguration().configure(arquivo).buildSessionFactory();
+            
         } catch (Throwable ex) {
-            // Log the exception. 
+            
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
