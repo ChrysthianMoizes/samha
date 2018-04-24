@@ -14,7 +14,7 @@ public class GdCoordenador extends GdGenerico{
     public GdCoordenador() {
         gdCoordenadoria = new GdCoordenadoria();
     }
-    
+
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Coordenador.class);
         crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
