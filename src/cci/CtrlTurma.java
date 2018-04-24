@@ -46,7 +46,6 @@ public class CtrlTurma extends CtrlGenerica{
     public void instanciarTelaBuscaTurma(Frame pai) {
         buscaTurma = new JDBuscarTurma(pai, true, ctrlPrincipal);
         buscaTurma.setIconImage(setarIconeJanela());
-        new Thread(new AtualizaInterface(buscaTurma)).start();
         buscaTurma.setVisible(true);
     }
 

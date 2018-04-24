@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 public class AtualizaInterface implements Runnable{
 
     private JDialog janela;
-    private boolean executar = true;
     
     public AtualizaInterface(JDialog janela) {
         this.janela = janela;   
@@ -15,9 +14,9 @@ public class AtualizaInterface implements Runnable{
 
     @Override
     public void run() {
-        
+        boolean executar = true;
         try {
-            Thread.sleep(30 * 1000);
+            Thread.sleep(5 * 1000);
             
             if(janela.isVisible()){
                 executar = true;
