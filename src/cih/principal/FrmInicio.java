@@ -1,7 +1,10 @@
 package cih.principal;
 
 import cci.CtrlPrincipal;
-import cdp.Coordenador;
+import cdp.CoordenadorAcademico;
+import cdp.CoordenadorCurso;
+import cdp.CoordenadorPedagogico;
+import cdp.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,13 +25,21 @@ public class FrmInicio extends javax.swing.JFrame {
      }
     
     public void atualizarInfoSistema(){
-        Coordenador coord = ctrlPrincipal.getGtPrincipal().getCoordAtual();
+        Usuario coordenador = ctrlPrincipal.getGtPrincipal().getCoordAtual();
         Date dataAtual = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String data = formatter.format(dataAtual);
-        if(coord != null){
-            lblNomeCoordenador.setText(coord.getNome());
-            lblDataAtual.setText(data);
+        lblDataAtual.setText(data);
+        
+        if(coordenador != null){
+        
+            if(coordenador instanceof CoordenadorCurso)
+                lblNomeCoordenador.setText(((CoordenadorCurso)coordenador).getProfessor().getNome());
+            else if(coordenador instanceof CoordenadorAcademico)
+                lblNomeCoordenador.setText(((CoordenadorAcademico)coordenador).getServidor().getNome());
+            else
+                lblNomeCoordenador.setText(((CoordenadorPedagogico)coordenador).getServidor().getNome());
+        
         }
     }
     
@@ -75,7 +86,6 @@ public class FrmInicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
-        setPreferredSize(new java.awt.Dimension(800, 400));
 
         toolBar.setBackground(new java.awt.Color(0, 153, 102));
         toolBar.setBorder(null);

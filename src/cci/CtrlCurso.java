@@ -47,6 +47,7 @@ public class CtrlCurso extends CtrlGenerica{
     public void instanciarTelaBuscaCurso(Frame pai) {
         buscaCurso = new JDBuscarCurso(pai, true, ctrlPrincipal);
         buscaCurso.setIconImage(setarIconeJanela());
+        new Thread(new AtualizarInterface(buscaCurso)).start();
         buscaCurso.setVisible(true);
     }
 
@@ -64,6 +65,7 @@ public class CtrlCurso extends CtrlGenerica{
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
             cadastraCurso.desabilitarCampos();
+            cadastraCurso.desabilitarCombos();
             buscaCurso.atualizarTabela();
         } else {
             CtrlMensagem.exibirMensagemErro(cadastraCurso, resposta);
@@ -207,8 +209,7 @@ public class CtrlCurso extends CtrlGenerica{
 
     public void preencherComboCoordenadorias(int id, JComboBox cbxCoordenadoria) {
         
-        List listaCoordenadorias = cadastraCurso.getListaCoordenadorias();
-        listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
+        List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
         cadastraCurso.setListaCoordenadorias(listaCoordenadorias);
         preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
     }

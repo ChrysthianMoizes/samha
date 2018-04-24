@@ -16,7 +16,7 @@ public class GtDisciplina {
     public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
 
         try {
-           
+            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
             Disciplina disciplina = new Disciplina();
             
             disciplina.setCargaHoraria(cargaHoraria);
@@ -37,7 +37,7 @@ public class GtDisciplina {
     public String alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina){
         
         try {
-            
+            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
             disciplina.setCargaHoraria(cargaHoraria);
             disciplina.setMatriz(matriz);
             disciplina.setNome(nome);
@@ -67,7 +67,7 @@ public class GtDisciplina {
         try {
             //verificar se a disciplina está associada a alguma alocação = criar gdLocacao
             List alocacao = null; 
-            if(alocacao.size() == 0){
+            if(alocacao == null){
                 gdDisciplina.excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else
@@ -75,5 +75,26 @@ public class GtDisciplina {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-    }   
+    }
+    
+    public void validarCampos(String nome, String tipo, int periodos, int cargaHoraria, int qtAulas, MatrizCurricular matriz) throws SAMHAException{
+        
+        if((nome.equals("")))
+            throw new SAMHAException(1);
+        
+        if(tipo.equals(""))
+            throw new SAMHAException(16);
+        
+        if(periodos <= 0)
+            throw new SAMHAException(10);
+        
+        if(cargaHoraria <= 0)
+            throw new SAMHAException(5);
+        
+        if(qtAulas <= 0)
+            throw new SAMHAException(14);
+        
+        if(matriz == null)
+            throw new SAMHAException(13);
+    }
 }

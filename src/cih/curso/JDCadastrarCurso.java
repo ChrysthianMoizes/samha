@@ -398,6 +398,14 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         spnPeriodos.setEnabled(false);
         btnSalvar.setEnabled(false);
         btnCancelar.setText("Sair");
+        txtNomeCoordenadoria.setEnabled(false);
+        txtNomeCoordenadoria.setText("");
+        txtNomeEixo.setText("");
+        txtNomeEixo.setEnabled(false);
+        btnAdicionarCoordenadoria.setEnabled(false);
+        btnAdicionarEixo.setEnabled(false);
+        btnRemoverCoordenadoria.setEnabled(false);
+        btnRemoverEixo.setEnabled(false);
     }
     
     public void desabilitarCombos(){

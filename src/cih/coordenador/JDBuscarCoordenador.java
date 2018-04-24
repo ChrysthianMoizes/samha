@@ -2,16 +2,13 @@ package cih.coordenador;
 
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
-import cdp.Coordenador;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private CtrlPrincipal ctrlPrincipal;
     private Frame pai;
-    private List<Coordenador> listaCoordenadores;
     
     public JDBuscarCoordenador(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
@@ -48,17 +45,28 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             btnBuscar.setEnabled(true);
         }     
     }
-
-    public List<Coordenador> getListaCoordenadores() {
-        return listaCoordenadores;
-    }
-
-    public void setListaCoordenadores(List<Coordenador> listaCoordenadores) {
-        this.listaCoordenadores = listaCoordenadores;
-    }
     
     public void atualizarTabela(){
-        btnBuscarActionPerformed(null);
+        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = txtFiltro.getText();
+        
+        if(colunaFiltro.toLowerCase().equals("tipo")){
+            
+            char tipo = (char) btnGroup.getSelection().getMnemonic();
+            
+            switch (tipo) {
+                case 'A':
+                    filtro = "COORDENADOR ACADÊMICO";
+                    break;
+                case 'C':
+                    filtro = "COORDENADOR DE CURSO";
+                    break;
+                default:
+                    filtro = "COORDENADOR PEDAGÓGICO";
+                    break;
+            }  
+        }
+        ctrlPrincipal.getCtrlCoordenador().listarCoordenadores(colunaFiltro, filtro, tblCoordenador);
     }
     
     @SuppressWarnings("unchecked")
@@ -283,9 +291,9 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(rdbCoordenadorPedagogico))
                             .addGroup(pnlBuscarCoordenadorLayout.createSequentialGroup()
-                                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -349,37 +357,17 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = txtFiltro.getText();
-        
-        if(colunaFiltro.toLowerCase().equals("tipo")){
-            
-            char tipo = (char) btnGroup.getSelection().getMnemonic();
-            
-            switch (tipo) {
-                case 'A':
-                    filtro = "COORDENADOR ACADÊMICO";
-                    break;
-                case 'C':
-                    filtro = "COORDENADOR DE CURSO";
-                    break;
-                default:
-                    filtro = "COORDENADOR PEDAGÓGICO";
-                    break;
-            }  
-        }
-        ctrlPrincipal.getCtrlCoordenador().listarCoordenadores(colunaFiltro, filtro, tblCoordenador);
+        atualizarTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btnBuscarActionPerformed(null);
+            atualizarTabela();
         }
     }//GEN-LAST:event_btnBuscarKeyPressed
 
@@ -427,15 +415,15 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     private void rdbCoordenadorAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorAcademicoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rdbCoordenadorAcademicoActionPerformed
 
     private void rdbCoordenadorCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorCursoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rdbCoordenadorCursoActionPerformed
 
     private void rdbCoordenadorPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorPedagogicoActionPerformed
-        btnBuscarActionPerformed(null);
+        atualizarTabela();
     }//GEN-LAST:event_rdbCoordenadorPedagogicoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

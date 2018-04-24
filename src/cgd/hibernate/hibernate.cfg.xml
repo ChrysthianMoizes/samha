@@ -10,7 +10,9 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="cdp.Alocacao"/>
     <mapping class="cdp.Aula"/>
-    <mapping class="cdp.Coordenador"/>
+    <mapping class="cdp.CoordenadorCurso"/>
+    <mapping class="cdp.CoordenadorAcademico"/>
+    <mapping class="cdp.CoordenadorPedagogico"/>
     <mapping class="cdp.Coordenadoria"/>
     <mapping class="cdp.Curso"/>
     <mapping class="cdp.Disciplina"/>

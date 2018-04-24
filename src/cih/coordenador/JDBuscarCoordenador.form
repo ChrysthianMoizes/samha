@@ -222,9 +222,9 @@
                                       <Component id="rdbCoordenadorPedagogico" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="cbxFiltro" min="-2" pref="97" max="-2" attributes="0"/>
+                                      <Component id="cbxFiltro" min="-2" pref="105" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtFiltro" min="-2" pref="418" max="-2" attributes="0"/>
+                                      <Component id="txtFiltro" min="-2" pref="410" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="btnBuscar" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>

@@ -4,11 +4,9 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.Curso;
 import cdp.Disciplina;
-import cdp.Eixo;
 import cdp.MatrizCurricular;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDCadastrarDisciplina extends javax.swing.JDialog {
 
@@ -23,7 +21,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.disciplina = disciplina;
         setarBackground();
-        identificarOrigem();
     }
     
     private void setarBackground(){
@@ -113,11 +110,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxMatriz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxMatrizItemStateChanged(evt);
-            }
-        });
 
         lblAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblAno.setText("Ano/Semestre:");
@@ -262,7 +254,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         spnAulas.setModel(new javax.swing.SpinnerNumberModel(4, 0, null, 1));
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 0, null, 30));
+        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 0, null, 15));
 
         lblHoras.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblHoras.setText("Hrs.");
@@ -400,87 +392,36 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void identificarOrigem() {
-        preencherComboCurso();
-        if (disciplina != null){ 
-            setarCamposComInstancia();
-            txtNomeMatriz.setEnabled(false);          
-            btnAdicionarMatriz.setEnabled(false);
-            btnRemoverMatriz.setEnabled(false);
-            spnAno.setEnabled(false);
-            spnSemestre.setEnabled(false);
-        }
-    }
-
-    public void setarCamposComInstancia() {
-        setarCurso();
-        setarMatriz();
-        setarTipo();
+    public void setarCamposComInstancia(Disciplina disciplina) {
         txtNomeDisciplina.setText(disciplina.getNome());
         spnCargaHoraria.setValue(disciplina.getCargaHoraria());
         spnAulas.setValue(disciplina.getQtAulas());
         spnPeriodo.setValue(disciplina.getPeriodo());           
     }
     
-    public void setarCurso(){
-        
-        Curso curso;
-
-        for (int i = 0; i < listaCursos.size(); i++) {
-
-            curso = listaCursos.get(i);
-            if (curso.getId() == disciplina.getMatriz().getCurso().getId()) {
-                cbxCurso.setSelectedIndex(i);
-                preencherComboMatriz(curso.getId());
-                break;
-            }
-        }
+    public void setarCurso(Disciplina disciplina){
+        ctrlPrincipal.getCtrlDisciplina().setarCurso(disciplina, cbxCurso, cbxMatriz);
     }
     
     public void setarMatriz(){
-        
-        MatrizCurricular matriz;
-        
-        for (int i = 0; i < listaMatriz.size(); i++) {
-
-            matriz = listaMatriz.get(i);
-            if (matriz.getId() == disciplina.getMatriz().getId()) {
-                cbxMatriz.setSelectedIndex(i);
-                break;
-            }
-        }
+        ctrlPrincipal.getCtrlDisciplina().setarMatriz(cbxMatriz);
     }
     
     public void setarTipo(){
-        
-        if(disciplina.getTipo().equals("OBRIGATÓRIA")){
-            cbxTipo.setSelectedIndex(0);
-        }else if(disciplina.getTipo().equals("OPTATIVA")){
-            cbxTipo.setSelectedIndex(1);
-        }else{
-            cbxTipo.setSelectedIndex(2);
-        } 
+        ctrlPrincipal.getCtrlDisciplina().setarTipo(cbxTipo);
     }
  
     public void preencherComboCurso(){ 
-        listaCursos = ctrlPrincipal.getCtrlCurso().listar();
-        cbxCurso.removeAllItems();
-        cbxCurso.setModel(new DefaultComboBoxModel(listaCursos.toArray()));
-        
-        if(listaCursos.size() > 0){
-            Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(curso.getId());
-        }  
-    }
-    
-    public void preencherComboMatriz(int id) {
-        listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        cbxMatriz.removeAllItems();
-        cbxMatriz.setModel(new DefaultComboBoxModel(listaMatriz.toArray())); 
+        ctrlPrincipal.getCtrlDisciplina().preencherComboCurso(cbxCurso, cbxMatriz);
     }
     
     public void desabilitarCampos(){
         txtNomeDisciplina.setEnabled(false);
+        txtNomeMatriz.setEnabled(false);
+        btnAdicionarMatriz.setEnabled(false);
+        btnRemoverMatriz.setEnabled(false);
+        spnAno.setEnabled(false);
+        spnSemestre.setEnabled(false);
         cbxTipo.setEnabled(false);
         spnPeriodo.setEnabled(false);
         spnAulas.setEnabled(false);
@@ -488,27 +429,71 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         btnSalvar.setEnabled(false);
         btnCancelar.setText("Sair");
     }
+    
+    public void desabilitarCombos(){
+        cbxCurso.setEnabled(false);
+        cbxMatriz.setEnabled(false);
+    }
+    
+    public void desabilitarCamposIniciais(){
+        txtNomeMatriz.setEnabled(false);          
+        btnAdicionarMatriz.setEnabled(false);
+        btnRemoverMatriz.setEnabled(false);
+        spnAno.setEnabled(false);
+        spnSemestre.setEnabled(false);
+    }
+    
+    public void limparCampos(){
+        limparCamposMatriz();
+        txtNomeDisciplina.setText("");
+        cbxTipo.setSelectedIndex(0);
+        spnAulas.setValue(4);
+        spnCargaHoraria.setValue(60);
+        spnPeriodo.setValue(1);
+    }
+    
+    public void limparCamposMatriz(){
+        txtNomeMatriz.setText("");
+        spnAno.setValue(2018);
+        spnSemestre.setValue(1);
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
+
+    public List<MatrizCurricular> getListaMatriz() {
+        return listaMatriz;
+    }
+
+    public void setListaMatriz(List<MatrizCurricular> listaMatriz) {
+        this.listaMatriz = listaMatriz;
+    }
+
+    public List<Curso> getListaCursos() {
+        return listaCursos;
+    }
+
+    public void setListaCursos(List<Curso> listaCursos) {
+        this.listaCursos = listaCursos;
+    }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
-        String nome = txtNomeDisciplina.getText();
-        String tipo = cbxTipo.getSelectedItem().toString();
-        int cargaHoraria = (int) spnCargaHoraria.getValue();
-        int periodo = (int) spnPeriodo.getValue();
-        int qtAulas = (int) spnAulas.getValue();
-        MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-        
-        int resposta = 0;
-        
-        if(disciplina == null){
-            resposta = ctrlPrincipal.getCtrlDisciplina().cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);  
-        }else{
-            resposta = ctrlPrincipal.getCtrlDisciplina().alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
+        try{
+            String nome = txtNomeDisciplina.getText();
+            String tipo = cbxTipo.getSelectedItem().toString();
+            int cargaHoraria = (int) spnCargaHoraria.getValue();
+            int periodo = (int) spnPeriodo.getValue();
+            int qtAulas = (int) spnAulas.getValue();
+            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
+            ctrlPrincipal.getCtrlDisciplina().validarOperacao(matriz, nome, tipo, periodo, cargaHoraria, qtAulas);
+        }catch(Exception e){
+            CtrlMensagem.exibirMensagemAviso(this, "Todos os campos devem ser preenchidos");
         }
-        
-        if (resposta == 0) {
-            desabilitarCampos();
-        }  
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -533,33 +518,12 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         Curso curso = (Curso) cbxCurso.getSelectedItem();
-        int resposta = ctrlPrincipal.getCtrlMatriz().cadastrar(nome, ano, semestre, curso);
-        
-        if(resposta == 0){
-            txtNomeMatriz.setText("");
-            preencherComboMatriz(curso.getId());
-            int posicao = listaMatriz.size();
-            cbxMatriz.setSelectedIndex(posicao-1);  
-        }      
+        ctrlPrincipal.getCtrlDisciplina().adicionarMatriz(nome, ano, semestre, curso, cbxMatriz);
     }//GEN-LAST:event_btnAdicionarMatrizActionPerformed
 
     private void btnRemoverMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMatrizActionPerformed
-        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-                int resposta = ctrlPrincipal.getCtrlMatriz().excluir(matriz);
-                if(resposta == 0){
-                    Curso curso = (Curso) cbxCurso.getSelectedItem();
-                    preencherComboMatriz(curso.getId());
-                }
-            }
+        ctrlPrincipal.getCtrlDisciplina().removerMatriz(cbxCurso, cbxMatriz);
     }//GEN-LAST:event_btnRemoverMatrizActionPerformed
-
-    private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
-        Eixo eixo = (Eixo) cbxMatriz.getSelectedItem();
-        if(eixo != null)
-            preencherComboMatriz(eixo.getId());
-    }//GEN-LAST:event_cbxMatrizItemStateChanged
 
     private void btnAdicionarMatrizKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAdicionarMatrizKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -575,8 +539,9 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
 
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null)
-            preencherComboMatriz(curso.getId());
+        if(curso != null){
+             ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
+        }     
     }//GEN-LAST:event_cbxCursoItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

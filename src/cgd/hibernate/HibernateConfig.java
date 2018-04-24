@@ -1,9 +1,8 @@
 package cgd.hibernate;
 
-import org.hibernate.Session;
+import java.io.File;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 public class HibernateConfig {
 
@@ -11,12 +10,11 @@ public class HibernateConfig {
     
     static {
         try {
-            
-            sessionFactory = new AnnotationConfiguration().configure("/cgd/hibernate/Hibernate.cfg.xml").buildSessionFactory();
-            Session session = sessionFactory.openSession(); 
-            Transaction tx = session.beginTransaction();
-            tx.commit();
-            session.close();
+            //File absoluto = new File("../src/cgd/hibernate/hibernate.cfg.xml");
+            File netbeans = new File("src/cgd/hibernate/hibernate.cfg.xml");
+            //File funciona = new File("C:\\Users\\chrys\\Desktop\\Projetos\\SAMHA\\src\\cgd\\hibernate\\hibernate.cfg.xml");
+            //String pastaRaiz = System.getProperty("user.dir");
+            sessionFactory = new AnnotationConfiguration().configure(netbeans).buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
