@@ -8,6 +8,7 @@ import cdp.Eixo;
 import cdp.MatrizCurricular;
 import cgt.Constantes;
 import cgt.GtAlocacao;
+import cih.alocacao.FrmAlocacao;
 import cih.alocacao.FrmCargaHoraria;
 import cih.alocacao.JDAlocacao;
 import java.awt.Frame;

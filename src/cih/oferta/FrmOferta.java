@@ -332,7 +332,7 @@ public class FrmOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnValidarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
