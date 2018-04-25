@@ -10,12 +10,7 @@ public class HibernateConfig {
     
     static {
         try {
-            //File absoluto = new File("../src/cgd/hibernate/hibernate.cfg.xml");
-            //File funciona = new File("C:\\Users\\chrys\\Desktop\\Projetos\\SAMHA\\src\\cgd\\hibernate\\hibernate.cfg.xml");
-            //String pastaRaiz = System.getProperty("user.dir");
-            //System.out.println(pastaRaiz);
-            
-            File arquivo = new File("src/cgd/hibernate/hibernate.cfg.xml");
+            File arquivo = new File("hibernate.cfg.xml");
             sessionFactory = new AnnotationConfiguration().configure(arquivo).buildSessionFactory();
             
         } catch (Throwable ex) {

@@ -60,15 +60,11 @@ public abstract class GdGenerico {
      
     public List consultar(Class classe) {
         
-        List lista;
-        sessao = criarSessao();
+        Criteria crit = criarSessao().createCriteria(classe);
         sessao.beginTransaction();
-        
-        Criteria cons = sessao.createCriteria(classe);
-        lista = cons.list();
+        List lista = crit.list();
         sessao.getTransaction().commit();
         sessao.close();
- 
         return lista;
     }
 

@@ -12,7 +12,6 @@ public class GdRestricao extends GdGenerico{
         sessao.beginTransaction();
         crit.add( Restrictions.eq(coluna, texto) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        sessao.beginTransaction();
         List lista = crit.list();
         sessao.getTransaction().commit();
         sessao.close();

@@ -32,6 +32,7 @@ public final class CtrlPrincipal {
     private CtrlDisciplina ctrlDisciplina;
     private CtrlMatriz ctrlMatriz;
     private CtrlTurma ctrlTurma;
+    private CtrlAlocacao ctrlAlocacao;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -45,6 +46,7 @@ public final class CtrlPrincipal {
         ctrlDisciplina = new CtrlDisciplina(this);
         ctrlMatriz = new CtrlMatriz(this);
         ctrlTurma = new CtrlTurma(this);
+        ctrlAlocacao = new CtrlAlocacao(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -196,4 +198,8 @@ public final class CtrlPrincipal {
     public CtrlTurma getCtrlTurma() {
         return ctrlTurma;
     }
+
+    public CtrlAlocacao getCtrlAlocacao() {
+        return ctrlAlocacao;
+    } 
 }

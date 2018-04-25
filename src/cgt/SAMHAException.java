@@ -31,6 +31,13 @@ public class SAMHAException extends Exception {
         msgsErro[14] = "Campo Quantidade de Aulas inválido";
         msgsErro[15] = "Campo TURNO inválido";
         msgsErro[16] = "Campo TIPO inválido";
+        
+        //Alocacao
+        msgsErro[17] = "Disciplina não selecionada";
+        msgsErro[18] = "Professor não selecionado";
+        msgsErro[19] = "Quantidade de Professores inválida, selecione 2 professores";
+        msgsErro[20] = "Quantidade de Professores inválida, selecione apenas 1 professor";
+        msgsErro[21] = "2º Professor não selecionado";
     }
     
     @Override

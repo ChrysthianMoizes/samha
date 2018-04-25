@@ -266,7 +266,7 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTurmaActionPerformed
 
     private void btnAlocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlocarActionPerformed
-        // TODO add your handling code here:
+        ctrlPrincipal.getCtrlAlocacao().instanciarTelaAlocacao(this);
     }//GEN-LAST:event_btnAlocarActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables

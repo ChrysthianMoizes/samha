@@ -15,4 +15,6 @@ public abstract class Constantes {
     public static final String COORD_CURSO = "coordenador de curso";
     public static final String COORD_PEDAG = "coordenador pedagógico";
     
+    public static final String ESPECIAL = "especial";
+    
 }

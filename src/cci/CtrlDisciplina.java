@@ -85,6 +85,10 @@ public class CtrlDisciplina extends CtrlGenerica{
         return gtDisciplina.buscar(coluna, texto);
     }
     
+    public List filtrarPorMatrizPeriodo(int matriz, int periodo){
+        return gtDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+    }
+    
     public void excluir(JTable tabela) {
 
         try {

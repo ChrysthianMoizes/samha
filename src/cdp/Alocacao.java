@@ -28,41 +28,41 @@ public class Alocacao implements Serializable{
     private int semestre;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "turma_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Turma turma;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Disciplina disciplina;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "professor_id")
+    @JoinColumn(name = "professor1_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Professor professor;
+    private Professor professor1;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "professor2_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Professor professor2;
 
     public Alocacao() {
     }
 
-    public Alocacao(int id, int ano, int semestre, Turma turma, Disciplina disciplina, Professor professor) {
+    public Alocacao(int id, int ano, int semestre, Disciplina disciplina, Professor professor1, Professor professor2) {
         this.id = id;
         this.ano = ano;
         this.semestre = semestre;
-        this.turma = turma;
         this.disciplina = disciplina;
-        this.professor = professor;
+        this.professor1 = professor1;
+        this.professor2 = professor2;
     }
 
-    public Alocacao(int ano, int semestre, Turma turma, Disciplina disciplina, Professor professor) {
+    public Alocacao(int ano, int semestre, Disciplina disciplina, Professor professor1, Professor professor2) {
         this.ano = ano;
         this.semestre = semestre;
-        this.turma = turma;
         this.disciplina = disciplina;
-        this.professor = professor;
+        this.professor1 = professor1;
+        this.professor2 = professor2;
     }
 
     public int getId() {
@@ -89,14 +89,6 @@ public class Alocacao implements Serializable{
         this.semestre = semestre;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
     public Disciplina getDisciplina() {
         return disciplina;
     }
@@ -105,11 +97,28 @@ public class Alocacao implements Serializable{
         this.disciplina = disciplina;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public Professor getProfessor1() {
+        return professor1;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }  
+    public void setProfessor1(Professor professor1) {
+        this.professor1 = professor1;
+    }
+
+    public Professor getProfessor2() {
+        return professor2;
+    }
+
+    public void setProfessor2(Professor professor2) {
+        this.professor2 = professor2;
+    }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(disciplina.getPeriodo());
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, disciplina.getNome(), disciplina.getMatriz().getNome(), professor1.getNome() };
+    }
 }

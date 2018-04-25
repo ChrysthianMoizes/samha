@@ -62,6 +62,10 @@ public class GtDisciplina {
         return gdDisciplina.buscar(coluna.toLowerCase(), texto);
     }
     
+    public List filtrarPorMatrizPeriodo(int matriz, int periodo){
+        return gdDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+    }
+    
     public String excluir(Disciplina disciplina) {
 
         try {

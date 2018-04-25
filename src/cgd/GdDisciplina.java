@@ -30,4 +30,16 @@ public class GdDisciplina extends GdGenerico{
         return lista;
     }
     
+    public List filtrarPorMatrizPeriodo(int matriz, int periodo){
+        Criteria crit = criarSessao().createCriteria(Disciplina.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("matriz.id", matriz));
+        crit.add( Restrictions.eq("periodo", periodo));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
 }
