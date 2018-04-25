@@ -8,9 +8,9 @@ import cdp.Eixo;
 import cdp.MatrizCurricular;
 import cgt.Constantes;
 import cgt.GtAlocacao;
-import cih.alocacao.FrmAlocacao;
-import cih.alocacao.FrmCargaHoraria;
 import cih.alocacao.JDAlocacao;
+import cih.alocacao.JDCargaHoraria;
+import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
@@ -24,7 +24,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
     private JDAlocacao cadastraAlocacao;
-    private FrmCargaHoraria frmCargaHoraria;
+    private JDCargaHoraria jdCargaHoraria;
     private GtAlocacao gtAlocacao;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
@@ -44,10 +44,13 @@ public class CtrlAlocacao extends CtrlGenerica{
         cadastraAlocacao.setVisible(true);
     }
     
-    public void instanciarFrameCargaHoraria(){
-        frmCargaHoraria = new FrmCargaHoraria(ctrlPrincipal);
-        frmCargaHoraria.setIconImage(setarIconeJanela());
-        frmCargaHoraria.setVisible(true);
+    public void instanciarTelaCargaHoraria(){
+        
+        if(jdCargaHoraria == null)
+            jdCargaHoraria = new JDCargaHoraria(null, true, ctrlPrincipal);
+        jdCargaHoraria.setIconImage(setarIconeJanela());
+        jdCargaHoraria.setVisible(true);
+            
     }
     
     public void cadastrar(JList lstProfessores, JList lstDisciplinas, JSpinner spnAno, JSpinner spnSemestre) {
