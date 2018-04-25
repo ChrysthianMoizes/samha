@@ -49,12 +49,11 @@ public class GtProfessor {
     }
 
     public List<Professor> buscar(String coluna, String texto) {
-
-        if (coluna.toLowerCase().equals("coordenadoria")) {
-            coluna = "coordenadoria.id";
-            return gdProfessor.filtrarPorCoordenadoria(coluna, Integer.parseInt(texto));
-        } else 
-            return gdProfessor.buscar(coluna.toLowerCase(), texto);      
+        return gdProfessor.buscar(coluna.toLowerCase(), texto);      
+    }
+    
+    public List<Professor> filtrarPorCoordenadoria(int id){
+        return gdProfessor.filtrarPorCoordenadoria("coordenadoria.id", id);
     }
 
     public List<Professor> consultar() {

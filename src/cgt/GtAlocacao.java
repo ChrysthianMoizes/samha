@@ -4,6 +4,7 @@ import cdp.Alocacao;
 import cdp.Disciplina;
 import cdp.Professor;
 import cgd.GdAlocacao;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GtAlocacao {
@@ -12,6 +13,39 @@ public class GtAlocacao {
     
     public GtAlocacao(){
         gdAlocacao = new GdAlocacao();
+    }
+    
+    public List calcularCargaHorariaProfessor(int ano, int semestre, List listaProfessores){
+        
+        List listaAlocacoes = gdAlocacao.filtrarPorAnoSemestre(ano, semestre);
+        List listaCargaHoraria = new ArrayList<>();
+        Alocacao alocacao;
+        Professor professor;
+        
+        for(int i = 0; i < listaProfessores.size(); i++){
+            professor = (Professor) listaProfessores.get(i);
+            professor.setCargaHoraria(0);
+            
+            for(int j = 0; j < listaAlocacoes.size(); j++){
+                
+                alocacao = (Alocacao) listaAlocacoes.get(j);
+                
+                if(alocacao.getProfessor1().getId() == professor.getId()){
+                    int cargaHoraria = professor.getCargaHoraria();
+                    professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
+                } 
+                
+                if(alocacao.getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+                    
+                    if(alocacao.getProfessor2().getId() == professor.getId()){
+                        int cargaHoraria = professor.getCargaHoraria();
+                        professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
+                    }  
+                }               
+            }
+            listaCargaHoraria.add(professor);
+        }
+        return listaCargaHoraria;
     }
     
     public String cadastrar(List listaProfessores, Disciplina disciplina, int ano, int semestre) {

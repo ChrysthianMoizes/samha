@@ -57,8 +57,15 @@ public class CtrlProfessor extends CtrlGenerica{
         cadastraProf.setVisible(true);
     }
 
-    public List<Professor> buscar(String coluna, String texto) {
-        return gtProfessor.buscar(coluna, texto);
+    public List<Professor> buscar(String coluna, String texto) {      
+        if (coluna.toLowerCase().equals("coordenadoria")) {
+            return filtrarPorCoordenadoria(Integer.parseInt(texto));
+        } else 
+            return gtProfessor.buscar(coluna.toLowerCase(), texto);      
+    }
+    
+    public List<Professor> filtrarPorCoordenadoria(int id){
+        return gtProfessor.filtrarPorCoordenadoria(id);
     }
 
     public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {

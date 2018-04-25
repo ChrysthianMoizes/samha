@@ -10,12 +10,13 @@ import cgt.Constantes;
 import cgt.GtAlocacao;
 import cih.alocacao.JDAlocacao;
 import cih.alocacao.JDCargaHoraria;
-import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Image;
+import java.lang.reflect.Method;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -26,6 +27,8 @@ public class CtrlAlocacao extends CtrlGenerica{
     private JDAlocacao cadastraAlocacao;
     private JDCargaHoraria jdCargaHoraria;
     private GtAlocacao gtAlocacao;
+    private List listaCoordenadorias;
+    private Coordenadoria coordenadoriaSelecionada;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -44,11 +47,12 @@ public class CtrlAlocacao extends CtrlGenerica{
         cadastraAlocacao.setVisible(true);
     }
     
-    public void instanciarTelaCargaHoraria(){
+    public void instanciarTelaCargaHoraria(Frame pai){
         
         if(jdCargaHoraria == null)
-            jdCargaHoraria = new JDCargaHoraria(null, true, ctrlPrincipal);
+            jdCargaHoraria = new JDCargaHoraria(pai, true, ctrlPrincipal);
         jdCargaHoraria.setIconImage(setarIconeJanela());
+        
         jdCargaHoraria.setVisible(true);
             
     }
@@ -72,6 +76,42 @@ public class CtrlAlocacao extends CtrlGenerica{
     public void listarAlocacoes(int ano, int semestre, JTable tabela){
         List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestre(ano, semestre);
         listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao);
+    }
+    
+    public void listarCargaHorariaProfessores(Coordenadoria coordenadoria, JTable tabela){
+        
+        if(coordenadoria != null){
+            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coordenadoria.getId());
+            int ano = cadastraAlocacao.getAno();
+            int semestre = cadastraAlocacao.getSemestre();
+            List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
+            listarEmTabelaCargaHoraria(listaCargasHorarias, tabela, jdCargaHoraria);
+        }else
+            CtrlMensagem.exibirMensagemErro(jdCargaHoraria, "Selecione uma coordenadoria");
+    }
+    
+    public void listarEmTabelaCargaHoraria(List lista, JTable tabela, JDialog janela){
+        
+        JTableUtil.limparTabela(tabela);
+        
+        if(lista.size() > 0){
+   
+            try {
+                preencherTabelaCargaHoraria(lista, tabela);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+    
+    public static void preencherTabelaCargaHoraria(List lista, JTable tabela) throws Exception{
+     
+        Method metodo;
+
+        for(Object obj : lista){
+            metodo = obj.getClass().getMethod("toArrayCargaHoraria", null);
+            JTableUtil.addLinha(tabela, (Object[]) metodo.invoke(obj, null));  
+        }            
     }
     
     public void excluir(JTable tabela) {
@@ -129,6 +169,7 @@ public class CtrlAlocacao extends CtrlGenerica{
 
     public void preencherComboCoordenadorias(int id, JComboBox cbxCoordenadoria) {
         List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
+        setListaCoordenadorias(listaCoordenadorias);
         preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
     }
     
@@ -143,8 +184,39 @@ public class CtrlAlocacao extends CtrlGenerica{
     public void preencherListaProfessores(JComboBox cbxCoordenadoria, JList lstProfessores) {
         
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+        setCoordenadoriaSelecionada(coordenadoria);
         List listaProfessores = ctrlPrincipal.getCtrlProfessor().buscar("coordenadoria", String.valueOf(coordenadoria.getId()));
         preencherJList(listaProfessores, lstProfessores);   
     }
     
+    public void setarCoordenadoria(JComboBox cbxCoordenadoria){
+        
+        List listaCoordenadorias = getListaCoordenadorias();
+        Coordenadoria coordenadoria;
+        
+        for (int i = 0; i < listaCoordenadorias.size(); i++) {
+
+            coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
+            if (coordenadoria.getId() == getCoordenadoriaSelecionada().getId()) {
+                cbxCoordenadoria.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+
+    public Coordenadoria getCoordenadoriaSelecionada() {
+        return coordenadoriaSelecionada;
+    }
+
+    public void setCoordenadoriaSelecionada(Coordenadoria coordenadoriaSelecionada) {
+        this.coordenadoriaSelecionada = coordenadoriaSelecionada;
+    }
+
+    public List getListaCoordenadorias() {
+        return listaCoordenadorias;
+    }
+
+    public void setListaCoordenadorias(List listaCoordenadorias) {
+        this.listaCoordenadorias = listaCoordenadorias;
+    } 
 }
