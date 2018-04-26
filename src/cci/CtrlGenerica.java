@@ -17,16 +17,12 @@ public abstract class CtrlGenerica {
     public void listarEmTabela(List lista, JTable tabela, JDialog janela){
         
         JTableUtil.limparTabela(tabela);
-        
-        if(lista.size() > 0){
-   
-            try {
-                JTableUtil.preencherTabela(lista, tabela);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-         }else
-            CtrlMensagem.exibirMensagemAviso(janela, "Nenhum registro encontrado");
+
+        try {
+            JTableUtil.preencherTabela(lista, tabela);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     public void preencherJList(List lista, JList lst){

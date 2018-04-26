@@ -220,10 +220,20 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
+        spnSemestre.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnSemestreStateChanged(evt);
+            }
+        });
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2015, 2000, null, 1));
         spnAno.setPreferredSize(new java.awt.Dimension(31, 35));
+        spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnAnoStateChanged(evt);
+            }
+        });
 
         btnBuscar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         btnBuscar.setText("OK");
@@ -411,6 +421,14 @@ public class JDAlocacao extends javax.swing.JDialog {
     private void btnCargaHorariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargaHorariaActionPerformed
         ctrlPrincipal.getCtrlAlocacao().instanciarTelaCargaHoraria(pai);
     }//GEN-LAST:event_btnCargaHorariaActionPerformed
+
+    private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
+        atualizarTabela();
+    }//GEN-LAST:event_spnAnoStateChanged
+
+    private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
+        atualizarTabela();
+    }//GEN-LAST:event_spnSemestreStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

@@ -21,16 +21,18 @@ public class GtAlocacao {
         List listaCargaHoraria = new ArrayList<>();
         Alocacao alocacao;
         Professor professor;
+        boolean adicionado;
         
         for(int i = 0; i < listaProfessores.size(); i++){
             professor = (Professor) listaProfessores.get(i);
             professor.setCargaHoraria(0);
-            
+            adicionado = false;
             for(int j = 0; j < listaAlocacoes.size(); j++){
                 
                 alocacao = (Alocacao) listaAlocacoes.get(j);
                 
                 if(alocacao.getProfessor1().getId() == professor.getId()){
+                    adicionado = true;
                     int cargaHoraria = professor.getCargaHoraria();
                     professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
                 } 
@@ -38,12 +40,14 @@ public class GtAlocacao {
                 if(alocacao.getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
                     
                     if(alocacao.getProfessor2().getId() == professor.getId()){
+                        adicionado = true;
                         int cargaHoraria = professor.getCargaHoraria();
                         professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
                     }  
                 }               
             }
-            listaCargaHoraria.add(professor);
+            if(adicionado)
+                listaCargaHoraria.add(professor);
         }
         return listaCargaHoraria;
     }

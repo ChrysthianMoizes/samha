@@ -55,6 +55,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         if(ultimaAlocacao != null){
             cadastraAlocacao.setAno(ultimaAlocacao.getAno());
             cadastraAlocacao.setSemestre(ultimaAlocacao.getSemestre());
+            cadastraAlocacao.atualizarTabela();
         }
     }
     
@@ -91,7 +92,10 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void listarAlocacoes(int ano, int semestre, JTable tabela){
         List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestre(ano, semestre);
-        listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao);
+        if(listaAlocacoes.size() > 0)
+            listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao);
+        if(jdCargaHoraria != null)
+            jdCargaHoraria.atualizarTabela();
     }
     
     public void listarCargaHorariaProfessores(Coordenadoria coordenadoria, JTable tabela){
@@ -101,33 +105,29 @@ public class CtrlAlocacao extends CtrlGenerica{
             int ano = cadastraAlocacao.getAno();
             int semestre = cadastraAlocacao.getSemestre();
             List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
-            listarEmTabelaCargaHoraria(listaCargasHorarias, tabela, jdCargaHoraria);
+            preencherTabelaCargaHoraria(listaCargasHorarias, tabela, jdCargaHoraria);
         }else
             CtrlMensagem.exibirMensagemAviso(jdCargaHoraria, "Selecione uma coordenadoria");
     }
     
-    public void listarEmTabelaCargaHoraria(List lista, JTable tabela, JDialog janela){
+    public void preencherTabelaCargaHoraria(List lista, JTable tabela, JDialog janela){
         
         JTableUtil.limparTabela(tabela);
         
         if(lista.size() > 0){
    
             try {
-                preencherTabelaCargaHoraria(lista, tabela);
+                Method metodo;
+
+                for(Object obj : lista){
+                    metodo = obj.getClass().getMethod("toArrayCargaHoraria", null);
+                    JTableUtil.addLinha(tabela, (Object[]) metodo.invoke(obj, null));  
+                }
+                
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
-    }
-    
-    public static void preencherTabelaCargaHoraria(List lista, JTable tabela) throws Exception{
-     
-        Method metodo;
-
-        for(Object obj : lista){
-            metodo = obj.getClass().getMethod("toArrayCargaHoraria", null);
-            JTableUtil.addLinha(tabela, (Object[]) metodo.invoke(obj, null));  
-        }            
     }
     
     public void excluir(JTable tabela) {
@@ -181,14 +181,22 @@ public class CtrlAlocacao extends CtrlGenerica{
     public void preencherComboCoordenadorias(int id, JComboBox cbxCoordenadoria) {
         List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
         setListaCoordenadorias(listaCoordenadorias);
-        preencherCombo(cbxCoordenadoria, listaCoordenadorias);   
+        preencherCombo(cbxCoordenadoria, listaCoordenadorias);
+        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
+        setCoordenadoriaSelecionada(coordenadoria);
     }
     
     public void preencherListaDisciplinas(JComboBox cbxMatriz, JList lstDisciplinas, JSpinner spnPeriodo) {
+        
         int periodo = (int) spnPeriodo.getValue();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-        List listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);
-        preencherJList(listaDisciplinas, lstDisciplinas);   
+        
+        if(matriz != null){
+            List listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);
+            preencherJList(listaDisciplinas, lstDisciplinas);  
+        }else{
+            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Matriz Curricular não selecionada");  
+        }
     }
     
     public void preencherListaProfessores(JComboBox cbxCoordenadoria, JList lstProfessores) {
@@ -199,26 +207,34 @@ public class CtrlAlocacao extends CtrlGenerica{
         preencherJList(listaProfessores, lstProfessores);   
     }
     
-    public void setarCoordenadoria(JComboBox cbxCoordenadoria){
+    public void setarCoordenadoriaTelaCargaHoraria(JComboBox cbxCoordenadoria){
         
         List listaCoordenadorias = getListaCoordenadorias();
-        Coordenadoria coordenadoria;
         Coordenadoria coordenadoriaAtual = getCoordenadoriaSelecionada();
-        preencherCombo(cbxCoordenadoria, listaCoordenadorias);
         
-        if((listaCoordenadorias.size() != 0) && (coordenadoriaAtual != null)){
+        if(listaCoordenadorias != null){
             
-            for (int i = 0; i < listaCoordenadorias.size(); i++) {
+            preencherCombo(cbxCoordenadoria, listaCoordenadorias);
+     
+            if((listaCoordenadorias.size() != 0) && (coordenadoriaAtual != null)){
+                
+                Coordenadoria coordenadoria;
 
-                coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
-                if (coordenadoria.getId() == coordenadoriaAtual.getId()) {
-                    cbxCoordenadoria.setSelectedIndex(i);
-                    break;
+                for (int i = 0; i < listaCoordenadorias.size(); i++) {
+
+                    coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
+                    if (coordenadoria.getId() == coordenadoriaAtual.getId()) {
+                        cbxCoordenadoria.setSelectedIndex(i);
+                        break;
+                    }
                 }
+            }else{
+                CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Selecione uma Coordenadoria");
+                jdCargaHoraria = null;
             }
         }else{
-            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Selecione Uma Coordenadoria");
             jdCargaHoraria = null;
+            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Selecione uma Coordenadoria");
         }
     }
 

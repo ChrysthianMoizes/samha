@@ -16,7 +16,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     }
     
     public void setarCoordenadoria(){
-        ctrlPrincipal.getCtrlAlocacao().setarCoordenadoria(cbxCoordenadoria);
+        ctrlPrincipal.getCtrlAlocacao().setarCoordenadoriaTelaCargaHoraria(cbxCoordenadoria);
     }
     
     public void atualizarTabela(){
@@ -30,7 +30,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
 
         pnlPrincipal = new javax.swing.JPanel();
         pnlSuperior = new javax.swing.JPanel();
-        btnAtualizar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         cbxCoordenadoria = new javax.swing.JComboBox<>();
         pnlTabela = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -42,11 +42,11 @@ public class JDCargaHoraria extends javax.swing.JDialog {
 
         pnlPrincipal.setLayout(new java.awt.BorderLayout());
 
-        btnAtualizar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -58,9 +58,9 @@ public class JDCargaHoraria extends javax.swing.JDialog {
             pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSuperiorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbxCoordenadoria, 0, 297, Short.MAX_VALUE)
+                .addComponent(cbxCoordenadoria, 0, 321, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAtualizar)
+                .addComponent(btnBuscar)
                 .addContainerGap())
         );
         pnlSuperiorLayout.setVerticalGroup(
@@ -68,7 +68,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
             .addGroup(pnlSuperiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(cbxCoordenadoria))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -119,12 +119,12 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         atualizarTabela();
-    }//GEN-LAST:event_btnAtualizarActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnlPrincipal;
