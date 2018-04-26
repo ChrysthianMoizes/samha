@@ -21,7 +21,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     
     public void atualizarTabela(){
         Coordenadoria coordeanadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-        ctrlPrincipal.getCtrlAlocacao().listarCargaHorariaProfessores(coordeanadoria, tblCargaHoraria);   
+        ctrlPrincipal.getCtrlAlocacao().listarCargaHorariaProfessores(coordeanadoria, tblCargaHoraria);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +51,6 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         });
 
         cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma coordenadoria..." }));
 
         javax.swing.GroupLayout pnlSuperiorLayout = new javax.swing.GroupLayout(pnlSuperior);
         pnlSuperior.setLayout(pnlSuperiorLayout);

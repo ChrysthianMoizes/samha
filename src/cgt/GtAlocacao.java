@@ -77,6 +77,11 @@ public class GtAlocacao {
         return gdAlocacao.filtrarPorAnoSemestre(ano, semestre);  
     }
     
+    public Alocacao identificarUltimaAlocacao(){
+        Alocacao ultimaAlocacao = gdAlocacao.filtrarUltimaAlocacao();
+        return ultimaAlocacao;
+    }
+    
     public String excluir(Alocacao alocacao) {
 
         try {
@@ -94,7 +99,7 @@ public class GtAlocacao {
         if(disciplina == null)
             throw new SAMHAException(17);
         
-        if(listaProfessores != null){
+        if(listaProfessores.size() != 0){
             
             Professor professor = (Professor) listaProfessores.get(0);
             if(professor == null)

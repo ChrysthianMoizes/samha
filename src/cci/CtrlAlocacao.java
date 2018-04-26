@@ -43,18 +43,34 @@ public class CtrlAlocacao extends CtrlGenerica{
     public void instanciarTelaAlocacao(Frame pai) {
         cadastraAlocacao = new JDAlocacao(pai, true, ctrlPrincipal);
         cadastraAlocacao.setIconImage(setarIconeJanela());
-        preencherCombos();
+        cadastraAlocacao.preencherComboCurso();
+        cadastraAlocacao.preencherComboEixo();
+        identificarUltimaAlocacao();
         cadastraAlocacao.setVisible(true);
+        
+    }
+    
+    public void identificarUltimaAlocacao(){
+        Alocacao ultimaAlocacao = gtAlocacao.identificarUltimaAlocacao();
+        if(ultimaAlocacao != null){
+            cadastraAlocacao.setAno(ultimaAlocacao.getAno());
+            cadastraAlocacao.setSemestre(ultimaAlocacao.getSemestre());
+        }
     }
     
     public void instanciarTelaCargaHoraria(Frame pai){
         
-        if(jdCargaHoraria == null)
+        if(jdCargaHoraria == null){
             jdCargaHoraria = new JDCargaHoraria(pai, true, ctrlPrincipal);
-        jdCargaHoraria.setIconImage(setarIconeJanela());
+            jdCargaHoraria.setIconImage(setarIconeJanela()); 
+        }
         
-        jdCargaHoraria.setVisible(true);
-            
+        jdCargaHoraria.setarCoordenadoria();
+        
+        if(jdCargaHoraria != null){
+            jdCargaHoraria.atualizarTabela();
+            jdCargaHoraria.setVisible(true);
+        }          
     }
     
     public void cadastrar(JList lstProfessores, JList lstDisciplinas, JSpinner spnAno, JSpinner spnSemestre) {
@@ -87,7 +103,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
             listarEmTabelaCargaHoraria(listaCargasHorarias, tabela, jdCargaHoraria);
         }else
-            CtrlMensagem.exibirMensagemErro(jdCargaHoraria, "Selecione uma coordenadoria");
+            CtrlMensagem.exibirMensagemAviso(jdCargaHoraria, "Selecione uma coordenadoria");
     }
     
     public void listarEmTabelaCargaHoraria(List lista, JTable tabela, JDialog janela){
@@ -132,11 +148,6 @@ public class CtrlAlocacao extends CtrlGenerica{
         }
     }
     
-    public void preencherCombos(){
-        cadastraAlocacao.preencherComboCurso();
-        cadastraAlocacao.preencherComboEixo();
-    }
-    
     public void preencherComboCurso(JComboBox cbxCurso, JComboBox cbxMatriz){ 
         
         List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
@@ -174,7 +185,6 @@ public class CtrlAlocacao extends CtrlGenerica{
     }
     
     public void preencherListaDisciplinas(JComboBox cbxMatriz, JList lstDisciplinas, JSpinner spnPeriodo) {
-        
         int periodo = (int) spnPeriodo.getValue();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         List listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);
@@ -193,14 +203,22 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         List listaCoordenadorias = getListaCoordenadorias();
         Coordenadoria coordenadoria;
+        Coordenadoria coordenadoriaAtual = getCoordenadoriaSelecionada();
+        preencherCombo(cbxCoordenadoria, listaCoordenadorias);
         
-        for (int i = 0; i < listaCoordenadorias.size(); i++) {
+        if((listaCoordenadorias.size() != 0) && (coordenadoriaAtual != null)){
+            
+            for (int i = 0; i < listaCoordenadorias.size(); i++) {
 
-            coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
-            if (coordenadoria.getId() == getCoordenadoriaSelecionada().getId()) {
-                cbxCoordenadoria.setSelectedIndex(i);
-                break;
+                coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
+                if (coordenadoria.getId() == coordenadoriaAtual.getId()) {
+                    cbxCoordenadoria.setSelectedIndex(i);
+                    break;
+                }
             }
+        }else{
+            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Selecione Uma Coordenadoria");
+            jdCargaHoraria = null;
         }
     }
 

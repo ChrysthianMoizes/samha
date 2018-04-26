@@ -148,7 +148,12 @@ public class CtrlDisciplina extends CtrlGenerica{
         preencherCombo(cbxCurso, listaCursos);
         
         if(listaCursos.size() > 0){
+            
             Curso curso = (Curso) cbxCurso.getSelectedItem();
+            
+            if(cadastraDisciplina != null)
+                cadastraDisciplina.setarPeriodoMaximo(curso.getQtPeriodos());
+            
             preencherComboMatriz(curso.getId(), cbxMatriz);
         }
     }
@@ -156,9 +161,10 @@ public class CtrlDisciplina extends CtrlGenerica{
     public void preencherComboMatriz(int id, JComboBox cbxMatriz) {
         
         List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        if(cadastraDisciplina != null)
+        if(cadastraDisciplina != null){
             cadastraDisciplina.setListaMatriz(listaMatriz);
-        
+            cbxMatriz.removeAllItems();
+        }
         if(listaMatriz.size() > 0)
             preencherCombo(cbxMatriz, listaMatriz);   
     }

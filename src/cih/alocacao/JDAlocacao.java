@@ -53,6 +53,14 @@ public class JDAlocacao extends javax.swing.JDialog {
         return (int) spnSemestre.getValue();
     }
     
+    public void setAno(int ano){
+        spnAno.setValue(ano);
+    }
+    
+    public void setSemestre(int semestre){
+        spnSemestre.setValue(semestre);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,7 +98,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         pnlDisciplina.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disciplina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um curso.." }));
         cbxCurso.setPreferredSize(new java.awt.Dimension(39, 30));
         cbxCurso.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -99,7 +106,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         });
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxMatriz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matriz Curricular..." }));
         cbxMatriz.setPreferredSize(new java.awt.Dimension(39, 30));
         cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +138,7 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                     .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                         .addComponent(cbxMatriz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -162,7 +168,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         pnlProfessor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Professor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
         cbxEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxEixo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um eixo..." }));
         cbxEixo.setPreferredSize(new java.awt.Dimension(39, 30));
         cbxEixo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -171,7 +176,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         });
 
         cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma coordenadoria..." }));
         cbxCoordenadoria.setPreferredSize(new java.awt.Dimension(39, 30));
         cbxCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,6 +397,7 @@ public class JDAlocacao extends javax.swing.JDialog {
 
     private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
         ctrlPrincipal.getCtrlAlocacao().preencherListaDisciplinas(cbxMatriz, lstDisciplinas, spnPeriodo);
+        spnPeriodo.setValue(1);
     }//GEN-LAST:event_cbxMatrizActionPerformed
 
     private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed

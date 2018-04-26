@@ -3,6 +3,7 @@ package cgd;
 import cdp.Alocacao;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 public class GdAlocacao extends GdGenerico{
@@ -17,6 +18,16 @@ public class GdAlocacao extends GdGenerico{
         sessao.getTransaction().commit();
         sessao.close();
         return lista;
+    }
+    
+    public Alocacao filtrarUltimaAlocacao() {
+        Criteria crit = criarSessao().createCriteria(Alocacao.class)
+                .setProjection(Projections.max("ano"))
+                .setProjection(Projections.max("semestre"));
+        crit.setMaxResults(1);
+        Alocacao alocacao = (Alocacao) crit.uniqueResult();
+        sessao.close();
+        return alocacao;
     }
     
 }
