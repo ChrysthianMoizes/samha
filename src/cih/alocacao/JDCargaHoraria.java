@@ -1,7 +1,6 @@
 package cih.alocacao;
 
 import cci.CtrlPrincipal;
-import cdp.Coordenadoria;
 
 public class JDCargaHoraria extends javax.swing.JDialog {
     
@@ -13,15 +12,18 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         this.setModalityType(ModalityType.MODELESS);
+        setarBackground();
     }
     
-    public void setarCoordenadoria(){
-        ctrlPrincipal.getCtrlAlocacao().setarCoordenadoriaTelaCargaHoraria(cbxCoordenadoria);
+    private void setarBackground(){
+        pnlDireita.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlEsquerda.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlInferior.setBackground(ctrlPrincipal.setarCorPanelExterior());
+        pnlSuperior.setBackground(ctrlPrincipal.setarCorPanelExterior());
     }
     
     public void atualizarTabela(){
-        Coordenadoria coordeanadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-        ctrlPrincipal.getCtrlAlocacao().listarCargaHorariaProfessores(coordeanadoria, tblCargaHoraria);
+        ctrlPrincipal.getCtrlAlocacao().listarCargaHorariaProfessores(tblCargaHoraria);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,51 +31,18 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlSuperior = new javax.swing.JPanel();
-        btnBuscar = new javax.swing.JButton();
-        cbxCoordenadoria = new javax.swing.JComboBox<>();
-        pnlTabela = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCargaHoraria = new javax.swing.JTable();
+        pnlInferior = new javax.swing.JPanel();
+        pnlDireita = new javax.swing.JPanel();
+        pnlSuperior = new javax.swing.JPanel();
+        pnlEsquerda = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Carga Horária dos Professores");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         pnlPrincipal.setLayout(new java.awt.BorderLayout());
-
-        btnBuscar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout pnlSuperiorLayout = new javax.swing.GroupLayout(pnlSuperior);
-        pnlSuperior.setLayout(pnlSuperiorLayout);
-        pnlSuperiorLayout.setHorizontalGroup(
-            pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSuperiorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cbxCoordenadoria, 0, 321, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addContainerGap())
-        );
-        pnlSuperiorLayout.setVerticalGroup(
-            pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSuperiorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(cbxCoordenadoria))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlPrincipal.add(pnlSuperior, java.awt.BorderLayout.CENTER);
 
         tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         tblCargaHoraria.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,24 +63,11 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblCargaHoraria);
 
-        javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
-        pnlTabela.setLayout(pnlTabelaLayout);
-        pnlTabelaLayout.setHorizontalGroup(
-            pnlTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlTabelaLayout.setVerticalGroup(
-            pnlTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTabelaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        pnlPrincipal.add(pnlTabela, java.awt.BorderLayout.PAGE_END);
+        pnlPrincipal.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        pnlPrincipal.add(pnlInferior, java.awt.BorderLayout.PAGE_END);
+        pnlPrincipal.add(pnlDireita, java.awt.BorderLayout.LINE_END);
+        pnlPrincipal.add(pnlSuperior, java.awt.BorderLayout.PAGE_START);
+        pnlPrincipal.add(pnlEsquerda, java.awt.BorderLayout.LINE_START);
 
         getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);
 
@@ -119,17 +75,13 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        atualizarTabela();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pnlDireita;
+    private javax.swing.JPanel pnlEsquerda;
+    private javax.swing.JPanel pnlInferior;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlSuperior;
-    private javax.swing.JPanel pnlTabela;
     private javax.swing.JTable tblCargaHoraria;
     // End of variables declaration//GEN-END:variables
 }

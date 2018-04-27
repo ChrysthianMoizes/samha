@@ -121,7 +121,7 @@ public class CtrlProfessor extends CtrlGenerica{
     
     public void listarProfessores(String coluna, String texto, JTable tabela) {
         List listaProfessores = buscar(coluna, texto);
-        listarEmTabela(listaProfessores, tabela, buscaProf);
+        listarEmTabela(listaProfessores, tabela, buscaProf, "toArray");
     }
     
     //================================================= TELA DE CADASTRO ====================================================

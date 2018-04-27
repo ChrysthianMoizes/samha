@@ -41,6 +41,15 @@ public class JDAlocacao extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlAlocacao().preencherComboEixos(cbxEixo, cbxCoordenadoria);
     }
     
+    public void preencherListaDisciplinas(){
+        ctrlPrincipal.getCtrlAlocacao().preencherListaDisciplinas(cbxMatriz, lstDisciplinas, spnPeriodo);
+        spnPeriodo.setValue(1);
+    }
+    
+    public void preencherListaProfessores(){
+        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxCoordenadoria, lstProfessores);
+    }
+    
     public void setarPeriodoMaximo(int maximo){
         spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, maximo, 1));
     }
@@ -84,7 +93,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         pnlAnoSemestre = new javax.swing.JPanel();
         spnSemestre = new javax.swing.JSpinner();
         spnAno = new javax.swing.JSpinner();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAlocacao = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
@@ -235,37 +243,24 @@ public class JDAlocacao extends javax.swing.JDialog {
             }
         });
 
-        btnBuscar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        btnBuscar.setText("OK");
-        btnBuscar.setPreferredSize(new java.awt.Dimension(47, 35));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlAnoSemestreLayout = new javax.swing.GroupLayout(pnlAnoSemestre);
         pnlAnoSemestre.setLayout(pnlAnoSemestreLayout);
         pnlAnoSemestreLayout.setHorizontalGroup(
             pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAnoSemestreLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlAnoSemestreLayout.setVerticalGroup(
             pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAnoSemestreLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,9 +314,7 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacaoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAlocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlAlocacaoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacaoLayout.createSequentialGroup()
                         .addGroup(pnlAlocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlAlocacaoLayout.createSequentialGroup()
@@ -330,7 +323,8 @@ public class JDAlocacao extends javax.swing.JDialog {
                                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnCargaHoraria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlAnoSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(pnlAnoSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         pnlAlocacaoLayout.setVerticalGroup(
             pnlAlocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,10 +373,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        atualizarTabela();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
@@ -406,12 +396,11 @@ public class JDAlocacao extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxEixoItemStateChanged
 
     private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
-        ctrlPrincipal.getCtrlAlocacao().preencherListaDisciplinas(cbxMatriz, lstDisciplinas, spnPeriodo);
-        spnPeriodo.setValue(1);
+        preencherListaDisciplinas();
     }//GEN-LAST:event_cbxMatrizActionPerformed
 
     private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
-        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxCoordenadoria, lstProfessores);
+        preencherListaProfessores();
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
@@ -432,7 +421,6 @@ public class JDAlocacao extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCargaHoraria;
     private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox<String> cbxCoordenadoria;

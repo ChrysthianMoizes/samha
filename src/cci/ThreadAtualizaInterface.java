@@ -4,11 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.swing.JDialog;
 
-public class AtualizaInterface implements Runnable{
+public class ThreadAtualizaInterface implements Runnable{
 
     private JDialog janela;
     
-    public AtualizaInterface(JDialog janela) {
+    public ThreadAtualizaInterface(JDialog janela) {
         this.janela = janela;   
     }
 

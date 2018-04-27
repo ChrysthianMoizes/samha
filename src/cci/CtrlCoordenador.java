@@ -109,7 +109,7 @@ public class CtrlCoordenador extends CtrlGenerica{
         if(coluna.toLowerCase().equals("tipo")){
             
             List listaCoordenadores = gtCoordenador.buscarCoordenadoresPorTipo(texto);
-            listarEmTabela(listaCoordenadores, tabela, buscaCoord);
+            listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
             
         }else{
         
@@ -123,7 +123,7 @@ public class CtrlCoordenador extends CtrlGenerica{
             listaCoordenadores.addAll(listaCoordenadoresCurso);
             listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
 
-            listarEmTabela(listaCoordenadores, tabela, buscaCoord);
+            listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
         }
     }
     

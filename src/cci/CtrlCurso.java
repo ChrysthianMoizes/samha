@@ -110,7 +110,7 @@ public class CtrlCurso extends CtrlGenerica{
     
     public void listarCursos(String coluna, String texto, JTable tabela){
         List listaCursos = buscar(coluna, texto);
-        listarEmTabela(listaCursos, tabela, buscaCurso);
+        listarEmTabela(listaCursos, tabela, buscaCurso, "toArray");
     }
     
     public List<Curso> listar() {

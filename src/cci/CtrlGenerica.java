@@ -14,12 +14,12 @@ public abstract class CtrlGenerica {
         combo.setModel(new DefaultComboBoxModel(lista.toArray()));
     }
     
-    public void listarEmTabela(List lista, JTable tabela, JDialog janela){
+    public void listarEmTabela(List lista, JTable tabela, JDialog janela, String nomeMetodo){
         
         JTableUtil.limparTabela(tabela);
 
         try {
-            JTableUtil.preencherTabela(lista, tabela);
+            JTableUtil.preencherTabela(lista, tabela, nomeMetodo);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

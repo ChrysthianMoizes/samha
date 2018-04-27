@@ -87,12 +87,12 @@ public class JTableUtil {
      * @param jTable 
      */
     
-    public static void preencherTabela(List lista, JTable tabela) throws Exception{
+    public static void preencherTabela(List lista, JTable tabela, String nomeMetodo) throws Exception{
      
         Method metodo;
 
         for(Object obj : lista){
-            metodo = obj.getClass().getMethod("toArray", null);
+            metodo = obj.getClass().getMethod(nomeMetodo, null);
             JTableUtil.addLinha(tabela, (Object[]) metodo.invoke(obj, null));  
         }            
     }
