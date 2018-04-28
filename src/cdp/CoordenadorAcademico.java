@@ -52,7 +52,21 @@ public class CoordenadorAcademico extends Usuario implements Comparable<Object>{
     @Override
     public int compareTo(Object o) {
         
-        CoordenadorAcademico other = (CoordenadorAcademico)o;
-        return this.getServidor().getNome().compareTo(other.getServidor().getNome());      
+        if(o instanceof CoordenadorCurso){
+            
+            CoordenadorCurso other = (CoordenadorCurso) o;
+            return this.getServidor().getNome().compareTo(other.getProfessor().getNome());
+            
+        }else{
+            
+            if(o instanceof CoordenadorAcademico){
+                CoordenadorAcademico other = (CoordenadorAcademico) o;
+                return this.getServidor().getNome().compareTo(other.getServidor().getNome());
+                
+            }else{
+                CoordenadorPedagogico other = (CoordenadorPedagogico) o;
+                return this.getServidor().getNome().compareTo(other.getServidor().getNome());
+            } 
+        }
     }
 }

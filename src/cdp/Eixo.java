@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Eixo implements Serializable {
+public class Eixo implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,4 +53,10 @@ public class Eixo implements Serializable {
     public Object[] toArray() {
         return new Object[] { this };
     }   
+
+    @Override
+    public int compareTo(Object o) {
+        Eixo other = (Eixo) o;
+        return this.getNome().compareTo(other.getNome());
+    }
 }

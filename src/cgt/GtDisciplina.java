@@ -2,15 +2,19 @@ package cgt;
 
 import cdp.Disciplina;
 import cdp.MatrizCurricular;
+import cgd.GdAlocacao;
 import cgd.GdDisciplina;
+import java.util.Collections;
 import java.util.List;
 
 public class GtDisciplina {
     
     private GdDisciplina gdDisciplina;
+    private GdAlocacao gdAlocacao;
     
     public GtDisciplina(){
         gdDisciplina = new GdDisciplina();
+        gdAlocacao = new GdAlocacao();
     }
       
     public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
@@ -55,23 +59,31 @@ public class GtDisciplina {
     
     public List<Disciplina> buscar(String coluna, String texto) {
         
-        if(coluna.toLowerCase().equals("curso")){
-            coluna = "matriz.id";
-            return gdDisciplina.filtrar(coluna.toLowerCase(), Integer.valueOf(texto));
-        }
-        return gdDisciplina.buscar(coluna.toLowerCase(), texto);
+        List lista;
+        
+        if(coluna.toLowerCase().equals("curso"))
+            lista = gdDisciplina.filtrar("matriz.id", Integer.valueOf(texto));
+        else
+            lista = gdDisciplina.buscar(coluna.toLowerCase(), texto);
+        
+        Collections.sort(lista);
+        return lista;
     }
     
     public List filtrarPorMatrizPeriodo(int matriz, int periodo){
-        return gdDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+        
+        List lista = gdDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+        Collections.sort(lista);
+        return lista;
     }
     
     public String excluir(Disciplina disciplina) {
 
         try {
-            //verificar se a disciplina está associada a alguma alocação = criar gdLocacao
-            List alocacao = null; 
-            if(alocacao == null){
+
+            List listaAlocacoes = gdAlocacao.filtrarPorDisciplina(disciplina.getId()); 
+            
+            if(listaAlocacoes.size() == 0){
                 gdDisciplina.excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else

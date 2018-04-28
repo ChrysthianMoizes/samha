@@ -81,10 +81,6 @@ public class CtrlDisciplina extends CtrlGenerica{
             CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
     }
     
-    public List<Disciplina> buscar(String coluna, String texto) {
-        return gtDisciplina.buscar(coluna, texto);
-    }
-    
     public List filtrarPorMatrizPeriodo(int matriz, int periodo){
         return gtDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
     }

@@ -15,7 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Turma implements Serializable {
+public class Turma implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,5 +114,13 @@ public class Turma implements Serializable {
     
     public Object[] toArray() {
         return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        
+        Turma other = (Turma) o;
+        return this.getNome().compareTo(other.getNome());
+        
     }
 }

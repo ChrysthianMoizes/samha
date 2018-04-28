@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Disciplina implements Serializable {
+public class Disciplina implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,6 +122,12 @@ public class Disciplina implements Serializable {
     
     public Object[] toArray() {
         return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTipo() };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Disciplina other = (Disciplina) o; 
+        return this.getNome().compareTo(other.getNome());
     }
     
 }

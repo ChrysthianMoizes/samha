@@ -7,6 +7,8 @@ import cdp.Professor;
 import cdp.Servidor;
 import cdp.Usuario;
 import cgd.GdCoordenador;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GtCoordenador {
@@ -103,26 +105,35 @@ public class GtCoordenador {
         }
     }
 
-    public List<CoordenadorCurso> buscarCoordenadoresCurso(String coluna, String texto) {
-        return gdCoordenador.buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
-    }
-    
-    public List<CoordenadorAcademico> buscarCoordenadoresAcademicos(String coluna, String texto) {
-        return gdCoordenador.buscarCoordenadoresAcademicos(coluna.toLowerCase(), texto);
-    }
-    
-    public List<CoordenadorPedagogico> buscarCoordenadoresPedagogicos(String coluna, String texto) {
-        return gdCoordenador.buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
+    public List<CoordenadorCurso> listarCoordenadores(String coluna, String texto) {
+        
+        List listaCoordenadoresCurso = gdCoordenador.buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
+        List listaCoordenadoresAcademicos = gdCoordenador.buscarCoordenadoresAcademicos(coluna.toLowerCase(), texto);
+        List listaCoordenadoresPedagogicos = gdCoordenador.buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
+
+        List listaCoordenadores = new ArrayList<>();
+
+        listaCoordenadores.addAll(listaCoordenadoresAcademicos);
+        listaCoordenadores.addAll(listaCoordenadoresCurso);
+        listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
+        Collections.sort(listaCoordenadores);
+        
+        return listaCoordenadores;
     }
     
     public List buscarCoordenadoresPorTipo(String tipo){
         
+        List lista;
+        
         if(tipo.toLowerCase().equals(Constantes.COORD_ACAD))
-            return gdCoordenador.consultar(CoordenadorAcademico.class);
+            lista = gdCoordenador.consultar(CoordenadorAcademico.class);
         else if(tipo.toLowerCase().equals(Constantes.COORD_CURSO))
-            return gdCoordenador.consultar(CoordenadorCurso.class);
+            lista = gdCoordenador.consultar(CoordenadorCurso.class);
         else
-            return gdCoordenador.consultar(CoordenadorPedagogico.class);
+            lista = gdCoordenador.consultar(CoordenadorPedagogico.class);
+        
+        Collections.sort(lista);
+        return lista;
     }
 
     public void validarCampos(String nome, String matricula, String login, String senha, String tipo, Professor professor) throws Exception {

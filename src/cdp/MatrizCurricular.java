@@ -17,7 +17,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "matriz_curricular")
-public class MatrizCurricular implements Serializable {
+public class MatrizCurricular implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,5 +103,11 @@ public class MatrizCurricular implements Serializable {
    
     public Object[] toArray() {
         return new Object[] { this };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        MatrizCurricular other = (MatrizCurricular) o;
+        return this.getNome().compareTo(other.getNome());
     }
 }

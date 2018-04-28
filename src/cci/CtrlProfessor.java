@@ -123,7 +123,6 @@ public class CtrlProfessor extends CtrlGenerica{
     public void listarProfessores(String coluna, String texto, JTable tabela) {
        
         List listaProfessores = buscar(coluna, texto);
-        Collections.sort(listaProfessores);
         listarEmTabela(listaProfessores, tabela, buscaProf, "toArray");  
         
         if(listaProfessores.size() == 0)

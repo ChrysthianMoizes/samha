@@ -7,7 +7,7 @@ import org.hibernate.annotations.CascadeType;
 
 
 @Entity
-public class Coordenadoria implements Serializable {
+public class Coordenadoria implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,5 +96,11 @@ public class Coordenadoria implements Serializable {
     
     public Object[] toArray() {
         return new Object[] { this };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Coordenadoria other = (Coordenadoria) o;
+        return this.getNome().compareTo(other.getNome());
     }
 }

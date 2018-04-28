@@ -1,6 +1,5 @@
 package cdp;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -52,7 +51,7 @@ public class CoordenadorCurso extends Usuario implements Comparable<Object>{
 
     @Override
     public int compareTo(Object o) {
-        CoordenadorCurso other = (CoordenadorCurso)o;
+        CoordenadorCurso other = (CoordenadorCurso) o;
         return this.getProfessor().getNome().compareTo(other.getProfessor().getNome()); 
     }
 }

@@ -76,6 +76,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     
     private void alterarComboFiltro(){
         
+        JTableUtil.limparTabela(tblCurso);
         lblMensagem.setText("");
         txtFiltro.setText("");
         
@@ -88,6 +89,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             rbtnDoutorado.setEnabled(true);
             txtFiltro.setEnabled(false);
             btnBuscar.setEnabled(false);
+            atualizarTabela();
         }else{
             rbtnEnsinoMedio.setEnabled(false);
             rbtnGraduacao.setEnabled(false);
@@ -516,7 +518,6 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_rbtnDoutoradoActionPerformed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        JTableUtil.limparTabela(tblCurso);
         alterarComboFiltro();        
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 

@@ -6,6 +6,7 @@ import cgd.GdCoordenador;
 import cgd.GdCoordenadoria;
 import cgd.GdCurso;
 import cgd.GdProfessor;
+import java.util.Collections;
 import java.util.List;
 
 public class GtCoordenadoria {
@@ -65,15 +66,22 @@ public class GtCoordenadoria {
     }
     
     public List<Coordenadoria> buscar(String coluna, String texto) {
-        return gdCoordenadoria.buscar(coluna.toLowerCase(), texto);
+        
+        List lista = gdCoordenadoria.buscar(coluna.toLowerCase(), texto);
+        Collections.sort(lista);
+        return lista;
     }
     
     public List<Coordenadoria> filtrarCoordenadoriasEixo(int id) {
-        return gdCoordenadoria.filtrarCoordenadoriasEixo("eixo.id", id);
+        List lista = gdCoordenadoria.filtrarCoordenadoriasEixo("eixo.id", id);
+        Collections.sort(lista);
+        return lista;
     }
 
     public List<Coordenadoria> listar() {
-       return gdCoordenadoria.consultar(Coordenadoria.class);
+        List lista = gdCoordenadoria.consultar(Coordenadoria.class);
+        Collections.sort(lista);
+        return lista;
     }
 
     public void validarCampos(String nome, Eixo eixo) throws SAMHAException{

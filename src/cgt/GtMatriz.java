@@ -4,6 +4,7 @@ import cdp.Curso;
 import cdp.MatrizCurricular;
 import cgd.GdDisciplina;
 import cgd.GdMatriz;
+import java.util.Collections;
 import java.util.List;
 
 public class GtMatriz {
@@ -53,7 +54,10 @@ public class GtMatriz {
     }
     
     public List<MatrizCurricular> filtrarMatrizCurso(int id) {
-        return gdMatriz.filtrarMatrizCurso("curso.id", id);
+        
+        List lista = gdMatriz.filtrarMatrizCurso("curso.id", id);
+        Collections.sort(lista);
+        return lista;
     }
     
     public void validarCampos(String nome, Curso curso) throws SAMHAException{

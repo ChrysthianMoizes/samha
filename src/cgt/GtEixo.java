@@ -2,6 +2,7 @@ package cgt;
 
 import cdp.Eixo;
 import cgd.GdEixo;
+import java.util.Collections;
 import java.util.List;
 
 public class GtEixo {
@@ -47,7 +48,10 @@ public class GtEixo {
     }
    
     public List<Eixo> consultar() {
-        return gdEixo.consultar(Eixo.class);
+        
+        List lista = gdEixo.consultar(Eixo.class);
+        Collections.sort(lista);
+        return lista;
     }
     
     public void validarCampos(String nome) throws SAMHAException{

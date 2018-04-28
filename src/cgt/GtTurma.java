@@ -3,6 +3,7 @@ package cgt;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import cgd.GdTurma;
+import java.util.Collections;
 import java.util.List;
 
 public class GtTurma {
@@ -53,14 +54,22 @@ public class GtTurma {
     
     public List<Turma> buscar(String coluna, String texto) {
         
-        if(coluna.toLowerCase().equals("curso")){
-            return gdTurma.filtrarPorCurso(Integer.valueOf(texto));
-        }
-        return gdTurma.buscar(coluna.toLowerCase(), texto);
+        List lista;
+        
+        if(coluna.toLowerCase().equals("curso"))
+            lista = gdTurma.filtrarPorCurso(Integer.valueOf(texto));
+        else
+            lista= gdTurma.buscar(coluna.toLowerCase(), texto);
+        
+        Collections.sort(lista);
+        return lista;
     }
     
-    public List<Turma> buscarPorCurso(int id) {  
-        return gdTurma.filtrarPorCurso(id);
+    public List<Turma> buscarPorCurso(int id) {
+        
+        List lista = gdTurma.filtrarPorCurso(id);
+        Collections.sort(lista);
+        return lista;
     }
     
     public String excluir(Turma turma) {

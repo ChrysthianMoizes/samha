@@ -9,6 +9,7 @@ import cih.curso.JDBuscarCurso;
 import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
 import java.awt.Image;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -110,7 +111,7 @@ public class CtrlCurso extends CtrlGenerica{
     
     public void listarCursos(String coluna, String texto, JTable tabela){
         
-        List listaCursos = buscar(coluna, texto);
+        List listaCursos = gtCurso.buscar(coluna, texto);
         listarEmTabela(listaCursos, tabela, buscaCurso, "toArray");
         
         if(listaCursos.size() == 0)

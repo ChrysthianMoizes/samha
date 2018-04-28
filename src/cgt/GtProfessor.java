@@ -5,6 +5,7 @@ import cdp.Professor;
 import cgd.GdProfessor;
 import cgd.GdRestricao;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class GtProfessor {
@@ -49,15 +50,23 @@ public class GtProfessor {
     }
 
     public List<Professor> buscar(String coluna, String texto) {
-        return gdProfessor.buscar(coluna.toLowerCase(), texto);      
+        
+        List lista = gdProfessor.buscar(coluna.toLowerCase(), texto);
+        Collections.sort(lista);
+        return lista;      
     }
     
     public List<Professor> filtrarPorCoordenadoria(int id){
-        return gdProfessor.filtrarPorCoordenadoria("coordenadoria.id", id);
+        
+        List lista = gdProfessor.filtrarPorCoordenadoria("coordenadoria.id", id);
+        Collections.sort(lista);
+        return lista;
     }
 
     public List<Professor> consultar() {
-        return gdProfessor.consultar(Professor.class);
+        List lista = gdProfessor.consultar(Professor.class);
+        Collections.sort(lista);
+        return lista;
     }
 
     public String excluir(Professor professor){

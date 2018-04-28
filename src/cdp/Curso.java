@@ -13,7 +13,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-public class Curso implements Serializable {
+public class Curso implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,5 +98,11 @@ public class Curso implements Serializable {
    
     public Object[] toArray() {
         return new Object[] { this, getNivel(), getCoordenadoria().getEixo().getNome() };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Curso other = (Curso) o;
+        return this.getNome().compareTo(other.getNome());
     }
 }

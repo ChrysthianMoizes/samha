@@ -6,6 +6,7 @@ import cgd.GdCoordenadoria;
 import cgd.GdCurso;
 import cgd.GdMatriz;
 import cgd.GdTurma;
+import java.util.Collections;
 import java.util.List;
 
 public class GtCurso {
@@ -61,14 +62,23 @@ public class GtCurso {
     }
     
     public List<Curso> buscar(String coluna, String texto) {
+        
+        List lista;
+        
         if(coluna.toLowerCase().equals("nome"))
-            return gdCurso.buscar(coluna.toLowerCase(), texto);
+            lista = gdCurso.buscar(coluna.toLowerCase(), texto);
         else
-            return gdCurso.buscarPorNivel(coluna.toLowerCase(), texto);  
+            lista = gdCurso.buscarPorNivel(coluna.toLowerCase(), texto);
+        
+        Collections.sort(lista);
+        return lista;
     }
     
     public List<Curso> listar() {
-       return gdCurso.consultar(Curso.class);
+        
+        List lista = gdCurso.consultar(Curso.class);
+        Collections.sort(lista);
+        return lista;
     }
     
     public String excluir(Curso curso) {

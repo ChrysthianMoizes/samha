@@ -107,37 +107,18 @@ public class CtrlCoordenador extends CtrlGenerica{
 
     public void listarCoordenadores(String coluna, String texto, JTable tabela) {
         
-        if(coluna.toLowerCase().equals("tipo")){
-            
-            List listaCoordenadores = gtCoordenador.buscarCoordenadoresPorTipo(texto);
-            Collections.sort(listaCoordenadores);
-            listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
-            
-            if(listaCoordenadores.size() == 0)
-                buscaCoord.setarMensagem("Nenhum coordenador encontrado.");
-            
-        }else{
+        List listaCoordenadores;
         
-            List listaCoordenadoresCurso = gtCoordenador.buscarCoordenadoresCurso(coluna, texto);
-            List listaCoordenadoresAcademicos = gtCoordenador.buscarCoordenadoresAcademicos(coluna, texto);
-            List listaCoordenadoresPedagogicos = gtCoordenador.buscarCoordenadoresPedagogicos(coluna, texto);
-
-            List listaCoordenadores = new ArrayList<>();
-
-            listaCoordenadores.addAll(listaCoordenadoresAcademicos);
-            listaCoordenadores.addAll(listaCoordenadoresCurso);
-            listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
+        if(coluna.toLowerCase().equals("tipo"))
+            listaCoordenadores = gtCoordenador.buscarCoordenadoresPorTipo(texto);   
             
-            Collections.sort(listaCoordenadores);
-            listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
-            
-            if(listaCoordenadores.size() == 0)
+        else
+            listaCoordenadores = gtCoordenador.listarCoordenadores(coluna, texto);    
+               
+        listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
+        
+        if(listaCoordenadores.size() == 0)
                 buscaCoord.setarMensagem("Nenhum coordenador encontrado.");
-        }
-    }
-    
-    public List<CoordenadorAcademico> buscarCoordenadoresAcademicos(String coluna, String texto) {
-        return gtCoordenador.buscarCoordenadoresAcademicos(coluna, texto);
     }
     
     //============================ TELA DE CADASTRO ============================================================

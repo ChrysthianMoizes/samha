@@ -27,5 +27,16 @@ public class GdAlocacao extends GdGenerico{
         Alocacao alocacao = (Alocacao) crit.uniqueResult();
         sessao.close();
         return alocacao;
-    }  
+    }
+    
+    public List filtrarPorDisciplina(int id){
+        Criteria crit = criarSessao().createCriteria(Alocacao.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("disciplina.id", id));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
 }

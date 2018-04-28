@@ -29,6 +29,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     
     public void alterarComboFiltro(){
         
+        JTableUtil.limparTabela(tblCoordenador);
         lblMensagem.setText("");
         txtFiltro.setText("");
         
@@ -39,6 +40,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
             rdbCoordenadorPedagogico.setEnabled(true);
             txtFiltro.setEnabled(false);
             btnBuscar.setEnabled(false);
+            atualizarTabela();
         }else{
             rdbCoordenadorAcademico.setEnabled(false);
             rdbCoordenadorCurso.setEnabled(false);
@@ -49,7 +51,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }
     
     public void atualizarTabela(){
-        
+         
         lblMensagem.setText("");
         
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
@@ -425,7 +427,6 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        JTableUtil.limparTabela(tblCoordenador);
         alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 

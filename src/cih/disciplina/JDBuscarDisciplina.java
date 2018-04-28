@@ -71,6 +71,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     
     public void alterarComboFiltro(){
         
+        JTableUtil.limparTabela(tblDisciplina);
         lblMensagem.setText("");
         txtFiltro.setText("");
         
@@ -91,11 +92,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             btnBuscar.setEnabled(false);
             cbxCurso.setEnabled(true);
             cbxMatriz.setEnabled(true);
-            preencherComboCurso();
             rbtnObrigatoria.setEnabled(false);
             rbtnOptativa.setEnabled(false);
             rbtnEspecial.setEnabled(false);
             txtFiltro.setEnabled(false);
+            preencherComboCurso();
             atualizarTabela();
       
         }else{
@@ -111,6 +112,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             rbtnEspecial.setEnabled(true);
             txtFiltro.setText("");
             txtFiltro.setEnabled(false);
+            atualizarTabela();
         }
     }
 
@@ -343,17 +345,17 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setEnabled(false);
-        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCursoItemStateChanged(evt);
+        cbxCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursoActionPerformed(evt);
             }
         });
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxMatriz.setEnabled(false);
-        cbxMatriz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxMatrizItemStateChanged(evt);
+        cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMatrizActionPerformed(evt);
             }
         });
 
@@ -512,7 +514,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        JTableUtil.limparTabela(tblDisciplina);
         alterarComboFiltro();       
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
@@ -528,17 +529,17 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         atualizarTabela();
     }//GEN-LAST:event_rbtnEspecialActionPerformed
 
-    private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
+    private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_cbxMatrizActionPerformed
+
+    private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
+       Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
            ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
            atualizarTabela();
-        }   
-    }//GEN-LAST:event_cbxCursoItemStateChanged
-
-    private void cbxMatrizItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMatrizItemStateChanged
-        atualizarTabela();
-    }//GEN-LAST:event_cbxMatrizItemStateChanged
+        }
+    }//GEN-LAST:event_cbxCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

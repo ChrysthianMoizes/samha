@@ -51,7 +51,7 @@ public class CoordenadorPedagogico extends Usuario implements Comparable<Object>
 
     @Override
     public int compareTo(Object o) {
-        CoordenadorPedagogico other = (CoordenadorPedagogico)o;
+        CoordenadorPedagogico other = (CoordenadorPedagogico) o;
         return this.getServidor().getNome().compareTo(other.getServidor().getNome()); 
     }
 }
