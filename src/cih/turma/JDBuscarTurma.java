@@ -4,12 +4,10 @@ import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cci.JTableUtil;
 import cdp.Curso;
-import cdp.MatrizCurricular;
 import cdp.Turma;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDBuscarTurma extends javax.swing.JDialog {
 
@@ -34,6 +32,8 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     
     public void atualizarTabela(){
         
+        lblMensagem.setText("");
+        
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
@@ -52,19 +52,23 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     }
     
     public void alterarComboFiltro(){
+        
         JTableUtil.limparTabela(tblTurma);
+        lblMensagem.setText("");
+        txtFiltro.setText("");
+        
         if(cbxFiltro.getSelectedIndex() == 0){
             cbxCurso.removeAllItems();
             cbxCurso.setEnabled(false);
             txtFiltro.setEnabled(true);
             btnBuscar.setEnabled(true);
             
-        }else if(cbxFiltro.getSelectedIndex() == 1){
+        }else{
             btnBuscar.setEnabled(false);
             cbxCurso.setEnabled(true);
+            txtFiltro.setEnabled(false);
             preencherComboCurso();
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);    
+            atualizarTabela();
         }
     }
 
@@ -82,6 +86,10 @@ public class JDBuscarTurma extends javax.swing.JDialog {
 
     public void setListaCursos(List<Curso> listaCursos) {
         this.listaCursos = listaCursos;
+    }
+    
+    public void setarMensagem(String mensagem){
+        lblMensagem.setText(mensagem);
     }
    
     @SuppressWarnings("unchecked")
@@ -103,6 +111,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         tblTurma = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         cbxCurso = new javax.swing.JComboBox<>();
+        lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Turma");
@@ -266,6 +275,9 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             }
         });
 
+        lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
+
         javax.swing.GroupLayout pnlBuscarTurmaLayout = new javax.swing.GroupLayout(pnlBuscarTurma);
         pnlBuscarTurma.setLayout(pnlBuscarTurmaLayout);
         pnlBuscarTurmaLayout.setHorizontalGroup(
@@ -273,9 +285,6 @@ public class JDBuscarTurma extends javax.swing.JDialog {
             .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -285,7 +294,12 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                             .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtFiltro))
                         .addGap(11, 11, 11)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarTurmaLayout.createSequentialGroup()
+                        .addGroup(pnlBuscarTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlBuscarTurmaLayout.setVerticalGroup(
@@ -301,7 +315,8 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                 .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnlGeralLayout = new javax.swing.GroupLayout(pnlGeral);
@@ -413,6 +428,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JScrollPane jScrollPaneTurmas;
+    private javax.swing.JLabel lblMensagem;
     private javax.swing.JPanel pnlBuscarTurma;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;

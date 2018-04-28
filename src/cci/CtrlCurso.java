@@ -109,8 +109,12 @@ public class CtrlCurso extends CtrlGenerica{
     }
     
     public void listarCursos(String coluna, String texto, JTable tabela){
+        
         List listaCursos = buscar(coluna, texto);
         listarEmTabela(listaCursos, tabela, buscaCurso, "toArray");
+        
+        if(listaCursos.size() == 0)
+            buscaCurso.setarMensagem("Nenhum curso encontrado.");
     }
     
     public List<Curso> listar() {

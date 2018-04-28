@@ -9,6 +9,7 @@ import cih.professor.JDBuscarProfessor;
 import cih.professor.JDCadastrarProfessor;
 import java.awt.Frame;
 import java.awt.Image;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -120,8 +121,13 @@ public class CtrlProfessor extends CtrlGenerica{
     }
     
     public void listarProfessores(String coluna, String texto, JTable tabela) {
+       
         List listaProfessores = buscar(coluna, texto);
-        listarEmTabela(listaProfessores, tabela, buscaProf, "toArray");
+        Collections.sort(listaProfessores);
+        listarEmTabela(listaProfessores, tabela, buscaProf, "toArray");  
+        
+        if(listaProfessores.size() == 0)
+            buscaProf.setarMensagem("Nenhum professor encontrado.");
     }
     
     //================================================= TELA DE CADASTRO ====================================================
@@ -221,7 +227,7 @@ public class CtrlProfessor extends CtrlGenerica{
                     preencherListaRestricoes(lstRestricoes);
                 }
             }
-        } else {
+        }else{
             CtrlMensagem.exibirMensagemAviso(cadastraProf, "Selecione uma Restrição");
         }
     }

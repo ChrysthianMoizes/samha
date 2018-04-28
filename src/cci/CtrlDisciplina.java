@@ -108,8 +108,12 @@ public class CtrlDisciplina extends CtrlGenerica{
     }
     
     public void listarDisciplinas(String coluna, String texto, JTable tabela){
+        
         List listaDisciplinas = gtDisciplina.buscar(coluna, texto);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
+        
+        if(listaDisciplinas.size() == 0)
+            buscaDisciplina.setarMensagem("Nenhuma disciplina encontrada.");
     }
     
     //======================================= TELA DE CADASTRO ===============================================

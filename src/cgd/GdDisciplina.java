@@ -12,7 +12,6 @@ public class GdDisciplina extends GdGenerico{
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         sessao.beginTransaction();
         crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
-        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();
         sessao.close();

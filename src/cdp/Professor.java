@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "professor")
 @PrimaryKeyJoinColumn(name = "professor_id")
-public class Professor extends Servidor{
+public class Professor extends Servidor implements Comparable<Object>{
     
     @Column(nullable = false)
     private int cargaHoraria;
@@ -58,5 +58,12 @@ public class Professor extends Servidor{
     
     public Object[] toArrayCargaHoraria() {
         return new Object[] { this, getMatricula(), getCargaHoraria()};
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        
+        Professor other = (Professor) o;  
+        return this.getNome().compareTo(other.getNome());
     }
 }

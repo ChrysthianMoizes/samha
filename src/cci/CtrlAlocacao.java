@@ -44,6 +44,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         cadastraAlocacao.preencherComboCurso();
         cadastraAlocacao.preencherComboEixo();
         identificarUltimaAlocacao();
+        cadastraAlocacao.atualizarTabela();
         cadastraAlocacao.setVisible(true);
         
     }
@@ -67,7 +68,6 @@ public class CtrlAlocacao extends CtrlGenerica{
         if(ultimaAlocacao != null){
             cadastraAlocacao.setAno(ultimaAlocacao.getAno());
             cadastraAlocacao.setSemestre(ultimaAlocacao.getSemestre());
-            cadastraAlocacao.atualizarTabela();
         }
     }
     
@@ -90,9 +90,10 @@ public class CtrlAlocacao extends CtrlGenerica{
     public void listarAlocacoes(int ano, int semestre, JTable tabela){
         
         List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestre(ano, semestre);
+        listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
         
-        if(listaAlocacoes.size() > 0)
-            listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
+        if(listaAlocacoes.size() == 0)
+                cadastraAlocacao.setarMensagem("Nenhuma alocação encontrada.");
         
         if(jdCargaHoraria != null)
             jdCargaHoraria.atualizarTabela();
@@ -108,8 +109,10 @@ public class CtrlAlocacao extends CtrlGenerica{
             int semestre = cadastraAlocacao.getSemestre();
             
             List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
-            
             listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
+            
+            
+            
             
         }else{
             jdCargaHoraria = null;

@@ -11,6 +11,7 @@ import cih.coordenador.JDCadastrarCoordenador;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -109,7 +110,11 @@ public class CtrlCoordenador extends CtrlGenerica{
         if(coluna.toLowerCase().equals("tipo")){
             
             List listaCoordenadores = gtCoordenador.buscarCoordenadoresPorTipo(texto);
+            Collections.sort(listaCoordenadores);
             listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
+            
+            if(listaCoordenadores.size() == 0)
+                buscaCoord.setarMensagem("Nenhum coordenador encontrado.");
             
         }else{
         
@@ -122,8 +127,12 @@ public class CtrlCoordenador extends CtrlGenerica{
             listaCoordenadores.addAll(listaCoordenadoresAcademicos);
             listaCoordenadores.addAll(listaCoordenadoresCurso);
             listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
-
+            
+            Collections.sort(listaCoordenadores);
             listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
+            
+            if(listaCoordenadores.size() == 0)
+                buscaCoord.setarMensagem("Nenhum coordenador encontrado.");
         }
     }
     

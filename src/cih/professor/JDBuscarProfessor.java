@@ -34,6 +34,9 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }
     
     public void atualizarTabela(){
+        
+        lblMensagem.setText("");
+        
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = txtFiltro.getText();
         
@@ -46,13 +49,17 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }
     
     private void alterarComboFiltro(){
+        
+        lblMensagem.setText("");
+        txtFiltro.setText("");
+
         if(cbxFiltro.getSelectedIndex() == 2){
             cbxCoordenadoria.setEnabled(true);
-            txtFiltro.setText("");
             txtFiltro.setEnabled(false);
             btnBuscar.setEnabled(false);
             preencherComboCoordenadorias();
-            cbxCoordenadoriaActionPerformed(null);
+            atualizarTabela();
+            
         }else{
             cbxCoordenadoria.removeAllItems();
             cbxCoordenadoria.setEnabled(false);
@@ -76,6 +83,11 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     public void setListaCoordenadorias(List<Coordenadoria> listaCoordenadorias) {
         this.listaCoordenadorias = listaCoordenadorias;
     }
+    
+    public void setarMensagem(String mensagem){
+        lblMensagem.setText(mensagem);
+    }
+       
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,6 +107,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         tblProfessor = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         cbxCoordenadoria = new javax.swing.JComboBox<>();
+        lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Professor");
@@ -207,6 +220,11 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                 cbxFiltroItemStateChanged(evt);
             }
         });
+        cbxFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFiltroActionPerformed(evt);
+            }
+        });
 
         txtFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -257,6 +275,9 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
             }
         });
 
+        lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
+
         javax.swing.GroupLayout pnlBuscarProfessorLayout = new javax.swing.GroupLayout(pnlBuscarProfessor);
         pnlBuscarProfessor.setLayout(pnlBuscarProfessorLayout);
         pnlBuscarProfessorLayout.setHorizontalGroup(
@@ -276,7 +297,11 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2))
                             .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBuscarProfessorLayout.createSequentialGroup()
+                        .addGroup(pnlBuscarProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlBuscarProfessorLayout.setVerticalGroup(
@@ -292,7 +317,8 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                 .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnlGeralLayout = new javax.swing.GroupLayout(pnlGeral);
@@ -386,13 +412,18 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        JTableUtil.limparTabela(tblProfessor);
-        alterarComboFiltro();
+        //JTableUtil.limparTabela(tblProfessor);
+        //alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
         atualizarTabela();
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
+
+    private void cbxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFiltroActionPerformed
+        JTableUtil.limparTabela(tblProfessor);
+        alterarComboFiltro();
+    }//GEN-LAST:event_cbxFiltroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -405,6 +436,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JScrollPane jScrollPaneProfessores;
+    private javax.swing.JLabel lblMensagem;
     private javax.swing.JPanel pnlBuscarProfessor;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;

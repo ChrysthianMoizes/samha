@@ -82,8 +82,12 @@ public class CtrlTurma extends CtrlGenerica{
     }
     
     public void listarTurmas(String coluna, String texto, JTable tabela){
+        
         List listaTurmas = gtTurma.buscar(coluna, texto);
         listarEmTabela(listaTurmas, tabela, buscaTurma, "toArray");
+        
+        if(listaTurmas.size() == 0)
+            buscaTurma.setarMensagem("Nenhuma turma encontrada.");
     }
     
     public List<Turma> buscar(String coluna, String texto) {
