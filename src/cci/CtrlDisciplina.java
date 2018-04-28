@@ -46,7 +46,10 @@ public class CtrlDisciplina extends CtrlGenerica{
     public void instanciarTelaBuscaDisciplina(Frame pai) {
         buscaDisciplina = new JDBuscarDisciplina(pai, true, ctrlPrincipal);
         buscaDisciplina.setIconImage(setarIconeJanela());
+        buscaDisciplina.preencherComboCurso();
+        buscaDisciplina.atualizarTabela();
         buscaDisciplina.setVisible(true);
+        
     }
 
     public void instanciarTelaCadastroDisciplina(Disciplina disciplina, Frame pai) {
@@ -103,9 +106,18 @@ public class CtrlDisciplina extends CtrlGenerica{
         }   
     }
     
-    public void listarDisciplinas(String coluna, String texto, JTable tabela){
+    public void filtrarPorMatriz(String coluna, int id, JTable tabela){
         
-        List listaDisciplinas = gtDisciplina.buscar(coluna, texto);
+        List listaDisciplinas = gtDisciplina.filtrarPorMatriz(coluna, id);
+        listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
+        
+        if(listaDisciplinas.size() == 0)
+            buscaDisciplina.setarMensagem("Nenhuma disciplina encontrada.");
+    }
+    
+    public void filtrarPorTipo(String tipo, int id, JTable tabela){
+        
+        List listaDisciplinas = gtDisciplina.filtrarPorTipo(tipo, id);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
         if(listaDisciplinas.size() == 0)

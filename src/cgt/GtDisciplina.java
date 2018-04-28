@@ -57,15 +57,15 @@ public class GtDisciplina {
         }
     }
     
-    public List<Disciplina> buscar(String coluna, String texto) {
+    public List<Disciplina> filtrarPorMatriz(String coluna, int id) {
+        List lista = gdDisciplina.filtrarPorMatriz("matriz.id", id);
+        Collections.sort(lista);
+        return lista;
+    }
+    
+    public List filtrarPorTipo(String tipo, int id){
         
-        List lista;
-        
-        if(coluna.toLowerCase().equals("curso"))
-            lista = gdDisciplina.filtrar("matriz.id", Integer.valueOf(texto));
-        else
-            lista = gdDisciplina.buscar(coluna.toLowerCase(), texto);
-        
+        List lista = gdDisciplina.filtrarPorTipo(tipo.toUpperCase(), id);
         Collections.sort(lista);
         return lista;
     }

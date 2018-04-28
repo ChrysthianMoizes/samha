@@ -39,7 +39,7 @@ public class GtMatriz {
 
         try {
             
-            List disciplinas = gdDisciplina.filtrar("matriz.id", matriz.getId());
+            List disciplinas = gdDisciplina.filtrarPorMatriz("matriz.id", matriz.getId());
             
             if(disciplinas.size() == 0){
                 gdMatriz.excluir(matriz);

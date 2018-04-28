@@ -121,7 +121,7 @@ public class Disciplina implements Serializable, Comparable<Object> {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTipo() };
+        return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getPeriodo(), getTipo() };
     }
 
     @Override

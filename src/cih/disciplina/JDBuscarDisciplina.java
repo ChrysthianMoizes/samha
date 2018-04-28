@@ -38,31 +38,33 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         lblMensagem.setText("");
         
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
-        String filtro = txtFiltro.getText();
+        MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
-        if(colunaFiltro.toLowerCase().equals("tipo")){
-            
-            char tipo = (char) btnGroup.getSelection().getMnemonic();
-            
-            switch (tipo) {
-                case 'B':
-                    filtro = "OBRIGATÓRIA";
-                    break;
-                case 'P':
-                    filtro = "OPTATIVA";
-                    break;          
-                default:
-                    filtro = "ESPECIAL";
-                    break;
-            }  
-        }else if(colunaFiltro.toLowerCase().equals("curso")){
-            MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-            if(matriz != null)
-                filtro = String.valueOf(matriz.getId());
-            else
-                CtrlMensagem.exibirMensagemAviso(pai, "Curso não possui matriz cadastrada");
-        } 
-        ctrlPrincipal.getCtrlDisciplina().listarDisciplinas(colunaFiltro, filtro, tblDisciplina); 
+        if(matriz == null)
+                setarMensagem("Curso não possui matriz associada.");
+        else{
+        
+            if(colunaFiltro.equals("curso")){
+                ctrlPrincipal.getCtrlDisciplina().filtrarPorMatriz(colunaFiltro, matriz.getId(), tblDisciplina); 
+            }else{
+
+                char tipo = (char) btnGroup.getSelection().getMnemonic();
+                String filtro = "";
+
+                switch (tipo) {
+                    case 'B':
+                        filtro = "OBRIGATÓRIA";
+                        break;
+                    case 'P':
+                        filtro = "OPTATIVA";
+                        break;          
+                    default:
+                        filtro = "ESPECIAL";
+                        break;
+                }
+                ctrlPrincipal.getCtrlDisciplina().filtrarPorTipo(filtro, matriz.getId(), tblDisciplina); 
+            } 
+        }  
     }
     
     public void preencherComboCurso(){
@@ -73,45 +75,24 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         JTableUtil.limparTabela(tblDisciplina);
         lblMensagem.setText("");
-        txtFiltro.setText("");
-        
+   
         if(cbxFiltro.getSelectedIndex() == 0){
             
-            cbxCurso.removeAllItems();
-            cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
-            cbxMatriz.setEnabled(false);
-            rbtnObrigatoria.setEnabled(false);
-            rbtnOptativa.setEnabled(false);
-            rbtnEspecial.setEnabled(false);
-            txtFiltro.setEnabled(true);
-            btnBuscar.setEnabled(true);
-            
-        }else if(cbxFiltro.getSelectedIndex() == 1){
-            
-            btnBuscar.setEnabled(false);
             cbxCurso.setEnabled(true);
             cbxMatriz.setEnabled(true);
             rbtnObrigatoria.setEnabled(false);
             rbtnOptativa.setEnabled(false);
             rbtnEspecial.setEnabled(false);
-            txtFiltro.setEnabled(false);
-            preencherComboCurso();
             atualizarTabela();
       
         }else{
             
-            btnBuscar.setEnabled(false);
-            cbxCurso.removeAllItems();
             cbxCurso.setEnabled(false);
-            cbxMatriz.removeAllItems();
             cbxMatriz.setEnabled(false);
             rbtnObrigatoria.setEnabled(true);
             rbtnObrigatoria.setSelected(true);
             rbtnOptativa.setEnabled(true);
             rbtnEspecial.setEnabled(true);
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
             atualizarTabela();
         }
     }
@@ -142,10 +123,8 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         pnlBuscarDisciplina = new javax.swing.JPanel();
         jLabelFiltrar = new javax.swing.JLabel();
         cbxFiltro = new javax.swing.JComboBox<>();
-        txtFiltro = new javax.swing.JTextField();
         jScrollPaneDisciplinas = new javax.swing.JScrollPane();
         tblDisciplina = new javax.swing.JTable();
-        btnBuscar = new javax.swing.JButton();
         rbtnEspecial = new javax.swing.JRadioButton();
         rbtnObrigatoria = new javax.swing.JRadioButton();
         rbtnOptativa = new javax.swing.JRadioButton();
@@ -258,17 +237,10 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         jLabelFiltrar.setText("Filtrar por:");
 
         cbxFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Curso", "Tipo" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curso", "Tipo" }));
         cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxFiltroItemStateChanged(evt);
-            }
-        });
-
-        txtFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFiltroKeyPressed(evt);
             }
         });
 
@@ -280,11 +252,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Matriz Curricular", "Curso", "Tipo"
+                "Nome", "Matriz Curricular", "Curso", "Período", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -292,19 +264,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             }
         });
         jScrollPaneDisciplinas.setViewportView(tblDisciplina);
-
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
-        btnBuscar.setToolTipText("Filtrar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        btnBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnBuscarKeyPressed(evt);
-            }
-        });
 
         rbtnEspecial.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnEspecial);
@@ -344,7 +303,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCurso.setEnabled(false);
         cbxCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxCursoActionPerformed(evt);
@@ -352,7 +310,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
 
         cbxMatriz.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxMatriz.setEnabled(false);
         cbxMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxMatrizActionPerformed(evt);
@@ -368,48 +325,37 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                                 .addComponent(rbtnObrigatoria)
                                 .addGap(18, 18, 18)
                                 .addComponent(rbtnOptativa)
                                 .addGap(18, 18, 18)
-                                .addComponent(rbtnEspecial)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
+                                .addComponent(rbtnEspecial))
+                            .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                                 .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
-                                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro)))
-                        .addGap(11, 11, 11)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
-                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlBuscarDisciplinaLayout.setVerticalGroup(
             pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFiltro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtnEspecial)
@@ -456,22 +402,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            atualizarTabela();
-        }
-    }//GEN-LAST:event_txtFiltroKeyPressed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        atualizarTabela();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            atualizarTabela();
-        }
-    }//GEN-LAST:event_btnBuscarKeyPressed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         ctrlPrincipal.getCtrlDisciplina().transitarTelas(tblDisciplina, pai);
@@ -543,7 +473,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
@@ -561,6 +490,5 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbtnObrigatoria;
     private javax.swing.JRadioButton rbtnOptativa;
     private javax.swing.JTable tblDisciplina;
-    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

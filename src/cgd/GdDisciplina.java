@@ -8,17 +8,19 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdDisciplina extends GdGenerico{
     
-    public List buscar(String coluna, String texto) {
+    public List filtrarPorTipo(String tipo, int id) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         sessao.beginTransaction();
-        crit.add( Restrictions.like(coluna, texto, MatchMode.ANYWHERE) );
+        crit.add( Restrictions.eq("matriz.id", id));
+        crit.add( Restrictions.eq("tipo", tipo));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();
         sessao.close();
         return lista;
     }
     
-    public List filtrar(String coluna, int texto) {
+    public List filtrarPorMatriz(String coluna, int texto) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         sessao.beginTransaction();
         crit.add( Restrictions.eq(coluna, texto) );
