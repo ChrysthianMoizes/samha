@@ -200,8 +200,7 @@ public class CtrlCurso extends CtrlGenerica{
     
     public void preencherComboEixos(JComboBox cbxEixo, JComboBox cbxCoordenadoria){ 
         
-        List listaEixos = cadastraCurso.getListaEixos();
-        listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
+        List listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
         cadastraCurso.setListaEixos(listaEixos);
         preencherCombo(cbxEixo, listaEixos);
         

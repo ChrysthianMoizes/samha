@@ -77,8 +77,8 @@ public class GtAlocacao {
         }
     }
     
-    public List filtrarPorAnoSemestre(int ano, int semestre){    
-        return gdAlocacao.filtrarPorAnoSemestre(ano, semestre);  
+    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){    
+        return gdAlocacao.filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
     }
     
     public Alocacao identificarUltimaAlocacao(){

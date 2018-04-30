@@ -32,7 +32,7 @@ public class JDAlocacao extends javax.swing.JDialog {
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlAlocacao().listarAlocacoes(ano, semestre, tblAlocacao);   
+        ctrlPrincipal.getCtrlAlocacao().listarAlocacoes(ano, semestre, tblAlocacao, cbxMatriz);   
     }
     
     public void preencherComboCurso(){
@@ -277,11 +277,11 @@ public class JDAlocacao extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Período", "Disciplina", "Matriz", "Professor"
+                "Disciplina / Professor", "Período"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

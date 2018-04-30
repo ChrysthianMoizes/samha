@@ -4,7 +4,6 @@ import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Constantes;
 import cih.principal.FrmInicio;
-import cih.oferta.FrmOferta;
 import cih.principal.FrmValidarAcesso;
 import java.awt.Color;
 import java.awt.Frame;
@@ -20,7 +19,6 @@ public final class CtrlPrincipal {
     private Config config;
     private FrmValidarAcesso frmValidarAcesso;
     private FrmInicio frmInicio;
-    private Frame frmOferta;
     private static int permissao;
     private GtPrincipal gtPrincipal;
     private CtrlProfessor ctrlProfessor;
@@ -33,6 +31,7 @@ public final class CtrlPrincipal {
     private CtrlMatriz ctrlMatriz;
     private CtrlTurma ctrlTurma;
     private CtrlAlocacao ctrlAlocacao;
+    private CtrlOferta ctrlOferta;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -47,6 +46,7 @@ public final class CtrlPrincipal {
         ctrlMatriz = new CtrlMatriz(this);
         ctrlTurma = new CtrlTurma(this);
         ctrlAlocacao = new CtrlAlocacao(this);
+        ctrlOferta = new CtrlOferta(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -89,11 +89,6 @@ public final class CtrlPrincipal {
         frmValidarAcesso.setVisible(true);
     }
 
-    public void instanciarFrameOferta() {
-        frmOferta = new FrmOferta(this);
-        frmOferta.setVisible(true);
-    }
-     
     public void instanciarFrameInicio() {
         frmInicio = new FrmInicio(this);
         frmInicio.identificarUsuario(getPermissao());
@@ -141,14 +136,6 @@ public final class CtrlPrincipal {
 
     public void setConfig(Config config) {
         this.config = config;
-    }
-    
-    public Frame getFrmOferta() {
-        return frmOferta;
-    }
-
-    public void setFrmOferta(Frame frmOferta) {
-        this.frmOferta = frmOferta;
     }
 
     public static int getPermissao() {
@@ -202,4 +189,8 @@ public final class CtrlPrincipal {
     public CtrlAlocacao getCtrlAlocacao() {
         return ctrlAlocacao;
     } 
+
+    public CtrlOferta getCtrlOferta() {
+        return ctrlOferta;
+    }
 }

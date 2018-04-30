@@ -23,6 +23,13 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         jPasswordFieldSenha.setText("");
     }
     
+    private void validarAcesso(){
+        String login = jTextFieldLogin.getText();
+        String senha = jPasswordFieldSenha.getText();
+        
+        ctrlPrincipal.validarAcesso(login, senha);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,9 +38,10 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         pnlInterior = new javax.swing.JPanel();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jLabelSenha = new javax.swing.JLabel();
-        jButtonEntrar = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         jTextFieldLogin = new javax.swing.JTextField();
         jLabelUsuario = new javax.swing.JLabel();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Validar Acesso");
@@ -54,17 +62,17 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         jLabelSenha.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabelSenha.setText("Senha:");
 
-        jButtonEntrar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        jButtonEntrar.setText("Entrar");
-        jButtonEntrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEntrar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnEntrar.setText("Entrar");
+        btnEntrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEntrarActionPerformed(evt);
+                btnEntrarActionPerformed(evt);
             }
         });
-        jButtonEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButtonEntrarKeyPressed(evt);
+                btnEntrarKeyPressed(evt);
             }
         });
 
@@ -72,6 +80,20 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
 
         jLabelUsuario.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabelUsuario.setText("Usuário:");
+
+        btnSair.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        btnSair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnSairKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlInteriorLayout = new javax.swing.GroupLayout(pnlInterior);
         pnlInterior.setLayout(pnlInteriorLayout);
@@ -81,15 +103,16 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPasswordFieldSenha)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInteriorLayout.createSequentialGroup()
-                        .addGap(0, 217, Short.MAX_VALUE)
-                        .addComponent(jButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextFieldLogin)
                     .addGroup(pnlInteriorLayout.createSequentialGroup()
                         .addGroup(pnlInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelSenha)
                             .addComponent(jLabelUsuario))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlInteriorLayout.createSequentialGroup()
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlInteriorLayout.setVerticalGroup(
@@ -103,8 +126,10 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
                 .addComponent(jLabelSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(pnlInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -140,29 +165,36 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        
-        String login = jTextFieldLogin.getText();
-        String senha = jPasswordFieldSenha.getText();
-        
-        ctrlPrincipal.validarAcesso(login, senha);
-    }//GEN-LAST:event_jButtonEntrarActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        validarAcesso(); 
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void jPasswordFieldSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonEntrarActionPerformed(null);
+            validarAcesso();
         }
     }//GEN-LAST:event_jPasswordFieldSenhaKeyPressed
 
-    private void jButtonEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonEntrarKeyPressed
+    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonEntrarActionPerformed(null);
+            validarAcesso();
         }
-    }//GEN-LAST:event_jButtonEntrarKeyPressed
+    }//GEN-LAST:event_btnEntrarKeyPressed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSairKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnSairKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEntrar;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPasswordField jPasswordFieldSenha;

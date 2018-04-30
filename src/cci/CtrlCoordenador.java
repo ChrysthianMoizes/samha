@@ -1,6 +1,5 @@
 package cci;
 
-import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.Professor;
 import cdp.Usuario;
@@ -11,7 +10,6 @@ import cih.coordenador.JDCadastrarCoordenador;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;

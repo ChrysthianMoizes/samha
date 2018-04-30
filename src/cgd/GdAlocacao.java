@@ -8,6 +8,21 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdAlocacao extends GdGenerico{
     
+    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){
+        Criteria crit = criarSessao().createCriteria(Alocacao.class);
+        sessao.beginTransaction();
+        crit.createAlias("disciplina", "d");
+        crit.createAlias("d.matriz", "m");
+        crit.add( Restrictions.eq("m.id", matriz));
+        crit.add( Restrictions.eq("ano", ano));
+        crit.add( Restrictions.eq("semestre", semestre));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public List filtrarPorAnoSemestre(int ano, int semestre){
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         sessao.beginTransaction();

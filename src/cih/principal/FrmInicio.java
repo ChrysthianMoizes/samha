@@ -254,7 +254,7 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDisciplinaActionPerformed
 
     private void btnOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaActionPerformed
-        ctrlPrincipal.instanciarFrameOferta();
+        ctrlPrincipal.getCtrlOferta().instanciarTelaOferta(this);
     }//GEN-LAST:event_btnOfertaActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

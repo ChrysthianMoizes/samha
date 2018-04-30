@@ -252,11 +252,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Matriz Curricular", "Curso", "Período", "Tipo"
+                "Nome", "Período", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -87,16 +87,24 @@ public class CtrlAlocacao extends CtrlGenerica{
         }
     }
     
-    public void listarAlocacoes(int ano, int semestre, JTable tabela){
+    public void listarAlocacoes(int ano, int semestre, JTable tabela, JComboBox cbxMatriz){
         
-        List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestre(ano, semestre);
-        listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
+        MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
+        if(matriz != null){
+            
+            List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestreMatriz(ano, semestre, matriz.getId());
+            listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
+               
         if(listaAlocacoes.size() == 0)
                 cadastraAlocacao.setarMensagem("Nenhuma alocação encontrada.");
         
         if(jdCargaHoraria != null)
             jdCargaHoraria.atualizarTabela();
+        
+        }else
+            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Matriz Curricular não foi selecionada.");
+        
     }
     
     public void listarCargaHorariaProfessores(JTable tabela){
@@ -110,10 +118,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             
             List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
             listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
-            
-            
-            
-            
+
         }else{
             jdCargaHoraria = null;
             CtrlMensagem.exibirMensagemAviso(jdCargaHoraria, "Selecione uma coordenadoria");

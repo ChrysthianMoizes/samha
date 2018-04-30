@@ -115,10 +115,10 @@ public class Alocacao implements Serializable{
     
     @Override
     public String toString() {
-        return String.valueOf(disciplina.getPeriodo());
+        return disciplina.getNome() + " - " + professor1.getNome();
     }
     
     public Object[] toArray() {
-        return new Object[] { this, disciplina.getNome(), disciplina.getMatriz().getNome(), professor1.getNome() };
+        return new Object[] { this, disciplina.getPeriodo() };
     }
 }
