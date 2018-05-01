@@ -33,7 +33,7 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/logo.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/oferta.png");
         return icone.getImage();
     }
     

@@ -22,7 +22,7 @@ public class CtrlRestricao {
         RestricaoProfessor restricao = gtRestricao.cadastrar(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
 
         if (restricao == null) {
-            CtrlMensagem.exibirMensagemErro(null, "Erro ao adicionar restrição");
+            CtrlMensagem.exibirMensagemErro(null, "Todos os campos devem ser preenchidos");
         }
         return restricao;
     }

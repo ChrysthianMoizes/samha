@@ -204,6 +204,7 @@ public class CtrlProfessor extends CtrlGenerica{
         if (restricao != null) {
             listaRestricoes.add(restricao);
             cadastraProf.setListaRestricoes(listaRestricoes);
+            cadastraProf.limparTelaRestricao();
             cadastraProf.preencherListaRestricoes();
         }
     }
@@ -220,9 +221,9 @@ public class CtrlProfessor extends CtrlGenerica{
 
                 int resposta = ctrlPrincipal.getCtrlRestricao().excluir(restricao);
                 if (resposta == 0) {
-                    ctrlPrincipal.getCtrlRestricao().excluir(restricao);
                     listaRestricoes.remove(posicao);
                     cadastraProf.setListaRestricoes(listaRestricoes);
+                    cadastraProf.limparTelaRestricao();
                     preencherListaRestricoes(lstRestricoes);
                 }
             }

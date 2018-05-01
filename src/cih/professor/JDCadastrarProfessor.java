@@ -231,6 +231,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lstRestricoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstRestricoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstRestricoesMouseClicked(evt);
@@ -642,7 +643,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtAreaDescricao.setEnabled(opcao);
     }
     
-    private void limparTelaRestricao(){
+    public void limparTelaRestricao(){
         txtNomeRestricao.setText("");
         cbxTurnos.setSelectedIndex(0);
         cbxDias.setSelectedIndex(0);
@@ -654,6 +655,38 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         chxAula6.setSelected(false);
         rbtnBaixa.setSelected(true);
         txtAreaDescricao.setText("");
+    }
+    
+    public void adicionarRestricao(){
+        
+        String nome = txtNomeRestricao.getText();
+        String turno = cbxTurnos.getSelectedItem().toString();
+        String dia = cbxDias.getSelectedItem().toString();
+        String descricao = txtAreaDescricao.getText();
+        String prioridade;
+        char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
+
+        switch (priori) {
+            case 'B':
+                prioridade = "BAIXA";
+                break;
+            case 'M':
+                prioridade = "MÉDIA";
+                break;
+            default:
+                prioridade = "ALTA";
+                break;
+        }
+
+        boolean aula1 = chxAula1.isSelected();
+        boolean aula2 = chxAula2.isSelected();
+        boolean aula3 = chxAula3.isSelected();
+        boolean aula4 = chxAula4.isSelected();
+        boolean aula5 = chxAula5.isSelected();
+        boolean aula6 = chxAula6.isSelected();
+
+        ctrlPrincipal.getCtrlProfessor().adicionarRestricao(nome, turno, dia, descricao, prioridade, 
+                aula1, aula2, aula3, aula4, aula5, aula6, professor);
     }
 
     public Professor getProfessor() {
@@ -710,35 +743,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarKeyPressed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
-        String nome = txtNomeRestricao.getText();
-        String turno = cbxTurnos.getSelectedItem().toString();
-        String dia = cbxDias.getSelectedItem().toString();
-        String descricao = txtAreaDescricao.getText();
-        String prioridade;
-        char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();
-
-        switch (priori) {
-            case 'B':
-                prioridade = "BAIXA";
-                break;
-            case 'M':
-                prioridade = "MÉDIA";
-                break;
-            default:
-                prioridade = "ALTA";
-                break;
-        }
-
-        boolean aula1 = chxAula1.isSelected();
-        boolean aula2 = chxAula2.isSelected();
-        boolean aula3 = chxAula3.isSelected();
-        boolean aula4 = chxAula4.isSelected();
-        boolean aula5 = chxAula5.isSelected();
-        boolean aula6 = chxAula6.isSelected();
-
-        ctrlPrincipal.getCtrlProfessor().adicionarRestricao(nome, turno, dia, descricao, prioridade, 
-                aula1, aula2, aula3, aula4, aula5, aula6, professor);
+        adicionarRestricao();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
