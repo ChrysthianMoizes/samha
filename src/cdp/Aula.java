@@ -133,4 +133,13 @@ public class Aula implements Serializable {
     public void setOferta(Oferta oferta) {
         this.oferta = oferta;
     }
+    
+    @Override
+    public String toString() {
+        return getAlocacao().getDisciplina().getNome();
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getAlocacao().getProfessor1().getNome() };
+    }
 }

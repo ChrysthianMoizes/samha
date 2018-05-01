@@ -4,7 +4,6 @@ import cci.CtrlPrincipal;
 import cdp.Alocacao;
 import cdp.Curso;
 import java.util.List;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -680,8 +679,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
         txtAreaNotificacoes.setText("");      
-        Alocacao alocacao = (Alocacao) tblTurma.getValueAt(0, 0);
-        ctrlPrincipal.getCtrlOferta().exibirNotificação(null, 0, 0, tblTurma, alocacao);
+        ctrlPrincipal.getCtrlOferta().pintarCelulaTabela(null, 0, 0, tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -717,9 +715,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -743,9 +738,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JLabel lblTurma;
     private javax.swing.JLabel lblTurno;
     private javax.swing.JList<String> lstAlocacoes;
-    private javax.swing.JList<String> lstRestricoes;
-    private javax.swing.JList<String> lstRestricoes1;
-    private javax.swing.JList<String> lstRestricoes2;
     private javax.swing.JPanel pnlAlocacoes;
     private javax.swing.JPanel pnlConfiguracao;
     private javax.swing.JPanel pnlDiasProfessor;

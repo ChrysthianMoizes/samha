@@ -1,6 +1,6 @@
 package cci;
 
-import cdp.Alocacao;
+import cdp.Aula;
 import cdp.Curso;
 import cdp.Turma;
 import cgt.GtAlocacao;
@@ -81,41 +81,40 @@ public class CtrlOferta extends CtrlGenerica{
         for(int linha = 0; linha < 5; linha++){
             
             for(int coluna = 0; coluna < 6; coluna++){
-                Alocacao alocacao = (Alocacao) tabela.getValueAt(linha, coluna);
+                Aula aula = (Aula) tabela.getValueAt(linha, coluna);
                 
-                if(alocacao != null){
-                    String mensagem = gtOferta.validarOferta(alocacao);
-                    exibirNotificação(mensagem, linha, coluna, tabela, alocacao);
+                if(aula != null){
+                    String mensagem = gtOferta.validarOferta(aula);
+                    exibirNotificação(mensagem, linha, coluna);
+                    pintarCelulaTabela(mensagem, linha, coluna, tabela);
                 }
             }
         }  
     }
  
-    public void exibirNotificação(String mensagem, int linha, int coluna, JTable tabela, Alocacao alocacao){
+    public void exibirNotificação(String mensagem, int linha, int coluna){
         
-        CustomTableCellRenderer renderer = new CustomTableCellRenderer(); 
+        if(mensagem != null){
+            String notificacao = mensagem.substring(2);
+            jdOferta.exibirNotificação("Linha " + linha + ", Coluna " + coluna + ": " + notificacao);
+        }
+    }
+    
+    public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
+        
+        //CustomTableCellRenderer renderer = new CustomTableCellRenderer(); 
         Component celula = (Component) tabela.getCellRenderer(linha, coluna);
         
         if(mensagem != null){
             
             int codigo = mensagem.charAt(0);
-            String notificacao = mensagem.substring(1);
             
-            jdOferta.exibirNotificação("Linha " + linha + ", Coluna " + coluna + ": " + notificacao);
-           
             if(codigo == 0)
                celula.setBackground(Color.RED);  
             else
                celula.setBackground(Color.YELLOW); 
         }else
-            celula.setBackground(Color.GREEN);
-  
-        /*JTable.DropLocation dropLocation = tabela.getDropLocation ();
-        if ((dropLocation != null) && (!dropLocation.isInsertRow()) && (!dropLocation.isInsertColumn()) && (dropLocation.getRow () == linha) && (dropLocation.getColumn () == coluna)) {
-
-         // esta célula representa o local da queda atual
-         // então, render especialmente, talvez com uma cor diferente
-        }*/
+            celula.setBackground(Color.GREEN);     
     }
     
     public class CustomTableCellRenderer extends DefaultTableCellRenderer {
@@ -127,4 +126,11 @@ public class CtrlOferta extends CtrlGenerica{
             return super.getTableCellRendererComponent(tabela, value, isSelected, hasFocus, linha, coluna); 
         }
     }
+    
+    /*JTable.DropLocation dropLocation = tabela.getDropLocation ();
+        if ((dropLocation != null) && (!dropLocation.isInsertRow()) && (!dropLocation.isInsertColumn()) && (dropLocation.getRow () == linha) && (dropLocation.getColumn () == coluna)) {
+
+         // esta célula representa o local da queda atual
+         // então, render especialmente, talvez com uma cor diferente
+        }*/
 }

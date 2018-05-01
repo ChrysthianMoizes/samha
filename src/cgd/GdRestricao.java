@@ -7,10 +7,23 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdRestricao extends GdGenerico{
     
-    public List filtrarPorProfessor(String coluna, int texto) {
+    public List filtrarPorProfessor(int id) {
         Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
         sessao.beginTransaction();
-        crit.add( Restrictions.eq(coluna, texto) );
+        crit.add( Restrictions.eq("professor.id", id) );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
+    public List filtrarParaValidacao(int idProfessor, String dia, String turno) {
+        Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("professor.id", idProfessor) );
+        crit.add( Restrictions.eq("dia", dia) );
+        crit.add( Restrictions.eq("turno", turno) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();
@@ -20,7 +33,7 @@ public class GdRestricao extends GdGenerico{
     
     public void excluirRestricoes(String coluna, int id){
         
-        List lista = filtrarPorProfessor(coluna, id);
+        List lista = filtrarPorProfessor(id);
 
         try {
             sessao = criarSessao();

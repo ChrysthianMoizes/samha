@@ -47,7 +47,7 @@ public class GtRestricao {
     }
 
     public List<RestricaoProfessor> filtrarPorProfessor(int id) {
-        return gdRestricao.filtrarPorProfessor("professor.id", id);
+        return gdRestricao.filtrarPorProfessor(id);
     }
 
     public String excluir(RestricaoProfessor restricao) {
