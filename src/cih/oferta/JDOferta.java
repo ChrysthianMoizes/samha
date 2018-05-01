@@ -1,13 +1,17 @@
 package cih.oferta;
 
 import cci.CtrlPrincipal;
+import cdp.Alocacao;
 import cdp.Curso;
+import java.util.List;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDOferta extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
+    private List listaAlocacoes;
 
     public JDOferta(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
@@ -48,6 +52,18 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void setarTurma(String mensagem){
         lblTurma.setText(mensagem);
+    }
+    
+    public void exibirNotificação(String mensagem){
+        txtAreaNotificacoes.append(mensagem);
+    }
+
+    public List getListaAlocacoes() {
+        return listaAlocacoes;
+    }
+
+    public void setListaAlocacoes(List listaAlocacoes) {
+        this.listaAlocacoes = listaAlocacoes;
     }
     
     @SuppressWarnings("unchecked")
@@ -147,6 +163,8 @@ public class JDOferta extends javax.swing.JDialog {
 
         txtAreaNotificacoes.setEditable(false);
         txtAreaNotificacoes.setColumns(20);
+        txtAreaNotificacoes.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        txtAreaNotificacoes.setForeground(new java.awt.Color(252, 2, 2));
         txtAreaNotificacoes.setLineWrap(true);
         txtAreaNotificacoes.setRows(5);
         txtAreaNotificacoes.setBorder(null);
@@ -653,11 +671,17 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+         
+        int posicao = lstAlocacoes.getSelectedIndex();
+        Alocacao aloc = (Alocacao) listaAlocacoes.get(posicao);
+        tblTurma.setValueAt(aloc, 0, 0);
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-
+        txtAreaNotificacoes.setText("");      
+        Alocacao alocacao = (Alocacao) tblTurma.getValueAt(0, 0);
+        ctrlPrincipal.getCtrlOferta().exibirNotificação(null, 0, 0, tblTurma, alocacao);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed

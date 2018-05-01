@@ -1,5 +1,6 @@
 package cgt;
 
+import cdp.Alocacao;
 import cgd.GdOferta;
 
 public class GtOferta {
@@ -8,5 +9,9 @@ public class GtOferta {
 
     public GtOferta() {
         gdOferta = new GdOferta();
+    }
+    
+    public String validarOferta(Alocacao alocacao){
+        return "";
     }
 }

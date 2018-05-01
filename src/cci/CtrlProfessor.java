@@ -9,7 +9,6 @@ import cih.professor.JDBuscarProfessor;
 import cih.professor.JDCadastrarProfessor;
 import java.awt.Frame;
 import java.awt.Image;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
