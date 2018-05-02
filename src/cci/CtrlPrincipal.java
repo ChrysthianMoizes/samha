@@ -69,7 +69,7 @@ public final class CtrlPrincipal {
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/oferta2.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/img/logo-white.png");
         return icone.getImage();
     }
     

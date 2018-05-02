@@ -12,14 +12,6 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         this.setModalityType(ModalityType.MODELESS);
-        setarBackground();
-    }
-    
-    private void setarBackground(){
-        pnlDireita.setBackground(ctrlPrincipal.setarCorPanelExterior());
-        pnlEsquerda.setBackground(ctrlPrincipal.setarCorPanelExterior());
-        pnlInferior.setBackground(ctrlPrincipal.setarCorPanelExterior());
-        pnlSuperior.setBackground(ctrlPrincipal.setarCorPanelExterior());
     }
     
     public void atualizarTabela(){
@@ -30,21 +22,18 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlPrincipal = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCargaHoraria = new javax.swing.JTable();
-        pnlInferior = new javax.swing.JPanel();
-        pnlDireita = new javax.swing.JPanel();
-        pnlSuperior = new javax.swing.JPanel();
-        pnlEsquerda = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Carga Horária dos Professores");
+        setTitle("Professores");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        setPreferredSize(new java.awt.Dimension(452, 250));
 
-        pnlPrincipal.setLayout(new java.awt.BorderLayout());
-
-        tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        tblCargaHoraria.setBackground(new java.awt.Color(0, 153, 102));
+        tblCargaHoraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        tblCargaHoraria.setForeground(new java.awt.Color(255, 255, 255));
         tblCargaHoraria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -61,15 +50,10 @@ public class JDCargaHoraria extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblCargaHoraria.setRowHeight(25);
         jScrollPane2.setViewportView(tblCargaHoraria);
 
-        pnlPrincipal.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-        pnlPrincipal.add(pnlInferior, java.awt.BorderLayout.PAGE_END);
-        pnlPrincipal.add(pnlDireita, java.awt.BorderLayout.LINE_END);
-        pnlPrincipal.add(pnlSuperior, java.awt.BorderLayout.PAGE_START);
-        pnlPrincipal.add(pnlEsquerda, java.awt.BorderLayout.LINE_START);
-
-        getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -77,11 +61,6 @@ public class JDCargaHoraria extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel pnlDireita;
-    private javax.swing.JPanel pnlEsquerda;
-    private javax.swing.JPanel pnlInferior;
-    private javax.swing.JPanel pnlPrincipal;
-    private javax.swing.JPanel pnlSuperior;
     private javax.swing.JTable tblCargaHoraria;
     // End of variables declaration//GEN-END:variables
 }

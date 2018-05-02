@@ -145,7 +145,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator7);
 
-        btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/matriz_curricular.png"))); // NOI18N
+        btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/disciplina.png"))); // NOI18N
         btnDisciplina.setToolTipText("Disciplina");
         btnDisciplina.setFocusable(false);
         btnDisciplina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -193,7 +193,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator10);
 
-        btnOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/oferta.png"))); // NOI18N
+        btnOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/oferta-white.png"))); // NOI18N
         btnOferta.setToolTipText("Oferta");
         btnOferta.setFocusable(false);
         btnOferta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -281,10 +281,6 @@ public class FrmInicio extends javax.swing.JFrame {
         ctrlPrincipal.getCtrlDisciplina().instanciarTelaBuscaDisciplina(this);
     }//GEN-LAST:event_btnDisciplinaActionPerformed
 
-    private void btnOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaActionPerformed
-        ctrlPrincipal.getCtrlOferta().instanciarTelaOferta(this);
-    }//GEN-LAST:event_btnOfertaActionPerformed
-
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         ctrlPrincipal.encerrarSessao();
     }//GEN-LAST:event_btnSairActionPerformed
@@ -296,6 +292,10 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnAlocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlocarActionPerformed
         ctrlPrincipal.getCtrlAlocacao().instanciarTelaAlocacao(this);
     }//GEN-LAST:event_btnAlocarActionPerformed
+
+    private void btnOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaActionPerformed
+        ctrlPrincipal.getCtrlOferta().instanciarTelaOferta(this);
+    }//GEN-LAST:event_btnOfertaActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocar;
