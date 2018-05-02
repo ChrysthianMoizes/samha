@@ -12,7 +12,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name = "coordenador_academico")
 @PrimaryKeyJoinColumn(name = "coordenador_academico_id")
-public class CoordenadorAcademico extends Usuario implements Comparable<Object>{
+public class CoordenadorAcademico extends Usuario{
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "servidor_id", nullable = false)
@@ -47,26 +47,5 @@ public class CoordenadorAcademico extends Usuario implements Comparable<Object>{
 
     public Object[] toArray() {
         return new Object[] { this, getServidor().getMatricula(), "COORDENADOR ACADÊMICO" };
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        
-        if(o instanceof CoordenadorCurso){
-            
-            CoordenadorCurso other = (CoordenadorCurso) o;
-            return this.getServidor().getNome().compareTo(other.getProfessor().getNome());
-            
-        }else{
-            
-            if(o instanceof CoordenadorAcademico){
-                CoordenadorAcademico other = (CoordenadorAcademico) o;
-                return this.getServidor().getNome().compareTo(other.getServidor().getNome());
-                
-            }else{
-                CoordenadorPedagogico other = (CoordenadorPedagogico) o;
-                return this.getServidor().getNome().compareTo(other.getServidor().getNome());
-            } 
-        }
     }
 }

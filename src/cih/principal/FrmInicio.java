@@ -92,12 +92,15 @@ public class FrmInicio extends javax.swing.JFrame {
         toolBar.setFloatable(false);
         toolBar.setRollover(true);
         toolBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jSeparator12.setBackground(new java.awt.Color(0, 153, 102));
         toolBar.add(jSeparator12);
 
         btnProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/professor.png"))); // NOI18N
         btnProfessor.setToolTipText("Professores");
         btnProfessor.setFocusable(false);
         btnProfessor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProfessor.setOpaque(false);
         btnProfessor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,12 +108,16 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnProfessor);
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator2);
 
         btnCoordenador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/coordenador.png"))); // NOI18N
         btnCoordenador.setToolTipText("Coordenadores");
         btnCoordenador.setFocusable(false);
         btnCoordenador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCoordenador.setOpaque(false);
         btnCoordenador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCoordenador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,12 +125,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnCoordenador);
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator4);
 
         btnCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/curso.png"))); // NOI18N
         btnCurso.setToolTipText("Curso");
         btnCurso.setFocusable(false);
         btnCurso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCurso.setOpaque(false);
         btnCurso.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,12 +141,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnCurso);
+
+        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator7);
 
         btnDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/matriz_curricular.png"))); // NOI18N
         btnDisciplina.setToolTipText("Disciplina");
         btnDisciplina.setFocusable(false);
         btnDisciplina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDisciplina.setOpaque(false);
         btnDisciplina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDisciplina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,12 +157,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnDisciplina);
+
+        jSeparator8.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator8);
 
         btnTurma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/turma.png"))); // NOI18N
         btnTurma.setToolTipText("Turma");
         btnTurma.setFocusable(false);
         btnTurma.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTurma.setOpaque(false);
         btnTurma.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,12 +173,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnTurma);
+
+        jSeparator9.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator9);
 
         btnAlocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/alocacao.png"))); // NOI18N
         btnAlocar.setToolTipText("Alocação");
         btnAlocar.setFocusable(false);
         btnAlocar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlocar.setOpaque(false);
         btnAlocar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAlocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,12 +189,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnAlocar);
+
+        jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator10);
 
         btnOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/oferta.png"))); // NOI18N
         btnOferta.setToolTipText("Oferta");
         btnOferta.setFocusable(false);
         btnOferta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnOferta.setOpaque(false);
         btnOferta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnOferta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,12 +205,15 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnOferta);
+
+        jSeparator15.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator15);
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/sair.png"))); // NOI18N
         btnSair.setToolTipText("Sair");
         btnSair.setFocusable(false);
         btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSair.setOpaque(false);
         btnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +221,9 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnSair);
+
+        jSeparator13.setBackground(new java.awt.Color(0, 153, 102));
+        jSeparator13.setForeground(new java.awt.Color(0, 153, 102));
         toolBar.add(jSeparator13);
 
         getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
@@ -214,7 +242,7 @@ public class FrmInicio extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap(927, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDataAtual, javax.swing.GroupLayout.Alignment.TRAILING)

@@ -47,6 +47,11 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
         <Component class="javax.swing.JSeparator" name="jSeparator12">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnProfessor">
           <Properties>
@@ -56,6 +61,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Professores"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -63,6 +69,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCoordenador">
           <Properties>
@@ -72,6 +86,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Coordenadores"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -79,6 +94,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator4">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCurso">
           <Properties>
@@ -88,6 +108,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Curso"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -95,6 +116,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator7">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnDisciplina">
           <Properties>
@@ -104,6 +130,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Disciplina"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -111,6 +138,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator8">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnTurma">
           <Properties>
@@ -120,6 +152,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Turma"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -127,6 +160,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator9">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnAlocar">
           <Properties>
@@ -136,6 +174,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Aloca&#xe7;&#xe3;o"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -143,6 +182,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator10">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnOferta">
           <Properties>
@@ -152,6 +196,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Oferta"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -159,6 +204,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator15">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnSair">
           <Properties>
@@ -168,6 +218,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Sair"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
@@ -175,6 +226,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator13">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -193,7 +252,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace pref="927" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblDataAtual" alignment="1" min="-2" max="-2" attributes="0"/>

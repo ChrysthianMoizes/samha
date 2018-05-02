@@ -1,5 +1,6 @@
 package cgt;
 
+import cdp.ComparadorUsuario;
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.CoordenadorPedagogico;
@@ -116,7 +117,7 @@ public class GtCoordenador {
         listaCoordenadores.addAll(listaCoordenadoresAcademicos);
         listaCoordenadores.addAll(listaCoordenadoresCurso);
         listaCoordenadores.addAll(listaCoordenadoresPedagogicos);
-        Collections.sort(listaCoordenadores);
+        Collections.sort(listaCoordenadores, new ComparadorUsuario());
         
         return listaCoordenadores;
     }
@@ -132,7 +133,7 @@ public class GtCoordenador {
         else
             lista = gdCoordenador.consultar(CoordenadorPedagogico.class);
         
-        Collections.sort(lista);
+        Collections.sort(lista, new ComparadorUsuario());
         return lista;
     }
 
