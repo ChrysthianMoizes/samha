@@ -451,7 +451,7 @@ public class JDOferta extends javax.swing.JDialog {
         tblTurma.setCellSelectionEnabled(true);
         tblTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         tblTurma.setDragEnabled(true);
-        tblTurma.setDropMode(javax.swing.DropMode.INSERT);
+        tblTurma.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
         tblTurma.setRowHeight(65);
         tblTurma.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblTurma.getTableHeader().setReorderingAllowed(false);
