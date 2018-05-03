@@ -665,14 +665,15 @@ public class JDOferta extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
          
         int posicao = lstAlocacoes.getSelectedIndex();
-        Alocacao aloc = (Alocacao) listaAlocacoes.get(posicao);
-        tblTurma.setValueAt(aloc, 0, 0);
-        
+        if(posicao > 0){
+            Alocacao aloc = (Alocacao) listaAlocacoes.get(posicao);
+            tblTurma.setValueAt(aloc, 0, 0);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
         txtAreaNotificacoes.setText("");      
-        ctrlPrincipal.getCtrlOferta().pintarCelulaTabela(null, 0, 0, (RenderizadorCelulas) tblTurma);
+        ctrlPrincipal.getCtrlOferta().pintarCelulaTabela(null, 0, 0, tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed

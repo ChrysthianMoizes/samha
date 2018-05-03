@@ -31,19 +31,61 @@ public class GtOferta {
         int numero = aula.getNumero();
         String dia = aula.getDia();
         String turno = aula.getTurno();
+        boolean especial = false;
         
-        List listaAulas = gdAula.filtrarParaValidacao(ano, semestre, idProfessor, numero, dia, turno);
+        List listaAulas;
+        List listaRestricoes;
+        RestricaoProfessor restricao;
+        
+        if(aula.getAlocacao().getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+            especial = true;
+        }
+        
+        listaAulas = gdAula.filtrarParaValidacao(ano, semestre, idProfessor, numero, dia, turno);
         
         if(listaAulas.size() == 0){
             
-            List listaRestricoes = gdRestricao.filtrarParaValidacao(idProfessor, dia, turno);
+            listaRestricoes = gdRestricao.filtrarParaValidacao(idProfessor, dia, turno);
             
-            if(listaRestricoes.size() == 0)
-                return null;  
-            
-            else{
+            if(listaRestricoes.size() == 0){
                 
-                RestricaoProfessor restricao;  
+                if(especial){
+                    int idProfessor2 = aula.getAlocacao().getProfessor2().getId();
+                    listaAulas = gdAula.filtrarParaValidacao(ano, semestre, idProfessor, numero, dia, turno);
+
+                    if(listaAulas.size() == 0){
+            
+                        listaRestricoes = gdRestricao.filtrarParaValidacao(idProfessor2, dia, turno);
+                        
+                        if(listaRestricoes.size() == 0){
+                            return null;
+                            
+                        }else{
+                             
+                            boolean resposta; 
+                
+                            for(int i = 0; i < listaRestricoes.size(); i++){
+                    
+                                restricao = (RestricaoProfessor) listaRestricoes.get(i);
+                                resposta = identificarConflitoRestricao(restricao, aula);
+
+                                if(resposta){
+                                    mensagem = "Professor 2 possui uma restrição neste horário: " + restricao.getNome().toUpperCase();
+                                    return "1 " + mensagem;
+                                }
+                            }
+                        }
+                            
+                    }else {
+                        Aula a = (Aula) listaAulas.get(0);
+                        mensagem = "Professor 2 está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
+                        return "0 " + mensagem;
+                    }     
+                }        
+                return null;
+                
+            }else{
+
                 boolean resposta; 
                 
                 for(int i = 0; i < listaRestricoes.size(); i++){
@@ -52,16 +94,16 @@ public class GtOferta {
                     resposta = identificarConflitoRestricao(restricao, aula);
                     
                     if(resposta){
-                        mensagem = "1 Professor possui uma restrição neste horário: " + restricao.getNome().toUpperCase();
-                        return mensagem;
+                        mensagem = "Professor possui uma restrição neste horário: " + restricao.getNome().toUpperCase();
+                        return "1 " + mensagem;
                     }
                 }
             }
             return null;
         }else{
             Aula a = (Aula) listaAulas.get(0);
-            mensagem = "0 Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
-            return mensagem;
+            mensagem = "Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
+            return "0 " + mensagem;
         }
     }
     

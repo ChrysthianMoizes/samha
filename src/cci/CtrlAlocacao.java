@@ -103,8 +103,8 @@ public class CtrlAlocacao extends CtrlGenerica{
             jdCargaHoraria.atualizarTabela();
         
         }else
-            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Matriz Curricular não foi selecionada.");
-        
+            cadastraAlocacao.setarMensagem("Matriz Curricular não foi selecionada.");
+
     }
     
     public void listarCargaHorariaProfessores(JTable tabela){

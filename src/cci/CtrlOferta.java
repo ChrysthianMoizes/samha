@@ -78,7 +78,7 @@ public class CtrlOferta extends CtrlGenerica{
         }
     }
     
-    public void validarOfertas(RenderizadorCelulas tabela){
+    public void validarOfertas(JTable tabela){
         
         for(int linha = 0; linha < 5; linha++){
             
@@ -102,7 +102,7 @@ public class CtrlOferta extends CtrlGenerica{
         }
     }
     
-    public void pintarCelulaTabela(String mensagem, int linha, int coluna, RenderizadorCelulas tabela){
+    public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
         
         if(mensagem != null){
             
