@@ -23,11 +23,13 @@ public class CtrlOferta extends CtrlGenerica{
     private GtOferta gtOferta;
     private GtAlocacao gtAlocacao;
     private JDOferta jdOferta;
+    private RenderizadorCelulas render;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
         gtOferta = new GtOferta();
         gtAlocacao = new GtAlocacao();
+        render = new RenderizadorCelulas();
     }
     
     public void instanciarTelaOferta(Frame pai) {
@@ -76,7 +78,7 @@ public class CtrlOferta extends CtrlGenerica{
         }
     }
     
-    public void validarOfertas(JTable tabela){
+    public void validarOfertas(RenderizadorCelulas tabela){
         
         for(int linha = 0; linha < 5; linha++){
             
@@ -100,37 +102,22 @@ public class CtrlOferta extends CtrlGenerica{
         }
     }
     
-    public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
-        
-        //CustomTableCellRenderer renderer = new CustomTableCellRenderer(); 
-        Component celula = (Component) tabela.getCellRenderer(linha, coluna);
+    public void pintarCelulaTabela(String mensagem, int linha, int coluna, RenderizadorCelulas tabela){
         
         if(mensagem != null){
             
             int codigo = mensagem.charAt(0);
             
             if(codigo == 0)
-               celula.setBackground(Color.RED);  
+                render.setCor(Color.RED);
+               //celula.setBackground(Color.RED);  
             else
-               celula.setBackground(Color.YELLOW); 
+                render.setCor(Color.YELLOW);
+               //celula.setBackground(Color.YELLOW); 
         }else
-            celula.setBackground(Color.GREEN);     
-    }
-    
-    public class CustomTableCellRenderer extends DefaultTableCellRenderer {
-    
-        @Override
-        public Component getTableCellRendererComponent(JTable tabela, Object value, boolean isSelected, boolean hasFocus, int linha, int coluna){
-            this.setHorizontalAlignment(CENTER);
-            this.setVerticalAlignment(CENTER);
-            return super.getTableCellRendererComponent(tabela, value, isSelected, hasFocus, linha, coluna); 
-        }
-    }
-    
-    /*JTable.DropLocation dropLocation = tabela.getDropLocation ();
-        if ((dropLocation != null) && (!dropLocation.isInsertRow()) && (!dropLocation.isInsertColumn()) && (dropLocation.getRow () == linha) && (dropLocation.getColumn () == coluna)) {
+            render.setCor(Color.GREEN);
+            //celula.setBackground(Color.GREEN);
 
-         // esta célula representa o local da queda atual
-         // então, render especialmente, talvez com uma cor diferente
-        }*/
+        render.prepareRenderer(null, linha, coluna);
+    }
 }

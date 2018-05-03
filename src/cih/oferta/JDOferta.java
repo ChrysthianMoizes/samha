@@ -1,6 +1,7 @@
 package cih.oferta;
 
 import cci.CtrlPrincipal;
+import cci.RenderizadorCelulas;
 import cdp.Alocacao;
 import cdp.Curso;
 import java.util.List;
@@ -106,7 +107,7 @@ public class JDOferta extends javax.swing.JDialog {
         pnlTurno = new javax.swing.JPanel();
         lblTurno = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblTurma = new javax.swing.JTable();
+        tblTurma = new RenderizadorCelulas();
         pnlProfessor = new javax.swing.JPanel();
         pnlDiasProfessor = new javax.swing.JPanel();
         lblSexta1 = new javax.swing.JLabel();
@@ -439,15 +440,7 @@ public class JDOferta extends javax.swing.JDialog {
             new String [] {
                 "07:00 - 07:55", "07:55 - 08:50", "08:50 - 09:45", "10:00 - 10:55", "10:55 - 11:40", "11:45 - 12:40"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblTurma.setCellSelectionEnabled(true);
         tblTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         tblTurma.setDragEnabled(true);
@@ -679,7 +672,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
         txtAreaNotificacoes.setText("");      
-        ctrlPrincipal.getCtrlOferta().pintarCelulaTabela(null, 0, 0, tblTurma);
+        ctrlPrincipal.getCtrlOferta().pintarCelulaTabela(null, 0, 0, (RenderizadorCelulas) tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
