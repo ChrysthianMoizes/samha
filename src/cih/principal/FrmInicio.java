@@ -1,5 +1,6 @@
 package cih.principal;
 
+import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
@@ -78,6 +79,8 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JToolBar.Separator();
         btnOferta = new javax.swing.JButton();
         jSeparator15 = new javax.swing.JToolBar.Separator();
+        btnRelatorio = new javax.swing.JButton();
+        jSeparator16 = new javax.swing.JToolBar.Separator();
         btnSair = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JSeparator();
         pnlPrincipal = new javax.swing.JPanel();
@@ -209,6 +212,22 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator15.setForeground(new java.awt.Color(255, 255, 255));
         toolBar.add(jSeparator15);
 
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio.png"))); // NOI18N
+        btnRelatorio.setToolTipText("Relatórios");
+        btnRelatorio.setFocusable(false);
+        btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio.setOpaque(false);
+        btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+        toolBar.add(btnRelatorio);
+
+        jSeparator16.setForeground(new java.awt.Color(255, 255, 255));
+        toolBar.add(jSeparator16);
+
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/sair.png"))); // NOI18N
         btnSair.setToolTipText("Sair");
         btnSair.setFocusable(false);
@@ -296,6 +315,10 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaActionPerformed
         ctrlPrincipal.getCtrlOferta().instanciarTelaOferta(this);
     }//GEN-LAST:event_btnOfertaActionPerformed
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+    CtrlMensagem.exibirMensagemAviso(this, "Módulo de Relatórios ainda não está disponível.");
+    }//GEN-LAST:event_btnRelatorioActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlocar;
@@ -304,12 +327,14 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnDisciplina;
     private javax.swing.JButton btnOferta;
     private javax.swing.JButton btnProfessor;
+    private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTurma;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JToolBar.Separator jSeparator15;
+    private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator7;

@@ -80,8 +80,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         });
 
         btnAdicionarEixo.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnAdicionarEixo.setText("Adicionar");
-        btnAdicionarEixo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAdicionarEixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/plus-reduzido.png"))); // NOI18N
+        btnAdicionarEixo.setToolTipText("Adicionar");
+        btnAdicionarEixo.setBorder(null);
         btnAdicionarEixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarEixoActionPerformed(evt);
@@ -94,8 +95,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         });
 
         btnRemoverEixo.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnRemoverEixo.setText("Remover");
-        btnRemoverEixo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRemoverEixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/trash-o.png"))); // NOI18N
+        btnRemoverEixo.setToolTipText("Remover");
+        btnRemoverEixo.setBorder(null);
         btnRemoverEixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverEixoActionPerformed(evt);
@@ -118,14 +120,14 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblNomeEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxEixo, 0, 400, Short.MAX_VALUE)
-                    .addComponent(txtNomeEixo))
-                .addGap(18, 18, 18)
                 .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdicionarEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoverEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNomeEixo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdicionarEixo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRemoverEixo, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         pnlEixoLayout.setVerticalGroup(
             pnlEixoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,8 +148,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnSalvar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/save.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar");
+        btnSalvar.setBorder(null);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -160,8 +163,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         });
 
         btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setBorder(null);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -224,14 +228,14 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                     .addComponent(lblNivel)
                     .addComponent(lblNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlCursoLayout.createSequentialGroup()
-                        .addComponent(cbxNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addComponent(cbxNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblPeriodos)
                         .addGap(18, 18, 18)
-                        .addComponent(spnPeriodos))
-                    .addComponent(txtNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(spnPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeCurso))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCursoLayout.setVerticalGroup(
@@ -258,8 +262,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         btnAdicionarCoordenadoria.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnAdicionarCoordenadoria.setText("Adicionar");
-        btnAdicionarCoordenadoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAdicionarCoordenadoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/plus-reduzido.png"))); // NOI18N
+        btnAdicionarCoordenadoria.setToolTipText("Adicionar");
+        btnAdicionarCoordenadoria.setBorder(null);
         btnAdicionarCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarCoordenadoriaActionPerformed(evt);
@@ -272,8 +277,9 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
         });
 
         btnRemoverCoordenadoria.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnRemoverCoordenadoria.setText("Remover");
-        btnRemoverCoordenadoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRemoverCoordenadoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/trash-o.png"))); // NOI18N
+        btnRemoverCoordenadoria.setToolTipText("Remover");
+        btnRemoverCoordenadoria.setBorder(null);
         btnRemoverCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCoordenadoriaActionPerformed(evt);
@@ -297,13 +303,16 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
                 .addComponent(lblNomeCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxCoordenadoria, 0, 400, Short.MAX_VALUE)
+                    .addComponent(cbxCoordenadoria, 0, 357, Short.MAX_VALUE)
                     .addComponent(txtNomeCoordenadoria))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdicionarCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoverCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlCoordenadoriaLayout.createSequentialGroup()
+                        .addComponent(btnRemoverCoordenadoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(96, 96, 96))
+                    .addGroup(pnlCoordenadoriaLayout.createSequentialGroup()
+                        .addComponent(btnAdicionarCoordenadoria)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlCoordenadoriaLayout.setVerticalGroup(
             pnlCoordenadoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,11 +335,11 @@ public class JDCadastrarCurso extends javax.swing.JDialog {
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCoordenadoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlEixo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlCoordenadoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRodape, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlCurso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlEixo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlGeralLayout.setVerticalGroup(

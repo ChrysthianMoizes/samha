@@ -137,14 +137,14 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         setIconImage(null);
         setResizable(false);
 
-        pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
+        pnlGeral.setBackground(new java.awt.Color(0, 153, 102));
 
-        pnlRodape.setBackground(new java.awt.Color(0, 204, 102));
         pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAlterar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnAlterar.setText("Alterar");
-        btnAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/edit.png"))); // NOI18N
+        btnAlterar.setToolTipText("Alterar");
+        btnAlterar.setBorder(null);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -157,8 +157,9 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
 
         btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setBorder(null);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -171,8 +172,9 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
 
         btnCadastrar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCadastrar.setText("Novo");
-        btnCadastrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/plus.png"))); // NOI18N
+        btnCadastrar.setToolTipText("Adicionar");
+        btnCadastrar.setBorder(null);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -185,8 +187,9 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
 
         btnExcluir.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/trash.png"))); // NOI18N
+        btnExcluir.setToolTipText("Excluir");
+        btnExcluir.setBorder(null);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -207,10 +210,10 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlRodapeLayout.setVerticalGroup(
@@ -230,11 +233,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlBuscarDisciplina.setBackground(new java.awt.Color(0, 204, 102));
         pnlBuscarDisciplina.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         jLabelFiltrar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jLabelFiltrar.setText("Filtrar por:");
+        jLabelFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/filter.png"))); // NOI18N
+        jLabelFiltrar.setToolTipText("Filtrar");
 
         cbxFiltro.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curso", "Tipo" }));
@@ -265,7 +268,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         });
         jScrollPaneDisciplinas.setViewportView(tblDisciplina);
 
-        rbtnEspecial.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnEspecial);
         rbtnEspecial.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnEspecial.setMnemonic('e');
@@ -277,7 +279,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             }
         });
 
-        rbtnObrigatoria.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnObrigatoria);
         rbtnObrigatoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnObrigatoria.setMnemonic('b');
@@ -290,7 +291,6 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             }
         });
 
-        rbtnOptativa.setBackground(new java.awt.Color(0, 204, 102));
         btnGroup.add(rbtnOptativa);
         rbtnOptativa.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnOptativa.setMnemonic('p');
@@ -325,25 +325,24 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                                 .addComponent(rbtnObrigatoria)
                                 .addGap(18, 18, 18)
                                 .addComponent(rbtnOptativa)
                                 .addGap(18, 18, 18)
                                 .addComponent(rbtnEspecial))
-                            .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
-                                .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlBuscarDisciplinaLayout.setVerticalGroup(
@@ -392,7 +391,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

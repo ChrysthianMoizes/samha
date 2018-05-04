@@ -127,7 +127,7 @@ public class JDOferta extends javax.swing.JDialog {
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1850, 788));
         setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1400, 788));
+        setPreferredSize(new java.awt.Dimension(1366, 788));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));

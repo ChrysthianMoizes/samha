@@ -92,9 +92,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         setTitle("Cadastrar Professor");
         setResizable(false);
 
-        pnlGeral.setBackground(new java.awt.Color(53, 151, 48));
+        pnlGeral.setBackground(new java.awt.Color(0, 153, 102));
 
-        pnlDadosPessoais.setBackground(new java.awt.Color(0, 204, 102));
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         lblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -168,12 +167,12 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlRodape.setBackground(new java.awt.Color(0, 204, 102));
         pnlRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnSalvar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/save.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar");
+        btnSalvar.setBorder(null);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -186,8 +185,9 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         });
 
         btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setBorder(null);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -220,7 +220,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlRestricoes.setBackground(new java.awt.Color(0, 204, 102));
         pnlRestricoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Restrições", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         lstRestricoes.setBackground(new java.awt.Color(204, 255, 204));
@@ -251,30 +250,23 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxTurnos.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
 
-        pnlAulas.setBackground(new java.awt.Color(0, 204, 102));
         pnlAulas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aulas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
-        chxAula1.setBackground(new java.awt.Color(0, 204, 102));
         chxAula1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula1.setText("Aula 1");
 
-        chxAula2.setBackground(new java.awt.Color(0, 204, 102));
         chxAula2.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula2.setText("Aula 2");
 
-        chxAula3.setBackground(new java.awt.Color(0, 204, 102));
         chxAula3.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula3.setText("Aula 3");
 
-        chxAula4.setBackground(new java.awt.Color(0, 204, 102));
         chxAula4.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula4.setText("Aula 4");
 
-        chxAula5.setBackground(new java.awt.Color(0, 204, 102));
         chxAula5.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula5.setText("Aula 5");
 
-        chxAula6.setBackground(new java.awt.Color(0, 204, 102));
         chxAula6.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         chxAula6.setText("Aula 6");
 
@@ -315,8 +307,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         );
 
         btnRemover.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/trash.png"))); // NOI18N
         btnRemover.setText("Remover");
-        btnRemover.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRemover.setToolTipText("Remover");
+        btnRemover.setBorder(null);
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -324,15 +318,16 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         });
 
         btnAdicionar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/plus.png"))); // NOI18N
         btnAdicionar.setText("Adicionar");
-        btnAdicionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAdicionar.setToolTipText("Adicionar");
+        btnAdicionar.setBorder(null);
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
             }
         });
 
-        pnlDescricao.setBackground(new java.awt.Color(0, 204, 102));
         pnlDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
         txtAreaDescricao.setColumns(20);
@@ -356,23 +351,19 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         txtNomeRestricao.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
-        pnlPrioridade.setBackground(new java.awt.Color(0, 204, 102));
         pnlPrioridade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
-        rbtnBaixa.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnBaixa);
         rbtnBaixa.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnBaixa.setMnemonic('b');
         rbtnBaixa.setSelected(true);
         rbtnBaixa.setText("Baixa");
 
-        rbtnMedia.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnMedia);
         rbtnMedia.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnMedia.setMnemonic('m');
         rbtnMedia.setText("Média");
 
-        rbtnAlta.setBackground(new java.awt.Color(0, 204, 102));
         btnGroupPrioridade.add(rbtnAlta);
         rbtnAlta.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnAlta.setMnemonic('a');
@@ -403,8 +394,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         );
 
         btnLimpar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/eraser.png"))); // NOI18N
         btnLimpar.setText("Limpar");
-        btnLimpar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLimpar.setToolTipText("Limpar");
+        btnLimpar.setBorder(null);
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -419,8 +412,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -478,12 +471,14 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                             .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(pnlPrioridade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pnlAulas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(4, 4, 4)
                             .addGroup(pnlRestricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(pnlRestricoesLayout.createSequentialGroup()
-                                    .addGap(34, 34, 34)
-                                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGap(4, 4, 4)
+                                    .addComponent(pnlDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRestricoesLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
