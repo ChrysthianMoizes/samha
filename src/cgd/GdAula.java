@@ -7,7 +7,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdAula extends GdGenerico{
     
-    public List filtrarParaValidacao(int ano, int semestre, int idProfessor, int numero, String dia, String turno) {
+    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, String dia, String turno) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         crit.createAlias("alocacao", "a");
         crit.createAlias("a.professor1", "p");

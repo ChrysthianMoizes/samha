@@ -18,7 +18,7 @@ public class GdRestricao extends GdGenerico{
         return lista;
     }
     
-    public List filtrarParaValidacao(int idProfessor, String dia, String turno) {
+    public List identificarConflitoRestricao(int idProfessor, String dia, String turno) {
         Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
         sessao.beginTransaction();
         crit.add( Restrictions.eq("professor.id", idProfessor) );

@@ -115,7 +115,7 @@ public class JDOferta extends javax.swing.JDialog {
         lblTerca1 = new javax.swing.JLabel();
         lblQuarta1 = new javax.swing.JLabel();
         lblSegunda1 = new javax.swing.JLabel();
-        lblDiaProfessor = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         pnlNomeProfessor = new javax.swing.JPanel();
         lblNomeProfessor = new javax.swing.JLabel();
         pnlTabelaProfessor = new javax.swing.JPanel();
@@ -506,9 +506,8 @@ public class JDOferta extends javax.swing.JDialog {
         lblSegunda1.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblSegunda1.setText("Segunda");
 
-        lblDiaProfessor.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        lblDiaProfessor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDiaProfessor.setText("Dia");
+        jComboBox1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
 
         javax.swing.GroupLayout pnlDiasProfessorLayout = new javax.swing.GroupLayout(pnlDiasProfessor);
         pnlDiasProfessor.setLayout(pnlDiasProfessorLayout);
@@ -519,21 +518,21 @@ public class JDOferta extends javax.swing.JDialog {
                 .addGroup(pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTerca1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblQuarta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSexta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblQuinta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
                         .addGroup(pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblSegunda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblDiaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addComponent(lblSexta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblQuinta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlDiasProfessorLayout.setVerticalGroup(
             pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblDiaProfessor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lblSegunda1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTerca1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -612,7 +611,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(pnlProfessorLayout.createSequentialGroup()
                         .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
                     .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -705,6 +704,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JComboBox<String> cbxTurno;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -713,7 +713,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblAno;
-    private javax.swing.JLabel lblDiaProfessor;
     private javax.swing.JLabel lblIntervaloMinimo;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeProfessor;

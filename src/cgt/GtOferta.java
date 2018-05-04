@@ -21,95 +21,66 @@ public class GtOferta {
     }
     
     public String validarOferta(Aula aula){
+
+        String mensagem = null;
         
-        String mensagem = "";
+        Professor professor = aula.getAlocacao().getProfessor1();
+        Professor professor2;
         
-        Professor professor = aula.getAlocacao().getProfessor1(); 
+        mensagem = identificarConflitoTurma(aula, professor.getId(), mensagem);
+        
+        if(aula.getAlocacao().getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+            professor2 = aula.getAlocacao().getProfessor2();
+            mensagem = identificarConflitoTurma(aula, professor2.getId(), mensagem);
+        }
+        
+        return mensagem;
+    }
+    
+    public String identificarConflitoTurma(Aula aula, int idProfessor, String mensagem){
+        
         int ano = aula.getAlocacao().getAno();
         int semestre = aula.getAlocacao().getSemestre();
-        int idProfessor = professor.getId();
         int numero = aula.getNumero();
         String dia = aula.getDia();
         String turno = aula.getTurno();
-        boolean especial = false;
         
-        List listaAulas;
-        List listaRestricoes;
-        RestricaoProfessor restricao;
-        
-        if(aula.getAlocacao().getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
-            especial = true;
-        }
-        
-        listaAulas = gdAula.filtrarParaValidacao(ano, semestre, idProfessor, numero, dia, turno);
-        
+        List listaAulas = gdAula.identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
+
         if(listaAulas.size() == 0){
-            
-            listaRestricoes = gdRestricao.filtrarParaValidacao(idProfessor, dia, turno);
-            
+
+            List listaRestricoes = gdRestricao.identificarConflitoRestricao(idProfessor, dia, turno);
+
             if(listaRestricoes.size() == 0){
-                
-                if(especial){
-                    int idProfessor2 = aula.getAlocacao().getProfessor2().getId();
-                    listaAulas = gdAula.filtrarParaValidacao(ano, semestre, idProfessor, numero, dia, turno);
+                return mensagem;
 
-                    if(listaAulas.size() == 0){
-            
-                        listaRestricoes = gdRestricao.filtrarParaValidacao(idProfessor2, dia, turno);
-                        
-                        if(listaRestricoes.size() == 0){
-                            return null;
-                            
-                        }else{
-                             
-                            boolean resposta; 
-                
-                            for(int i = 0; i < listaRestricoes.size(); i++){
-                    
-                                restricao = (RestricaoProfessor) listaRestricoes.get(i);
-                                resposta = identificarConflitoRestricao(restricao, aula);
-
-                                if(resposta){
-                                    mensagem = "Professor 2 possui uma restrição neste horário: " + restricao.getNome().toUpperCase();
-                                    return "1 " + mensagem;
-                                }
-                            }
-                        }
-                            
-                    }else {
-                        Aula a = (Aula) listaAulas.get(0);
-                        mensagem = "Professor 2 está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
-                        return "0 " + mensagem;
-                    }     
-                }        
-                return null;
-                
-            }else{
-
-                boolean resposta; 
-                
-                for(int i = 0; i < listaRestricoes.size(); i++){
-                    
-                    restricao = (RestricaoProfessor) listaRestricoes.get(i);
-                    resposta = identificarConflitoRestricao(restricao, aula);
-                    
-                    if(resposta){
-                        mensagem = "Professor possui uma restrição neste horário: " + restricao.getNome().toUpperCase();
-                        return "1 " + mensagem;
-                    }
-                }
-            }
-            return null;
-        }else{
+            }else
+                return identificarConflitoRestricao(listaAulas, aula, mensagem);            
+        }else {
             Aula a = (Aula) listaAulas.get(0);
-            mensagem = "Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
-            return "0 " + mensagem;
+            return "0 Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
         }
     }
     
-    public boolean identificarConflitoRestricao(RestricaoProfessor restricao, Aula aula){
+    public String identificarConflitoRestricao(List lista, Aula aula, String mensagem){
+        
+        boolean resposta; 
+        RestricaoProfessor restricao;
+                
+        for(int i = 0; i < lista.size(); i++){
+
+            restricao = (RestricaoProfessor) lista.get(i);
+            resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
+
+            if(resposta)
+                return "1 Professor possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+        }
+        return mensagem;
+    }
+    
+    public boolean identificarNumeroAulaConflitante(RestricaoProfessor restricao, int numero){
             
-        switch(aula.getNumero()){
+        switch(numero){
 
             case 1: return restricao.isAula1();
             case 2: return restricao.isAula2();
