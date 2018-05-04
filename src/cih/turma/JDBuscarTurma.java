@@ -410,13 +410,13 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnExcluirKeyPressed
 
-    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        alterarComboFiltro();
-    }//GEN-LAST:event_cbxFiltroItemStateChanged
-
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
         atualizarTabela();
     }//GEN-LAST:event_cbxCursoActionPerformed
+
+    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        alterarComboFiltro();
+    }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

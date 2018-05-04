@@ -12,6 +12,13 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         this.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         this.setModalityType(ModalityType.MODELESS);
+        alterarLarguraTabela();
+    }
+
+    public void alterarLarguraTabela(){
+        tblCargaHoraria.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblCargaHoraria.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tblCargaHoraria.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
     
     public void atualizarTabela(){

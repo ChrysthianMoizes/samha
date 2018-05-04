@@ -11,6 +11,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         this.ctrlPrincipal = ctrlPrincipal;
         initComponents();
         setarBackground();
+        jTextFieldLogin.requestFocus();
    }
 
     private void setarBackground(){
@@ -25,7 +26,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     private void validarAcesso(){
         String login = jTextFieldLogin.getText();
         String senha = jPasswordFieldSenha.getText();
-        
+
         ctrlPrincipal.validarAcesso(login, senha);
     }
     
@@ -118,7 +119,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlExteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlExteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
