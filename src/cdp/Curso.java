@@ -32,23 +32,30 @@ public class Curso implements Serializable, Comparable<Object> {
     @JoinColumn(name = "coordenadoria_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Coordenadoria coordenadoria;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordenador_id", nullable = true)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private CoordenadorCurso coordenador;
 
     public Curso() {
     }
 
-    public Curso(int id, String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria) {
+    public Curso(int id, String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria, CoordenadorCurso coordenador) {
         this.id = id;
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.nivel = nivel;
         this.coordenadoria = coordenadoria;
+        this.coordenador = coordenador;
     }
 
-    public Curso(String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria) {
+    public Curso(String nome, int qtPeriodos, String nivel, Coordenadoria coordenadoria, CoordenadorCurso coordenador) {
         this.nome = nome;
         this.qtPeriodos = qtPeriodos;
         this.nivel = nivel;
         this.coordenadoria = coordenadoria;
+        this.coordenador = coordenador;
     }
 
     public int getId() {
@@ -91,6 +98,14 @@ public class Curso implements Serializable, Comparable<Object> {
         this.coordenadoria = coordenadoria;
     }
 
+    public CoordenadorCurso getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(CoordenadorCurso coordenador) {
+        this.coordenador = coordenador;
+    }
+    
     @Override
     public String toString() {
         return nome;

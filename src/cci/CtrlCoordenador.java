@@ -1,6 +1,7 @@
 package cci;
 
 import cdp.CoordenadorCurso;
+import cdp.Curso;
 import cdp.Professor;
 import cdp.Usuario;
 import cgt.Constantes;
@@ -57,9 +58,9 @@ public class CtrlCoordenador extends CtrlGenerica{
         cadastraCoord.setVisible(true);  
     }
 
-    public void cadastrar(Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public void cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
 
-        String resposta = gtCoordenador.cadastrar(professor, tipo, login, senha, nome, matricula);
+        String resposta = gtCoordenador.cadastrar(professor, curso, tipo, login, senha, nome, matricula);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
@@ -70,13 +71,13 @@ public class CtrlCoordenador extends CtrlGenerica{
         }
     }
 
-    public void alterar(Usuario coordenador, Professor professor, String tipo, String login, String senha, String nome, String matricula) {
+    public void alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
 
-        String resposta = gtCoordenador.alterar(coordenador, professor, tipo, login, senha, nome, matricula);
+        String resposta = gtCoordenador.alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula);
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
             cadastraCoord.desabilitarComboTipoCoordenador();
-            cadastraCoord.desabilitarComboProfessor(false);
+            cadastraCoord.desabilitarCombos(false);
             cadastraCoord.desabilitarCampos();
             buscaCoord.atualizarTabela();
         } else {
@@ -129,22 +130,22 @@ public class CtrlCoordenador extends CtrlGenerica{
             cadastraCoord.setarCamposComInstancia(coordenador);
             cadastraCoord.desabilitarComboTipoCoordenador();
             if(coordenador instanceof CoordenadorCurso)
-                cadastraCoord.desabilitarComboProfessor(true);
+                cadastraCoord.desabilitarCombos(true);
             else
-                cadastraCoord.desabilitarComboProfessor(false);
+                cadastraCoord.desabilitarCombos(false);
         }
     }
     
-    public void validarOperacao(Professor professor, String tipo, String login, String senha, String nome, String matricula){  
+    public void validarOperacao(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula){  
         
         Usuario coordenador = cadastraCoord.getCoordenador();
         
         if(validarCampos(nome, matricula, login, senha)){
             
             if(coordenador == null)   
-                cadastrar(professor, tipo, login, senha, nome, matricula);  
+                cadastrar(professor, curso, tipo, login, senha, nome, matricula);  
             else
-                alterar(coordenador, professor, tipo, login, senha, nome, matricula);
+                alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraCoord, "Todos os campos devem ser preenchidos");
     }
@@ -170,6 +171,11 @@ public class CtrlCoordenador extends CtrlGenerica{
                 }
             }
         }
+    }
+    
+    public void preencherComboCurso(JComboBox cbxCurso){      
+        List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
+        preencherCombo(cbxCurso, listaCursos);     
     }
     
     public List listarProfessoresNaoCoordenadores(){

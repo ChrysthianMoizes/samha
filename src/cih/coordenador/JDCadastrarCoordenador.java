@@ -5,6 +5,7 @@ import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.CoordenadorPedagogico;
 import cdp.Coordenadoria;
+import cdp.Curso;
 import cdp.Professor;
 import cdp.Usuario;
 import java.awt.event.KeyEvent;
@@ -42,6 +43,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         cbxProfessor = new javax.swing.JComboBox<>();
         lblTipo = new javax.swing.JLabel();
         lblProfessor = new javax.swing.JLabel();
+        cbxCurso = new javax.swing.JComboBox<>();
         pnlDadosPessoais = new javax.swing.JPanel();
         lblMatricula = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
@@ -88,6 +90,10 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         lblProfessor.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblProfessor.setText("Professor:");
 
+        cbxCurso.setBackground(new java.awt.Color(0, 204, 0));
+        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxCurso.setEnabled(false);
+
         javax.swing.GroupLayout pnlCoordenadorLayout = new javax.swing.GroupLayout(pnlCoordenador);
         pnlCoordenador.setLayout(pnlCoordenadorLayout);
         pnlCoordenadorLayout.setHorizontalGroup(
@@ -99,6 +105,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                     .addComponent(lblTipo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlCoordenadorLayout.createSequentialGroup()
                         .addComponent(lblProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 307, Short.MAX_VALUE))
@@ -115,7 +122,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addGroup(pnlCoordenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(cbxProfessor))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addComponent(cbxCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
@@ -334,13 +343,17 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         switch (cbxTipo.getSelectedIndex()) {
             case 1:
                 ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
+                ctrlPrincipal.getCtrlCoordenador().preencherComboCurso(cbxCurso);
                 cbxProfessor.setEnabled(true);
+                cbxCurso.setEnabled(true);
                 txtNome.setEditable(false);
                 txtMatricula.setEditable(false);
                 break;
             default:
                 cbxProfessor.removeAllItems();
                 cbxProfessor.setEnabled(false);
+                cbxCurso.removeAllItems();
+                cbxCurso.setEnabled(false);
                 txtNome.setEditable(true);
                 txtMatricula.setEditable(true);
                 txtMatricula.setText("");
@@ -353,8 +366,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         cbxTipo.setEnabled(false);
     }
     
-     public void desabilitarComboProfessor(boolean opcao){ 
-        cbxProfessor.setEnabled(opcao);    
+     public void desabilitarCombos(boolean opcao){ 
+        cbxProfessor.setEnabled(opcao);
+        cbxCurso.setEnabled(opcao);
     }
     
     public void desabilitarCampos(){
@@ -421,8 +435,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         String login = txtUsuario.getText();
         String senha = txtSenha.getText();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
+        Curso curso = (Curso) cbxCurso.getSelectedItem();
         
-        ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, tipo, login, senha, nome, matricula);
+        ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, curso, tipo, login, senha, nome, matricula);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -453,6 +468,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxProfessor;
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JLabel lblLogin;

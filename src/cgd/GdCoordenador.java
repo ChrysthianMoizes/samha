@@ -3,7 +3,7 @@ package cgd;
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.CoordenadorPedagogico;
-import cdp.Coordenadoria;
+import cdp.Curso;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
@@ -11,10 +11,10 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdCoordenador extends GdGenerico{
     
-    private GdCoordenadoria gdCoordenadoria;
+    private GdCurso gdCurso;
 
     public GdCoordenador() {
-        gdCoordenadoria = new GdCoordenadoria();
+        gdCurso = new GdCurso();
     }
         
     public List buscarCoordenadoresCurso(String coluna, String texto) {
@@ -53,16 +53,58 @@ public class GdCoordenador extends GdGenerico{
         return lista;
     }
     
+    public void cadastrarCoordenadorCurso(Curso curso, CoordenadorCurso coordenador){
+        
+        try {
+            sessao = criarSessao();
+            sessao.beginTransaction();
+
+            curso.setCoordenador(coordenador);
+            sessao.save(coordenador);
+            sessao.update(curso);
+            
+            sessao.getTransaction().commit();        
+            sessao.close();
+
+        } catch (Exception e) {
+            sessao.getTransaction().rollback();
+            sessao.close();
+            throw e;
+        }
+        
+    }
+    
+    public void alterarCoordenadorCurso(Curso curso, CoordenadorCurso coordenador){
+        
+        try {
+            sessao = criarSessao();
+            sessao.beginTransaction();
+            
+            curso.setCoordenador(coordenador);
+            sessao.update(curso);
+            sessao.update(coordenador);
+            
+            sessao.getTransaction().commit();        
+            sessao.close();
+
+        } catch (Exception e) {
+            sessao.getTransaction().rollback();
+            sessao.close();
+            throw e;
+        }
+        
+    }
+    
     public void excluirCoordenadorCurso(CoordenadorCurso coordenador){
        
         try {
             sessao = criarSessao();
             sessao.beginTransaction();
             
-            Coordenadoria coordenadoria = coordenador.getProfessor().getCoordenadoria();
+            Curso curso = gdCurso.filtrarCursoUnico("coordenador.id", coordenador.getId());
             
-            coordenadoria.setCoordenador(null);
-            sessao.update(coordenadoria);
+            curso.setCoordenador(null);
+            sessao.update(curso);
             sessao.delete(coordenador);
             
             sessao.getTransaction().commit();        

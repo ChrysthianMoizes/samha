@@ -43,7 +43,7 @@ public class GtCoordenadoria {
 
         try {
            
-            if(coordenadoria.getCoordenador() == null){
+            if(coordenadoria.getCurso().getCoordenador() == null){
                 
                 if(coordenadoria.getCurso() == null){
                                      
