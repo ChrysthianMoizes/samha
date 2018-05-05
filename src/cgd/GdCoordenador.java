@@ -16,6 +16,16 @@ public class GdCoordenador extends GdGenerico{
     public GdCoordenador() {
         gdCurso = new GdCurso();
     }
+    
+    public CoordenadorCurso identificarCoordenadorCurso(int id){
+        Criteria crit = criarSessao().createCriteria(CoordenadorCurso.class);
+        crit.createAlias("professor", "p");
+        crit.add(Restrictions.eq("p.id", id));
+        crit.setMaxResults(1);
+        CoordenadorCurso coordenador = (CoordenadorCurso) crit.uniqueResult();
+        sessao.close();
+        return coordenador;
+    }
         
     public List buscarCoordenadoresCurso(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(CoordenadorCurso.class);
@@ -59,8 +69,8 @@ public class GdCoordenador extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
 
-            curso.setCoordenador(coordenador);
             sessao.save(coordenador);
+            curso.setCoordenador(coordenador);
             sessao.update(curso);
             
             sessao.getTransaction().commit();        
@@ -80,10 +90,10 @@ public class GdCoordenador extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
             
+            sessao.update(coordenador);
             curso.setCoordenador(coordenador);
             sessao.update(curso);
-            sessao.update(coordenador);
-            
+
             sessao.getTransaction().commit();        
             sessao.close();
 
@@ -106,7 +116,7 @@ public class GdCoordenador extends GdGenerico{
             curso.setCoordenador(null);
             sessao.update(curso);
             sessao.delete(coordenador);
-            
+
             sessao.getTransaction().commit();        
             sessao.close();
 

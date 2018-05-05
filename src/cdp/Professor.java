@@ -57,7 +57,7 @@ public class Professor extends Servidor implements Comparable<Object>{
     }
     
     public Object[] toArrayCargaHoraria() {
-        return new Object[] { this, getMatricula(), getCargaHoraria()};
+        return new Object[] { this, getCargaHoraria()};
     }
 
     @Override

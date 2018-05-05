@@ -21,25 +21,18 @@ public class Coordenadoria implements Serializable, Comparable<Object> {
     @Cascade(CascadeType.SAVE_UPDATE)
     private Eixo eixo;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id", nullable = true)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Curso curso;
-  
     public Coordenadoria() {
     }
 
-    public Coordenadoria(int id, String nome, Eixo eixo, Curso curso) {
+    public Coordenadoria(int id, String nome, Eixo eixo) {
         this.id = id;
         this.nome = nome;
         this.eixo = eixo;
-        this.curso = curso;
     }
 
-    public Coordenadoria(String nome, Eixo eixo, Curso curso) {
+    public Coordenadoria(String nome, Eixo eixo) {
         this.nome = nome;
         this.eixo = eixo;
-        this.curso = curso;
     }
 
     public int getId() {
@@ -56,14 +49,6 @@ public class Coordenadoria implements Serializable, Comparable<Object> {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
     }
 
     public Eixo getEixo() {

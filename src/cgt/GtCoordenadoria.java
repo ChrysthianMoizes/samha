@@ -1,6 +1,7 @@
 package cgt;
 
 import cdp.Coordenadoria;
+import cdp.Curso;
 import cdp.Eixo;
 import cgd.GdCoordenador;
 import cgd.GdCoordenadoria;
@@ -42,10 +43,12 @@ public class GtCoordenadoria {
     public String excluir(Coordenadoria coordenadoria) {
 
         try {
+            
+            Curso curso = gdCurso.filtrarCursoUnico("coordenadoria.id", coordenadoria.getId());
            
-            if(coordenadoria.getCurso().getCoordenador() == null){
+            if(curso == null){
                 
-                if(coordenadoria.getCurso() == null){
+                if(curso.getCoordenador() == null){
                                      
                     List listaProfessores = gdProfessor.filtrarPorCoordenadoria("coordenadoria.id", coordenadoria.getId());
                     
@@ -56,9 +59,10 @@ public class GtCoordenadoria {
                     }else
                         return "Coordenadoria possui professores associados";                    
                 }else
-                    return "Coordenadoria possui curso associado";  
+                    return "Coordenadoria possui coordenador associado";
             }else
-                return "Coordenadoria possui coordenador associado";
+                return "Coordenadoria possui curso associado";
+                
             
         } catch (Exception ex) {
             return ex.getMessage();

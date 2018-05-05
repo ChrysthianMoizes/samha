@@ -21,6 +21,13 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
         setarBackground();
+        alterarLarguraTabela();
+    }
+    
+    public void alterarLarguraTabela(){
+        tblProfessor.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tblProfessor.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tblProfessor.getColumnModel().getColumn(2).setPreferredWidth(150);  
     }
     
     private void setarBackground(){

@@ -16,6 +16,12 @@ public class JDAlocacao extends javax.swing.JDialog {
         ctrlPrincipal = ctrl;
         this.pai = parent;
         setarBackground();
+        alterarLarguraTabela();
+    }
+    
+    public void alterarLarguraTabela(){
+        tblAlocacao.getColumnModel().getColumn(0).setPreferredWidth(280);
+        tblAlocacao.getColumnModel().getColumn(1).setPreferredWidth(5);
     }
 
     private void setarBackground(){

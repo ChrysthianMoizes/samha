@@ -16,9 +16,8 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     }
 
     public void alterarLarguraTabela(){
-        tblCargaHoraria.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblCargaHoraria.getColumnModel().getColumn(0).setPreferredWidth(200);
         tblCargaHoraria.getColumnModel().getColumn(1).setPreferredWidth(10);
-        tblCargaHoraria.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
     
     public void atualizarTabela(){
@@ -46,11 +45,11 @@ public class JDCargaHoraria extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Matrícula", "Carga Horária"
+                "Nome", "Carga Horária"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -33,11 +33,8 @@ public class GtCurso {
             curso.setNivel(nivel);
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);
-            
             gdCurso.cadastrar(curso);
-            coordenadoria.setCurso(curso);
-            gdCoordenadoria.alterar(coordenadoria);
-            
+
             return Constantes.CADASTRADO;
         } catch (Exception ex) {
             return ex.getMessage();
@@ -89,11 +86,9 @@ public class GtCurso {
             if (matrizes.size() == 0) {        
                 
                 List turmas = gdTurma.filtrarPorCurso(curso.getId());
+                
                 if (turmas.size() == 0) {
                     
-                    Coordenadoria coordenadoria = curso.getCoordenadoria();
-                    coordenadoria.setCurso(null);
-                    gdCoordenadoria.alterar(coordenadoria);
                     gdCurso.excluir(curso);
                     
                     return Constantes.EXCLUIDO;

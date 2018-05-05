@@ -16,6 +16,13 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
         setarBackground();
+        alterarLarguraTabela();
+    }
+    
+    public void alterarLarguraTabela(){
+        tblCoordenador.getColumnModel().getColumn(0).setPreferredWidth(250);
+        tblCoordenador.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tblCoordenador.getColumnModel().getColumn(2).setPreferredWidth(100);  
     }
     
     private void setarBackground(){

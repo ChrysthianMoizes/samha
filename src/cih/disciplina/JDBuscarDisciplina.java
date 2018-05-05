@@ -22,6 +22,13 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
         setarBackground();
+        alterarLarguraTabela();
+    }
+    
+    public void alterarLarguraTabela(){
+        tblDisciplina.getColumnModel().getColumn(0).setPreferredWidth(270);
+        tblDisciplina.getColumnModel().getColumn(1).setPreferredWidth(5);
+        tblDisciplina.getColumnModel().getColumn(2).setPreferredWidth(30);  
     }
     
     private void setarBackground(){

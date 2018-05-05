@@ -22,6 +22,14 @@ public class JDBuscarTurma extends javax.swing.JDialog {
         this.pai = parent;
         this.ctrlPrincipal = ctrl;
         setarBackground();
+        alterarLarguraTabela();
+    }
+    
+    public void alterarLarguraTabela(){
+        tblTurma.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tblTurma.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tblTurma.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tblTurma.getColumnModel().getColumn(3).setPreferredWidth(20);
     }
     
     private void setarBackground(){

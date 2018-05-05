@@ -1,7 +1,9 @@
 package cgt;
 
+import cdp.CoordenadorCurso;
 import cdp.Coordenadoria;
 import cdp.Professor;
+import cgd.GdCoordenador;
 import cgd.GdProfessor;
 import cgd.GdRestricao;
 import java.sql.SQLException;
@@ -11,10 +13,12 @@ import java.util.List;
 public class GtProfessor {
 
     private GdProfessor gdProfessor;
+    private GdCoordenador gdCoordenador;
     private GdRestricao gdRestricao;
 
     public GtProfessor() {
         gdProfessor = new GdProfessor();
+        gdCoordenador = new GdCoordenador();
         gdRestricao = new GdRestricao();
     }
 
@@ -70,12 +74,20 @@ public class GtProfessor {
     }
 
     public String excluir(Professor professor){
+        
         try {
-            gdRestricao.excluirRestricoes("professor.id", professor.getId());
-            gdProfessor.excluir(professor);
-            return Constantes.EXCLUIDO;
+            
+            CoordenadorCurso coordenador = gdCoordenador.identificarCoordenadorCurso(professor.getId());
+            
+            if(coordenador == null){
+                gdRestricao.excluirRestricoes("professor.id", professor.getId());
+                gdProfessor.excluir(professor);
+                return Constantes.EXCLUIDO;
+            }else
+                return "Professor não pode ser excluído pois também é um coordenador";
+            
         } catch (SQLException | ClassNotFoundException ex) {
-            return "Professor não pode ser excluído pois também é um coordenador";
+            return ex.getMessage();
         }
     }
 

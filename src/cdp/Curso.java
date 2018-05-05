@@ -28,7 +28,7 @@ public class Curso implements Serializable, Comparable<Object> {
     @Column(nullable = false)
     private String nivel;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coordenadoria_id", nullable = true)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Coordenadoria coordenadoria;
@@ -112,7 +112,7 @@ public class Curso implements Serializable, Comparable<Object> {
     }
    
     public Object[] toArray() {
-        return new Object[] { this, getNivel(), getCoordenadoria().getEixo().getNome() };
+        return new Object[] { this, getNivel()};
     }
 
     @Override

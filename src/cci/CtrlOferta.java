@@ -7,7 +7,6 @@ import cgt.GtAlocacao;
 import cgt.GtOferta;
 import cih.oferta.JDOferta;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
@@ -15,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class CtrlOferta extends CtrlGenerica{
     
