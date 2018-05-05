@@ -25,8 +25,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     private JDAlocacao cadastraAlocacao;
     private JDCargaHoraria jdCargaHoraria;
     private GtAlocacao gtAlocacao;
-    private List listaCoordenadorias;
-    private Coordenadoria coordenadoriaSelecionada;
+    private Eixo eixoSelecionado;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -109,9 +108,9 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void listarCargaHorariaProfessores(JTable tabela){
         
-        if(getCoordenadoriaSelecionada() != null){
+        if(getEixoSelecionado() != null){
             
-            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(getCoordenadoriaSelecionada().getId());
+            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(getEixoSelecionado().getId());
             
             int ano = cadastraAlocacao.getAno();
             int semestre = cadastraAlocacao.getSemestre();
@@ -164,30 +163,13 @@ public class CtrlAlocacao extends CtrlGenerica{
         }    
     }
     
-    public void preencherComboEixos(JComboBox cbxEixo, JComboBox cbxCoordenadoria){ 
+    public void preencherComboEixos(JComboBox cbxEixo){ 
         
         List listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
         preencherCombo(cbxEixo, listaEixos);
         
-        if(listaEixos.size() > 0){
-            Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-            preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);
-        }
-    }
-
-    public void preencherComboCoordenadorias(int id, JComboBox cbxCoordenadoria) {
-        
-        List listaCoordenadorias = ctrlPrincipal.getCtrlCoordenadoria().filtrarCoordenadoriasEixo(id);
-        setListaCoordenadorias(listaCoordenadorias);
-        
-        if(listaCoordenadorias.size() > 0){
-            preencherCombo(cbxCoordenadoria, listaCoordenadorias);
-            cadastraAlocacao.preencherListaProfessores();
-        }
-        
-        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-        setCoordenadoriaSelecionada(coordenadoria);
-        
+        if(listaEixos.size() > 0)
+            cadastraAlocacao.preencherListaProfessores();  
     }
     
     public void preencherListaDisciplinas(JComboBox cbxMatriz, JList lstDisciplinas, JSpinner spnPeriodo) {
@@ -203,31 +185,23 @@ public class CtrlAlocacao extends CtrlGenerica{
         }
     }
     
-    public void preencherListaProfessores(JComboBox cbxCoordenadoria, JList lstProfessores) {
+    public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores) {
         
-        Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
-        setCoordenadoriaSelecionada(coordenadoria);
+        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
+        setEixoSelecionado(eixo);
         
         if(jdCargaHoraria != null)
             jdCargaHoraria.atualizarTabela();      
         
-        List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coordenadoria.getId());
+        List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
         preencherJList(listaProfessores, lstProfessores);   
     }
 
-    public Coordenadoria getCoordenadoriaSelecionada() {
-        return coordenadoriaSelecionada;
+    public Eixo getEixoSelecionado() {
+        return eixoSelecionado;
     }
 
-    public void setCoordenadoriaSelecionada(Coordenadoria coordenadoriaSelecionada) {
-        this.coordenadoriaSelecionada = coordenadoriaSelecionada;
+    public void setEixoSelecionado(Eixo eixo) {
+        this.eixoSelecionado = eixo;
     }
-
-    public List getListaCoordenadorias() {
-        return listaCoordenadorias;
-    }
-
-    public void setListaCoordenadorias(List listaCoordenadorias) {
-        this.listaCoordenadorias = listaCoordenadorias;
-    } 
 }

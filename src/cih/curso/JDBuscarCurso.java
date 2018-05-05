@@ -23,9 +23,8 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     }
     
     public void alterarLarguraTabela(){
-        tblCurso.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tblCurso.getColumnModel().getColumn(0).setPreferredWidth(250);
         tblCurso.getColumnModel().getColumn(1).setPreferredWidth(10);
-        tblCurso.getColumnModel().getColumn(2).setPreferredWidth(20);  
     }
     
     private void setarBackground(){
@@ -269,11 +268,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Nível", "Eixo"
+                "Nome", "Nível"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

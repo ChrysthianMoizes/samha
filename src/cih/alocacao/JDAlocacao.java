@@ -2,7 +2,6 @@ package cih.alocacao;
 
 import cci.CtrlPrincipal;
 import cdp.Curso;
-import cdp.Eixo;
 import java.awt.Frame;
 
 public class JDAlocacao extends javax.swing.JDialog {
@@ -46,7 +45,7 @@ public class JDAlocacao extends javax.swing.JDialog {
     }
     
     public void preencherComboEixo(){
-        ctrlPrincipal.getCtrlAlocacao().preencherComboEixos(cbxEixo, cbxCoordenadoria);
+        ctrlPrincipal.getCtrlAlocacao().preencherComboEixos(cbxEixo);
     }
     
     public void preencherListaDisciplinas(){
@@ -55,7 +54,7 @@ public class JDAlocacao extends javax.swing.JDialog {
     }
     
     public void preencherListaProfessores(){
-        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxCoordenadoria, lstProfessores);
+        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxEixo, lstProfessores);
     }
     
     public void setarPeriodoMaximo(int maximo){
@@ -97,7 +96,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         lstDisciplinas = new javax.swing.JList<>();
         pnlProfessor = new javax.swing.JPanel();
         cbxEixo = new javax.swing.JComboBox<>();
-        cbxCoordenadoria = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstProfessores = new javax.swing.JList<>();
         jSeparator2 = new javax.swing.JSeparator();
@@ -159,10 +157,10 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDisciplinaLayout.createSequentialGroup()
-                        .addComponent(cbxMatriz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -190,17 +188,9 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         cbxEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxEixo.setPreferredSize(new java.awt.Dimension(39, 30));
-        cbxEixo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxEixoItemStateChanged(evt);
-            }
-        });
-
-        cbxCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCoordenadoria.setPreferredSize(new java.awt.Dimension(39, 30));
-        cbxCoordenadoria.addActionListener(new java.awt.event.ActionListener() {
+        cbxEixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCoordenadoriaActionPerformed(evt);
+                cbxEixoActionPerformed(evt);
             }
         });
 
@@ -216,7 +206,6 @@ public class JDAlocacao extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -226,9 +215,7 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(66, 66, 66)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,20 +397,9 @@ public class JDAlocacao extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlAlocacao().excluir(tblAlocacao);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void cbxEixoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxEixoItemStateChanged
-        Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-        if(eixo != null){
-           ctrlPrincipal.getCtrlAlocacao().preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);
-        }
-    }//GEN-LAST:event_cbxEixoItemStateChanged
-
     private void cbxMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMatrizActionPerformed
         preencherListaDisciplinas();
     }//GEN-LAST:event_cbxMatrizActionPerformed
-
-    private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
-        preencherListaProfessores();
-    }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
         ctrlPrincipal.getCtrlAlocacao().preencherListaDisciplinas(cbxMatriz, lstDisciplinas, spnPeriodo);
@@ -441,11 +417,14 @@ public class JDAlocacao extends javax.swing.JDialog {
         atualizarTabela();
     }//GEN-LAST:event_spnSemestreStateChanged
 
+    private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed
+        preencherListaProfessores();
+    }//GEN-LAST:event_cbxEixoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCargaHoraria;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxEixo;
     private javax.swing.JComboBox<String> cbxMatriz;

@@ -67,6 +67,10 @@ public class CtrlProfessor extends CtrlGenerica{
     public List<Professor> filtrarPorCoordenadoria(int id){
         return gtProfessor.filtrarPorCoordenadoria(id);
     }
+    
+    public List<Professor> filtrarPorEixo(int id){
+        return gtProfessor.filtrarPorEixo(id);
+    }
 
     public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 

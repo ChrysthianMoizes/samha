@@ -508,6 +508,7 @@ public class JDOferta extends javax.swing.JDialog {
 
         jComboBox1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        jComboBox1.setEnabled(false);
 
         javax.swing.GroupLayout pnlDiasProfessorLayout = new javax.swing.GroupLayout(pnlDiasProfessor);
         pnlDiasProfessor.setLayout(pnlDiasProfessorLayout);

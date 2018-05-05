@@ -66,6 +66,13 @@ public class GtProfessor {
         Collections.sort(lista);
         return lista;
     }
+    
+    public List<Professor> filtrarPorEixo(int id){
+        
+        List lista = gdProfessor.filtrarPorEixo(id);
+        Collections.sort(lista);
+        return lista;
+    }
 
     public List<Professor> consultar() {
         List lista = gdProfessor.consultar(Professor.class);

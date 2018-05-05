@@ -29,4 +29,17 @@ public class GdProfessor extends GdGenerico{
         sessao.close();
         return lista;
     }
+    
+    public List filtrarPorEixo(int id) {
+        Criteria crit = criarSessao().createCriteria(Professor.class);
+        sessao.beginTransaction();
+        crit.createAlias("coordenadoria", "c");
+        crit.createAlias("c.eixo", "e");
+        crit.add( Restrictions.eq("e.id", id));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
 }
