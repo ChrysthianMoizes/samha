@@ -2,24 +2,21 @@ package cci;
 
 import cdp.Eixo;
 import cgt.Constantes;
-import cgt.GtEixo;
 import java.util.List;
 
 public class CtrlEixo {
     
     private CtrlPrincipal ctrlPrincipal;
-    private GtEixo gtEixo;
 
     public CtrlEixo(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
-        gtEixo = new GtEixo();
     }
     
     public int cadastrar(String nome){
         
         if(validarCampos(nome)){
         
-            String resposta = gtEixo.cadastrar(nome);
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtEixo().cadastrar(nome);
 
             if (resposta.equals(Constantes.CADASTRADO)) {
                 CtrlMensagem.exibirMensagemSucesso(null, "Cadastrado Com sucesso!");
@@ -36,7 +33,7 @@ public class CtrlEixo {
     
     public int excluir(Eixo eixo) {
 
-        String resposta = gtEixo.excluir(eixo);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtEixo().excluir(eixo);
         if (resposta.equals(Constantes.EXCLUIDO)) {
             return 0;
         } else {
@@ -46,7 +43,7 @@ public class CtrlEixo {
     }
     
     public List<Eixo> consultar() {
-        return gtEixo.consultar();
+        return ctrlPrincipal.getGtPrincipal().getGtEixo().consultar();
     }
     
     public boolean validarCampos(String nome){

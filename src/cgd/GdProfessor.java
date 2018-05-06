@@ -8,6 +8,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdProfessor extends GdGenerico{
     
+    private GdPrincipal gdPrincipal;
+    
+    public GdProfessor(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
+    
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Professor.class);
         sessao.beginTransaction();
@@ -19,10 +25,10 @@ public class GdProfessor extends GdGenerico{
         return lista;
     }
     
-    public List filtrarPorCoordenadoria(String coluna, int id) {
+    public List filtrarPorCoordenadoria(int id) {
         Criteria crit = criarSessao().createCriteria(Professor.class);
         sessao.beginTransaction();
-        crit.add( Restrictions.eq(coluna, id) );
+        crit.add( Restrictions.eq("coordenadoria.id", id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();

@@ -7,6 +7,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdAula extends GdGenerico{
     
+    private GdPrincipal gdPrincipal;
+
+    public GdAula(GdPrincipal gdPrincipal) {
+        this.gdPrincipal = gdPrincipal;
+    }
+    
     public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, String dia, String turno) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         crit.createAlias("alocacao", "a");

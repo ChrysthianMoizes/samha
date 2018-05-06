@@ -2,19 +2,16 @@ package cgt;
 
 import cdp.Disciplina;
 import cdp.MatrizCurricular;
-import cgd.GdAlocacao;
-import cgd.GdDisciplina;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtDisciplina {
     
-    private GdDisciplina gdDisciplina;
-    private GdAlocacao gdAlocacao;
+    private GtPrincipal gtPrincipal;
     
-    public GtDisciplina(){
-        gdDisciplina = new GdDisciplina();
-        gdAlocacao = new GdAlocacao();
+    public GtDisciplina(GtPrincipal gt){
+        gtPrincipal = gt;
     }
       
     public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
@@ -30,10 +27,10 @@ public class GtDisciplina {
             disciplina.setQtAulas(qtAulas);
             disciplina.setTipo(tipo);
             
-            gdDisciplina.cadastrar(disciplina);           
+            gtPrincipal.getGdPrincipal().getGdDisciplina().cadastrar(disciplina);           
             return Constantes.CADASTRADO;
             
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -49,7 +46,7 @@ public class GtDisciplina {
             disciplina.setQtAulas(qtAulas);
             disciplina.setTipo(tipo);
             
-            gdDisciplina.alterar(disciplina);
+            gtPrincipal.getGdPrincipal().getGdDisciplina().alterar(disciplina);
        
             return Constantes.ALTERADO;
         } catch (Exception ex) {
@@ -58,21 +55,21 @@ public class GtDisciplina {
     }
     
     public List<Disciplina> filtrarPorMatriz(String coluna, int id) {
-        List lista = gdDisciplina.filtrarPorMatriz("matriz.id", id);
+        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatriz("matriz.id", id);
         Collections.sort(lista);
         return lista;
     }
     
     public List filtrarPorTipo(String tipo, int id){
         
-        List lista = gdDisciplina.filtrarPorTipo(tipo.toUpperCase(), id);
+        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorTipo(tipo.toUpperCase(), id);
         Collections.sort(lista);
         return lista;
     }
     
     public List filtrarPorMatrizPeriodo(int matriz, int periodo){
         
-        List lista = gdDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatrizPeriodo(matriz, periodo);
         Collections.sort(lista);
         return lista;
     }
@@ -81,14 +78,15 @@ public class GtDisciplina {
 
         try {
 
-            List listaAlocacoes = gdAlocacao.filtrarPorDisciplina(disciplina.getId()); 
+            List listaAlocacoes = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorDisciplina(disciplina.getId()); 
             
-            if(listaAlocacoes.size() == 0){
-                gdDisciplina.excluir(disciplina);
+            if(listaAlocacoes.isEmpty()){
+                gtPrincipal.getGdPrincipal().getGdDisciplina().excluir(disciplina);
                 return Constantes.EXCLUIDO;
             }else
                 return "Disciplina está associada a uma alocação";
-        } catch (Exception ex) {
+            
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

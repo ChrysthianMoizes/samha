@@ -2,16 +2,16 @@ package cgt;
 
 import cdp.MatrizCurricular;
 import cdp.Turma;
-import cgd.GdTurma;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtTurma {
-    
-    private GdTurma gdTurma;
 
-    public GtTurma() {
-        gdTurma = new GdTurma();
+    private GtPrincipal gtPrincipal;
+
+    public GtTurma(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
     
     public String cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
@@ -26,10 +26,10 @@ public class GtTurma {
             turma.setSemestre(semestre);
             turma.setTurno(turno.toUpperCase());
             
-            gdTurma.cadastrar(turma);           
+            gtPrincipal.getGdPrincipal().getGdTurma().cadastrar(turma);           
             return Constantes.CADASTRADO;
             
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -44,10 +44,10 @@ public class GtTurma {
             turma.setSemestre(semestre);
             turma.setTurno(turno.toUpperCase());
             
-            gdTurma.alterar(turma);
+            gtPrincipal.getGdPrincipal().getGdTurma().alterar(turma);
        
             return Constantes.ALTERADO;
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -57,9 +57,9 @@ public class GtTurma {
         List lista;
         
         if(coluna.toLowerCase().equals("curso"))
-            lista = gdTurma.filtrarPorCurso(Integer.valueOf(texto));
+            lista = gtPrincipal.getGdPrincipal().getGdTurma().filtrarPorCurso(Integer.valueOf(texto));
         else
-            lista= gdTurma.buscar(coluna.toLowerCase(), texto);
+            lista= gtPrincipal.getGdPrincipal().getGdTurma().buscar(coluna.toLowerCase(), texto);
         
         Collections.sort(lista);
         return lista;
@@ -67,7 +67,7 @@ public class GtTurma {
     
     public List<Turma> buscarPorCurso(int id) {
         
-        List lista = gdTurma.filtrarPorCurso(id);
+        List lista = gtPrincipal.getGdPrincipal().getGdTurma().filtrarPorCurso(id);
         Collections.sort(lista);
         return lista;
     }
@@ -78,11 +78,11 @@ public class GtTurma {
             //verificar se a turma possui oferta
             List oferta = null; 
             if(oferta == null){
-                gdTurma.excluir(turma);
+                gtPrincipal.getGdPrincipal().getGdTurma().excluir(turma);
                 return Constantes.EXCLUIDO;
             }else
                 return "Turma possui ofertas cadastradas";
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

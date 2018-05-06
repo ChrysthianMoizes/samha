@@ -3,16 +3,13 @@ package cci;
 import cdp.Coordenadoria;
 import cdp.Eixo;
 import cgt.Constantes;
-import cgt.GtCoordenadoria;
 import java.util.List;
 
 public class CtrlCoordenadoria {
     
-    private GtCoordenadoria gtCoordenadoria;
     private CtrlPrincipal ctrlPrincipal;
 
     public CtrlCoordenadoria(CtrlPrincipal ctrl) {
-        gtCoordenadoria = new GtCoordenadoria();
         this.ctrlPrincipal = ctrl;
     }
     
@@ -20,7 +17,7 @@ public class CtrlCoordenadoria {
         
         if (validarCampos(nome)) {
 
-            String resposta = gtCoordenadoria.cadastrar(nome, eixo);
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenadoria().cadastrar(nome, eixo);
 
             if (resposta.equals(Constantes.CADASTRADO)) {
                 CtrlMensagem.exibirMensagemSucesso(null, "Cadastrado Com sucesso!");
@@ -37,7 +34,7 @@ public class CtrlCoordenadoria {
     
     public int excluir(Coordenadoria coordenadoria) {
 
-        String resposta = gtCoordenadoria.excluir(coordenadoria);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenadoria().excluir(coordenadoria);
         if (resposta.equals(Constantes.EXCLUIDO)) {
             return 0;
         } else {
@@ -47,15 +44,15 @@ public class CtrlCoordenadoria {
     }
     
     public List<Coordenadoria> filtrarCoordenadoriasEixo(int id) {
-        return gtCoordenadoria.filtrarCoordenadoriasEixo(id);
+        return ctrlPrincipal.getGtPrincipal().getGtCoordenadoria().filtrarCoordenadoriasEixo(id);
     }
     
     public List<Coordenadoria> buscar(String coluna, String texto) {
-       return gtCoordenadoria.buscar(coluna, texto);
+       return ctrlPrincipal.getGtPrincipal().getGtCoordenadoria().buscar(coluna, texto);
     }
     
     public List<Coordenadoria> consultar() {
-       return gtCoordenadoria.listar();
+       return ctrlPrincipal.getGtPrincipal().getGtCoordenadoria().listar();
     }
     
     public boolean validarCampos(String nome){

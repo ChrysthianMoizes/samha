@@ -1,13 +1,11 @@
 package cci;
 
 import cdp.Alocacao;
-import cdp.Coordenadoria;
 import cdp.Curso;
 import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.MatrizCurricular;
 import cgt.Constantes;
-import cgt.GtAlocacao;
 import cih.alocacao.JDAlocacao;
 import cih.alocacao.JDCargaHoraria;
 import java.awt.Frame;
@@ -24,12 +22,10 @@ public class CtrlAlocacao extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDAlocacao cadastraAlocacao;
     private JDCargaHoraria jdCargaHoraria;
-    private GtAlocacao gtAlocacao;
     private Eixo eixoSelecionado;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
-        gtAlocacao = new GtAlocacao();
     }
     
     public Image setarIconeJanela() {
@@ -63,7 +59,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void identificarUltimaAlocacao(){
         
-        Alocacao ultimaAlocacao = gtAlocacao.identificarUltimaAlocacao();
+        Alocacao ultimaAlocacao = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarUltimaAlocacao();
         if(ultimaAlocacao != null){
             cadastraAlocacao.setAno(ultimaAlocacao.getAno());
             cadastraAlocacao.setSemestre(ultimaAlocacao.getSemestre());
@@ -77,7 +73,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        String resposta = gtAlocacao.cadastrar(professores, disciplina, ano, semestre);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtAlocacao().cadastrar(professores, disciplina, ano, semestre);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             cadastraAlocacao.atualizarTabela();
@@ -92,10 +88,10 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         if(matriz != null){
             
-            List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestreMatriz(ano, semestre, matriz.getId());
+            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz.getId());
             listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
                
-        if(listaAlocacoes.size() == 0)
+        if( listaAlocacoes.isEmpty())
                 cadastraAlocacao.setarMensagem("Nenhuma alocação encontrada.");
         
         if(jdCargaHoraria != null)
@@ -115,7 +111,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             int ano = cadastraAlocacao.getAno();
             int semestre = cadastraAlocacao.getSemestre();
             
-            List listaCargasHorarias = gtAlocacao.calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
+            List listaCargasHorarias = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
             listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
 
         }else{
@@ -130,7 +126,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             Alocacao alocacao = (Alocacao) JTableUtil.getDadosLinhaSelecionada(tabela);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this.cadastraAlocacao, "Confirmar Remoção ?");
             if (confirmacao == 0) {
-                String resposta = gtAlocacao.excluir(alocacao);
+                String resposta = ctrlPrincipal.getGtPrincipal().getGtAlocacao().excluir(alocacao);
                 if (resposta.equals(Constantes.EXCLUIDO)){ 
                     cadastraAlocacao.atualizarTabela();
                 }else 

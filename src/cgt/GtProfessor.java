@@ -3,23 +3,17 @@ package cgt;
 import cdp.CoordenadorCurso;
 import cdp.Coordenadoria;
 import cdp.Professor;
-import cgd.GdCoordenador;
-import cgd.GdProfessor;
-import cgd.GdRestricao;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtProfessor {
 
-    private GdProfessor gdProfessor;
-    private GdCoordenador gdCoordenador;
-    private GdRestricao gdRestricao;
+    private GtPrincipal gtPrincipal;
 
-    public GtProfessor() {
-        gdProfessor = new GdProfessor();
-        gdCoordenador = new GdCoordenador();
-        gdRestricao = new GdRestricao();
+    public GtProfessor(GtPrincipal gt) {
+        gtPrincipal = gt;
+
     }
 
     public Professor cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
@@ -31,7 +25,7 @@ public class GtProfessor {
             professor.setMatricula(matricula);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
-            gdProfessor.cadastrar(professor);
+            gtPrincipal.getGdPrincipal().getGdProfessor().cadastrar(professor);
             return professor;
         } catch (Exception ex) {
             return null;
@@ -46,7 +40,7 @@ public class GtProfessor {
             professor.setMatricula(matricula);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
-            gdProfessor.alterar(professor);
+            gtPrincipal.getGdPrincipal().getGdProfessor().alterar(professor);
             return professor;
         } catch (Exception ex) {
             return null;
@@ -55,27 +49,27 @@ public class GtProfessor {
 
     public List<Professor> buscar(String coluna, String texto) {
         
-        List lista = gdProfessor.buscar(coluna.toLowerCase(), texto);
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().buscar(coluna.toLowerCase(), texto);
         Collections.sort(lista);
         return lista;      
     }
     
     public List<Professor> filtrarPorCoordenadoria(int id){
         
-        List lista = gdProfessor.filtrarPorCoordenadoria("coordenadoria.id", id);
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().filtrarPorCoordenadoria(id);
         Collections.sort(lista);
         return lista;
     }
     
     public List<Professor> filtrarPorEixo(int id){
         
-        List lista = gdProfessor.filtrarPorEixo(id);
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().filtrarPorEixo(id);
         Collections.sort(lista);
         return lista;
     }
 
     public List<Professor> consultar() {
-        List lista = gdProfessor.consultar(Professor.class);
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().consultar(Professor.class);
         Collections.sort(lista);
         return lista;
     }
@@ -84,11 +78,11 @@ public class GtProfessor {
         
         try {
             
-            CoordenadorCurso coordenador = gdCoordenador.identificarCoordenadorCurso(professor.getId());
+            CoordenadorCurso coordenador = gtPrincipal.getGdPrincipal().getGdCoordenador().identificarCoordenadorCurso(professor.getId());
             
             if(coordenador == null){
-                gdRestricao.excluirRestricoes("professor.id", professor.getId());
-                gdProfessor.excluir(professor);
+                gtPrincipal.getGdPrincipal().getGdRestricao().excluirRestricoes("professor.id", professor.getId());
+                gtPrincipal.getGdPrincipal().getGdProfessor().excluir(professor);
                 return Constantes.EXCLUIDO;
             }else
                 return "Professor não pode ser excluído pois também é um coordenador";

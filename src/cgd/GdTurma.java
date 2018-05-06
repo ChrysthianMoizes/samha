@@ -8,6 +8,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdTurma extends GdGenerico{
     
+    private GdPrincipal gdPrincipal;
+    
+    public GdTurma(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
+    
     public List filtrarPorCurso(int id) {
         Criteria crit = criarSessao().createCriteria(Turma.class);
         sessao.beginTransaction();

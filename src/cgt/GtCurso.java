@@ -2,25 +2,16 @@ package cgt;
 
 import cdp.Coordenadoria;
 import cdp.Curso;
-import cgd.GdCoordenadoria;
-import cgd.GdCurso;
-import cgd.GdMatriz;
-import cgd.GdTurma;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtCurso {
-    
-    private GdCurso gdCurso;
-    private GdTurma gdTurma;
-    private GdCoordenadoria gdCoordenadoria;
-    private GdMatriz gdMatriz;
 
-    public GtCurso() {
-        gdCurso = new GdCurso();
-        gdTurma = new GdTurma();
-        gdCoordenadoria = new GdCoordenadoria();
-        gdMatriz = new GdMatriz();
+    private GtPrincipal gtPrincipal;
+
+    public GtCurso(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
     
     public String cadastrar(String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
@@ -33,10 +24,10 @@ public class GtCurso {
             curso.setNivel(nivel);
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);
-            gdCurso.cadastrar(curso);
+            gtPrincipal.getGdPrincipal().getGdCurso().cadastrar(curso);
 
             return Constantes.CADASTRADO;
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -50,10 +41,10 @@ public class GtCurso {
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);
             
-            gdCurso.alterar(curso);
+            gtPrincipal.getGdPrincipal().getGdCurso().alterar(curso);
        
             return Constantes.ALTERADO;
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -63,9 +54,9 @@ public class GtCurso {
         List lista;
         
         if(coluna.toLowerCase().equals("nome"))
-            lista = gdCurso.buscar(coluna.toLowerCase(), texto);
+            lista = gtPrincipal.getGdPrincipal().getGdCurso().buscar(coluna.toLowerCase(), texto);
         else
-            lista = gdCurso.buscarPorNivel(coluna.toLowerCase(), texto);
+            lista = gtPrincipal.getGdPrincipal().getGdCurso().buscarPorNivel(coluna.toLowerCase(), texto);
         
         Collections.sort(lista);
         return lista;
@@ -73,7 +64,7 @@ public class GtCurso {
     
     public List<Curso> listar() {
         
-        List lista = gdCurso.consultar(Curso.class);
+        List lista = gtPrincipal.getGdPrincipal().getGdCurso().consultar(Curso.class);
         Collections.sort(lista);
         return lista;
     }
@@ -81,15 +72,15 @@ public class GtCurso {
     public String excluir(Curso curso) {
 
         try {
-            List matrizes = gdMatriz.filtrarMatrizCurso("curso.id", curso.getId());
+            List matrizes = gtPrincipal.getGdPrincipal().getGdMatriz().filtrarMatrizCurso(curso.getId());
             
-            if (matrizes.size() == 0) {        
+            if (matrizes.isEmpty()) {        
                 
-                List turmas = gdTurma.filtrarPorCurso(curso.getId());
+                List turmas = gtPrincipal.getGdPrincipal().getGdTurma().filtrarPorCurso(curso.getId());
                 
-                if (turmas.size() == 0) {
+                if (turmas.isEmpty()) {
                     
-                    gdCurso.excluir(curso);
+                    gtPrincipal.getGdPrincipal().getGdCurso().excluir(curso);
                     
                     return Constantes.EXCLUIDO;
                 } else {
@@ -99,7 +90,7 @@ public class GtCurso {
                 return "Curso possui matrizes associadas";
             }
             
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

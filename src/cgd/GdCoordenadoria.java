@@ -8,11 +8,16 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdCoordenadoria extends GdGenerico{
     
-    public List filtrarCoordenadoriasEixo(String coluna, int id) {
+    private GdPrincipal gdPrincipal;
+    
+    public GdCoordenadoria(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
+    
+    public List filtrarCoordenadoriasEixo(int id) {
         Criteria crit = criarSessao().createCriteria(Coordenadoria.class);
         sessao.beginTransaction();
-        coluna = coluna.toLowerCase();
-        crit.add( Restrictions.eq(coluna, id) );
+        crit.add( Restrictions.eq("eixo.id", id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();

@@ -2,19 +2,16 @@ package cgt;
 
 import cdp.Curso;
 import cdp.MatrizCurricular;
-import cgd.GdDisciplina;
-import cgd.GdMatriz;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtMatriz {
     
-    private GdMatriz gdMatriz;
-    private GdDisciplina gdDisciplina;
+    private GtPrincipal gtPrincipal;
 
-    public GtMatriz() {
-        gdMatriz = new GdMatriz();
-        gdDisciplina = new GdDisciplina();
+    public GtMatriz(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
     
     public String cadastrar(String nome, int ano, int semestre, Curso curso) {
@@ -27,10 +24,10 @@ public class GtMatriz {
             matriz.setCurso(curso);
             matriz.setSemestre(semestre);
             
-            gdMatriz.cadastrar(matriz);
+            gtPrincipal.getGdPrincipal().getGdMatriz().cadastrar(matriz);
             return Constantes.CADASTRADO;
             
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -39,23 +36,23 @@ public class GtMatriz {
 
         try {
             
-            List disciplinas = gdDisciplina.filtrarPorMatriz("matriz.id", matriz.getId());
+            List disciplinas = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatriz("matriz.id", matriz.getId());
             
-            if(disciplinas.size() == 0){
-                gdMatriz.excluir(matriz);
+            if(disciplinas.isEmpty()){
+                gtPrincipal.getGdPrincipal().getGdMatriz().excluir(matriz);
                 return Constantes.EXCLUIDO;
                  
             }else
                 return "Matriz possui disciplinas associadas";
             
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
     
     public List<MatrizCurricular> filtrarMatrizCurso(int id) {
         
-        List lista = gdMatriz.filtrarMatrizCurso("curso.id", id);
+        List lista = gtPrincipal.getGdPrincipal().getGdMatriz().filtrarMatrizCurso(id);
         Collections.sort(lista);
         return lista;
     }

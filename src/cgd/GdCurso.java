@@ -8,6 +8,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdCurso extends GdGenerico{
     
+    private GdPrincipal gdPrincipal;
+    
+    public GdCurso(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
+    
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Curso.class);
         sessao.beginTransaction();

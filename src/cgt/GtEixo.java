@@ -1,18 +1,16 @@
 package cgt;
 
 import cdp.Eixo;
-import cgd.GdEixo;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
 public class GtEixo {
     
-    private GdEixo gdEixo;
-    private GtCoordenadoria gtCoordenadoria;
+    private GtPrincipal gtPrincipal;
 
-    public GtEixo() {  
-        gdEixo = new GdEixo();
-        gtCoordenadoria = new GtCoordenadoria();
+    public GtEixo(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
     
     public String cadastrar(String nome) {
@@ -22,10 +20,10 @@ public class GtEixo {
             Eixo eixo = new Eixo();
             eixo.setNome(nome.toUpperCase());
             
-            gdEixo.cadastrar(eixo);
+            gtPrincipal.getGdPrincipal().getGdEixo().cadastrar(eixo);
             return Constantes.CADASTRADO;
             
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -34,22 +32,22 @@ public class GtEixo {
 
         try {
             
-            List coordenadorias = gtCoordenadoria.filtrarCoordenadoriasEixo(eixo.getId());
+            List coordenadorias = gtPrincipal.getGdPrincipal().getGdCoordenadoria().filtrarCoordenadoriasEixo(eixo.getId());
             
-            if(coordenadorias.size() == 0){
-                gdEixo.excluir(eixo);
+            if(coordenadorias.isEmpty()){
+                gtPrincipal.getGdPrincipal().getGdEixo().excluir(eixo);
                 return Constantes.EXCLUIDO;
             }else
                 return "Eixo possui coordenadorias associadas";
             
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
    
     public List<Eixo> consultar() {
         
-        List lista = gdEixo.consultar(Eixo.class);
+        List lista = gtPrincipal.getGdPrincipal().getGdEixo().consultar(Eixo.class);
         Collections.sort(lista);
         return lista;
     }

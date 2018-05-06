@@ -4,12 +4,10 @@ import cdp.Curso;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import cgt.Constantes;
-import cgt.GtTurma;
 import cih.turma.JDBuscarTurma;
 import cih.turma.JDCadastrarTurma;
 import java.awt.Frame;
 import java.awt.Image;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -18,13 +16,11 @@ import javax.swing.JTable;
 public class CtrlTurma extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
-    private GtTurma gtTurma;
     private JDBuscarTurma buscaTurma;
     private JDCadastrarTurma cadastraTurma;
 
     public CtrlTurma(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
-        gtTurma = new GtTurma();
     }
     
     public Image setarIconeJanela() {
@@ -59,7 +55,7 @@ public class CtrlTurma extends CtrlGenerica{
     
     public void cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
 
-        String resposta = gtTurma.cadastrar(nome, turno, ano, semestre, matriz);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtTurma().cadastrar(nome, turno, ano, semestre, matriz);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraTurma, "Cadastrado com sucesso!");
@@ -72,7 +68,7 @@ public class CtrlTurma extends CtrlGenerica{
     
     public void alterar(String nome, String turno ,int ano, int semestre, MatrizCurricular matriz, Turma turma) {
 
-        String resposta = gtTurma.alterar(nome, turno, ano, semestre, matriz, turma);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtTurma().alterar(nome, turno, ano, semestre, matriz, turma);
         
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraTurma, "Alterado Com sucesso!");
@@ -84,19 +80,19 @@ public class CtrlTurma extends CtrlGenerica{
     
     public void listarTurmas(String coluna, String texto, JTable tabela){
         
-        List listaTurmas = gtTurma.buscar(coluna, texto);
+        List listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().buscar(coluna, texto);
         listarEmTabela(listaTurmas, tabela, buscaTurma, "toArray");
         
-        if(listaTurmas.size() == 0)
+        if(listaTurmas.isEmpty())
             buscaTurma.setarMensagem("Nenhuma turma encontrada.");
     }
     
     public List<Turma> buscar(String coluna, String texto) {
-        return gtTurma.buscar(coluna, texto);
+        return ctrlPrincipal.getGtPrincipal().getGtTurma().buscar(coluna, texto);
     }
     
     public List<Turma> buscarPorCurso(int id) {
-        return gtTurma.buscarPorCurso(id);
+        return ctrlPrincipal.getGtPrincipal().getGtTurma().buscarPorCurso(id);
     }
     
     public void excluir(JTable tabela) {
@@ -105,7 +101,7 @@ public class CtrlTurma extends CtrlGenerica{
             Turma turma = (Turma) JTableUtil.getDadosLinhaSelecionada(tabela);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaTurma, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                String resposta = gtTurma.excluir(turma);
+                String resposta = ctrlPrincipal.getGtPrincipal().getGtTurma().excluir(turma);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaTurma, "Excluído com sucesso!");
                     buscaTurma.atualizarTabela();
@@ -206,13 +202,17 @@ public class CtrlTurma extends CtrlGenerica{
         
         Turma turma = cadastraTurma.getTurma();
         
-        if(turma.getTurno().equals("MATUTINO")){
-            cbxTurno.setSelectedIndex(0);
-        }else if(turma.getTurno().equals("VESPERTINO")){
-            cbxTurno.setSelectedIndex(1);
-        }else{
-            cbxTurno.setSelectedIndex(2);
-        } 
+        switch (turma.getTurno()) {
+            case "MATUTINO":
+                cbxTurno.setSelectedIndex(0);
+                break;
+            case "VESPERTINO":
+                cbxTurno.setSelectedIndex(1);
+                break; 
+            default:
+                cbxTurno.setSelectedIndex(2);
+                break;
+        }
     }
     
     public boolean validarCampos(String nome){

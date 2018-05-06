@@ -7,11 +7,16 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdMatriz extends GdGenerico{
     
-    public List filtrarMatrizCurso(String coluna, int id) {
+    private GdPrincipal gdPrincipal;
+    
+    public GdMatriz(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
+    
+    public List filtrarMatrizCurso(int id) {
         Criteria crit = criarSessao().createCriteria(MatrizCurricular.class);
         sessao.beginTransaction();
-        coluna = coluna.toLowerCase();
-        crit.add( Restrictions.eq(coluna, id) );
+        crit.add( Restrictions.eq("curso.id", id) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();

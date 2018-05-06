@@ -4,7 +4,6 @@ import cdp.Curso;
 import cdp.Disciplina;
 import cdp.MatrizCurricular;
 import cgt.Constantes;
-import cgt.GtDisciplina;
 import cih.disciplina.JDBuscarDisciplina;
 import cih.disciplina.JDCadastrarDisciplina;
 import java.awt.Frame;
@@ -17,13 +16,11 @@ import javax.swing.JTable;
 public class CtrlDisciplina extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
-    private GtDisciplina gtDisciplina;
     private JDBuscarDisciplina buscaDisciplina;
     private JDCadastrarDisciplina cadastraDisciplina;
 
     public CtrlDisciplina(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
-        gtDisciplina = new GtDisciplina();
     }
     
     public Image setarIconeJanela() {
@@ -61,7 +58,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     
     public void cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
 
-        String resposta = gtDisciplina.cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Cadastrado com sucesso!");
@@ -73,7 +70,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     
     public void alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina) {
 
-        String resposta = gtDisciplina.alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
         
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Alterado Com sucesso!");
@@ -85,7 +82,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     }
     
     public List filtrarPorMatrizPeriodo(int matriz, int periodo){
-        return gtDisciplina.filtrarPorMatrizPeriodo(matriz, periodo);
+        return ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorMatrizPeriodo(matriz, periodo);
     }
     
     public void excluir(JTable tabela) {
@@ -94,7 +91,7 @@ public class CtrlDisciplina extends CtrlGenerica{
             Disciplina disciplina = (Disciplina) JTableUtil.getDadosLinhaSelecionada(tabela);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaDisciplina, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                String resposta = gtDisciplina.excluir(disciplina);
+                String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().excluir(disciplina);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaDisciplina, "Excluído com sucesso!");
                     buscaDisciplina.atualizarTabela();
@@ -108,7 +105,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     
     public void filtrarPorMatriz(String coluna, int id, JTable tabela){
         
-        List listaDisciplinas = gtDisciplina.filtrarPorMatriz(coluna, id);
+        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorMatriz(coluna, id);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
         if(listaDisciplinas.size() == 0)
@@ -117,7 +114,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     
     public void filtrarPorTipo(String tipo, int id, JTable tabela){
         
-        List listaDisciplinas = gtDisciplina.filtrarPorTipo(tipo, id);
+        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorTipo(tipo, id);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
         if(listaDisciplinas.size() == 0)

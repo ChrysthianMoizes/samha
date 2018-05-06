@@ -3,21 +3,21 @@ package cgt;
 import cdp.Alocacao;
 import cdp.Disciplina;
 import cdp.Professor;
-import cgd.GdAlocacao;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GtAlocacao {
     
-    private GdAlocacao gdAlocacao;
+    private GtPrincipal gtPrincipal;
     
-    public GtAlocacao(){
-        gdAlocacao = new GdAlocacao();
+    public GtAlocacao(GtPrincipal gt){
+        gtPrincipal = gt;
     }
     
     public List calcularCargaHorariaProfessor(int ano, int semestre, List listaProfessores){
         
-        List listaAlocacoes = gdAlocacao.filtrarPorAnoSemestre(ano, semestre);
+        List listaAlocacoes = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestre(ano, semestre);
         List listaCargaHoraria = new ArrayList<>();
         Alocacao alocacao;
         Professor professor;
@@ -69,20 +69,20 @@ public class GtAlocacao {
                 alocacao.setProfessor2(professor2);
             }
             
-            gdAlocacao.cadastrar(alocacao);
+            gtPrincipal.getGdPrincipal().getGdAlocacao().cadastrar(alocacao);
             return Constantes.CADASTRADO;
             
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
     
     public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){    
-        return gdAlocacao.filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
+        return gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
     }
     
     public Alocacao identificarUltimaAlocacao(){
-        Alocacao ultimaAlocacao = gdAlocacao.filtrarUltimaAlocacao();
+        Alocacao ultimaAlocacao = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarUltimaAlocacao();
         return ultimaAlocacao;
     }
     
@@ -90,7 +90,7 @@ public class GtAlocacao {
 
         try {
             
-            gdAlocacao.excluir(alocacao);
+            gtPrincipal.getGdPrincipal().getGdAlocacao().excluir(alocacao);
             return Constantes.EXCLUIDO;
             
         } catch (Exception ex) {
@@ -103,7 +103,7 @@ public class GtAlocacao {
         if(disciplina == null)
             throw new SAMHAException(17);
         
-        if(listaProfessores.size() != 0){
+        if(!listaProfessores.isEmpty()){
             
             Professor professor = (Professor) listaProfessores.get(0);
             if(professor == null)

@@ -9,7 +9,6 @@ import cih.curso.JDBuscarCurso;
 import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
 import java.awt.Image;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -21,11 +20,9 @@ public class CtrlCurso extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDBuscarCurso buscaCurso;
     private JDCadastrarCurso cadastraCurso;
-    private GtCurso gtCurso;
 
     public CtrlCurso(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
-        gtCurso = new GtCurso();
     }
     
     public Image setarIconeJanela() {
@@ -60,7 +57,7 @@ public class CtrlCurso extends CtrlGenerica{
     
     public void cadastrar(String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
 
-        String resposta = gtCurso.cadastrar(nome, nivel, periodos, coordenadoria);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtCurso().cadastrar(nome, nivel, periodos, coordenadoria);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCurso, "Cadastrado com sucesso!");
@@ -74,7 +71,7 @@ public class CtrlCurso extends CtrlGenerica{
     
     public void alterar(Curso curso, String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
 
-        String resposta = gtCurso.alterar(curso, nome, nivel, periodos, coordenadoria);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtCurso().alterar(curso, nome, nivel, periodos, coordenadoria);
         
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCurso, "Alterado Com sucesso!");
@@ -92,7 +89,7 @@ public class CtrlCurso extends CtrlGenerica{
             Curso curso = (Curso) JTableUtil.getDadosLinhaSelecionada(tabela);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaCurso, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                String resposta = gtCurso.excluir(curso);
+                String resposta = ctrlPrincipal.getGtPrincipal().getGtCurso().excluir(curso);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaCurso, "Excluído com sucesso!");
                     buscaCurso.atualizarTabela();
@@ -106,12 +103,12 @@ public class CtrlCurso extends CtrlGenerica{
     }
     
     public List<Curso> buscar(String coluna, String texto) {
-        return gtCurso.buscar(coluna, texto);
+        return ctrlPrincipal.getGtPrincipal().getGtCurso().buscar(coluna, texto);
     }
     
     public void listarCursos(String coluna, String texto, JTable tabela){
         
-        List listaCursos = gtCurso.buscar(coluna, texto);
+        List listaCursos = ctrlPrincipal.getGtPrincipal().getGtCurso().buscar(coluna, texto);
         listarEmTabela(listaCursos, tabela, buscaCurso, "toArray");
         
         if(listaCursos.size() == 0)
@@ -119,7 +116,7 @@ public class CtrlCurso extends CtrlGenerica{
     }
     
     public List<Curso> listar() {
-       return gtCurso.listar();
+       return ctrlPrincipal.getGtPrincipal().getGtCurso().listar();
     }
     
     //======================================= TELA DE CADASTRO ===============================================

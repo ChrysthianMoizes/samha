@@ -8,6 +8,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GdAlocacao extends GdGenerico{
     
+    private GdPrincipal gdPrincipal;
+
+    public GdAlocacao(GdPrincipal gdPrincipal) {
+        this.gdPrincipal = gdPrincipal;
+    }
+
     public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         sessao.beginTransaction();

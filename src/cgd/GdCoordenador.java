@@ -6,15 +6,16 @@ import cdp.CoordenadorPedagogico;
 import cdp.Curso;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 public class GdCoordenador extends GdGenerico{
     
-    private GdCurso gdCurso;
+    private GdPrincipal gdPrincipal;
 
-    public GdCoordenador() {
-        gdCurso = new GdCurso();
+    public GdCoordenador(GdPrincipal gdPrincipal) {
+        this.gdPrincipal = gdPrincipal;
     }
     
     public CoordenadorCurso identificarCoordenadorCurso(int id){
@@ -76,7 +77,7 @@ public class GdCoordenador extends GdGenerico{
             sessao.getTransaction().commit();        
             sessao.close();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             sessao.getTransaction().rollback();
             sessao.close();
             throw e;
@@ -97,7 +98,7 @@ public class GdCoordenador extends GdGenerico{
             sessao.getTransaction().commit();        
             sessao.close();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             sessao.getTransaction().rollback();
             sessao.close();
             throw e;
@@ -111,7 +112,7 @@ public class GdCoordenador extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
             
-            Curso curso = gdCurso.filtrarCursoUnico("coordenador.id", coordenador.getId());
+            Curso curso = gdPrincipal.getGdCurso().filtrarCursoUnico("coordenador.id", coordenador.getId());
             
             curso.setCoordenador(null);
             sessao.update(curso);
@@ -120,7 +121,7 @@ public class GdCoordenador extends GdGenerico{
             sessao.getTransaction().commit();        
             sessao.close();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             sessao.getTransaction().rollback();
             sessao.close();
             throw e;

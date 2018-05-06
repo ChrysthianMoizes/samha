@@ -3,8 +3,6 @@ package cci;
 import cdp.Aula;
 import cdp.Curso;
 import cdp.Turma;
-import cgt.GtAlocacao;
-import cgt.GtOferta;
 import cih.oferta.JDOferta;
 import java.awt.Color;
 import java.awt.Frame;
@@ -18,15 +16,11 @@ import javax.swing.JTable;
 public class CtrlOferta extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
-    private GtOferta gtOferta;
-    private GtAlocacao gtAlocacao;
     private JDOferta jdOferta;
     private RenderizadorCelulas render;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
-        gtOferta = new GtOferta();
-        gtAlocacao = new GtAlocacao();
         render = new RenderizadorCelulas();
     }
     
@@ -67,7 +61,7 @@ public class CtrlOferta extends CtrlGenerica{
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         
         if(turma != null){
-            List listaAlocacoes = gtAlocacao.filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
+            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
             jdOferta.setListaAlocacoes(listaAlocacoes);
             preencherJList(listaAlocacoes, lstAlocacoes);  
             
@@ -84,7 +78,7 @@ public class CtrlOferta extends CtrlGenerica{
                 Aula aula = (Aula) tabela.getValueAt(linha, coluna);
                 
                 if(aula != null){
-                    String mensagem = gtOferta.validarOferta(aula);
+                    String mensagem = ctrlPrincipal.getGtPrincipal().getGtOferta().validarOferta(aula);
                     exibirNotificação(mensagem, linha, coluna);
                     pintarCelulaTabela(mensagem, linha, coluna, tabela);
                 }

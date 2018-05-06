@@ -8,17 +8,17 @@ import cdp.Curso;
 import cdp.Professor;
 import cdp.Servidor;
 import cdp.Usuario;
-import cgd.GdCoordenador;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class GtCoordenador {
 
-    private GdCoordenador gdCoordenador;
+    private GtPrincipal gtPrincipal;
 
-    public GtCoordenador() {
-        gdCoordenador = new GdCoordenador();
+    public GtCoordenador(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
 
     public String cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
@@ -34,7 +34,7 @@ public class GtCoordenador {
                 coordCurso.setProfessor(professor);
                 
                 if(curso.getCoordenador() == null){
-                    gdCoordenador.cadastrarCoordenadorCurso(curso, coordCurso);
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().cadastrarCoordenadorCurso(curso, coordCurso);
                 }else
                     return "Curso já possui coordenador associado.";
  
@@ -51,7 +51,7 @@ public class GtCoordenador {
                     coordAcademico.setLogin(login);
                     coordAcademico.setSenha(senha);
                     coordAcademico.setServidor(servidor);
-                    gdCoordenador.cadastrar(coordAcademico);
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().cadastrar(coordAcademico);
 
                 }else{
                     
@@ -59,7 +59,7 @@ public class GtCoordenador {
                     coorPedagogico.setLogin(login);
                     coorPedagogico.setSenha(senha);
                     coorPedagogico.setServidor(servidor);
-                    gdCoordenador.cadastrar(coorPedagogico);
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().cadastrar(coorPedagogico);
                 }
             }            
             return Constantes.CADASTRADO;
@@ -81,16 +81,16 @@ public class GtCoordenador {
                 
                 ((CoordenadorAcademico) coordenador).getServidor().setMatricula(matricula);
                 ((CoordenadorAcademico) coordenador).getServidor().setNome(nome);
-                gdCoordenador.alterar(coordenador);
+                gtPrincipal.getGdPrincipal().getGdCoordenador().alterar(coordenador);
                 
             }else if(coordenador instanceof CoordenadorCurso){
                 ((CoordenadorCurso) coordenador).setProfessor(professor);
-                gdCoordenador.alterarCoordenadorCurso(curso, (CoordenadorCurso) coordenador);
+                gtPrincipal.getGdPrincipal().getGdCoordenador().alterarCoordenadorCurso(curso, (CoordenadorCurso) coordenador);
             
             }else{
                 ((CoordenadorPedagogico) coordenador).getServidor().setMatricula(matricula);
                 ((CoordenadorPedagogico) coordenador).getServidor().setNome(nome);
-                gdCoordenador.alterar(coordenador);
+                gtPrincipal.getGdPrincipal().getGdCoordenador().alterar(coordenador);
             }                       
             
             return Constantes.ALTERADO;
@@ -104,22 +104,22 @@ public class GtCoordenador {
 
         try {
             if(usuario instanceof CoordenadorCurso)
-                gdCoordenador.excluirCoordenadorCurso((CoordenadorCurso)usuario);
+                gtPrincipal.getGdPrincipal().getGdCoordenador().excluirCoordenadorCurso((CoordenadorCurso)usuario);
             else
-                gdCoordenador.excluir(usuario);
+                gtPrincipal.getGdPrincipal().getGdCoordenador().excluir(usuario);
             
             return Constantes.EXCLUIDO;
             
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
 
     public List<CoordenadorCurso> listarCoordenadores(String coluna, String texto) {
         
-        List listaCoordenadoresCurso = gdCoordenador.buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
-        List listaCoordenadoresAcademicos = gdCoordenador.buscarCoordenadoresAcademicos(coluna.toLowerCase(), texto);
-        List listaCoordenadoresPedagogicos = gdCoordenador.buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
+        List listaCoordenadoresCurso = gtPrincipal.getGdPrincipal().getGdCoordenador().buscarCoordenadoresCurso(coluna.toLowerCase(), texto);
+        List listaCoordenadoresAcademicos = gtPrincipal.getGdPrincipal().getGdCoordenador().buscarCoordenadoresAcademicos(coluna.toLowerCase(), texto);
+        List listaCoordenadoresPedagogicos = gtPrincipal.getGdPrincipal().getGdCoordenador().buscarCoordenadoresPedagogicos(coluna.toLowerCase(), texto);
 
         List listaCoordenadores = new ArrayList<>();
 
@@ -135,12 +135,18 @@ public class GtCoordenador {
         
         List lista;
         
-        if(tipo.toLowerCase().equals(Constantes.COORD_ACAD))
-            lista = gdCoordenador.consultar(CoordenadorAcademico.class);
-        else if(tipo.toLowerCase().equals(Constantes.COORD_CURSO))
-            lista = gdCoordenador.consultar(CoordenadorCurso.class);
-        else
-            lista = gdCoordenador.consultar(CoordenadorPedagogico.class);
+        switch (tipo.toLowerCase()) {
+            
+            case Constantes.COORD_ACAD:
+                lista = gtPrincipal.getGdPrincipal().getGdCoordenador().consultar(CoordenadorAcademico.class);
+                break;
+            case Constantes.COORD_CURSO:
+                lista = gtPrincipal.getGdPrincipal().getGdCoordenador().consultar(CoordenadorCurso.class);
+                break;
+            default:
+                lista = gtPrincipal.getGdPrincipal().getGdCoordenador().consultar(CoordenadorPedagogico.class);
+                break;
+        }
         
         Collections.sort(lista, new ComparadorUsuario());
         return lista;

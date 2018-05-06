@@ -3,10 +3,15 @@ package cgd;
 import cdp.Disciplina;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 public class GdDisciplina extends GdGenerico{
+    
+    private GdPrincipal gdPrincipal;
+    
+    public GdDisciplina(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
     
     public List filtrarPorTipo(String tipo, int id) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);

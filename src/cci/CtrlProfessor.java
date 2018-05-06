@@ -4,7 +4,6 @@ import cdp.Coordenadoria;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import cgt.Constantes;
-import cgt.GtProfessor;
 import cih.professor.JDBuscarProfessor;
 import cih.professor.JDCadastrarProfessor;
 import java.awt.Frame;
@@ -17,13 +16,11 @@ import javax.swing.JTable;
 
 public class CtrlProfessor extends CtrlGenerica{
 
-    private GtProfessor gtProfessor;
     private JDBuscarProfessor buscaProf;
     private JDCadastrarProfessor cadastraProf;
     private CtrlPrincipal ctrlPrincipal;
 
     public CtrlProfessor(CtrlPrincipal ctrl) {
-        gtProfessor = new GtProfessor();
         ctrlPrincipal = ctrl;
     }
     
@@ -61,20 +58,20 @@ public class CtrlProfessor extends CtrlGenerica{
         if (coluna.toLowerCase().equals("coordenadoria")) {
             return filtrarPorCoordenadoria(Integer.parseInt(texto));
         } else 
-            return gtProfessor.buscar(coluna.toLowerCase(), texto);      
+            return ctrlPrincipal.getGtPrincipal().getGtProfessor().buscar(coluna.toLowerCase(), texto);      
     }
     
     public List<Professor> filtrarPorCoordenadoria(int id){
-        return gtProfessor.filtrarPorCoordenadoria(id);
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorCoordenadoria(id);
     }
     
     public List<Professor> filtrarPorEixo(int id){
-        return gtProfessor.filtrarPorEixo(id);
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorEixo(id);
     }
 
     public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
-        Professor professor = gtProfessor.cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        Professor professor = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
         if (professor != null) {
             cadastraProf.setProfessor(professor);
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
@@ -88,7 +85,7 @@ public class CtrlProfessor extends CtrlGenerica{
 
     public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
-        Professor prof = gtProfessor.alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        Professor prof = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
         if (prof != null) {
             cadastraProf.setProfessor(prof);
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
@@ -101,7 +98,7 @@ public class CtrlProfessor extends CtrlGenerica{
     }
 
     public List<Professor> consultar() {
-        return gtProfessor.consultar();
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().consultar();
     }
 
     public void excluir(JTable tblProfessor) {
@@ -110,7 +107,7 @@ public class CtrlProfessor extends CtrlGenerica{
             Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tblProfessor);
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaProf, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
-                String resposta = gtProfessor.excluir(professor);
+                String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().excluir(professor);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
                     buscaProf.atualizarTabela();
@@ -128,7 +125,7 @@ public class CtrlProfessor extends CtrlGenerica{
         List listaProfessores = buscar(coluna, texto);
         listarEmTabela(listaProfessores, tabela, buscaProf, "toArray");  
         
-        if(listaProfessores.size() == 0)
+        if(listaProfessores.isEmpty())
             buscaProf.setarMensagem("Nenhum professor encontrado.");
     }
     
@@ -245,6 +242,7 @@ public class CtrlProfessor extends CtrlGenerica{
             return false;
         if(coordenadoria == null)
             return false;
+        
         return true;
     }
 }

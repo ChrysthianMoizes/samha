@@ -3,9 +3,16 @@ package cgd;
 import cdp.RestricaoProfessor;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 public class GdRestricao extends GdGenerico{
+    
+    private GdPrincipal gdPrincipal;
+    
+    public GdRestricao(GdPrincipal gdPrincipal){
+        this.gdPrincipal = gdPrincipal;
+    }
     
     public List filtrarPorProfessor(int id) {
         Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
@@ -47,7 +54,7 @@ public class GdRestricao extends GdGenerico{
             sessao.getTransaction().commit();
             sessao.close();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             sessao.getTransaction().rollback();
             sessao.close();
             throw e;

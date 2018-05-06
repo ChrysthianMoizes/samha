@@ -20,6 +20,7 @@ public final class CtrlPrincipal {
     private FrmValidarAcesso frmValidarAcesso;
     private FrmInicio frmInicio;
     private static int permissao;
+    
     private GtPrincipal gtPrincipal;
     private CtrlProfessor ctrlProfessor;
     private CtrlCoordenador ctrlCoordenador;
@@ -109,9 +110,9 @@ public final class CtrlPrincipal {
 
     public void validarAcesso(String login, String senha) {
 
-        int permissao = gtPrincipal.validarAcesso(login, senha);
-        setPermissao(permissao);
-        if (permissao == Constantes.PERMISSAO_NEGADA) {
+        int perm = gtPrincipal.validarAcesso(login, senha);
+        setPermissao(perm);
+        if (perm == Constantes.PERMISSAO_NEGADA) {
             CtrlMensagem.exibirMensagemErro(null, "Acesso Negado!");
             frmValidarAcesso.limparCampos();
         } else {

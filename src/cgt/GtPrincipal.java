@@ -10,11 +10,34 @@ public class GtPrincipal {
     private GdPrincipal gdPrincipal;
     private Usuario coordAtual;
     private int permissao;
+    
+    private GtAlocacao gtAlocacao;
+    private GtCoordenador gtCoordenador;
+    private GtCoordenadoria gtCoordenadoria;
+    private GtCurso gtCurso;
+    private GtDisciplina gtDisciplina;
+    private GtEixo gtEixo;
+    private GtMatriz gtMatriz;
+    private GtOferta gtOferta;
+    private GtProfessor gtProfessor;
+    private GtRestricao gtRestricao;
+    private GtTurma gtTurma;
 
     public GtPrincipal() {
         gdPrincipal = new GdPrincipal();
-        coordAtual = null;
-        permissao = Constantes.PERMISSAO_NEGADA;
+        gtAlocacao = new GtAlocacao(this);
+        gtCoordenador = new GtCoordenador(this);
+        gtCoordenadoria = new GtCoordenadoria(this);
+        gtCurso = new GtCurso(this);
+        gtDisciplina = new GtDisciplina(this);
+        gtEixo = new GtEixo(this);
+        gtMatriz = new GtMatriz(this);
+        gtOferta = new GtOferta(this);
+        gtProfessor = new GtProfessor(this);
+        gtRestricao = new GtRestricao(this);
+        gtTurma = new GtTurma(this);
+        setPermissao(Constantes.PERMISSAO_NEGADA);
+        setCoordAtual(null);
     }
 
     public int validarAcesso(String login, String senha) {
@@ -72,5 +95,53 @@ public class GtPrincipal {
 
     public void setPermissao(int permissao) {
         this.permissao = permissao;
+    }
+
+    public GtAlocacao getGtAlocacao() {
+        return gtAlocacao;
+    }
+
+    public GtCoordenador getGtCoordenador() {
+        return gtCoordenador;
+    }
+
+    public GtCoordenadoria getGtCoordenadoria() {
+        return gtCoordenadoria;
+    }
+
+    public GtCurso getGtCurso() {
+        return gtCurso;
+    }
+
+    public GtDisciplina getGtDisciplina() {
+        return gtDisciplina;
+    }
+
+    public GtEixo getGtEixo() {
+        return gtEixo;
+    }
+
+    public GtMatriz getGtMatriz() {
+        return gtMatriz;
+    }
+
+    public GtOferta getGtOferta() {
+        return gtOferta;
+    }
+
+    public GtProfessor getGtProfessor() {
+        return gtProfessor;
+    }
+
+    public GtRestricao getGtRestricao() {
+        return gtRestricao;
+    }
+
+    public GtTurma getGtTurma() {
+        return gtTurma;
+    }
+
+    public GdPrincipal getGdPrincipal() {
+        return gdPrincipal;
     }
 }

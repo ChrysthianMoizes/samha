@@ -2,16 +2,15 @@ package cgt;
 
 import cdp.Professor;
 import cdp.RestricaoProfessor;
-import cgd.GdRestricao;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GtRestricao {
 
-    private GdRestricao gdRestricao;
+    private GtPrincipal gtPrincipal;
 
-    public GtRestricao() {
-        gdRestricao = new GdRestricao();
+    public GtRestricao(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
 
     public RestricaoProfessor cadastrar(String nome, String turno, String dia, String descricao, String prioridade,
@@ -39,7 +38,7 @@ public class GtRestricao {
             restricao.setPrioridade(prioridade.toUpperCase());
             restricao.setTurno(turno.toUpperCase());
             restricao.setProfessor(professor);
-            gdRestricao.cadastrar(restricao);
+            gtPrincipal.getGdPrincipal().getGdRestricao().cadastrar(restricao);
             return restricao;
         } catch (SQLException | ClassNotFoundException ex) {
             return null;
@@ -47,12 +46,12 @@ public class GtRestricao {
     }
 
     public List<RestricaoProfessor> filtrarPorProfessor(int id) {
-        return gdRestricao.filtrarPorProfessor(id);
+        return gtPrincipal.getGdPrincipal().getGdRestricao().filtrarPorProfessor(id);
     }
 
     public String excluir(RestricaoProfessor restricao) {
         try {
-            gdRestricao.excluir(restricao);
+            gtPrincipal.getGdPrincipal().getGdRestricao().excluir(restricao);
             return Constantes.EXCLUIDO;
         } catch (SQLException | ClassNotFoundException ex) {
             return ex.getMessage();

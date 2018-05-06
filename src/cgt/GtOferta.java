@@ -3,21 +3,14 @@ package cgt;
 import cdp.Aula;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
-import cgd.GdAula;
-import cgd.GdOferta;
-import cgd.GdRestricao;
 import java.util.List;
 
 public class GtOferta {
-    
-    private GdOferta gdOferta;
-    private GdAula gdAula;
-    private GdRestricao gdRestricao;
 
-    public GtOferta() {
-        gdOferta = new GdOferta();
-        gdAula = new GdAula();
-        gdRestricao = new GdRestricao();
+    private GtPrincipal gtPrincipal;
+    
+    public GtOferta(GtPrincipal gt) {
+        gtPrincipal = gt;
     }
     
     public String validarOferta(Aula aula){
@@ -45,13 +38,13 @@ public class GtOferta {
         String dia = aula.getDia();
         String turno = aula.getTurno();
         
-        List listaAulas = gdAula.identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
+        List listaAulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
 
-        if(listaAulas.size() == 0){
+        if(listaAulas.isEmpty()){
 
-            List listaRestricoes = gdRestricao.identificarConflitoRestricao(idProfessor, dia, turno);
+            List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, dia, turno);
 
-            if(listaRestricoes.size() == 0){
+            if(listaRestricoes.isEmpty()){
                 return mensagem;
 
             }else
