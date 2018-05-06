@@ -91,6 +91,9 @@ public class GdCoordenador extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
             
+            //excection: "A different object with the same identifier value was already associated with the session (Coordenadoria)"
+            // tenho 2 objetos coordenadoria em memoria, um dentro de curso e outro dentro de coordenador, dai o erro, 2 ids iguais na mesma sessao.
+            
             sessao.update(coordenador);
             curso.setCoordenador(coordenador);
             sessao.update(curso);

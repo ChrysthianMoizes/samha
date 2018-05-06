@@ -14,7 +14,7 @@ public class GtOferta {
     }
     
     public String validarOferta(Aula aula){
-
+        
         String mensagem = null;
         
         Professor professor = aula.getAlocacao().getProfessor1();

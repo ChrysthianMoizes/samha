@@ -24,6 +24,7 @@ public class GtCoordenador {
     public String cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
 
         try {
+            gtPrincipal.identificarPermissaoAdmin();
             validarCampos(nome, matricula, login, senha, tipo, professor, curso);
             
             if(tipo.toLowerCase().equals(Constantes.COORD_CURSO)){
@@ -72,7 +73,7 @@ public class GtCoordenador {
     public String alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoAdmin();
             validarCampos(nome, matricula, login, senha, tipo, professor, curso);
             coordenador.setLogin(login);
             coordenador.setSenha(senha);
@@ -85,8 +86,12 @@ public class GtCoordenador {
                 
             }else if(coordenador instanceof CoordenadorCurso){
                 ((CoordenadorCurso) coordenador).setProfessor(professor);
-                gtPrincipal.getGdPrincipal().getGdCoordenador().alterarCoordenadorCurso(curso, (CoordenadorCurso) coordenador);
-            
+                
+                if(curso.getCoordenador().getId() == coordenador.getId()){
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().alterarCoordenadorCurso(curso, (CoordenadorCurso) coordenador);
+                }else
+                    return "Curso já possui coordenador associado.";
+ 
             }else{
                 ((CoordenadorPedagogico) coordenador).getServidor().setMatricula(matricula);
                 ((CoordenadorPedagogico) coordenador).getServidor().setNome(nome);
@@ -103,6 +108,7 @@ public class GtCoordenador {
     public String excluir(Usuario usuario) {
 
         try {
+            gtPrincipal.identificarPermissaoAdmin();
             if(usuario instanceof CoordenadorCurso)
                 gtPrincipal.getGdPrincipal().getGdCoordenador().excluirCoordenadorCurso((CoordenadorCurso)usuario);
             else
@@ -110,7 +116,7 @@ public class GtCoordenador {
             
             return Constantes.EXCLUIDO;
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

@@ -48,7 +48,6 @@ public class FrmInicio extends javax.swing.JFrame {
         
         if(permissao == 2){
             btnCoordenador.setEnabled(false);
-            btnCurso.setEnabled(false); 
         }else if(permissao == 3){
             btnAlocar.setEnabled(false);
             btnCoordenador.setEnabled(false);

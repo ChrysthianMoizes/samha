@@ -10,15 +10,17 @@ import java.util.List;
 public class GtProfessor {
 
     private GtPrincipal gtPrincipal;
+    private Professor professorSelecionado;
 
     public GtProfessor(GtPrincipal gt) {
         gtPrincipal = gt;
-
+        setProfessorSelecionado(null);
     }
 
-    public Professor cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
+    public String cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, matricula, coordenadoria);
             Professor professor = new Professor();
             professor.setNome(nome);
@@ -26,24 +28,27 @@ public class GtProfessor {
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gtPrincipal.getGdPrincipal().getGdProfessor().cadastrar(professor);
-            return professor;
+            setProfessorSelecionado(professor);
+            return Constantes.CADASTRADO;
         } catch (Exception ex) {
-            return null;
+            return ex.getMessage();
         }
     }
     
-    public Professor alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public String alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, matricula, coordenadoria);
             professor.setNome(nome);
             professor.setMatricula(matricula);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gtPrincipal.getGdPrincipal().getGdProfessor().alterar(professor);
-            return professor;
+            setProfessorSelecionado(professor);
+            return Constantes.ALTERADO;
         } catch (Exception ex) {
-            return null;
+            return ex.getMessage();
         }
     }
 
@@ -77,7 +82,7 @@ public class GtProfessor {
     public String excluir(Professor professor){
         
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             CoordenadorCurso coordenador = gtPrincipal.getGdPrincipal().getGdCoordenador().identificarCoordenadorCurso(professor.getId());
             
             if(coordenador == null){
@@ -87,7 +92,7 @@ public class GtProfessor {
             }else
                 return "Professor não pode ser excluído pois também é um coordenador";
             
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -102,5 +107,13 @@ public class GtProfessor {
         
         if(coordenadoria == null)
             throw new SAMHAException(11);    
+    }
+
+    public Professor getProfessorSelecionado() {
+        return professorSelecionado;
+    }
+
+    public void setProfessorSelecionado(Professor professorSelecionado) {
+        this.professorSelecionado = professorSelecionado;
     }
 }

@@ -17,6 +17,7 @@ public class GtTurma {
     public String cadastrar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, turno, matriz);
             Turma turma = new Turma();
            
@@ -37,6 +38,7 @@ public class GtTurma {
     public String alterar(String nome, String turno, int ano, int semestre, MatrizCurricular matriz, Turma turma){
         
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, turno, matriz);
             turma.setAno(ano);
             turma.setMatriz(matriz);
@@ -75,6 +77,7 @@ public class GtTurma {
     public String excluir(Turma turma) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             //verificar se a turma possui oferta
             List oferta = null; 
             if(oferta == null){
@@ -82,7 +85,7 @@ public class GtTurma {
                 return Constantes.EXCLUIDO;
             }else
                 return "Turma possui ofertas cadastradas";
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

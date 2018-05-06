@@ -92,7 +92,7 @@ public final class CtrlPrincipal {
 
     public void instanciarFrameInicio() {
         frmInicio = new FrmInicio(this);
-        frmInicio.identificarUsuario(getPermissao());
+        //frmInicio.identificarUsuario(getPermissao());
         frmInicio.setIconImage(setarIconeJanela());
         frmInicio.atualizarInfoSistema();
         frmInicio.setExtendedState(Frame.MAXIMIZED_BOTH);

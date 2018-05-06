@@ -18,12 +18,8 @@ public class GtRestricao {
 
         try {
 
-            try {
-                validarCampos(nome, descricao);
-            } catch (Exception ex) {
-                return null;
-            }
-
+            gtPrincipal.identificarPermissaoPadrao();
+            validarCampos(nome, descricao);
             RestricaoProfessor restricao = new RestricaoProfessor();
             restricao.setAula1(aula1);
             restricao.setAula2(aula2);
@@ -40,7 +36,7 @@ public class GtRestricao {
             restricao.setProfessor(professor);
             gtPrincipal.getGdPrincipal().getGdRestricao().cadastrar(restricao);
             return restricao;
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
@@ -51,9 +47,10 @@ public class GtRestricao {
 
     public String excluir(RestricaoProfessor restricao) {
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             gtPrincipal.getGdPrincipal().getGdRestricao().excluir(restricao);
             return Constantes.EXCLUIDO;
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

@@ -17,7 +17,7 @@ public class GtCurso {
     public String cadastrar(String nome, String nivel, int periodos, Coordenadoria coordenadoria) {
 
         try {
-           
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, nivel, periodos, coordenadoria);
             Curso curso = new Curso();
             curso.setNome(nome.toUpperCase());
@@ -35,6 +35,7 @@ public class GtCurso {
     public String alterar(Curso curso, String nome, String nivel, int periodos, Coordenadoria coordenadoria){
         
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, nivel, periodos, coordenadoria);
             curso.setNome(nome.toUpperCase());
             curso.setNivel(nivel);
@@ -72,6 +73,7 @@ public class GtCurso {
     public String excluir(Curso curso) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             List matrizes = gtPrincipal.getGdPrincipal().getGdMatriz().filtrarMatrizCurso(curso.getId());
             
             if (matrizes.isEmpty()) {        
@@ -90,7 +92,7 @@ public class GtCurso {
                 return "Curso possui matrizes associadas";
             }
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

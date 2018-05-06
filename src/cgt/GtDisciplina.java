@@ -17,6 +17,8 @@ public class GtDisciplina {
     public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
 
         try {
+            
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
             Disciplina disciplina = new Disciplina();
             
@@ -38,6 +40,7 @@ public class GtDisciplina {
     public String alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina){
         
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
             disciplina.setCargaHoraria(cargaHoraria);
             disciplina.setMatriz(matriz);
@@ -49,7 +52,7 @@ public class GtDisciplina {
             gtPrincipal.getGdPrincipal().getGdDisciplina().alterar(disciplina);
        
             return Constantes.ALTERADO;
-        } catch (Exception ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }
@@ -77,7 +80,7 @@ public class GtDisciplina {
     public String excluir(Disciplina disciplina) {
 
         try {
-
+            gtPrincipal.identificarPermissaoPadrao();
             List listaAlocacoes = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorDisciplina(disciplina.getId()); 
             
             if(listaAlocacoes.isEmpty()){
@@ -86,7 +89,7 @@ public class GtDisciplina {
             }else
                 return "Disciplina está associada a uma alocação";
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

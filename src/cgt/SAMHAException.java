@@ -38,6 +38,8 @@ public class SAMHAException extends Exception {
         msgsErro[19] = "Quantidade de Professores inválida, selecione 2 professores";
         msgsErro[20] = "Quantidade de Professores inválida, selecione apenas 1 professor";
         msgsErro[21] = "2º Professor não selecionado";
+        
+        msgsErro[50] = "Usuário não possui permissão para este tipo de operação.";
     }
     
     @Override

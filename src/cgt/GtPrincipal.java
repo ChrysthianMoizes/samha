@@ -39,6 +39,18 @@ public class GtPrincipal {
         setPermissao(Constantes.PERMISSAO_NEGADA);
         setCoordAtual(null);
     }
+    
+    public void identificarPermissaoAdmin() throws SAMHAException{
+        
+        if(!(getCoordAtual() instanceof CoordenadorAcademico))
+            throw new SAMHAException(50);
+    }
+    
+    public void identificarPermissaoPadrao() throws SAMHAException{
+        
+        if(!((getCoordAtual() instanceof CoordenadorAcademico)||(getCoordAtual() instanceof CoordenadorCurso)))
+            throw new SAMHAException(50);
+    }
 
     public int validarAcesso(String login, String senha) {
 

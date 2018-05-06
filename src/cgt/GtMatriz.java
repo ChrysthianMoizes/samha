@@ -17,6 +17,7 @@ public class GtMatriz {
     public String cadastrar(String nome, int ano, int semestre, Curso curso) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, curso);
             MatrizCurricular matriz = new MatrizCurricular();
             matriz.setNome(nome.toUpperCase());
@@ -35,7 +36,7 @@ public class GtMatriz {
     public String excluir(MatrizCurricular matriz) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             List disciplinas = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatriz("matriz.id", matriz.getId());
             
             if(disciplinas.isEmpty()){
@@ -45,7 +46,7 @@ public class GtMatriz {
             }else
                 return "Matriz possui disciplinas associadas";
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

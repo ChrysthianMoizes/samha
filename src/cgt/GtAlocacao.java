@@ -55,7 +55,7 @@ public class GtAlocacao {
     public String cadastrar(List listaProfessores, Disciplina disciplina, int ano, int semestre) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(listaProfessores, disciplina);
             Alocacao alocacao = new Alocacao(); 
             alocacao.setAno(ano);
@@ -89,7 +89,7 @@ public class GtAlocacao {
     public String excluir(Alocacao alocacao) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             gtPrincipal.getGdPrincipal().getGdAlocacao().excluir(alocacao);
             return Constantes.EXCLUIDO;
             

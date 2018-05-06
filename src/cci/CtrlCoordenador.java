@@ -113,7 +113,7 @@ public class CtrlCoordenador extends CtrlGenerica{
                
         listarEmTabela(listaCoordenadores, tabela, buscaCoord, "toArray");
         
-        if(listaCoordenadores.size() == 0)
+        if(listaCoordenadores.isEmpty())
                 buscaCoord.setarMensagem("Nenhum coordenador encontrado.");
     }
     
@@ -152,13 +152,15 @@ public class CtrlCoordenador extends CtrlGenerica{
         CoordenadorCurso coordenador = (CoordenadorCurso) cadastraCoord.getCoordenador();
 
         List novaListaProfessores = listarProfessoresNaoCoordenadores();
-        
+        if(coordenador != null)
+            novaListaProfessores.add(coordenador.getProfessor());
         preencherCombo(cbxProfessor, novaListaProfessores);
           
         Professor prof = (Professor) cbxProfessor.getSelectedItem();
         cadastraCoord.setarCamposProfessor(prof);         
         
         if(coordenador != null){
+            
             Professor profAtual;
             for(int i = 0; i < novaListaProfessores.size(); i++){
                 profAtual = (Professor) novaListaProfessores.get(i);

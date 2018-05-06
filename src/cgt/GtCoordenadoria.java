@@ -18,6 +18,7 @@ public class GtCoordenadoria {
     public String cadastrar(String nome, Eixo eixo) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, eixo);
             Coordenadoria coordenadoria = new Coordenadoria();
             coordenadoria.setNome(nome.toUpperCase());
@@ -34,7 +35,7 @@ public class GtCoordenadoria {
     public String excluir(Coordenadoria coordenadoria) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             Curso curso = gtPrincipal.getGdPrincipal().getGdCurso().filtrarCursoUnico("coordenadoria.id", coordenadoria.getId());
            
             if(curso == null){
@@ -53,7 +54,7 @@ public class GtCoordenadoria {
                 return "Coordenadoria possui curso associado";
                 
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

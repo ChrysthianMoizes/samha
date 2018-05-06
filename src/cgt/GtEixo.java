@@ -16,6 +16,7 @@ public class GtEixo {
     public String cadastrar(String nome) {
 
         try {
+            gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome);
             Eixo eixo = new Eixo();
             eixo.setNome(nome.toUpperCase());
@@ -31,7 +32,7 @@ public class GtEixo {
     public String excluir(Eixo eixo) {
 
         try {
-            
+            gtPrincipal.identificarPermissaoPadrao();
             List coordenadorias = gtPrincipal.getGdPrincipal().getGdCoordenadoria().filtrarCoordenadoriasEixo(eixo.getId());
             
             if(coordenadorias.isEmpty()){
@@ -40,7 +41,7 @@ public class GtEixo {
             }else
                 return "Eixo possui coordenadorias associadas";
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }
     }

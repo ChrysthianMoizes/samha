@@ -71,30 +71,38 @@ public class CtrlProfessor extends CtrlGenerica{
 
     public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
 
-        Professor professor = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
-        if (professor != null) {
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        
+        if (resposta.equals(Constantes.CADASTRADO)) {
+            
+            Professor professor = ctrlPrincipal.getGtPrincipal().getGtProfessor().getProfessorSelecionado();
             cadastraProf.setProfessor(professor);
+            
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Cadastrado com sucesso!");
             cadastraProf.desabilitarCamposProfessor(false);
             cadastraProf.habilitarCamposRestricao(true);
             buscaProf.atualizarTabela();
-        } else {
-            CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao cadastrar");
-        }
+            
+        } else
+            CtrlMensagem.exibirMensagemErro(cadastraProf, resposta);     
     }
 
     public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
 
-        Professor prof = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
-        if (prof != null) {
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        
+        if (resposta.equals(Constantes.ALTERADO)) { 
+            
+            Professor prof = ctrlPrincipal.getGtPrincipal().getGtProfessor().getProfessorSelecionado();
             cadastraProf.setProfessor(prof);
+            
             CtrlMensagem.exibirMensagemSucesso(cadastraProf, "Alterado com sucesso!");
             cadastraProf.desabilitarCamposProfessor(false);
             cadastraProf.habilitarCamposRestricao(true);
             buscaProf.atualizarTabela();
-        }else{
-            CtrlMensagem.exibirMensagemErro(cadastraProf, "Erro ao alterar");
-        }
+            
+        }else
+            CtrlMensagem.exibirMensagemErro(cadastraProf, resposta);    
     }
 
     public List<Professor> consultar() {
@@ -196,14 +204,10 @@ public class CtrlProfessor extends CtrlGenerica{
     public void adicionarRestricao(String nome, String turno, String dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor){
         
-        List listaRestricoes = cadastraProf.getListaRestricoes();
-        
         RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(
                 nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);
 
         if (restricao != null) {
-            listaRestricoes.add(restricao);
-            cadastraProf.setListaRestricoes(listaRestricoes);
             cadastraProf.limparTelaRestricao();
             cadastraProf.preencherListaRestricoes();
         }
