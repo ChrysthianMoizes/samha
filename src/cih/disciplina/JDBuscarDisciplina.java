@@ -47,9 +47,10 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
-        if(matriz == null)
-                setarMensagem("Curso não possui matriz associada.");
-        else{
+        if(matriz == null){
+            setarMensagem("Curso não possui matriz associada.");
+            JTableUtil.limparTabela(tblDisciplina);
+        }else{
         
             if(colunaFiltro.equals("curso")){
                 ctrlPrincipal.getCtrlDisciplina().filtrarPorMatriz(colunaFiltro, matriz.getId(), tblDisciplina); 

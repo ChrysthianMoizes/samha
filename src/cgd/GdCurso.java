@@ -3,6 +3,7 @@ package cgd;
 import cdp.Curso;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -41,6 +42,18 @@ public class GdCurso extends GdGenerico{
         sessao.beginTransaction();
         colunaFiltro = colunaFiltro.toLowerCase();
         crit.add( Restrictions.eq(colunaFiltro, id));
+        crit.setMaxResults(1);
+        Curso curso = (Curso) crit.uniqueResult();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return curso;
+    }
+    
+    public Curso cursoCoordenadoriaEager(int id) {
+        Criteria crit = criarSessao().createCriteria(Curso.class);
+        sessao.beginTransaction();
+        crit.setFetchMode("coordenadoria", FetchMode.JOIN);
+        crit.add( Restrictions.eq("id", id));
         crit.setMaxResults(1);
         Curso curso = (Curso) crit.uniqueResult();
         sessao.getTransaction().commit();

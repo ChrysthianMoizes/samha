@@ -170,11 +170,11 @@ public class CtrlDisciplina extends CtrlGenerica{
     public void preencherComboMatriz(int id, JComboBox cbxMatriz) {
         
         List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
+        cbxMatriz.removeAllItems();
         if(cadastraDisciplina != null){
-            cadastraDisciplina.setListaMatriz(listaMatriz);
-            cbxMatriz.removeAllItems();
+            cadastraDisciplina.setListaMatriz(listaMatriz);    
         }
-        if(listaMatriz.size() > 0)
+        //if(listaMatriz.size() > 0)
             preencherCombo(cbxMatriz, listaMatriz);   
     }
     
