@@ -24,32 +24,33 @@ public class GtAlocacao {
         boolean adicionado;
         
         for(int i = 0; i < listaProfessores.size(); i++){
+            
             professor = (Professor) listaProfessores.get(i);
             professor.setCargaHoraria(0);
             adicionado = false;
+            
             for(int j = 0; j < listaAlocacoes.size(); j++){
                 
                 alocacao = (Alocacao) listaAlocacoes.get(j);
                 
-                if(alocacao.getProfessor1().getId() == professor.getId()){
-                    adicionado = true;
-                    int cargaHoraria = professor.getCargaHoraria();
-                    professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
-                } 
+                if(alocacao.getProfessor1().getId() == professor.getId())
+                    adicionado = somarCargaHoraria(professor, alocacao);
                 
                 if(alocacao.getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
-                    
-                    if(alocacao.getProfessor2().getId() == professor.getId()){
-                        adicionado = true;
-                        int cargaHoraria = professor.getCargaHoraria();
-                        professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
-                    }  
+                    if(alocacao.getProfessor2().getId() == professor.getId())
+                        adicionado = somarCargaHoraria(professor, alocacao);  
                 }               
             }
             if(adicionado)
                 listaCargaHoraria.add(professor);
         }
         return listaCargaHoraria;
+    }
+    
+    public boolean somarCargaHoraria(Professor professor, Alocacao alocacao){
+        int cargaHoraria = professor.getCargaHoraria();
+        professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
+        return true;
     }
     
     public String cadastrar(List listaProfessores, Disciplina disciplina, int ano, int semestre) {
@@ -127,5 +128,4 @@ public class GtAlocacao {
         }else
             throw new SAMHAException(18);     
     }
-    
 }
