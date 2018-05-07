@@ -26,13 +26,14 @@ public abstract class CtrlGenerica {
     }
     
     public void preencherJList(List lista, JList lst){
-        if (lista != null) {
-            DefaultListModel defaultListModel = new DefaultListModel();
-            lst.removeAll();
+        
+        DefaultListModel defaultListModel = new DefaultListModel();
+        lst.removeAll(); 
+        if (lista != null) { 
             for (int i = 0; i < lista.size(); i++) {
                 defaultListModel.addElement(lista.get(i));
-            }
-            lst.setModel(defaultListModel);
+            } 
         }
+        lst.setModel(defaultListModel);
     }
 }

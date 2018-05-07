@@ -118,9 +118,9 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         cbxCurso.setPreferredSize(new java.awt.Dimension(39, 30));
-        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCursoItemStateChanged(evt);
+        cbxCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursoActionPerformed(evt);
             }
         });
 
@@ -382,13 +382,6 @@ public class JDAlocacao extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null){
-           ctrlPrincipal.getCtrlAlocacao().preencherComboMatriz(curso.getId(), cbxMatriz);
-        }
-    }//GEN-LAST:event_cbxCursoItemStateChanged
-
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         ctrlPrincipal.getCtrlAlocacao().cadastrar(lstProfessores, lstDisciplinas, spnAno, spnSemestre);
     }//GEN-LAST:event_btnAdicionarActionPerformed
@@ -420,6 +413,10 @@ public class JDAlocacao extends javax.swing.JDialog {
     private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed
         preencherListaProfessores();
     }//GEN-LAST:event_cbxEixoActionPerformed
+
+    private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
+        ctrlPrincipal.getCtrlAlocacao().preencherComboMatriz(cbxCurso, cbxMatriz);
+    }//GEN-LAST:event_cbxCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

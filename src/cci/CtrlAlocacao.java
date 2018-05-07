@@ -145,15 +145,17 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         if(listaCursos.size() > 0){
             Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(curso.getId(), cbxMatriz);
+            preencherComboMatriz(cbxCurso, cbxMatriz);
             cadastraAlocacao.setarPeriodoMaximo(curso.getQtPeriodos());
         }
     }
 
-    public void preencherComboMatriz(int id, JComboBox cbxMatriz) {
+    public void preencherComboMatriz(JComboBox cbxCurso, JComboBox cbxMatriz) {
         
-        List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        if(listaMatriz.size() > 0){
+        Curso curso = (Curso) cbxCurso.getSelectedItem();
+        if(curso != null){
+            cadastraAlocacao.setarPeriodoMaximo(curso.getQtPeriodos());
+            List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(curso.getId());
             preencherCombo(cbxMatriz, listaMatriz); 
             cadastraAlocacao.preencherListaDisciplinas();
         }    
@@ -172,25 +174,31 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         int periodo = (int) spnPeriodo.getValue();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-        
         if(matriz != null){
             List listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);
             preencherJList(listaDisciplinas, lstDisciplinas);  
         }else{
-            CtrlMensagem.exibirMensagemAviso(cadastraAlocacao, "Matriz Curricular não selecionada");  
+            preencherJList(null, lstDisciplinas);
+            cadastraAlocacao.setarMensagem("Curso não possui matriz cadastrada.");
         }
     }
     
     public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores) {
         
+        cadastraAlocacao.setarMensagem("");
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
-        setEixoSelecionado(eixo);
         
-        if(jdCargaHoraria != null)
-            jdCargaHoraria.atualizarTabela();      
+        if(eixo != null){
+            
+            setEixoSelecionado(eixo);
         
-        List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
-        preencherJList(listaProfessores, lstProfessores);   
+            if(jdCargaHoraria != null)
+                jdCargaHoraria.atualizarTabela();      
+
+            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
+            preencherJList(listaProfessores, lstProfessores);
+        }else
+            cadastraAlocacao.setarMensagem("Eixo não selecionado.");
     }
 
     public Eixo getEixoSelecionado() {
