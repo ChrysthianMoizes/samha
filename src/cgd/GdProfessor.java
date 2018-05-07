@@ -1,8 +1,10 @@
 package cgd;
 
 import cdp.Professor;
+import cdp.RestricaoProfessor;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -47,5 +49,33 @@ public class GdProfessor extends GdGenerico{
         sessao.getTransaction().commit();
         sessao.close();
         return lista;
+    }
+    
+    public void excluirProfessor(Professor professor){
+        
+        List listaRestricoes = gdPrincipal.getGdRestricao().filtrarPorProfessor(professor.getId());
+        
+        try {
+            sessao = criarSessao();
+            sessao.beginTransaction();
+            
+            RestricaoProfessor restricao;
+            
+            for (int i = 0; i < listaRestricoes.size(); i++) {
+                restricao = (RestricaoProfessor) listaRestricoes.get(i);
+                sessao.delete(restricao);
+            }
+            
+            sessao.delete(professor);
+            
+            sessao.getTransaction().commit();
+            sessao.close();
+
+        } catch (HibernateException e) {
+            sessao.getTransaction().rollback();
+            sessao.close();
+            throw e;
+        } 
+        
     }
 }

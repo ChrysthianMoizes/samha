@@ -37,27 +37,4 @@ public class GdRestricao extends GdGenerico{
         sessao.close();
         return lista;
     }
-    
-    public void excluirRestricoes(String coluna, int id){
-        
-        List lista = filtrarPorProfessor(id);
-
-        try {
-            sessao = criarSessao();
-            sessao.beginTransaction();
-            RestricaoProfessor restricao;
-            for (int i = 0; i < lista.size(); i++) {
-                restricao = (RestricaoProfessor) lista.get(i);
-                sessao.delete(restricao);
-            }
-            sessao.flush();
-            sessao.getTransaction().commit();
-            sessao.close();
-
-        } catch (HibernateException e) {
-            sessao.getTransaction().rollback();
-            sessao.close();
-            throw e;
-        } 
-    }
 }

@@ -86,13 +86,12 @@ public class GtProfessor {
             CoordenadorCurso coordenador = gtPrincipal.getGdPrincipal().getGdCoordenador().identificarCoordenadorCurso(professor.getId());
             
             if(coordenador == null){
-                gtPrincipal.getGdPrincipal().getGdRestricao().excluirRestricoes("professor.id", professor.getId());
-                gtPrincipal.getGdPrincipal().getGdProfessor().excluir(professor);
+                gtPrincipal.getGdPrincipal().getGdProfessor().excluirProfessor(professor);
                 return Constantes.EXCLUIDO;
             }else
                 return "Professor não pode ser excluído pois também é um coordenador";
             
-        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
+        } catch (SAMHAException ex) {
             return ex.getMessage();
         }
     }
