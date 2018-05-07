@@ -362,12 +362,15 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         }
     }
     
-    public void desabilitarComboTipoCoordenador(){
-        cbxTipo.setEnabled(false);
+    public void desabilitarComboTipoCoordenador(boolean opcao){
+        cbxTipo.setEnabled(opcao);
     }
     
-     public void desabilitarCombos(boolean opcao){ 
+    public void desabilitarComboProfessor(boolean opcao){ 
         cbxProfessor.setEnabled(opcao);
+    }
+    
+    public void desabilitarComboCurso(boolean opcao){ 
         cbxCurso.setEnabled(opcao);
     }
     
@@ -458,7 +461,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
 
     private void cbxProfessorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxProfessorItemStateChanged
         Professor prof = (Professor) cbxProfessor.getSelectedItem();
-        setarCamposProfessor(prof); 
+        setarCamposProfessor(prof);
+        txtSenha.setText("");
+        txtUsuario.setText("");
     }//GEN-LAST:event_cbxProfessorItemStateChanged
 
     private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed

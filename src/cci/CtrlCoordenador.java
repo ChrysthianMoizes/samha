@@ -73,8 +73,9 @@ public class CtrlCoordenador extends CtrlGenerica{
         String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenador().alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula);
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
-            cadastraCoord.desabilitarComboTipoCoordenador();
-            cadastraCoord.desabilitarCombos(false);
+            cadastraCoord.desabilitarComboTipoCoordenador(false);
+            cadastraCoord.desabilitarComboProfessor(false);
+            cadastraCoord.desabilitarComboCurso(false);
             cadastraCoord.desabilitarCampos();
             buscaCoord.atualizarTabela();
         } else {
@@ -125,11 +126,12 @@ public class CtrlCoordenador extends CtrlGenerica{
             cadastraCoord.setCoordenador(coordenador);
             cadastraCoord.selecionarTipoCoordenador(coordenador);
             cadastraCoord.setarCamposComInstancia(coordenador);
-            cadastraCoord.desabilitarComboTipoCoordenador();
+            cadastraCoord.desabilitarComboTipoCoordenador(false);
+            cadastraCoord.desabilitarComboCurso(false);
             if(coordenador instanceof CoordenadorCurso)
-                cadastraCoord.desabilitarCombos(true);
+                cadastraCoord.desabilitarComboProfessor(true);
             else
-                cadastraCoord.desabilitarCombos(false);
+                cadastraCoord.desabilitarComboProfessor(false);
         }
     }
     

@@ -1,6 +1,7 @@
 package cgd;
 
 import cdp.Coordenadoria;
+import cdp.Curso;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;

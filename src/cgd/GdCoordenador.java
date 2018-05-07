@@ -95,8 +95,8 @@ public class GdCoordenador extends GdGenerico{
             // tenho 2 objetos coordenadoria em memoria, um dentro de curso e outro dentro de coordenador, dai o erro, 2 ids iguais na mesma sessao.
             
             sessao.update(coordenador);
-            curso.setCoordenador(coordenador);
-            sessao.update(curso);
+            //curso.setCoordenador(coordenador);
+            //sessao.update(curso);
 
             sessao.getTransaction().commit();        
             sessao.close();

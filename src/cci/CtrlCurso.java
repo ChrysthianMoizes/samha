@@ -151,15 +151,15 @@ public class CtrlCurso extends CtrlGenerica{
         
         List listaEixos = cadastraCurso.getListaEixos();
         Eixo eixo;
-
+        
         for (int i = 0; i < listaEixos.size(); i++) {
 
             eixo = (Eixo) listaEixos.get(i);
-            if (eixo.getId() == curso.getCoordenadoria().getEixo().getId()) {
+           // if (eixo.getId() == curso.getCoordenadoria().getEixo().getId()) {
                 cbxEixo.setSelectedIndex(i);
                 preencherComboCoordenadorias(eixo.getId(), cbxCoordenadoria);
                 break;
-            }
+            //}
         }
     }
     
@@ -172,10 +172,10 @@ public class CtrlCurso extends CtrlGenerica{
         for (int i = 0; i < listaCoordenadorias.size(); i++) {
 
             coordenadoria = (Coordenadoria) listaCoordenadorias.get(i);
-            if (coordenadoria.getId() == curso.getCoordenadoria().getId()) {
+            //if (coordenadoria.getId() == curso.getCoordenadoria().getId()) {
                 cbxCoordenadoria.setSelectedIndex(i);
                 break;
-            }
+            //}
         }
     }
     
