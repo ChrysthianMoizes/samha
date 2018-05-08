@@ -6,6 +6,8 @@ import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
 import java.util.List;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDOferta extends javax.swing.JDialog {
     
@@ -425,6 +427,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
+        ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
         pnlTurma.setLayout(pnlTurmaLayout);
@@ -562,6 +565,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane4.setViewportView(tblProfessor);
         tblProfessor.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas());
+        ((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 

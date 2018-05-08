@@ -422,7 +422,8 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         txtNomeDisciplina.setText(disciplina.getNome());
         spnCargaHoraria.setValue(disciplina.getCargaHoraria());
         spnAulas.setValue(disciplina.getQtAulas());
-        spnPeriodo.setValue(disciplina.getPeriodo());           
+        spnPeriodo.setValue(disciplina.getPeriodo());
+        txtSigla.setText(disciplina.getSigla());
     }
     
     public void setarCurso(Disciplina disciplina){
