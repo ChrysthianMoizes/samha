@@ -6,8 +6,6 @@ import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
 import java.util.List;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDOferta extends javax.swing.JDialog {
     
@@ -106,7 +104,7 @@ public class JDOferta extends javax.swing.JDialog {
         pnlTurno = new javax.swing.JPanel();
         lblTurno = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblTurma = new RenderizadorCelulas();
+        tblTurma = new javax.swing.JTable();
         pnlProfessor = new javax.swing.JPanel();
         pnlDiasProfessor = new javax.swing.JPanel();
         lblSexta1 = new javax.swing.JLabel();
@@ -426,7 +424,7 @@ public class JDOferta extends javax.swing.JDialog {
         tblTurma.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        ((DefaultTableCellRenderer) tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
         pnlTurma.setLayout(pnlTurmaLayout);
@@ -563,7 +561,7 @@ public class JDOferta extends javax.swing.JDialog {
         tblProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tblProfessor);
         tblProfessor.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        ((DefaultTableCellRenderer) tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas());
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 

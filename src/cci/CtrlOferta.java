@@ -96,20 +96,20 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
         
-        if(mensagem != null){
-            
-            int codigo = mensagem.charAt(0);
-            
-            if(codigo == 0)
-                render.setCor(Color.RED);
-               //celula.setBackground(Color.RED);  
-            else
-                render.setCor(Color.YELLOW);
-               //celula.setBackground(Color.YELLOW); 
-        }else
-            render.setCor(Color.GREEN);
-            //celula.setBackground(Color.GREEN);
-
-        render.prepareRenderer(null, linha, coluna);
+//        if(mensagem != null){
+//            
+//            int codigo = mensagem.charAt(0);
+//            
+//            if(codigo == 0)
+//                render.setCor(Color.RED);
+//               celula.setBackground(Color.RED);  
+//            else
+//                render.setCor(Color.YELLOW);
+//               celula.setBackground(Color.YELLOW); 
+//        }else
+//            render.setCor(Color.GREEN);
+//            celula.setBackground(Color.GREEN);
+//
+//        render.prepareRenderer(null, linha, coluna);
     }
 }
