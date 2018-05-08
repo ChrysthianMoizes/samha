@@ -143,11 +143,11 @@ public class CtrlTurma extends CtrlGenerica{
     public void preencherComboCurso(JComboBox cbxCurso, JComboBox cbxMatriz){ 
         
         List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
-        if(cadastraTurma != null)
+        if((cadastraTurma != null) && (cadastraTurma.isVisible()))
             cadastraTurma.setListaCursos(listaCursos);
         preencherCombo(cbxCurso, listaCursos);
         
-        if(cadastraTurma != null){
+        if((cadastraTurma != null) && (cadastraTurma.isVisible())){
             if(listaCursos.size() > 0){
                 Curso curso = (Curso) cbxCurso.getSelectedItem();
                 preencherComboMatriz(curso.getId(), cbxMatriz);
@@ -158,7 +158,7 @@ public class CtrlTurma extends CtrlGenerica{
     public void preencherComboMatriz(int id, JComboBox cbxMatriz) {
         
         List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
-        if(cadastraTurma != null)
+        if((cadastraTurma != null) && (cadastraTurma.isVisible()))
             cadastraTurma.setListaMatriz(listaMatriz);
         
         if(listaMatriz.size() > 0)
