@@ -166,7 +166,7 @@ public class JDOferta extends javax.swing.JDialog {
         lblAno.setText("Ano:");
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2015, 2000, null, 1));
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
         spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnAnoStateChanged(evt);

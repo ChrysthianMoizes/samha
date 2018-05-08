@@ -138,7 +138,12 @@ public class Aula implements Serializable {
     public String toString() {
         
         String nomeCompleto = getAlocacao().getProfessor1().getNome();
-        String nome = nomeCompleto.substring(0, nomeCompleto.indexOf(" "));
+        int espaco = nomeCompleto.indexOf(" ");
+        
+        if(espaco == -1)
+            return getAlocacao().getDisciplina().getSigla() + " - " + nomeCompleto;
+        
+        String nome = nomeCompleto.substring(0, espaco);
         return getAlocacao().getDisciplina().getSigla() + " - " + nome;
     }
     
