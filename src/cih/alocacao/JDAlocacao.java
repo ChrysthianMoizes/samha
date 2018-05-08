@@ -202,13 +202,13 @@ public class JDAlocacao extends javax.swing.JDialog {
         pnlProfessor.setLayout(pnlProfessorLayout);
         pnlProfessorLayout.setHorizontalGroup(
             pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                    .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnlProfessorLayout.setVerticalGroup(
             pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,11 +248,11 @@ public class JDAlocacao extends javax.swing.JDialog {
         pnlAnoSemestreLayout.setHorizontalGroup(
             pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAnoSemestreLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         pnlAnoSemestreLayout.setVerticalGroup(
             pnlAnoSemestreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,6 +415,7 @@ public class JDAlocacao extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxEixoActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
+        setarMensagem("");
         ctrlPrincipal.getCtrlAlocacao().preencherComboMatriz(cbxCurso, cbxMatriz);
     }//GEN-LAST:event_cbxCursoActionPerformed
 

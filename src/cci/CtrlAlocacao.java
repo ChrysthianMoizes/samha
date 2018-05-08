@@ -185,7 +185,6 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores) {
         
-        cadastraAlocacao.setarMensagem("");
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         
         if(eixo != null){
