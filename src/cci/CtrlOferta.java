@@ -1,5 +1,6 @@
 package cci;
 
+import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
 import cdp.Turma;
@@ -67,6 +68,27 @@ public class CtrlOferta extends CtrlGenerica{
             
             if(listaAlocacoes.size() == 0)
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
+        }
+    }
+    
+    public void gerarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes){
+        
+        int posicao = lstAlocacoes.getSelectedIndex();
+        
+        if(posicao >= 0){
+            
+            Alocacao alocacao = (Alocacao) listaAlocacoes.get(posicao);
+
+            Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarAula(alocacao);
+            aula.setAlocacao(alocacao);
+
+            int coluna = tblTurma.getSelectedColumn();
+            int linha = tblTurma.getSelectedRow();
+            
+            if((linha >= 0) && (coluna >= 0))
+                tblTurma.setValueAt(aula, linha, coluna);
+            else
+                jdOferta.setarMensagem("Selecione uma célula da tabela.");
         }
     }
     

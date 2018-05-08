@@ -16,7 +16,7 @@ public class CoordenadorPedagogico extends Usuario{
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "servidor_id", nullable = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
+    @Cascade(CascadeType.ALL)
     private Servidor servidor;
 
     public CoordenadorPedagogico() {

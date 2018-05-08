@@ -235,7 +235,7 @@ public class JDAlocacao extends javax.swing.JDialog {
         });
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2015, 2000, null, 1));
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
         spnAno.setPreferredSize(new java.awt.Dimension(31, 35));
         spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

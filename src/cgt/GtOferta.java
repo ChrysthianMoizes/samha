@@ -1,5 +1,6 @@
 package cgt;
 
+import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
@@ -83,5 +84,13 @@ public class GtOferta {
             case 6: return restricao.isAula6();
         }
         return false;
+    }
+    
+    public Aula gerarAula(Alocacao alocacao){
+        
+        Aula aula = new Aula();
+        aula.setAlocacao(alocacao);
+        
+        return aula;     
     }
 }

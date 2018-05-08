@@ -139,14 +139,12 @@ public class Aula implements Serializable {
         
         String nomeCompleto = getAlocacao().getProfessor1().getNome();
         String nome = nomeCompleto.substring(0, nomeCompleto.indexOf(" "));
-        System.out.println(nome);
         return getAlocacao().getDisciplina().getSigla() + " - " + nome;
     }
     
     public Object[] toArray() {
         String nomeCompleto = getAlocacao().getProfessor1().getNome();
         String nome = nomeCompleto.substring(0, nomeCompleto.indexOf(" "));
-        System.out.println(nome);
         return new Object[] { this, " - \n" + nome};
     }
 }

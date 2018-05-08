@@ -28,9 +28,14 @@ public class JDOferta extends javax.swing.JDialog {
         pnlValidacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
+    public void gerarAula(){
+        setarMensagem("");
+        ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, listaAlocacoes);
+    }
+    
     public void atualizarLista(){
         
-        lblMensagem.setText("");
+        setarMensagem("");
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
@@ -636,21 +641,7 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        setarMensagem("");
-        int posicao = lstAlocacoes.getSelectedIndex();
-        if(posicao >= 0){
-            Alocacao aloc = (Alocacao) listaAlocacoes.get(posicao);
-
-            Aula aula = new Aula();
-            aula.setAlocacao(aloc);
-
-            int coluna = tblTurma.getSelectedColumn();
-            int linha = tblTurma.getSelectedRow();
-            if((linha >= 0) && (coluna >= 0))
-                tblTurma.setValueAt(aula, linha, coluna);
-            else
-                setarMensagem("Selecione uma célula da tabela.");
-        }
+        gerarAula();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
