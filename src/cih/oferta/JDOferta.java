@@ -3,6 +3,7 @@ package cih.oferta;
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
 import cdp.Alocacao;
+import cdp.Aula;
 import cdp.Curso;
 import java.util.List;
 import javax.swing.SwingConstants;
@@ -633,14 +634,20 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-         
+        setarMensagem("");
         int posicao = lstAlocacoes.getSelectedIndex();
         if(posicao >= 0){
             Alocacao aloc = (Alocacao) listaAlocacoes.get(posicao);
-            
+
+            Aula aula = new Aula();
+            aula.setAlocacao(aloc);
+
             int coluna = tblTurma.getSelectedColumn();
             int linha = tblTurma.getSelectedRow();
-            tblTurma.setValueAt(aloc, linha, coluna);
+            if((linha >= 0) && (coluna >= 0))
+                tblTurma.setValueAt(aula, linha, coluna);
+            else
+                setarMensagem("Selecione uma célula da tabela.");
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
