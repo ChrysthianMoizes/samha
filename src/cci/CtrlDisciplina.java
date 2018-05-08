@@ -56,9 +56,9 @@ public class CtrlDisciplina extends CtrlGenerica{
         cadastraDisciplina.setVisible(true);
     }
     
-    public void cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
+    public void cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, String sigla) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, sigla);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Cadastrado com sucesso!");
@@ -68,9 +68,9 @@ public class CtrlDisciplina extends CtrlGenerica{
             CtrlMensagem.exibirMensagemErro(cadastraDisciplina, resposta);
     }
     
-    public void alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina) {
+    public void alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina, String sigla) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtDisciplina().alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina, sigla);
         
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraDisciplina, "Alterado Com sucesso!");
@@ -123,16 +123,16 @@ public class CtrlDisciplina extends CtrlGenerica{
     
     //======================================= TELA DE CADASTRO ===============================================
     
-    public void validarOperacao(MatrizCurricular matriz, String nome, String tipo, int periodo, int cargaHoraria, int qtAulas){  
+    public void validarOperacao(MatrizCurricular matriz, String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, String sigla){  
         
         Disciplina disciplina = cadastraDisciplina.getDisciplina();
         
         if(validarCampos(nome)){
             
             if(disciplina == null)   
-                cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
+                cadastrar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, sigla);
             else
-                alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina);
+                alterar(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, disciplina, sigla);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraDisciplina, "Todos os campos devem ser preenchidos");
     }

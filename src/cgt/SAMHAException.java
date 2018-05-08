@@ -26,11 +26,13 @@ public class SAMHAException extends Exception {
         msgsErro[10] = "Campo PERÍODOS inválido";
         msgsErro[11] = "Coordenadoria não selecionada";
         
+        //Disciplina
         msgsErro[12] = "Curso não selecionado";
         msgsErro[13] = "Matriz Curricular não selecionada";
         msgsErro[14] = "Campo Quantidade de Aulas inválido";
         msgsErro[15] = "Campo TURNO inválido";
         msgsErro[16] = "Campo TIPO inválido";
+        msgsErro[25] = "Campo SIGLA inválido";
         
         //Alocacao
         msgsErro[17] = "Disciplina não selecionada";

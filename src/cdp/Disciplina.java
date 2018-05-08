@@ -21,6 +21,9 @@ public class Disciplina implements Serializable, Comparable<Object> {
     private String nome;
     
     @Column(nullable = false)
+    private String sigla;
+    
+    @Column(nullable = false)
     private String tipo;
     
     @Column(nullable = false)
@@ -39,7 +42,7 @@ public class Disciplina implements Serializable, Comparable<Object> {
     public Disciplina() {
     }
 
-    public Disciplina(int id, String nome, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
+    public Disciplina(int id, String nome, String sigla, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -47,15 +50,17 @@ public class Disciplina implements Serializable, Comparable<Object> {
         this.qtAulas = qtAulas;
         this.matriz = matriz;
         this.periodo = periodo;
+        this.sigla = sigla;
     }
 
-    public Disciplina(String nome, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
+    public Disciplina(String nome, String sigla, String tipo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, int periodo) {
         this.nome = nome;
         this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
         this.qtAulas = qtAulas;
         this.matriz = matriz;
         this.periodo = periodo;
+        this.sigla = sigla;
     }
 
     public int getId() {
@@ -74,6 +79,14 @@ public class Disciplina implements Serializable, Comparable<Object> {
         this.nome = nome;
     }
 
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+    
     public String getTipo() {
         return tipo;
     }

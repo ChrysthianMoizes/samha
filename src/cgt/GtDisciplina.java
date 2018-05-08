@@ -14,12 +14,12 @@ public class GtDisciplina {
         gtPrincipal = gt;
     }
       
-    public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz) {
+    public String cadastrar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, String sigla) {
 
         try {
             
             gtPrincipal.identificarPermissaoPadrao();
-            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
+            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, sigla);
             Disciplina disciplina = new Disciplina();
             
             disciplina.setCargaHoraria(cargaHoraria);
@@ -28,6 +28,7 @@ public class GtDisciplina {
             disciplina.setPeriodo(periodo);
             disciplina.setQtAulas(qtAulas);
             disciplina.setTipo(tipo);
+            disciplina.setSigla(sigla.toUpperCase());
             
             gtPrincipal.getGdPrincipal().getGdDisciplina().cadastrar(disciplina);           
             return Constantes.CADASTRADO;
@@ -37,17 +38,18 @@ public class GtDisciplina {
         }
     }
     
-    public String alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina){
+    public String alterar(String nome, String tipo, int periodo, int cargaHoraria, int qtAulas, MatrizCurricular matriz, Disciplina disciplina, String sigla){
         
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz);
+            validarCampos(nome, tipo, periodo, cargaHoraria, qtAulas, matriz, sigla);
             disciplina.setCargaHoraria(cargaHoraria);
             disciplina.setMatriz(matriz);
             disciplina.setNome(nome);
             disciplina.setPeriodo(periodo);
             disciplina.setQtAulas(qtAulas);
             disciplina.setTipo(tipo);
+            disciplina.setSigla(sigla.toUpperCase());
             
             gtPrincipal.getGdPrincipal().getGdDisciplina().alterar(disciplina);
        
@@ -94,13 +96,16 @@ public class GtDisciplina {
         }
     }
     
-    public void validarCampos(String nome, String tipo, int periodos, int cargaHoraria, int qtAulas, MatrizCurricular matriz) throws SAMHAException{
+    public void validarCampos(String nome, String tipo, int periodos, int cargaHoraria, int qtAulas, MatrizCurricular matriz, String sigla) throws SAMHAException{
         
         if((nome.equals("")))
             throw new SAMHAException(1);
         
         if(tipo.equals(""))
             throw new SAMHAException(16);
+        
+        if((sigla.equals("")))
+            throw new SAMHAException(25);
         
         if(periodos <= 0)
             throw new SAMHAException(10);
