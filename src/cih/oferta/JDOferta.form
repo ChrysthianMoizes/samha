@@ -483,12 +483,12 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="5">
-                        <Column editable="true" title="07:00 - 07:55" type="java.lang.Object"/>
-                        <Column editable="true" title="07:55 - 08:50" type="java.lang.Object"/>
-                        <Column editable="true" title="08:50 - 09:45" type="java.lang.Object"/>
-                        <Column editable="true" title="10:00 - 10:55" type="java.lang.Object"/>
-                        <Column editable="true" title="10:55 - 11:40" type="java.lang.Object"/>
-                        <Column editable="true" title="11:45 - 12:40" type="java.lang.Object"/>
+                        <Column editable="false" title="07:00 - 07:50" type="java.lang.Object"/>
+                        <Column editable="false" title="07:55 - 08:45" type="java.lang.Object"/>
+                        <Column editable="false" title="08:50 - 09:40" type="java.lang.Object"/>
+                        <Column editable="false" title="10:00 - 10:50" type="java.lang.Object"/>
+                        <Column editable="false" title="10:55 - 11:45" type="java.lang.Object"/>
+                        <Column editable="false" title="11:50 - 12:40" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="cellSelectionEnabled" type="boolean" value="true"/>
@@ -747,16 +747,16 @@
                           <Table columnCount="16" rowCount="5">
                             <Column editable="false" title="07:00" type="java.lang.Object"/>
                             <Column editable="false" title="07:55" type="java.lang.Object"/>
-                            <Column editable="false" title="08:45" type="java.lang.Object"/>
+                            <Column editable="false" title="08:50" type="java.lang.Object"/>
                             <Column editable="false" title="10:00" type="java.lang.Object"/>
                             <Column editable="false" title="10:55" type="java.lang.Object"/>
-                            <Column editable="false" title="11:45" type="java.lang.Object"/>
+                            <Column editable="false" title="11:50" type="java.lang.Object"/>
                             <Column editable="false" title="13:00" type="java.lang.Object"/>
                             <Column editable="false" title="13:55" type="java.lang.Object"/>
-                            <Column editable="false" title="15:00" type="java.lang.Object"/>
-                            <Column editable="false" title="15:55" type="java.lang.Object"/>
-                            <Column editable="false" title="16:45" type="java.lang.Object"/>
-                            <Column editable="false" title="18:00" type="java.lang.Object"/>
+                            <Column editable="false" title="14:50" type="java.lang.Object"/>
+                            <Column editable="false" title="16:00" type="java.lang.Object"/>
+                            <Column editable="false" title="16:55" type="java.lang.Object"/>
+                            <Column editable="false" title="17:50" type="java.lang.Object"/>
                             <Column editable="false" title="18:50" type="java.lang.Object"/>
                             <Column editable="false" title="19:40" type="java.lang.Object"/>
                             <Column editable="false" title="20:50" type="java.lang.Object"/>
@@ -892,25 +892,23 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jScrollPane3" pref="250" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblAno" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="spnAno" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblSemestre" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="spnSemestre" pref="61" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="cbxCurso" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbxTurma" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cbxTurno" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="lblMensagem" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblAno" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnAno" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblSemestre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnSemestre" pref="61" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="cbxCurso" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cbxTurma" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbxTurno" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblMensagem" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -927,11 +925,13 @@
                           <Component id="cbxTurno" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblAno" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="spnAno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSemestre" alignment="1" max="32767" attributes="0"/>
-                          <Component id="spnSemestre" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblAno" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="spnAno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="spnSemestre" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>

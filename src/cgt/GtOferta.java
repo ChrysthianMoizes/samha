@@ -86,10 +86,14 @@ public class GtOferta {
         return false;
     }
     
-    public Aula gerarAula(Alocacao alocacao){
+    public Aula gerarAula(Alocacao alocacao, String dia, String turno, int numero){
         
         Aula aula = new Aula();
+        
         aula.setAlocacao(alocacao);
+        aula.setDia(dia);
+        aula.setNumero(numero);
+        aula.setTurno(turno);
         
         return aula;     
     }

@@ -174,13 +174,14 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         int periodo = (int) spnPeriodo.getValue();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
-        if(matriz != null){
-            List listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);
-            preencherJList(listaDisciplinas, lstDisciplinas);  
-        }else{
-            preencherJList(null, lstDisciplinas);
+        List listaDisciplinas = null;
+        
+        if(matriz != null)
+            listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);     
+        else
             cadastraAlocacao.setarMensagem("Curso não possui matriz cadastrada.");
-        }
+        
+        preencherJList(listaDisciplinas, lstDisciplinas); 
     }
     
     public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores) {

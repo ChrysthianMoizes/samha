@@ -29,13 +29,7 @@ public class Aula implements Serializable {
     
     @Column(nullable = false)
     private String turno;
-  
-    @Column(nullable = false, precision = 2)
-    private double horarioInicio;
-    
-    @Column(nullable = false, precision = 2)
-    private double horarioTermino;
-    
+ 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "alocacao_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -49,23 +43,19 @@ public class Aula implements Serializable {
     public Aula() {
     }
 
-    public Aula(int id, int numero, String dia, String turno, double horarioInicio, double horarioTermino, Alocacao alocacao, Oferta oferta) {
+    public Aula(int id, int numero, String dia, String turno, Alocacao alocacao, Oferta oferta) {
         this.id = id;
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
-        this.horarioInicio = horarioInicio;
-        this.horarioTermino = horarioTermino;
         this.alocacao = alocacao;
         this.oferta = oferta;
     }
 
-    public Aula(int numero, String dia, String turno, double horarioInicio, double horarioTermino, Alocacao alocacao, Oferta oferta) {
+    public Aula(int numero, String dia, String turno, Alocacao alocacao, Oferta oferta) {
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
-        this.horarioInicio = horarioInicio;
-        this.horarioTermino = horarioTermino;
         this.alocacao = alocacao;
         this.oferta = oferta;
     }
@@ -100,22 +90,6 @@ public class Aula implements Serializable {
 
     public void setTurno(String turno) {
         this.turno = turno;
-    }
-
-    public double getHorarioInicio() {
-        return horarioInicio;
-    }
-
-    public void setHorarioInicio(double horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
-
-    public double getHorarioTermino() {
-        return horarioTermino;
-    }
-
-    public void setHorarioTermino(double horarioTermino) {
-        this.horarioTermino = horarioTermino;
     }
 
     public Alocacao getAlocacao() {

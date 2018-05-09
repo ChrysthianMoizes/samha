@@ -4,6 +4,7 @@ import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
 import cdp.Turma;
+import cgt.Constantes;
 import cih.oferta.JDOferta;
 import java.awt.Color;
 import java.awt.Frame;
@@ -49,48 +50,110 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public void preencherComboTurma(int id, JComboBox cbxTurma) {
+        
         List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(id));
         preencherCombo(cbxTurma, listaTurmas);
+        jdOferta.atualizarLista();
         
-        if(listaTurmas.size() > 0){
-            jdOferta.atualizarLista();
-        }
     }
     
     public void preencherListaAlocacoes(int ano, int semestre, JComboBox cbxTurma, JList lstAlocacoes){
         
         Turma turma = (Turma) cbxTurma.getSelectedItem();
+        List listaAlocacoes = null;
         
         if(turma != null){
-            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
-            jdOferta.setListaAlocacoes(listaAlocacoes);
-            preencherJList(listaAlocacoes, lstAlocacoes);  
             
-            if(listaAlocacoes.size() == 0)
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
+            jdOferta.setListaAlocacoes(listaAlocacoes);
+            
+            if(listaAlocacoes.isEmpty())
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
-        }
+        }else
+            jdOferta.setarMensagem("Nenhuma turma encontrada.");
+        
+        preencherJList(listaAlocacoes, lstAlocacoes);
     }
     
-    public void gerarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes){
+    public void gerarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes, JComboBox cbxTurno){
         
         int posicao = lstAlocacoes.getSelectedIndex();
         
         if(posicao >= 0){
             
-            Alocacao alocacao = (Alocacao) listaAlocacoes.get(posicao);
-
-            Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarAula(alocacao);
-            aula.setAlocacao(alocacao);
-
             int coluna = tblTurma.getSelectedColumn();
             int linha = tblTurma.getSelectedRow();
             
-            if((linha >= 0) && (coluna >= 0))
+            if((linha >= 0) && (coluna >= 0)){
+                
+                String dia = obterStringDia(linha);
+                String turno = (String) cbxTurno.getSelectedItem();
+                int numero = coluna;
+                
+                Alocacao alocacao = (Alocacao) listaAlocacoes.get(posicao);
+
+                Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarAula(alocacao, dia, turno, numero);
+                aula.setAlocacao(alocacao);
+
                 tblTurma.setValueAt(aula, linha, coluna);
-            else
+                
+            }else
                 jdOferta.setarMensagem("Selecione uma célula da tabela.");
         }
     }
+    
+    public String obterStringDia(int linha){
+    
+        switch(linha){
+            
+            case 0:
+                return Constantes.SEGUNDA;
+            case 1:
+                return Constantes.TERCA;
+            case 2:
+                return Constantes.QUARTA;
+            case 3:
+                return Constantes.QUINTA;    
+            default:
+                return Constantes.SEXTA; 
+        }  
+    }
+
+    public void alterarTurno(JComboBox cbxTurno, JTable tblTurma){
+        
+        String turno = (String) cbxTurno.getSelectedItem();
+        
+        switch(turno){
+            
+            case Constantes.MATUTINO: 
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.MATUTINO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.MATUTINO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.MATUTINO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.MATUTINO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.MATUTINO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.MATUTINO_6);
+                break;
+                
+            case Constantes.VESPERTINO: 
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.VESPERTINO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.VESPERTINO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.VESPERTINO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.VESPERTINO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.VESPERTINO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.VESPERTINO_6);
+                break;
+                
+            default:
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.NOTURNO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.NOTURNO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.NOTURNO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.NOTURNO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.NOTURNO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.NOTURNO_6);
+                break;
+        }
+        jdOferta.repaint();
+    }    
     
     public void validarOfertas(JTable tabela){
         

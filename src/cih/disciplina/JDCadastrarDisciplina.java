@@ -252,7 +252,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         lblAulasSemanais.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblAulasSemanais.setText("Aulas semanais:");
+        lblAulasSemanais.setText("Aulas:");
 
         lblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblCargaHoraria.setText("Carga Horária:");
@@ -290,13 +290,13 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
                 .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                         .addComponent(lblAulasSemanais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spnAulas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(lblPeriodo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addGap(31, 31, 31)
                         .addComponent(lblSigla)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSigla))
@@ -308,9 +308,9 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
                         .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                                 .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblCargaHoraria)
-                                .addGap(23, 23, 23)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
                                 .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
                                 .addComponent(lblHoras, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
