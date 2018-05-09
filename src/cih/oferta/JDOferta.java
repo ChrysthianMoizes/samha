@@ -2,8 +2,6 @@ package cih.oferta;
 
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
-import cdp.Alocacao;
-import cdp.Aula;
 import cdp.Curso;
 import java.util.List;
 import javax.swing.SwingConstants;
@@ -47,6 +45,13 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().preencherComboCurso(cbxCurso, cbxTurma);
     }
     
+    public void preencherComboTurma(){
+        Curso curso = (Curso) cbxCurso.getSelectedItem();
+        if(curso != null){
+           ctrlPrincipal.getCtrlOferta().preencherComboTurma(curso.getId(), cbxTurma);
+        }
+    }
+    
     public void setarMensagem(String mensagem){
         lblMensagem.setText(mensagem);
     }
@@ -76,18 +81,6 @@ public class JDOferta extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlPrincipal = new javax.swing.JPanel();
-        pnlAlocacoes = new javax.swing.JPanel();
-        cbxCurso = new javax.swing.JComboBox<>();
-        cbxTurma = new javax.swing.JComboBox<>();
-        cbxTurno = new javax.swing.JComboBox<>();
-        lblAno = new javax.swing.JLabel();
-        spnAno = new javax.swing.JSpinner();
-        lblSemestre = new javax.swing.JLabel();
-        spnSemestre = new javax.swing.JSpinner();
-        jSeparator2 = new javax.swing.JSeparator();
-        lblMensagem = new javax.swing.JLabel();
-        scrlpnlAlocacoes = new javax.swing.JScrollPane();
-        lstAlocacoes = new javax.swing.JList<>();
         pnlNotificacoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaNotificacoes = new javax.swing.JTextArea();
@@ -125,121 +118,30 @@ public class JDOferta extends javax.swing.JDialog {
         pnlTabelaProfessor = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblProfessor = new javax.swing.JTable();
+        pnlAlocacoes = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstAlocacoes = new javax.swing.JList<>();
+        cbxCurso = new javax.swing.JComboBox<>();
+        cbxTurma = new javax.swing.JComboBox<>();
+        cbxTurno = new javax.swing.JComboBox<>();
+        lblAno = new javax.swing.JLabel();
+        spnAno = new javax.swing.JSpinner();
+        lblSemestre = new javax.swing.JLabel();
+        spnSemestre = new javax.swing.JSpinner();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1850, 788));
         setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1366, 788));
+        setPreferredSize(new java.awt.Dimension(1366, 800));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
         pnlPrincipal.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         pnlPrincipal.setMaximumSize(new java.awt.Dimension(1920, 790));
-
-        pnlAlocacoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alocações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
-
-        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCursoActionPerformed(evt);
-            }
-        });
-
-        cbxTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTurmaActionPerformed(evt);
-            }
-        });
-
-        cbxTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        cbxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
-        cbxTurno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTurnoActionPerformed(evt);
-            }
-        });
-
-        lblAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblAno.setText("Ano:");
-
-        spnAno.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
-        spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnAnoStateChanged(evt);
-            }
-        });
-
-        lblSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblSemestre.setText("Semestre:");
-
-        spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
-        spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
-        spnSemestre.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnSemestreStateChanged(evt);
-            }
-        });
-
-        lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 16)); // NOI18N
-        lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
-
-        lstAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lstAlocacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        scrlpnlAlocacoes.setViewportView(lstAlocacoes);
-
-        javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
-        pnlAlocacoes.setLayout(pnlAlocacoesLayout);
-        pnlAlocacoesLayout.setHorizontalGroup(
-            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAlocacoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
-                        .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxTurno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
-                        .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(lblSemestre)
-                        .addGap(10, 10, 10)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrlpnlAlocacoes))
-                .addContainerGap())
-        );
-        pnlAlocacoesLayout.setVerticalGroup(
-            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnAno)
-                    .addComponent(spnSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrlpnlAlocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         pnlNotificacoes.setBackground(new java.awt.Color(255, 255, 255));
         pnlNotificacoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Notificações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
@@ -504,9 +406,9 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(lblSexta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblQuinta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
-                        .addGroup(pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblSegunda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSegunda1))
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -514,8 +416,8 @@ public class JDOferta extends javax.swing.JDialog {
             pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jComboBox1)
+                .addGap(11, 11, 11)
                 .addComponent(lblSegunda1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTerca1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -523,8 +425,9 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(lblQuarta1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblQuinta1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSexta1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSexta1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         pnlNomeProfessor.setLayout(new java.awt.BorderLayout());
@@ -583,7 +486,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
                     .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -592,11 +495,114 @@ public class JDOferta extends javax.swing.JDialog {
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlProfessorLayout.createSequentialGroup()
                         .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        pnlAlocacoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alocações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
+
+        lstAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lstAlocacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(lstAlocacoes);
+
+        cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursoActionPerformed(evt);
+            }
+        });
+
+        cbxTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTurmaActionPerformed(evt);
+            }
+        });
+
+        cbxTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MATUTINO", "VESPERTINO", "NOTURNO" }));
+        cbxTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTurnoActionPerformed(evt);
+            }
+        });
+
+        lblAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblAno.setText("Ano:");
+
+        spnAno.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
+        spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnAnoStateChanged(evt);
+            }
+        });
+
+        lblSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblSemestre.setText("Semestre:");
+
+        spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
+        spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
+        spnSemestre.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnSemestreStateChanged(evt);
+            }
+        });
+
+        lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 16)); // NOI18N
+        lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
+
+        javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
+        pnlAlocacoes.setLayout(pnlAlocacoesLayout);
+        pnlAlocacoesLayout.setHorizontalGroup(
+            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAlocacoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
+                            .addComponent(lblAno)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblSemestre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(spnSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                        .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
+                            .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbxTurno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblMensagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlAlocacoesLayout.setVerticalGroup(
+            pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -610,7 +616,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -630,7 +636,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -645,8 +651,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        txtAreaNotificacoes.setText("");      
-        
+        txtAreaNotificacoes.setText("");  
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -654,10 +659,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null){
-           ctrlPrincipal.getCtrlOferta().preencherComboTurma(curso.getId(), cbxTurma);
-        }
+        preencherComboTurma();
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
@@ -681,6 +683,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -715,7 +718,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTurma;
     private javax.swing.JPanel pnlTurno;
     private javax.swing.JPanel pnlValidacao;
-    private javax.swing.JScrollPane scrlpnlAlocacoes;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnSemestre;
     private javax.swing.JTable tblProfessor;
