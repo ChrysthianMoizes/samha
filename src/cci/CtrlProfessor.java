@@ -112,19 +112,20 @@ public class CtrlProfessor extends CtrlGenerica{
     public void excluir(JTable tblProfessor) {
 
         try {
+            
             Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tblProfessor);
+
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaProf, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
                 String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().excluir(professor);
                 if (resposta.equals(Constantes.EXCLUIDO)) {
                     CtrlMensagem.exibirMensagemSucesso(buscaProf, "Excluído com sucesso!");
                     buscaProf.atualizarTabela();
-                } else {
-                    CtrlMensagem.exibirMensagemErro(buscaProf, resposta);
-                }
+                }else
+                    CtrlMensagem.exibirMensagemErro(buscaProf, resposta);     
             }
         } catch (Exception ex) {
-            CtrlMensagem.exibirMensagemErro(buscaProf, "Selecione um professor");
+            CtrlMensagem.exibirMensagemErro(buscaProf, ex.getMessage());
         }
     }
     

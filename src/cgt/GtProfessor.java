@@ -83,13 +83,21 @@ public class GtProfessor {
         
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            CoordenadorCurso coordenador = gtPrincipal.getGdPrincipal().getGdCoordenador().identificarCoordenadorCurso(professor.getId());
             
-            if(coordenador == null){
-                gtPrincipal.getGdPrincipal().getGdProfessor().excluirProfessor(professor);
-                return Constantes.EXCLUIDO;
+            if(professor != null){
+                CoordenadorCurso coordenador = gtPrincipal.getGdPrincipal().getGdCoordenador().identificarCoordenadorCurso(professor.getId());
+
+                if(coordenador == null){
+                    List listaAlocacoes = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorProfessor(professor.getId());
+                    if(listaAlocacoes.isEmpty())
+                        gtPrincipal.getGdPrincipal().getGdProfessor().excluirProfessor(professor);
+                    else
+                        throw new SAMHAException(22);
+                    return Constantes.EXCLUIDO;
+                }else
+                    return "Professor não pode ser excluído pois também é um coordenador";
             }else
-                return "Professor não pode ser excluído pois também é um coordenador";
+                throw new SAMHAException(7);
             
         } catch (SAMHAException ex) {
             return ex.getMessage();

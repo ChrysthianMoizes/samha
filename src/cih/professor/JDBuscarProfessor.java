@@ -407,6 +407,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        setarMensagem("");
         ctrlPrincipal.getCtrlProfessor().excluir(tblProfessor);    
     }//GEN-LAST:event_btnExcluirActionPerformed
 

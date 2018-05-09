@@ -119,7 +119,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         jLabel1.setText("Hrs.");
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(20, 20, 40, 5));
+        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(40, 20, 40, 5));
 
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);

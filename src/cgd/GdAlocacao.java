@@ -60,4 +60,16 @@ public class GdAlocacao extends GdGenerico{
         sessao.close();
         return lista;
     }
+    
+    public List filtrarPorProfessor(int id){
+        Criteria crit = criarSessao().createCriteria(Alocacao.class);
+        sessao.beginTransaction();
+        //crit.add( Restrictions.eq("professor1.id", id));
+        crit.add(Restrictions.or(Restrictions.eq("professor1.id", id), Restrictions.eq("professor2.id", id)));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
 }
