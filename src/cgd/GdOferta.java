@@ -28,7 +28,7 @@ public class GdOferta extends GdGenerico{
         return oferta;
     }
     
-    public void cadastrarOferta(Oferta oferta, ArrayList<ArrayList> matriz){
+    public void cadastrarOferta(Oferta oferta, Aula[][] matriz){
         
         try {
             sessao = criarSessao();
@@ -36,13 +36,14 @@ public class GdOferta extends GdGenerico{
             
             sessao.save(oferta);
             
-            int linhas = matriz.size();
-            int colunas = matriz.get(0).size();
+            int linhas = matriz.length;
+            int colunas = matriz[0].length;
+            
             Aula aula;
             
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
-                    aula = (Aula) matriz.get(linha).get(coluna);
+                    aula = matriz[linha][coluna];
                     aula.setOferta(oferta);
                     if(aula != null)
                         sessao.save(aula);  
@@ -60,19 +61,19 @@ public class GdOferta extends GdGenerico{
         
     }
     
-    public void cadastrarAulas(ArrayList<ArrayList> matriz){
+    public void cadastrarAulas(Aula[][] matriz){
         
         try {
             sessao = criarSessao();
             sessao.beginTransaction();
             
-            int linhas = matriz.size();
-            int colunas = matriz.get(0).size();
+            int linhas = matriz.length;
+            int colunas = matriz[0].length;
             Aula aula;
             
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
-                    aula = (Aula) matriz.get(linha).get(coluna);
+                    aula = (Aula) matriz[linha][coluna];
                     if(aula != null)
                         sessao.saveOrUpdate(aula);  
                 } 

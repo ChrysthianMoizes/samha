@@ -6,13 +6,12 @@ import cdp.Oferta;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import cdp.Turma;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GtOferta {
 
     private GtPrincipal gtPrincipal;
-    private ArrayList<ArrayList> matriz;
+    private Aula[][] matriz;
     private Oferta ofertaSelecionada;
     
     public GtOferta(GtPrincipal gt) {
@@ -214,26 +213,15 @@ public class GtOferta {
     }
     
     public void gerarMatriz(){
-        
-        matriz = new ArrayList<>();
-        
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            matriz.add(new ArrayList<>());
-        }
-        
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                setAulaMatriz(linha, coluna, null);
-            }
-        }
+        matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
     }
     
     public Aula getAulaMatriz(int linha, int coluna){
-        return (Aula) matriz.get(linha).get(coluna);
+        return (Aula) matriz[linha][coluna];
     }
     
     public void setAulaMatriz(int linha, int coluna, Aula aula){
-        matriz.get(linha).set(coluna, aula);    
+        matriz[linha][coluna] = aula;    
     }
 
     public Oferta getOfertaSelecionada() {
