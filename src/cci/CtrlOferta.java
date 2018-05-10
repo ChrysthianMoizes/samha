@@ -6,7 +6,6 @@ import cdp.Curso;
 import cdp.Turma;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
@@ -57,12 +56,14 @@ public class CtrlOferta extends CtrlGenerica{
         
     }
     
-    public void preencherListaAlocacoes(int ano, int semestre, JComboBox cbxTurma, JList lstAlocacoes){
+    public void preencherListaAlocacoes(int ano, int semestre, JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
         
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         List listaAlocacoes = null;
         
         if(turma != null){
+            
+            identificarOferta(ano, semestre, turma, tblTurma, cbxTurno);
             
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
             jdOferta.setListaAlocacoes(listaAlocacoes);
@@ -75,7 +76,31 @@ public class CtrlOferta extends CtrlGenerica{
         preencherJList(listaAlocacoes, lstAlocacoes);
     }
     
-    public void gerarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes, JComboBox cbxTurno){
+    public void identificarOferta(int ano, int semestre, Turma turma, JTable tblTurma, JComboBox cbxTurno){
+        
+        String turno = (String) cbxTurno.getSelectedItem();
+        ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, turno, turma.getId());
+        alterarTurno(turno, tblTurma);
+        preencherTabelaAulas(tblTurma);
+        validarOfertas(tblTurma);
+    }
+    
+    public void preencherTabelaAulas(JTable tblTurma){
+ 
+        JTableUtil.limparTabela(tblTurma);
+        Aula aula;
+        
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                aula = ctrlPrincipal.getGtPrincipal().getGtOferta().getAulaMatriz(linha, coluna);
+                if(aula != null)
+                    tblTurma.setValueAt(aula, linha, coluna);
+            }  
+        }   
+    }
+    
+    public void identificarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes, JComboBox cbxTurno){
         
         int posicao = lstAlocacoes.getSelectedIndex();
         
@@ -86,43 +111,37 @@ public class CtrlOferta extends CtrlGenerica{
             
             if((linha >= 0) && (coluna >= 0)){
                 
-                String dia = obterStringDia(linha);
                 String turno = (String) cbxTurno.getSelectedItem();
-                int numero = coluna;
                 
                 Alocacao alocacao = (Alocacao) listaAlocacoes.get(posicao);
 
-                Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarAula(alocacao, dia, turno, numero);
-                aula.setAlocacao(alocacao);
-
+                Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().identificarAula(alocacao, linha, turno, coluna);
                 tblTurma.setValueAt(aula, linha, coluna);
                 
             }else
-                jdOferta.setarMensagem("Selecione uma célula da tabela.");
+                exibirNotificação("1 Selecione uma célula da tabela.", 0, 0);
         }
     }
     
-    public String obterStringDia(int linha){
-    
-        switch(linha){
+    public void salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, JComboBox cbxTurma){
+        
+        Turma turma = (Turma) cbxTurma.getSelectedItem();
+        
+        if(turma != null){
             
-            case 0:
-                return Constantes.SEGUNDA;
-            case 1:
-                return Constantes.TERCA;
-            case 2:
-                return Constantes.QUARTA;
-            case 3:
-                return Constantes.QUINTA;    
-            default:
-                return Constantes.SEXTA; 
-        }  
-    }
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtOferta().salvarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
 
-    public void alterarTurno(JComboBox cbxTurno, JTable tblTurma){
-        
-        String turno = (String) cbxTurno.getSelectedItem();
-        
+            if(resposta.equals(Constantes.CADASTRADO)){
+                CtrlMensagem.exibirMensagemSucesso(jdOferta, "Aulas inseridas com sucesso!");
+
+            }else
+                CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
+        }else
+            CtrlMensagem.exibirMensagemErro(jdOferta, "Nenhuma turma selecionada.");
+    }
+    
+    public void alterarTurno(String turno, JTable tblTurma){
+     
         switch(turno){
             
             case Constantes.MATUTINO: 
@@ -157,10 +176,11 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void validarOfertas(JTable tabela){
         
-        for(int linha = 0; linha < 5; linha++){
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
             
-            for(int coluna = 0; coluna < 6; coluna++){
-                Aula aula = (Aula) tabela.getValueAt(linha, coluna);
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                
+                Aula aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtOferta().getAulaMatriz(linha, coluna);
                 
                 if(aula != null){
                     String mensagem = ctrlPrincipal.getGtPrincipal().getGtOferta().validarOferta(aula);

@@ -28,7 +28,16 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void gerarAula(){
         setarMensagem("");
-        ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, listaAlocacoes, cbxTurno);
+        ctrlPrincipal.getCtrlOferta().identificarAula(lstAlocacoes, tblTurma, listaAlocacoes, cbxTurno);
+    }
+    
+    public void salvarOferta(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        int tempo = (int) spnTempoMaximo.getValue();
+        int intervalo = (int) spnIntervalo.getValue();
+        ctrlPrincipal.getCtrlOferta().salvarOferta(ano, semestre, tempo, intervalo, cbxTurma);
     }
     
     public void atualizarLista(){
@@ -38,7 +47,7 @@ public class JDOferta extends javax.swing.JDialog {
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        ctrlPrincipal.getCtrlOferta().preencherListaAlocacoes(ano, semestre, cbxTurma, lstAlocacoes);
+        ctrlPrincipal.getCtrlOferta().preencherListaAlocacoes(ano, semestre, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
     }
     
     public void preencherComboCurso(){ 
@@ -88,10 +97,10 @@ public class JDOferta extends javax.swing.JDialog {
         btnValidar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         lblTempoMaximo = new javax.swing.JLabel();
-        txtTempoMaximo = new javax.swing.JTextField();
         lblIntervaloMinimo = new javax.swing.JLabel();
-        txtIntervaloMinimo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        spnIntervalo = new javax.swing.JSpinner();
+        spnTempoMaximo = new javax.swing.JSpinner();
         pnlTurma = new javax.swing.JPanel();
         pnlDiasTurma = new javax.swing.JPanel();
         lblSexta = new javax.swing.JLabel();
@@ -175,7 +184,7 @@ public class JDOferta extends javax.swing.JDialog {
 
         btnValidar.setBackground(new java.awt.Color(255, 255, 255));
         btnValidar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnValidar.setText("Validar Ofertas");
+        btnValidar.setText("Inserir");
         btnValidar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,16 +206,14 @@ public class JDOferta extends javax.swing.JDialog {
         lblTempoMaximo.setText("Tempo Máximo:");
         lblTempoMaximo.setToolTipText("");
 
-        txtTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtTempoMaximo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTempoMaximo.setText("11");
-
         lblIntervaloMinimo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblIntervaloMinimo.setText("Intervalo Mínimo:");
 
-        txtIntervaloMinimo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtIntervaloMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtIntervaloMinimo.setText("11");
+        spnIntervalo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
+        spnIntervalo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
+
+        spnTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
+        spnTempoMaximo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
 
         javax.swing.GroupLayout pnlValidacaoLayout = new javax.swing.GroupLayout(pnlValidacao);
         pnlValidacao.setLayout(pnlValidacaoLayout);
@@ -219,15 +226,15 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(pnlValidacaoLayout.createSequentialGroup()
                         .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlValidacaoLayout.createSequentialGroup()
-                                .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(spnIntervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlValidacaoLayout.createSequentialGroup()
                                 .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(25, 25, 25)
-                                .addComponent(txtTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(59, 59, 59)
+                                .addComponent(spnTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnValidar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnValidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         pnlValidacaoLayout.setVerticalGroup(
@@ -236,16 +243,16 @@ public class JDOferta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIntervaloMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIntervaloMinimo))
+                    .addComponent(lblIntervaloMinimo)
+                    .addComponent(spnIntervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -494,7 +501,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                     .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -571,16 +578,16 @@ public class JDOferta extends javax.swing.JDialog {
             .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(lblAno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(lblSemestre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,13 +606,12 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSemestre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSemestre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -624,7 +630,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -655,11 +661,12 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        gerarAula();
+        salvarOferta();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        txtAreaNotificacoes.setText("");  
+        txtAreaNotificacoes.setText("");
+        gerarAula();
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -679,7 +686,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
-        ctrlPrincipal.getCtrlOferta().alterarTurno(cbxTurno, tblTurma);
+        atualizarLista();
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -727,11 +734,11 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTurno;
     private javax.swing.JPanel pnlValidacao;
     private javax.swing.JSpinner spnAno;
+    private javax.swing.JSpinner spnIntervalo;
     private javax.swing.JSpinner spnSemestre;
+    private javax.swing.JSpinner spnTempoMaximo;
     private javax.swing.JTable tblProfessor;
     private javax.swing.JTable tblTurma;
     private javax.swing.JTextArea txtAreaNotificacoes;
-    private javax.swing.JTextField txtIntervaloMinimo;
-    private javax.swing.JTextField txtTempoMaximo;
     // End of variables declaration//GEN-END:variables
 }

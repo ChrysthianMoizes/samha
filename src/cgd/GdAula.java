@@ -29,4 +29,16 @@ public class GdAula extends GdGenerico{
         return lista;
     }
     
+    public List filtrarAulasTurno(String turno, int idOferta) {
+        Criteria crit = criarSessao().createCriteria(Aula.class);
+        sessao.beginTransaction();
+        crit.createAlias("oferta", "o");
+        crit.add( Restrictions.eq("turno", turno));
+        crit.add( Restrictions.eq("o.id", idOferta));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }  
 }

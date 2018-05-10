@@ -23,11 +23,11 @@ public class Oferta implements Serializable {
     @Column(nullable = false)
     private int semestre;
     
-    @Column(nullable = false, precision = 2)
-    private double tempoMaximoTrabalho;
+    @Column(nullable = false)
+    private int tempoMaximoTrabalho;
     
-    @Column(nullable = false, precision = 2)
-    private double intervaloMinimo;
+    @Column(nullable = false)
+    private int intervaloMinimo;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "turma_id", nullable = false)
@@ -36,7 +36,7 @@ public class Oferta implements Serializable {
     public Oferta() {
     }
 
-    public Oferta(int id, int ano, int semestre, double tempoMaximoTrabalho, double intervaloMinimo, Turma turma) {
+    public Oferta(int id, int ano, int semestre, int tempoMaximoTrabalho, int intervaloMinimo, Turma turma) {
         this.id = id;
         this.semestre = semestre;
         this.tempoMaximoTrabalho = tempoMaximoTrabalho;
@@ -44,7 +44,7 @@ public class Oferta implements Serializable {
         this.turma = turma;
     }
 
-    public Oferta(int ano, int semestre, double tempoMaximoTrabalho, double intervaloMinimo, Turma turma) {
+    public Oferta(int ano, int semestre, int tempoMaximoTrabalho, int intervaloMinimo, Turma turma) {
         this.semestre = semestre;
         this.tempoMaximoTrabalho = tempoMaximoTrabalho;
         this.intervaloMinimo = intervaloMinimo;
@@ -55,7 +55,7 @@ public class Oferta implements Serializable {
         return tempoMaximoTrabalho;
     }
 
-    public void setTempoMaximoTrabalho(double tempoMaximoTrabalho) {
+    public void setTempoMaximoTrabalho(int tempoMaximoTrabalho) {
         this.tempoMaximoTrabalho = tempoMaximoTrabalho;
     }
 
@@ -63,7 +63,7 @@ public class Oferta implements Serializable {
         return intervaloMinimo;
     }
 
-    public void setIntervaloMinimo(double intervaloMinimo) {
+    public void setIntervaloMinimo(int intervaloMinimo) {
         this.intervaloMinimo = intervaloMinimo;
     }
     

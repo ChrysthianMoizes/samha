@@ -7,6 +7,9 @@ public abstract class Constantes {
     public static final int PERMISSAO_COORD = 2;
     public static final int PERMISSAO_VIEW = 3;
     
+    public static final int LINHA = 5;
+    public static final int COLUNA = 6;
+    
     public static final String CADASTRADO = "cadastrado";
     public static final String ALTERADO = "alterado";
     public static final String EXCLUIDO = "excluido";
