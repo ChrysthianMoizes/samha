@@ -158,6 +158,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(curso.getId());
             preencherCombo(cbxMatriz, listaMatriz); 
             cadastraAlocacao.preencherListaDisciplinas();
+            cadastraAlocacao.atualizarTabela();
         }    
     }
     
