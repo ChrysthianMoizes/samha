@@ -16,7 +16,7 @@ public abstract class CtrlGenerica {
     
     public void listarEmTabela(List lista, JTable tabela, JDialog janela, String nomeMetodo){
         
-        JTableUtil.limparTabela(tabela);
+        JTableUtil.removerLinhas(tabela);
 
         try {
             JTableUtil.preencherTabela(lista, tabela, nomeMetodo);

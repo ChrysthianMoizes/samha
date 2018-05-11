@@ -61,7 +61,7 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     
     public void alterarComboFiltro(){
         
-        JTableUtil.limparTabela(tblTurma);
+        JTableUtil.removerLinhas(tblTurma);
         lblMensagem.setText("");
         txtFiltro.setText("");
         

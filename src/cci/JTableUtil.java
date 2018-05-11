@@ -76,10 +76,27 @@ public class JTableUtil {
      * Apaga todas as linhas da tabela.
      * @param jTable 
      */
-    public static void limparTabela(JTable jTable) {
+    public static void removerLinhas(JTable jTable) {
         int qtdLinhas = jTable.getRowCount() - 1;
         for (int i = qtdLinhas; i >= 0; i--)
             getModel(jTable).removeRow(i);
+    }
+    
+    /**
+     * Limpa todas as celulas da tabela.
+     * @param jTable 
+     */
+    public static void limparCelulasTabela(JTable jTable){
+        
+        int linhas = jTable.getRowCount() - 1;
+        int colunas = jTable.getColumnCount() - 1;
+        
+        for(int linha = 0; linha < linhas; linha++){
+            
+            for(int coluna = 0; coluna < colunas; coluna++){
+                jTable.setValueAt(null, linha, coluna);
+            }  
+        }
     }
     
     /**

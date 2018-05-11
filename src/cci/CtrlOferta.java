@@ -58,6 +58,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void atualizarTela(int ano, int semestre, JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
         
+        JTableUtil.limparCelulasTabela(tblTurma);
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         String turno = (String) cbxTurno.getSelectedItem();
         
@@ -94,7 +95,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void preencherTabelaAulas(JTable tblTurma){
  
-        JTableUtil.limparTabela(tblTurma);
+        JTableUtil.limparCelulasTabela(tblTurma);
         Aula aula;
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){

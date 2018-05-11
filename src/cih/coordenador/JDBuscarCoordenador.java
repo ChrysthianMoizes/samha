@@ -36,7 +36,7 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     
     public void alterarComboFiltro(){
         
-        JTableUtil.limparTabela(tblCoordenador);
+        JTableUtil.removerLinhas(tblCoordenador);
         lblMensagem.setText("");
         txtFiltro.setText("");
         

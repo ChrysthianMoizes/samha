@@ -82,7 +82,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     
     private void alterarComboFiltro(){
         
-        JTableUtil.limparTabela(tblCurso);
+        JTableUtil.removerLinhas(tblCurso);
         lblMensagem.setText("");
         txtFiltro.setText("");
         

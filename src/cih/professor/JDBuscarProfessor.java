@@ -418,7 +418,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirKeyPressed
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
-        //JTableUtil.limparTabela(tblProfessor);
+        //JTableUtil.removerLinhas(tblProfessor);
         //alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
@@ -427,7 +427,7 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void cbxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFiltroActionPerformed
-        JTableUtil.limparTabela(tblProfessor);
+        JTableUtil.removerLinhas(tblProfessor);
         alterarComboFiltro();
     }//GEN-LAST:event_cbxFiltroActionPerformed
 

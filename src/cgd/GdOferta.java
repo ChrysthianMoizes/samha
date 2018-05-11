@@ -39,7 +39,7 @@ public class GdOferta extends GdGenerico{
             int linhas = matriz.length;
             int colunas = matriz[0].length;
             
-            Aula aula;
+            Aula aula = null;
             
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){

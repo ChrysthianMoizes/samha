@@ -49,7 +49,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         if(matriz == null){
             setarMensagem("Curso não possui matriz associada.");
-            JTableUtil.limparTabela(tblDisciplina);
+            JTableUtil.removerLinhas(tblDisciplina);
         }else{
         
             if(colunaFiltro.equals("curso")){
@@ -81,7 +81,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     
     public void alterarComboFiltro(){
         
-        JTableUtil.limparTabela(tblDisciplina);
+        JTableUtil.removerLinhas(tblDisciplina);
         lblMensagem.setText("");
    
         if(cbxFiltro.getSelectedIndex() == 0){
