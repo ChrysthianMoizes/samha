@@ -73,8 +73,12 @@ public class JDOferta extends javax.swing.JDialog {
         lblTurma.setText(mensagem);
     }
     
-    public void exibirNotificação(String mensagem){
+    public void exibirNotificacao(String mensagem){
         txtAreaNotificacoes.append(mensagem);
+    }
+    
+    public void limparNotificacoes(){
+        txtAreaNotificacoes.setText("");
     }
 
     public List getListaAlocacoes() {

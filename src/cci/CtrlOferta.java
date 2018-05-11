@@ -59,6 +59,7 @@ public class CtrlOferta extends CtrlGenerica{
     public void atualizarTela(int ano, int semestre, JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
         
         JTableUtil.limparCelulasTabela(tblTurma);
+        jdOferta.limparNotificacoes();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         String turno = (String) cbxTurno.getSelectedItem();
         
@@ -133,6 +134,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, JComboBox cbxTurma){
         
+        jdOferta.limparNotificacoes();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         
         if(turma != null){
@@ -203,7 +205,7 @@ public class CtrlOferta extends CtrlGenerica{
         
         if(mensagem != null){
             String notificacao = mensagem.substring(2);
-            jdOferta.exibirNotificação("Linha " + linha + ", Coluna " + coluna + ": " + notificacao+"\n");
+            jdOferta.exibirNotificacao("Linha " + linha + ", Coluna " + coluna + ": " + notificacao+"\n");
         }
     }
     

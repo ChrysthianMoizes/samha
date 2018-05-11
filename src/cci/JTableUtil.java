@@ -88,8 +88,8 @@ public class JTableUtil {
      */
     public static void limparCelulasTabela(JTable jTable){
         
-        int linhas = jTable.getRowCount() - 1;
-        int colunas = jTable.getColumnCount() - 1;
+        int linhas = jTable.getRowCount();
+        int colunas = jTable.getColumnCount();
         
         for(int linha = 0; linha < linhas; linha++){
             

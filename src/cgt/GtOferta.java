@@ -203,12 +203,10 @@ public class GtOferta {
     public void preencherMatrizOferta(List lista){
                
         Aula aula; 
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
+        for(int linha = 0; linha < lista.size(); linha++){
             aula = (Aula) lista.get(linha);
             aula.setOferta(getOfertaSelecionada());
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                setAulaMatriz(linha, coluna, aula);
-            }
+            setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), aula);   
         }  
     }
     
