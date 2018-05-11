@@ -44,9 +44,11 @@ public class GdOferta extends GdGenerico{
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
                     aula = matriz[linha][coluna];
-                    aula.setOferta(oferta);
-                    if(aula != null)
+                    
+                    if(aula != null){
+                        aula.setOferta(oferta);
                         sessao.save(aula);  
+                    }      
                 } 
             }
 

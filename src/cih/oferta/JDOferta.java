@@ -40,14 +40,14 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().salvarOferta(ano, semestre, tempo, intervalo, cbxTurma);
     }
     
-    public void atualizarLista(){
+    public void atualizarTela(){
         
         setarMensagem("");
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        ctrlPrincipal.getCtrlOferta().preencherListaAlocacoes(ano, semestre, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
+        ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
     }
     
     public void preencherComboCurso(){ 
@@ -665,12 +665,11 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        txtAreaNotificacoes.setText("");
         gerarAula();
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
-        atualizarLista();
+        atualizarTela();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
@@ -678,15 +677,15 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        atualizarLista();
+        atualizarTela();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        atualizarLista();
+        atualizarTela();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
-        atualizarLista();
+        atualizarTela();
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
