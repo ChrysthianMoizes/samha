@@ -1,6 +1,7 @@
 package cih.oferta;
 
 import cci.CtrlPrincipal;
+import cci.ManipuladorTransferencia;
 import cci.RenderizadorCelulas;
 import cdp.Curso;
 import java.util.List;
@@ -149,7 +150,7 @@ public class JDOferta extends javax.swing.JDialog {
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1850, 788));
         setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1366, 800));
+        setPreferredSize(new java.awt.Dimension(1600, 800));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
@@ -346,13 +347,13 @@ public class JDOferta extends javax.swing.JDialog {
         tblTurma.setCellSelectionEnabled(true);
         tblTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblTurma.setDragEnabled(true);
-        tblTurma.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
         tblTurma.setRowHeight(65);
         tblTurma.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblTurma.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
+        tblTurma.setTransferHandler(new ManipuladorTransferencia());
         ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
@@ -526,6 +527,7 @@ public class JDOferta extends javax.swing.JDialog {
 
         lstAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lstAlocacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstAlocacoes.setDragEnabled(true);
         jScrollPane3.setViewportView(lstAlocacoes);
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
