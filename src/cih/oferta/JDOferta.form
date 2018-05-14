@@ -66,12 +66,12 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="pnlTurma" max="32767" attributes="0"/>
-                      <Component id="pnlProfessor" pref="758" max="32767" attributes="0"/>
+                      <Component id="pnlProfessor" pref="747" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="pnlNotificacoes" max="32767" attributes="0"/>
                       <Component id="pnlValidacao" max="32767" attributes="0"/>
+                      <Component id="pnlNotificacoes" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -186,7 +186,7 @@
                                       <Component id="spnIntervalo" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="lblTempoMaximo" max="32767" attributes="0"/>
+                                      <Component id="lblTempoMaximo" pref="115" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                       <Component id="spnTempoMaximo" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
@@ -494,7 +494,7 @@
                       </Table>
                     </Property>
                     <Property name="cellSelectionEnabled" type="boolean" value="true"/>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());&#xa;tblTurma.setTransferHandler(new ManipuladorTransferencia());&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);">
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());&#xa;tblTurma.setTransferHandler(new ManipuladorTransferencia(ctrlPrincipal));&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);">
                       <TableColumnModel selectionModel="2">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
@@ -569,7 +569,7 @@
                       <Component id="pnlDiasProfessor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pnlTabelaProfessor" pref="650" max="32767" attributes="0"/>
+                          <Component id="pnlTabelaProfessor" pref="639" max="32767" attributes="0"/>
                           <Component id="pnlNomeProfessor" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>

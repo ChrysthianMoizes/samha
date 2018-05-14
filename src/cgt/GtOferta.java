@@ -143,8 +143,6 @@ public class GtOferta {
         novaAula.setNumero(numero);
         novaAula.setTurno(turno);
 
-        setAulaMatriz(dia, numero, novaAula);
-
         if(getOfertaSelecionada() != null)
             novaAula.setOferta(getOfertaSelecionada());
 
@@ -160,6 +158,46 @@ public class GtOferta {
 
         setAulaMatriz(dia, numero, aula);
         return aula;
+    }
+    
+    public void importarAulaLista(int linha, int coluna, Aula origem){
+        
+        Aula destino = getAulaMatriz(linha, coluna);
+        
+        if(destino == null){
+            setAulaMatriz(linha, coluna, origem);
+        }else{
+            setAulaMatriz(linha, coluna, alterarAula(destino, origem.getAlocacao(), obterInteiroDia(origem.getDia()), origem.getTurno(), origem.getNumero()));
+        }
+    }
+    
+    public void moverAulaInterna(int linha, int coluna, Aula origem){
+        
+        Aula destino = getAulaMatriz(linha, coluna);
+        
+        String d = origem.getDia();
+        int numero = origem.getNumero();
+        
+        origem.setDia(obterStringDia(linha));
+        origem.setNumero(coluna);
+        
+        if(destino == null){
+            setAulaMatriz(obterInteiroDia(d), numero, null);
+            setAulaMatriz(linha, coluna, origem);          
+        }else{
+            
+            Aula aulaAux = destino;
+            
+            setAulaMatriz(linha, coluna, origem);
+            aulaAux.setDia(d);
+            aulaAux.setNumero(numero);
+            setAulaMatriz(obterInteiroDia(d), numero, aulaAux);
+        }
+    }
+    public void removerAula(Aula aula){
+        
+        if(aula != null)
+            setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), null);
     }
     
     public String salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma){

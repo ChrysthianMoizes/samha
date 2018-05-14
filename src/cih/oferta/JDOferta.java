@@ -3,21 +3,23 @@ package cih.oferta;
 import cci.CtrlPrincipal;
 import cci.ManipuladorTransferencia;
 import cci.RenderizadorCelulas;
+import cdp.Aula;
 import cdp.Curso;
-import java.util.List;
+import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDOferta extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
-    private List listaAlocacoes;
 
     public JDOferta(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
         setarBackground();
+        tblTurma.setTransferHandler(new ManipuladorTransferencia(ctrlPrincipal));
     }
     
     private void setarBackground(){
@@ -27,9 +29,8 @@ public class JDOferta extends javax.swing.JDialog {
         pnlValidacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
-    public void gerarAula(){
-        setarMensagem("");
-        ctrlPrincipal.getCtrlOferta().identificarAula(lstAlocacoes, tblTurma, listaAlocacoes, cbxTurno);
+    public Aula gerarAula(){
+        return ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
     }
     
     public void salvarOferta(){
@@ -82,14 +83,14 @@ public class JDOferta extends javax.swing.JDialog {
         txtAreaNotificacoes.setText("");
     }
 
-    public List getListaAlocacoes() {
-        return listaAlocacoes;
+    public JList<String> getLstAlocacoes() {
+        return lstAlocacoes;
     }
 
-    public void setListaAlocacoes(List listaAlocacoes) {
-        this.listaAlocacoes = listaAlocacoes;
+    public JTable getTblTurma() {
+        return tblTurma;
     }
-    
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -235,7 +236,7 @@ public class JDOferta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spnIntervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlValidacaoLayout.createSequentialGroup()
-                                .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                 .addGap(59, 59, 59)
                                 .addComponent(spnTempoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -353,7 +354,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
-        tblTurma.setTransferHandler(new ManipuladorTransferencia());
+        tblTurma.setTransferHandler(new ManipuladorTransferencia(ctrlPrincipal));
         ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
@@ -506,7 +507,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                     .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -636,11 +637,11 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlValidacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlValidacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         pnlPrincipalLayout.setVerticalGroup(
@@ -671,7 +672,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        gerarAula();
+        
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed

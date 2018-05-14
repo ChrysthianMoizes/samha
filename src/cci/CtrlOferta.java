@@ -19,6 +19,9 @@ public class CtrlOferta extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDOferta jdOferta;
     private RenderizadorCelulas render;
+    private List listaAlocacoes;
+    private boolean dropInterno = false;
+    private Aula aulaSelecionada;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -74,7 +77,7 @@ public class CtrlOferta extends CtrlGenerica{
         if(turma != null){ 
             
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
-            jdOferta.setListaAlocacoes(listaAlocacoes);
+            setListaAlocacoes(listaAlocacoes);
             
             if(listaAlocacoes.isEmpty())
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
@@ -109,8 +112,9 @@ public class CtrlOferta extends CtrlGenerica{
         }   
     }
     
-    public void identificarAula(JList lstAlocacoes, JTable tblTurma, List listaAlocacoes, JComboBox cbxTurno){
+    public Aula gerarAula(JList lstAlocacoes, JTable tblTurma, JComboBox cbxTurno){
         
+        Aula aula = null;
         int posicao = lstAlocacoes.getSelectedIndex();
         
         if(posicao >= 0){
@@ -121,15 +125,39 @@ public class CtrlOferta extends CtrlGenerica{
             if((linha >= 0) && (coluna >= 0)){
                 
                 String turno = (String) cbxTurno.getSelectedItem();
-                
-                Alocacao alocacao = (Alocacao) listaAlocacoes.get(posicao);
-
-                Aula aula = ctrlPrincipal.getGtPrincipal().getGtOferta().identificarAula(alocacao, linha, turno, coluna);
-                tblTurma.setValueAt(aula, linha, coluna);
+                Alocacao alocacao = (Alocacao) getListaAlocacoes().get(posicao);
+                aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarNovaAula(alocacao, linha, turno, coluna);
                 
             }else
                 exibirNotificação("1 Selecione uma célula da tabela.", -1, -1);
         }
+        
+        return aula;
+    }
+    
+    public void importarAulaLista(int linha, int coluna, Aula aula){
+        
+        if(aula != null && !isDropInterno()){    // ESTOU ARRASTANDO DA LISTA         
+            ctrlPrincipal.getGtPrincipal().getGtOferta().importarAulaLista(linha, coluna, aula);
+            
+        }else if(aula != null && isDropInterno()){  // ESTOU ARRASTANDO DA TABELA
+            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaInterna(linha, coluna, aula);
+            preencherTabelaAulas(jdOferta.getTblTurma());
+        }   
+    }
+    
+    public Aula identificarOrigem(){
+        
+        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
+        
+        if(indice >= 0 && !isDropInterno())
+            return (Aula) jdOferta.gerarAula();
+        else 
+            return getAulaSelecionada();
+    }
+    
+    public void removerAulaTabela(){     
+        ctrlPrincipal.getGtPrincipal().getGtOferta().removerAula(getAulaSelecionada()); 
     }
     
     public void salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, JComboBox cbxTurma){
@@ -226,5 +254,29 @@ public class CtrlOferta extends CtrlGenerica{
 //            celula.setBackground(Color.GREEN);
 //
 //        render.prepareRenderer(null, linha, coluna);
+    }
+
+    public List getListaAlocacoes() {
+        return listaAlocacoes;
+    }
+
+    public void setListaAlocacoes(List listaAlocacoes) {
+        this.listaAlocacoes = listaAlocacoes;
+    }
+
+    public boolean isDropInterno() {
+        return dropInterno;
+    }
+
+    public void setDropInterno(boolean dropInterno) {
+        this.dropInterno = dropInterno;
+    }
+
+    public Aula getAulaSelecionada() {
+        return aulaSelecionada;
+    }
+
+    public void setAulaSelecionada(Aula aulaSelecionada) {
+        this.aulaSelecionada = aulaSelecionada;
     }
 }

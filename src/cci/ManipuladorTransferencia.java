@@ -4,15 +4,19 @@ import cdp.Aula;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.io.IOException;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
 import javax.swing.table.DefaultTableModel;
 
 public class ManipuladorTransferencia extends TransferHandler{
+    
+    private CtrlPrincipal ctrlPrincipal;
+
+    public ManipuladorTransferencia(CtrlPrincipal ctrl) {
+        this.ctrlPrincipal = ctrl;
+    } 
      
     @Override
     public int getSourceActions(JComponent c) {
@@ -28,23 +32,17 @@ public class ManipuladorTransferencia extends TransferHandler{
         
         Object obj = (Object)table.getModel().getValueAt(row,col);
         
-        StringSelection transferable = null;
-        
-        if(obj instanceof String)
-            transferable = new StringSelection((String) obj);
-        if(obj instanceof Aula)
-            transferable = new StringSelection(obj.toString());
+        StringSelection transferable = new StringSelection(obj.toString());
         
         table.getModel().setValueAt(null,row,col);
-        
+        ctrlPrincipal.getCtrlOferta().setAulaSelecionada((Aula) obj);
+        ctrlPrincipal.getCtrlOferta().setDropInterno(true);
         return transferable;
     }
      
     @Override
     public boolean canImport(TransferHandler.TransferSupport info){
-        if (!info.isDataFlavorSupported(DataFlavor.stringFlavor))
-            return false;
-        return true;
+        return info.isDataFlavorSupported(DataFlavor.stringFlavor);
     }
      
     @Override
@@ -63,16 +61,12 @@ public class ManipuladorTransferencia extends TransferHandler{
 
         int row = dl.getRow();
         int col=dl.getColumn();
+        
+        Aula aula = ctrlPrincipal.getCtrlOferta().identificarOrigem();
+        ctrlPrincipal.getCtrlOferta().importarAulaLista(row, col, aula);
 
-        String data;
-        try {
-            data = (String) support.getTransferable().getTransferData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            return false;
-        }
-
-        tableModel.setValueAt(data, row, col);
-
+        tableModel.setValueAt(aula, row, col);
+        ctrlPrincipal.getCtrlOferta().setDropInterno(false);
         return true;
     }
 }
