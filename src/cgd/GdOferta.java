@@ -2,7 +2,7 @@ package cgd;
 
 import cdp.Aula;
 import cdp.Oferta;
-import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
@@ -28,7 +28,7 @@ public class GdOferta extends GdGenerico{
         return oferta;
     }
     
-    public void cadastrarOferta(Oferta oferta, Aula[][] matriz){
+    public void cadastrarAulasOferta(Oferta oferta, Aula[][] matriz){
         
         try {
             sessao = criarSessao();
@@ -63,21 +63,27 @@ public class GdOferta extends GdGenerico{
         
     }
     
-    public void cadastrarAulas(Aula[][] matriz){
+    public void atualizarAulasOferta(Aula[][] matriz, List aulasRemovidas){
         
         try {
             sessao = criarSessao();
             sessao.beginTransaction();
             
+            for(int i = 0; i < aulasRemovidas.size(); i++){
+                sessao.delete(aulasRemovidas.get(i));
+            }
+            
             int linhas = matriz.length;
             int colunas = matriz[0].length;
             Aula aula;
-            
+                     
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
                     aula = (Aula) matriz[linha][coluna];
-                    if(aula != null)
-                        sessao.saveOrUpdate(aula);  
+                    if(aula != null){
+                        matriz[linha][coluna] = null;
+                        sessao.saveOrUpdate(aula);   
+                    }
                 } 
             }
             

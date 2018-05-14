@@ -1,10 +1,10 @@
 package cih.oferta;
 
 import cci.CtrlPrincipal;
-import cci.ManipuladorTransferencia;
 import cci.RenderizadorCelulas;
 import cdp.Aula;
 import cdp.Curso;
+import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -28,8 +28,8 @@ public class JDOferta extends javax.swing.JDialog {
         pnlValidacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
-    public Aula gerarAula(){
-        return ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
+    public void gerarAula(){
+        ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
     }
     
     public void salvarOferta(){
@@ -42,8 +42,6 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void atualizarTela(){
-        
-        setarMensagem("");
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
@@ -65,13 +63,9 @@ public class JDOferta extends javax.swing.JDialog {
     public void setarMensagem(String mensagem){
         lblMensagem.setText(mensagem);
     }
-
-    public void setarTurno(String mensagem){
-        lblTurno.setText(mensagem);
-    }
     
     public void setarTurma(String mensagem){
-        lblTurma.setText(mensagem);
+        lblNomeTurma.setText(mensagem);
     }
     
     public void exibirNotificacao(String mensagem){
@@ -89,11 +83,17 @@ public class JDOferta extends javax.swing.JDialog {
     public JTable getTblTurma() {
         return tblTurma;
     }
+    
+    public void setarTurno(int indice){
+        cbxTurno.setSelectedIndex(indice);
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUpRemover = new javax.swing.JPopupMenu();
+        itemRemover = new javax.swing.JMenuItem();
         pnlPrincipal = new javax.swing.JPanel();
         pnlNotificacoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -116,7 +116,7 @@ public class JDOferta extends javax.swing.JDialog {
         jSeparator3 = new javax.swing.JSeparator();
         lblTurma = new javax.swing.JLabel();
         pnlTurno = new javax.swing.JPanel();
-        lblTurno = new javax.swing.JLabel();
+        lblNomeTurma = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTurma = new javax.swing.JTable();
         pnlProfessor = new javax.swing.JPanel();
@@ -144,6 +144,13 @@ public class JDOferta extends javax.swing.JDialog {
         spnSemestre = new javax.swing.JSpinner();
         jSeparator2 = new javax.swing.JSeparator();
         lblMensagem = new javax.swing.JLabel();
+
+        itemRemover.setText("jMenuItem1");
+        itemRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRemoverActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Montar Oferta");
@@ -189,7 +196,7 @@ public class JDOferta extends javax.swing.JDialog {
 
         btnValidar.setBackground(new java.awt.Color(255, 255, 255));
         btnValidar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnValidar.setText("Inserir");
+        btnValidar.setText("Validar Aulas");
         btnValidar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,10 +325,10 @@ public class JDOferta extends javax.swing.JDialog {
 
         pnlTurno.setLayout(new java.awt.BorderLayout());
 
-        lblTurno.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
-        lblTurno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTurno.setText("Turno");
-        pnlTurno.add(lblTurno, java.awt.BorderLayout.CENTER);
+        lblNomeTurma.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lblNomeTurma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNomeTurma.setText("Turma");
+        pnlTurno.add(lblNomeTurma, java.awt.BorderLayout.CENTER);
 
         tblTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         tblTurma.setModel(new javax.swing.table.DefaultTableModel(
@@ -350,10 +357,15 @@ public class JDOferta extends javax.swing.JDialog {
         tblTurma.setRowHeight(65);
         tblTurma.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblTurma.getTableHeader().setReorderingAllowed(false);
+        tblTurma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTurmaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
-        tblTurma.setTransferHandler(new ManipuladorTransferencia(ctrlPrincipal));
+        tblTurma.setTransferHandler(new cci.ManipuladorTransferenciaTabela(ctrlPrincipal));
         ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
@@ -671,7 +683,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        
+        ctrlPrincipal.getCtrlOferta().validarOfertas(tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -694,12 +706,37 @@ public class JDOferta extends javax.swing.JDialog {
         atualizarTela();
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
+    private void tblTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmaMouseClicked
+
+        if(evt.getButton() == MouseEvent.BUTTON3){
+            
+            int coluna = tblTurma.getSelectedColumn();
+            int linha = tblTurma.getSelectedRow();
+            
+            if((linha >= 0) && (coluna >= 0)){
+                
+                Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
+                
+                if(aula != null){
+                    itemRemover.setText("Remover");
+                    popUpRemover.add(itemRemover);
+                    popUpRemover.show(tblTurma, evt.getX(), evt.getY());
+                }
+            } 
+        }
+    }//GEN-LAST:event_tblTurmaMouseClicked
+
+    private void itemRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRemoverActionPerformed
+        ctrlPrincipal.getCtrlOferta().removerAula(tblTurma);
+    }//GEN-LAST:event_itemRemoverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JComboBox<String> cbxTurno;
+    private javax.swing.JMenuItem itemRemover;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -712,6 +749,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JLabel lblIntervaloMinimo;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeProfessor;
+    private javax.swing.JLabel lblNomeTurma;
     private javax.swing.JLabel lblQuarta;
     private javax.swing.JLabel lblQuarta1;
     private javax.swing.JLabel lblQuinta;
@@ -725,7 +763,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JLabel lblTerca;
     private javax.swing.JLabel lblTerca1;
     private javax.swing.JLabel lblTurma;
-    private javax.swing.JLabel lblTurno;
     private javax.swing.JList<String> lstAlocacoes;
     private javax.swing.JPanel pnlAlocacoes;
     private javax.swing.JPanel pnlDiasProfessor;
@@ -738,6 +775,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTurma;
     private javax.swing.JPanel pnlTurno;
     private javax.swing.JPanel pnlValidacao;
+    private javax.swing.JPopupMenu popUpRemover;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnIntervalo;
     private javax.swing.JSpinner spnSemestre;

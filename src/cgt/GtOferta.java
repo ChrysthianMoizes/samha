@@ -6,6 +6,7 @@ import cdp.Oferta;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import cdp.Turma;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GtOferta {
@@ -13,6 +14,7 @@ public class GtOferta {
     private GtPrincipal gtPrincipal;
     private Aula[][] matriz;
     private Oferta ofertaSelecionada;
+    private List aulasRemovidas;
     
     public GtOferta(GtPrincipal gt) {
         gtPrincipal = gt;
@@ -167,7 +169,8 @@ public class GtOferta {
         if(destino == null){
             setAulaMatriz(linha, coluna, origem);
         }else{
-            setAulaMatriz(linha, coluna, alterarAula(destino, origem.getAlocacao(), obterInteiroDia(origem.getDia()), origem.getTurno(), origem.getNumero()));
+            Aula aulaAlterada = alterarAula(destino, origem.getAlocacao(), obterInteiroDia(origem.getDia()), origem.getTurno(), origem.getNumero());
+            setAulaMatriz(linha, coluna, aulaAlterada);
         }
     }
     
@@ -194,10 +197,13 @@ public class GtOferta {
             setAulaMatriz(obterInteiroDia(d), numero, aulaAux);
         }
     }
+    
     public void removerAula(Aula aula){
         
-        if(aula != null)
+        if(aula != null){
             setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), null);
+            getAulasRemovidas().add(aula);
+        }
     }
     
     public String salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma){
@@ -214,11 +220,12 @@ public class GtOferta {
                 oferta.setTempoMaximoTrabalho(tempoMaximo);
                 oferta.setTurma(turma);
 
-                gtPrincipal.getGdPrincipal().getGdOferta().cadastrarOferta(oferta, matriz);
-                setOfertaSelecionada(oferta);               
+                gtPrincipal.getGdPrincipal().getGdOferta().cadastrarAulasOferta(oferta, matriz);
+                setOfertaSelecionada(oferta);
+                return Constantes.CADASTRADO;
             }
             
-            gtPrincipal.getGdPrincipal().getGdOferta().cadastrarAulas(matriz); 
+            gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, aulasRemovidas); 
             return Constantes.CADASTRADO;
             
         } catch (Exception ex) {
@@ -230,7 +237,7 @@ public class GtOferta {
         
         Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, idTurma);
         setOfertaSelecionada(oferta);
-        gerarMatriz();
+        gerarEstruturasArmazenamento();
         
         if(oferta != null){  
             List listaAulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
@@ -248,8 +255,9 @@ public class GtOferta {
         }  
     }
     
-    public void gerarMatriz(){
+    public void gerarEstruturasArmazenamento(){
         matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
+        aulasRemovidas = new ArrayList<>();
     }
     
     public Aula getAulaMatriz(int linha, int coluna){
@@ -266,5 +274,13 @@ public class GtOferta {
 
     public void setOfertaSelecionada(Oferta ofertaSelecionada) {
         this.ofertaSelecionada = ofertaSelecionada;
+    }
+
+    public List getAulasRemovidas() {
+        return aulasRemovidas;
+    }
+
+    public void setAulasRemovidas(List aulasRemovidas) {
+        this.aulasRemovidas = aulasRemovidas;
     }
 }

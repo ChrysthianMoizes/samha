@@ -8,13 +8,12 @@ import java.awt.dnd.DnDConstants;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
-import javax.swing.table.DefaultTableModel;
 
-public class ManipuladorTransferencia extends TransferHandler{
+public class ManipuladorTransferenciaTabela extends TransferHandler{
     
     private CtrlPrincipal ctrlPrincipal;
 
-    public ManipuladorTransferencia(CtrlPrincipal ctrl) {
+    public ManipuladorTransferenciaTabela(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
     } 
      
@@ -30,15 +29,12 @@ public class ManipuladorTransferencia extends TransferHandler{
         int row=table.getSelectedRow();
         int col=table.getSelectedColumn();
         
-        Object obj = (Object)table.getModel().getValueAt(row,col);
+        Aula aula = (Aula)table.getModel().getValueAt(row,col);     
         
-        StringSelection transferable = new StringSelection(obj.toString());
-        
-        ctrlPrincipal.getCtrlOferta().setAulaSelecionada((Aula) obj);
+        ctrlPrincipal.getCtrlOferta().setAulaSelecionada(aula);
         ctrlPrincipal.getCtrlOferta().setDropInterno(true);
-        ctrlPrincipal.getCtrlOferta().removerAulaTabela();
-        table.getModel().setValueAt(null,row,col);
         
+        StringSelection transferable = new StringSelection(aula.toString());
         return transferable;
     }
      
@@ -55,20 +51,15 @@ public class ManipuladorTransferencia extends TransferHandler{
         
         if (!canImport(support))
             return false;
-        
-        JTable table=(JTable)support.getComponent();
-        DefaultTableModel tableModel=(DefaultTableModel)table.getModel();
 
-       JTable.DropLocation dl = (JTable.DropLocation)support.getDropLocation();
+        JTable.DropLocation dl = (JTable.DropLocation)support.getDropLocation();
 
         int row = dl.getRow();
         int col=dl.getColumn();
         
-        Aula aula = ctrlPrincipal.getCtrlOferta().identificarOrigem();
-        ctrlPrincipal.getCtrlOferta().importarAulaLista(row, col, aula);
-
-        tableModel.setValueAt(aula, row, col);
+        ctrlPrincipal.getCtrlOferta().identificarOrigem(row, col);
         ctrlPrincipal.getCtrlOferta().setDropInterno(false);
+        
         return true;
     }
 }
