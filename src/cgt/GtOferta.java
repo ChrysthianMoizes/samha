@@ -171,7 +171,7 @@ public class GtOferta {
         }
     }
     
-    public void moverAulaInterna(int linha, int coluna, Aula origem){
+    public void moverAulaMatriz(int linha, int coluna, Aula origem){
         
         Aula destino = getAulaMatriz(linha, coluna);
         

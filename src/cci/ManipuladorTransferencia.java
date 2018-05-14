@@ -34,9 +34,11 @@ public class ManipuladorTransferencia extends TransferHandler{
         
         StringSelection transferable = new StringSelection(obj.toString());
         
-        table.getModel().setValueAt(null,row,col);
         ctrlPrincipal.getCtrlOferta().setAulaSelecionada((Aula) obj);
         ctrlPrincipal.getCtrlOferta().setDropInterno(true);
+        ctrlPrincipal.getCtrlOferta().removerAulaTabela();
+        table.getModel().setValueAt(null,row,col);
+        
         return transferable;
     }
      

@@ -141,7 +141,7 @@ public class CtrlOferta extends CtrlGenerica{
             ctrlPrincipal.getGtPrincipal().getGtOferta().importarAulaLista(linha, coluna, aula);
             
         }else if(aula != null && isDropInterno()){  // ESTOU ARRASTANDO DA TABELA
-            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaInterna(linha, coluna, aula);
+            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaMatriz(linha, coluna, aula);
             preencherTabelaAulas(jdOferta.getTblTurma());
         }   
     }

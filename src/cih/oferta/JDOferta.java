@@ -16,10 +16,9 @@ public class JDOferta extends javax.swing.JDialog {
 
     public JDOferta(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
-        initComponents();
         this.ctrlPrincipal = ctrl;
+        initComponents();
         setarBackground();
-        tblTurma.setTransferHandler(new ManipuladorTransferencia(ctrlPrincipal));
     }
     
     private void setarBackground(){
