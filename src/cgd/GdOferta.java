@@ -69,10 +69,12 @@ public class GdOferta extends GdGenerico{
             sessao = criarSessao();
             sessao.beginTransaction();
             
+            Aula removida;
             for(int i = 0; i < aulasRemovidas.size(); i++){
-                sessao.delete(aulasRemovidas.get(i));
+                removida = (Aula) aulasRemovidas.get(i);
+                sessao.delete(removida);
             }
-            
+
             int linhas = matriz.length;
             int colunas = matriz[0].length;
             Aula aula;
@@ -81,7 +83,7 @@ public class GdOferta extends GdGenerico{
                 for(int coluna = 0; coluna < colunas; coluna++){
                     aula = (Aula) matriz[linha][coluna];
                     if(aula != null){
-                        matriz[linha][coluna] = null;
+                        sessao.clear();
                         sessao.saveOrUpdate(aula);   
                     }
                 } 
