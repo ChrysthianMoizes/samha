@@ -14,7 +14,7 @@ public class GtOferta {
     private GtPrincipal gtPrincipal;
     private Aula[][] matriz;
     private Oferta ofertaSelecionada;
-    private List aulasRemovidas;
+    private List listaAulas;
     
     public GtOferta(GtPrincipal gt) {
         gtPrincipal = gt;
@@ -202,7 +202,7 @@ public class GtOferta {
         
         if(aula != null){
             setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), null);
-            getAulasRemovidas().add(aula);
+            //getListaAulas().add(aula);
         }
     }
     
@@ -225,7 +225,7 @@ public class GtOferta {
                 return Constantes.CADASTRADO;
             }
             
-            gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, aulasRemovidas); 
+            gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, listaAulas); 
             return Constantes.CADASTRADO;
             
         } catch (Exception ex) {
@@ -240,8 +240,9 @@ public class GtOferta {
         gerarEstruturasArmazenamento();
         
         if(oferta != null){  
-            List listaAulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
-            preencherMatrizOferta(listaAulas);
+            List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
+            setListaAulas(aulas);
+            preencherMatrizOferta(aulas);
         }
     }
     
@@ -257,7 +258,7 @@ public class GtOferta {
     
     public void gerarEstruturasArmazenamento(){
         matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
-        aulasRemovidas = new ArrayList<>();
+        listaAulas = new ArrayList<>();
     }
     
     public Aula getAulaMatriz(int linha, int coluna){
@@ -276,11 +277,11 @@ public class GtOferta {
         this.ofertaSelecionada = ofertaSelecionada;
     }
 
-    public List getAulasRemovidas() {
-        return aulasRemovidas;
+    public List getListaAulas() {
+        return listaAulas;
     }
 
-    public void setAulasRemovidas(List aulasRemovidas) {
-        this.aulasRemovidas = aulasRemovidas;
+    public void setListaAulas(List listaAulas) {
+        this.listaAulas = listaAulas;
     }
 }
