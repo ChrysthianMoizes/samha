@@ -532,6 +532,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     }
     
     private void setarRestricaoTela(){
+        
         if (lstRestricoes.isEnabled()) {
             
             if (!listaRestricoes.isEmpty()) {

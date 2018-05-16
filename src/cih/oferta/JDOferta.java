@@ -126,7 +126,7 @@ public class JDOferta extends javax.swing.JDialog {
         lblTerca1 = new javax.swing.JLabel();
         lblQuarta1 = new javax.swing.JLabel();
         lblSegunda1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxQuantidadeProfessor = new javax.swing.JComboBox<>();
         pnlNomeProfessor = new javax.swing.JPanel();
         lblNomeProfessor = new javax.swing.JLabel();
         pnlTabelaProfessor = new javax.swing.JPanel();
@@ -423,9 +423,14 @@ public class JDOferta extends javax.swing.JDialog {
         lblSegunda1.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         lblSegunda1.setText("Segunda");
 
-        jComboBox1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
-        jComboBox1.setEnabled(false);
+        cbxQuantidadeProfessor.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        cbxQuantidadeProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        cbxQuantidadeProfessor.setEnabled(false);
+        cbxQuantidadeProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxQuantidadeProfessorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDiasProfessorLayout = new javax.swing.GroupLayout(pnlDiasProfessor);
         pnlDiasProfessor.setLayout(pnlDiasProfessorLayout);
@@ -440,7 +445,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(lblQuinta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
                         .addGroup(pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxQuantidadeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSegunda1))
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -449,7 +454,7 @@ public class JDOferta extends javax.swing.JDialog {
             pnlDiasProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDiasProfessorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1)
+                .addComponent(cbxQuantidadeProfessor)
                 .addGap(11, 11, 11)
                 .addComponent(lblSegunda1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -541,6 +546,11 @@ public class JDOferta extends javax.swing.JDialog {
         lstAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lstAlocacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstAlocacoes.setDragEnabled(true);
+        lstAlocacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstAlocacoesMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstAlocacoes);
 
         cbxCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -731,14 +741,22 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().removerAula(tblTurma);
     }//GEN-LAST:event_itemRemoverActionPerformed
 
+    private void lstAlocacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlocacoesMouseClicked
+        ctrlPrincipal.getCtrlOferta().preencherHorarioProfessor(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
+    }//GEN-LAST:event_lstAlocacoesMouseClicked
+
+    private void cbxQuantidadeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantidadeProfessorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxQuantidadeProfessorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbxCurso;
+    private javax.swing.JComboBox<String> cbxQuantidadeProfessor;
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JComboBox<String> cbxTurno;
     private javax.swing.JMenuItem itemRemover;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -40,5 +40,35 @@ public class GdAula extends GdGenerico{
         sessao.getTransaction().commit();
         sessao.close();
         return lista;
-    }  
+    }
+
+    public List filtrarAulasProfessor1AnoSemestre(int idProfessor, int ano, int semestre) {
+        Criteria crit = criarSessao().createCriteria(Aula.class);
+        sessao.beginTransaction();
+        crit.createAlias("alocacao", "a");
+        crit.createAlias("a.professor1", "p1");
+        crit.add( Restrictions.eq("p1.id", idProfessor));
+        crit.add( Restrictions.eq("a.ano", ano));
+        crit.add( Restrictions.eq("a.semestre", semestre));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
+    public List filtrarAulasProfessor2AnoSemestre(int idProfessor, int ano, int semestre) {
+        Criteria crit = criarSessao().createCriteria(Aula.class);
+        sessao.beginTransaction();
+        crit.createAlias("alocacao", "a");
+        crit.createAlias("a.professor2", "p2");
+        crit.add( Restrictions.eq("p2.id", idProfessor));
+        crit.add( Restrictions.eq("a.ano", ano));
+        crit.add( Restrictions.eq("a.semestre", semestre));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
 }

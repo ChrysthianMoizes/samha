@@ -3,6 +3,8 @@ package cci;
 import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
+import cdp.Disciplina;
+import cdp.Professor;
 import cdp.Turma;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
@@ -294,4 +296,77 @@ public class CtrlOferta extends CtrlGenerica{
     public void setAulaSelecionada(Aula aulaSelecionada) {
         this.aulaSelecionada = aulaSelecionada;
     }
+    
+    //================================================= TABELA DE PROFESSOR ================================================================
+    
+    public void preencherHorarioProfessor(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
+        
+        if (!listaAlocacoes.isEmpty()) {
+            
+            int indice = lstAlocacoes.getSelectedIndex();
+            Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);
+            
+            Disciplina disciplina = alocacao.getDisciplina();
+            Professor professor1 = alocacao.getProfessor1();
+            
+            int idProfessor = professor1.getId();
+            int ano = alocacao.getAno();
+            int semestre = alocacao.getSemestre();
+            
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtOferta().listarAulasProfessor(idProfessor, ano, semestre, 1);
+            preencherTabelaProfessor(tblProfessor, listaAulas);
+            
+            if(disciplina.getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+                cbxQuantidadeProfessor.setEnabled(true);
+            }else
+                cbxQuantidadeProfessor.setEnabled(false);   
+        }
+    }
+    
+    public void alterarProfessorCombo(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
+        
+        int numero = cbxQuantidadeProfessor.getSelectedIndex();
+        
+        int indice = lstAlocacoes.getSelectedIndex();
+        
+        Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);
+        Professor professor1 = alocacao.getProfessor1();
+
+        int idProfessor = professor1.getId();
+        int ano = alocacao.getAno();
+        int semestre = alocacao.getSemestre();
+
+        List listaAulas;
+        
+        if(numero == 0)
+            listaAulas = ctrlPrincipal.getGtPrincipal().getGtOferta().listarAulasProfessor(idProfessor, ano, semestre, 1);
+        else
+            listaAulas = ctrlPrincipal.getGtPrincipal().getGtOferta().listarAulasProfessor(idProfessor, ano, semestre, 2);
+        
+        preencherTabelaProfessor(tblProfessor, listaAulas);
+    }
+    
+    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas){
+ 
+        JTableUtil.limparCelulasTabela(tblProfessor);
+        Aula aula;
+        for(int i = 0; i < listaAulas.size(); i++){
+            aula = (Aula) listaAulas.get(i);
+            int linha = ctrlPrincipal.getGtPrincipal().getGtOferta().obterInteiroDia(aula.getDia());
+            int turno = calcularNumeroTurno(aula.getTurno());
+            int coluna = (aula.getNumero() * turno);
+            tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), linha, coluna);
+        }   
+    }
+    
+    public int calcularNumeroTurno(String turno){
+        
+        if(turno.toUpperCase().equals(Constantes.MATUTINO)){
+            return 1;
+        }else if(turno.toUpperCase().equals(Constantes.VESPERTINO))
+            return 2;
+        else
+            return 3;
+    }
+
 }
