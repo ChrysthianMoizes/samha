@@ -47,7 +47,7 @@ public class GtOferta {
         
         List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
 
-        if(aulas.isEmpty()){
+        if(aulas.size() == 1){
 
             List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, dia, turno);
 
@@ -55,10 +55,17 @@ public class GtOferta {
                 return mensagem;
 
             }else
-                return identificarConflitoRestricao(aulas, aula, mensagem);            
+                return identificarConflitoRestricao(listaRestricoes, aula, mensagem);            
         }else {
-            Aula a = (Aula) aulas.get(0);
-            return "0 Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
+            
+            Aula a = null;
+            String novaMensagem = "0 Professor está em outras turmas neste horário: ";
+            
+            for(int i = 0; i< aulas.size(); i++){
+                a = (Aula) aulas.get(0);
+                novaMensagem = novaMensagem + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome() + ". ";
+            }     
+            return novaMensagem;       
         }
     }
     
@@ -72,8 +79,8 @@ public class GtOferta {
             restricao = (RestricaoProfessor) lista.get(i);
             resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
 
-            if(resposta)
-                return "1 Professor possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+            if(resposta) 
+                return "1 " + restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
         }
         return mensagem;
     }

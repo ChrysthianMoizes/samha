@@ -117,21 +117,18 @@ public class CtrlOferta extends CtrlGenerica{
     public void gerarAula(JList lstAlocacoes, JTable tblTurma, JComboBox cbxTurno){
         
         Aula aula = null;
-        int posicao = lstAlocacoes.getSelectedIndex();
         
-        if(posicao >= 0){
-            
-            int coluna = tblTurma.getSelectedColumn();
-            int linha = tblTurma.getSelectedRow();
-            
-            if((linha >= 0) && (coluna >= 0)){
+        int indice = lstAlocacoes.getSelectedIndex();
+        
+        int coluna = tblTurma.getSelectedColumn();
+        int linha = tblTurma.getSelectedRow();
+
+        if((linha >= 0) && (coluna >= 0)){
+
+            String turno = (String) cbxTurno.getSelectedItem();
+            Alocacao alocacao = (Alocacao) getListaAlocacoes().get(indice);
+            aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarNovaAula(alocacao, linha, turno, coluna);
                 
-                String turno = (String) cbxTurno.getSelectedItem();
-                Alocacao alocacao = (Alocacao) getListaAlocacoes().get(posicao);
-                aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarNovaAula(alocacao, linha, turno, coluna);
-                
-            }else
-                exibirNotificação("1 Selecione uma célula da tabela.", -1, -1);
         }       
         setAulaSelecionada(aula);
     }
@@ -215,7 +212,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.MATUTINO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.MATUTINO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.MATUTINO_6);
-                jdOferta.setarTurno(0);
+                //jdOferta.setarTurno(0);
                 break;
                 
             case Constantes.VESPERTINO: 
@@ -225,7 +222,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.VESPERTINO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.VESPERTINO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.VESPERTINO_6);
-                jdOferta.setarTurno(1);
+                //jdOferta.setarTurno(1);
                 break;
                 
             default:
@@ -235,7 +232,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.NOTURNO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.NOTURNO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.NOTURNO_6);
-                jdOferta.setarTurno(2);
+                //jdOferta.setarTurno(2);
                 break;
         }
         jdOferta.repaint();
@@ -251,19 +248,19 @@ public class CtrlOferta extends CtrlGenerica{
                 
                 if(aula != null){
                     String mensagem = ctrlPrincipal.getGtPrincipal().getGtOferta().validarOferta(aula);
-                    exibirNotificação(mensagem, linha, coluna);
+                    if(mensagem != null){
+                        String notificacao = mensagem.substring(2);
+                        exibirNotificação(notificacao, aula);
+                    }
                     pintarCelulaTabela(mensagem, linha, coluna, tabela);
                 }
             }
         }  
     }
  
-    public void exibirNotificação(String mensagem, int linha, int coluna){
-        
-        if(mensagem != null){
-            String notificacao = mensagem.substring(2);
-            jdOferta.exibirNotificacao("Linha " + linha + ", Coluna " + coluna + ": " + notificacao+"\n");
-        }
+    public void exibirNotificação(String notificacao, Aula aula){
+        int numero = aula.getNumero() + 1; 
+        jdOferta.exibirNotificacao(aula.getDia() + ": Aula " + numero + ".\n" + notificacao+"\n\n");     
     }
     
     public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){

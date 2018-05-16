@@ -173,6 +173,7 @@ public class JDOferta extends javax.swing.JDialog {
         txtAreaNotificacoes.setForeground(new java.awt.Color(252, 2, 2));
         txtAreaNotificacoes.setLineWrap(true);
         txtAreaNotificacoes.setRows(5);
+        txtAreaNotificacoes.setWrapStyleWord(true);
         txtAreaNotificacoes.setBorder(null);
         jScrollPane1.setViewportView(txtAreaNotificacoes);
 

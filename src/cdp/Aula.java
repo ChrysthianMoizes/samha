@@ -109,16 +109,8 @@ public class Aula implements Serializable {
     }
     
     @Override
-    public String toString() {
-        
-        String nomeCompleto = getAlocacao().getProfessor1().getNome();
-        int espaco = nomeCompleto.indexOf(" ");
-        
-        if(espaco == -1)
-            return getAlocacao().getDisciplina().getSigla() + " - " + nomeCompleto;
-        
-        String nome = nomeCompleto.substring(0, espaco);
-        return getAlocacao().getDisciplina().getSigla() + " - " + nome;
+    public String toString() { 
+        return getAlocacao().getDisciplina().getSigla() + " - " + getAlocacao().getProfessor1().getPrimeiroNome();
     }
     
     public Object[] toArray() {

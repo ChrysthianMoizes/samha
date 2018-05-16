@@ -35,6 +35,12 @@ public class Professor extends Servidor implements Comparable<Object>{
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
     }
+    
+    public String getPrimeiroNome(){
+        int espaco = this.getNome().indexOf(" ");
+        String primeiroNome = this.getNome().substring(0, espaco);
+        return primeiroNome;
+    }
 
     public int getCargaHoraria() {
         return cargaHoraria;
