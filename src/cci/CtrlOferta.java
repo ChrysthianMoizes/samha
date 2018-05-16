@@ -372,7 +372,7 @@ public class CtrlOferta extends CtrlGenerica{
             aula = (Aula) listaAulas.get(i);
             linha = ctrlPrincipal.getGtPrincipal().getGtOferta().obterInteiroDia(aula.getDia());
             turno = calcularNumeroTurno(aula.getTurno());
-            coluna = (aula.getNumero() * turno);
+            coluna = (aula.getNumero() + turno);
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), linha, coluna);
         }   
     }
@@ -381,11 +381,11 @@ public class CtrlOferta extends CtrlGenerica{
         
         switch (turno.toUpperCase()) {
             case Constantes.MATUTINO:
-                return 1;
+                return 0;
             case Constantes.VESPERTINO:
-                return 2;
+                return 6;
             default:
-                return 3;
+                return 12;
         }
     }
 }
