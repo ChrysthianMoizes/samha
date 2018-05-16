@@ -366,7 +366,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
-        tblTurma.setTransferHandler(new cci.ManipuladorTransferenciaTabela(ctrlPrincipal));
+        tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));
         ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);

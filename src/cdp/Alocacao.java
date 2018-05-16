@@ -115,7 +115,12 @@ public class Alocacao implements Serializable{
     
     @Override
     public String toString() {
-        return disciplina.getNome() + " - " + professor1.getNome();
+        
+        String retorno = disciplina.getSigla()+ " - " + professor1.getPrimeiroNome();
+        if(disciplina.getTipo().toUpperCase().equals("ESPECIAL")){
+            retorno = retorno + "/" + professor2.getPrimeiroNome();
+        }
+        return retorno;
     }
     
     public Object[] toArray() {

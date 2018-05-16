@@ -173,18 +173,7 @@ public class CtrlOferta extends CtrlGenerica{
     public void salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, JComboBox cbxTurma){
         
         jdOferta.limparNotificacoes();
-        Turma turma = (Turma) cbxTurma.getSelectedItem();
-        
-            /* CASOS TESTADOS: 
-                *SALVAR OFERTA SEM MODIFICAR AULAS
-                *MOVER AULAS EXISTENTES
-                *CRIAR NOVA OFERTA COM AULAS
-            */
-            
-            /* CASOS COM PROBLEMAS: 
-                *IMPORTAR DA LISTA PARA CELULA VAZIA
-                *IMPORTAR DA LISTA PARA CELULA JÁ PREENCHIDA   
-            */
+        Turma turma = (Turma) cbxTurma.getSelectedItem();       
         
         if(turma != null){
             

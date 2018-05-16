@@ -110,12 +110,10 @@ public class Aula implements Serializable {
     
     @Override
     public String toString() { 
-        return getAlocacao().getDisciplina().getSigla() + " - " + getAlocacao().getProfessor1().getPrimeiroNome();
-    }
-    
-    public Object[] toArray() {
-        String nomeCompleto = getAlocacao().getProfessor1().getNome();
-        String nome = nomeCompleto.substring(0, nomeCompleto.indexOf(" "));
-        return new Object[] { this, " - \n" + nome};
+        String retorno = getAlocacao().getDisciplina().getSigla() + " - " + getAlocacao().getProfessor1().getPrimeiroNome();
+        if(getAlocacao().getDisciplina().getTipo().toUpperCase().equals("ESPECIAL")){
+            retorno = retorno + "/" + getAlocacao().getProfessor2().getPrimeiroNome();
+        }
+        return retorno;
     }
 }

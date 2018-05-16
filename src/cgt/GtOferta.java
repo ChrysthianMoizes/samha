@@ -14,7 +14,7 @@ public class GtOferta {
     private GtPrincipal gtPrincipal;
     private Aula[][] matriz;
     private Oferta ofertaSelecionada;
-    private List listaAulas;
+    private List listaAulasRemovidas;
     
     public GtOferta(GtPrincipal gt) {
         gtPrincipal = gt;
@@ -209,7 +209,7 @@ public class GtOferta {
         
         if(aula != null){
             setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), null);
-            getListaAulas().add(aula);
+            getListaAulasRemovidas().add(aula);
         }
     }
     
@@ -232,7 +232,7 @@ public class GtOferta {
                 return Constantes.CADASTRADO;
             }
             
-            gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, listaAulas); 
+            gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, listaAulasRemovidas); 
             return Constantes.CADASTRADO;
             
         } catch (Exception ex) {
@@ -248,7 +248,6 @@ public class GtOferta {
         
         if(oferta != null){  
             List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
-            //setListaAulas(aulas);
             preencherMatrizOferta(aulas);
         }
     }
@@ -265,7 +264,7 @@ public class GtOferta {
     
     public void gerarEstruturasArmazenamento(){
         matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
-        listaAulas = new ArrayList<>();
+        listaAulasRemovidas = new ArrayList<>();
     }
     
     public Aula getAulaMatriz(int linha, int coluna){
@@ -284,11 +283,11 @@ public class GtOferta {
         this.ofertaSelecionada = ofertaSelecionada;
     }
 
-    public List getListaAulas() {
-        return listaAulas;
+    public List getListaAulasRemovidas() {
+        return listaAulasRemovidas;
     }
 
-    public void setListaAulas(List listaAulas) {
-        this.listaAulas = listaAulas;
+    public void setListaAulasRemovidas(List listaAulasRemovidas) {
+        this.listaAulasRemovidas = listaAulasRemovidas;
     }
 }

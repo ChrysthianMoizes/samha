@@ -63,19 +63,19 @@ public class GdOferta extends GdGenerico{
         
     }
     
-    public void atualizarAulasOferta(Aula[][] matriz, List listaAulas){
+    public void atualizarAulasOferta(Aula[][] matriz, List listaAulasRemovidas){
         
         try {
             sessao = criarSessao();
             sessao.beginTransaction();
             
             Aula aulaRemovida;
-            for(int i = 0; i < listaAulas.size(); i++){
-                aulaRemovida = (Aula) listaAulas.get(i);
+            for(int i = 0; i < listaAulasRemovidas.size(); i++){
+                aulaRemovida = (Aula) listaAulasRemovidas.get(i);
                 sessao.delete(aulaRemovida);
             }
             
-            listaAulas.clear();
+            listaAulasRemovidas.clear();
             
             int linhas = matriz.length;
             int colunas = matriz[0].length;

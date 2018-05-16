@@ -106,24 +106,19 @@ public class GtAlocacao {
         
         if(!listaProfessores.isEmpty()){
             
-            Professor professor = (Professor) listaProfessores.get(0);
-            if(professor == null)
-                throw new SAMHAException(18);   
-            
             if(disciplina.getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+                
+                if(listaProfessores.size() != 2)
+                    throw new SAMHAException(19);
                 
                 Professor professor2 = (Professor) listaProfessores.get(1);
                 if(professor2 == null)
                     throw new SAMHAException(21);
-                
-                if(listaProfessores.size() != 2)
-                    throw new SAMHAException(19);
-                  
+  
             }else{
                 
                 if(listaProfessores.size() > 1)
-                    throw new SAMHAException(20);
-                     
+                    throw new SAMHAException(20);          
             }
         }else
             throw new SAMHAException(18);     

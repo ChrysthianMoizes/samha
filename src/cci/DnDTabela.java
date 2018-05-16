@@ -9,11 +9,11 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
 
-public class ManipuladorTransferenciaTabela extends TransferHandler{
+public class DnDTabela extends TransferHandler{
     
     private CtrlPrincipal ctrlPrincipal;
 
-    public ManipuladorTransferenciaTabela(CtrlPrincipal ctrl) {
+    public DnDTabela(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
     } 
      
