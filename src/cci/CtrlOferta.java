@@ -187,10 +187,7 @@ public class CtrlOferta extends CtrlGenerica{
             
             String resposta = ctrlPrincipal.getGtPrincipal().getGtOferta().salvarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
 
-            if(resposta.equals(Constantes.CADASTRADO)){
-                CtrlMensagem.exibirMensagemSucesso(jdOferta, "Aulas inseridas com sucesso!");
-
-            }else
+            if(!resposta.equals(Constantes.CADASTRADO))
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
             
             jdOferta.atualizarTela();
