@@ -49,6 +49,23 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
     }
     
+    public void removerAula(int x, int y){
+        
+        int coluna = tblTurma.getSelectedColumn();
+        int linha = tblTurma.getSelectedRow();
+
+        if((linha >= 0) && (coluna >= 0)){
+
+            Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
+
+            if(aula != null){
+                itemRemover.setText("Remover");
+                popUpRemover.add(itemRemover);
+                popUpRemover.show(tblTurma, x, y);
+            }
+        }
+    }
+    
     public void preencherComboCurso(){ 
         ctrlPrincipal.getCtrlOferta().preencherComboCurso(cbxCurso, cbxTurma);
     }
@@ -86,6 +103,11 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void setarTurno(int indice){
         cbxTurno.setSelectedIndex(indice);
+    }
+    
+    public void validarOferta(boolean opcao){
+        btnValidar.setEnabled(opcao);   
+        btnSalvar.setEnabled(!opcao);   
     }
    
     @SuppressWarnings("unchecked")
@@ -155,9 +177,7 @@ public class JDOferta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(1850, 788));
         setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1600, 800));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
@@ -694,7 +714,6 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        limparNotificacoes();
         ctrlPrincipal.getCtrlOferta().validarOfertas(tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
@@ -719,23 +738,8 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
     private void tblTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmaMouseClicked
-
-        if(evt.getButton() == MouseEvent.BUTTON3){
-            
-            int coluna = tblTurma.getSelectedColumn();
-            int linha = tblTurma.getSelectedRow();
-            
-            if((linha >= 0) && (coluna >= 0)){
-                
-                Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
-                
-                if(aula != null){
-                    itemRemover.setText("Remover");
-                    popUpRemover.add(itemRemover);
-                    popUpRemover.show(tblTurma, evt.getX(), evt.getY());
-                }
-            } 
-        }
+        if(evt.getButton() == MouseEvent.BUTTON3)
+            removerAula(evt.getX(), evt.getY());   
     }//GEN-LAST:event_tblTurmaMouseClicked
 
     private void itemRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRemoverActionPerformed

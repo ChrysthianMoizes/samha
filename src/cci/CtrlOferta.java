@@ -93,11 +93,11 @@ public class CtrlOferta extends CtrlGenerica{
     public void identificarOferta(int ano, int semestre, Turma turma, JTable tblTurma, String turno){
         
         if(turma != null){
+            jdOferta.validarOferta(false);
             ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, turno, turma.getId());
             jdOferta.setarTurma(turma.getNome());
             alterarTurno(turno, tblTurma);
             preencherTabelaAulas(tblTurma);
-            validarOfertas(tblTurma);
         }
     }
     
@@ -113,7 +113,7 @@ public class CtrlOferta extends CtrlGenerica{
                 if(aula != null)
                     tblTurma.setValueAt(aula, linha, coluna);
             }  
-        }   
+        }
     }
     
     public void gerarAula(JList lstAlocacoes, JTable tblTurma, JComboBox cbxTurno){
@@ -137,17 +137,19 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void arrastarAula(int linha, int coluna, Aula aula){
         
-        if(aula != null && !isDropInterno()){    // ARRASTAR DA LISTA         
-            ctrlPrincipal.getGtPrincipal().getGtOferta().importarAulaLista(linha, coluna, aula);
-            
-        }else if(aula != null && isDropInterno()){  // ARRASTAR DA TABELA
-            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaMatriz(linha, coluna, aula);
-            preencherTabelaAulas(jdOferta.getTblTurma());
-        }else
+        if(aula != null && !isDropInterno())    // ARRASTAR DA LISTA         
+            ctrlPrincipal.getGtPrincipal().getGtOferta().importarAulaLista(linha, coluna, aula);  
+        else if(aula != null && isDropInterno())  // ARRASTAR DA TABELA
+            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaMatriz(linha, coluna, aula);  
+        else
             CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
+        
+        preencherTabelaAulas(jdOferta.getTblTurma());
     }
     
     public void identificarOrigem(int linha, int coluna){
+        
+        jdOferta.validarOferta(true);
         
         int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
         
@@ -162,6 +164,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void removerAula(JTable tblTurma){
         
+        jdOferta.validarOferta(true);
         int coluna = tblTurma.getSelectedColumn();
         int linha = tblTurma.getSelectedRow();
         
@@ -203,7 +206,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.MATUTINO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.MATUTINO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.MATUTINO_6);
-                //jdOferta.setarTurno(0);
+                jdOferta.setarTurno(0);
                 break;
                 
             case Constantes.VESPERTINO: 
@@ -213,7 +216,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.VESPERTINO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.VESPERTINO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.VESPERTINO_6);
-                //jdOferta.setarTurno(1);
+                jdOferta.setarTurno(1);
                 break;
                 
             default:
@@ -223,13 +226,15 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.NOTURNO_4);
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.NOTURNO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.NOTURNO_6);
-                //jdOferta.setarTurno(2);
+                jdOferta.setarTurno(2);
                 break;
         }
         jdOferta.repaint();
     }    
     
     public void validarOfertas(JTable tabela){
+        
+        jdOferta.limparNotificacoes();
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){
             
@@ -246,7 +251,8 @@ public class CtrlOferta extends CtrlGenerica{
                     pintarCelulaTabela(mensagem, linha, coluna, tabela);
                 }
             }
-        }  
+        }
+        jdOferta.validarOferta(false);
     }
  
     public void exibirNotificação(String notificacao, Aula aula){
