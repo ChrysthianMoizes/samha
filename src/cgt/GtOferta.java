@@ -45,9 +45,9 @@ public class GtOferta {
         String dia = aula.getDia();
         String turno = aula.getTurno();
         
-        List listaAulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
+        List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
 
-        if(listaAulas.isEmpty()){
+        if(aulas.isEmpty()){
 
             List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, dia, turno);
 
@@ -55,9 +55,9 @@ public class GtOferta {
                 return mensagem;
 
             }else
-                return identificarConflitoRestricao(listaAulas, aula, mensagem);            
+                return identificarConflitoRestricao(aulas, aula, mensagem);            
         }else {
-            Aula a = (Aula) listaAulas.get(0);
+            Aula a = (Aula) aulas.get(0);
             return "0 Professor está em outra turma neste horário: " + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome();       
         }
     }
@@ -202,7 +202,7 @@ public class GtOferta {
         
         if(aula != null){
             setAulaMatriz(obterInteiroDia(aula.getDia()), aula.getNumero(), null);
-            //getListaAulas().add(aula);
+            getListaAulas().add(aula);
         }
     }
     
@@ -241,7 +241,7 @@ public class GtOferta {
         
         if(oferta != null){  
             List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
-            setListaAulas(aulas);
+            //setListaAulas(aulas);
             preencherMatrizOferta(aulas);
         }
     }
