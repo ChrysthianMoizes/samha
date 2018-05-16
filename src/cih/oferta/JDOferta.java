@@ -5,6 +5,7 @@ import cci.RenderizadorCelulas;
 import cdp.Aula;
 import cdp.Curso;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -81,8 +82,12 @@ public class JDOferta extends javax.swing.JDialog {
         lblMensagem.setText(mensagem);
     }
     
-    public void setarTurma(String mensagem){
-        lblNomeTurma.setText(mensagem);
+    public void setarTurma(String nome){
+        lblNomeTurma.setText(nome);
+    }
+    
+    public void setarProfessor(String nome){
+        lblNomeProfessor.setText(nome);
     }
     
     public void exibirNotificacao(String mensagem){
@@ -99,6 +104,14 @@ public class JDOferta extends javax.swing.JDialog {
 
     public JTable getTblTurma() {
         return tblTurma;
+    }
+    
+    public JTable getTblProfessor() {
+        return tblProfessor;
+    }
+
+    public JComboBox<String> getCbxQuantidadeProfessor() {
+        return cbxQuantidadeProfessor;
     }
     
     public void setarTurno(int indice){
@@ -493,7 +506,6 @@ public class JDOferta extends javax.swing.JDialog {
         lblNomeProfessor.setBackground(new java.awt.Color(204, 204, 204));
         lblNomeProfessor.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         lblNomeProfessor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNomeProfessor.setText("Professor");
         pnlNomeProfessor.add(lblNomeProfessor, java.awt.BorderLayout.CENTER);
 
         pnlTabelaProfessor.setLayout(new java.awt.BorderLayout());
@@ -751,7 +763,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_lstAlocacoesMouseClicked
 
     private void cbxQuantidadeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantidadeProfessorActionPerformed
-        // TODO add your handling code here:
+        ctrlPrincipal.getCtrlOferta().alterarProfessorCombo(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
     }//GEN-LAST:event_cbxQuantidadeProfessorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

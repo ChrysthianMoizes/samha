@@ -94,8 +94,8 @@ public class GtAlocacao {
             gtPrincipal.getGdPrincipal().getGdAlocacao().excluir(alocacao);
             return Constantes.EXCLUIDO;
             
-        } catch (Exception ex) {
-            return ex.getMessage();
+        } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
+            return "Alocação está associada a uma Oferta.";
         }
     }
     
