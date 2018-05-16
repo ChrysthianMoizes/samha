@@ -46,27 +46,44 @@ public class GtOferta {
         String turno = aula.getTurno();
         
         List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(ano, semestre, idProfessor, numero, dia, turno);
-
-        if(aulas.size() == 1){
-
+        
+        if(aulas.size() <= 1){
+            
             List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, dia, turno);
-
-            if(listaRestricoes.isEmpty()){
-                return mensagem;
-
-            }else
-                return identificarConflitoRestricao(listaRestricoes, aula, mensagem);            
-        }else {
             
-            Aula a = null;
-            String novaMensagem = "0 Professor está em outras turmas neste horário: ";
-            
-            for(int i = 0; i< aulas.size(); i++){
-                a = (Aula) aulas.get(0);
-                novaMensagem = novaMensagem + a.getOferta().getTurma().getNome() + " - " + a.getAlocacao().getDisciplina().getNome() + ". ";
-            }     
-            return novaMensagem;       
-        }
+            if(aulas.isEmpty()){
+                return montarStringConflitoRestricao(mensagem, listaRestricoes, aula); 
+                
+            }else{
+                
+                Aula aulaLista = (Aula) aulas.get(0);
+                
+                if(aulaLista.getId() == aula.getId())
+                    return montarStringConflitoRestricao(mensagem, listaRestricoes, aula);
+                else
+                    return montarStringConflitoTurma(aulas);
+            }
+        }else
+            return montarStringConflitoTurma(aulas);
+    }
+    
+    public String montarStringConflitoTurma(List aulas){
+        
+        Aula aula;
+        String novaMensagem = "0 Professor está em outra turma neste horário: ";
+
+        for(int i = 0; i< aulas.size(); i++){
+            aula = (Aula) aulas.get(0);
+            novaMensagem = novaMensagem + aula.getOferta().getTurma().getNome() + " - " + aula.getAlocacao().getDisciplina().getNome() + ". ";
+        }     
+        return novaMensagem;
+    }
+    
+    public String montarStringConflitoRestricao(String mensagem, List listaRestricoes, Aula aula){
+        if(listaRestricoes.isEmpty())
+            return mensagem;
+        else
+            return identificarConflitoRestricao(listaRestricoes, aula, mensagem);
     }
     
     public String identificarConflitoRestricao(List lista, Aula aula, String mensagem){
@@ -263,8 +280,23 @@ public class GtOferta {
     }
     
     public void gerarEstruturasArmazenamento(){
-        matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
-        listaAulasRemovidas = new ArrayList<>();
+        if(matriz == null){
+           matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
+            listaAulasRemovidas = new ArrayList<>(); 
+        }else{
+            limparEstruturasArmazenamento();
+        }
+    }
+    
+    public void limparEstruturasArmazenamento(){
+        
+        listaAulasRemovidas.clear();
+  
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                setAulaMatriz(linha, coluna, null);
+            }
+        }
     }
     
     public Aula getAulaMatriz(int linha, int coluna){
