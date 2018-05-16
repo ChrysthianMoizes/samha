@@ -87,7 +87,7 @@ public class GtOferta {
     
     public boolean identificarNumeroAulaConflitante(RestricaoProfessor restricao, int numero){
             
-        switch(numero){
+        switch(numero+1){
 
             case 1: return restricao.isAula1();
             case 2: return restricao.isAula2();

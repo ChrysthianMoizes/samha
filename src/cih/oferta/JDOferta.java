@@ -694,6 +694,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+        limparNotificacoes();
         ctrlPrincipal.getCtrlOferta().validarOfertas(tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
