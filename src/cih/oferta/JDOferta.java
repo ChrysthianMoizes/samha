@@ -3,7 +3,6 @@ package cih.oferta;
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
 import cdp.Aula;
-import cdp.Curso;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
@@ -34,21 +33,18 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
     }
     
-    public void salvarOferta(){
-        
-        int ano = (int) spnAno.getValue();
-        int semestre = (int) spnSemestre.getValue();
-        int tempo = (int) spnTempoMaximo.getValue();
-        int intervalo = (int) spnIntervalo.getValue();
-        ctrlPrincipal.getCtrlOferta().salvarOferta(ano, semestre, tempo, intervalo, cbxTurma);
+    public void atualizarAulas(){
+        ctrlPrincipal.getCtrlOferta().atualizarAulas(cbxTurma);
     }
     
     public void atualizarTela(){
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
+        int tempo = (int) spnTempoMaximo.getValue();
+        int intervalo = (int) spnIntervalo.getValue();
         
-        ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
+        ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
     }
     
     public void removerAula(int x, int y){
@@ -720,7 +716,7 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        salvarOferta();
+        atualizarAulas();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed

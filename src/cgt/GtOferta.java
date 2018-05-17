@@ -6,6 +6,7 @@ import cdp.Oferta;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import cdp.Turma;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,9 +199,7 @@ public class GtOferta {
         novaAula.setDia(obterStringDia(dia));
         novaAula.setNumero(numero);
         novaAula.setTurno(turno);
-
-        if(getOfertaSelecionada() != null)
-            novaAula.setOferta(getOfertaSelecionada());
+        novaAula.setOferta(getOfertaSelecionada());
 
         return novaAula; 
     }
@@ -260,24 +259,9 @@ public class GtOferta {
         }
     }
     
-    public String salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma){
+    public String atualizarAulas(){
 
         try {
-            
-            if(getOfertaSelecionada() == null){
-
-                Oferta oferta = new Oferta();
-
-                oferta.setAno(ano);
-                oferta.setIntervaloMinimo(intervaloMinimo);
-                oferta.setSemestre(semestre);
-                oferta.setTempoMaximoTrabalho(tempoMaximo);
-                oferta.setTurma(turma);
-
-                gtPrincipal.getGdPrincipal().getGdOferta().cadastrarAulasOferta(oferta, matriz);
-                setOfertaSelecionada(oferta);
-                return Constantes.CADASTRADO;
-            }
             
             gtPrincipal.getGdPrincipal().getGdOferta().atualizarAulasOferta(matriz, listaAulasRemovidas); 
             return Constantes.CADASTRADO;
@@ -287,17 +271,38 @@ public class GtOferta {
         } 
     }
     
-    public void identificarOferta(int ano, int semestre, String turno, int idTurma){
+    public void identificarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, String turno, Turma turma){
         
-        Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, idTurma);
+        Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, turma.getId());
+        
+        if(oferta == null)
+            oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
+
         setOfertaSelecionada(oferta);
         gerarEstruturasArmazenamento();
         
-        if(oferta != null){  
+        if(oferta != null){
             List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
             preencherMatrizOferta(aulas);
         }
     }
+    
+    public Oferta gerarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma){
+        
+        try {
+            Oferta oferta = new Oferta();
+
+            oferta.setAno(ano);
+            oferta.setIntervaloMinimo(intervaloMinimo);
+            oferta.setSemestre(semestre);
+            oferta.setTempoMaximoTrabalho(tempoMaximo);
+            oferta.setTurma(turma);
+            gtPrincipal.getGdPrincipal().getGdOferta().cadastrar(oferta);
+            return oferta;
+        } catch (SQLException | ClassNotFoundException ex) {
+            return null;
+        }   
+    }    
     
     public void preencherMatrizOferta(List lista){
                

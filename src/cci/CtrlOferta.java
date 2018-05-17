@@ -64,7 +64,8 @@ public class CtrlOferta extends CtrlGenerica{
         }  
     }
     
-    public void atualizarTela(int ano, int semestre, JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
+    public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, 
+            JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
         
         JTableUtil.limparCelulasTabela(tblTurma);
         jdOferta.limparNotificacoes();
@@ -79,7 +80,7 @@ public class CtrlOferta extends CtrlGenerica{
                 setAbrindoTela(false);
             }    
             String turno = (String) cbxTurno.getSelectedItem(); 
-            identificarOferta(ano, semestre, turma, tblTurma, turno);
+            identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma, tblTurma, turno);
             validarOfertas(tblTurma);
         }
         
@@ -105,9 +106,9 @@ public class CtrlOferta extends CtrlGenerica{
         preencherJList(listaAlocacoes, lstAlocacoes);
     }
     
-    public void identificarOferta(int ano, int semestre, Turma turma, JTable tblTurma, String turno){
+    public void identificarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma, JTable tblTurma, String turno){
         jdOferta.validarOferta(false);
-        ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, turno, turma.getId());
+        ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turno, turma);
         jdOferta.setarTurma(turma.getNome());
         preencherTabelaAulas(tblTurma);
     }
@@ -186,16 +187,18 @@ public class CtrlOferta extends CtrlGenerica{
         setDropInterno(false);
     }
     
-    public void salvarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, JComboBox cbxTurma){
+    public void atualizarAulas(JComboBox cbxTurma){
         
         jdOferta.limparNotificacoes();
         Turma turma = (Turma) cbxTurma.getSelectedItem();       
         
         if(turma != null){
             
-            String resposta = ctrlPrincipal.getGtPrincipal().getGtOferta().salvarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtOferta().atualizarAulas();
 
-            if(!resposta.equals(Constantes.CADASTRADO))
+            if(resposta.equals(Constantes.CADASTRADO))
+                CtrlMensagem.exibirMensagemSucesso(jdOferta, "Salvo com Sucesso!");
+            else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
             
             jdOferta.atualizarTela();

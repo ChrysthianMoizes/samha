@@ -27,42 +27,7 @@ public class GdOferta extends GdGenerico{
         sessao.close();
         return oferta;
     }
-    
-    public void cadastrarAulasOferta(Oferta oferta, Aula[][] matriz){
-        
-        try {
-            sessao = criarSessao();
-            sessao.beginTransaction();
-            
-            sessao.save(oferta);
-            
-            int linhas = matriz.length;
-            int colunas = matriz[0].length;
-            
-            Aula aula = null;
-            
-            for(int linha = 0; linha < linhas; linha++){
-                for(int coluna = 0; coluna < colunas; coluna++){
-                    aula = matriz[linha][coluna];
-                    
-                    if(aula != null){
-                        aula.setOferta(oferta);
-                        sessao.save(aula);  
-                    }      
-                } 
-            }
 
-            sessao.getTransaction().commit();
-            sessao.close();
-
-        } catch (HibernateException e) {
-            sessao.getTransaction().rollback();
-            sessao.close();
-            throw e;
-        } 
-        
-    }
-    
     public void atualizarAulasOferta(Aula[][] matriz, List listaAulasRemovidas){
         
         try {
