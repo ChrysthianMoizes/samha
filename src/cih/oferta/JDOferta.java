@@ -185,6 +185,7 @@ public class JDOferta extends javax.swing.JDialog {
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1400, 788));
+        setPreferredSize(new java.awt.Dimension(1580, 762));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
