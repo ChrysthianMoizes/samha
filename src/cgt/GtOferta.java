@@ -23,21 +23,31 @@ public class GtOferta {
     public String validarOferta(Aula aula){
         
         String mensagem = null;
-        
         Professor professor = aula.getAlocacao().getProfessor1();
-        Professor professor2;
         
-        mensagem = identificarConflitoTurma(aula, professor.getId(), mensagem);
+        mensagem = identificarConflitoTurma(aula, professor.getId(), mensagem, 1);
         
-        if(aula.getAlocacao().getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
-            professor2 = aula.getAlocacao().getProfessor2();
-            mensagem = identificarConflitoTurma(aula, professor2.getId(), mensagem);
-        }
-        
+        if(aula.getAlocacao().getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL))         
+            mensagem = validarDisciplinaEspecial(mensagem, aula);
+              
         return mensagem;
     }
     
-    public String identificarConflitoTurma(Aula aula, int idProfessor, String mensagem){
+    public String validarDisciplinaEspecial(String mensagem, Aula aula){
+        
+        Professor professor2 = aula.getAlocacao().getProfessor2();
+        String mensagem2 = identificarConflitoTurma(aula, professor2.getId(), mensagem, 2);
+
+        if(mensagem != null){
+            if(mensagem2 != null)
+                mensagem = mensagem + "\n\n" + identificarConflitoTurma(aula, professor2.getId(), mensagem, 2);
+        }else
+            mensagem = mensagem2;
+
+        return mensagem;
+    }
+    
+    public String identificarConflitoTurma(Aula aula, int idProfessor, String mensagem, int numeroProfessor){
         
         int ano = aula.getAlocacao().getAno();
         int semestre = aula.getAlocacao().getSemestre();
@@ -52,22 +62,22 @@ public class GtOferta {
             List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, dia, turno);
             
             if(aulas.isEmpty()){
-                return montarStringConflitoRestricao(mensagem, listaRestricoes, aula); 
+                return montarMensagemRestricaoInstituicao(mensagem, listaRestricoes, aula, numeroProfessor); 
                 
             }else{
                 
                 Aula aulaLista = (Aula) aulas.get(0);
                 
                 if(aulaLista.getId() == aula.getId())
-                    return montarStringConflitoRestricao(mensagem, listaRestricoes, aula);
+                    return montarMensagemRestricaoInstituicao(mensagem, listaRestricoes, aula, numeroProfessor);
                 else
-                    return montarStringConflitoTurma(aulas);
+                    return montarMensagemConflitoTurma(aulas);
             }
         }else
-            return montarStringConflitoTurma(aulas);
+            return montarMensagemConflitoTurma(aulas);
     }
     
-    public String montarStringConflitoTurma(List aulas){
+    public String montarMensagemConflitoTurma(List aulas){
         
         Aula aula;
         String novaMensagem = "0 Professor está em outra turma neste horário: ";
@@ -79,14 +89,33 @@ public class GtOferta {
         return novaMensagem;
     }
     
-    public String montarStringConflitoRestricao(String mensagem, List listaRestricoes, Aula aula){
-        if(listaRestricoes.isEmpty())
-            return mensagem;
+    public String montarMensagemRestricaoInstituicao(String mensagem, List listaRestricoes, Aula aula, int numeroProfessor){
+        
+        List aulas;
+        int ano = aula.getAlocacao().getAno();
+        int semestre = aula.getAlocacao().getSemestre();
+        
+        if(numeroProfessor == 1)
+            aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(aula.getAlocacao().getProfessor1().getId(), ano, semestre);
         else
-            return identificarConflitoRestricao(listaRestricoes, aula, mensagem);
+            aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(aula.getAlocacao().getProfessor2().getId(), ano, semestre);
+        
+        //VERIFICAR SE AS AULAS DO PROFESSOR ESTÃO ULTRAPASSANDO O TEMPO MÁXIMO E O INTERVALO MÍNIMO
+        
+        if(mensagem == null)
+            mensagem = montarMensagemConflitoRestricaoProfessor(mensagem, listaRestricoes, aula);
+        
+        return mensagem;
     }
     
-    public String identificarConflitoRestricao(List lista, Aula aula, String mensagem){
+    public String montarMensagemConflitoRestricaoProfessor(String mensagem, List listaRestricoes, Aula aula){
+        if(listaRestricoes.isEmpty()){
+            return null;
+        }else
+            return identificarConflitoRestricaoProfessor(listaRestricoes, aula, mensagem);
+    }
+    
+    public String identificarConflitoRestricaoProfessor(List lista, Aula aula, String mensagem){
         
         boolean resposta; 
         RestricaoProfessor restricao;
