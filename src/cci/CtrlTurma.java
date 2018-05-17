@@ -167,7 +167,8 @@ public class CtrlTurma extends CtrlGenerica{
     
     public void setarCurso(Turma turma, JComboBox cbxCurso, JComboBox cbxMatriz){
         
-        List listaCursos = cadastraTurma.getListaCursos();
+        List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
+        
         Curso curso;
 
         for (int i = 0; i < listaCursos.size(); i++) {
@@ -182,9 +183,9 @@ public class CtrlTurma extends CtrlGenerica{
     }
     
     public void setarMatriz(JComboBox cbxMatriz){
-        
-        List listaMatriz = cadastraTurma.getListaMatriz();
+               
         Turma turma = cadastraTurma.getTurma();
+        List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(turma.getMatriz().getCurso().getId());
         
         MatrizCurricular matriz;
         

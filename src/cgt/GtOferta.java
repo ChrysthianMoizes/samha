@@ -71,20 +71,21 @@ public class GtOferta {
                 if(aulaLista.getId() == aula.getId())
                     return montarMensagemRestricaoInstituicao(mensagem, listaRestricoes, aula, numeroProfessor);
                 else
-                    return montarMensagemConflitoTurma(aulas);
+                    return montarMensagemConflitoTurma(aulas, aula);
             }
         }else
-            return montarMensagemConflitoTurma(aulas);
+            return montarMensagemConflitoTurma(aulas, aula);
     }
     
-    public String montarMensagemConflitoTurma(List aulas){
+    public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
         
         Aula aula;
         String novaMensagem = "0 Professor está em outra turma neste horário: ";
 
-        for(int i = 0; i< aulas.size(); i++){
-            aula = (Aula) aulas.get(0);
-            novaMensagem = novaMensagem + aula.getOferta().getTurma().getNome() + " - " + aula.getAlocacao().getDisciplina().getNome() + ". ";
+        for(int i = 0; i < aulas.size(); i++){
+            aula = (Aula) aulas.get(i);
+            if(aula.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
+                novaMensagem = novaMensagem + aula.getOferta().getTurma().getNome() + " - " + aula.getAlocacao().getDisciplina().getNome() + ". ";           
         }     
         return novaMensagem;
     }

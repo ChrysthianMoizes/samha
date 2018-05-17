@@ -4,6 +4,7 @@ import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
 import cdp.Aula;
 import cdp.Curso;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -72,10 +73,7 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void preencherComboTurma(){
-        Curso curso = (Curso) cbxCurso.getSelectedItem();
-        if(curso != null){
-           ctrlPrincipal.getCtrlOferta().preencherComboTurma(curso.getId(), cbxTurma);
-        }
+        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma);    
     }
     
     public void setarMensagem(String mensagem){
@@ -90,7 +88,8 @@ public class JDOferta extends javax.swing.JDialog {
         lblNomeProfessor.setText(nome);
     }
     
-    public void exibirNotificacao(String mensagem){
+    public void exibirNotificacao(String mensagem, Color cor){
+        txtAreaNotificacoes.setForeground(cor);
         txtAreaNotificacoes.append(mensagem);
     }
     
@@ -666,10 +665,11 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -728,10 +728,12 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
+        ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
         atualizarTela();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
+        ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
         preencherComboTurma();
     }//GEN-LAST:event_cbxCursoActionPerformed
 
@@ -744,6 +746,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
+        ctrlPrincipal.getCtrlOferta().alterarTurno((String) cbxTurno.getSelectedItem(), tblTurma);
         atualizarTela();
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
