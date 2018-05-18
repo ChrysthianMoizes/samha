@@ -4,6 +4,7 @@ import cdp.Aula;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JTable;
 
 public class CtrlConflito {
@@ -20,38 +21,44 @@ public class CtrlConflito {
         setJdOferta(tela);
         
         jdOferta.limparNotificacoes();
-        int conflitos = 0;
-        
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            
+
+        for(int linha = 0; linha < Constantes.LINHA; linha++){ 
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
                 
                 Aula aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
                 
                 if(aula != null){
-                    String mensagem = ctrlPrincipal.getGtPrincipal().getGtConflito().validarOferta(aula);
-                    if(mensagem != null){
-                        conflitos++;
-                        String notificacao = mensagem.substring(2);
-                        exibirNotificação(notificacao, aula, Color.RED);
-                    }
-                    pintarCelulaTabela(mensagem, linha, coluna, tabela);
+                    List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarOferta(aula);
+                    exibirNotificacoes(msg, aula);
                 }
             }
         }
-        if(conflitos == 0){
-            Color cor = new Color(53,151,48);
-            jdOferta.exibirNotificacao("Nenhum conflito encontrado!", cor);       
-        }
+        
         jdOferta.validarOferta(false);
     }
     
-    public void exibirNotificação(String notificacao, Aula aula, Color cor){
-        int numero = aula.getNumero() + 1; 
-        jdOferta.exibirNotificacao(aula.getDia() + ": Aula " + numero + ".\n" + notificacao+"\n\n", cor);     
+    public void exibirNotificacoes(List mensagens, Aula aula){
+        
+        int numero = aula.getNumero() + 1;
+        String mensagem = null;
+        String notificacao;
+        String dia = obterStringDia(aula.getDia());
+        
+        if(!mensagens.isEmpty()){
+            
+            for(int i = 0; i < mensagens.size(); i++){
+                mensagem = (String) mensagens.get(i);
+                notificacao = mensagem.substring(2);
+                jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + notificacao +"\n\n", Color.RED);
+                pintarCelulaTabela(Color.ORANGE, aula.getDia(), aula.getNumero(), jdOferta.getTblTurma());
+            }
+        }else{
+            pintarCelulaTabela(Color.GREEN, aula.getDia(), aula.getNumero(), jdOferta.getTblTurma());
+            jdOferta.exibirNotificacao(obterStringDia(aula.getDia()) + " - Aula "+ (aula.getNumero()+1) + ".\nNenhum conflito encontrado!\n\n", new Color(53,151,48)); 
+        }           
     }
     
-    public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
+    public void pintarCelulaTabela(Color cor, int linha, int coluna, JTable tabela){
         
 //        if(mensagem != null){
 //            
@@ -69,6 +76,23 @@ public class CtrlConflito {
 //
 //        render.prepareRenderer(null, linha, coluna);
     }
+    
+    public String obterStringDia(int dia){
+
+        switch(dia){
+            
+            case 0:
+                return Constantes.SEGUNDA;
+            case 1:
+                return Constantes.TERCA;
+            case 2:
+                return Constantes.QUARTA;
+            case 3:
+                return Constantes.QUINTA;    
+            default:
+                return Constantes.SEXTA; 
+        }  
+   }
 
     public void setJdOferta(JDOferta jdOferta) {
         this.jdOferta = jdOferta;

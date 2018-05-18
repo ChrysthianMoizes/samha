@@ -36,7 +36,7 @@ public class GtAlocacao {
                 if(alocacao.getProfessor1().getId() == professor.getId())
                     adicionado = somarCargaHoraria(professor, alocacao);
                 
-                if(alocacao.getDisciplina().getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+                if(alocacao.getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
                     if(alocacao.getProfessor2().getId() == professor.getId())
                         adicionado = somarCargaHoraria(professor, alocacao);  
                 }               
@@ -65,7 +65,7 @@ public class GtAlocacao {
             Professor professor = (Professor) listaProfessores.get(0);
             alocacao.setProfessor1(professor);
 
-            if(disciplina.getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+            if(disciplina.getTipo().equals(Constantes.ESPECIAL)){
                 Professor professor2 = (Professor) listaProfessores.get(1);
                 alocacao.setProfessor2(professor2);
             }
@@ -106,7 +106,7 @@ public class GtAlocacao {
         
         if(!listaProfessores.isEmpty()){
             
-            if(disciplina.getTipo().toLowerCase().equals(Constantes.ESPECIAL)){
+            if(disciplina.getTipo().equals(Constantes.ESPECIAL)){
                 
                 if(listaProfessores.size() != 2)
                     throw new SAMHAException(19);

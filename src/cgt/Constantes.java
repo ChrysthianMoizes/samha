@@ -14,7 +14,7 @@ public abstract class Constantes {
     public static final String ALTERADO = "alterado";
     public static final String EXCLUIDO = "excluido";
     
-    public static final String ESPECIAL = "especial";
+    public static final String ESPECIAL = "ESPECIAL";
     
     public static final String COORD_ACAD = "coordenador acadêmico";
     public static final String COORD_CURSO = "coordenador de curso";

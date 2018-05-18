@@ -27,7 +27,7 @@ public class GtDisciplina {
             disciplina.setNome(nome);
             disciplina.setPeriodo(periodo);
             disciplina.setQtAulas(qtAulas);
-            disciplina.setTipo(tipo);
+            disciplina.setTipo(tipo.toUpperCase());
             disciplina.setSigla(sigla.toUpperCase());
             
             gtPrincipal.getGdPrincipal().getGdDisciplina().cadastrar(disciplina);           
@@ -48,7 +48,7 @@ public class GtDisciplina {
             disciplina.setNome(nome);
             disciplina.setPeriodo(periodo);
             disciplina.setQtAulas(qtAulas);
-            disciplina.setTipo(tipo);
+            disciplina.setTipo(tipo.toUpperCase());
             disciplina.setSigla(sigla.toUpperCase());
             
             gtPrincipal.getGdPrincipal().getGdDisciplina().alterar(disciplina);

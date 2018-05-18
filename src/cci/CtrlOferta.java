@@ -194,7 +194,7 @@ public class CtrlOferta extends CtrlGenerica{
             
             Disciplina disciplina = alocacao.getDisciplina();
 
-            if(disciplina.getTipo().toLowerCase().equals(Constantes.ESPECIAL))
+            if(disciplina.getTipo().equals(Constantes.ESPECIAL))
                 cbxQuantidadeProfessor.setEnabled(true);
             else{
                 cbxQuantidadeProfessor.setEnabled(false);
