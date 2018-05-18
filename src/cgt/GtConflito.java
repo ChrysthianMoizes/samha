@@ -4,16 +4,18 @@ import cdp.Aula;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GtConflito {
     
     private GtPrincipal gtPrincipal;
+    private List[] vetor;
     
     public GtConflito(GtPrincipal gt) {
         this.gtPrincipal = gt;
     }
-    
+      
     public List validarOferta(Aula aula){
  
         Professor professor = aula.getAlocacao().getProfessor1();
@@ -81,19 +83,92 @@ public class GtConflito {
     
     public String identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
         
-        List aulas;
         String mensagem = null;
+        int idProfessor = aula.getAlocacao().getProfessor1().getId();
         
-        if(numeroProfessor == 1)
-            aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(aula.getAlocacao().getProfessor1().getId(), aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
-        else
-            aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(aula.getAlocacao().getProfessor2().getId(), aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
-        
-        //VERIFICAR SE AS AULAS DO PROFESSOR ESTÃO ULTRAPASSANDO O TEMPO MÁXIMO E O INTERVALO MÍNIMO
+        if(numeroProfessor != 1)
+            idProfessor = aula.getAlocacao().getProfessor2().getId();
+        preencherVetorAulas(aula, idProfessor);
         
         return mensagem;
     }
     
+    public void preencherVetorAulas(Aula aula, int idProfessor){
+        
+        int ano = aula.getAlocacao().getAno();
+        int semestre = aula.getAlocacao().getSemestre();
+        int dia = aula.getDia();
+        
+        vetor = new List[Constantes.LINHA];
+        
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            
+            vetor[linha] = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessorAnoSemestre(linha, idProfessor, ano, semestre);
+            
+            if(dia == linha)
+                vetor[linha].add(aula);
+            
+            Collections.sort(vetor[linha]);
+        }
+    }
+    
+    public String montarMensagemConflitoTempoMaximo(){
+        
+        List aulas;
+        Aula primeiraAula, ultimaAula;
+        double horarioInicial, horarioFinal, tempo;
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+            aulas = vetor[dia];
+            
+            if(aulas.size() > 1){
+                primeiraAula = (Aula) aulas.get(0);
+                ultimaAula = (Aula) aulas.get(aulas.size() - 1);
+                horarioInicial = obterHorarioInicial(primeiraAula);
+                horarioFinal = obterHorarioFinal(ultimaAula);
+                tempo = horarioFinal - horarioInicial;
+                
+                if(tempo > primeiraAula.getOferta().getTempoMaximoTrabalho()){
+                    return "TEM CONFLITO NESSA POHHA!";
+                }
+            }
+        }
+        return null;
+    }
+    
+    public String montarMensagemConflitoIntervaloMinimo(){
+        return null;
+    }
+    
+    public double obterHorarioInicial(Aula aula){
+        
+        String turno = aula.getTurno();
+        int numero = aula.getNumero();
+        
+        double horarioInicial = 5; // Horario.horarioInicial(numero + obterNumeroTurno(turno));
+        
+        return horarioInicial;
+    }
+    
+    public double obterHorarioFinal(Aula aula){
+        
+        String turno = aula.getTurno();
+        int numero = aula.getNumero();
+        
+        double horarioFinal = 5; // Horario.horarioFinal(numero + obterNumeroTurno(turno));
+        
+        return horarioFinal;
+    }
+    
+    public int obterNumeroTurno(String turno){
+        
+        switch(turno){ 
+            case Constantes.MATUTINO: return 0;
+            case Constantes.VESPERTINO: return 6;
+            default: return 12;    
+        }
+    }
+        
     public String identificarConflitoRestricaoProfessor(Aula aula, int idProfessor){
         
         List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), aula.getTurno());
