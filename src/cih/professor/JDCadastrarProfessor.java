@@ -564,19 +564,19 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                             break;
                     }
 
-                    String dia = restricao.getDia();
+                    int dia = restricao.getDia();
 
                     switch (dia) {
-                        case "SEGUNDA-FEIRA":
+                        case 0:
                             cbxDias.setSelectedIndex(0);
                             break;
-                        case "TERÇA-FEIRA":
+                        case 1:
                             cbxDias.setSelectedIndex(1);
                             break;
-                        case "QUARTA-FEIRA":
+                        case 2:
                             cbxDias.setSelectedIndex(2);
                             break;
-                        case "QUINTA-FEIRA":
+                        case 3:
                             cbxDias.setSelectedIndex(3);
                             break;
                         default:
@@ -657,7 +657,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         
         String nome = txtNomeRestricao.getText();
         String turno = cbxTurnos.getSelectedItem().toString();
-        String dia = cbxDias.getSelectedItem().toString();
+        int dia = cbxDias.getSelectedIndex();
         String descricao = txtAreaDescricao.getText();
         String prioridade;
         char priori = (char) btnGroupPrioridade.getSelection().getMnemonic();

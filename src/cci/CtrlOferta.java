@@ -8,7 +8,6 @@ import cdp.Professor;
 import cdp.Turma;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
@@ -23,9 +22,7 @@ public class CtrlOferta extends CtrlGenerica{
     private JDOferta jdOferta;
     private RenderizadorCelulas render;
     private List listaAlocacoes;
-    private boolean dropInterno = false;
     private boolean abrindoTela = true;
-    private Aula aulaSelecionada;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -81,7 +78,7 @@ public class CtrlOferta extends CtrlGenerica{
             }    
             String turno = (String) cbxTurno.getSelectedItem(); 
             identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma, tblTurma, turno);
-            validarOfertas(tblTurma);
+            validarOferta(tblTurma);
         }
         
         preencherListaAlocacoes(ano, semestre, turma, lstAlocacoes, tblTurma);
@@ -110,102 +107,7 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.validarOferta(false);
         ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turno, turma);
         jdOferta.setarTurma(turma.getNome());
-        preencherTabelaAulas(tblTurma);
-    }
-    
-    public void preencherTabelaAulas(JTable tblTurma){
- 
-        JTableUtil.limparCelulasTabela(tblTurma);
-        Aula aula;
-        
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                aula = ctrlPrincipal.getGtPrincipal().getGtOferta().getAulaMatriz(linha, coluna);
-                if(aula != null)
-                    tblTurma.setValueAt(aula, linha, coluna);
-            }  
-        }
-    }
-    
-    public void gerarAula(JList lstAlocacoes, JTable tblTurma, JComboBox cbxTurno){
-        
-        Aula aula = null;
-        
-        int indice = lstAlocacoes.getSelectedIndex();
-        
-        int coluna = tblTurma.getSelectedColumn();
-        int linha = tblTurma.getSelectedRow();
-
-        if((linha >= 0) && (coluna >= 0)){
-
-            String turno = (String) cbxTurno.getSelectedItem();
-            Alocacao alocacao = (Alocacao) getListaAlocacoes().get(indice);
-            aula = ctrlPrincipal.getGtPrincipal().getGtOferta().gerarNovaAula(alocacao, linha, turno, coluna);
-                
-        }       
-        setAulaSelecionada(aula);
-    }
-    
-    public void arrastarAula(int linha, int coluna, Aula aula){
-        
-        if(aula != null && !isDropInterno())    // ARRASTAR DA LISTA         
-            ctrlPrincipal.getGtPrincipal().getGtOferta().importarAulaLista(linha, coluna, aula);  
-        else if(aula != null && isDropInterno())  // ARRASTAR DA TABELA
-            ctrlPrincipal.getGtPrincipal().getGtOferta().moverAulaMatriz(linha, coluna, aula);  
-        else
-            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
-        
-        preencherTabelaAulas(jdOferta.getTblTurma());
-    }
-    
-    public void identificarOrigem(int linha, int coluna){
-        
-        jdOferta.validarOferta(true);
-        
-        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
-        
-        if(indice >= 0 && !isDropInterno())
-            jdOferta.gerarAula();
-
-        arrastarAula(linha, coluna, getAulaSelecionada());
-        jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
-
-        setAulaSelecionada(null);
-    }
-    
-    public void removerAula(JTable tblTurma){
-        
-        jdOferta.validarOferta(true);
-        int coluna = tblTurma.getSelectedColumn();
-        int linha = tblTurma.getSelectedRow();
-        
-        Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
-        ctrlPrincipal.getGtPrincipal().getGtOferta().removerAula(aula);
-        tblTurma.setValueAt(null, linha, coluna);
-        setAulaSelecionada(null);
-        setDropInterno(false);
-    }
-    
-    public void atualizarAulas(JComboBox cbxTurma){
-        
-        jdOferta.limparNotificacoes();
-        Turma turma = (Turma) cbxTurma.getSelectedItem();       
-        
-        if(turma != null){
-            
-            String resposta = ctrlPrincipal.getGtPrincipal().getGtOferta().atualizarAulas();
-
-            if(resposta.equals(Constantes.CADASTRADO))
-                CtrlMensagem.exibirMensagemSucesso(jdOferta, "Salvo com Sucesso!");
-            else
-                CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
-            
-            jdOferta.atualizarTela();
-        }else
-            CtrlMensagem.exibirMensagemErro(jdOferta, "Nenhuma turma selecionada.");
-        
-        zerarTabelaProfessor();
+        ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma);
     }
     
     public void zerarTabelaProfessor(){
@@ -257,57 +159,8 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.repaint();
     }    
     
-    public void validarOfertas(JTable tabela){
-        
-        jdOferta.limparNotificacoes();
-        int conflitos = 0;
-        
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                
-                Aula aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtOferta().getAulaMatriz(linha, coluna);
-                
-                if(aula != null){
-                    String mensagem = ctrlPrincipal.getGtPrincipal().getGtOferta().validarOferta(aula);
-                    if(mensagem != null){
-                        conflitos++;
-                        String notificacao = mensagem.substring(2);
-                        exibirNotificação(notificacao, aula, Color.RED);
-                    }
-                    pintarCelulaTabela(mensagem, linha, coluna, tabela);
-                }
-            }
-        }
-        if(conflitos == 0){
-            Color cor = new Color(53,151,48);
-            jdOferta.exibirNotificacao("Nenhum conflito encontrado!", cor);       
-        }
-        jdOferta.validarOferta(false);
-    }
- 
-    public void exibirNotificação(String notificacao, Aula aula, Color cor){
-        int numero = aula.getNumero() + 1; 
-        jdOferta.exibirNotificacao(aula.getDia() + ": Aula " + numero + ".\n" + notificacao+"\n\n", cor);     
-    }
-    
-    public void pintarCelulaTabela(String mensagem, int linha, int coluna, JTable tabela){
-        
-//        if(mensagem != null){
-//            
-//            int codigo = mensagem.charAt(0);
-//            
-//            if(codigo == 0)
-//                render.setCor(Color.RED);
-//               celula.setBackground(Color.RED);  
-//            else
-//                render.setCor(Color.YELLOW);
-//               celula.setBackground(Color.YELLOW); 
-//        }else
-//            render.setCor(Color.GREEN);
-//            celula.setBackground(Color.GREEN);
-//
-//        render.prepareRenderer(null, linha, coluna);
+    public void validarOferta(JTable tabela){
+        ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
     }
 
     public List getListaAlocacoes() {
@@ -318,14 +171,6 @@ public class CtrlOferta extends CtrlGenerica{
         this.listaAlocacoes = listaAlocacoes;
     }
 
-    public boolean isDropInterno() {
-        return dropInterno;
-    }
-
-    public void setDropInterno(boolean dropInterno) {
-        this.dropInterno = dropInterno;
-    }
-
     public boolean isAbrindoTela() {
         return abrindoTela;
     }
@@ -334,14 +179,10 @@ public class CtrlOferta extends CtrlGenerica{
         this.abrindoTela = abrindoTela;
     }
 
-    public Aula getAulaSelecionada() {
-        return aulaSelecionada;
+    public JDOferta getJdOferta() {
+        return jdOferta;
     }
 
-    public void setAulaSelecionada(Aula aulaSelecionada) {
-        this.aulaSelecionada = aulaSelecionada;
-    }
-    
     //================================================= TABELA DE PROFESSOR ================================================================
     
     public void preencherHorarioProfessor(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
@@ -378,10 +219,10 @@ public class CtrlOferta extends CtrlGenerica{
 
             if(numero == 0){
                 professor = alocacao.getProfessor1();
-                listaAulas = ctrlPrincipal.getGtPrincipal().getGtOferta().listarAulasProfessor(professor.getId(), ano, semestre, 1);
+                listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 1);
             }else{
                 professor = alocacao.getProfessor2();
-                listaAulas = ctrlPrincipal.getGtPrincipal().getGtOferta().listarAulasProfessor(professor.getId(), ano, semestre, 2);
+                listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 2);
             }
             jdOferta.setarProfessor(professor.getNome());
             preencherTabelaProfessor(tblProfessor, listaAulas);
@@ -397,7 +238,7 @@ public class CtrlOferta extends CtrlGenerica{
         
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
-            linha = ctrlPrincipal.getGtPrincipal().getGtOferta().obterInteiroDia(aula.getDia());
+            linha = aula.getDia();
             turno = calcularNumeroTurno(aula.getTurno());
             coluna = (aula.getNumero() + turno);
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), linha, coluna);

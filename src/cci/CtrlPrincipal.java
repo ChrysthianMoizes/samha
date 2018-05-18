@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public final class CtrlPrincipal {
 
@@ -33,6 +34,8 @@ public final class CtrlPrincipal {
     private CtrlTurma ctrlTurma;
     private CtrlAlocacao ctrlAlocacao;
     private CtrlOferta ctrlOferta;
+    private CtrlConflito ctrlConflito;
+    private CtrlAula ctrlAula;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -48,6 +51,8 @@ public final class CtrlPrincipal {
         ctrlTurma = new CtrlTurma(this);
         ctrlAlocacao = new CtrlAlocacao(this);
         ctrlOferta = new CtrlOferta(this);
+        ctrlConflito = new CtrlConflito(this);
+        ctrlAula = new CtrlAula(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -59,7 +64,7 @@ public final class CtrlPrincipal {
                     break;
                 }
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -193,5 +198,13 @@ public final class CtrlPrincipal {
 
     public CtrlOferta getCtrlOferta() {
         return ctrlOferta;
+    }
+
+    public CtrlConflito getCtrlConflito() {
+        return ctrlConflito;
+    } 
+
+    public CtrlAula getCtrlAula() {
+        return ctrlAula;
     }
 }

@@ -13,7 +13,7 @@ public class GtRestricao {
         gtPrincipal = gt;
     }
 
-    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String descricao, String prioridade,
+    public RestricaoProfessor cadastrar(String nome, String turno, int dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
         try {
@@ -29,7 +29,7 @@ public class GtRestricao {
             restricao.setAula6(aula6);
 
             restricao.setDescricao(descricao);
-            restricao.setDia(dia.toUpperCase());
+            restricao.setDia(dia);
             restricao.setNome(nome);
             restricao.setPrioridade(prioridade.toUpperCase());
             restricao.setTurno(turno.toUpperCase());

@@ -26,7 +26,7 @@ public class RestricaoProfessor implements Serializable{
     private String descricao;
     
     @Column(nullable = false)
-    private String dia;
+    private int dia;
     
     @Column(nullable = false)
     private String turno;
@@ -59,7 +59,7 @@ public class RestricaoProfessor implements Serializable{
     public RestricaoProfessor(){    
     }
 
-    public RestricaoProfessor(int id, String nome, String descricao, String dia, String turno, 
+    public RestricaoProfessor(int id, String nome, String descricao, int dia, String turno, 
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.id = id;
         this.nome = nome;
@@ -76,7 +76,7 @@ public class RestricaoProfessor implements Serializable{
         this.professor = professor;
     }
 
-    public RestricaoProfessor(String nome, String descricao, String dia, String turno,
+    public RestricaoProfessor(String nome, String descricao, int dia, String turno,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, String prioridade, Professor professor) {
         this.nome = nome;
         this.descricao = descricao;
@@ -164,11 +164,11 @@ public class RestricaoProfessor implements Serializable{
         this.descricao = descricao;
     }
 
-    public String getDia() {
+    public int getDia() {
         return dia;
     }
 
-    public void setDia(String dia) {
+    public void setDia(int dia) {
         this.dia = dia;
     }
 

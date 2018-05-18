@@ -3,7 +3,6 @@ package cgd;
 import cdp.RestricaoProfessor;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 public class GdRestricao extends GdGenerico{
@@ -25,7 +24,7 @@ public class GdRestricao extends GdGenerico{
         return lista;
     }
     
-    public List identificarConflitoRestricao(int idProfessor, String dia, String turno) {
+    public List identificarConflitoRestricao(int idProfessor, int dia, String turno) {
         Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
         sessao.beginTransaction();
         crit.add( Restrictions.eq("professor.id", idProfessor) );

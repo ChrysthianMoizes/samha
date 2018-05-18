@@ -202,7 +202,7 @@ public class CtrlProfessor extends CtrlGenerica{
         }
     }
     
-    public void adicionarRestricao(String nome, String turno, String dia, String descricao, String prioridade,
+    public void adicionarRestricao(String nome, String turno, int dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor){
         
         RestricaoProfessor restricao = ctrlPrincipal.getCtrlRestricao().cadastrar(

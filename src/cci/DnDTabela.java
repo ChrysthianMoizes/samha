@@ -31,8 +31,8 @@ public class DnDTabela extends TransferHandler{
         
         Aula aula = (Aula)table.getModel().getValueAt(row,col);     
         
-        ctrlPrincipal.getCtrlOferta().setAulaSelecionada(aula);
-        ctrlPrincipal.getCtrlOferta().setDropInterno(true);
+        ctrlPrincipal.getCtrlAula().setAulaSelecionada(aula);
+        ctrlPrincipal.getCtrlAula().setDropInterno(true);
         
         StringSelection transferable = new StringSelection(aula.toString());
         return transferable;
@@ -57,8 +57,8 @@ public class DnDTabela extends TransferHandler{
         int row = dl.getRow();
         int col=dl.getColumn();
         
-        ctrlPrincipal.getCtrlOferta().identificarOrigem(row, col);
-        ctrlPrincipal.getCtrlOferta().setDropInterno(false);
+        ctrlPrincipal.getCtrlAula().identificarOrigem(row, col);
+        ctrlPrincipal.getCtrlAula().setDropInterno(false);
         
         return true;
     }

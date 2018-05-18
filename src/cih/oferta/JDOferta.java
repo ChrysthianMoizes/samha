@@ -30,11 +30,11 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void gerarAula(){
-        ctrlPrincipal.getCtrlOferta().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
+        ctrlPrincipal.getCtrlAula().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
     }
     
     public void atualizarAulas(){
-        ctrlPrincipal.getCtrlOferta().atualizarAulas(cbxTurma);
+        ctrlPrincipal.getCtrlAula().atualizarAulas(cbxTurma);
     }
     
     public void atualizarTela(){
@@ -517,7 +517,7 @@ public class JDOferta extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "07:00", "07:55", "08:50", "10:00", "10:55", "11:50", "12:50", "13:45", "14:40", "15:50", "16:45", "17:40", "18:50", "19:35", "20:30", "21:15", "--l", "--"
+                "07:00", "07:55", "08:50", "10:00", "10:55", "11:50", "12:50", "13:45", "14:40", "15:50", "16:45", "17:40", "18:50", "19:35", "20:30", "21:15", "--", "--"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -721,7 +721,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        ctrlPrincipal.getCtrlOferta().validarOfertas(tblTurma);
+        ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma);
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -753,7 +753,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_tblTurmaMouseClicked
 
     private void itemRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRemoverActionPerformed
-        ctrlPrincipal.getCtrlOferta().removerAula(tblTurma);
+        ctrlPrincipal.getCtrlAula().removerAula(tblTurma);
     }//GEN-LAST:event_itemRemoverActionPerformed
 
     private void lstAlocacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlocacoesMouseClicked

@@ -22,6 +22,8 @@ public class GtPrincipal {
     private GtProfessor gtProfessor;
     private GtRestricao gtRestricao;
     private GtTurma gtTurma;
+    private GtAula gtAula;
+    private GtConflito gtConflito;
 
     public GtPrincipal() {
         gdPrincipal = new GdPrincipal();
@@ -36,6 +38,8 @@ public class GtPrincipal {
         gtProfessor = new GtProfessor(this);
         gtRestricao = new GtRestricao(this);
         gtTurma = new GtTurma(this);
+        gtAula = new GtAula(this);
+        gtConflito = new GtConflito(this);
         setPermissao(Constantes.PERMISSAO_NEGADA);
         setCoordAtual(null);
     }
@@ -155,5 +159,13 @@ public class GtPrincipal {
 
     public GdPrincipal getGdPrincipal() {
         return gdPrincipal;
+    }
+
+    public GtAula getGtAula() {
+        return gtAula;
+    }
+
+    public GtConflito getGtConflito() {
+        return gtConflito;
     }
 }

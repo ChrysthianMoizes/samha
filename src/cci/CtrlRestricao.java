@@ -13,7 +13,7 @@ public class CtrlRestricao {
         this.ctrlPrincipal = ctrl;
     }
 
-    public RestricaoProfessor cadastrar(String nome, String turno, String dia, String descricao, String prioridade,
+    public RestricaoProfessor cadastrar(String nome, String turno, int dia, String descricao, String prioridade,
             boolean aula1, boolean aula2, boolean aula3, boolean aula4, boolean aula5, boolean aula6, Professor professor) {
 
         RestricaoProfessor restricao = ctrlPrincipal.getGtPrincipal().getGtRestricao().cadastrar(nome, turno, dia, descricao, prioridade, aula1, aula2, aula3, aula4, aula5, aula6, professor);

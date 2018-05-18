@@ -3,6 +3,7 @@ package cgd;
 import cdp.Aula;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 public class GdAula extends GdGenerico{
@@ -13,7 +14,44 @@ public class GdAula extends GdGenerico{
         this.gdPrincipal = gdPrincipal;
     }
     
-    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, String dia, String turno) {
+    public void atualizarAulasOferta(Aula[][] matriz, List listaAulasRemovidas){
+        
+        try {
+            sessao = criarSessao();
+            sessao.beginTransaction();
+            
+            Aula aulaRemovida;
+            for(int i = 0; i < listaAulasRemovidas.size(); i++){
+                aulaRemovida = (Aula) listaAulasRemovidas.get(i);
+                sessao.delete(aulaRemovida);
+            }
+            
+            listaAulasRemovidas.clear();
+            
+            int linhas = matriz.length;
+            int colunas = matriz[0].length;
+            Aula aula;
+                     
+            for(int linha = 0; linha < linhas; linha++){
+                for(int coluna = 0; coluna < colunas; coluna++){
+                    aula = (Aula) matriz[linha][coluna];
+                    if(aula != null){
+                        sessao.merge(aula);   
+                    }
+                } 
+            }
+            
+            sessao.getTransaction().commit();
+            sessao.close();
+
+        } catch (HibernateException e) {
+            sessao.getTransaction().rollback();
+            sessao.close();
+            throw e;
+        }     
+    }
+    
+    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, int dia, String turno) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         crit.createAlias("alocacao", "a");
         crit.createAlias("a.professor1", "p");

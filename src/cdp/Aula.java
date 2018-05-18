@@ -25,7 +25,7 @@ public class Aula implements Serializable {
     private int numero;
     
     @Column(nullable = false)
-    private String dia;
+    private int dia;
     
     @Column(nullable = false)
     private String turno;
@@ -43,7 +43,7 @@ public class Aula implements Serializable {
     public Aula() {
     }
 
-    public Aula(int id, int numero, String dia, String turno, Alocacao alocacao, Oferta oferta) {
+    public Aula(int id, int numero, int dia, String turno, Alocacao alocacao, Oferta oferta) {
         this.id = id;
         this.numero = numero;
         this.dia = dia;
@@ -52,7 +52,7 @@ public class Aula implements Serializable {
         this.oferta = oferta;
     }
 
-    public Aula(int numero, String dia, String turno, Alocacao alocacao, Oferta oferta) {
+    public Aula(int numero, int dia, String turno, Alocacao alocacao, Oferta oferta) {
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
@@ -76,11 +76,11 @@ public class Aula implements Serializable {
         this.numero = numero;
     }
 
-    public String getDia() {
+    public int getDia() {
         return dia;
     }
 
-    public void setDia(String dia) {
+    public void setDia(int dia) {
         this.dia = dia;
     }
 
