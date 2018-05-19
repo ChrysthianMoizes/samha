@@ -266,7 +266,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         });
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 15, 90, 15));
+        spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(60, 15, 120, 15));
         spnCargaHoraria.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnCargaHorariaStateChanged(evt);
@@ -449,6 +449,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     public void desabilitarCampos(){
         txtNomeDisciplina.setEnabled(false);
         txtNomeMatriz.setEnabled(false);
+        txtSigla.setEnabled(false);
         btnAdicionarMatriz.setEnabled(false);
         btnRemoverMatriz.setEnabled(false);
         spnAno.setEnabled(false);
@@ -477,6 +478,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     public void limparCampos(){
         limparCamposMatriz();
         txtNomeDisciplina.setText("");
+        txtSigla.setText("");
         cbxTipo.setSelectedIndex(0);
         spnAulas.setValue(4);
         spnCargaHoraria.setValue(60);
@@ -569,7 +571,8 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
-             ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
+            ctrlPrincipal.getCtrlDisciplina().setCursoSelecionado(curso);
+            ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
         }     
     }//GEN-LAST:event_cbxCursoItemStateChanged
 

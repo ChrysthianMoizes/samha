@@ -18,6 +18,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDBuscarDisciplina buscaDisciplina;
     private JDCadastrarDisciplina cadastraDisciplina;
+    private Curso cursoSelecionado;
 
     public CtrlDisciplina(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
@@ -108,7 +109,7 @@ public class CtrlDisciplina extends CtrlGenerica{
         List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorMatriz(coluna, id);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
-        if(listaDisciplinas.size() == 0)
+        if(listaDisciplinas.isEmpty())
             buscaDisciplina.setarMensagem("Nenhuma disciplina encontrada.");
     }
     
@@ -117,7 +118,7 @@ public class CtrlDisciplina extends CtrlGenerica{
         List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorTipo(tipo, id);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
-        if(listaDisciplinas.size() == 0)
+        if(listaDisciplinas.isEmpty())
             buscaDisciplina.setarMensagem("Nenhuma disciplina encontrada.");
     }
     
@@ -156,14 +157,19 @@ public class CtrlDisciplina extends CtrlGenerica{
             cadastraDisciplina.setListaCursos(listaCursos);
         preencherCombo(cbxCurso, listaCursos);
         
-        if(listaCursos.size() > 0){
+        if(!listaCursos.isEmpty()){
             
             Curso curso = (Curso) cbxCurso.getSelectedItem();
             
-            if(cadastraDisciplina != null)
-                cadastraDisciplina.setarPeriodoMaximo(curso.getQtPeriodos());
+            if(getCursoSelecionado() == null)
+                setCursoSelecionado(curso);
             
-            preencherComboMatriz(curso.getId(), cbxMatriz);
+            if(cadastraDisciplina != null){
+                cadastraDisciplina.setarPeriodoMaximo(curso.getQtPeriodos());
+                setarCursoCadastro(cbxCurso, cbxMatriz);
+                preencherComboMatriz(getCursoSelecionado().getId(), cbxMatriz);
+            }else
+                preencherComboMatriz(curso.getId(), cbxMatriz);
         }
     }
 
@@ -171,11 +177,12 @@ public class CtrlDisciplina extends CtrlGenerica{
         
         List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(id);
         cbxMatriz.removeAllItems();
+        
         if(cadastraDisciplina != null){
-            cadastraDisciplina.setListaMatriz(listaMatriz);    
+            cadastraDisciplina.setListaMatriz(listaMatriz);
+            cadastraDisciplina.setarPeriodoMaximo(getCursoSelecionado().getQtPeriodos());
         }
-        //if(listaMatriz.size() > 0)
-            preencherCombo(cbxMatriz, listaMatriz);   
+        preencherCombo(cbxMatriz, listaMatriz);   
     }
     
     public void setarCurso(Disciplina disciplina, JComboBox cbxCurso, JComboBox cbxMatriz){
@@ -187,6 +194,23 @@ public class CtrlDisciplina extends CtrlGenerica{
 
             curso = (Curso) listaCursos.get(i);
             if (curso.getId() == disciplina.getMatriz().getCurso().getId()) {
+                cbxCurso.setSelectedIndex(i);
+                preencherComboMatriz(curso.getId(), cbxMatriz);
+                break;
+            }
+        }
+    }
+    
+    public void setarCursoCadastro(JComboBox cbxCurso, JComboBox cbxMatriz){
+        
+        List listaCursos = cadastraDisciplina.getListaCursos();
+        Curso curso;
+
+        for (int i = 0; i < listaCursos.size(); i++) {
+
+            curso = (Curso) listaCursos.get(i);
+            if (curso.getId() == getCursoSelecionado().getId()) {
+                cadastraDisciplina.setarPeriodoMaximo(getCursoSelecionado().getQtPeriodos());
                 cbxCurso.setSelectedIndex(i);
                 preencherComboMatriz(curso.getId(), cbxMatriz);
                 break;
@@ -215,13 +239,18 @@ public class CtrlDisciplina extends CtrlGenerica{
         
         Disciplina disciplina = cadastraDisciplina.getDisciplina();
         
-        if(disciplina.getTipo().equals("OBRIGATÓRIA")){
-            cbxTipo.setSelectedIndex(0);
-        }else if(disciplina.getTipo().equals("OPTATIVA")){
-            cbxTipo.setSelectedIndex(1);
-        }else{
-            cbxTipo.setSelectedIndex(2);
-        } 
+        switch (disciplina.getTipo()) {
+            
+            case "OBRIGATÓRIA":
+                cbxTipo.setSelectedIndex(0);
+                break;
+            case "OPTATIVA":
+                cbxTipo.setSelectedIndex(1);
+                break; 
+            default:
+                cbxTipo.setSelectedIndex(2);
+                break;
+        }
     }
     
     public void adicionarMatriz(String nome, int ano, int semestre, Curso curso, JComboBox cbxMatriz){
@@ -261,4 +290,13 @@ public class CtrlDisciplina extends CtrlGenerica{
             return false;
         return true;
     } 
+
+    public Curso getCursoSelecionado() {
+        return cursoSelecionado;
+    }
+
+    public void setCursoSelecionado(Curso cursoSelecionado) {
+        this.cursoSelecionado = cursoSelecionado;
+    }
+
 }

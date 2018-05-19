@@ -473,6 +473,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
        Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
+            ctrlPrincipal.getCtrlDisciplina().setCursoSelecionado(curso);
            ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
            atualizarTabela();
         }

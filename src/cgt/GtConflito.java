@@ -38,8 +38,8 @@ public class GtConflito {
         String mensagemConflitoTurma = identificarConflitoTurma(aula, idProfessor);
         if(mensagemConflitoTurma != null) mensagens.add(mensagemConflitoTurma);
         
-        String mensagemConflitoInstituicao = identificarConflitoRestricaoInstituicao(aula, numeroProfessor);
-        if(mensagemConflitoInstituicao != null) mensagens.add(mensagemConflitoInstituicao);
+        //String mensagemConflitoInstituicao = identificarConflitoRestricaoInstituicao(aula, numeroProfessor);
+        //if(mensagemConflitoInstituicao != null) mensagens.add(mensagemConflitoInstituicao);
         
         String mensagemConflitoRestricaoProfessor = identificarConflitoRestricaoProfessor(aula, idProfessor);
         if(mensagemConflitoRestricaoProfessor != null) mensagens.add(mensagemConflitoRestricaoProfessor);
@@ -105,7 +105,7 @@ public class GtConflito {
             
             vetor[linha] = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessorAnoSemestre(linha, idProfessor, ano, semestre);
             
-            if(dia == linha)
+            if(dia == linha && aula.getId() == 0)
                 vetor[linha].add(aula);
             
             Collections.sort(vetor[linha]);

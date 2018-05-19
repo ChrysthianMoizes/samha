@@ -143,11 +143,8 @@ public class CtrlAlocacao extends CtrlGenerica{
         List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
         preencherCombo(cbxCurso, listaCursos);
         
-        if(listaCursos.size() > 0){
-            Curso curso = (Curso) cbxCurso.getSelectedItem();
-            preencherComboMatriz(cbxCurso, cbxMatriz);
-            cadastraAlocacao.setarPeriodoMaximo(curso.getQtPeriodos());
-        }
+        if(!listaCursos.isEmpty())
+            preencherComboMatriz(cbxCurso, cbxMatriz);   
     }
 
     public void preencherComboMatriz(JComboBox cbxCurso, JComboBox cbxMatriz) {
