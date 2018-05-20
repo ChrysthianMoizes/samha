@@ -15,7 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Aula implements Serializable {
+public class Aula implements Serializable, Comparable<Object> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,5 +115,14 @@ public class Aula implements Serializable {
             retorno = retorno + "/" + getAlocacao().getProfessor2().getPrimeiroNome();
         }
         return retorno;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+       
+        Aula other = (Aula) o;
+        if(this.getNumero() > other.getNumero())
+            return 1;
+        return -1;
     }
 }

@@ -44,6 +44,7 @@ public class CtrlProfessor extends CtrlGenerica{
     public void instanciarTelaBuscaProfessor(Frame pai) {
         buscaProf = new JDBuscarProfessor(pai, true, ctrlPrincipal);
         buscaProf.setIconImage(setarIconeJanela());
+        buscaProf.atualizarTabela();
         buscaProf.setVisible(true);
     }
 

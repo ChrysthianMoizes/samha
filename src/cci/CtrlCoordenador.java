@@ -45,6 +45,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     public void instanciarTelaBuscaCoordenador(Frame pai) {
         buscaCoord = new JDBuscarCoordenador(pai, true, ctrlPrincipal);
         buscaCoord.setIconImage(setarIconeJanela());
+        buscaCoord.atualizarTabela();
         buscaCoord.setVisible(true);
     }
 

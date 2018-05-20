@@ -42,7 +42,7 @@ public class CtrlConflito {
         int numero = aula.getNumero() + 1;
         String mensagem = null;
         String notificacao;
-        String dia = obterStringDia(aula.getDia());
+        String dia = ctrlPrincipal.getGtPrincipal().getGtConflito().obterStringDia(aula.getDia());
         
         if(!mensagens.isEmpty()){
             
@@ -54,7 +54,7 @@ public class CtrlConflito {
             }
         }else{
             pintarCelulaTabela(Color.GREEN, aula.getDia(), aula.getNumero(), jdOferta.getTblTurma());
-            jdOferta.exibirNotificacao(obterStringDia(aula.getDia()) + " - Aula "+ (aula.getNumero()+1) + ".\nNenhum conflito encontrado!\n\n", new Color(53,151,48)); 
+            jdOferta.exibirNotificacao(dia + " - Aula "+ (aula.getNumero()+1) + ".\nNenhum conflito encontrado!\n\n", new Color(53,151,48)); 
         }           
     }
     
@@ -77,23 +77,6 @@ public class CtrlConflito {
 //        render.prepareRenderer(null, linha, coluna);
     }
     
-    public String obterStringDia(int dia){
-
-        switch(dia){
-            
-            case 0:
-                return Constantes.SEGUNDA;
-            case 1:
-                return Constantes.TERCA;
-            case 2:
-                return Constantes.QUARTA;
-            case 3:
-                return Constantes.QUINTA;    
-            default:
-                return Constantes.SEXTA; 
-        }  
-   }
-
     public void setJdOferta(JDOferta jdOferta) {
         this.jdOferta = jdOferta;
     } 

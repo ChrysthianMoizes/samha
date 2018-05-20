@@ -7,6 +7,7 @@ import cdp.Disciplina;
 import cdp.Professor;
 import cdp.Turma;
 import cgt.Constantes;
+import cgt.Horarios;
 import cih.oferta.JDOferta;
 import java.awt.Frame;
 import java.awt.Image;
@@ -130,30 +131,30 @@ public class CtrlOferta extends CtrlGenerica{
         switch(turno){
             
             case Constantes.MATUTINO: 
-                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.MATUTINO_1);
-                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.MATUTINO_2);
-                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.MATUTINO_3);
-                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.MATUTINO_4);
-                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.MATUTINO_5);
-                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.MATUTINO_6);
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Horarios.MATUTINO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Horarios.MATUTINO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Horarios.MATUTINO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Horarios.MATUTINO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Horarios.MATUTINO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Horarios.MATUTINO_6);
                 break;
                 
             case Constantes.VESPERTINO: 
-                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.VESPERTINO_1);
-                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.VESPERTINO_2);
-                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.VESPERTINO_3);
-                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.VESPERTINO_4);
-                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.VESPERTINO_5);
-                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.VESPERTINO_6);
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Horarios.VESPERTINO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Horarios.VESPERTINO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Horarios.VESPERTINO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Horarios.VESPERTINO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Horarios.VESPERTINO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Horarios.VESPERTINO_6);
                 break;
                 
             default:
-                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Constantes.NOTURNO_1);
-                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Constantes.NOTURNO_2);
-                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Constantes.NOTURNO_3);
-                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Constantes.NOTURNO_4);
-                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Constantes.NOTURNO_5);
-                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Constantes.NOTURNO_6);
+                tblTurma.getColumnModel().getColumn(0).setHeaderValue(Horarios.NOTURNO_1);
+                tblTurma.getColumnModel().getColumn(1).setHeaderValue(Horarios.NOTURNO_2);
+                tblTurma.getColumnModel().getColumn(2).setHeaderValue(Horarios.NOTURNO_3);
+                tblTurma.getColumnModel().getColumn(3).setHeaderValue(Horarios.NOTURNO_4);
+                tblTurma.getColumnModel().getColumn(4).setHeaderValue(Horarios.NOTURNO_5);
+                tblTurma.getColumnModel().getColumn(5).setHeaderValue(Horarios.NOTURNO_6);
                 break;
         }
         jdOferta.repaint();
@@ -239,21 +240,9 @@ public class CtrlOferta extends CtrlGenerica{
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
             linha = aula.getDia();
-            turno = calcularNumeroTurno(aula.getTurno());
+            turno = ctrlPrincipal.getGtPrincipal().getGtConflito().obterNumeroTurno(aula.getTurno());
             coluna = (aula.getNumero() + turno);
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), linha, coluna);
         }   
-    }
-    
-    public int calcularNumeroTurno(String turno){
-        
-        switch (turno.toUpperCase()) {
-            case Constantes.MATUTINO:
-                return 0;
-            case Constantes.VESPERTINO:
-                return 6;
-            default:
-                return 12;
-        }
     }
 }

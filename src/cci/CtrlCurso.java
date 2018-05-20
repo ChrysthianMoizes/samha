@@ -45,6 +45,7 @@ public class CtrlCurso extends CtrlGenerica{
     public void instanciarTelaBuscaCurso(Frame pai) {
         buscaCurso = new JDBuscarCurso(pai, true, ctrlPrincipal);
         buscaCurso.setIconImage(setarIconeJanela());
+        buscaCurso.atualizarTabela();
         buscaCurso.setVisible(true);
     }
 

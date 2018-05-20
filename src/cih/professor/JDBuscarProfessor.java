@@ -103,7 +103,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         pnlGeral = new javax.swing.JPanel();
         pnlRodape = new javax.swing.JPanel();
         btnAlterar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         pnlBuscarProfessor = new javax.swing.JPanel();
@@ -137,21 +136,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         btnAlterar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnAlterarKeyPressed(evt);
-            }
-        });
-
-        btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close.png"))); // NOI18N
-        btnCancelar.setToolTipText("Cancelar");
-        btnCancelar.setBorder(null);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        btnCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnCancelarKeyPressed(evt);
             }
         });
 
@@ -194,10 +178,8 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlRodapeLayout.setVerticalGroup(
@@ -211,7 +193,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                     .addGroup(pnlRodapeLayout.createSequentialGroup()
                         .addGroup(pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnAlterar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -388,16 +369,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnAlterarKeyPressed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnCancelarKeyPressed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlPrincipal.getCtrlProfessor().instanciarTelaCadastroProfessor(null, pai);
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -435,7 +406,6 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
