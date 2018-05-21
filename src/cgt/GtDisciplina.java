@@ -59,15 +59,15 @@ public class GtDisciplina {
         }
     }
     
-    public List<Disciplina> filtrarPorMatriz(String coluna, int id) {
-        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatriz("matriz.id", id);
+    public List<Disciplina> filtrarPorMatrizPeriodo(String coluna, int idMatriz, int periodo) {
+        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorMatrizPeriodo(idMatriz, periodo);
         Collections.sort(lista);
         return lista;
     }
     
-    public List filtrarPorTipo(String tipo, int id){
+    public List filtrarPorTipoPeriodo(String tipo, int idMatriz, int periodo){
         
-        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorTipo(tipo.toUpperCase(), id);
+        List lista = gtPrincipal.getGdPrincipal().getGdDisciplina().filtrarPorTipoPeriodo(tipo.toUpperCase(), idMatriz, periodo);
         Collections.sort(lista);
         return lista;
     }

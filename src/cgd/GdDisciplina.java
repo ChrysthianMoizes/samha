@@ -13,11 +13,10 @@ public class GdDisciplina extends GdGenerico{
         this.gdPrincipal = gdPrincipal;
     }
     
-    public List filtrarPorTipo(String tipo, int id) {
+    public List filtrarPorMatriz(String coluna, int texto) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         sessao.beginTransaction();
-        crit.add( Restrictions.eq("matriz.id", id));
-        crit.add( Restrictions.eq("tipo", tipo));
+        crit.add( Restrictions.eq(coluna, texto) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();
@@ -25,10 +24,12 @@ public class GdDisciplina extends GdGenerico{
         return lista;
     }
     
-    public List filtrarPorMatriz(String coluna, int texto) {
+    public List filtrarPorTipoPeriodo(String tipo, int idMatriz, int periodo) {
         Criteria crit = criarSessao().createCriteria(Disciplina.class);
         sessao.beginTransaction();
-        crit.add( Restrictions.eq(coluna, texto) );
+        crit.add( Restrictions.eq("matriz.id", idMatriz));
+        crit.add( Restrictions.eq("tipo", tipo));
+        crit.add( Restrictions.eq("periodo", periodo));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();

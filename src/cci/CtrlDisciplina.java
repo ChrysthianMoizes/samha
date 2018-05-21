@@ -104,18 +104,18 @@ public class CtrlDisciplina extends CtrlGenerica{
         }   
     }
     
-    public void filtrarPorMatriz(String coluna, int id, JTable tabela){
+    public void filtrarPorMatrizPeriodo(String coluna, int idMatriz, JTable tabela, int periodo){
         
-        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorMatriz(coluna, id);
+        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorMatrizPeriodo(coluna, idMatriz, periodo);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
         if(listaDisciplinas.isEmpty())
             buscaDisciplina.setarMensagem("Nenhuma disciplina encontrada.");
     }
     
-    public void filtrarPorTipo(String tipo, int id, JTable tabela){
+    public void filtrarPorTipoPeriodo(String tipo, int idMatriz, JTable tabela, int periodo){
         
-        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorTipo(tipo, id);
+        List listaDisciplinas = ctrlPrincipal.getGtPrincipal().getGtDisciplina().filtrarPorTipoPeriodo(tipo, idMatriz, periodo);
         listarEmTabela(listaDisciplinas, tabela, buscaDisciplina, "toArray");
         
         if(listaDisciplinas.isEmpty())

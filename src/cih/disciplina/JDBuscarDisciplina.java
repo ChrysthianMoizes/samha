@@ -46,6 +46,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         String colunaFiltro = cbxFiltro.getSelectedItem().toString().toLowerCase();
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
+        int periodo = (int) spnPeriodo.getValue();
         
         if(matriz == null){
             setarMensagem("Curso não possui matriz associada.");
@@ -53,7 +54,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         }else{
         
             if(colunaFiltro.equals("curso")){
-                ctrlPrincipal.getCtrlDisciplina().filtrarPorMatriz(colunaFiltro, matriz.getId(), tblDisciplina); 
+                ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(colunaFiltro, matriz.getId(), tblDisciplina, periodo); 
             }else{
 
                 char tipo = (char) btnGroup.getSelection().getMnemonic();
@@ -70,7 +71,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                         filtro = "ESPECIAL";
                         break;
                 }
-                ctrlPrincipal.getCtrlDisciplina().filtrarPorTipo(filtro, matriz.getId(), tblDisciplina); 
+                ctrlPrincipal.getCtrlDisciplina().filtrarPorTipoPeriodo(filtro, matriz.getId(), tblDisciplina, periodo); 
             } 
         }  
     }
@@ -83,6 +84,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         
         JTableUtil.removerLinhas(tblDisciplina);
         lblMensagem.setText("");
+        spnPeriodo.setValue(1);
    
         if(cbxFiltro.getSelectedIndex() == 0){
             
@@ -117,6 +119,10 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         lblMensagem.setText(mensagem);
     }
     
+    public void setarPeriodoMaximo(int maximo){
+        spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, maximo, 1));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,6 +144,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         cbxCurso = new javax.swing.JComboBox<>();
         cbxMatriz = new javax.swing.JComboBox<>();
         lblMensagem = new javax.swing.JLabel();
+        spnPeriodo = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Disciplina");
@@ -303,6 +310,14 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
         lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
 
+        spnPeriodo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnPeriodo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnPeriodoStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBuscarDisciplinaLayout = new javax.swing.GroupLayout(pnlBuscarDisciplina);
         pnlBuscarDisciplina.setLayout(pnlBuscarDisciplinaLayout);
         pnlBuscarDisciplinaLayout.setHorizontalGroup(
@@ -310,24 +325,32 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
+                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPaneDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlBuscarDisciplinaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spnPeriodo)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarDisciplinaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rbtnObrigatoria)
                                 .addGap(18, 18, 18)
                                 .addComponent(rbtnOptativa)
                                 .addGap(18, 18, 18)
-                                .addComponent(rbtnEspecial))
-                            .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(rbtnEspecial)
+                                .addGap(135, 135, 135))))))
         );
         pnlBuscarDisciplinaLayout.setVerticalGroup(
             pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +360,8 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                     .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBuscarDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -438,12 +462,18 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
        Curso curso = (Curso) cbxCurso.getSelectedItem();
+       spnPeriodo.setValue(1);
         if(curso != null){
+            setarPeriodoMaximo(curso.getQtPeriodos());
             ctrlPrincipal.getCtrlDisciplina().setCursoSelecionado(curso);
-           ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
-           atualizarTabela();
+            ctrlPrincipal.getCtrlDisciplina().preencherComboMatriz(curso.getId(), cbxMatriz);
+            atualizarTabela();
         }
     }//GEN-LAST:event_cbxCursoActionPerformed
+
+    private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
+        atualizarTabela();
+    }//GEN-LAST:event_spnPeriodoStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -462,6 +492,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbtnEspecial;
     private javax.swing.JRadioButton rbtnObrigatoria;
     private javax.swing.JRadioButton rbtnOptativa;
+    private javax.swing.JSpinner spnPeriodo;
     private javax.swing.JTable tblDisciplina;
     // End of variables declaration//GEN-END:variables
 }

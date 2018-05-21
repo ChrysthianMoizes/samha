@@ -186,28 +186,39 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPaneDisciplinas" alignment="0" min="-2" pref="629" max="-2" attributes="0"/>
-                          <Component id="lblMensagem" alignment="0" min="-2" pref="435" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPaneDisciplinas" alignment="0" min="-2" pref="629" max="-2" attributes="0"/>
+                                  <Component id="lblMensagem" alignment="0" min="-2" pref="435" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabelFiltrar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cbxFiltro" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="cbxFiltro" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="cbxCurso" min="-2" pref="310" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="cbxMatriz" min="-2" pref="108" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="spnPeriodo" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="rbtnObrigatoria" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="rbtnOptativa" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="rbtnEspecial" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="cbxCurso" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cbxMatriz" min="-2" pref="128" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -220,6 +231,7 @@
                               <Component id="cbxFiltro" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="cbxCurso" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="cbxMatriz" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="spnPeriodo" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabelFiltrar" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
@@ -389,6 +401,19 @@
                   <Color blue="0" green="0" red="e5" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="spnPeriodo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="DialogInput" size="14" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnPeriodoStateChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
