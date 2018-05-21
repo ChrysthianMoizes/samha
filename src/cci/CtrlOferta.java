@@ -4,6 +4,7 @@ import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Curso;
 import cdp.Disciplina;
+import cdp.Oferta;
 import cdp.Professor;
 import cdp.Turma;
 import cgt.Constantes;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.JToggleButton;
 
 public class CtrlOferta extends CtrlGenerica{
     
@@ -61,7 +63,7 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, 
-            JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma){
+            JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma, JToggleButton btnCQD){
         
         JTableUtil.limparCelulasTabela(tblTurma);
         jdOferta.limparNotificacoes();
@@ -77,7 +79,7 @@ public class CtrlOferta extends CtrlGenerica{
             }    
             String turno = (String) cbxTurno.getSelectedItem(); 
             identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma, tblTurma, turno);
-            validarOferta(tblTurma);
+            validarOferta(tblTurma, btnCQD);
         }
         
         preencherListaAlocacoes(ano, semestre, turma, lstAlocacoes, tblTurma);
@@ -107,12 +109,28 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public void identificarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma, JTable tblTurma, String turno){
+        
         jdOferta.validarOferta(false);
         ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turno, turma);
+        
         jdOferta.setarTurma(turma.getNome());
-        jdOferta.setarTempoMaximo((int) ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada().getTempoMaximoTrabalho());
-        jdOferta.setarIntervaloMinimo((int) ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada().getIntervaloMinimo());
+        
+        Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada();
+        atualizarTempoMaximoIntervaloMinimo(oferta);
+        
         ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma);
+    }
+    
+    public void atualizarTempoMaximoIntervaloMinimo(Oferta oferta){
+        
+        jdOferta.getSpnTempoMaximo().setEnabled(false);
+        jdOferta.setarTempoMaximo((int) oferta.getTempoMaximoTrabalho());
+        jdOferta.getSpnTempoMaximo().setEnabled(true);
+        
+        jdOferta.getSpnIntervalo().setEnabled(false);
+        jdOferta.setarIntervaloMinimo((int) oferta.getIntervaloMinimo());
+        jdOferta.getSpnIntervalo().setEnabled(true);
+        
     }
     
     public void zerarTabelaProfessor(){
@@ -164,9 +182,10 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.repaint();
     }    
     
-    public void validarOferta(JTable tabela){
+    public void validarOferta(JTable tabela, JToggleButton btnCQD){
         ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
-        ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
+        if(btnCQD.isSelected())
+            ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
     }
 
     public List getListaAlocacoes() {

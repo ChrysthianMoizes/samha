@@ -205,7 +205,11 @@
                                       <Component id="spnTempoMaximo" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnValidar" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnCQD" max="32767" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnValidar" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -229,7 +233,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnValidar" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnValidar" pref="39" max="32767" attributes="0"/>
+                          <Component id="btnCQD" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSalvar" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -250,6 +257,7 @@
                   <Image iconType="3" name="/cih/img/validar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Validar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Validar Aulas"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder/>
@@ -327,6 +335,23 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnTempoMaximoStateChanged"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JToggleButton" name="btnCQD">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="DialogInput" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CQD"/>
+                <Property name="toolTipText" type="java.lang.String" value="Controle de Quantidade de Disciplinas"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCQDActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlTurma">
@@ -351,8 +376,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" pref="679" max="32767" attributes="0"/>
                           <Component id="pnlTurno" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
