@@ -310,6 +310,9 @@
                   <SpinnerModel initial="11" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnIntervaloStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JSpinner" name="spnTempoMaximo">
               <Properties>
@@ -320,6 +323,9 @@
                   <SpinnerModel initial="11" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnTempoMaximoStateChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -38,13 +38,20 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void atualizarTela(){
-        
+
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         int tempo = (int) spnTempoMaximo.getValue();
         int intervalo = (int) spnIntervalo.getValue();
         
         ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma);
+    }
+    
+    public void atualizarOferta(){
+        
+        int tempo = (int) spnTempoMaximo.getValue();
+        int intervalo = (int) spnIntervalo.getValue();
+        ctrlPrincipal.getCtrlOferta().atualizarOferta(tempo, intervalo);   
     }
     
     public void removerAula(int x, int y){
@@ -83,6 +90,14 @@ public class JDOferta extends javax.swing.JDialog {
     public void setarProfessor(String nome){
         lblNomeProfessor.setText(nome);
     }
+    
+    public void setarTempoMaximo(int tempo){
+        spnTempoMaximo.setValue(tempo);
+    }
+    
+    public void setarIntervaloMinimo(int intervalo){
+        spnIntervalo.setValue(intervalo);
+    }    
     
     public void exibirNotificacao(String mensagem, Color cor){
         txtAreaNotificacoes.setForeground(cor);
@@ -254,9 +269,19 @@ public class JDOferta extends javax.swing.JDialog {
 
         spnIntervalo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         spnIntervalo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
+        spnIntervalo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnIntervaloStateChanged(evt);
+            }
+        });
 
         spnTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         spnTempoMaximo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
+        spnTempoMaximo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnTempoMaximoStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlValidacaoLayout = new javax.swing.GroupLayout(pnlValidacao);
         pnlValidacao.setLayout(pnlValidacaoLayout);
@@ -763,6 +788,14 @@ public class JDOferta extends javax.swing.JDialog {
     private void cbxQuantidadeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantidadeProfessorActionPerformed
         ctrlPrincipal.getCtrlOferta().alterarProfessorCombo(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
     }//GEN-LAST:event_cbxQuantidadeProfessorActionPerformed
+
+    private void spnTempoMaximoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTempoMaximoStateChanged
+        atualizarOferta();
+    }//GEN-LAST:event_spnTempoMaximoStateChanged
+
+    private void spnIntervaloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnIntervaloStateChanged
+        atualizarOferta();
+    }//GEN-LAST:event_spnIntervaloStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;

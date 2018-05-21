@@ -85,6 +85,10 @@ public class CtrlOferta extends CtrlGenerica{
         zerarTabelaProfessor();
     }
     
+    public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
+        ctrlPrincipal.getGtPrincipal().getGtOferta().atualizarOferta(tempoMaximo, intervaloMinimo);
+    }
+    
     public void preencherListaAlocacoes(int ano, int semestre, Turma turma, JList lstAlocacoes, JTable tblTurma){
         
         List listaAlocacoes = null;
@@ -106,6 +110,8 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.validarOferta(false);
         ctrlPrincipal.getGtPrincipal().getGtOferta().identificarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turno, turma);
         jdOferta.setarTurma(turma.getNome());
+        jdOferta.setarTempoMaximo((int) ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada().getTempoMaximoTrabalho());
+        jdOferta.setarIntervaloMinimo((int) ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada().getIntervaloMinimo());
         ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma);
     }
     

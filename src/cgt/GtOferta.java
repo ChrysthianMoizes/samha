@@ -20,9 +20,6 @@ public class GtOferta {
         
         if(oferta == null)
             oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
-        
-        oferta.setIntervaloMinimo(intervaloMinimo);
-        oferta.setTempoMaximoTrabalho(tempoMaximo);
 
         setOfertaSelecionada(oferta);
         gtPrincipal.getGtAula().gerarEstruturasArmazenamento();
@@ -30,6 +27,20 @@ public class GtOferta {
         if(oferta != null){
             List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
             gtPrincipal.getGtAula().preencherMatrizOferta(aulas);
+        }
+    }
+    
+    public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
+        
+        if(getOfertaSelecionada() != null){
+            getOfertaSelecionada().setIntervaloMinimo(intervaloMinimo);
+            getOfertaSelecionada().setTempoMaximoTrabalho(tempoMaximo);
+            
+            try {
+                gtPrincipal.getGdPrincipal().getGdOferta().alterar(getOfertaSelecionada());
+            } catch (SQLException | ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
     
