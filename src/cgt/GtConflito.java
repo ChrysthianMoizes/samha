@@ -3,11 +3,11 @@ package cgt;
 import cdp.Aula;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class GtConflito {
@@ -126,7 +126,7 @@ public class GtConflito {
         
         List aulas;
         Aula primeiraAula, ultimaAula;
-        double tempo;
+        int tempo;
         
         for(int dia = 0; dia < Constantes.LINHA; dia++){
             aulas = vetor[dia];
@@ -171,7 +171,7 @@ public class GtConflito {
         
         List aulasDiaAtual, aulasDiaAnterior;
         Aula primeiraAula, ultimaAula;
-        double tempo;
+        int tempo;
         
         for(int dia = 1; dia < Constantes.LINHA; dia++){
             
@@ -236,29 +236,25 @@ public class GtConflito {
         return horarioFinal;
     }
     
-    public double calcularDiferencaHoras(Aula primeira, Aula ultima){
+    public int calcularDiferencaHoras(Aula primeira, Aula ultima){
         
-        String horarioFinal = obterHorarioFinal(ultima);
         String horarioInicial = obterHorarioInicial(primeira);
+        String horarioFinal = obterHorarioFinal(ultima);
         
-        try {
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            
-            Date horaInicial = sdf.parse(horarioInicial);
-            Date horaFinal = sdf.parse(horarioFinal);
-            
-            long hf = horaFinal.getTime();
-            long hi = horaInicial.getTime();
-            
-            double tempo = hf - hi;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
         
-            return tempo;
-            
-        } catch (ParseException ex) {
-            System.out.println(ex.getMessage());
-            return 0; 
-        }   
+        LocalTime inicio = LocalTime.parse(horarioInicial, formato);
+        LocalTime fim = LocalTime.parse(horarioFinal, formato);
+        
+        LocalTime diferenca = fim.minusHours(inicio.getHour()).minusMinutes(inicio.getMinute());
+        String dif = diferenca.format(formato);
+
+        String[] horas = dif.split(":");
+        
+        int qtHoras = Integer.parseInt(horas[0]);
+        //int qtMinutos = Integer.parseInt(horas[1]);
+   
+        return qtHoras;
     }
     
     public int obterNumeroTurno(String turno){

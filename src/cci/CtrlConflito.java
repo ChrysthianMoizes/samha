@@ -38,8 +38,9 @@ public class CtrlConflito {
         }
         
         if(mensagens.isEmpty()){
+            Color cor = ctrlPrincipal.setarCorPanelExterior();
             jdOferta.limparNotificacoes();
-            jdOferta.exibirNotificacao("Nenhum conflito de aulas encontrado!\n\n", new Color(53,151,48)); 
+            jdOferta.exibirNotificacao("Nenhum conflito de aulas encontrado!\n\n", cor); 
         }
         
         jdOferta.validarOferta(false);
@@ -156,8 +157,7 @@ public class CtrlConflito {
             aula = (Aula) aulas.get(i);
             nomeDisciplina = aula.getAlocacao().getDisciplina().getNome();
             qtAulas = aula.getAlocacao().getDisciplina().getQtAulas();
-            
-            jdOferta.exibirNotificacao(nomeDisciplina + " possui uma quantidade de aulas diferente da especificada: " + qtAulas + " aulas.\n\n", Color.RED);
+            jdOferta.exibirNotificacao(nomeDisciplina + " : Quantidade de aulas diferente da especificada: " + qtAulas + " aulas.\n\n", Color.RED);
         } 
     }    
 }
