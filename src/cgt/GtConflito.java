@@ -3,8 +3,11 @@ package cgt;
 import cdp.Aula;
 import cdp.Professor;
 import cdp.RestricaoProfessor;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class GtConflito {
@@ -20,26 +23,26 @@ public class GtConflito {
  
         Professor professor = aula.getAlocacao().getProfessor1();
         
-        List mensagens = validar(aula, professor.getId(), 1);
+        List mensagens = identificarConflitos(aula, professor.getId(), 1);
         
         if(aula.getAlocacao().getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
             Professor professor2 = aula.getAlocacao().getProfessor2();
-            List msg = validar(aula, professor2.getId(), 2);
+            List msg = identificarConflitos(aula, professor2.getId(), 2);
             mensagens.addAll(msg);
         }
    
         return mensagens;
     }
     
-    public List validar(Aula aula, int idProfessor, int numeroProfessor){
+    public List identificarConflitos(Aula aula, int idProfessor, int numeroProfessor){
         
         List mensagens = new ArrayList<>();
         
         String mensagemConflitoTurma = identificarConflitoTurma(aula, idProfessor);
         if(mensagemConflitoTurma != null) mensagens.add(mensagemConflitoTurma);
         
-        //String mensagemConflitoInstituicao = identificarConflitoRestricaoInstituicao(aula, numeroProfessor);
-        //if(mensagemConflitoInstituicao != null) mensagens.add(mensagemConflitoInstituicao);
+        String mensagemConflitoInstituicao = identificarConflitoRestricaoInstituicao(aula, numeroProfessor);
+        if(mensagemConflitoInstituicao != null) mensagens.add(mensagemConflitoInstituicao);
         
         String mensagemConflitoRestricaoProfessor = identificarConflitoRestricaoProfessor(aula, idProfessor);
         if(mensagemConflitoRestricaoProfessor != null) mensagens.add(mensagemConflitoRestricaoProfessor);
@@ -133,7 +136,7 @@ public class GtConflito {
                 primeiraAula = (Aula) aulas.get(0);
                 ultimaAula = (Aula) aulas.get(aulas.size() - 1);
                 
-                tempo = calcularHoras(primeiraAula, ultimaAula);
+                tempo = calcularDiferencaHoras(primeiraAula, ultimaAula);
                 
                 if(tempo > primeiraAula.getOferta().getTempoMaximoTrabalho())
                     return montarMensagemTempoMaximo(ultimaAula, primeiraAula);
@@ -151,14 +154,14 @@ public class GtConflito {
         String tipoPrimeira = primeira.getAlocacao().getDisciplina().getTipo();
         
         String dia = obterStringDia(primeira.getDia());
-        double horarioInicial = obterHorarioInicial(primeira);
-        double horarioFinal = obterHorarioFinal(ultima);
+        String horarioInicial = obterHorarioInicial(primeira);
+        String horarioFinal = obterHorarioFinal(ultima);
         
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL)){
-            mensagem = "Um professor da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido: " 
+            mensagem = "1 Um professor da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido: " 
                     + dia + " " + horarioInicial + " às " + horarioFinal + ".";
         }else{  
-            mensagem = "O Professor " + nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido: " 
+            mensagem = "1 O Professor " + nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido: " 
                     + dia + " " + horarioInicial + " às " + horarioFinal + ".";     
         }
         return mensagem;
@@ -180,7 +183,7 @@ public class GtConflito {
                 ultimaAula = (Aula) aulasDiaAnterior.get(aulasDiaAnterior.size() - 1);
                 primeiraAula = (Aula) aulasDiaAtual.get(0);
                 
-                tempo = calcularHoras(primeiraAula, ultimaAula);
+                tempo = calcularDiferencaHoras(primeiraAula, ultimaAula);
                 
                 if(tempo < primeiraAula.getOferta().getIntervaloMinimo())
                     return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula);
@@ -199,47 +202,63 @@ public class GtConflito {
         
         String diaAnterior = obterStringDia(ultima.getDia());
         String diaAtual = obterStringDia(primeira.getDia());
-        double horarioFinal = obterHorarioFinal(ultima);
-        double horarioInicial = obterHorarioInicial(primeira);
+        
+        String horarioFinal = obterHorarioFinal(ultima);
+        String horarioInicial = obterHorarioInicial(primeira);
      
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL)){
-            mensagem = "Um professor da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: " 
+            mensagem = "1 Um professor da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: " 
                     + diaAnterior + " " + horarioFinal + " à " + diaAtual + " " + horarioInicial + ".";
         }else{  
-            mensagem = "O Professor " + nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " 
+            mensagem = "1 O Professor " + nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " 
                     + diaAnterior + " " + horarioFinal + " à " + diaAtual + " " + horarioInicial + ".";     
         }
         return mensagem;
     }    
     
-    public double obterHorarioInicial(Aula aula){
+    public String obterHorarioInicial(Aula aula){
         
         String turno = aula.getTurno();
         int numero = aula.getNumero();
         
-        double horarioInicial = Horarios.horarioInicial(numero + obterNumeroTurno(turno));
+        String horarioInicial = Horarios.horarioInicial(numero + obterNumeroTurno(turno));
         
         return horarioInicial;
     }
     
-    public double obterHorarioFinal(Aula aula){
+    public String obterHorarioFinal(Aula aula){
         
         String turno = aula.getTurno();
         int numero = aula.getNumero();
         
-        double horarioFinal = Horarios.horarioFinal(numero + obterNumeroTurno(turno));
+        String horarioFinal = Horarios.horarioFinal(numero + obterNumeroTurno(turno));
         
         return horarioFinal;
     }
     
-    public double calcularHoras(Aula primeira, Aula ultima){
+    public double calcularDiferencaHoras(Aula primeira, Aula ultima){
         
-        double horarioFinal = obterHorarioFinal(ultima);
-        double horarioInicial = obterHorarioInicial(primeira);
+        String horarioFinal = obterHorarioFinal(ultima);
+        String horarioInicial = obterHorarioInicial(primeira);
         
-        double tempo = horarioFinal - horarioInicial;
+        try {
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            
+            Date horaInicial = sdf.parse(horarioInicial);
+            Date horaFinal = sdf.parse(horarioFinal);
+            
+            long hf = horaFinal.getTime();
+            long hi = horaInicial.getTime();
+            
+            double tempo = hf - hi;
         
-        return tempo;
+            return tempo;
+            
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+            return 0; 
+        }   
     }
     
     public int obterNumeroTurno(String turno){
@@ -289,7 +308,7 @@ public class GtConflito {
             resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
 
             if(resposta) 
-                return "1 " + restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+                return "2 " + restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
         }
         return null;
     }
@@ -308,4 +327,31 @@ public class GtConflito {
         return false;
     }
     
+    public boolean validarQuantidadeAulasDisciplina(Aula aula){
+        
+        if(aula != null){
+            
+            int cont  = 0;
+            int qtAulas = aula.getAlocacao().getDisciplina().getQtAulas();
+            int idDisciplina = aula.getAlocacao().getDisciplina().getId();
+
+            Aula aulaAux;
+
+            for(int linha = 0; linha < Constantes.LINHA; linha++){
+
+                for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+
+                    aulaAux = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
+
+                    if(aulaAux != null){
+                        if(aulaAux.getAlocacao().getDisciplina().getId() == idDisciplina){
+                            cont++;
+                        }
+                    }
+                }
+            }
+            return cont == qtAulas;
+        }
+        return true;
+    }
 }

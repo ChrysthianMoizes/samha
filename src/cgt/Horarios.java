@@ -23,47 +23,45 @@ public abstract class Horarios {
     public static final String NOTURNO_5 = "--";
     public static final String NOTURNO_6 = "--";
     
-    public static final double INICIAL_0 = 7;
-    public static final double INICIAL_1 = 8;
-    public static final double INICIAL_2 = 9;
-    public static final double INICIAL_3 = 10;
-    public static final double INICIAL_4 = 11;
-    public static final double INICIAL_5 = 12;
-    public static final double INICIAL_6 = 13;
-    public static final double INICIAL_7 = 14;
-    public static final double INICIAL_8 = 15;
-    public static final double INICIAL_9 = 16;
-    public static final double INICIAL_10 = 17;
-    public static final double INICIAL_11 = 18;
-    public static final double INICIAL_12 = 19;
-    public static final double INICIAL_13 = 20;
-    public static final double INICIAL_14 = 21;
-    public static final double INICIAL_15 = 22;
-    public static final double INICIAL_16 = 0;
-    public static final double INICIAL_17 = 0;
-    public static final double INICIAL_18 = 0;
+    public static final String INICIAL_0 = "07:00";
+    public static final String INICIAL_1 = "07:55";
+    public static final String INICIAL_2 = "08:50";
+    public static final String INICIAL_3 = "10:00";
+    public static final String INICIAL_4 = "10:55";
+    public static final String INICIAL_5 = "11:50";
+    public static final String INICIAL_6 = "12:50";
+    public static final String INICIAL_7 = "13:45";
+    public static final String INICIAL_8 = "14:40";
+    public static final String INICIAL_9 = "15:50";
+    public static final String INICIAL_10 = "16:45";
+    public static final String INICIAL_11 = "17:40";
+    public static final String INICIAL_12 = "18:50";
+    public static final String INICIAL_13 = "19:35";
+    public static final String INICIAL_14 = "20:30";
+    public static final String INICIAL_15 = "21:15";
+    public static final String INICIAL_16 = "22:00";
+    public static final String INICIAL_17 = "22:45";
     
-    public static final double FINAL_0 = 7;
-    public static final double FINAL_1 = 7;
-    public static final double FINAL_2 = 7;
-    public static final double FINAL_3 = 7;
-    public static final double FINAL_4 = 7;
-    public static final double FINAL_5 = 7;
-    public static final double FINAL_6 = 7;
-    public static final double FINAL_7 = 7;
-    public static final double FINAL_8 = 7;
-    public static final double FINAL_9 = 7;
-    public static final double FINAL_10 = 7;
-    public static final double FINAL_11 = 7;
-    public static final double FINAL_12 = 7;
-    public static final double FINAL_13 = 7;
-    public static final double FINAL_14 = 7;
-    public static final double FINAL_15 = 7;
-    public static final double FINAL_16 = 7;
-    public static final double FINAL_17 = 7;
-    public static final double FINAL_18 = 7;
+    public static final String FINAL_0 = "07:50";
+    public static final String FINAL_1 = "08:45";
+    public static final String FINAL_2 = "09:40";
+    public static final String FINAL_3 = "10:50";
+    public static final String FINAL_4 = "11:45";
+    public static final String FINAL_5 = "12:40";
+    public static final String FINAL_6 = "13:40";
+    public static final String FINAL_7 = "14:35";
+    public static final String FINAL_8 = "15:30";
+    public static final String FINAL_9 = "16:40";
+    public static final String FINAL_10 = "17:35";
+    public static final String FINAL_11 = "18:30";
+    public static final String FINAL_12 = "19:35";
+    public static final String FINAL_13 = "20:20";
+    public static final String FINAL_14 = "21:15";
+    public static final String FINAL_15 = "22:00";
+    public static final String FINAL_16 = "22:45";
+    public static final String FINAL_17 = "23:30";
     
-    public static double horarioInicial(int numero){
+    public static String horarioInicial(int numero){
         
         switch(numero){
             
@@ -84,13 +82,12 @@ public abstract class Horarios {
             case 14: return INICIAL_14;
             case 15: return INICIAL_15;
             case 16: return INICIAL_16;
-            case 17: return INICIAL_17;
-            default: return INICIAL_18;
+            default: return INICIAL_17;
             
         }
     }
     
-    public static double horarioFinal(int numero){
+    public static String horarioFinal(int numero){
         
         switch(numero){
             
@@ -111,8 +108,7 @@ public abstract class Horarios {
             case 14: return FINAL_14;
             case 15: return FINAL_15;
             case 16: return FINAL_16;
-            case 17: return FINAL_17;
-            default: return FINAL_18;
+            default: return FINAL_17;
             
         }
     }

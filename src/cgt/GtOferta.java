@@ -20,6 +20,9 @@ public class GtOferta {
         
         if(oferta == null)
             oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
+        
+        oferta.setIntervaloMinimo(intervaloMinimo);
+        oferta.setTempoMaximoTrabalho(tempoMaximo);
 
         setOfertaSelecionada(oferta);
         gtPrincipal.getGtAula().gerarEstruturasArmazenamento();

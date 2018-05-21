@@ -21,13 +21,11 @@ public class CtrlOferta extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
     private JDOferta jdOferta;
-    private RenderizadorCelulas render;
     private List listaAlocacoes;
     private boolean abrindoTela = true;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
-        render = new RenderizadorCelulas();
     }
     
     public void instanciarTelaOferta(Frame pai) {
@@ -162,6 +160,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void validarOferta(JTable tabela){
         ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
+        ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
     }
 
     public List getListaAlocacoes() {
