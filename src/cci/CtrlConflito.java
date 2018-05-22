@@ -148,16 +148,16 @@ public class CtrlConflito {
     
     public void exibirNotificacoesDisciplina(List aulas){
     
-        String nomeDisciplina;
+        String sigla;
         int qtAulas;
         Aula aula;
  
         for(int i = 0; i < aulas.size(); i++){
             
             aula = (Aula) aulas.get(i);
-            nomeDisciplina = aula.getAlocacao().getDisciplina().getNome();
+            sigla = aula.getAlocacao().getDisciplina().getSigla();
             qtAulas = aula.getAlocacao().getDisciplina().getQtAulas();
-            jdOferta.exibirNotificacao(nomeDisciplina + " : Quantidade de aulas diferente da especificada: " + qtAulas + " aulas.\n\n", Color.RED);
+            jdOferta.exibirNotificacao(sigla + ": Quantidade de aulas diferente da especificada: " + qtAulas + " aulas.\n\n", Color.RED);
         } 
     }    
 }

@@ -9,6 +9,8 @@ public abstract class Constantes {
     
     public static final int LINHA = 5;
     public static final int COLUNA = 6;
+    public static final int TEMPO_MAXIMO = 1;
+    public static final int INTERVALO_MINIMO = 2;
     
     public static final String CADASTRADO = "cadastrado";
     public static final String ALTERADO = "alterado";
