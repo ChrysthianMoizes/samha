@@ -32,8 +32,8 @@ public class CtrlAula {
             jdOferta.gerarAula();
 
         arrastarAula(linha, coluna, getAulaSelecionada());
-        jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
-
+        preencherTabelaAulas(jdOferta.getTblTurma());
+        //jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
         setAulaSelecionada(null);
     }
     
@@ -77,12 +77,12 @@ public class CtrlAula {
         else if(aula != null && isDropInterno())  // ARRASTAR DA TABELA
             ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, aula);  
         else
-            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
-        
-        preencherTabelaAulas(jdOferta.getTblTurma());
+            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");            
     }
 
     public void removerAula(JTable tblTurma){
+        
+        setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
         
         jdOferta.validarOferta(true);
         int coluna = tblTurma.getSelectedColumn();
