@@ -25,7 +25,7 @@ public class GtOferta {
         gtPrincipal.getGtAula().gerarEstruturasArmazenamento();
         
         if(oferta != null){
-            List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurno(turno, oferta.getId());
+            List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
             gtPrincipal.getGtAula().preencherMatrizOferta(aulas);
         }
     }

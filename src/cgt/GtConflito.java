@@ -54,7 +54,7 @@ public class GtConflito {
     public String identificarConflitoTurma(Aula aula, int idProfessor){
            
         List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), 
-                idProfessor, aula.getNumero(), aula.getDia(), aula.getTurno());
+                idProfessor, aula.getNumero(), aula.getDia());
         
         if(aulas.size() <= 1){
 
@@ -216,21 +216,13 @@ public class GtConflito {
     
     public String obterHorarioInicial(Aula aula){
         
-        String turno = aula.getTurno();
-        int numero = aula.getNumero();
-        
-        String horarioInicial = Horarios.horarioInicial(numero + obterNumeroTurno(turno));
-        
+        String horarioInicial = Horarios.horarioInicial(aula.getNumero());
         return horarioInicial;
     }
     
     public String obterHorarioFinal(Aula aula){
         
-        String turno = aula.getTurno();
-        int numero = aula.getNumero();
-        
-        String horarioFinal = Horarios.horarioFinal(numero + obterNumeroTurno(turno));
-        
+        String horarioFinal = Horarios.horarioFinal(aula.getNumero());  
         return horarioFinal;
     }
     
@@ -257,15 +249,6 @@ public class GtConflito {
         return qtHoras;
     }
     
-    public int obterNumeroTurno(String turno){
-        
-        switch(turno){ 
-            case Constantes.MATUTINO: return 0;
-            case Constantes.VESPERTINO: return 6;
-            default: return 12;    
-        }
-    }
-    
     public String obterStringDia(int dia){
 
         switch(dia){
@@ -285,7 +268,9 @@ public class GtConflito {
         
     public String identificarConflitoRestricaoProfessor(Aula aula, int idProfessor){
         
-        List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), aula.getTurno());
+        String turno = obterStringTurno(aula.getTurno());
+        
+        List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), turno);
         
         if(listaRestricoes.isEmpty()){
             return null;
@@ -321,6 +306,15 @@ public class GtConflito {
             case 5: return restricao.isAula6();
         }
         return false;
+    }
+    
+    public String obterStringTurno(int turno){
+        
+        switch(turno){ 
+            case 0: return Constantes.MATUTINO;
+            case 6: return Constantes.VESPERTINO;
+            default: return Constantes.NOTURNO;    
+        }
     }
     
     public boolean validarQuantidadeAulasDisciplina(Aula aula){

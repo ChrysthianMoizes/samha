@@ -16,74 +16,63 @@ public class GtAula {
         this.gtPrincipal = gt;
     }
     
-    public Aula identificarAula(Alocacao alocacao, int dia, String turno, int numero){
-        
-        Aula aula = getAulaMatriz(dia, numero);
-        
-        if(aula == null)
-            return gerarNovaAula(alocacao, dia, turno, numero);   
-        else
-            return alterarAula(aula, alocacao, dia, turno, numero);        
-    }
-    
     public Aula gerarNovaAula(Alocacao alocacao, int dia, String turno, int numero){
         
         Aula novaAula = new Aula();
         Oferta oferta = gtPrincipal.getGtOferta().getOfertaSelecionada();
-        
+        int trn = gtPrincipal.getGtAula().obterNumeroTurno(turno);
         novaAula.setAlocacao(alocacao);
         novaAula.setDia(dia);
-        novaAula.setNumero(numero);
-        novaAula.setTurno(turno);
+        novaAula.setNumero(numero+trn);
+        novaAula.setTurno(trn);
         novaAula.setOferta(oferta);
 
         return novaAula; 
     }
     
-    public Aula alterarAula(Aula aula, Alocacao alocacao, int dia, String turno, int numero){
+    public Aula alterarAula(Aula aula, Alocacao alocacao, int dia, int turno, int numero){
         
         aula.setAlocacao(alocacao);
         aula.setDia(dia);
         aula.setNumero(numero);
         aula.setTurno(turno);
-
         setAulaMatriz(dia, numero, aula);
         return aula;
     }
     
-    public void importarAulaLista(int linha, int coluna, Aula origem){
+    public void importarAulaLista(Aula origem){
         
-        Aula destino = getAulaMatriz(linha, coluna);
+        Aula destino = getAulaMatriz(origem.getDia(), origem.getNumero());
         
         if(destino == null){
-            setAulaMatriz(linha, coluna, origem);
+            setAulaMatriz(origem.getDia(), origem.getNumero(), origem);
         }else{
             Aula aulaAlterada = alterarAula(destino, origem.getAlocacao(), origem.getDia(), origem.getTurno(), origem.getNumero());
-            setAulaMatriz(linha, coluna, aulaAlterada);
+            setAulaMatriz(origem.getDia(), origem.getNumero(), aulaAlterada);
         }
     }
     
-    public void moverAulaMatriz(int linha, int coluna, Aula origem){
+    public void moverAulaMatriz(int linha, int coluna, int turno, Aula origem){
         
-        Aula destino = getAulaMatriz(linha, coluna);
+        Aula destino = getAulaMatriz(linha, (coluna + turno));
         
-        int d = origem.getDia();
+        int dia = origem.getDia();
         int numero = origem.getNumero();
         
         origem.setDia(linha);
-        origem.setNumero(coluna);
+        origem.setNumero(coluna + turno);
         
         if(destino == null){
-            setAulaMatriz(d, numero, null);
-            setAulaMatriz(linha, coluna, origem);          
+            setAulaMatriz(dia, numero, null);
+            setAulaMatriz(linha, (coluna + turno), origem);          
         }else{
             
             Aula aulaAux = destino;
             
-            setAulaMatriz(linha, coluna, origem);
-            aulaAux.setDia(d);
+            setAulaMatriz(linha, (coluna + turno), origem);
+            aulaAux.setDia(dia);
             aulaAux.setNumero(numero);
-            setAulaMatriz(d, numero, aulaAux);
+            setAulaMatriz(dia, numero, aulaAux);
         }
     }
     
@@ -144,6 +133,15 @@ public class GtAula {
             return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(idProfessor, ano, semestre);
         else
             return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(idProfessor, ano, semestre);
+    }
+    
+    public int obterNumeroTurno(String turno){
+        
+        switch(turno.toUpperCase()){ 
+            case Constantes.MATUTINO: return 0;
+            case Constantes.VESPERTINO: return 6;
+            default: return 12;    
+        }
     }
     
     public Aula getAulaMatriz(int linha, int coluna){

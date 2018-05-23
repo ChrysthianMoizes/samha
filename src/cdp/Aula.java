@@ -28,7 +28,7 @@ public class Aula implements Serializable, Comparable<Object> {
     private int dia;
     
     @Column(nullable = false)
-    private String turno;
+    private int turno;
  
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "alocacao_id")
@@ -43,7 +43,7 @@ public class Aula implements Serializable, Comparable<Object> {
     public Aula() {
     }
 
-    public Aula(int id, int numero, int dia, String turno, Alocacao alocacao, Oferta oferta) {
+    public Aula(int id, int numero, int dia, int turno, Alocacao alocacao, Oferta oferta) {
         this.id = id;
         this.numero = numero;
         this.dia = dia;
@@ -52,7 +52,7 @@ public class Aula implements Serializable, Comparable<Object> {
         this.oferta = oferta;
     }
 
-    public Aula(int numero, int dia, String turno, Alocacao alocacao, Oferta oferta) {
+    public Aula(int numero, int dia, int turno, Alocacao alocacao, Oferta oferta) {
         this.numero = numero;
         this.dia = dia;
         this.turno = turno;
@@ -84,11 +84,11 @@ public class Aula implements Serializable, Comparable<Object> {
         this.dia = dia;
     }
 
-    public String getTurno() {
+    public int getTurno() {
         return turno;
     }
 
-    public void setTurno(String turno) {
+    public void setTurno(int turno) {
         this.turno = turno;
     }
 

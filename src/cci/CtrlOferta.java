@@ -102,9 +102,10 @@ public class CtrlOferta extends CtrlGenerica{
             
             if(listaAlocacoes.isEmpty())
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
-        }else
+        }else{
+            ctrlPrincipal.getGtPrincipal().getGtAula().limparEstruturasArmazenamento();
             jdOferta.setarMensagem("Nenhuma turma encontrada.");
-        
+        }
         preencherJList(listaAlocacoes, lstAlocacoes);
     }
     
@@ -118,7 +119,7 @@ public class CtrlOferta extends CtrlGenerica{
         Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada();
         atualizarTempoMaximoIntervaloMinimo(oferta);
         
-        ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma);
+        ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma, turno);
     }
     
     public void atualizarTempoMaximoIntervaloMinimo(Oferta oferta){
@@ -258,15 +259,10 @@ public class CtrlOferta extends CtrlGenerica{
  
         JTableUtil.limparCelulasTabela(tblProfessor);
         
-        Aula aula;
-        int linha, coluna, turno;
-        
+        Aula aula;        
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
-            linha = aula.getDia();
-            turno = ctrlPrincipal.getGtPrincipal().getGtConflito().obterNumeroTurno(aula.getTurno());
-            coluna = (aula.getNumero() + turno);
-            tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), linha, coluna);
+            tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
         }   
     }
 }

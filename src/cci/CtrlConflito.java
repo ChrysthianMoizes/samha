@@ -23,9 +23,11 @@ public class CtrlConflito {
         List mensagens = new ArrayList<>();
         jdOferta.limparNotificacoes();
         Aula aula;
+        
+        int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno((String) jdOferta.getCbxTurno().getSelectedItem());
 
         for(int linha = 0; linha < Constantes.LINHA; linha++){ 
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+            for(int coluna = turno; coluna < Constantes.AULAS + turno; coluna++){
                 
                 aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
                 
@@ -62,10 +64,10 @@ public class CtrlConflito {
                 mensagem = (String) mensagens.get(i);
                 notificacao = mensagem.substring(2);
                 jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + notificacao +"\n\n", Color.RED);
-                identificarTipoConflito(aula.getDia(), aula.getNumero(), codigo);
+                identificarTipoConflito(aula.getDia(), (aula.getNumero() - aula.getTurno()), codigo);
             }
         }else
-            identificarTipoConflito(aula.getDia(), aula.getNumero(), 3);
+            identificarTipoConflito(aula.getDia(), (aula.getNumero() - aula.getTurno()), 3);
     }
     
     public void identificarTipoConflito(int dia, int numero, int codigo){

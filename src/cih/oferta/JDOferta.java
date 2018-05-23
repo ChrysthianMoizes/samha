@@ -124,6 +124,10 @@ public class JDOferta extends javax.swing.JDialog {
     public JComboBox<String> getCbxQuantidadeProfessor() {
         return cbxQuantidadeProfessor;
     }
+
+    public JComboBox<String> getCbxTurno() {
+        return cbxTurno;
+    }
     
     public void setarTurno(int indice){
         cbxTurno.setSelectedIndex(indice);
@@ -795,7 +799,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
         ctrlPrincipal.getCtrlOferta().alterarTurno((String) cbxTurno.getSelectedItem(), tblTurma);
-        atualizarTela();
+        ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma, (String) cbxTurno.getSelectedItem());
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
     private void tblTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmaMouseClicked

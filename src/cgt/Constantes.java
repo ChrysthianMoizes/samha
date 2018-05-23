@@ -8,7 +8,8 @@ public abstract class Constantes {
     public static final int PERMISSAO_VIEW = 3;
     
     public static final int LINHA = 5;
-    public static final int COLUNA = 6;
+    public static final int COLUNA = 18;
+    public static final int AULAS = 6;
     public static final int TEMPO_MAXIMO = 1;
     public static final int INTERVALO_MINIMO = 2;
     

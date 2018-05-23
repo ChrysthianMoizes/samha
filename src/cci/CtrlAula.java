@@ -32,23 +32,28 @@ public class CtrlAula {
             jdOferta.gerarAula();
 
         arrastarAula(linha, coluna, getAulaSelecionada());
-        preencherTabelaAulas(jdOferta.getTblTurma());
-        //jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
+        preencherTabelaAulas(jdOferta.getTblTurma(), (String) jdOferta.getCbxTurno().getSelectedItem());
         setAulaSelecionada(null);
     }
     
-    public void preencherTabelaAulas(JTable tblTurma){
- 
-        JTableUtil.limparCelulasTabela(tblTurma);
-        Aula aula;
+    public void preencherTabelaAulas(JTable tblTurma, String turno){
         
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                aula = ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
-                if(aula != null)
-                    tblTurma.setValueAt(aula, linha, coluna);
-            }  
+        if(ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada() != null){
+        
+            JTableUtil.limparCelulasTabela(tblTurma);
+
+            int t = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(turno);
+
+            Aula aula;
+
+            for(int linha = 0; linha < Constantes.LINHA; linha++){
+
+                for(int coluna = t; coluna < (Constantes.AULAS + t); coluna++){
+                    aula = ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
+                    if(aula != null)
+                        tblTurma.setValueAt(aula, linha, aula.getNumero() - t);
+                }  
+            }
         }
     }
     
@@ -72,12 +77,17 @@ public class CtrlAula {
     
     public void arrastarAula(int linha, int coluna, Aula aula){
         
+        String t = (String) jdOferta.getCbxTurno().getSelectedItem();
+        int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(t);
+        
         if(aula != null && !isDropInterno())    // ARRASTAR DA LISTA         
-            ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(linha, coluna, aula);  
+            ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(aula);  
         else if(aula != null && isDropInterno())  // ARRASTAR DA TABELA
-            ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, aula);  
+            ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, turno, aula);  
         else
-            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");            
+            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
+        
+        jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
     }
 
     public void removerAula(JTable tblTurma){

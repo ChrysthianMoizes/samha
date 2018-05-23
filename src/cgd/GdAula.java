@@ -51,7 +51,7 @@ public class GdAula extends GdGenerico{
         }     
     }
     
-    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, int dia, String turno) {
+    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, int dia) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         crit.createAlias("alocacao", "a");
         crit.createAlias("a.professor1", "p");
@@ -60,18 +60,16 @@ public class GdAula extends GdGenerico{
         crit.add( Restrictions.eq("p.id", idProfessor) );
         crit.add( Restrictions.eq("numero", numero) );
         crit.add( Restrictions.eq("dia", dia) );
-        crit.add( Restrictions.eq("turno", turno) );
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.close();
         return lista;
     }
     
-    public List filtrarAulasTurno(String turno, int idOferta) {
+    public List filtrarAulasOferta(int idOferta) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         sessao.beginTransaction();
         crit.createAlias("oferta", "o");
-        crit.add( Restrictions.eq("turno", turno));
         crit.add( Restrictions.eq("o.id", idOferta));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
