@@ -80,7 +80,8 @@ public class GtAula {
         
         if(aula != null){
             setAulaMatriz(aula.getDia(), aula.getNumero(), null);
-            getListaAulasRemovidas().add(aula);
+            if(aula.getId() != 0)
+                getListaAulasRemovidas().add(aula);
         }
     }
     
