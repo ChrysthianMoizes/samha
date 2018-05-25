@@ -214,7 +214,6 @@ public class JDOferta extends javax.swing.JDialog {
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1580, 762));
         setSize(new java.awt.Dimension(1366, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
@@ -283,7 +282,7 @@ public class JDOferta extends javax.swing.JDialog {
         lblIntervaloMinimo.setText("Intervalo Mínimo:");
 
         spnIntervalo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
-        spnIntervalo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
+        spnIntervalo.setModel(new javax.swing.SpinnerNumberModel(11, 0, 24, 1));
         spnIntervalo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnIntervaloStateChanged(evt);
@@ -291,7 +290,7 @@ public class JDOferta extends javax.swing.JDialog {
         });
 
         spnTempoMaximo.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
-        spnTempoMaximo.setModel(new javax.swing.SpinnerNumberModel(11, 0, null, 1));
+        spnTempoMaximo.setModel(new javax.swing.SpinnerNumberModel(11, 0, 24, 1));
         spnTempoMaximo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnTempoMaximoStateChanged(evt);
@@ -661,6 +660,7 @@ public class JDOferta extends javax.swing.JDialog {
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
+        spnAno.setEditor(new JSpinner.NumberEditor(spnAno, "####"));
         spnAno.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnAnoStateChanged(evt);
@@ -700,9 +700,9 @@ public class JDOferta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbxTurno, 0, 127, Short.MAX_VALUE))
                             .addGroup(pnlAlocacoesLayout.createSequentialGroup()
-                                .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(lblAno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spnAno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))

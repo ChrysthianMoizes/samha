@@ -7,6 +7,7 @@ import cdp.MatrizCurricular;
 import cdp.Turma;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.JSpinner;
 
 public class JDCadastrarTurma extends javax.swing.JDialog {
 
@@ -69,6 +70,7 @@ public class JDCadastrarTurma extends javax.swing.JDialog {
 
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
+        spnAno.setEditor(new JSpinner.NumberEditor(spnAno, "####"));
 
         spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));

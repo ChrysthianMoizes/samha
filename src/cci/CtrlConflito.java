@@ -24,8 +24,7 @@ public class CtrlConflito {
         jdOferta.limparNotificacoes();
         Aula aula;
         
-        //int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno((String) jdOferta.getCbxTurno().getSelectedItem());
-        //int colunas = Constantes.AULAS + turno;
+        ctrlPrincipal.getGtPrincipal().getGtInstituicao().instanciarVetoresInstituicao();
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){ 
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
@@ -54,7 +53,7 @@ public class CtrlConflito {
         int numero = aula.getNumero() + 1;
         String mensagem = null;
         String notificacao;
-        String dia = ctrlPrincipal.getGtPrincipal().getGtConflito().obterStringDia(aula.getDia());
+        String dia = ctrlPrincipal.getGtPrincipal().getGtInstituicao().obterStringDia(aula.getDia());
         
         if(!mensagens.isEmpty()){
             
