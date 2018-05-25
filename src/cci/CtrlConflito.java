@@ -24,10 +24,11 @@ public class CtrlConflito {
         jdOferta.limparNotificacoes();
         Aula aula;
         
-        int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno((String) jdOferta.getCbxTurno().getSelectedItem());
-
+        //int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno((String) jdOferta.getCbxTurno().getSelectedItem());
+        //int colunas = Constantes.AULAS + turno;
+        
         for(int linha = 0; linha < Constantes.LINHA; linha++){ 
-            for(int coluna = turno; coluna < Constantes.AULAS + turno; coluna++){
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
                 
                 aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
                 
