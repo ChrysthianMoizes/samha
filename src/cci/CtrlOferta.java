@@ -143,7 +143,7 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public void desatualizarTabelaProfessor(){
-        jdOferta.setarProfessor("As aulas do professor podem estar desatualizadas", Color.RED);
+        jdOferta.setarProfessor("As aulas desse professor podem estar desatualizadas", Color.RED);
     }
     
     public void setarTurno(String turno, JComboBox cbxTurno){

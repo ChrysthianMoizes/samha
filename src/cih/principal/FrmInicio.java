@@ -6,6 +6,7 @@ import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
 import cdp.CoordenadorPedagogico;
 import cdp.Usuario;
+import cgt.Constantes;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,15 +47,16 @@ public class FrmInicio extends javax.swing.JFrame {
     
     public void identificarUsuario(int permissao){
         
-        if(permissao == 2){
+        if(permissao == Constantes.PERMISSAO_COORD){
             btnCoordenador.setEnabled(false);
-        }else if(permissao == 3){
+        }else if(permissao == Constantes.PERMISSAO_VIEW){
             btnAlocar.setEnabled(false);
             btnCoordenador.setEnabled(false);
             btnCurso.setEnabled(false);
             btnDisciplina.setEnabled(false);
             btnProfessor.setEnabled(false);
             btnTurma.setEnabled(false);
+            btnOferta.setEnabled(false);
         }
     }
     
