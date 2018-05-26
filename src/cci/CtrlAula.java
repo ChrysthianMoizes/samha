@@ -13,6 +13,7 @@ public class CtrlAula {
     
     private CtrlPrincipal ctrlPrincipal;
     private boolean dropInterno = false;
+    private boolean temAlteracoes = false;
     private Aula aulaSelecionada;
     private JDOferta jdOferta;
     
@@ -34,6 +35,7 @@ public class CtrlAula {
         arrastarAula(linha, coluna, getAulaSelecionada());
         preencherTabelaAulas(jdOferta.getTblTurma(), (String) jdOferta.getCbxTurno().getSelectedItem());
         setAulaSelecionada(null);
+        setTemAlteracoes(true);
     }
     
     public void preencherTabelaAulas(JTable tblTurma, String turno){
@@ -103,6 +105,7 @@ public class CtrlAula {
         tblTurma.setValueAt(null, linha, coluna);
         setAulaSelecionada(null);
         setDropInterno(false);
+        setTemAlteracoes(true);
     }
     
     public void atualizarAulas(JComboBox cbxTurma){
@@ -114,9 +117,10 @@ public class CtrlAula {
             
             String resposta = ctrlPrincipal.getGtPrincipal().getGtAula().atualizarAulas();
 
-            if(resposta.equals(Constantes.CADASTRADO))
+            if(resposta.equals(Constantes.CADASTRADO)){
                 CtrlMensagem.exibirMensagemSucesso(jdOferta, "Salvo com Sucesso!");
-            else
+                setTemAlteracoes(false);
+            }else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
             
             jdOferta.atualizarTela();
@@ -134,6 +138,14 @@ public class CtrlAula {
         this.dropInterno = dropInterno;
     }
 
+    public boolean isTemAlteracoes() {
+        return temAlteracoes;
+    }
+
+    public void setTemAlteracoes(boolean temAlteracoes) {
+        this.temAlteracoes = temAlteracoes;
+    }
+
     public Aula getAulaSelecionada() {
         return aulaSelecionada;
     }
@@ -149,4 +161,18 @@ public class CtrlAula {
     public void setJdOferta(JDOferta jdOferta) {
         this.jdOferta = jdOferta;
     }
+    
+    public void cancelar(){
+        
+        setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
+        
+        if(isTemAlteracoes()){
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, "Você possui alterações que não foram salvas. Deseja realmente sair ?");
+                if (confirmacao == 0) {
+                    setTemAlteracoes(false);
+                    jdOferta.dispose();
+                }
+        }else
+            jdOferta.dispose();
+    }  
 }
