@@ -172,12 +172,10 @@ public class CtrlAula {
             
             String mensagem = "Deseja salvar as alterações feitas em " + turma + " ?";
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
-                if (confirmacao == 0) {
+                if (confirmacao == 0) 
                     jdOferta.atualizarAulas();
-                    jdOferta.dispose();
-                }
-        }else
-            jdOferta.dispose();
+        }
+        jdOferta.dispose();
     } 
     
     public void desfazer(String turma){

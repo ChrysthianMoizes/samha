@@ -47,15 +47,14 @@ public class GtConflito {
     
     public String identificarConflitoTurma(Aula aula, int idProfessor){
            
-        List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), 
-                idProfessor, aula.getNumero(), aula.getDia());
+        List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
         
         if(aulas.size() <= 1){
 
             if(!aulas.isEmpty()){
                 
                 Aula aulaLista = (Aula) aulas.get(0);
-                
+
                 if(aulaLista.getId() == aula.getId())
                     return null;
                 else
@@ -68,13 +67,13 @@ public class GtConflito {
     
     public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
         
-        Aula aula;
+        Aula aulaLista;
         String novaMensagem = "0 Professor está em outra turma neste horário: ";
 
         for(int i = 0; i < aulas.size(); i++){
-            aula = (Aula) aulas.get(i);
-            if(aula.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
-                novaMensagem = novaMensagem + aula.getOferta().getTurma().getNome() + " - " + aula.getAlocacao().getDisciplina().getNome() + ". ";           
+            aulaLista = (Aula) aulas.get(i);
+            if(aulaLista.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
+                novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
         }     
         return novaMensagem;
     }

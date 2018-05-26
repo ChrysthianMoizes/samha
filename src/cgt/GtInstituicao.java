@@ -246,16 +246,12 @@ public class GtInstituicao {
                 } 
                 
             }else if(fim.getHour() < inicio.getHour()){
-                if(fim.getMinute() == inicio.getMinute()){
-                    return qtHoras;
-                }else if(fim.getMinute() > inicio.getMinute()){
+                if(fim.getMinute() >= inicio.getMinute()){
                     return qtHoras;
                 }
             }
-            
             return 24 - qtHoras;
         }    
-        
         return qtHoras;
     }
     

@@ -30,13 +30,11 @@ public class GdAula extends GdGenerico{
             
             int linhas = matriz.length;
             int colunas = matriz[0].length;
-            Aula aula;
                      
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
-                    aula = (Aula) matriz[linha][coluna];
-                    if(aula != null){
-                        sessao.merge(aula);   
+                    if(matriz[linha][coluna] != null){
+                        sessao.merge(matriz[linha][coluna]); 
                     }
                 } 
             }
