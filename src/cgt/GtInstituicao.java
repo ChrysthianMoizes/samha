@@ -238,8 +238,23 @@ public class GtInstituicao {
         
         int qtHoras = Integer.parseInt(horas[0]);
         
-        if(flag == Constantes.INTERVALO_MINIMO)
+        if(flag == Constantes.INTERVALO_MINIMO){
+            
+            if(fim.getHour() == inicio.getHour()){
+                if(fim.getMinute() < inicio.getMinute()){
+                    return qtHoras;
+                } 
+                
+            }else if(fim.getHour() < inicio.getHour()){
+                if(fim.getMinute() == inicio.getMinute()){
+                    return qtHoras;
+                }else if(fim.getMinute() > inicio.getMinute()){
+                    return qtHoras;
+                }
+            }
+            
             return 24 - qtHoras;
+        }    
         
         return qtHoras;
     }

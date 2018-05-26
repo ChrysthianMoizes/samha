@@ -110,7 +110,6 @@ public class CtrlAula {
     public void atualizarAulas(JComboBox cbxTurma){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta()); 
-        jdOferta.limparNotificacoes();
         
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
@@ -124,8 +123,6 @@ public class CtrlAula {
                 setTemAlteracoes(false);
             }else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
-            
-            jdOferta.atualizarTela();
         }else
             CtrlMensagem.exibirMensagemErro(jdOferta, "Nenhuma turma selecionada.");
         
