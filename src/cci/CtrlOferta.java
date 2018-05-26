@@ -10,11 +10,11 @@ import cdp.Turma;
 import cgt.Constantes;
 import cgt.Horarios;
 import cih.oferta.JDOferta;
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -142,6 +142,11 @@ public class CtrlOferta extends CtrlGenerica{
         JTableUtil.limparCelulasTabela(jdOferta.getTblProfessor());
     }
     
+    public void desatualizarTabelaProfessor(){
+        //zerarTabelaProfessor();
+        jdOferta.setarProfessor("Os dados do professor podem estar desatualizados", Color.RED);
+    }
+    
     public void setarTurno(String turno, JComboBox cbxTurno){
         switch(turno){
             case Constantes.MATUTINO: cbxTurno.setSelectedIndex(0); break;
@@ -186,8 +191,11 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void validarOferta(JTable tabela, JToggleButton btnCQD){
         ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
-        if(btnCQD.isSelected())
+        if(btnCQD.isSelected()){
+            btnCQD.setBackground(Color.BLUE);
             ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
+        }else
+            btnCQD.setBackground(new Color(240, 240, 240));
     }
 
     public List getListaAlocacoes() {

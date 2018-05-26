@@ -98,6 +98,12 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void setarProfessor(String nome){
+        lblNomeProfessor.setForeground(Color.BLACK);
+        lblNomeProfessor.setText(nome);
+    }
+    
+    public void setarProfessor(String nome, Color cor){
+        lblNomeProfessor.setForeground(cor);
         lblNomeProfessor.setText(nome);
     }
     
@@ -157,6 +163,10 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void cancelar(){
         ctrlPrincipal.getCtrlAula().cancelar();
+    }
+    
+    public void preencherHorarioProfessor(){
+        ctrlPrincipal.getCtrlOferta().preencherHorarioProfessor(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
     }
     
     @SuppressWarnings("unchecked")
@@ -316,6 +326,7 @@ public class JDOferta extends javax.swing.JDialog {
         btnCQD.setText("CQD");
         btnCQD.setToolTipText("Controle de Quantidade de Disciplinas");
         btnCQD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCQD.setOpaque(true);
         btnCQD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCQDActionPerformed(evt);
@@ -495,7 +506,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(lblTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
                     .addComponent(pnlTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -637,7 +648,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(pnlDiasProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                    .addComponent(pnlTabelaProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
                     .addComponent(pnlNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -771,7 +782,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlValidacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -842,7 +853,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_itemRemoverActionPerformed
 
     private void lstAlocacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlocacoesMouseClicked
-        ctrlPrincipal.getCtrlOferta().preencherHorarioProfessor(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
+        preencherHorarioProfessor();
     }//GEN-LAST:event_lstAlocacoesMouseClicked
 
     private void cbxQuantidadeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantidadeProfessorActionPerformed

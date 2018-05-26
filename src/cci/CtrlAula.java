@@ -24,11 +24,9 @@ public class CtrlAula {
     public void identificarOrigem(int linha, int coluna){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
-
         jdOferta.validarOferta(true);
-        
         int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
-        
+        ctrlPrincipal.getCtrlOferta().desatualizarTabelaProfessor();
         if(indice >= 0 && !isDropInterno())
             jdOferta.gerarAula();
 
@@ -95,8 +93,9 @@ public class CtrlAula {
     public void removerAula(JTable tblTurma){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
-        
         jdOferta.validarOferta(true);
+        ctrlPrincipal.getCtrlOferta().desatualizarTabelaProfessor();
+        
         int coluna = tblTurma.getSelectedColumn();
         int linha = tblTurma.getSelectedRow();
         
@@ -110,8 +109,11 @@ public class CtrlAula {
     
     public void atualizarAulas(JComboBox cbxTurma){
         
+        setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta()); 
         jdOferta.limparNotificacoes();
-        Turma turma = (Turma) cbxTurma.getSelectedItem();       
+        
+        Turma turma = (Turma) cbxTurma.getSelectedItem();
+        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
         
         if(turma != null){
             
@@ -127,7 +129,11 @@ public class CtrlAula {
         }else
             CtrlMensagem.exibirMensagemErro(jdOferta, "Nenhuma turma selecionada.");
         
-        ctrlPrincipal.getCtrlOferta().zerarTabelaProfessor();
+        if(indice >= 0){
+            jdOferta.getLstAlocacoes().setSelectedIndex(indice);
+            jdOferta.preencherHorarioProfessor();
+        }else
+            ctrlPrincipal.getCtrlOferta().zerarTabelaProfessor();
     }
 
     public boolean isDropInterno() {
