@@ -110,7 +110,6 @@ public class CtrlAula {
     public void atualizarAulas(JComboBox cbxTurma){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta()); 
-        
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
         
@@ -165,17 +164,34 @@ public class CtrlAula {
         this.jdOferta = jdOferta;
     }
     
-    public void cancelar(){
+    public void sair(String turma){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
-        
+
         if(isTemAlteracoes()){
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, "Você possui alterações que não foram salvas. Deseja realmente sair ?");
+            
+            String mensagem = "Deseja salvar as alterações feitas em " + turma + " ?";
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
                 if (confirmacao == 0) {
-                    setTemAlteracoes(false);
+                    jdOferta.atualizarAulas();
                     jdOferta.dispose();
                 }
         }else
             jdOferta.dispose();
-    }  
+    } 
+    
+    public void desfazer(String turma){
+        
+        setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
+        
+        if(isTemAlteracoes()){
+            String mensagem = "Deseja desfazer as alterações feitas em " + turma + " ?";
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
+                if (confirmacao == 0) {
+                    jdOferta.atualizarTela();
+                    setTemAlteracoes(false);
+                }
+        }else
+            CtrlMensagem.exibirMensagemAviso(jdOferta, "Nenhuma alteração encontrada.");
+    }
 }

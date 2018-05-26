@@ -27,7 +27,7 @@ public class JDOferta extends javax.swing.JDialog {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt){
-                cancelar();
+                sair();
             }
         });
     }
@@ -161,8 +161,12 @@ public class JDOferta extends javax.swing.JDialog {
         return spnTempoMaximo;
     }
     
-    public void cancelar(){
-        ctrlPrincipal.getCtrlAula().cancelar();
+    public void sair(){
+        ctrlPrincipal.getCtrlAula().sair(lblNomeTurma.getText());
+    }
+    
+    public void desfazer(){
+        ctrlPrincipal.getCtrlAula().desfazer(lblNomeTurma.getText());
     }
     
     public void preencherHorarioProfessor(){
@@ -188,7 +192,7 @@ public class JDOferta extends javax.swing.JDialog {
         spnIntervalo = new javax.swing.JSpinner();
         spnTempoMaximo = new javax.swing.JSpinner();
         btnCQD = new javax.swing.JToggleButton();
-        btnCancelar = new javax.swing.JToggleButton();
+        btnDesfazer = new javax.swing.JToggleButton();
         pnlTurma = new javax.swing.JPanel();
         pnlDiasTurma = new javax.swing.JPanel();
         lblSexta = new javax.swing.JLabel();
@@ -333,13 +337,13 @@ public class JDOferta extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close-aulas.png"))); // NOI18N
-        btnCancelar.setToolTipText("Cancelar");
-        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnDesfazer.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnDesfazer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close-aulas.png"))); // NOI18N
+        btnDesfazer.setToolTipText("Cancelar");
+        btnDesfazer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDesfazer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnDesfazerActionPerformed(evt);
             }
         });
 
@@ -368,7 +372,7 @@ public class JDOferta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnCQD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(btnDesfazer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
         );
         pnlValidacaoLayout.setVerticalGroup(
@@ -391,7 +395,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDesfazer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -874,13 +878,13 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma, btnCQD);
     }//GEN-LAST:event_btnCQDActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        cancelar();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnDesfazerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesfazerActionPerformed
+        desfazer();
+    }//GEN-LAST:event_btnDesfazerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
-    private javax.swing.JToggleButton btnCancelar;
+    private javax.swing.JToggleButton btnDesfazer;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbxCurso;
