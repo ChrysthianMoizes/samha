@@ -43,7 +43,8 @@ public class CtrlAula {
             JTableUtil.limparCelulasTabela(tblTurma);
 
             int t = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(turno);
-
+            ctrlPrincipal.getCtrlConflito().getRender().setTurno(t);
+            
             Aula aula;
 
             for(int linha = 0; linha < Constantes.LINHA; linha++){

@@ -49,31 +49,28 @@ public class GtConflito {
            
         List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
         
-        if(aulas.size() <= 1){
-
-            if(!aulas.isEmpty()){
-                
-                Aula aulaLista = (Aula) aulas.get(0);
-
-                if(aulaLista.getId() == aula.getId())
-                    return null;
-                else
-                    return montarMensagemConflitoTurma(aulas, aula);
-            }else
-                return null;
-        }else
-            return montarMensagemConflitoTurma(aulas, aula);
+        Aula aulaLista;
+        for(int i = 0; i < aulas.size(); i++){
+            aulaLista = (Aula) aulas.get(i);
+            if(aulaLista.getId() == aula.getId()){
+                aulas.remove(i);
+            }
+        }
+        
+        if(aulas.isEmpty())
+            return null;
+        else
+            return montarMensagemConflitoTurma(aulas);
     }
     
-    public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
+    public String montarMensagemConflitoTurma(List aulas){
         
         Aula aulaLista;
-        String novaMensagem = "0 Professor está em outra turma neste horário: ";
+        String novaMensagem = "Professor está em outra turma neste horário: ";
 
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
-            if(aulaLista.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
-                novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
+            novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
         }     
         return novaMensagem;
     }
@@ -84,9 +81,9 @@ public class GtConflito {
         
         List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), turno);
         
-        if(listaRestricoes.isEmpty()){
+        if(listaRestricoes.isEmpty())
             return null;
-        }else
+        else
             return montarMensagemConflitoRestricaoProfessor(listaRestricoes, aula);
     }
     
@@ -101,7 +98,7 @@ public class GtConflito {
             resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
 
             if(resposta) 
-                return "2 " + restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+                return restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
         }
         return null;
     }

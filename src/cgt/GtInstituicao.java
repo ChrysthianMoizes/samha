@@ -142,11 +142,11 @@ public class GtInstituicao {
 
         
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL))
-            mensagem = "1 Um professor(a) da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido:\n" 
+            mensagem = "Um professor(a) da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido:\n" 
                     + primeira.getOferta().getTurma().getNome() + " | " 
                     + ultima.getOferta().getTurma().getNome() + " - " +  tempo + " horas.";
         else  
-            mensagem = "1 " + nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido:\n" 
+            mensagem = nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido:\n" 
                     + primeira.getOferta().getTurma().getNome() + " | " 
                     + ultima.getOferta().getTurma().getNome() + " - " +  tempo + " horas.";     
         
@@ -198,11 +198,11 @@ public class GtInstituicao {
         String horarioInicial = obterHorarioInicial(primeira);
      
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL)){
-            mensagem = "1 Um professor(a) da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: "  
+            mensagem = "Um professor(a) da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: "  
                     + tempo + " horas. " + ultima.getOferta().getTurma().getNome() + ": " + diaAnterior + " - " + horarioFinal + ". "
                     + primeira.getOferta().getTurma().getNome() + ": " + diaAtual + " - " + horarioInicial + ".";
         }else{  
-            mensagem = "1 " + nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " + tempo + " horas.\n"
+            mensagem = nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " + tempo + " horas.\n"
                     + ultima.getOferta().getTurma().getNome() + ": " + diaAnterior + " - " + horarioFinal + ".\n"
                     + primeira.getOferta().getTurma().getNome() + ": "+ diaAtual + " - " + horarioInicial + ".";     
         }

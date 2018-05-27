@@ -573,7 +573,7 @@
                       </Table>
                     </Property>
                     <Property name="cellSelectionEnabled" type="boolean" value="true"/>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());&#xa;tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);">
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblTurma.setDefaultRenderer(Object.class, ctrlPrincipal.getCtrlConflito().getRender());">
                       <TableColumnModel selectionModel="2">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
@@ -849,7 +849,7 @@
                           </Table>
                         </Property>
                         <Property name="cellSelectionEnabled" type="boolean" value="true"/>
-                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas());&#xa;((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);">
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));">
                           <TableColumnModel selectionModel="2">
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>

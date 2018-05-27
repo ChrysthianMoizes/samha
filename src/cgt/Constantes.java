@@ -7,6 +7,10 @@ public abstract class Constantes {
     public static final int PERMISSAO_COORD = 2;
     public static final int PERMISSAO_VIEW = 3;
     
+    public static final int CONFLITO_TURMA = 0;
+    public static final int CONFLITO_INST = 1;
+    public static final int CONFLITO_REST = 2;
+    
     public static final int LINHA = 5;
     public static final int COLUNA = 18;
     public static final int AULAS = 6;

@@ -10,14 +10,18 @@ import javax.swing.JTable;
 
 public class CtrlConflito {
     
+    private RenderizadorCelulas render;
     private CtrlPrincipal ctrlPrincipal;
     private JDOferta jdOferta;
     
     public CtrlConflito(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
+        render = new RenderizadorCelulas(ctrlPrincipal, 1);
     }
     
     public void validarOferta(JTable tabela, JDOferta tela){
+        
+        render.gerarMatrizCores();
         
         setJdOferta(tela);
         List mensagens = new ArrayList<>();
@@ -40,9 +44,8 @@ public class CtrlConflito {
         }
         
         if(mensagens.isEmpty()){
-            Color cor = ctrlPrincipal.setarCorPanelExterior();
             jdOferta.limparNotificacoes();
-            jdOferta.exibirNotificacao("Nenhum conflito de aulas encontrado!\n\n", cor); 
+            jdOferta.exibirNotificacao("Nenhum conflito de aulas encontrado!\n\n", ctrlPrincipal.setarCorPanelExterior()); 
         }
         
         jdOferta.validarOferta(false);
@@ -51,61 +54,22 @@ public class CtrlConflito {
     public void exibirNotificacoesConflito(List mensagens, Aula aula){
         
         int numero = aula.getNumero() + 1;
-        String mensagem = null;
-        String notificacao;
         String dia = ctrlPrincipal.getGtPrincipal().getGtInstituicao().obterStringDia(aula.getDia());
         
+        String mensagem;
         if(!mensagens.isEmpty()){
-            
-            mensagem = (String) mensagens.get(0);
-            int codigo = mensagem.charAt(0);
-            
             for(int i = 0; i < mensagens.size(); i++){
                 mensagem = (String) mensagens.get(i);
-                notificacao = mensagem.substring(2);
-                jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + notificacao +"\n\n", Color.RED);
-                identificarTipoConflito(aula.getDia(), (aula.getNumero() - aula.getTurno()), codigo);
+                jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
             }
+            pintarCelula(aula.getDia(), aula.getNumero(), new Color(255, 73, 73));
         }else
-            identificarTipoConflito(aula.getDia(), (aula.getNumero() - aula.getTurno()), 3);
+            pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);     
     }
     
-    public void identificarTipoConflito(int dia, int numero, int codigo){
-        
-        switch(codigo){
-            
-            case 0: 
-                pintarCelulaTabela(Color.RED, dia, numero, jdOferta.getTblTurma());
-                break;
-            case 1: 
-                pintarCelulaTabela(Color.ORANGE, dia, numero, jdOferta.getTblTurma());
-                break;
-            case 2: 
-                pintarCelulaTabela(Color.YELLOW, dia, numero, jdOferta.getTblTurma());
-                break;
-            default: 
-                pintarCelulaTabela(Color.GREEN, dia, numero, jdOferta.getTblTurma());
-                break;
-        }
-    }
-    
-    public void pintarCelulaTabela(Color cor, int linha, int coluna, JTable tabela){
-        
-//        if(mensagem != null){
-//            
-//            int codigo = mensagem.charAt(0);
-//            
-//            if(codigo == 0)
-//                render.setCor(Color.RED);
-//               celula.setBackground(Color.RED);  
-//            else
-//                render.setCor(Color.YELLOW);
-//               celula.setBackground(Color.YELLOW); 
-//        }else
-//            render.setCor(Color.GREEN);
-//            celula.setBackground(Color.GREEN);
-//
-//        render.prepareRenderer(null, linha, coluna);
+    public void pintarCelula(int linha, int coluna, Color cor){
+        render.setColorMatriz(linha, coluna, cor);
+        jdOferta.getTblTurma().repaint();
     }
     
     public void setJdOferta(JDOferta jdOferta) {
@@ -161,5 +125,9 @@ public class CtrlConflito {
             qtAulas = aula.getAlocacao().getDisciplina().getQtAulas();
             jdOferta.exibirNotificacao(sigla + ": Quantidade de aulas diferente da especificada: " + qtAulas + " aulas.\n\n", Color.RED);
         } 
-    }    
+    }
+
+    public RenderizadorCelulas getRender() {
+        return render;
+    }
 }

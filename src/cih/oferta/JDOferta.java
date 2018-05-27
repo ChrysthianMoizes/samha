@@ -494,9 +494,9 @@ public class JDOferta extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblTurma);
         tblTurma.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas());
         tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));
         ((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        tblTurma.setDefaultRenderer(Object.class, ctrlPrincipal.getCtrlConflito().getRender());
 
         javax.swing.GroupLayout pnlTurmaLayout = new javax.swing.GroupLayout(pnlTurma);
         pnlTurma.setLayout(pnlTurmaLayout);
@@ -638,8 +638,8 @@ public class JDOferta extends javax.swing.JDialog {
         tblProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tblProfessor);
         tblProfessor.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas());
         ((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 
