@@ -122,7 +122,8 @@ public final class CtrlPrincipal {
             frmValidarAcesso.limparCampos();
         } else {
             instanciarFrameInicio();
-            frmValidarAcesso.dispose();
+            frmValidarAcesso.dispose();   
+            CtrlMensagem.exibirMensagemSucesso(frmInicio, "Bem-Vindo(a) de volta " + frmInicio.getNomeCoordenador() + "!");
         }
     }
 

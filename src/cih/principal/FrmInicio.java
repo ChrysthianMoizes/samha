@@ -10,6 +10,7 @@ import cgt.Constantes;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JLabel;
 
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -58,6 +59,11 @@ public class FrmInicio extends javax.swing.JFrame {
             btnTurma.setEnabled(false);
             btnOferta.setEnabled(false);
         }
+    }
+
+    public String getNomeCoordenador(){
+        String[] nome = lblNomeCoordenador.getText().split(" ");
+        return nome[0];
     }
     
     @SuppressWarnings("unchecked")

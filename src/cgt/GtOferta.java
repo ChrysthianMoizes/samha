@@ -31,7 +31,7 @@ public class GtOferta {
     }
     
     public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
-        
+
         if(getOfertaSelecionada() != null){
             getOfertaSelecionada().setIntervaloMinimo(intervaloMinimo);
             getOfertaSelecionada().setTempoMaximoTrabalho(tempoMaximo);

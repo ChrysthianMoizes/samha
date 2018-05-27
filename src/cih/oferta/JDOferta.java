@@ -192,7 +192,7 @@ public class JDOferta extends javax.swing.JDialog {
         spnIntervalo = new javax.swing.JSpinner();
         spnTempoMaximo = new javax.swing.JSpinner();
         btnCQD = new javax.swing.JToggleButton();
-        btnDesfazer = new javax.swing.JToggleButton();
+        btnDesfazer = new javax.swing.JButton();
         pnlTurma = new javax.swing.JPanel();
         pnlDiasTurma = new javax.swing.JPanel();
         lblSexta = new javax.swing.JLabel();
@@ -327,7 +327,7 @@ public class JDOferta extends javax.swing.JDialog {
         });
 
         btnCQD.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnCQD.setText("CQD");
+        btnCQD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/cqd.png"))); // NOI18N
         btnCQD.setToolTipText("Controle de Quantidade de Disciplinas");
         btnCQD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCQD.setOpaque(true);
@@ -338,8 +338,8 @@ public class JDOferta extends javax.swing.JDialog {
         });
 
         btnDesfazer.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnDesfazer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/close-aulas.png"))); // NOI18N
-        btnDesfazer.setToolTipText("Cancelar");
+        btnDesfazer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/desfazer.png"))); // NOI18N
+        btnDesfazer.setToolTipText("Desfazer Alterações");
         btnDesfazer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDesfazer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -884,7 +884,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
-    private javax.swing.JToggleButton btnDesfazer;
+    private javax.swing.JButton btnDesfazer;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbxCurso;
