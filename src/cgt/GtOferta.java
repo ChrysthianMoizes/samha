@@ -22,11 +22,9 @@ public class GtOferta {
             oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
 
         setOfertaSelecionada(oferta);
-        gtPrincipal.getGtAula().gerarEstruturasArmazenamento();
         
         if(oferta != null){
-            List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
-            gtPrincipal.getGtAula().preencherMatrizOferta(aulas);
+            gtPrincipal.getGtAula().preencherMatrizOferta(oferta);
         }
     }
     

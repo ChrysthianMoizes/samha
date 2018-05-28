@@ -43,8 +43,8 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlAula().gerarAula(lstAlocacoes, tblTurma, cbxTurno);
     }
     
-    public void atualizarAulas(){
-        ctrlPrincipal.getCtrlAula().atualizarAulas(cbxTurma);
+    public void salvarAulas(){
+        ctrlPrincipal.getCtrlAula().salvarAulas(cbxTurma);
     }
     
     public void atualizarTela(){
@@ -818,7 +818,7 @@ public class JDOferta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        atualizarAulas();
+        salvarAulas();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed

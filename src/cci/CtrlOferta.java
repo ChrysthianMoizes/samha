@@ -66,6 +66,16 @@ public class CtrlOferta extends CtrlGenerica{
     public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, 
             JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma, JToggleButton btnCQD){
         
+        
+        if(ctrlPrincipal.getCtrlAula().isTemAlteracoes()){
+            String mensagem = "Deseja salvar as alterações feitas ?";
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
+                if (confirmacao == 0) {
+                    jdOferta.salvarAulas();
+                    ctrlPrincipal.getCtrlAula().setTemAlteracoes(false);
+                }
+        }
+        
         JTableUtil.limparCelulasTabela(tblTurma);
         jdOferta.limparNotificacoes();
         jdOferta.setarMensagem("");

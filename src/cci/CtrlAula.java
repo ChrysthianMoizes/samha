@@ -58,6 +58,7 @@ public class CtrlAula {
                 }  
             }
         }
+        setTemAlteracoes(false);
     }
     
     public void gerarAula(JList lstAlocacoes, JTable tblTurma, JComboBox cbxTurno){
@@ -91,7 +92,7 @@ public class CtrlAula {
             ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
             ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, turno, aula);  
         }else
-            CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
+            CtrlMensagem.exibirMensagemAviso(jdOferta, "Selecione uma aula válida.");
         
         jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);
     }
@@ -113,7 +114,7 @@ public class CtrlAula {
         setTemAlteracoes(true);
     }
     
-    public void atualizarAulas(JComboBox cbxTurma){
+    public void salvarAulas(JComboBox cbxTurma){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta()); 
         Turma turma = (Turma) cbxTurma.getSelectedItem();
@@ -121,10 +122,10 @@ public class CtrlAula {
         
         if(turma != null){
             
-            String resposta = ctrlPrincipal.getGtPrincipal().getGtAula().atualizarAulas();
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtAula().salvarAulas();
 
             if(resposta.equals(Constantes.CADASTRADO)){
-                CtrlMensagem.exibirMensagemSucesso(jdOferta, "Salvo com Sucesso!");
+                CtrlMensagem.exibirMensagemSucesso(jdOferta, "As aulas foram salvas com Sucesso!");
                 setTemAlteracoes(false);
             }else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
@@ -179,7 +180,7 @@ public class CtrlAula {
             String mensagem = "Deseja salvar as alterações feitas em " + turma + " ?";
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
                 if (confirmacao == 0) 
-                    jdOferta.atualizarAulas();
+                    jdOferta.salvarAulas();
         }
         jdOferta.dispose();
     } 
@@ -192,8 +193,8 @@ public class CtrlAula {
             String mensagem = "Deseja desfazer as alterações feitas em " + turma + " ?";
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
                 if (confirmacao == 0) {
-                    jdOferta.atualizarTela();
                     setTemAlteracoes(false);
+                    jdOferta.atualizarTela();
                 }
         }else
             CtrlMensagem.exibirMensagemAviso(jdOferta, "Nenhuma alteração encontrada.");

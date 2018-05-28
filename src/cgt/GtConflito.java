@@ -61,21 +61,6 @@ public class GtConflito {
             return null;
         else
             return montarMensagemConflitoTurma(aulas, aula);
-        
-        /*if(aulas.size() <= 1){
-
-            if(!aulas.isEmpty()){
-
-                Aula aulaLista = (Aula) aulas.get(0);
-
-                if(aulaLista.getId() == aula.getId())
-                    return null;
-                else
-                    return montarMensagemConflitoTurma(aulas, aula);
-            }else
-                return null;
-        }else
-            return montarMensagemConflitoTurma(aulas, aula);*/
     }
     
     public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
@@ -85,8 +70,7 @@ public class GtConflito {
 
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
-            //if(aulaLista.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
-                novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
+            novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
         }     
         return novaMensagem;
     }

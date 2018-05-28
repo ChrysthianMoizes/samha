@@ -85,11 +85,12 @@ public class GtAula {
         }
     }
     
-    public String atualizarAulas(){
+    public String salvarAulas(){
 
         try {
             
-            gtPrincipal.getGdPrincipal().getGdAula().atualizarAulasOferta(matriz, listaAulasRemovidas); 
+            gtPrincipal.getGdPrincipal().getGdAula().salvarAulasOferta(matriz, listaAulasRemovidas);
+            preencherMatrizOferta(gtPrincipal.getGtOferta().getOfertaSelecionada());
             return Constantes.CADASTRADO;
             
         } catch (Exception ex) {
@@ -97,11 +98,13 @@ public class GtAula {
         } 
     }
     
-    public void preencherMatrizOferta(List lista){
-               
-        Aula aula;
-        Oferta oferta = gtPrincipal.getGtOferta().getOfertaSelecionada();
+    public void preencherMatrizOferta(Oferta oferta){
         
+        gerarEstruturasArmazenamento();
+        
+        List lista = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
+        
+        Aula aula;
         for(int linha = 0; linha < lista.size(); linha++){
             aula = (Aula) lista.get(linha);
             aula.setOferta(oferta);

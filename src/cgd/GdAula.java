@@ -14,7 +14,7 @@ public class GdAula extends GdGenerico{
         this.gdPrincipal = gdPrincipal;
     }
     
-    public void atualizarAulasOferta(Aula[][] matriz, List listaAulasRemovidas){
+    public void salvarAulasOferta(Aula[][] matriz, List listaAulasRemovidas){
         
         try {
             sessao = criarSessao();
@@ -30,12 +30,11 @@ public class GdAula extends GdGenerico{
             
             int linhas = matriz.length;
             int colunas = matriz[0].length;
-                     
+            
             for(int linha = 0; linha < linhas; linha++){
                 for(int coluna = 0; coluna < colunas; coluna++){
-                    if(matriz[linha][coluna] != null){
-                        sessao.merge(matriz[linha][coluna]); 
-                    }
+                    if(matriz[linha][coluna] != null)
+                        sessao.merge(matriz[linha][coluna]);  
                 } 
             }
             
