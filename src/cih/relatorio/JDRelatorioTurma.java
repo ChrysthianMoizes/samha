@@ -2,6 +2,7 @@ package cih.relatorio;
 
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
+import cdp.Oferta;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -17,6 +18,18 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         this.ctrlPrincipal = ctrl;
         initComponents();
         setarBackground();
+    }
+    
+    public void preencherTabelaTurma(Oferta oferta){
+        ctrlPrincipal.getCtrlRelatorio().preencherTabelaTurma(tblTurma, cbxTurno, oferta);
+    }
+    
+    public void identificarOferta(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma);
     }
     
     private void setarBackground(){
@@ -341,12 +354,12 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                     .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTurma2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
@@ -388,7 +401,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                             .addComponent(rbtnEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(35, 35, 35)
                         .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -426,10 +439,13 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
         setarTurno();
+        identificarOferta();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
         preencherComboTurma();
+        setarTurno();
+        identificarOferta();
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
@@ -443,10 +459,14 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
         ctrlPrincipal.getCtrlOferta().alterarTurno((String) cbxTurno.getSelectedItem(), tblTurma);
         this.repaint();
+        identificarOferta();
     }//GEN-LAST:event_cbxTurnoActionPerformed
 
     private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed
         preencherComboCurso();
+        preencherComboTurma();
+        setarTurno();
+        identificarOferta();
     }//GEN-LAST:event_cbxEixoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

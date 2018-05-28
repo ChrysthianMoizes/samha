@@ -14,6 +14,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         setarBackground();
     }
     
+    public void preencherTabelaProfessor(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlRelatorio().preencherTabelaProfessor(ano, semestre, cbxProfessor, tblProfessor);
+    }
+    
     private void setarBackground(){
         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
         pnlConfiguracoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
@@ -65,7 +72,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         tblProfessor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Relatório de Turmas");
+        setTitle("Relatório de Professores");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1100, 300));
         setResizable(false);
@@ -373,11 +380,12 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGerarActionPerformed
 
     private void cbxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProfessorActionPerformed
-  
+        preencherTabelaProfessor();
     }//GEN-LAST:event_cbxProfessorActionPerformed
 
     private void cbxCoordenadoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCoordenadoriaActionPerformed
         preencherComboProfessor();
+        preencherTabelaProfessor();
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
@@ -390,6 +398,8 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
 
     private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed
         preencherComboCoordenadoria();
+        preencherComboProfessor();
+        preencherTabelaProfessor();
     }//GEN-LAST:event_cbxEixoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

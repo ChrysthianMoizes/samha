@@ -163,4 +163,8 @@ public class GtAula {
     public void setListaAulasRemovidas(List listaAulasRemovidas) {
         this.listaAulasRemovidas = listaAulasRemovidas;
     }
+    
+    public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
+        return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessorAnoSemestre(id, ano, semestre);
+    }
 }

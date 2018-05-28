@@ -7,7 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Relat&#xf3;rio de Turmas"/>
+    <Property name="title" type="java.lang.String" value="Relat&#xf3;rio de Professores"/>
     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
       <Font name="DialogInput" size="14" style="0"/>
     </Property>

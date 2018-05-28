@@ -6,6 +6,7 @@ import cdp.Turma;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -182,7 +183,7 @@ public class CtrlAula {
                 if (confirmacao == 0) 
                     jdOferta.salvarAulas();
         }
-        ctrlPrincipal.getGtPrincipal().getGtAula().limparEstruturasArmazenamento();
+        ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
         jdOferta.dispose();
     } 
     
@@ -199,5 +200,9 @@ public class CtrlAula {
                 }
         }else
             CtrlMensagem.exibirMensagemAviso(jdOferta, "Nenhuma alteração encontrada.");
+    }
+    
+    public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(id, ano, semestre);
     }
 }
