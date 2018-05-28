@@ -3,9 +3,7 @@ package cih.relatorio;
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
 import cdp.Oferta;
-import javax.swing.JComboBox;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -56,17 +54,16 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     public void setarTurma(String nome){
         lblNomeTurma.setText(nome);
     }
-
-    public JTable getTblTurma() {
-        return tblTurma;
-    }
-
-    public JComboBox<String> getCbxTurno() {
-        return cbxTurno;
-    }
     
     public void setarTurno(){
         ctrlPrincipal.getCtrlRelatorio().setarTurno(cbxTurma, cbxTurno);
+    }
+    
+    public void gerarRelatorioTurma(){
+        char tipo = (char) grpFiltros.getSelection().getMnemonic();
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlRelatorio().gerarRelatorioTurma(cbxEixo, cbxCurso, cbxTurma, ano, semestre, tipo);
     }
     
     @SuppressWarnings("unchecked")
@@ -99,17 +96,16 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         lblTurma = new javax.swing.JLabel();
         lblEixo = new javax.swing.JLabel();
         lblCurso1 = new javax.swing.JLabel();
-        lblTurma2 = new javax.swing.JLabel();
+        lblTurno = new javax.swing.JLabel();
         rbtnTurma = new javax.swing.JRadioButton();
         rbtnCurso = new javax.swing.JRadioButton();
         rbtnEixo = new javax.swing.JRadioButton();
+        rbtnTodas = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de Turmas");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(2147483647, 605));
         setMinimumSize(new java.awt.Dimension(1100, 595));
-        setPreferredSize(new java.awt.Dimension(1079, 325));
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 788));
 
@@ -312,14 +308,13 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         lblCurso1.setText("Curso:");
         lblCurso1.setToolTipText("");
 
-        lblTurma2.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblTurma2.setText("Turno:");
-        lblTurma2.setToolTipText("");
+        lblTurno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblTurno.setText("Turno:");
+        lblTurno.setToolTipText("");
 
         grpFiltros.add(rbtnTurma);
         rbtnTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnTurma.setMnemonic('t');
-        rbtnTurma.setSelected(true);
         rbtnTurma.setText("Turma");
 
         grpFiltros.add(rbtnCurso);
@@ -331,6 +326,12 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         rbtnEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnEixo.setMnemonic('e');
         rbtnEixo.setText("Eixo");
+
+        grpFiltros.add(rbtnTodas);
+        rbtnTodas.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnTodas.setMnemonic('a');
+        rbtnTodas.setSelected(true);
+        rbtnTodas.setText("Todas");
 
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
@@ -352,7 +353,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTurma2))
+                    .addComponent(lblTurno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,10 +361,12 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                         .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addComponent(rbtnTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                        .addComponent(rbtnTodas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(rbtnCurso)
                         .addGap(10, 10, 10)
@@ -381,7 +384,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                         .addComponent(lblEixo))
                     .addComponent(lblTurma)
                     .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTurma2)
+                        .addComponent(lblTurno)
                         .addComponent(lblAno)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -398,7 +401,8 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbtnTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbtnCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbtnEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rbtnEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbtnTodas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -434,7 +438,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
-
+        gerarRelatorioTurma();
     }//GEN-LAST:event_btnGerarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
@@ -449,11 +453,11 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        
+        identificarOferta();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        
+        identificarOferta();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
@@ -488,7 +492,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     private javax.swing.JLabel lblSexta;
     private javax.swing.JLabel lblTerca;
     private javax.swing.JLabel lblTurma;
-    private javax.swing.JLabel lblTurma2;
+    private javax.swing.JLabel lblTurno;
     private javax.swing.JPanel pnlConfiguracoes;
     private javax.swing.JPanel pnlDiasTurma;
     private javax.swing.JPanel pnlPrincipal;
@@ -496,6 +500,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTurno;
     private javax.swing.JRadioButton rbtnCurso;
     private javax.swing.JRadioButton rbtnEixo;
+    private javax.swing.JRadioButton rbtnTodas;
     private javax.swing.JRadioButton rbtnTurma;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnSemestre;

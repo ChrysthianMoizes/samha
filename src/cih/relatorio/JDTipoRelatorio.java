@@ -18,7 +18,7 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
     
     private void setarBackground(){
         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
-        pnlConfiguracoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        pnlConfiguracoes.setBackground(ctrlPrincipal.setarCorPanelExterior());
     }
     
     private void identificarTipoRelatorio(){
@@ -33,10 +33,10 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         grpFiltros = new javax.swing.ButtonGroup();
         pnlPrincipal = new javax.swing.JPanel();
         pnlConfiguracoes = new javax.swing.JPanel();
-        btnGerar = new javax.swing.JButton();
         lblEixo = new javax.swing.JLabel();
         rbtnTurma = new javax.swing.JRadioButton();
         rbtnCurso = new javax.swing.JRadioButton();
+        btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tipos de Relatórios");
@@ -45,54 +45,60 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 788));
 
-        pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
+        pnlPrincipal.setBackground(new java.awt.Color(0, 153, 102));
         pnlPrincipal.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         pnlPrincipal.setMaximumSize(new java.awt.Dimension(1920, 790));
 
-        pnlConfiguracoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Relatórios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
+        pnlConfiguracoes.setBackground(new java.awt.Color(0, 153, 102));
+        pnlConfiguracoes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
-        btnGerar.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png"))); // NOI18N
-        btnGerar.setText("OK");
-        btnGerar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnGerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarActionPerformed(evt);
-            }
-        });
-
-        lblEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblEixo.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lblEixo.setForeground(new java.awt.Color(255, 255, 255));
         lblEixo.setText("Selecione o tipo do relatório:");
         lblEixo.setToolTipText("");
 
+        rbtnTurma.setBackground(new java.awt.Color(0, 153, 102));
         grpFiltros.add(rbtnTurma);
-        rbtnTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnTurma.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        rbtnTurma.setForeground(new java.awt.Color(255, 255, 255));
         rbtnTurma.setMnemonic('p');
         rbtnTurma.setSelected(true);
         rbtnTurma.setText("Professor");
 
+        rbtnCurso.setBackground(new java.awt.Color(0, 153, 102));
         grpFiltros.add(rbtnCurso);
-        rbtnCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnCurso.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        rbtnCurso.setForeground(new java.awt.Color(255, 255, 255));
         rbtnCurso.setMnemonic('t');
         rbtnCurso.setText("Turma");
+
+        btnEntrar.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setText("Visualizar");
+        btnEntrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEntrar.setContentAreaFilled(false);
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
         pnlConfiguracoesLayout.setHorizontalGroup(
             pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
+            .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblEixo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlConfiguracoesLayout.createSequentialGroup()
+                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEixo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbtnCurso)
                             .addComponent(rbtnTurma))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlConfiguracoesLayout.setVerticalGroup(
@@ -101,12 +107,12 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rbtnTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(rbtnTurma)
+                .addGap(10, 10, 10)
                 .addComponent(rbtnCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGerar)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -122,8 +128,8 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);
@@ -132,12 +138,12 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         identificarTipoRelatorio();
-    }//GEN-LAST:event_btnGerarActionPerformed
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGerar;
+    private javax.swing.JButton btnEntrar;
     private javax.swing.ButtonGroup grpFiltros;
     private javax.swing.JLabel lblEixo;
     private javax.swing.JPanel pnlConfiguracoes;

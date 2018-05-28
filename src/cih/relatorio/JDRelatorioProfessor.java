@@ -1,7 +1,10 @@
 package cih.relatorio;
 
 import cci.CtrlPrincipal;
+import cci.RenderizadorCelulas;
 import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDRelatorioProfessor extends javax.swing.JDialog {
     
@@ -37,6 +40,19 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     public void preencherComboProfessor(){
         ctrlPrincipal.getCtrlRelatorio().preencherComboProfessor(cbxCoordenadoria, cbxProfessor);
     }
+    
+    public void setarProfessor(String nome){
+        lblNomeProfessor.setText(nome);
+    }
+    
+    public void gerarRelatorioProfessor(){
+        
+        char tipo = (char) grpFiltros.getSelection().getMnemonic();
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlRelatorio().gerarRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo);
+    }
        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,9 +71,10 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         lblProfessor = new javax.swing.JLabel();
         lblEixo = new javax.swing.JLabel();
         lblCoordenadoria = new javax.swing.JLabel();
-        rbtnTurma = new javax.swing.JRadioButton();
-        rbtnCurso = new javax.swing.JRadioButton();
+        rbtnProfessor = new javax.swing.JRadioButton();
+        rbtnCoordenadoria = new javax.swing.JRadioButton();
         rbtnEixo = new javax.swing.JRadioButton();
+        rbtnTodos = new javax.swing.JRadioButton();
         pnlProfessor = new javax.swing.JPanel();
         pnlDiasProfessor = new javax.swing.JPanel();
         lblSexta1 = new javax.swing.JLabel();
@@ -149,21 +166,26 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         lblCoordenadoria.setText("Coordenadoria:");
         lblCoordenadoria.setToolTipText("");
 
-        grpFiltros.add(rbtnTurma);
-        rbtnTurma.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnTurma.setMnemonic('p');
-        rbtnTurma.setSelected(true);
-        rbtnTurma.setText("Professor");
+        grpFiltros.add(rbtnProfessor);
+        rbtnProfessor.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnProfessor.setMnemonic('p');
+        rbtnProfessor.setText("Professor");
 
-        grpFiltros.add(rbtnCurso);
-        rbtnCurso.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        rbtnCurso.setMnemonic('c');
-        rbtnCurso.setText("Coord.");
+        grpFiltros.add(rbtnCoordenadoria);
+        rbtnCoordenadoria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnCoordenadoria.setMnemonic('c');
+        rbtnCoordenadoria.setText("Coord.");
 
         grpFiltros.add(rbtnEixo);
         rbtnEixo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         rbtnEixo.setMnemonic('e');
         rbtnEixo.setText("Eixo");
+
+        grpFiltros.add(rbtnTodos);
+        rbtnTodos.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnTodos.setMnemonic('a');
+        rbtnTodos.setSelected(true);
+        rbtnTodos.setText("Todos");
 
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
@@ -183,48 +205,46 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                     .addComponent(lblProfessor)
                     .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
+                        .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnProfessor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnCoordenadoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnEixo))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addComponent(rbtnTurma)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbtnCurso)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtnEixo)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlConfiguracoesLayout.setVerticalGroup(
             pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCoordenadoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEixo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbtnTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbtnCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbtnEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                    .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblAno)
+                        .addComponent(rbtnTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rbtnProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rbtnCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rbtnEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(lblCoordenadoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEixo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -319,6 +339,8 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         tblProfessor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tblProfessor);
+        ((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 
@@ -354,10 +376,10 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
                     .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +398,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
-
+        gerarRelatorioProfessor();
     }//GEN-LAST:event_btnGerarActionPerformed
 
     private void cbxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProfessorActionPerformed
@@ -389,11 +411,11 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        
+        preencherTabelaProfessor();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        
+        preencherTabelaProfessor();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed
@@ -425,9 +447,10 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlProfessor;
     private javax.swing.JPanel pnlTabelaProfessor;
-    private javax.swing.JRadioButton rbtnCurso;
+    private javax.swing.JRadioButton rbtnCoordenadoria;
     private javax.swing.JRadioButton rbtnEixo;
-    private javax.swing.JRadioButton rbtnTurma;
+    private javax.swing.JRadioButton rbtnProfessor;
+    private javax.swing.JRadioButton rbtnTodos;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnSemestre;
     private javax.swing.JTable tblProfessor;

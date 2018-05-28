@@ -36,6 +36,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioTurma.preencherComboCurso();
         jdRelatorioTurma.preencherComboTurma();
         jdRelatorioTurma.setarTurno();
+        jdRelatorioTurma.identificarOferta();
         jdRelatorioTurma.setVisible(true);
     }
     
@@ -45,6 +46,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioProfessor.preencherComboEixo();
         jdRelatorioProfessor.preencherComboCoordenadoria();
         jdRelatorioProfessor.preencherComboProfessor();
+        jdRelatorioProfessor.preencherTabelaProfessor();
         jdRelatorioProfessor.setVisible(true);
     }
     
@@ -139,12 +141,14 @@ public class CtrlRelatorio extends CtrlGenerica{
         Oferta oferta = null;
         
         if(turma != null){
+            jdRelatorioTurma.setarTurma(turma.getNome());
             oferta = ctrlPrincipal.getGtPrincipal().getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, turma.getId());
             
             if(oferta != null){
                 ctrlPrincipal.getGtPrincipal().getGtAula().preencherMatrizOferta(oferta);
             }
-        }
+        }else
+            jdRelatorioTurma.setarTurma("Turma não Encontrada");
         jdRelatorioTurma.preencherTabelaTurma(oferta);
     }
     
@@ -172,12 +176,25 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public void preencherTabelaProfessor(int ano, int semestre, JComboBox cbxProfessor, JTable tblProfessor){
         
-        JTableUtil.limparCelulasTabela(tblProfessor);
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
         if(professor != null){
+            jdRelatorioProfessor.setarProfessor(professor.getNome());
             List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
             ctrlPrincipal.getCtrlOferta().preencherTabelaProfessor(tblProfessor, listaAulas);
-        } 
+            
+        }else{
+            jdRelatorioProfessor.setarProfessor("Professor não Encontrado");
+            JTableUtil.limparCelulasTabela(tblProfessor);
+        }    
+    }
+    
+    public void gerarRelatorioProfessor(JComboBox cbxEixo, JComboBox cbxCoordenadoria, JComboBox cbxProfessor, int ano, int semestre, char tipo){
+        
+        
+    }
+    
+    public void gerarRelatorioTurma(JComboBox cbxEixo, JComboBox cbxCurso, JComboBox cbxTurma, int ano, int semestre, char tipo){
+        
     }
 }
