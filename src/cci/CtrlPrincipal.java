@@ -123,7 +123,7 @@ public final class CtrlPrincipal {
         } else {
             instanciarFrameInicio();
             frmValidarAcesso.dispose();   
-            CtrlMensagem.exibirMensagemSucesso(frmInicio, "Bem-Vindo(a) de volta " + frmInicio.getNomeCoordenador() + "!");
+            //CtrlMensagem.exibirMensagemSucesso(frmInicio, "Bem-Vindo(a) de volta " + frmInicio.getNomeCoordenador() + "!");
         }
     }
 

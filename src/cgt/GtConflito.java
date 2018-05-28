@@ -48,7 +48,7 @@ public class GtConflito {
     public String identificarConflitoTurma(Aula aula, int idProfessor){
            
         List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
-        
+
         Aula aulaLista;
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
@@ -60,17 +60,33 @@ public class GtConflito {
         if(aulas.isEmpty())
             return null;
         else
-            return montarMensagemConflitoTurma(aulas);
+            return montarMensagemConflitoTurma(aulas, aula);
+        
+        /*if(aulas.size() <= 1){
+
+            if(!aulas.isEmpty()){
+
+                Aula aulaLista = (Aula) aulas.get(0);
+
+                if(aulaLista.getId() == aula.getId())
+                    return null;
+                else
+                    return montarMensagemConflitoTurma(aulas, aula);
+            }else
+                return null;
+        }else
+            return montarMensagemConflitoTurma(aulas, aula);*/
     }
     
-    public String montarMensagemConflitoTurma(List aulas){
+    public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
         
         Aula aulaLista;
-        String novaMensagem = "Professor está em outra turma neste horário: ";
+        String novaMensagem = "Este Professor está em outra turma neste horário: ";
 
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
-            novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
+            //if(aulaLista.getOferta().getTurma().getId() != aulaAtual.getOferta().getTurma().getId())
+                novaMensagem = novaMensagem + aulaLista.getOferta().getTurma().getNome() + " - " + aulaLista.getAlocacao().getDisciplina().getNome() + ". ";           
         }     
         return novaMensagem;
     }

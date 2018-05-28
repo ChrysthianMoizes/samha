@@ -5,6 +5,7 @@ import cdp.Aula;
 import cdp.Turma;
 import cgt.Constantes;
 import cih.oferta.JDOferta;
+import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -25,8 +26,9 @@ public class CtrlAula {
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
         jdOferta.validarOferta(true);
-        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
         ctrlPrincipal.getCtrlOferta().desatualizarTabelaProfessor();
+        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
+        
         if(indice >= 0 && !isDropInterno())
             jdOferta.gerarAula();
 
@@ -78,14 +80,17 @@ public class CtrlAula {
     
     public void arrastarAula(int linha, int coluna, Aula aula){
         
+        ctrlPrincipal.getCtrlConflito().pintarCelula(linha, coluna, Color.WHITE);
+        
         String t = (String) jdOferta.getCbxTurno().getSelectedItem();
         int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(t);
         
-        if(aula != null && !isDropInterno())    // ARRASTAR DA LISTA         
+        if(aula != null && !isDropInterno()){    // ARRASTAR DA LISTA         
             ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(aula);  
-        else if(aula != null && isDropInterno())  // ARRASTAR DA TABELA
+        }else if(aula != null && isDropInterno()){  // ARRASTAR DA TABELA
+            ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
             ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, turno, aula);  
-        else
+        }else
             CtrlMensagem.exibirMensagemErro(jdOferta, "Aula nula");
         
         jdOferta.getTblTurma().setValueAt(getAulaSelecionada(), linha, coluna);

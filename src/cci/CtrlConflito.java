@@ -39,7 +39,8 @@ public class CtrlConflito {
                     List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarOferta(aula);
                     mensagens.addAll(msg);
                     exibirNotificacoesConflito(msg, aula);
-                }
+                }else
+                    pintarCelula(linha, coluna, Color.WHITE); 
             }
         }
         

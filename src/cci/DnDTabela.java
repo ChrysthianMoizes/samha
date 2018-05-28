@@ -36,6 +36,7 @@ public class DnDTabela extends TransferHandler{
         
         StringSelection transferable = new StringSelection(aula.toString());
         return transferable;
+
     }
      
     @Override

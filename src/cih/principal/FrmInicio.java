@@ -93,6 +93,7 @@ public class FrmInicio extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JPanel();
         lblDataAtual = new javax.swing.JLabel();
         lblNomeCoordenador = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Apoio à Montagem de Horários Acadêmicos");
@@ -264,21 +265,33 @@ public class FrmInicio extends javax.swing.JFrame {
         lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblNomeCoordenador.setText("User");
 
+        jLabel1.setFont(new java.awt.Font("DialogInput", 1, 140)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(202, 199, 199));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SysAcad");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(927, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDataAtual, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNomeCoordenador, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(367, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(471, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(165, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
                 .addComponent(lblNomeCoordenador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDataAtual)
@@ -337,6 +350,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTurma;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
