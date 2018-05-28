@@ -70,6 +70,13 @@ public class GtCurso {
         return lista;
     }
     
+    public List<Curso> filtrarPorEixo(int id) {
+        
+        List lista = gtPrincipal.getGdPrincipal().getGdCurso().filtrarPorEixo(id);
+        Collections.sort(lista);
+        return lista;
+    }
+    
     public String excluir(Curso curso) {
 
         try {

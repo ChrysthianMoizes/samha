@@ -144,10 +144,6 @@ public class JDOferta extends javax.swing.JDialog {
         return cbxTurno;
     }
     
-    public void setarTurno(int indice){
-        cbxTurno.setSelectedIndex(indice);
-    }
-    
     public void validarOferta(boolean opcao){
         btnValidar.setEnabled(opcao);   
         btnSalvar.setEnabled(!opcao);   
@@ -845,6 +841,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
         ctrlPrincipal.getCtrlOferta().alterarTurno((String) cbxTurno.getSelectedItem(), tblTurma);
+        this.repaint();
         ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma, (String) cbxTurno.getSelectedItem());
     }//GEN-LAST:event_cbxTurnoActionPerformed
 

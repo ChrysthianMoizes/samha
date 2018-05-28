@@ -182,6 +182,7 @@ public class CtrlAula {
                 if (confirmacao == 0) 
                     jdOferta.salvarAulas();
         }
+        ctrlPrincipal.getGtPrincipal().getGtAula().limparEstruturasArmazenamento();
         jdOferta.dispose();
     } 
     

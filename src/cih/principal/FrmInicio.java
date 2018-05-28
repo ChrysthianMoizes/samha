@@ -1,6 +1,5 @@
 package cih.principal;
 
-import cci.CtrlMensagem;
 import cci.CtrlPrincipal;
 import cdp.CoordenadorAcademico;
 import cdp.CoordenadorCurso;
@@ -10,7 +9,6 @@ import cgt.Constantes;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JLabel;
 
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -337,7 +335,7 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOfertaActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-    CtrlMensagem.exibirMensagemAviso(this, "Módulo de Relatórios ainda não está disponível.");
+        ctrlPrincipal.getCtrlRelatorio().instanciarTelaTipoRelatorio(this);
     }//GEN-LAST:event_btnRelatorioActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables

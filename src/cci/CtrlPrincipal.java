@@ -36,6 +36,7 @@ public final class CtrlPrincipal {
     private CtrlOferta ctrlOferta;
     private CtrlConflito ctrlConflito;
     private CtrlAula ctrlAula;
+    private CtrlRelatorio ctrlRelatorio;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -53,6 +54,7 @@ public final class CtrlPrincipal {
         ctrlOferta = new CtrlOferta(this);
         ctrlConflito = new CtrlConflito(this);
         ctrlAula = new CtrlAula(this);
+        ctrlRelatorio = new CtrlRelatorio(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -122,8 +124,7 @@ public final class CtrlPrincipal {
             frmValidarAcesso.limparCampos();
         } else {
             instanciarFrameInicio();
-            frmValidarAcesso.dispose();   
-            //CtrlMensagem.exibirMensagemSucesso(frmInicio, "Bem-Vindo(a) de volta " + frmInicio.getNomeCoordenador() + "!");
+            frmValidarAcesso.dispose();
         }
     }
 
@@ -207,5 +208,9 @@ public final class CtrlPrincipal {
 
     public CtrlAula getCtrlAula() {
         return ctrlAula;
+    }
+
+    public CtrlRelatorio getCtrlRelatorio() {
+        return ctrlRelatorio;
     }
 }

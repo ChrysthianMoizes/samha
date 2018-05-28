@@ -107,6 +107,10 @@ public class CtrlCurso extends CtrlGenerica{
         return ctrlPrincipal.getGtPrincipal().getGtCurso().buscar(coluna, texto);
     }
     
+    public List<Curso> filtrarPorEixo(int id) {
+        return ctrlPrincipal.getGtPrincipal().getGtCurso().filtrarPorEixo(id);
+    }
+    
     public void listarCursos(String coluna, String texto, JTable tabela){
         
         List listaCursos = ctrlPrincipal.getGtPrincipal().getGtCurso().buscar(coluna, texto);

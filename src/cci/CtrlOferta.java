@@ -194,8 +194,7 @@ public class CtrlOferta extends CtrlGenerica{
                 tblTurma.getColumnModel().getColumn(4).setHeaderValue(Horarios.NOTURNO_5);
                 tblTurma.getColumnModel().getColumn(5).setHeaderValue(Horarios.NOTURNO_6);
                 break;
-        }
-        jdOferta.repaint();
+        } 
     }    
     
     public void validarOferta(JTable tabela, JToggleButton btnCQD){

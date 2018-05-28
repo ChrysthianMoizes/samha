@@ -37,6 +37,20 @@ public class GdCurso extends GdGenerico{
         return lista;
     }
     
+    public List filtrarPorEixo(int idEixo) {
+        Criteria crit = criarSessao().createCriteria(Curso.class);
+        sessao.beginTransaction();
+        crit.setFetchMode("coordenadoria", FetchMode.JOIN);
+        crit.createAlias("coordenadoria", "c");
+        crit.createAlias("c.eixo", "e");
+        crit.add( Restrictions.eq("e.id", idEixo) );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public Curso filtrarCursoUnico(String colunaFiltro, int id) {
         Criteria crit = criarSessao().createCriteria(Curso.class);
         sessao.beginTransaction();
