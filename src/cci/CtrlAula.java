@@ -182,6 +182,8 @@ public class CtrlAula {
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
                 if (confirmacao == 0) 
                     jdOferta.salvarAulas();
+                else
+                    setTemAlteracoes(false);
         }
         ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
         jdOferta.dispose();

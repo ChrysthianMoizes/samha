@@ -37,6 +37,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioTurma.preencherComboTurma();
         jdRelatorioTurma.setarTurno();
         jdRelatorioTurma.identificarOferta();
+        jdRelatorioTurma.ativarFiltroNenhum();
         jdRelatorioTurma.setVisible(true);
     }
     
@@ -47,6 +48,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioProfessor.preencherComboCoordenadoria();
         jdRelatorioProfessor.preencherComboProfessor();
         jdRelatorioProfessor.preencherTabelaProfessor();
+        jdRelatorioProfessor.ativarFiltroNenhum();
         jdRelatorioProfessor.setVisible(true);
     }
     
@@ -148,7 +150,8 @@ public class CtrlRelatorio extends CtrlGenerica{
                 ctrlPrincipal.getGtPrincipal().getGtAula().preencherMatrizOferta(oferta);
             }
         }else
-            jdRelatorioTurma.setarTurma("Turma não Encontrada");
+            jdRelatorioTurma.setarTurma("Turma");
+        
         jdRelatorioTurma.preencherTabelaTurma(oferta);
     }
     
@@ -184,7 +187,7 @@ public class CtrlRelatorio extends CtrlGenerica{
             ctrlPrincipal.getCtrlOferta().preencherTabelaProfessor(tblProfessor, listaAulas);
             
         }else{
-            jdRelatorioProfessor.setarProfessor("Professor não Encontrado");
+            jdRelatorioProfessor.setarProfessor("Professor");
             JTableUtil.limparCelulasTabela(tblProfessor);
         }    
     }
