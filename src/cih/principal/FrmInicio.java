@@ -263,8 +263,9 @@ public class FrmInicio extends javax.swing.JFrame {
         lblNomeCoordenador.setForeground(new java.awt.Color(240, 240, 240));
         lblNomeCoordenador.setText("User");
 
+        jLabel1.setBackground(new java.awt.Color(0, 153, 102));
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 160)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(202, 199, 199));
+        jLabel1.setForeground(new java.awt.Color(149, 228, 147));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SysAcad");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -280,16 +281,16 @@ public class FrmInicio extends javax.swing.JFrame {
                     .addComponent(lblNomeCoordenador, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
+                .addContainerGap(169, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(77, 77, 77)
                 .addComponent(lblNomeCoordenador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDataAtual)
