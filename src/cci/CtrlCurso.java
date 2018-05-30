@@ -4,7 +4,6 @@ import cdp.Coordenadoria;
 import cdp.Curso;
 import cdp.Eixo;
 import cgt.Constantes;
-import cgt.GtCurso;
 import cih.curso.JDBuscarCurso;
 import cih.curso.JDCadastrarCurso;
 import java.awt.Frame;
@@ -116,7 +115,7 @@ public class CtrlCurso extends CtrlGenerica{
         List listaCursos = ctrlPrincipal.getGtPrincipal().getGtCurso().buscar(coluna, texto);
         listarEmTabela(listaCursos, tabela, buscaCurso, "toArray");
         
-        if(listaCursos.size() == 0)
+        if(listaCursos.isEmpty())
             buscaCurso.setarMensagem("Nenhum curso encontrado.");
     }
     
@@ -189,16 +188,27 @@ public class CtrlCurso extends CtrlGenerica{
         
         Curso curso = cadastraCurso.getCurso();
         
-        if(curso.getNivel().equals("ENSINO MÉDIO INTEGRADO"))
-            cbxNivel.setSelectedIndex(0);
-        else if(curso.getNivel().equals("GRADUAÇÃO"))
-            cbxNivel.setSelectedIndex(1);
-        else if(curso.getNivel().equals("PÓS-GRADUAÇÃO"))
-            cbxNivel.setSelectedIndex(2);
-        else if(curso.getNivel().equals("MESTRADO"))
-            cbxNivel.setSelectedIndex(3);
-        else
-            cbxNivel.setSelectedIndex(4);
+        switch (curso.getNivel()) {
+            
+            case "ENSINO MÉDIO INTEGRADO":
+                cbxNivel.setSelectedIndex(0);
+                break;
+            case "TÉCNICO":
+                cbxNivel.setSelectedIndex(1);
+                break;
+            case "GRADUAÇÃO":
+                cbxNivel.setSelectedIndex(2);
+                break;
+            case "PÓS-GRADUAÇÃO":
+                cbxNivel.setSelectedIndex(3);
+                break;
+            case "MESTRADO":
+                cbxNivel.setSelectedIndex(4);
+                break;
+            default:
+                cbxNivel.setSelectedIndex(5);
+                break;
+        }
     }
     
     public void preencherComboEixos(JComboBox cbxEixo, JComboBox cbxCoordenadoria){ 

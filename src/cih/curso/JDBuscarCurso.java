@@ -36,6 +36,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnGraduacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
         rbtnMestrado.setBackground(ctrlPrincipal.setarCorPanelInterior());
         rbtnPosGraduacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
+        rbtnTecnico.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
 
     public List<Curso> getListaCursos() {
@@ -61,6 +62,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                 case 'E':
                     filtro = "ENSINO MÉDIO INTEGRADO";
                     break;
+                    
+                case 'T':
+                    filtro = "TÉCNICO";
+                    break;
+                    
                 case 'G':
                     filtro = "GRADUAÇÃO";
                     break;
@@ -88,6 +94,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         
         if(cbxFiltro.getSelectedIndex() == 1){
             rbtnEnsinoMedio.setSelected(true);
+            rbtnTecnico.setEnabled(true);
             rbtnEnsinoMedio.setEnabled(true);
             rbtnGraduacao.setEnabled(true);
             rbtnPosGraduacao.setEnabled(true);
@@ -98,6 +105,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             atualizarTabela();
         }else{
             rbtnEnsinoMedio.setEnabled(false);
+            rbtnTecnico.setEnabled(false);
             rbtnGraduacao.setEnabled(false);
             rbtnPosGraduacao.setEnabled(false);
             rbtnMestrado.setEnabled(false);
@@ -134,6 +142,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         rbtnMestrado = new javax.swing.JRadioButton();
         rbtnDoutorado = new javax.swing.JRadioButton();
         lblMensagem = new javax.swing.JLabel();
+        rbtnTecnico = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Curso");
@@ -339,6 +348,18 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         lblMensagem.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
 
+        rbtnTecnico.setBackground(new java.awt.Color(0, 204, 102));
+        btnGroup.add(rbtnTecnico);
+        rbtnTecnico.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        rbtnTecnico.setMnemonic('t');
+        rbtnTecnico.setText("Técnico");
+        rbtnTecnico.setEnabled(false);
+        rbtnTecnico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnTecnicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBuscarCursoLayout = new javax.swing.GroupLayout(pnlBuscarCurso);
         pnlBuscarCurso.setLayout(pnlBuscarCursoLayout);
         pnlBuscarCursoLayout.setHorizontalGroup(
@@ -349,28 +370,28 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                     .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlBuscarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
-                                .addComponent(rbtnEnsinoMedio)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnGraduacao)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnPosGraduacao)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnMestrado)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnDoutorado)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
-                                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltro)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar))))
+                        .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFiltro)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar))
+                    .addComponent(jScrollPaneProfessores)
                     .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
                         .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 288, Short.MAX_VALUE))
-                    .addComponent(jScrollPaneProfessores))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlBuscarCursoLayout.createSequentialGroup()
+                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addComponent(rbtnEnsinoMedio)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnTecnico)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnGraduacao)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnPosGraduacao)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnMestrado)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnDoutorado)))
                 .addContainerGap())
         );
         pnlBuscarCursoLayout.setVerticalGroup(
@@ -388,7 +409,8 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                     .addComponent(rbtnGraduacao)
                     .addComponent(rbtnEnsinoMedio)
                     .addComponent(rbtnMestrado)
-                    .addComponent(rbtnDoutorado))
+                    .addComponent(rbtnDoutorado)
+                    .addComponent(rbtnTecnico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -402,10 +424,10 @@ public class JDBuscarCurso extends javax.swing.JDialog {
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlBuscarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlGeralLayout.setVerticalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,6 +524,10 @@ public class JDBuscarCurso extends javax.swing.JDialog {
         alterarComboFiltro();        
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
+    private void rbtnTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTecnicoActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_rbtnTecnicoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;
@@ -520,6 +546,7 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbtnGraduacao;
     private javax.swing.JRadioButton rbtnMestrado;
     private javax.swing.JRadioButton rbtnPosGraduacao;
+    private javax.swing.JRadioButton rbtnTecnico;
     private javax.swing.JTable tblCurso;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables

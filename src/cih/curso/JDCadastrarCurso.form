@@ -112,15 +112,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnAdicionarEixo" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="lblNomeEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnRemoverEixo" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxEixo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="cbxEixo" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -347,12 +349,13 @@
                   <Font name="DialogInput" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
+                  <StringArray count="6">
                     <StringItem index="0" value="ENSINO M&#xc9;DIO INTEGRADO"/>
-                    <StringItem index="1" value="GRADUA&#xc7;&#xc3;O"/>
-                    <StringItem index="2" value="P&#xd3;S-GRADUA&#xc7;&#xc3;O"/>
-                    <StringItem index="3" value="MESTRADO"/>
-                    <StringItem index="4" value="DOUTORADO"/>
+                    <StringItem index="1" value="T&#xc9;CNICO"/>
+                    <StringItem index="2" value="GRADUA&#xc7;&#xc3;O"/>
+                    <StringItem index="3" value="P&#xd3;S-GRADUA&#xc7;&#xc3;O"/>
+                    <StringItem index="4" value="MESTRADO"/>
+                    <StringItem index="5" value="DOUTORADO"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -438,15 +441,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnAdicionarCoordenadoria" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="lblNomeCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnRemoverCoordenadoria" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxCoordenadoria" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="cbxCoordenadoria" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
