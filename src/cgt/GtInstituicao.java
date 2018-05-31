@@ -20,7 +20,33 @@ public class GtInstituicao {
         this.gtPrincipal = gt;  
     }
     
-    public Aula preencherVetorAulas(Aula aula, int idProfessor){
+    public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
+        
+        int idProfessor = aula.getAlocacao().getProfessor1().getId();
+        List mensagens = new ArrayList<>();
+        
+        if(numeroProfessor != 1)
+            idProfessor = aula.getAlocacao().getProfessor2().getId();
+        
+        preencherVetorAulas(aula, idProfessor);
+        
+        int dia = aula.getDia();
+        
+        if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
+            vetorTempoMaximo[dia].add(idProfessor);
+            String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor);
+            if(tempoMaximo != null) mensagens.add(tempoMaximo);
+        }
+       
+        if(!identificarProfessor(vetorIntervalo, idProfessor, dia)){
+            vetorIntervalo[dia].add(idProfessor);
+            String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
+            if(intervalo != null) mensagens.add(intervalo);
+        }
+        return mensagens;
+    }
+    
+    public void preencherVetorAulas(Aula aula, int idProfessor){
         
         int ano = aula.getAlocacao().getAno();
         int semestre = aula.getAlocacao().getSemestre();
@@ -31,12 +57,10 @@ public class GtInstituicao {
             
             vetorAulas[linha] = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessorAnoSemestre(linha, idProfessor, ano, semestre);
             
-            aula = identificarAlteracaoAula(linha, aula);
+            identificarAlteracaoAula(linha, aula);
             identificarNovaAula(linha);
             Collections.sort(vetorAulas[linha]);
         }
-        
-        return aula;
     }
     
     public void identificarNovaAula(int linha){
@@ -54,31 +78,29 @@ public class GtInstituicao {
         }   
     }
     
-    public Aula identificarAlteracaoAula(int linha, Aula aula){
+    public void identificarAlteracaoAula(int linha, Aula aula){
         
         List aulasDia = vetorAulas[linha];
-        Aula aulaLista, aulaAux;
+        Aula aulaBanco, aulaAux;
         
-        for(int numero = 0; numero < aulasDia.size(); numero++){
+        for(int indice = 0; indice < aulasDia.size(); indice++){
             
-            aulaLista = (Aula) aulasDia.get(numero);
+            aulaBanco = (Aula) aulasDia.get(indice);
             
-            if((aulaLista.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){
+            if((aulaBanco.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){
                 
-                aulaAux = atualizarAulaMatriz(aula);
+                aulaAux = atualizarAulaMatriz(aulaBanco);
                 
                 if(aulaAux != null){
-                    vetorAulas[linha].set(numero, aulaAux);
-                    return aulaAux;
+                    vetorAulas[linha].set(indice, aulaAux);
                 }else{
-                    vetorAulas[linha].remove(numero);
+                    vetorAulas[linha].remove(indice);
                 }
             }
         }
-        return aula;
     }
     
-    public Aula atualizarAulaMatriz(Aula aula){
+    public Aula atualizarAulaMatriz(Aula aulaBanco){
         
         // VERIFICAR SE A AULA VINDA DO BANCO AINDA EXISTE NA MATRIZ E ATUALIZA-LA
         
@@ -88,23 +110,16 @@ public class GtInstituicao {
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
                 aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
                 if(aulaMatriz != null){
-                    if(aulaMatriz.getId() == aula.getId()){
-                        aula.setDia(aulaMatriz.getDia());
-                        aula.setNumero(aulaMatriz.getNumero());
-                        return aula;
+                    if(aulaMatriz.getId() == aulaBanco.getId()){
+                        aulaBanco.setDia(aulaMatriz.getDia());
+                        aulaBanco.setNumero(aulaMatriz.getNumero());
+                        return aulaBanco;
                     }
                 }    
             }
         }
         return null;
     }    
-    
-    public void limparVetoresInstituicao(){
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            vetorTempoMaximo[linha].clear();
-            vetorIntervalo[linha].clear();
-        }
-    }
     
     public void instanciarVetoresInstituicao(){
               
@@ -116,10 +131,16 @@ public class GtInstituicao {
             for(int linha = 0; linha < Constantes.LINHA; linha++){
                 vetorTempoMaximo[linha] = new ArrayList<>();
                 vetorIntervalo[linha] = new ArrayList<>();
-            }
-            
+            }  
         }else
             limparVetoresInstituicao();
+    }
+    
+    public void limparVetoresInstituicao(){
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            vetorTempoMaximo[linha].clear();
+            vetorIntervalo[linha].clear();
+        }
     }
     
     public boolean identificarProfessor(List[] vetor, int chave, int dia){
@@ -131,32 +152,6 @@ public class GtInstituicao {
                 return true;
         }
         return false;
-    }
-    
-    public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
-        
-        int idProfessor = aula.getAlocacao().getProfessor1().getId();
-        List mensagens = new ArrayList<>();
-        
-        if(numeroProfessor != 1)
-            idProfessor = aula.getAlocacao().getProfessor2().getId();
-        
-        aula = preencherVetorAulas(aula, idProfessor);
-        
-        int dia = aula.getDia();
-        
-        if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
-            vetorTempoMaximo[dia].add(idProfessor);
-            String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor);
-            if(tempoMaximo != null) mensagens.add(tempoMaximo);
-        }
-       
-        if(!identificarProfessor(vetorIntervalo, idProfessor, dia)){
-            vetorIntervalo[dia].add(idProfessor);
-            String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
-            if(intervalo != null) mensagens.add(intervalo);
-        }
-        return mensagens;
     }
     
     public String identificarConflitoTempoMaximo(int dia, int idProfessor){
