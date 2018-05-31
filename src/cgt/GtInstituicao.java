@@ -20,7 +20,7 @@ public class GtInstituicao {
         this.gtPrincipal = gt;  
     }
     
-    public void preencherVetorAulas(Aula aula, int idProfessor){
+    public Aula preencherVetorAulas(Aula aula, int idProfessor){
         
         int ano = aula.getAlocacao().getAno();
         int semestre = aula.getAlocacao().getSemestre();
@@ -31,26 +31,73 @@ public class GtInstituicao {
             
             vetorAulas[linha] = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessorAnoSemestre(linha, idProfessor, ano, semestre);
             
-            List aulasDia = vetorAulas[linha];
-            Aula a, aulaMatriz;
-            
-            for(int col = 0; col < aulasDia.size(); col++){
-                a = (Aula) aulasDia.get(col);
-                aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(a.getDia(), a.getNumero());
-                if(aulaMatriz == null && (a.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId()))
-                    vetorAulas[linha].remove(col);
-            }
-
-            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                a = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
-                if(a != null){
-                    if(a.getId() == 0)
-                        vetorAulas[linha].add(a);
-                }
-            }   
+            aula = identificarAlteracaoAula(linha, aula);
+            identificarNovaAula(linha);
             Collections.sort(vetorAulas[linha]);
         }
+        
+        return aula;
     }
+    
+    public void identificarNovaAula(int linha){
+        
+        // INSERIR AULAS QUE AINDA NÃO FORAM SALVAS NO BANCO NA LISTA DE AULAS
+
+        Aula aulaMatriz;
+
+        for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+            aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
+            if(aulaMatriz != null){
+                if(aulaMatriz.getId() == 0)
+                    vetorAulas[linha].add(aulaMatriz);
+            }
+        }   
+    }
+    
+    public Aula identificarAlteracaoAula(int linha, Aula aula){
+        
+        List aulasDia = vetorAulas[linha];
+        Aula aulaLista, aulaAux;
+        
+        for(int numero = 0; numero < aulasDia.size(); numero++){
+            
+            aulaLista = (Aula) aulasDia.get(numero);
+            
+            if((aulaLista.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){
+                
+                aulaAux = atualizarAulaMatriz(aula);
+                
+                if(aulaAux != null){
+                    vetorAulas[linha].set(numero, aulaAux);
+                    return aulaAux;
+                }else{
+                    vetorAulas[linha].remove(numero);
+                }
+            }
+        }
+        return aula;
+    }
+    
+    public Aula atualizarAulaMatriz(Aula aula){
+        
+        // VERIFICAR SE A AULA VINDA DO BANCO AINDA EXISTE NA MATRIZ E ATUALIZA-LA
+        
+        Aula aulaMatriz;
+        
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
+                if(aulaMatriz != null){
+                    if(aulaMatriz.getId() == aula.getId()){
+                        aula.setDia(aulaMatriz.getDia());
+                        aula.setNumero(aulaMatriz.getNumero());
+                        return aula;
+                    }
+                }    
+            }
+        }
+        return null;
+    }    
     
     public void limparVetoresInstituicao(){
         for(int linha = 0; linha < Constantes.LINHA; linha++){
@@ -61,7 +108,7 @@ public class GtInstituicao {
     
     public void instanciarVetoresInstituicao(){
               
-        if(vetorIntervalo == null && vetorTempoMaximo == null){
+        if(vetorIntervalo == null || vetorTempoMaximo == null){
         
             vetorTempoMaximo = new List[Constantes.LINHA];
             vetorIntervalo = new List[Constantes.LINHA];
@@ -89,12 +136,14 @@ public class GtInstituicao {
     public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
         
         int idProfessor = aula.getAlocacao().getProfessor1().getId();
-        int dia = aula.getDia();
         List mensagens = new ArrayList<>();
         
         if(numeroProfessor != 1)
             idProfessor = aula.getAlocacao().getProfessor2().getId();
-        preencherVetorAulas(aula, idProfessor);
+        
+        aula = preencherVetorAulas(aula, idProfessor);
+        
+        int dia = aula.getDia();
         
         if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
             vetorTempoMaximo[dia].add(idProfessor);

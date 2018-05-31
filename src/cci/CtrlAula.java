@@ -108,6 +108,7 @@ public class CtrlAula {
         int linha = tblTurma.getSelectedRow();
         
         Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
+        ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
         ctrlPrincipal.getGtPrincipal().getGtAula().removerAula(aula);
         tblTurma.setValueAt(null, linha, coluna);
         setAulaSelecionada(null);
