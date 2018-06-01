@@ -13,6 +13,7 @@ public class CtrlConflito {
     private RenderizadorCelulas render;
     private CtrlPrincipal ctrlPrincipal;
     private JDOferta jdOferta;
+    private Color corErro = new Color(255, 73, 73);
     
     public CtrlConflito(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
@@ -63,9 +64,9 @@ public class CtrlConflito {
                 mensagem = (String) mensagens.get(i);
                 jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
             }
-            pintarCelula(aula.getDia(), aula.getNumero(), new Color(255, 73, 73));
+            pintarCelula(aula.getDia(), aula.getNumero(), corErro);
         }else
-            pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);     
+            pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);   
     }
     
     public void pintarCelula(int linha, int coluna, Color cor){

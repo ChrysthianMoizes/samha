@@ -5,6 +5,7 @@ import cdp.Disciplina;
 import cdp.Professor;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GtAlocacao {
@@ -78,8 +79,10 @@ public class GtAlocacao {
         }
     }
     
-    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){    
-        return gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
+    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){ 
+        List lista = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
+        Collections.sort(lista);
+        return lista;
     }
     
     public Alocacao identificarUltimaAlocacao(){

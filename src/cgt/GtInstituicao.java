@@ -20,6 +20,17 @@ public class GtInstituicao {
         this.gtPrincipal = gt;  
     }
     
+    public boolean identificarProfessor(List[] vetor, int chave, int dia){
+        
+        List<Integer> aulas = vetor[dia];
+        
+        for(Integer a : aulas){
+            if(a == chave)
+                return true;
+        }
+        return false;
+    }
+    
     public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
         
         int idProfessor = aula.getAlocacao().getProfessor1().getId();
@@ -50,6 +61,7 @@ public class GtInstituicao {
             String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
             if(intervalo != null) mensagens.add(intervalo);
         }
+        
         return mensagens;
     }
     
@@ -171,17 +183,6 @@ public class GtInstituicao {
         }
     }
     
-    public boolean identificarProfessor(List[] vetor, int chave, int dia){
-        
-        List<Integer> aulas = vetor[dia];
-        
-        for(Integer a : aulas){
-            if(a == chave)
-                return true;
-        }
-        return false;
-    }
-    
     public String identificarConflitoTempoMaximo(int dia, int idProfessor){
         
         Aula primeiraAula, ultimaAula;
@@ -198,7 +199,7 @@ public class GtInstituicao {
             tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.TEMPO_MAXIMO);
             
             if(tempo > oferta.getTempoMaximoTrabalho())
-                return montarMensagemTempoMaximo(ultimaAula, primeiraAula, tempo);
+                return montarMensagemTempoMaximo(ultimaAula, primeiraAula, tempo);          
         }
         
         return null;
@@ -246,9 +247,9 @@ public class GtInstituicao {
                 ultimaAula = (Aula) aulasDiaAnterior.get(aulasDiaAnterior.size() - 1);
                 
                 tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
-
+                
                 if(tempo < oferta.getIntervaloMinimo())
-                    return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula, tempo);
+                    return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula, tempo);                 
             }
         }
          

@@ -15,7 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Alocacao implements Serializable{
+public class Alocacao implements Serializable, Comparable<Object>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -125,5 +125,11 @@ public class Alocacao implements Serializable{
     
     public Object[] toArray() {
         return new Object[] { this, disciplina.getPeriodo() };
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Alocacao other = (Alocacao) o;  
+        return this.getDisciplina().getSigla().compareTo(other.getDisciplina().getSigla());
     }
 }

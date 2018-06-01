@@ -27,6 +27,7 @@ public class CtrlOferta extends CtrlGenerica{
     private List listaAlocacoes;
     private boolean abrindoTela = true;
     private boolean[] vetorProfessores;
+    private String nomeProfessor;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -95,8 +96,7 @@ public class CtrlOferta extends CtrlGenerica{
         }
         
         preencherListaAlocacoes(ano, semestre, turma, lstAlocacoes, tblTurma);
-        
-        zerarTabelaProfessor();
+        setarAlocacao();
     }
     
     public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
@@ -106,7 +106,7 @@ public class CtrlOferta extends CtrlGenerica{
     public void preencherListaAlocacoes(int ano, int semestre, Turma turma, JList lstAlocacoes, JTable tblTurma){
         
         List listaAlocacoes = null;
-        
+        setListaAlocacoes(listaAlocacoes);
         if(turma != null){ 
             
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
@@ -116,11 +116,21 @@ public class CtrlOferta extends CtrlGenerica{
             
             if(listaAlocacoes.isEmpty())
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
+            
         }else{
             ctrlPrincipal.getGtPrincipal().getGtAula().limparEstruturasArmazenamento();
             jdOferta.setarMensagem("Nenhuma turma encontrada.");
         }
-        preencherJList(listaAlocacoes, lstAlocacoes);
+        
+        preencherJList(listaAlocacoes, lstAlocacoes); 
+    }
+    
+    public void setarAlocacao(){
+        if(listaAlocacoes != null && !listaAlocacoes.isEmpty()){
+                jdOferta.getLstAlocacoes().setSelectedIndex(0);
+                jdOferta.preencherHorarioProfessor();
+        }else
+            zerarTabelaProfessor();   
     }
     
     public void identificarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, Turma turma, JTable tblTurma, String turno){
@@ -260,6 +270,7 @@ public class CtrlOferta extends CtrlGenerica{
                 listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 2);
             }
             jdOferta.setarProfessor(professor.getNome());
+            setNomeProfessor(professor.getNome());
             preencherTabelaProfessor(tblProfessor, listaAulas, indice);
         } 
     }
@@ -293,8 +304,7 @@ public class CtrlOferta extends CtrlGenerica{
     }
     
     public void exibirMensagemProfessorDesatualizado(){
-        String nomeProfessor = jdOferta.getLblNomeProfessor().getText();
-        jdOferta.getLblNomeProfessor().setForeground(Color.RED);
+        String nomeProfessor = getNomeProfessor();
         jdOferta.setarProfessor(nomeProfessor + " - Aulas desatualizadas", Color.RED); 
     }
     
@@ -304,9 +314,9 @@ public class CtrlOferta extends CtrlGenerica{
         for(int indice = 0; indice < listaAlocacoes.size(); indice++){
             alocacao = (Alocacao) listaAlocacoes.get(indice);
             if(alocacao.getProfessor1().getId() == aula.getAlocacao().getProfessor1().getId()){
+                setNomeProfessor(alocacao.getProfessor1().getNome());
                 desatualizarVetorProfessor(indice);
                 jdOferta.getLstAlocacoes().setSelectedIndex(indice);
-                exibirMensagemProfessorDesatualizado();
             }
         }  
     }
@@ -323,5 +333,12 @@ public class CtrlOferta extends CtrlGenerica{
                 vetorProfessores[i] = true;     
         }
     }
-    
+
+    public String getNomeProfessor() {
+        return nomeProfessor;
+    }
+
+    public void setNomeProfessor(String nomeProfessor) {
+        this.nomeProfessor = nomeProfessor;
+    }
 }
