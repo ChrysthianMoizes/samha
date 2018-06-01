@@ -26,6 +26,7 @@ public class CtrlOferta extends CtrlGenerica{
     private JDOferta jdOferta;
     private List listaAlocacoes;
     private boolean abrindoTela = true;
+    private boolean[] vetorProfessores;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -111,6 +112,8 @@ public class CtrlOferta extends CtrlGenerica{
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
             setListaAlocacoes(listaAlocacoes);
             
+            iniciarVetorProfessores(listaAlocacoes.size());
+            
             if(listaAlocacoes.isEmpty())
                 jdOferta.setarMensagem("Nenhuma alocação encontrada.");
         }else{
@@ -143,17 +146,6 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.setarIntervaloMinimo((int) oferta.getIntervaloMinimo());
         jdOferta.getSpnIntervalo().setEnabled(true);
         
-    }
-    
-    public void zerarTabelaProfessor(){
-        jdOferta.setarProfessor("");
-        jdOferta.getCbxQuantidadeProfessor().setSelectedIndex(0);
-        jdOferta.getCbxQuantidadeProfessor().setEnabled(false);
-        JTableUtil.limparCelulasTabela(jdOferta.getTblProfessor());
-    }
-    
-    public void desatualizarTabelaProfessor(){
-        jdOferta.setarProfessor("As aulas desse professor podem estar desatualizadas", Color.RED);
     }
     
     public void setarTurno(String turno, JComboBox cbxTurno){
@@ -268,11 +260,11 @@ public class CtrlOferta extends CtrlGenerica{
                 listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 2);
             }
             jdOferta.setarProfessor(professor.getNome());
-            preencherTabelaProfessor(tblProfessor, listaAulas);
+            preencherTabelaProfessor(tblProfessor, listaAulas, indice);
         } 
     }
     
-    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas){
+    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas, int indice){
  
         JTableUtil.limparCelulasTabela(tblProfessor);
         
@@ -280,6 +272,56 @@ public class CtrlOferta extends CtrlGenerica{
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
-        }   
+        }
+        
+        if(!vetorProfessores[indice])
+            exibirMensagemProfessorDesatualizado();
     }
+    
+    public void zerarTabelaProfessor(){
+        jdOferta.setarProfessor("");
+        jdOferta.getCbxQuantidadeProfessor().setSelectedIndex(0);
+        jdOferta.getCbxQuantidadeProfessor().setEnabled(false);
+        JTableUtil.limparCelulasTabela(jdOferta.getTblProfessor());
+    }
+    
+    public void desatualizarVetorProfessor(int indice){  
+        if(indice >= 0){
+            vetorProfessores[indice] = false;
+            exibirMensagemProfessorDesatualizado();
+        }
+    }
+    
+    public void exibirMensagemProfessorDesatualizado(){
+        String nomeProfessor = jdOferta.getLblNomeProfessor().getText();
+        jdOferta.getLblNomeProfessor().setForeground(Color.RED);
+        jdOferta.setarProfessor(nomeProfessor + " - Aulas desatualizadas", Color.RED); 
+    }
+    
+    public void identificarProfessor(Aula aula){
+        
+        Alocacao alocacao;
+        for(int indice = 0; indice < listaAlocacoes.size(); indice++){
+            alocacao = (Alocacao) listaAlocacoes.get(indice);
+            if(alocacao.getProfessor1().getId() == aula.getAlocacao().getProfessor1().getId()){
+                desatualizarVetorProfessor(indice);
+                jdOferta.getLstAlocacoes().setSelectedIndex(indice);
+                exibirMensagemProfessorDesatualizado();
+            }
+        }  
+    }
+    
+    public void iniciarVetorProfessores(int tam){
+        vetorProfessores = new boolean[tam];
+        limparVetorProfessores();
+    }
+    
+    public void limparVetorProfessores(){
+        
+        if(vetorProfessores != null){
+            for(int i = 0; i < vetorProfessores.length; i++)
+                vetorProfessores[i] = true;     
+        }
+    }
+    
 }

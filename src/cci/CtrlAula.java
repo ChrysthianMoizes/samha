@@ -27,8 +27,10 @@ public class CtrlAula {
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
         jdOferta.validarOferta(true);
-        ctrlPrincipal.getCtrlOferta().desatualizarTabelaProfessor();
+        
         int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
+        
+        ctrlPrincipal.getCtrlOferta().desatualizarVetorProfessor(indice);
         
         if(indice >= 0 && !isDropInterno())
             jdOferta.gerarAula();
@@ -102,12 +104,14 @@ public class CtrlAula {
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
         jdOferta.validarOferta(true);
-        ctrlPrincipal.getCtrlOferta().desatualizarTabelaProfessor();
         
         int coluna = tblTurma.getSelectedColumn();
         int linha = tblTurma.getSelectedRow();
         
         Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
+        
+        ctrlPrincipal.getCtrlOferta().identificarProfessor(aula);
+        
         ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
         ctrlPrincipal.getGtPrincipal().getGtAula().removerAula(aula);
         tblTurma.setValueAt(null, linha, coluna);
@@ -129,6 +133,7 @@ public class CtrlAula {
             if(resposta.equals(Constantes.CADASTRADO)){
                 CtrlMensagem.exibirMensagemSucesso(jdOferta, "As aulas foram salvas com Sucesso!");
                 setTemAlteracoes(false);
+                ctrlPrincipal.getCtrlOferta().limparVetorProfessores();
                 jdOferta.atualizarTela();
             }else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
@@ -181,14 +186,23 @@ public class CtrlAula {
         if(isTemAlteracoes()){
             
             String mensagem = "Deseja salvar as alterações feitas em " + turma + " ?";
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
-                if (confirmacao == 0) 
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacaoCancelar(jdOferta, mensagem);
+            
+                if (confirmacao == 0){ 
                     jdOferta.salvarAulas();
-                else
+                    ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+                    jdOferta.dispose();
+                }else if(confirmacao == 1){
                     setTemAlteracoes(false);
+                    ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+                    jdOferta.dispose();
+                }
+                
+        }else{
+            ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+            jdOferta.dispose();
         }
-        ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
-        jdOferta.dispose();
+        
     } 
     
     public void desfazer(String turma){

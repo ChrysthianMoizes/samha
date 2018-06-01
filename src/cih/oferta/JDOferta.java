@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -171,6 +172,10 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void preencherHorarioProfessor(){
         ctrlPrincipal.getCtrlOferta().preencherHorarioProfessor(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
+    }
+
+    public JLabel getLblNomeProfessor() {
+        return lblNomeProfessor;
     }
     
     @SuppressWarnings("unchecked")

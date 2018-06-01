@@ -184,12 +184,23 @@ public class CtrlRelatorio extends CtrlGenerica{
         if(professor != null){
             jdRelatorioProfessor.setarProfessor(professor.getNome());
             List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
-            ctrlPrincipal.getCtrlOferta().preencherTabelaProfessor(tblProfessor, listaAulas);
+            preencherTabelaProfessor(tblProfessor, listaAulas);
             
         }else{
             jdRelatorioProfessor.setarProfessor("Professor");
             JTableUtil.limparCelulasTabela(tblProfessor);
         }    
+    }
+    
+    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas){
+ 
+        JTableUtil.limparCelulasTabela(tblProfessor);
+        
+        Aula aula;        
+        for(int i = 0; i < listaAulas.size(); i++){
+            aula = (Aula) listaAulas.get(i);
+            tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
+        }
     }
     
     public void gerarRelatorioProfessor(JComboBox cbxEixo, JComboBox cbxCoordenadoria, JComboBox cbxProfessor, int ano, int semestre, char tipo){

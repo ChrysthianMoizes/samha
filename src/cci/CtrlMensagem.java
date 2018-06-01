@@ -20,4 +20,8 @@ public class CtrlMensagem {
     public static int exibirMensagemConfirmacao(Component janela, String mensagem){
         return JOptionPane.showConfirmDialog(janela, mensagem, "Confirmar:", JOptionPane.YES_NO_OPTION);
     }
+    
+    public static int exibirMensagemConfirmacaoCancelar(Component janela, String mensagem){
+        return JOptionPane.showConfirmDialog(janela, mensagem, "Confirmar:", JOptionPane.YES_NO_CANCEL_OPTION);
+    }
 }
