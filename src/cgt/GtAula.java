@@ -165,6 +165,22 @@ public class GtAula {
     }
     
     public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
-        return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessorAnoSemestre(id, ano, semestre);
+        
+        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(id, ano, semestre);
+        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(id, ano, semestre);
+        
+        aulasProf1.addAll(aulasProf2);
+        
+        return aulasProf1;
+    }
+    
+    public List filtrarAulasDiaProfessorAnoSemestre(int dia, int idProfessor, int ano, int semestre){
+        
+        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessor1AnoSemestre(dia, idProfessor, ano, semestre);
+        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessor2AnoSemestre(dia, idProfessor, ano, semestre);
+        
+        aulasProf1.addAll(aulasProf2);
+        
+        return aulasProf1;
     }
 }
