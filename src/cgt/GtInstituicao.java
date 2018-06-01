@@ -23,6 +23,7 @@ public class GtInstituicao {
     public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
         
         int idProfessor = aula.getAlocacao().getProfessor1().getId();
+        int dia = aula.getDia();
         List mensagens = new ArrayList<>();
         
         if(numeroProfessor != 1)
@@ -30,7 +31,13 @@ public class GtInstituicao {
         
         preencherVetorAulas(aula, idProfessor);
         
-        int dia = aula.getDia();
+        //VERIFICAR SE O DIA DA AULA VINDA DO BANCO FOI ALTERADO NA MATRIZ
+        
+        if(aula.getId() != 0){
+            aula = identificarAulaMatriz(aula);
+            if(aula != null)
+                dia = aula.getDia();
+        }
         
         if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
             vetorTempoMaximo[dia].add(idProfessor);
@@ -58,51 +65,35 @@ public class GtInstituicao {
             vetorAulas[linha] = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessorAnoSemestre(linha, idProfessor, ano, semestre);
             
             identificarAlteracaoAula(linha, aula);
-            identificarNovaAula(linha);
+            identificarNovaAula(linha, aula);
             Collections.sort(vetorAulas[linha]);
         }
     }
     
-    public void identificarNovaAula(int linha){
-        
-        // INSERIR AULAS QUE AINDA NÃO FORAM SALVAS NO BANCO NA LISTA DE AULAS
-
-        Aula aulaMatriz;
-
-        for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-            aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
-            if(aulaMatriz != null){
-                if(aulaMatriz.getId() == 0)
-                    vetorAulas[linha].add(aulaMatriz);
-            }
-        }   
-    }
-    
     public void identificarAlteracaoAula(int linha, Aula aula){
         
-        List aulasDia = vetorAulas[linha];
-        Aula aulaBanco, aulaAux;
+        List listaAulasBanco = vetorAulas[linha];
+        Aula aulaBanco, aulaMatriz;
         
-        for(int indice = 0; indice < aulasDia.size(); indice++){
+        for(int indice = 0; indice < listaAulasBanco.size(); indice++){
             
-            aulaBanco = (Aula) aulasDia.get(indice);
+            aulaBanco = (Aula) listaAulasBanco.get(indice);
             
             if((aulaBanco.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){
+
+                aulaMatriz = identificarAulaMatriz(aulaBanco);
                 
-                aulaAux = atualizarAulaMatriz(aulaBanco);
-                
-                if(aulaAux != null){
-                    vetorAulas[linha].set(indice, aulaAux);
-                }else{
-                    vetorAulas[linha].remove(indice);
-                }
+                if(aulaMatriz != null)
+                    vetorAulas[linha].set(indice, aulaMatriz);
+                else
+                    vetorAulas[linha].remove(indice); 
             }
         }
     }
     
-    public Aula atualizarAulaMatriz(Aula aulaBanco){
+    public Aula identificarAulaMatriz(Aula aulaBanco){
         
-        // VERIFICAR SE A AULA VINDA DO BANCO AINDA EXISTE NA MATRIZ E ATUALIZA-LA
+        // VERIFICAR SE A AULA VINDA DO BANCO AINDA EXISTE NA MATRIZ NO DIA ESPECIFICADO
         
         Aula aulaMatriz;
         
@@ -111,15 +102,52 @@ public class GtInstituicao {
                 aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
                 if(aulaMatriz != null){
                     if(aulaMatriz.getId() == aulaBanco.getId()){
-                        aulaBanco.setDia(aulaMatriz.getDia());
-                        aulaBanco.setNumero(aulaMatriz.getNumero());
-                        return aulaBanco;
+                        if(aulaBanco.getDia() == aulaMatriz.getDia())
+                            return aulaMatriz;
+                        else
+                            return null;
                     }
                 }    
             }
         }
         return null;
-    }    
+    }
+    
+    public void identificarNovaAula(int linha, Aula aula){
+        
+        // INSERIR AULAS QUE AINDA NÃO FORAM SALVAS NO BANCO NA LISTA DE AULAS OU AULAS QUE FORAM MUDADAS DE DIA
+
+        Aula aulaMatriz;
+
+        for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+            
+            aulaMatriz = gtPrincipal.getGtAula().getAulaMatriz(linha, coluna);
+            
+            if(aulaMatriz != null){
+                
+                existeNoDia(linha, aulaMatriz);
+                
+                if(aulaMatriz.getId() == 0)
+                    vetorAulas[linha].add(aulaMatriz);
+                else if(aula.getDia() == linha && !existeNoDia(linha, aulaMatriz)){
+                    vetorAulas[linha].add(aulaMatriz);
+                }    
+            }
+        }   
+    }
+    
+    public boolean existeNoDia(int dia, Aula aula){
+        
+        Aula aulaVetor;
+        if(aula.getId() != 0){
+            for(int indice = 0; indice < vetorAulas[dia].size(); indice++){
+                aulaVetor = (Aula) vetorAulas[dia].get(indice);
+                if(aulaVetor.getId() == aula.getId())
+                    return true;
+            }
+        }   
+        return false;
+    }
     
     public void instanciarVetoresInstituicao(){
               

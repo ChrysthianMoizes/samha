@@ -57,6 +57,10 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma, btnCQD);
     }
     
+    public void validarAulas(){
+        ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma, btnCQD);
+    }
+    
     public void atualizarOferta(){
         
         int tempo = (int) spnTempoMaximo.getValue();
@@ -818,7 +822,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma, btnCQD);
+        validarAulas();
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed

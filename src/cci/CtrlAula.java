@@ -129,6 +129,7 @@ public class CtrlAula {
             if(resposta.equals(Constantes.CADASTRADO)){
                 CtrlMensagem.exibirMensagemSucesso(jdOferta, "As aulas foram salvas com Sucesso!");
                 setTemAlteracoes(false);
+                jdOferta.atualizarTela();
             }else
                 CtrlMensagem.exibirMensagemErro(jdOferta, resposta);
         }else
