@@ -47,26 +47,39 @@ public class GtConflito {
     
     public String identificarConflitoTurma(Aula aula, int idProfessor){
            
-        List aulas = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
-
-        Aula aulaLista;
-        for(int i = 0; i < aulas.size(); i++){
-            aulaLista = (Aula) aulas.get(i);
-            if(aulaLista.getId() == aula.getId()){
-                aulas.remove(i);
-            }
-        }
+        List listaAulasBanco = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
+        listaAulasBanco = removerAulaListaBanco(listaAulasBanco, aula);
         
-        if(aulas.isEmpty())
+        if(listaAulasBanco.isEmpty())
             return null;
         else
-            return montarMensagemConflitoTurma(aulas, aula);
+            return montarMensagemConflitoTurma(listaAulasBanco);
     }
     
-    public String montarMensagemConflitoTurma(List aulas, Aula aulaAtual){
+    public List removerAulaListaBanco(List listaAulasBanco, Aula aula){
         
         Aula aulaLista;
-        String novaMensagem = "Este Professor está em outra turma neste horário: ";
+        
+        for(int i = 0; i < listaAulasBanco.size(); i++){
+            
+            aulaLista = (Aula) listaAulasBanco.get(i);
+            
+            if(aulaLista.getId() == aula.getId()){
+                listaAulasBanco.remove(i);    
+            }else if(aula.getOferta().getTurma().getId() == aulaLista.getOferta().getTurma().getId()){
+                if(aula.getNumero() == aulaLista.getNumero()){
+                    listaAulasBanco.remove(i);
+                }
+            }    
+        }
+        
+        return listaAulasBanco;
+    }
+    
+    public String montarMensagemConflitoTurma(List aulas){
+        
+        Aula aulaLista;
+        String novaMensagem = "Este Professor está em outra(s) turma(s) neste horário: ";
 
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
