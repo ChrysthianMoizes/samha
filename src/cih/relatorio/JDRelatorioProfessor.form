@@ -640,7 +640,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 3));"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>

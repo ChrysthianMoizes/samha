@@ -28,9 +28,11 @@ public class CtrlOferta extends CtrlGenerica{
     private boolean abrindoTela = true;
     private boolean[] vetorProfessores;
     private String nomeProfessor;
+    private RenderizadorCelulas renderTabelaProfessor;
 
     public CtrlOferta(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
+        renderTabelaProfessor = new RenderizadorCelulas(ctrlPrincipal, 2);
     }
     
     public void instanciarTelaOferta(Frame pai) {
@@ -253,7 +255,6 @@ public class CtrlOferta extends CtrlGenerica{
         
         int numero = cbxQuantidadeProfessor.getSelectedIndex();
         List listaAulas;
-        Professor professor;
         int indice = lstAlocacoes.getSelectedIndex();
         
         if(indice >= 0){
@@ -261,33 +262,62 @@ public class CtrlOferta extends CtrlGenerica{
             Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);
             int ano = alocacao.getAno();
             int semestre = alocacao.getSemestre();
-
-            if(numero == 0){
-                professor = alocacao.getProfessor1();
-                listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 1);
-            }else{
+            Professor professor = alocacao.getProfessor1();
+            
+            if(numero == 1)
                 professor = alocacao.getProfessor2();
-                listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().listarAulasProfessor(professor.getId(), ano, semestre, 2);
-            }
+
+            listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            
             jdOferta.setarProfessor(professor.getNome());
             setNomeProfessor(professor.getNome());
-            preencherTabelaProfessor(tblProfessor, listaAulas, indice);
+            preencherTabelaProfessor(tblProfessor, listaAulas, indice, professor.getId(), (numero + 1));
         } 
     }
     
-    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas, int indice){
+    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas, int indice, int idProfessor, int numero){
  
+        Color corErro = new Color(255, 73, 73);
+        renderTabelaProfessor.gerarMatrizCores();
         JTableUtil.limparCelulasTabela(tblProfessor);
-        
+
         Aula aula;        
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
+            
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
+            
+            if(identificarConflitoAulaProfessor(aula, idProfessor, numero))
+                pintarCelula(aula.getDia(), aula.getNumero(), corErro);
+            else
+                pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
         }
         
         if(!vetorProfessores[indice])
             exibirMensagemProfessorDesatualizado();
     }
+    
+    public boolean identificarConflitoAulaProfessor(Aula aula, int idProfessor, int numero){
+        
+        String conflitoTurma = ctrlPrincipal.getGtPrincipal().getGtConflito().identificarConflitoTurma(aula, idProfessor);
+        if(conflitoTurma != null)
+            return true;
+         
+        String conflitoRestricaoProfessor = ctrlPrincipal.getGtPrincipal().getGtConflito().identificarConflitoRestricaoProfessor(aula, idProfessor);
+        if(conflitoRestricaoProfessor != null)
+            return true;
+        
+        List conflitoInstituicao = ctrlPrincipal.getGtPrincipal().getGtInstituicao().identificarConflitoRestricaoInstituicao(aula, numero);
+        if(!conflitoInstituicao.isEmpty())
+            return true;
+        
+        return false;
+    }
+
+    public void pintarCelula(int linha, int coluna, Color cor){
+        renderTabelaProfessor.setColorMatriz(linha, coluna, cor);
+        jdOferta.getTblProfessor().repaint();
+    }    
     
     public void zerarTabelaProfessor(){
         jdOferta.setarProfessor("");
@@ -340,5 +370,9 @@ public class CtrlOferta extends CtrlGenerica{
 
     public void setNomeProfessor(String nomeProfessor) {
         this.nomeProfessor = nomeProfessor;
+    }
+
+    public RenderizadorCelulas getRenderTabelaProfessor() {
+        return renderTabelaProfessor;
     }
 }

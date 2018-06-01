@@ -32,6 +32,18 @@ public class RenderizadorCelulas extends DefaultTableCellRenderer{
                 else
                     this.setBackground(cor);
                        
+            }else if(numeroTabela == 2){
+                
+                if(cores == null)
+                    gerarMatrizCores();
+                
+                Color cor = cores[row][column];
+                
+                if(cor == null)
+                    this.setBackground(Color.WHITE);
+                else
+                    this.setBackground(cor);
+                
             }else
                 this.setBackground(Color.WHITE);
             

@@ -132,13 +132,6 @@ public class GtAula {
         }
     }
     
-    public List listarAulasProfessor(int idProfessor, int ano, int semestre, int numeroProfessor){
-        if(numeroProfessor == 1)
-            return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(idProfessor, ano, semestre);
-        else
-            return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(idProfessor, ano, semestre);
-    }
-    
     public int obterNumeroTurno(String turno){
         
         switch(turno.toUpperCase()){ 

@@ -644,7 +644,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane4.setViewportView(tblProfessor);
         tblProfessor.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         ((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));
+        tblProfessor.setDefaultRenderer(Object.class, ctrlPrincipal.getCtrlOferta().getRenderTabelaProfessor());
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 

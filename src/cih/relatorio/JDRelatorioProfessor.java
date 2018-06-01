@@ -429,7 +429,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         tblProfessor.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tblProfessor);
         ((DefaultTableCellRenderer)tblProfessor.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));
+        tblProfessor.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 3));
 
         pnlTabelaProfessor.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 

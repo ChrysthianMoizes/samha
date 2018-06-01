@@ -257,7 +257,7 @@
                       </Table>
                     </Property>
                     <Property name="cellSelectionEnabled" type="boolean" value="true"/>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 2));">
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblTurma.setTransferHandler(new cci.DnDTabela(ctrlPrincipal));&#xa;((DefaultTableCellRenderer)tblTurma.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;tblTurma.setDefaultRenderer(Object.class, new RenderizadorCelulas(ctrlPrincipal, 3));">
                       <TableColumnModel selectionModel="2">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>

@@ -13,22 +13,9 @@ public class GtInstituicao {
     
     private GtPrincipal gtPrincipal;
     private List[] vetorAulas;
-    private List[] vetorTempoMaximo;
-    private List[] vetorIntervalo;
     
     public GtInstituicao(GtPrincipal gt){
         this.gtPrincipal = gt;  
-    }
-    
-    public boolean identificarProfessor(List[] vetor, int chave, int dia){
-        
-        List<Integer> aulas = vetor[dia];
-        
-        for(Integer a : aulas){
-            if(a == chave)
-                return true;
-        }
-        return false;
     }
     
     public List identificarConflitoRestricaoInstituicao(Aula aula, int numeroProfessor){
@@ -49,18 +36,13 @@ public class GtInstituicao {
             if(aula != null)
                 dia = aula.getDia();
         }
+         
+        String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor);
+        if(tempoMaximo != null) mensagens.add(tempoMaximo);
+
+        String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
+        if(intervalo != null) mensagens.add(intervalo);
         
-        if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
-            vetorTempoMaximo[dia].add(idProfessor);
-            String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor);
-            if(tempoMaximo != null) mensagens.add(tempoMaximo);
-        }
-       
-        if(!identificarProfessor(vetorIntervalo, idProfessor, dia)){
-            vetorIntervalo[dia].add(idProfessor);
-            String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
-            if(intervalo != null) mensagens.add(intervalo);
-        }
         
         return mensagens;
     }
@@ -137,8 +119,6 @@ public class GtInstituicao {
             
             if(aulaMatriz != null){
                 
-                existeNoDia(linha, aulaMatriz);
-                
                 if(aulaMatriz.getId() == 0)
                     vetorAulas[linha].add(aulaMatriz);
                 else if(aula.getDia() == linha && !existeNoDia(linha, aulaMatriz)){
@@ -159,28 +139,6 @@ public class GtInstituicao {
             }
         }   
         return false;
-    }
-    
-    public void instanciarVetoresInstituicao(){
-              
-        if(vetorIntervalo == null || vetorTempoMaximo == null){
-        
-            vetorTempoMaximo = new List[Constantes.LINHA];
-            vetorIntervalo = new List[Constantes.LINHA];
-
-            for(int linha = 0; linha < Constantes.LINHA; linha++){
-                vetorTempoMaximo[linha] = new ArrayList<>();
-                vetorIntervalo[linha] = new ArrayList<>();
-            }  
-        }else
-            limparVetoresInstituicao();
-    }
-    
-    public void limparVetoresInstituicao(){
-        for(int linha = 0; linha < Constantes.LINHA; linha++){
-            vetorTempoMaximo[linha].clear();
-            vetorIntervalo[linha].clear();
-        }
     }
     
     public String identificarConflitoTempoMaximo(int dia, int idProfessor){
@@ -215,11 +173,11 @@ public class GtInstituicao {
 
         
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL))
-            mensagem = "Um professor(a) da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido:\n" 
+            mensagem = "0 Um professor(a) da disciplina ESPECIAL possui um tempo máximo de trabalho superior ao permitido:\n" 
                     + primeira.getOferta().getTurma().getNome() + " | " 
                     + ultima.getOferta().getTurma().getNome() + " - " +  tempo + " horas.";
         else  
-            mensagem = nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido:\n" 
+            mensagem = "0 " +nomeProfessor + " possui um tempo máximo de trabalho superior ao permitido:\n" 
                     + primeira.getOferta().getTurma().getNome() + " | " 
                     + ultima.getOferta().getTurma().getNome() + " - " +  tempo + " horas.";     
         
@@ -228,31 +186,29 @@ public class GtInstituicao {
     
     public String identificarConflitoIntervaloMinimo(int dia, int idProfessor){
         
-        if(dia != 0){
-            
-            List aulasDiaAtual, aulasDiaAnterior;
-            Aula primeiraAula, ultimaAula;
-            int tempo;
-
-            int diaAnterior = dia - 1;
-
-            Oferta oferta = gtPrincipal.getGtOferta().getOfertaSelecionada();
-
-            aulasDiaAnterior = vetorAulas[diaAnterior];
-            aulasDiaAtual = vetorAulas[dia];
-
-            if(!aulasDiaAnterior.isEmpty() && !aulasDiaAtual.isEmpty()){
+        Oferta oferta = gtPrincipal.getGtOferta().getOfertaSelecionada();
+        
+        if(dia != 0)
+            return alterarDiaIntervaloMinimo(vetorAulas[dia - 1], vetorAulas[dia], oferta);            
+        else
+            return alterarDiaIntervaloMinimo(vetorAulas[dia], vetorAulas[dia + 1], oferta);
+    }
+    
+    public String alterarDiaIntervaloMinimo(List aulasDiaAnterior, List aulasDiaAtual, Oferta oferta){
+        
+        Aula primeiraAula, ultimaAula;
+        int tempo;
+        
+        if(!aulasDiaAnterior.isEmpty() && !aulasDiaAtual.isEmpty()){
                       
-                primeiraAula = (Aula) aulasDiaAtual.get(0);
-                ultimaAula = (Aula) aulasDiaAnterior.get(aulasDiaAnterior.size() - 1);
-                
-                tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
-                
-                if(tempo < oferta.getIntervaloMinimo())
-                    return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula, tempo);                 
-            }
+            primeiraAula = (Aula) aulasDiaAtual.get(0);
+            ultimaAula = (Aula) aulasDiaAnterior.get(aulasDiaAnterior.size() - 1);
+
+            tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
+
+            if(tempo < oferta.getIntervaloMinimo())
+                return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula, tempo);                 
         }
-         
         return null;
     }
     
@@ -271,11 +227,11 @@ public class GtInstituicao {
         String horarioInicial = obterHorarioInicial(primeira);
      
         if(tipoUltima.equals(Constantes.ESPECIAL) || tipoPrimeira.equals(Constantes.ESPECIAL)){
-            mensagem = "Um professor(a) da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: "  
+            mensagem = "1 Um professor(a) da disciplina ESPECIAL possui um intervalo mínimo de descanso inferior ao permitido: "  
                     + tempo + " horas. " + ultima.getOferta().getTurma().getNome() + ": " + diaAnterior + " - " + horarioFinal + ". "
                     + primeira.getOferta().getTurma().getNome() + ": " + diaAtual + " - " + horarioInicial + ".";
         }else{  
-            mensagem = nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " + tempo + " horas.\n"
+            mensagem = "1 " + nomeProfessor + " possui um intervalo mínimo de descanso inferior ao permitido: " + tempo + " horas.\n"
                     + ultima.getOferta().getTurma().getNome() + ": " + diaAnterior + " - " + horarioFinal + ".\n"
                     + primeira.getOferta().getTurma().getNome() + ": "+ diaAtual + " - " + horarioInicial + ".";     
         }

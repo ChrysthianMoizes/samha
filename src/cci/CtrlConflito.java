@@ -10,26 +10,28 @@ import javax.swing.JTable;
 
 public class CtrlConflito {
     
-    private RenderizadorCelulas render;
+    private RenderizadorCelulas renderTabelaTurma;
     private CtrlPrincipal ctrlPrincipal;
     private JDOferta jdOferta;
     private Color corErro = new Color(255, 73, 73);
+    private List[] vetorTempoMaximo;
+    private List[] vetorIntervalo;
     
     public CtrlConflito(CtrlPrincipal ctrl) {
         this.ctrlPrincipal = ctrl;
-        render = new RenderizadorCelulas(ctrlPrincipal, 1);
+        renderTabelaTurma = new RenderizadorCelulas(ctrlPrincipal, 1);
     }
     
     public void validarOferta(JTable tabela, JDOferta tela){
         
-        render.gerarMatrizCores();
+        renderTabelaTurma.gerarMatrizCores();
         
         setJdOferta(tela);
         List mensagens = new ArrayList<>();
         jdOferta.limparNotificacoes();
         Aula aula;
         
-        ctrlPrincipal.getGtPrincipal().getGtInstituicao().instanciarVetoresInstituicao();
+        instanciarVetoresRestricaoInstituicao();
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){ 
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
@@ -62,20 +64,90 @@ public class CtrlConflito {
         if(!mensagens.isEmpty()){
             for(int i = 0; i < mensagens.size(); i++){
                 mensagem = (String) mensagens.get(i);
-                jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
+                
+                mensagem = identificarTipoMensagem(mensagem, aula);
+                
+                if(mensagem != null)
+                    jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
             }
             pintarCelula(aula.getDia(), aula.getNumero(), corErro);
         }else
             pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);   
     }
     
+    public String identificarTipoMensagem(String mensagem, Aula aula){
+        
+        int idProfessor = aula.getAlocacao().getProfessor1().getId();
+        int dia = aula.getDia();
+        
+        char c = mensagem.charAt(0);
+        int codigo = c - 48;
+        
+        String notificacao;
+        
+        switch (codigo) {
+            case 0:
+                if(!identificarProfessor(vetorTempoMaximo, idProfessor, dia)){
+                    vetorTempoMaximo[dia].add(idProfessor);
+                    notificacao = mensagem.substring(2);
+                    return notificacao;
+                }   break;
+            case 1:
+                if(!identificarProfessor(vetorIntervalo, idProfessor, dia)){
+                    vetorIntervalo[dia].add(idProfessor);
+                    
+                    if(dia == 0)
+                        vetorIntervalo[dia + 1].add(idProfessor);
+                    
+                    notificacao = mensagem.substring(2);
+                    return notificacao;
+                }   break;
+            default:
+                return mensagem;
+        }
+        return null;
+    }
+    
     public void pintarCelula(int linha, int coluna, Color cor){
-        render.setColorMatriz(linha, coluna, cor);
+        renderTabelaTurma.setColorMatriz(linha, coluna, cor);
         jdOferta.getTblTurma().repaint();
     }
     
     public void setJdOferta(JDOferta jdOferta) {
         this.jdOferta = jdOferta;
+    }
+    
+    public boolean identificarProfessor(List[] vetor, int idProfessor, int dia){
+        
+        List<Integer> aulas = vetor[dia];
+        
+        for(Integer id : aulas){
+            if(id == idProfessor)
+                return true;
+        }
+        return false;
+    }
+    
+    public void instanciarVetoresRestricaoInstituicao(){
+              
+        if(vetorIntervalo == null || vetorTempoMaximo == null){
+        
+            vetorTempoMaximo = new List[Constantes.LINHA];
+            vetorIntervalo = new List[Constantes.LINHA];
+
+            for(int linha = 0; linha < Constantes.LINHA; linha++){
+                vetorTempoMaximo[linha] = new ArrayList<>();
+                vetorIntervalo[linha] = new ArrayList<>();
+            }  
+        }else
+            limparVetoresInstituicao();
+    }
+    
+    public void limparVetoresInstituicao(){
+        for(int linha = 0; linha < Constantes.LINHA; linha++){
+            vetorTempoMaximo[linha].clear();
+            vetorIntervalo[linha].clear();
+        }
     }
     
     //============================================== VALIDAR QUANTIDADE DE AULAS DE DISCIPLINA ========================================================
@@ -130,6 +202,6 @@ public class CtrlConflito {
     }
 
     public RenderizadorCelulas getRender() {
-        return render;
+        return renderTabelaTurma;
     }
 }
