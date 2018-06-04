@@ -142,11 +142,11 @@ public class CtrlDisciplina extends CtrlGenerica{
         cadastraDisciplina.preencherComboCurso();
         if(disciplina != null){
             cadastraDisciplina.setDisciplina(disciplina);
-            cadastraDisciplina.setarCamposComInstancia(disciplina);
             cadastraDisciplina.setarCurso(disciplina);
             cadastraDisciplina.setarMatriz();
             cadastraDisciplina.setarTipo();
             cadastraDisciplina.desabilitarCamposIniciais();
+            cadastraDisciplina.setarCamposComInstancia(disciplina);
         }
     }
     

@@ -481,7 +481,6 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         limparCamposMatriz();
         txtNomeDisciplina.setText("");
         txtSigla.setText("");
-        cbxTipo.setSelectedIndex(0);
         spnAulas.setValue(4);
         spnCargaHoraria.setValue(60);
     }
