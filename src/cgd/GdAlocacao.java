@@ -14,11 +14,12 @@ public class GdAlocacao extends GdGenerico{
         this.gdPrincipal = gdPrincipal;
     }
 
-    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){
+    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int periodo, int matriz){
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         sessao.beginTransaction();
         crit.createAlias("disciplina", "d");
         crit.createAlias("d.matriz", "m");
+        crit.add( Restrictions.eq("d.periodo", periodo));
         crit.add( Restrictions.eq("m.id", matriz));
         crit.add( Restrictions.eq("ano", ano));
         crit.add( Restrictions.eq("semestre", semestre));

@@ -54,8 +54,9 @@ public class JDOferta extends javax.swing.JDialog {
         int semestre = (int) spnSemestre.getValue();
         int tempo = (int) spnTempoMaximo.getValue();
         int intervalo = (int) spnIntervalo.getValue();
+        int periodo = (int) spnPeriodo.getValue();
         
-        ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma, btnCQD);
+        ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, periodo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma, btnCQD);
     }
     
     public void validarAulas(){
@@ -92,6 +93,10 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void preencherComboTurma(){
         ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma);    
+    }
+    
+    public void setarPeriodoMaximo(int maximo){
+        spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, maximo, 1));
     }
     
     public void setarMensagem(String mensagem){
@@ -150,7 +155,7 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void validarOferta(boolean opcao){
-        btnValidar.setEnabled(opcao);   
+        btnValidarOferta.setEnabled(opcao);   
         btnSalvar.setEnabled(!opcao);   
     }
 
@@ -189,7 +194,7 @@ public class JDOferta extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaNotificacoes = new javax.swing.JTextArea();
         pnlValidacao = new javax.swing.JPanel();
-        btnValidar = new javax.swing.JButton();
+        btnValidarOferta = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         lblTempoMaximo = new javax.swing.JLabel();
         lblIntervaloMinimo = new javax.swing.JLabel();
@@ -235,6 +240,9 @@ public class JDOferta extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         lblMensagem = new javax.swing.JLabel();
         lblAno = new javax.swing.JLabel();
+        lblPeriodo = new javax.swing.JLabel();
+        spnPeriodo = new javax.swing.JSpinner();
+        btnValidarTurmas = new javax.swing.JButton();
 
         itemRemover.setText("jMenuItem1");
         itemRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -285,15 +293,15 @@ public class JDOferta extends javax.swing.JDialog {
 
         pnlValidacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnValidar.setBackground(new java.awt.Color(255, 255, 255));
-        btnValidar.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        btnValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/validar.png"))); // NOI18N
-        btnValidar.setText("Validar");
-        btnValidar.setToolTipText("Validar Aulas");
-        btnValidar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnValidar.addActionListener(new java.awt.event.ActionListener() {
+        btnValidarOferta.setBackground(new java.awt.Color(255, 255, 255));
+        btnValidarOferta.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnValidarOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/validar.png"))); // NOI18N
+        btnValidarOferta.setText("Validar");
+        btnValidarOferta.setToolTipText("Validar Aulas");
+        btnValidarOferta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnValidarOferta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValidarActionPerformed(evt);
+                btnValidarOfertaActionPerformed(evt);
             }
         });
 
@@ -373,7 +381,7 @@ public class JDOferta extends javax.swing.JDialog {
                             .addGroup(pnlValidacaoLayout.createSequentialGroup()
                                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnValidar, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                                    .addComponent(btnValidarOferta, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnCQD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -395,7 +403,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnValidar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(btnValidarOferta, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(btnCQD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlValidacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -732,6 +740,30 @@ public class JDOferta extends javax.swing.JDialog {
         lblAno.setText("Ano/Semeste:");
         lblAno.setToolTipText("");
 
+        lblPeriodo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblPeriodo.setText("Período:");
+        lblPeriodo.setToolTipText("");
+
+        spnPeriodo.setFont(new java.awt.Font("DialogInput", 1, 16)); // NOI18N
+        spnPeriodo.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnPeriodo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnPeriodoStateChanged(evt);
+            }
+        });
+
+        btnValidarTurmas.setBackground(new java.awt.Color(255, 255, 255));
+        btnValidarTurmas.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnValidarTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/validar.png"))); // NOI18N
+        btnValidarTurmas.setText("Validar Turmas");
+        btnValidarTurmas.setToolTipText("Validar Aulas");
+        btnValidarTurmas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnValidarTurmas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarTurmasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
         pnlAlocacoes.setLayout(pnlAlocacoesLayout);
         pnlAlocacoesLayout.setHorizontalGroup(
@@ -742,6 +774,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(jSeparator2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnValidarTurmas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblMensagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -755,7 +788,12 @@ public class JDOferta extends javax.swing.JDialog {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
                                         .addComponent(spnAno, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
+                                .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         pnlAlocacoesLayout.setVerticalGroup(
@@ -769,17 +807,26 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(cbxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14)
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spnAno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAlocacoesLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(spnPeriodo))
+                    .addComponent(lblPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnValidarTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -812,7 +859,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -826,9 +873,9 @@ public class JDOferta extends javax.swing.JDialog {
         salvarAulas();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+    private void btnValidarOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarOfertaActionPerformed
         validarAulas();
-    }//GEN-LAST:event_btnValidarActionPerformed
+    }//GEN-LAST:event_btnValidarOfertaActionPerformed
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
@@ -889,11 +936,20 @@ public class JDOferta extends javax.swing.JDialog {
         desfazer();
     }//GEN-LAST:event_btnDesfazerActionPerformed
 
+    private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
+        atualizarTela();
+    }//GEN-LAST:event_spnPeriodoStateChanged
+
+    private void btnValidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarTurmasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnValidarTurmasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
     private javax.swing.JButton btnDesfazer;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnValidar;
+    private javax.swing.JButton btnValidarOferta;
+    private javax.swing.JButton btnValidarTurmas;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxQuantidadeProfessor;
     private javax.swing.JComboBox<String> cbxTurma;
@@ -911,6 +967,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNomeProfessor;
     private javax.swing.JLabel lblNomeTurma;
+    private javax.swing.JLabel lblPeriodo;
     private javax.swing.JLabel lblQuarta;
     private javax.swing.JLabel lblQuarta1;
     private javax.swing.JLabel lblQuinta;
@@ -938,6 +995,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JPopupMenu popUpRemover;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnIntervalo;
+    private javax.swing.JSpinner spnPeriodo;
     private javax.swing.JSpinner spnSemestre;
     private javax.swing.JSpinner spnTempoMaximo;
     private javax.swing.JTable tblProfessor;

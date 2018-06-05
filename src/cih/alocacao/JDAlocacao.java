@@ -38,7 +38,8 @@ public class JDAlocacao extends javax.swing.JDialog {
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlAlocacao().listarAlocacoes(ano, semestre, tblAlocacao, cbxMatriz);   
+        int periodo = (int) spnPeriodo.getValue();
+        ctrlPrincipal.getCtrlAlocacao().listarAlocacoes(ano, semestre, periodo, tblAlocacao, cbxMatriz);   
     }
     
     public void preencherComboCurso(){
@@ -174,11 +175,11 @@ public class JDAlocacao extends javax.swing.JDialog {
             pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDisciplinaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDisciplinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxMatriz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +230,7 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         pnlAnoSemestre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ano/Semestre", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 0, 14))); // NOI18N
 
-        spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        spnSemestre.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         spnSemestre.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
         spnSemestre.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -237,7 +238,7 @@ public class JDAlocacao extends javax.swing.JDialog {
             }
         });
 
-        spnAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        spnAno.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
         spnAno.setEditor(new JSpinner.NumberEditor(spnAno, "####"));
         spnAno.setPreferredSize(new java.awt.Dimension(31, 35));
@@ -411,6 +412,7 @@ public class JDAlocacao extends javax.swing.JDialog {
 
     private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
         ctrlPrincipal.getCtrlAlocacao().preencherListaDisciplinas(cbxMatriz, lstDisciplinas, spnPeriodo);
+        atualizarTabela();
     }//GEN-LAST:event_spnPeriodoStateChanged
 
     private void btnCargaHorariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargaHorariaActionPerformed

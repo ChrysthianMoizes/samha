@@ -99,11 +99,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxCurso" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxCurso" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbxMatriz" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnPeriodo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="spnPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPeriodo" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -405,7 +405,7 @@
                 <Component class="javax.swing.JSpinner" name="spnSemestre">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="DialogInput" size="14" style="0"/>
+                      <Font name="DialogInput" size="18" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                       <SpinnerModel initial="1" maximum="2" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -418,7 +418,7 @@
                 <Component class="javax.swing.JSpinner" name="spnAno">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="DialogInput" size="14" style="0"/>
+                      <Font name="DialogInput" size="18" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="spnAno.setEditor(new JSpinner.NumberEditor(spnAno, &quot;####&quot;));">
                       <Connection code="new javax.swing.SpinnerNumberModel(2018, 2000, null, 1)" type="code"/>

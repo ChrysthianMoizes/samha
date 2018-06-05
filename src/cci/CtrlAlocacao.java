@@ -82,13 +82,13 @@ public class CtrlAlocacao extends CtrlGenerica{
         }
     }
     
-    public void listarAlocacoes(int ano, int semestre, JTable tabela, JComboBox cbxMatriz){
+    public void listarAlocacoes(int ano, int semestre, int periodo, JTable tabela, JComboBox cbxMatriz){
         
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
         if(matriz != null){
             
-            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz.getId());
+            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz.getId());
             listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
                
         if( listaAlocacoes.isEmpty())

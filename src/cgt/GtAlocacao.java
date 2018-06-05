@@ -79,8 +79,8 @@ public class GtAlocacao {
         }
     }
     
-    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int matriz){ 
-        List lista = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, matriz);  
+    public List filtrarPorAnoSemestreMatriz(int ano, int semestre, int periodo, int matriz){ 
+        List lista = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz);  
         Collections.sort(lista);
         return lista;
     }

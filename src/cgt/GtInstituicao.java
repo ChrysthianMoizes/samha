@@ -37,12 +37,11 @@ public class GtInstituicao {
                 dia = aula.getDia();
         }
          
-        String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor);
+        String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor, aula);
         if(tempoMaximo != null) mensagens.add(tempoMaximo);
 
-        String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor);
+        String intervalo = identificarConflitoIntervaloMinimo(dia, idProfessor, aula);
         if(intervalo != null) mensagens.add(intervalo);
-        
         
         return mensagens;
     }
@@ -141,7 +140,7 @@ public class GtInstituicao {
         return false;
     }
     
-    public String identificarConflitoTempoMaximo(int dia, int idProfessor){
+    public String identificarConflitoTempoMaximo(int dia, int idProfessor, Aula aula){
         
         Aula primeiraAula, ultimaAula;
         int tempo;
@@ -153,6 +152,10 @@ public class GtInstituicao {
 
             primeiraAula = (Aula) aulas.get(0);
             ultimaAula = (Aula) aulas.get(aulas.size() - 1);
+            
+            if(aula.getId() != ultimaAula.getId()){
+                primeiraAula = aula;
+            }
 
             tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.TEMPO_MAXIMO);
             
@@ -184,17 +187,17 @@ public class GtInstituicao {
         return mensagem;
     }    
     
-    public String identificarConflitoIntervaloMinimo(int dia, int idProfessor){
+    public String identificarConflitoIntervaloMinimo(int dia, int idProfessor, Aula aula){
         
         Oferta oferta = gtPrincipal.getGtOferta().getOfertaSelecionada();
         
         if(dia != 0)
-            return alterarDiaIntervaloMinimo(vetorAulas[dia - 1], vetorAulas[dia], oferta);            
+            return alterarDiaIntervaloMinimo(vetorAulas[dia - 1], vetorAulas[dia], oferta, aula);            
         else
-            return alterarDiaIntervaloMinimo(vetorAulas[dia], vetorAulas[dia + 1], oferta);
+            return alterarDiaIntervaloMinimo(vetorAulas[dia], vetorAulas[dia + 1], oferta, aula);
     }
     
-    public String alterarDiaIntervaloMinimo(List aulasDiaAnterior, List aulasDiaAtual, Oferta oferta){
+    public String alterarDiaIntervaloMinimo(List aulasDiaAnterior, List aulasDiaAtual, Oferta oferta, Aula aula){
         
         Aula primeiraAula, ultimaAula;
         int tempo;
@@ -203,6 +206,10 @@ public class GtInstituicao {
                       
             primeiraAula = (Aula) aulasDiaAtual.get(0);
             ultimaAula = (Aula) aulasDiaAnterior.get(aulasDiaAnterior.size() - 1);
+            
+            if(aula.getDia() != 0){
+                primeiraAula = aula;
+            }
 
             tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
 

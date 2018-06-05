@@ -61,13 +61,14 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.setarTurma("");
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
+            jdOferta.setarPeriodoMaximo(curso.getQtPeriodos());
             List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
             preencherCombo(cbxTurma, listaTurmas);
             jdOferta.atualizarTela();
         }  
     }
     
-    public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, 
+    public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, int periodo,
             JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma, JToggleButton btnCQD){
         
         
@@ -97,7 +98,7 @@ public class CtrlOferta extends CtrlGenerica{
             validarOferta(tblTurma, btnCQD);
         }
         
-        preencherListaAlocacoes(ano, semestre, turma, lstAlocacoes, tblTurma);
+        preencherListaAlocacoes(ano, semestre, periodo, turma, lstAlocacoes, tblTurma);
         setarAlocacao();
     }
     
@@ -105,13 +106,13 @@ public class CtrlOferta extends CtrlGenerica{
         ctrlPrincipal.getGtPrincipal().getGtOferta().atualizarOferta(tempoMaximo, intervaloMinimo);
     }
     
-    public void preencherListaAlocacoes(int ano, int semestre, Turma turma, JList lstAlocacoes, JTable tblTurma){
+    public void preencherListaAlocacoes(int ano, int semestre, int periodo, Turma turma, JList lstAlocacoes, JTable tblTurma){
         
         List listaAlocacoes = null;
         setListaAlocacoes(listaAlocacoes);
         if(turma != null){ 
             
-            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, turma.getMatriz().getId());
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, turma.getMatriz().getId());
             setListaAlocacoes(listaAlocacoes);
             
             iniciarVetorProfessores(listaAlocacoes.size());
