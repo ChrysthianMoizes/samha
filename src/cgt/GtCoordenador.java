@@ -108,12 +108,18 @@ public class GtCoordenador {
     public String excluir(Usuario usuario) {
 
         try {
+            
             gtPrincipal.identificarPermissaoAdmin();
+            
             if(usuario instanceof CoordenadorCurso)
                 gtPrincipal.getGdPrincipal().getGdCoordenador().excluirCoordenadorCurso((CoordenadorCurso)usuario);
-            else
-                gtPrincipal.getGdPrincipal().getGdCoordenador().excluir(usuario);
             
+            else{
+                if(gtPrincipal.getCoordAtual().getId() != usuario.getId())
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().excluir(usuario);
+                else
+                    return "Usuário não pode ser excluído, pois está logado.";
+            }
             return Constantes.EXCLUIDO;
             
         } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
