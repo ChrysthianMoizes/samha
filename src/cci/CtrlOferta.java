@@ -318,7 +318,15 @@ public class CtrlOferta extends CtrlGenerica{
     public void pintarCelula(int linha, int coluna, Color cor){
         renderTabelaProfessor.setColorMatriz(linha, coluna, cor);
         jdOferta.getTblProfessor().repaint();
-    }    
+    }
+
+    public void limparCelulasTabela(){
+        for(int linha = 0; linha < Constantes.LINHA; linha++){  
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                pintarCelula(linha, coluna, Color.WHITE);
+            }   
+        }
+    }
     
     public void zerarTabelaProfessor(){
         jdOferta.setarProfessor("");

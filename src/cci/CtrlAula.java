@@ -191,15 +191,18 @@ public class CtrlAula {
                 if (confirmacao == 0){ 
                     jdOferta.salvarAulas();
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+                    ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
                     jdOferta.dispose();
                 }else if(confirmacao == 1){
                     setTemAlteracoes(false);
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+                    ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
                     jdOferta.dispose();
                 }
                 
         }else{
             ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
+            ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
             jdOferta.dispose();
         }
         
