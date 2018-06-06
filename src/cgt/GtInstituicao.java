@@ -32,9 +32,9 @@ public class GtInstituicao {
         //VERIFICAR SE O DIA DA AULA VINDA DO BANCO FOI ALTERADO NA MATRIZ
         
         if(aula.getId() != 0){
-            aula = identificarAulaMatriz(aula);
-            if(aula != null)
-                dia = aula.getDia();
+            Aula aulaAux = identificarAulaMatriz(aula);
+            if(aulaAux != null)
+                dia = aulaAux.getDia();
         }
          
         String tempoMaximo = identificarConflitoTempoMaximo(dia, idProfessor, aula);

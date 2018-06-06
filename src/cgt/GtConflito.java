@@ -17,16 +17,17 @@ public class GtConflito {
     public List validarOferta(Aula aula){
  
         Professor professor = aula.getAlocacao().getProfessor1();
-        
+
         List mensagens = identificarConflitos(aula, professor.getId(), 1);
-        
+
         if(aula.getAlocacao().getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
             Professor professor2 = aula.getAlocacao().getProfessor2();
             List msg = identificarConflitos(aula, professor2.getId(), 2);
             mensagens.addAll(msg);
         }
-   
+        
         return mensagens;
+
     }
     
     public List identificarConflitos(Aula aula, int idProfessor, int numeroProfessor){

@@ -88,6 +88,10 @@ public class CtrlTurma extends CtrlGenerica{
             buscaTurma.setarMensagem("Nenhuma turma encontrada.");
     }
     
+    public List listar(){
+        return ctrlPrincipal.getGtPrincipal().getGtTurma().listar();
+    }
+    
     public List<Turma> buscar(String coluna, String texto) {
         return ctrlPrincipal.getGtPrincipal().getGtTurma().buscar(coluna, texto);
     }

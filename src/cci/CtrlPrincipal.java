@@ -37,6 +37,7 @@ public final class CtrlPrincipal {
     private CtrlConflito ctrlConflito;
     private CtrlAula ctrlAula;
     private CtrlRelatorio ctrlRelatorio;
+    private CtrlValidacaoTurmas ctrlValidacao;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -55,6 +56,7 @@ public final class CtrlPrincipal {
         ctrlConflito = new CtrlConflito(this);
         ctrlAula = new CtrlAula(this);
         ctrlRelatorio = new CtrlRelatorio(this);
+        ctrlValidacao = new CtrlValidacaoTurmas(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -212,5 +214,9 @@ public final class CtrlPrincipal {
 
     public CtrlRelatorio getCtrlRelatorio() {
         return ctrlRelatorio;
+    }
+
+    public CtrlValidacaoTurmas getCtrlValidacao() {
+        return ctrlValidacao;
     }
 }

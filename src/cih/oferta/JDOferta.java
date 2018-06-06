@@ -1,7 +1,6 @@
 package cih.oferta;
 
 import cci.CtrlPrincipal;
-import cci.RenderizadorCelulas;
 import cdp.Aula;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -37,7 +36,6 @@ public class JDOferta extends javax.swing.JDialog {
         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
         pnlAlocacoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
         pnlNotificacoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
-        //pnlValidacao.setBackground(ctrlPrincipal.setarCorPanelInterior());
     }
     
     public void gerarAula(){
@@ -181,6 +179,14 @@ public class JDOferta extends javax.swing.JDialog {
 
     public JLabel getLblNomeProfessor() {
         return lblNomeProfessor;
+    }
+    
+    public void validarTurmas(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlValidacao().confirmarValidacaoTurmas(ano, semestre);
     }
     
     @SuppressWarnings("unchecked")
@@ -911,7 +917,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_spnPeriodoStateChanged
 
     private void btnValidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarTurmasActionPerformed
-        // TODO add your handling code here:
+        validarTurmas();
     }//GEN-LAST:event_btnValidarTurmasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

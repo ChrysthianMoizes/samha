@@ -74,6 +74,12 @@ public class GtTurma {
         return lista;
     }
     
+    public List listar(){
+        List lista = gtPrincipal.getGdPrincipal().getGdTurma().consultar(Turma.class);
+        Collections.sort(lista);
+        return lista;
+    }
+    
     public String excluir(Turma turma) {
 
         try {
