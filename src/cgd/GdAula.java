@@ -122,6 +122,22 @@ public class GdAula extends GdGenerico{
         return lista;
     }
     
+    public List filtrarAulasTurmaAnoSemestre(int idTurma, int ano, int semestre) {
+        Criteria crit = criarSessao().createCriteria(Aula.class);
+        sessao.beginTransaction();
+        crit.createAlias("oferta", "o");
+        crit.createAlias("o.turma", "t");
+        crit.createAlias("alocacao", "a");
+        crit.add( Restrictions.eq("a.ano", ano));
+        crit.add( Restrictions.eq("a.semestre", semestre));
+        crit.add( Restrictions.eq("t.id", idTurma));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public List filtrarAulasProfessor2AnoSemestre(int idProfessor, int ano, int semestre) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         sessao.beginTransaction();

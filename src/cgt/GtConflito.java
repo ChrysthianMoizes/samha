@@ -14,7 +14,7 @@ public class GtConflito {
         this.gtPrincipal = gt;
     }
       
-    public List validarOferta(Aula aula){
+    public List validarAula(Aula aula){
  
         Professor professor = aula.getAlocacao().getProfessor1();
 

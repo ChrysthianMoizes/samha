@@ -167,6 +167,12 @@ public class GtAula {
         return aulasProf1;
     }
     
+    public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
+        
+        List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurmaAnoSemestre(id, ano, semestre);
+        return aulas;
+    }
+    
     public List filtrarAulasDiaProfessorAnoSemestre(int dia, int idProfessor, int ano, int semestre){
         
         List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessor1AnoSemestre(dia, idProfessor, ano, semestre);

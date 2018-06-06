@@ -1,7 +1,9 @@
 package cci;
 
+import cdp.Aula;
 import cdp.Turma;
 import cih.oferta.JDOferta;
+import java.awt.Color;
 import java.util.List;
 
 public class CtrlValidacaoTurmas {
@@ -24,7 +26,7 @@ public class CtrlValidacaoTurmas {
             
         }else{
             
-            String mensagem = "Este processo pode demorar algum tempo.\nTem certeza que deseja iniciar esta validação ?";
+            String mensagem = "Este processo pode demorar algum tempo.\nDeseja iniciar esta validação ?";
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(telaOferta, mensagem);
 
             if (confirmacao == 0)
@@ -34,68 +36,74 @@ public class CtrlValidacaoTurmas {
     
     public void validarTurmas(int ano, int semestre){
         
-        List listaTumas = identificarTurmasAtivas(ano, semestre);
+        List listaTurmas = ctrlPrincipal.getCtrlTurma().listar();
+        telaOferta.limparNotificacoes();
         
-        
-        
+        Turma turma;
+        List listaAulas;
+       
+        for(int i = 0; i < listaTurmas.size(); i++){
+            turma = (Turma) listaTurmas.get(i);
+            listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
+            if(!listaAulas.isEmpty())
+                identificarConflitos(turma, listaAulas);
+        } 
     }
     
-    public List identificarTurmasAtivas(int ano, int semestre){
+    public void identificarConflitos(Turma turma, List listaAulas){
         
-        List<Turma>listaTumas = ctrlPrincipal.getCtrlTurma().listar();
+        Aula aula;
         
-        boolean estahAtiva = true;
-        
-        for(Turma turma : listaTumas){
-            estahAtiva = calcularTempoCurso(turma, ano, semestre);
-            if(!estahAtiva)
-                listaTumas.remove(turma);
-        }
-        return listaTumas;
-    }
-    
-    public boolean calcularTempoCurso(Turma turma, int anoAtual, int semestreAtual){
-        
-        if(turma.getMatriz().getCurso().getNivel().equals("ENSINO MEDIO")){
-            
-            return false;
-            
-        }else{
-        
-        
-            int qtPeriodos = turma.getMatriz().getCurso().getQtPeriodos();
-
-            int anoTurma = turma.getAno();
-            int semestreTurma = turma.getSemestre();
-
-            int resto = qtPeriodos % 2;
-            int qtAnos = qtPeriodos / 2;
-
-            anoTurma = anoTurma + qtAnos - 1;
-
-            if(resto != 0){
-                if(semestreTurma == 1)
-                    semestreTurma++;
-                else{
-                    semestreTurma--;
-                    anoTurma++;
-                }    
-            }
-
-            if(anoAtual > anoTurma){
-                return true;
-            }else if(anoAtual == anoTurma){
-
-                if(semestreAtual >= semestreTurma){
-                    return true; 
-                }else
-                    return false;
-            }
-            return false;
-        
+        for(int i = 0; i < listaAulas.size(); i++){
+            aula = (Aula) listaAulas.get(i);
+            List mensagens = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
+            exibirMensagens(mensagens, aula, turma);
         }
     }
     
+    public void exibirMensagens(List mensagens, Aula aula, Turma turma){
+        
+        int numero = aula.getNumero() + 1;
+        String dia = ctrlPrincipal.getGtPrincipal().getGtInstituicao().obterStringDia(aula.getDia());
+        
+        String mensagem;
+        if(!mensagens.isEmpty()){
+            
+            telaOferta.exibirNotificacao("\n =========== " + turma.getNome() + " ==========" + "\n", Color.RED);
+            
+            for(int i = 0; i < mensagens.size(); i++){
+                
+                mensagem = (String) mensagens.get(i);
+                mensagem = identificarTipoMensagem(mensagem, aula);
+                
+                setarMensagem(dia, numero, mensagem);
+            }
+        }  
+    }
+    
+    public String identificarTipoMensagem(String mensagem, Aula aula){
+       
+        char c = mensagem.charAt(0);
+        int codigo = c - 48;
+        
+        String notificacao;
+        
+        switch (codigo) {
+            case 0:
+                    notificacao = mensagem.substring(2);
+                    return notificacao;
+            case 1:
+                    notificacao = mensagem.substring(2);
+                    return notificacao;  
+            default:
+                return mensagem;
+        }
+    }
+    
+    public void setarMensagem(String dia, int numero, String mensagem){  
+        telaOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
+    }
+
     public void setTelaOferta(JDOferta telaOferta) {
         this.telaOferta = telaOferta;
     }

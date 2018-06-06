@@ -226,4 +226,8 @@ public class CtrlAula {
     public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(id, ano, semestre);
     }
+    
+    public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaAnoSemestre(ano, semestre, id);
+    }
 }

@@ -39,7 +39,14 @@ public class CtrlConflito {
                 aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
                 
                 if(aula != null){
-                    List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarOferta(aula);
+                    
+                    List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
+                    
+                    if(msg.isEmpty())
+                        pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
+                    else
+                        pintarCelula(aula.getDia(), aula.getNumero(), corErro);
+                    
                     mensagens.addAll(msg);
                     exibirNotificacoesConflito(msg, aula);
                 }else
@@ -49,7 +56,7 @@ public class CtrlConflito {
         
         if(mensagens.isEmpty()){
             jdOferta.limparNotificacoes();
-            jdOferta.exibirNotificacao("Nenhum conflito de aulas encontrado!\n\n", ctrlPrincipal.setarCorPanelExterior()); 
+            jdOferta.exibirNotificacao("Nenhum conflito encontrado!\n\n", ctrlPrincipal.setarCorPanelExterior()); 
         }
         
         jdOferta.validarOferta(false);
@@ -62,17 +69,16 @@ public class CtrlConflito {
         
         String mensagem;
         if(!mensagens.isEmpty()){
+            
             for(int i = 0; i < mensagens.size(); i++){
-                mensagem = (String) mensagens.get(i);
                 
+                mensagem = (String) mensagens.get(i);
                 mensagem = identificarTipoMensagem(mensagem, aula);
                 
                 if(mensagem != null)
                     jdOferta.exibirNotificacao(dia + ": Aula " + numero + ".\n" + mensagem +"\n\n", Color.RED);
             }
-            pintarCelula(aula.getDia(), aula.getNumero(), corErro);
-        }else
-            pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);   
+        }  
     }
     
     public String identificarTipoMensagem(String mensagem, Aula aula){

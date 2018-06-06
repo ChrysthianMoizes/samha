@@ -21,7 +21,7 @@ public class GtCurso {
             validarCampos(nome, nivel, periodos, coordenadoria);
             Curso curso = new Curso();
             curso.setNome(nome.toUpperCase());
-            curso.setNivel(nivel);
+            curso.setNivel(nivel.toUpperCase());
             curso.setQtPeriodos(periodos);
             curso.setCoordenadoria(coordenadoria);
             gtPrincipal.getGdPrincipal().getGdCurso().cadastrar(curso);
