@@ -118,7 +118,10 @@ public class GtConflito {
     
     public boolean identificarNumeroAulaConflitante(RestricaoProfessor restricao, int numero){
             
-        switch(numero){
+        String t = restricao.getTurno();
+        int turno = gtPrincipal.getGtAula().obterNumeroTurno(t);
+        
+        switch(numero - turno){
 
             case 0: return restricao.isAula1();
             case 1: return restricao.isAula2();
