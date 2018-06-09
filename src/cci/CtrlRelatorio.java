@@ -294,8 +294,8 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         try {
             
-            JDialog viewer = new JDialog(new javax.swing.JFrame(), "Visualização do Relatório", true);
-            viewer.setSize(1000, 700);
+            JDialog viewer = new JDialog(new javax.swing.JFrame(), "Relatório", true);
+            viewer.setSize(1400, 1000);
             viewer.setLocationRelativeTo(null);
             
             JasperReport report = JasperCompileManager.compileReport(arquivo);
