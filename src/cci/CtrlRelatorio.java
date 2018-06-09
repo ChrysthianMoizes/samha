@@ -1,8 +1,10 @@
 package cci;
 
+import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Coordenadoria;
 import cdp.Curso;
+import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.Oferta;
 import cdp.Professor;
@@ -14,6 +16,7 @@ import cih.relatorio.JDRelatorioTurma;
 import java.awt.Frame;
 import java.awt.Image;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -215,7 +218,76 @@ public class CtrlRelatorio extends CtrlGenerica{
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
         }
     }
- 
+    
+    public List preencherListaAulasVazias(List[] aulas){
+    
+        Aula aula;
+        Aula[] vetorAulas;
+        
+        List lista = new ArrayList<>();
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+            
+            vetorAulas = preencherVetorAulas(aulas[dia]);
+            
+            for(int numero = 0; numero < 16; numero++){
+                
+                aula = vetorAulas[numero];
+                
+                if(aula == null){
+                    aula = gerarAulaVazia(dia, numero);
+                }
+                lista.add(aula);
+            }
+        }
+        return lista;
+    }
+    
+    public Aula[] preencherVetorAulas(List<Aula> lista){
+    
+        Aula[] vetorAulas = new Aula[16];
+        
+        for(Aula aula : lista){
+            vetorAulas[aula.getNumero()] = aula;
+        }
+        return vetorAulas;
+    }    
+    
+    public Aula gerarAulaVazia(int dia, int numero){
+        
+        Aula aula = new Aula();
+        
+        aula.setDia(dia);
+        aula.setNumero(numero);
+        aula.setAlocacao(gerarAlocacaoVazia());
+        return aula;
+    }
+    
+    public Alocacao gerarAlocacaoVazia(){
+        
+        Alocacao alocacao = new Alocacao();
+        alocacao.setProfessor1(gerarProfessorVazio());
+        alocacao.setProfessor2(gerarProfessorVazio());
+        alocacao.setDisciplina(gerarDisciplinaVazia());
+        
+        return alocacao;
+    }
+    
+    public Disciplina gerarDisciplinaVazia(){
+        
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome("");
+        disciplina.setSigla("");
+        
+        return disciplina;
+    }
+    
+    public Professor gerarProfessorVazio(){
+        Professor professor = new Professor();
+        professor.setNome("");
+        return professor;
+    }
+    
     public void gerarRelatorio(List lista){
         
         InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/relatorio.jrxml");
@@ -244,7 +316,5 @@ public class CtrlRelatorio extends CtrlGenerica{
         } catch (JRException ex) {
             Logger.getLogger(CtrlRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
 }

@@ -62,8 +62,8 @@ public class CtrlRelatorioProfessor {
     public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre){
 
         if(professor != null){
-            List lista = ctrlPrincipal.getCtrlAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
-            //tratar lista
+            List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);
+            List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista);
         }
     }

@@ -62,12 +62,9 @@ public class CtrlRelatorioTurma {
     public void gerarRelatorioPorTurma(Turma turma, int ano, int semestre){
 
         if(turma != null){
-            List lista = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
-         
-            //tratar lista
+            List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
+            List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista);
-            
         }
     }
-    
 }

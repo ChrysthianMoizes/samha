@@ -50,7 +50,9 @@
 		<field name="professor" class="java.lang.String"/>
 	</subDataset>
 	<field name="alocacao.disciplina" class="java.lang.String"/>
-	<field name="alocacao.professor1" class="java.lang.String"/>
+	<field name="alocacao.professor1.nome" class="java.lang.String"/>
+	<field name="alocacao.professor2.nome" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -74,9 +76,9 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="318" splitType="Stretch">
+		<band height="363" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" style="table 1" x="0" y="0" width="802" height="318" uuid="eedeed18-1d46-4b26-8c0a-cf63a0d2a643"/>
+				<reportElement key="table 1" style="table 1" x="14" y="0" width="788" height="363" uuid="eedeed18-1d46-4b26-8c0a-cf63a0d2a643"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Table Dataset 2" uuid="ea2a1531-4a39-4921-938f-bfad8cf91c4b">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
@@ -96,29 +98,20 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="016af32a-823b-4f2c-9dd9-eceb723cda18"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[07h
 07h50]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="28" uuid="ac195776-e5d6-42bd-af8b-300179b55972"/>
-									<textFieldExpression><![CDATA[$F{alocacao.disciplina}]]></textFieldExpression>
-								</textField>
-								<textField>
-									<reportElement x="0" y="28" width="50" height="28" uuid="a858100a-d7fd-41b3-a7d9-278bed079c6a"/>
-									<textFieldExpression><![CDATA[$F{alocacao.professor1}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="bec3eb12-c92e-4c19-945a-094380a64d6d">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="f05a407f-f562-4d9b-8f55-60c6f648d82f"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[07h55
 08h45]]></text>
@@ -131,7 +124,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="28d58788-7dd0-4930-b540-d4411e08c548"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[08h50
 09h40]]></text>
@@ -144,7 +137,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="f5dfaa36-b545-4c1b-a34a-0ad6d679081d"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[10h
 10h50]]></text>
@@ -157,7 +150,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="037a65eb-f562-47b3-b489-f696ac150fe8"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[10h55
 11h45]]></text>
@@ -170,7 +163,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="ceb1b44f-11e6-4cd1-aa54-e9450320fc79"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[11h50
 12h40]]></text>
@@ -194,7 +187,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="45" height="50" uuid="9e8aefc1-06ee-409b-b000-6af07803a440"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[12h50
 13h40]]></text>
@@ -207,7 +200,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="56abe0ef-a0b4-44a5-b4ed-b048008f116a"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[13h45
 14h35]]></text>
@@ -220,7 +213,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="3a5559b1-b710-446c-acb6-54671a7b24bd"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[14h40
 15h30]]></text>
@@ -233,7 +226,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="e8959baa-ce59-4bd6-ba04-3fb03f309cba"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[15h50
 16h40]]></text>
@@ -246,7 +239,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="55" height="50" uuid="93df474b-b006-46af-b254-cb91d341bfce"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[16h45
 17h35]]></text>
@@ -259,7 +252,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="109fa702-3f3d-45e0-8ee3-80715f7aea1d"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[17h40
 18h30]]></text>
@@ -283,7 +276,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="92784cdc-4735-4e06-b421-2e9c31c7947b"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[18h50
 19h35]]></text>
@@ -296,7 +289,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="fb486cb0-c136-4d1f-b44f-6c9bcdeeb3ef"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[19h35
 20h20]]></text>
@@ -309,7 +302,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="2e684760-287f-4df4-83ac-2ea70f6c3670"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[20h30
 21h15]]></text>
@@ -322,7 +315,7 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 								<staticText>
 									<reportElement x="0" y="0" width="50" height="50" uuid="4a55a623-0253-463a-87fb-daec4baf5adc"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="13"/>
+										<font fontName="DialogInput" size="13" isBold="true"/>
 									</textElement>
 									<text><![CDATA[21h15
 22h00]]></text>
@@ -333,6 +326,41 @@ SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
 					</jr:columnGroup>
 				</jr:table>
 			</componentElement>
+			<staticText>
+				<reportElement x="-19" y="118" width="33" height="36" uuid="cbdaf673-5fe0-47f0-bb1c-b665b0453cf8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2ª Feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-19" y="169" width="33" height="36" uuid="65c2e7fc-e632-4dec-ae11-710695f11dd6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3ª Feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-19" y="220" width="33" height="36" uuid="cabf5346-f8e6-4e66-bdae-79f904b3d321"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4ª Feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-19" y="273" width="33" height="36" uuid="609c907d-5a2d-4981-8c55-06716b2c01c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5ª Feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-19" y="327" width="33" height="36" uuid="c72dc3e0-1b85-4802-a607-7c8b3b643957"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[6ª Feira]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<pageFooter>

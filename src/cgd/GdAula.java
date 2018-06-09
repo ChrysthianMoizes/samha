@@ -75,7 +75,7 @@ public class GdAula extends GdGenerico{
         return lista;
     }
     
-    public List filtrarAulasDiaProfessor1AnoSemestre(int dia, int idProfessor, int ano, int semestre) {
+    public List filtrarAulasProfessor1DiaAnoSemestre(int dia, int idProfessor, int ano, int semestre) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         sessao.beginTransaction();
         crit.createAlias("alocacao", "a");
@@ -91,7 +91,7 @@ public class GdAula extends GdGenerico{
         return lista;
     }
     
-    public List filtrarAulasDiaProfessor2AnoSemestre(int dia, int idProfessor, int ano, int semestre) {
+    public List filtrarAulasProfessor2DiaAnoSemestre(int dia, int idProfessor, int ano, int semestre) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         sessao.beginTransaction();
         crit.createAlias("alocacao", "a");
@@ -131,6 +131,23 @@ public class GdAula extends GdGenerico{
         crit.add( Restrictions.eq("a.ano", ano));
         crit.add( Restrictions.eq("a.semestre", semestre));
         crit.add( Restrictions.eq("t.id", idTurma));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
+    public List filtrarAulasTurmaDiaAnoSemestre(int idTurma, int ano, int semestre, int dia) {
+        Criteria crit = criarSessao().createCriteria(Aula.class);
+        sessao.beginTransaction();
+        crit.createAlias("oferta", "o");
+        crit.createAlias("o.turma", "t");
+        crit.createAlias("alocacao", "a");
+        crit.add( Restrictions.eq("a.ano", ano));
+        crit.add( Restrictions.eq("a.semestre", semestre));
+        crit.add( Restrictions.eq("t.id", idTurma));
+        crit.add( Restrictions.eq("dia", dia));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();

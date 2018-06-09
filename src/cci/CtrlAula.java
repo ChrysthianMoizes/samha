@@ -230,4 +230,12 @@ public class CtrlAula {
     public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaAnoSemestre(ano, semestre, id);
     }
+    
+    public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int id, int ano, int semestre){
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(id, ano, semestre);
+    }
+    
+    public List[] filtrarOrdenarAulasDiaProfessorAnoSemestre(int idProfessor, int ano, int semestre){
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaAnoSemestre(idProfessor, ano, semestre);
+    }
 }

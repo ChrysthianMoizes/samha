@@ -4,6 +4,7 @@ import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Oferta;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GtAula {
@@ -173,13 +174,41 @@ public class GtAula {
         return aulas;
     }
     
-    public List filtrarAulasDiaProfessorAnoSemestre(int dia, int idProfessor, int ano, int semestre){
+    public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int idTurma, int ano, int semestre){
         
-        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessor1AnoSemestre(dia, idProfessor, ano, semestre);
-        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasDiaProfessor2AnoSemestre(dia, idProfessor, ano, semestre);
+        List[] aulas = new List[Constantes.LINHA];
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+            List lista = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurmaDiaAnoSemestre(idTurma, ano, semestre, dia);
+            Collections.sort(lista);
+            aulas[dia] = lista;
+        }
+        return aulas;
+    }
+    
+    public List filtrarAulasProfessorDiaAnoSemestre(int dia, int idProfessor, int ano, int semestre){
+        
+        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1DiaAnoSemestre(dia, idProfessor, ano, semestre);
+        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2DiaAnoSemestre(dia, idProfessor, ano, semestre);
         
         aulasProf1.addAll(aulasProf2);
         
         return aulasProf1;
+    }
+    
+    public List[] filtrarOrdenarAulasProfessorDiaAnoSemestre(int idProfessor, int ano, int semestre){
+
+        List[] aulas = new List[Constantes.LINHA];
+        
+        List aulasProf1, aulasProf2; 
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+            aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1DiaAnoSemestre(dia, idProfessor, ano, semestre);
+            aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2DiaAnoSemestre(dia, idProfessor, ano, semestre);
+            aulasProf1.addAll(aulasProf2);
+            Collections.sort(aulasProf1);
+            aulas[dia] = aulasProf1;
+        }
+        return aulas;
     }
 }
