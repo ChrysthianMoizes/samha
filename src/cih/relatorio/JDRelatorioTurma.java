@@ -63,7 +63,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         char tipo = (char) grpFiltros.getSelection().getMnemonic();
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlRelatorio().gerarRelatorioTurma(cbxEixo, cbxCurso, cbxTurma, ano, semestre, tipo);
+        ctrlPrincipal.getCtrlRelatorioTurma().identificarFiltroRelatorioTurma(cbxEixo, cbxCurso, cbxTurma, ano, semestre, tipo);
     }
     
     public void ativarFiltroNenhum(){

@@ -96,8 +96,12 @@ public class CtrlTurma extends CtrlGenerica{
         return ctrlPrincipal.getGtPrincipal().getGtTurma().buscar(coluna, texto);
     }
     
-    public List<Turma> buscarPorCurso(int id) {
+    public List<Turma> filtrarPorCurso(int id) {
         return ctrlPrincipal.getGtPrincipal().getGtTurma().buscarPorCurso(id);
+    }
+    
+    public List<Turma> filtrarPorEixo(int id) {
+        return ctrlPrincipal.getGtPrincipal().getGtTurma().buscarPorEixo(id);
     }
     
     public void excluir(JTable tabela) {

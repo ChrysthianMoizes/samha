@@ -74,6 +74,13 @@ public class GtTurma {
         return lista;
     }
     
+    public List<Turma> buscarPorEixo(int id) {
+        
+        List lista = gtPrincipal.getGdPrincipal().getGdTurma().filtrarPorEixo(id);
+        Collections.sort(lista);
+        return lista;
+    }
+    
     public List listar(){
         List lista = gtPrincipal.getGdPrincipal().getGdTurma().consultar(Turma.class);
         Collections.sort(lista);

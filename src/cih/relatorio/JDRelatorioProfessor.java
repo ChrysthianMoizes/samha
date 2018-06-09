@@ -51,7 +51,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        ctrlPrincipal.getCtrlRelatorio().gerarRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo);
+        ctrlPrincipal.getCtrlRelatorioProfessor().identificarFiltroRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo);
     }
     
     public void ativarFiltroNenhum(){

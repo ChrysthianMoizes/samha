@@ -13,10 +13,23 @@ import cih.relatorio.JDRelatorioProfessor;
 import cih.relatorio.JDRelatorioTurma;
 import java.awt.Frame;
 import java.awt.Image;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JTable;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class CtrlRelatorio extends CtrlGenerica{
     
@@ -111,7 +124,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         
         if(curso != null){
-            List listaTurmas = ctrlPrincipal.getCtrlTurma().buscarPorCurso(curso.getId());
+            List listaTurmas = ctrlPrincipal.getCtrlTurma().filtrarPorCurso(curso.getId());
             preencherCombo(cbxTurma, listaTurmas);           
         }  
     }
@@ -202,13 +215,36 @@ public class CtrlRelatorio extends CtrlGenerica{
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
         }
     }
-    
-    public void gerarRelatorioProfessor(JComboBox cbxEixo, JComboBox cbxCoordenadoria, JComboBox cbxProfessor, int ano, int semestre, char tipo){
+ 
+    public void gerarRelatorio(List lista){
         
+        InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/relatorio.jrxml");
         
-    }
-    
-    public void gerarRelatorioTurma(JComboBox cbxEixo, JComboBox cbxCurso, JComboBox cbxTurma, int ano, int semestre, char tipo){
+        try {
+            
+            JDialog viewer = new JDialog(new javax.swing.JFrame(), "Visualização do Relatório", true);
+            viewer.setSize(1000, 700);
+            viewer.setLocationRelativeTo(null);
+            
+            JasperReport report = JasperCompileManager.compileReport(arquivo);
+            JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
+            Map parametros = new HashMap();
+            
+            JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
+            JasperViewer.viewReport(print, false);
+            
+            JasperViewer jasperView = new JasperViewer(print, true);
+            viewer.getContentPane().add(jasperView.getContentPane());
+            
+            if ( print.getPages().size() > 0 )
+                viewer.setVisible(true);
+            else
+                CtrlMensagem.exibirMensagemErro(viewer, "Erro ao Abrir Relatório");
+
+        } catch (JRException ex) {
+            Logger.getLogger(CtrlRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
 }
