@@ -92,12 +92,11 @@ public class CtrlRelatorioProfessor {
             
             Map parametros = new HashMap();
             parametros.put("professor", professor.getNome());
-            parametros.put("coordenadoria", professor.getCoordenadoria());
+            parametros.put("coordenadoria", professor.getCoordenadoria().getNome());
             String semestreCorrente = ano + "/" + semestre;
             parametros.put("ano", semestreCorrente);
             
             String nomeExport = "Professores/" + professor.getNome() + "-" + ano + "-" + semestre;
-            
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
         }else
             CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");

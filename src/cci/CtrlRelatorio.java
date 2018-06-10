@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JTable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -30,7 +29,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperViewer;
 
 public class CtrlRelatorio extends CtrlGenerica{
     
@@ -258,7 +256,23 @@ public class CtrlRelatorio extends CtrlGenerica{
         aula.setDia(dia);
         aula.setNumero(numero);
         aula.setAlocacao(gerarAlocacaoVazia());
+        aula.setOferta(gerarOfertaVazia());
         return aula;
+    }
+    
+    public Oferta gerarOfertaVazia(){
+        
+        Oferta oferta = new Oferta();
+        oferta.setTurma(gerarTurmaVazia());
+        return oferta;
+    }
+    
+    public Turma gerarTurmaVazia(){
+        
+        Turma turma = new Turma();
+        turma.setNome("--");
+        
+        return turma;
     }
     
     public Alocacao gerarAlocacaoVazia(){
@@ -275,7 +289,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         Disciplina disciplina = new Disciplina();
         disciplina.setNome("");
-        disciplina.setSigla("");
+        disciplina.setSigla("--");
         
         return disciplina;
     }
@@ -288,30 +302,33 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport){
         
-        InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/"+ nomeRelatorio + ".jrxml");
-        
         try {
             
-//            JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
-//            janela.setSize(1200, 1000);
-//            janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
-//            janela.setLocationRelativeTo(null);
-            
+            InputStream arquivo = Aula.class.getResourceAsStream("/cih/relatorio/" + nomeRelatorio + ".jrxml");
+ 
             JasperReport report = JasperCompileManager.compileReport(arquivo);
             JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
             
             JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
-            JasperViewer.viewReport(print, false);
-            
             JasperExportManager.exportReportToPdfFile(print, System.getProperty("user.dir") + "/Relatorios/" + nomeExport + ".pdf");
             
-//            JasperViewer jasperView = new JasperViewer(print, true);
-//            janela.getContentPane().add(jasperView.getContentPane());
-//            janela.setVisible(true);
-
         } catch (JRException ex) {
-            System.out.println(ex.getMessage());
-            CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório:");
+            CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório: " + ex.getMessage());
         }
     }
 }
+
+/* EXIBIR RELATÓRIO ANTES DE GERAR
+
+    JasperViewer.viewReport(print, true);
+
+    JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
+    janela.setSize(1200, 1000);
+    janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
+    janela.setLocationRelativeTo(null);
+
+    JasperViewer jasperView = new JasperViewer(print, true);
+    janela.getContentPane().add(jasperView.getContentPane());
+    janela.setVisible(true);
+
+*/

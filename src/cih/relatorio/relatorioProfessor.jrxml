@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Professor" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8bf32357-282f-4585-8730-3373eb365bc4">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Professor" language="groovy" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8bf32357-282f-4585-8730-3373eb365bc4">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="92"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -44,45 +44,64 @@
 		</box>
 	</style>
 	<subDataset name="Tabela" uuid="532999b3-f44a-4186-b8cf-cb2beecbac81">
-		<field name="nome" class="java.lang.String">
-			<fieldDescription><![CDATA[oferta.turma.nome]]></fieldDescription>
-		</field>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
 	</subDataset>
+	<parameter name="professor" class="java.lang.String"/>
+	<parameter name="coordenadoria" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[oferta.turma.nome]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="176" splitType="Stretch">
-			<staticText>
-				<reportElement x="293" y="67" width="509" height="70" uuid="5569f788-acce-4d8b-843e-a34fb7e61e92"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DialogInput" size="24" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[COORD. TÉCNICO EM INFORMÁTICA EMI
-Renan Osório Rios - 2018/1]]></text>
-			</staticText>
+		<band height="179" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="293" height="138" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
+				<reportElement x="14" y="0" width="300" height="138" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
 				<imageExpression><![CDATA["C:\\Users\\chrys\\Desktop\\Projetos\\famha\\src\\cih\\img\\logo.JPG"]]></imageExpression>
 			</image>
 			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
 				<reportElement x="638" y="0" width="164" height="20" uuid="2812826b-f575-46f4-80bf-fa5eec0d7b75"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="314" y="64" width="488" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{professor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="102" width="353" height="36" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{coordenadoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="715" y="101" width="87" height="36" uuid="1f7a3b5e-ecbd-4dc9-b6dd-fa20e5f87720"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
-		<band splitType="Stretch"/>
+		<band height="1" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="362" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table 1" style="table 1" x="14" y="0" width="788" height="362" uuid="eedeed18-1d46-4b26-8c0a-cf63a0d2a643"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Tabela" uuid="f8816f2e-a838-4398-941e-710e65d37033">
+					<datasetRun subDataset="Tabela" uuid="38a7b7bc-4cf7-44fb-b911-2eaad003444b">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 					</datasetRun>
 					<jr:columnGroup width="300" uuid="1c7d9d0a-433e-4c3c-8957-4049a64c1fc9">
@@ -106,15 +125,7 @@ Renan Osório Rios - 2018/1]]></text>
 07h50]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="644042c5-f603-4e4d-bbe2-adee9d4746fd"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="bec3eb12-c92e-4c19-945a-094380a64d6d">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -127,15 +138,7 @@ Renan Osório Rios - 2018/1]]></text>
 08h45]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="3b7cb2eb-1f82-4988-bb37-ce71e4e41349"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="1ba0bb12-fbdd-47da-a481-8392c0646e7c">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -148,15 +151,7 @@ Renan Osório Rios - 2018/1]]></text>
 09h40]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="341254a8-d81a-431f-9c05-0ccf418222f4"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="36d26556-96d5-49d1-a2e5-203a738c6eef">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -169,15 +164,7 @@ Renan Osório Rios - 2018/1]]></text>
 10h50]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="6fa51562-3b42-47bb-bb5b-ce5ef7101ed5"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="d7d32464-9e1a-4ca8-8d9f-c9ce107a195f">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -190,15 +177,7 @@ Renan Osório Rios - 2018/1]]></text>
 11h45]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="269fa148-af88-4576-ad30-5a7c97fad97d"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="85e8d813-82c4-464c-b7b5-89ede505ba7c">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -211,15 +190,7 @@ Renan Osório Rios - 2018/1]]></text>
 12h40]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="ea12008c-31d9-4d9d-9822-f528e6656791"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 					</jr:columnGroup>
 					<jr:columnGroup width="300" uuid="4848a27c-13c2-45aa-994d-f44c5a1d2c9d">
@@ -243,15 +214,7 @@ Renan Osório Rios - 2018/1]]></text>
 13h40]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="27b95403-757a-4838-98a0-437d692a7c9a"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="a59d348c-3c67-4d29-b5b4-6c469ed412b6">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -264,15 +227,7 @@ Renan Osório Rios - 2018/1]]></text>
 14h35]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="f7a6223e-743d-4c4a-b32e-86d62ef22e6d"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="701beff0-8326-4459-9df0-4918e64d4dc8">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -285,15 +240,7 @@ Renan Osório Rios - 2018/1]]></text>
 15h30]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="28231065-0daf-4659-bdf8-f39bd60e6cb8"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="22149d5f-d432-458e-bc2d-9e06c326a602">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -306,15 +253,7 @@ Renan Osório Rios - 2018/1]]></text>
 16h40]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="0815f32f-606c-4388-b433-c99fe6bcb01c"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="9ce3ee55-7814-4ae3-a165-ea9cb97a6742">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -327,15 +266,7 @@ Renan Osório Rios - 2018/1]]></text>
 17h35]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="efe11535-8eea-408b-9378-1a4ef5f7e24f"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="900a19f1-7908-4579-9343-41e64d98006b">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -348,15 +279,7 @@ Renan Osório Rios - 2018/1]]></text>
 18h30]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="0d790a29-36a5-4bd3-8d9f-c9a5f6fccfb3"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 					</jr:columnGroup>
 					<jr:columnGroup width="200" uuid="208e956c-ca25-41e0-8458-8b83d894759f">
@@ -380,15 +303,7 @@ Renan Osório Rios - 2018/1]]></text>
 19h35]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="672050b2-5100-47ee-9897-05a048e63c58"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="86700fc0-b1bb-4b2e-92a3-36aafa167eae">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -401,15 +316,7 @@ Renan Osório Rios - 2018/1]]></text>
 20h20]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="ef8ee895-8e36-4adf-b481-009c0ff48a02"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="47a5a780-d6ee-4a8c-89d2-938beff0cb74">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -422,15 +329,7 @@ Renan Osório Rios - 2018/1]]></text>
 21h15]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="ddf09388-6c89-4bca-bb5b-5082224708b5"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 						<jr:column width="50" uuid="5d7633ac-afe8-43a7-a966-07a007ae6a23">
 							<jr:columnHeader style="table 1_TH" height="50" rowSpan="1">
@@ -443,15 +342,7 @@ Renan Osório Rios - 2018/1]]></text>
 22h00]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table 1_TD" height="56" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="50" height="56" uuid="c6065707-b634-4637-b143-bf544642cac2"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="DialogInput" size="12"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
+							<jr:detailCell style="table 1_TD" height="56" rowSpan="1"/>
 						</jr:column>
 					</jr:columnGroup>
 				</jr:table>

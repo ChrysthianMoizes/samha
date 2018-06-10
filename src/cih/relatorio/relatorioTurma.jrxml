@@ -54,6 +54,9 @@
 			<fieldDescription><![CDATA[alocacao.disciplina.sigla]]></fieldDescription>
 		</field>
 	</subDataset>
+	<parameter name="turma" class="java.lang.String"/>
+	<parameter name="curso" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -62,18 +65,35 @@
 	</background>
 	<title>
 		<band height="176" splitType="Stretch">
-			<staticText>
-				<reportElement x="293" y="68" width="509" height="70" uuid="5569f788-acce-4d8b-843e-a34fb7e61e92"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DialogInput" size="24" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Turma - M20
-SISTEMAS DE INFORMAÇÃO - 2018/1]]></text>
-			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="293" height="138" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
 				<imageExpression><![CDATA["C:\\Users\\chrys\\Desktop\\Projetos\\famha\\src\\cih\\img\\logo.JPG"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="293" y="99" width="431" height="39" uuid="69327dc7-4619-442d-95a1-dbd93f9bc27d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{curso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="724" y="99" width="78" height="39" uuid="6ca3f8f7-ce70-4025-977c-ca50e61b00f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="61" width="509" height="38" uuid="3e53a759-5e4b-44d8-a6df-d062f80ef9f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{turma}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="638" y="0" width="164" height="20" uuid="5ab6a43c-51ab-4f88-8721-571aeaba19ef"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
