@@ -17,17 +17,15 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -288,33 +286,33 @@ public class CtrlRelatorio extends CtrlGenerica{
         return professor;
     }
     
-    public void gerarRelatorio(List lista){
+    public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport){
         
-        InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/relatorio.jrxml");
+        CtrlMensagem.exibirMensagemAviso(null, "Gerando Relatórios. Aguarde!");
+        InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/"+ nomeRelatorio + ".jrxml");
         
         try {
             
-            JDialog viewer = new JDialog(new javax.swing.JFrame(), "Relatório", true);
-            viewer.setSize(1400, 1000);
-            viewer.setLocationRelativeTo(null);
+            JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
+            janela.setSize(1400, 1000);
+            janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
+            janela.setLocationRelativeTo(null);
             
             JasperReport report = JasperCompileManager.compileReport(arquivo);
             JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
-            Map parametros = new HashMap();
             
             JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
             JasperViewer.viewReport(print, false);
             
-            JasperViewer jasperView = new JasperViewer(print, true);
-            viewer.getContentPane().add(jasperView.getContentPane());
+            JasperExportManager.exportReportToPdfFile(print, "C:/Users/chrys/Desktop/Relatorios/" + nomeExport + ".pdf");
             
-            if ( print.getPages().size() > 0 )
-                viewer.setVisible(true);
-            else
-                CtrlMensagem.exibirMensagemErro(viewer, "Erro ao Abrir Relatório");
-
+//            JasperViewer jasperView = new JasperViewer(print, true);
+//            janela.getContentPane().add(jasperView.getContentPane());
+//            janela.setVisible(true);
+            CtrlMensagem.exibirMensagemSucesso(null, "Relatório(s) Gerado(s) com Sucesso!");
+            
         } catch (JRException ex) {
-            Logger.getLogger(CtrlRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+            CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório:");
         }
     }
 }

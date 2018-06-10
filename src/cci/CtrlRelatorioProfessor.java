@@ -3,7 +3,9 @@ package cci;
 import cdp.Coordenadoria;
 import cdp.Eixo;
 import cdp.Professor;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComboBox;
 
 public class CtrlRelatorioProfessor {
@@ -64,7 +66,18 @@ public class CtrlRelatorioProfessor {
         if(professor != null){
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);
             List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
-            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista);
+            
+            String nomeRelatorio = "relatorioProfessor";
+            
+            Map parametros = new HashMap();
+            parametros.put("professor", professor.getNome());
+            parametros.put("coordenadoria", professor.getCoordenadoria());
+            String semestreCorrente = ano + "/" + semestre;
+            parametros.put("ano", semestreCorrente);
+            
+            String nomeExport = "Professores/" + professor.getNome() + "-" + ano + "-" + semestre;
+            
+            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
         }
     }
     

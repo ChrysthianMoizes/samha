@@ -3,7 +3,9 @@ package cci;
 import cdp.Curso;
 import cdp.Eixo;
 import cdp.Turma;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComboBox;
 
 public class CtrlRelatorioTurma {
@@ -62,9 +64,21 @@ public class CtrlRelatorioTurma {
     public void gerarRelatorioPorTurma(Turma turma, int ano, int semestre){
 
         if(turma != null){
+            
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
             List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
-            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista);
-        }
+            
+            String nomeRelatorio = "relatorioTurma";
+            
+            Map parametros = new HashMap();
+            parametros.put("turma", turma.getNome());
+            parametros.put("curso", turma.getMatriz().getCurso().getNome());
+            String semestreCorrente = ano + "/" + semestre;
+            parametros.put("ano", semestreCorrente);
+            
+            String nomeExport = "Turmas/" + turma.getNome() + "-" + ano + "-" + semestre;
+            
+            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
+        }      
     }
 }
