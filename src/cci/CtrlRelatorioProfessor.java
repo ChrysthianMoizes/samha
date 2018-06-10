@@ -27,38 +27,59 @@ public class CtrlRelatorioProfessor {
             case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
             case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
             case 'C': gerarRelatorioPorCoordenadoria(coordenadoria, ano, semestre); break;
-            case 'P': gerarRelatorioPorProfessor(professor, ano, semestre); break;
-            default: break;
             
+            case 'P':
+                
+                if(professor != null){
+                    CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+                    gerarRelatorioPorProfessor(professor, ano, semestre);
+                    CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+                }else
+                    CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");
+                break;
+                
+            default: break;
         }  
     }
     
     public void gerarRelatorioTodosProfessores(int ano, int semestre){
         
+        CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+        
         List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
         for(Professor prof : listaProfessores){
             gerarRelatorioPorProfessor(prof, ano, semestre);
-        }   
+        } 
+        
+        CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
     }
     
     public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre){
         
         if(eixo != null){
+            CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+            
             List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
             for(Professor prof : listaProfessores){
                 gerarRelatorioPorProfessor(prof, ano, semestre);
-            }   
-        } 
+            }
+            CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado."); 
     }
     
     public void gerarRelatorioPorCoordenadoria(Coordenadoria coordenadoria, int ano, int semestre){
         
         if(coordenadoria != null){
+            CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+            
             List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coordenadoria.getId());
             for(Professor prof : listaProfessores){
                 gerarRelatorioPorProfessor(prof, ano, semestre);
             }
-        }
+            CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Coordenadoria não encontrada.");
     }
     
     public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre){
@@ -78,7 +99,7 @@ public class CtrlRelatorioProfessor {
             String nomeExport = "Professores/" + professor.getNome() + "-" + ano + "-" + semestre;
             
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
-        }
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");
     }
-    
 }

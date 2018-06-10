@@ -27,7 +27,16 @@ public class CtrlRelatorioTurma {
             case 'A': gerarRelatorioTodasTurmas(ano, semestre); break;
             case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
             case 'C': gerarRelatorioPorCurso(curso, ano, semestre); break;
-            case 'T': gerarRelatorioPorTurma(turma, ano, semestre); break;
+            case 'T': 
+                
+                if(turma != null){
+                    CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+                    gerarRelatorioPorTurma(turma, ano, semestre);
+                    CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+                }else
+                    CtrlMensagem.exibirMensagemErro(null, "Turma não encontrada.");
+                break;
+                
             default: break;
             
         }  
@@ -35,30 +44,46 @@ public class CtrlRelatorioTurma {
     
     public void gerarRelatorioTodasTurmas(int ano, int semestre){
         
+        CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+        
         List<Turma> turmas = ctrlPrincipal.getCtrlTurma().listar();
         for(Turma turma : turmas){
             gerarRelatorioPorTurma(turma, ano, semestre);
-        }   
+        }
+        
+        CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
     }
     
     public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre){
         
         if(eixo != null){
+            
+            CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+            
             List<Turma> turmas = ctrlPrincipal.getCtrlTurma().filtrarPorEixo(eixo.getId());
             for(Turma turma : turmas){
                 gerarRelatorioPorTurma(turma, ano, semestre);
-            }   
-        } 
+            }
+            
+            CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado."); 
     }
     
     public void gerarRelatorioPorCurso(Curso curso, int ano, int semestre){
         
         if(curso != null){
+            
+            CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
+            
             List<Turma> turmas = ctrlPrincipal.getCtrlTurma().filtrarPorCurso(curso.getId());
             for(Turma turma : turmas){
                 gerarRelatorioPorTurma(turma, ano, semestre);
             }
-        }
+            
+            CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Curso não encontrado.");
     }
     
     public void gerarRelatorioPorTurma(Turma turma, int ano, int semestre){
@@ -79,6 +104,7 @@ public class CtrlRelatorioTurma {
             String nomeExport = "Turmas/" + turma.getNome() + "-" + ano + "-" + semestre;
             
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
-        }      
+        }else
+            CtrlMensagem.exibirMensagemErro(null, "Turma não encontrada.");
     }
 }

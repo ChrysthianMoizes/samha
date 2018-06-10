@@ -288,15 +288,14 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport){
         
-        CtrlMensagem.exibirMensagemAviso(null, "Gerando Relatórios. Aguarde!");
         InputStream arquivo = Aula.class.getResourceAsStream("/cih/reports/"+ nomeRelatorio + ".jrxml");
         
         try {
             
-            JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
-            janela.setSize(1400, 1000);
-            janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
-            janela.setLocationRelativeTo(null);
+//            JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
+//            janela.setSize(1200, 1000);
+//            janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
+//            janela.setLocationRelativeTo(null);
             
             JasperReport report = JasperCompileManager.compileReport(arquivo);
             JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
@@ -304,14 +303,14 @@ public class CtrlRelatorio extends CtrlGenerica{
             JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
             JasperViewer.viewReport(print, false);
             
-            JasperExportManager.exportReportToPdfFile(print, "C:/Users/chrys/Desktop/Relatorios/" + nomeExport + ".pdf");
+            JasperExportManager.exportReportToPdfFile(print, System.getProperty("user.dir") + "/Relatorios/" + nomeExport + ".pdf");
             
 //            JasperViewer jasperView = new JasperViewer(print, true);
 //            janela.getContentPane().add(jasperView.getContentPane());
 //            janela.setVisible(true);
-            CtrlMensagem.exibirMensagemSucesso(null, "Relatório(s) Gerado(s) com Sucesso!");
-            
+
         } catch (JRException ex) {
+            System.out.println(ex.getMessage());
             CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório:");
         }
     }
