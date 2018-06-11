@@ -101,7 +101,8 @@ public class CtrlRelatorioTurma {
             String semestreCorrente = ano + "/" + semestre;
             parametros.put("ano", semestreCorrente);
             
-            String nomeExport = "Turmas/" + turma.getNome() + "-" + ano + "-" + semestre;
+            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento("Turmas", ano, semestre);
+            String nomeExport = diretorio + turma.getNome() + "-" + ano + "-" + semestre + ".pdf";
             
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
         }else

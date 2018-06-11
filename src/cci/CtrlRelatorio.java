@@ -15,6 +15,7 @@ import cih.relatorio.JDRelatorioProfessor;
 import cih.relatorio.JDRelatorioTurma;
 import java.awt.Frame;
 import java.awt.Image;
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -310,11 +311,22 @@ public class CtrlRelatorio extends CtrlGenerica{
             JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
             
             JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
-            JasperExportManager.exportReportToPdfFile(print, System.getProperty("user.dir") + "/Relatorios/" + nomeExport + ".pdf");
+            JasperExportManager.exportReportToPdfFile(print, nomeExport);
             
         } catch (JRException ex) {
             CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório: " + ex.getMessage());
         }
+    }
+    
+    public String criarDiretorioArquivamento(String tipo, int ano, int semestre){
+        
+        String caminho = System.getProperty("user.dir") + "/Relatorios/" + tipo + "/" + ano + "-" + semestre;
+        File diretorio = new File(caminho);
+            
+        if (!diretorio.exists())
+            diretorio.mkdirs();
+        
+        return caminho + "/";
     }
 }
 

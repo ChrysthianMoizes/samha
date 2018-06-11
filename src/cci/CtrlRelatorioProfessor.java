@@ -3,6 +3,7 @@ package cci;
 import cdp.Coordenadoria;
 import cdp.Eixo;
 import cdp.Professor;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +97,9 @@ public class CtrlRelatorioProfessor {
             String semestreCorrente = ano + "/" + semestre;
             parametros.put("ano", semestreCorrente);
             
-            String nomeExport = "Professores/" + professor.getNome() + "-" + ano + "-" + semestre;
+            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento("Professores", ano, semestre);
+            String nomeExport = diretorio + professor.getNome() + "-" + ano + "-" + semestre + ".pdf";
+            
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
         }else
             CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");
