@@ -4,5 +4,6 @@ nbproject/private/
 build/
 nbbuild/
 dist/
+Relatorios/
 nbdist/
 .nb-gradle/

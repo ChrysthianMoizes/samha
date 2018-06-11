@@ -301,21 +301,17 @@ public class CtrlRelatorio extends CtrlGenerica{
         return professor;
     }
     
-    public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport){
+    public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport) throws JRException{
         
-        try {
             
-            InputStream arquivo = Aula.class.getResourceAsStream("/cih/relatorio/" + nomeRelatorio + ".jrxml");
- 
-            JasperReport report = JasperCompileManager.compileReport(arquivo);
-            JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
-            
-            JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
-            JasperExportManager.exportReportToPdfFile(print, nomeExport);
-            
-        } catch (JRException ex) {
-            CtrlMensagem.exibirMensagemErro(null, "Erro ao Abrir Relatório: " + ex.getMessage());
-        }
+        InputStream arquivo = Aula.class.getResourceAsStream("/cih/relatorio/" + nomeRelatorio + ".jrxml");
+
+        JasperReport report = JasperCompileManager.compileReport(arquivo);
+        JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
+
+        JasperPrint print = JasperFillManager.fillReport(report, parametros, dados);
+        JasperExportManager.exportReportToPdfFile(print, nomeExport);
+
     }
     
     public String criarDiretorioArquivamento(String tipo, int ano, int semestre){

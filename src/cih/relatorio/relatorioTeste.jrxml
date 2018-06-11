@@ -106,6 +106,7 @@
 	<parameter name="professor" class="java.lang.String"/>
 	<parameter name="ano" class="java.lang.String"/>
 	<parameter name="coordenadoria" class="java.lang.String"/>
+	<parameter name="lista" class="java.util.List"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -160,6 +161,17 @@
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="31d03b31-102f-4796-8c1f-9d8842e50a67"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="100" height="20" uuid="b4a595d2-9c15-4ca4-8f37-5564998d7632"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textFieldExpression><![CDATA[$P{lista}.get( 0 )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
