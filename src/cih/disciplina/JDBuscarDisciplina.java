@@ -245,7 +245,7 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Período", "Tipo"
+                "Nome", "Qt. Aulas", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {

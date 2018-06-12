@@ -33,7 +33,7 @@ public class CtrlRelatorioProfessor {
         janela.gerandoRelatorio();
         
         try {
-        
+
             switch(tipo){
 
                 case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
@@ -51,13 +51,14 @@ public class CtrlRelatorioProfessor {
                 default: break;
             }
             CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
-        
+
         } catch (JRException ex) {
             CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
-            
+
         } catch (FileNotFoundException | JRRuntimeException e){
             CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");
         }
+
         janela.relatorioGerado();
     }
     

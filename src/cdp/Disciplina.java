@@ -134,7 +134,7 @@ public class Disciplina implements Serializable, Comparable<Object> {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getPeriodo(), getTipo() };
+        return new Object[] { this, getQtAulas(), getTipo() };
     }
 
     @Override
