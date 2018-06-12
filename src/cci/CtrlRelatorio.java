@@ -305,6 +305,9 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport) throws JRException, FileNotFoundException, JRRuntimeException{
            
+        String logo = obterDiretorioLogoRelatorio();
+        parametros.put("logo", logo);
+        
         InputStream arquivo = Aula.class.getResourceAsStream("/cih/relatorio/" + nomeRelatorio + ".jrxml");
 
         JasperReport report = JasperCompileManager.compileReport(arquivo);
@@ -315,9 +318,9 @@ public class CtrlRelatorio extends CtrlGenerica{
 
     }
     
-    public String criarDiretorioArquivamento(String tipo, int ano, int semestre){
+    public String obterDiretorioArquivamento(String tipo, int ano, int semestre){
         
-        String caminho = System.getProperty("user.dir") + "/Relatorios/" + tipo + "/" + ano + "-" + semestre;
+        String caminho = obterDiretorioInicializacao() + "Relatorios/" + tipo + "/" + ano + "-" + semestre;
         File diretorio = new File(caminho);
             
         if (!diretorio.exists())
@@ -325,19 +328,21 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         return caminho + "/";
     }
+    
+    public String obterDiretorioLogoRelatorio(){
+        
+        String logo = obterDiretorioInicializacao() + "src/cih/img/logo_ifes.JPG";
+        return logo.replace("/", "\\");
+    }
+    
+    public String obterDiretorioInicializacao(){
+        
+        String caminho = System.getProperty("user.dir");
+        File diretorio = new File(caminho + "/src");        
+        
+        if (!diretorio.exists()){
+            return caminho + "/../";
+        }else 
+            return caminho + "/";  
+    }
 }
-
-/* EXIBIR RELATÓRIO ANTES DE GERAR
-
-    JasperViewer.viewReport(print, true);
-
-    JDialog janela = new JDialog(new javax.swing.JFrame(), "Relatório", true);
-    janela.setSize(1200, 1000);
-    janela.setIconImage(ctrlPrincipal.getCtrlRelatorio().setarIconeJanela());
-    janela.setLocationRelativeTo(null);
-
-    JasperViewer jasperView = new JasperViewer(print, true);
-    janela.getContentPane().add(jasperView.getContentPane());
-    janela.setVisible(true);
-
-*/

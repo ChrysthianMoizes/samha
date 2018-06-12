@@ -105,7 +105,7 @@ public class CtrlRelatorioTurma {
             
             Map parametros = gerarHashTurma(turma, ano, semestre, lista);
             
-            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
+            String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
             String nomeExport = diretorio + turma.getNome() + "-" + ano + "-" + semestre + ".pdf";
             
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
@@ -145,7 +145,7 @@ public class CtrlRelatorioTurma {
     
     public void abrirPastaTurma(int ano, int semestre, JDRelatorioTurma janela){
         
-        String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
+        String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
         try {  
             Runtime.getRuntime().exec("explorer " + diretorio.replace("/", "\\"));
         } catch (IOException ex) {

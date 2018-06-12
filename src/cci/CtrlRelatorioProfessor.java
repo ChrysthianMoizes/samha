@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRRuntimeException;
@@ -108,7 +106,7 @@ public class CtrlRelatorioProfessor {
             
             Map parametros = gerarHashProfessor(professor, ano, semestre, lista);
             
-            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
+            String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
             String nomeExport = diretorio + professor.getNome() + "-" + ano + "-" + semestre + ".pdf";
             
             ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(relatorio, parametros, nomeRelatorio, nomeExport);
@@ -146,7 +144,7 @@ public class CtrlRelatorioProfessor {
     
     public void abrirPastaProfessor(int ano, int semestre, JDRelatorioProfessor janela){
         
-        String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
+        String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
         try {  
             Runtime.getRuntime().exec("explorer.exe " + diretorio.replace("/", "\\"));
         } catch (IOException ex) {

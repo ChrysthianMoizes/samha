@@ -50,6 +50,7 @@
 	</subDataset>
 	<parameter name="nome" class="java.lang.String"/>
 	<parameter name="setor" class="java.lang.String"/>
+        <parameter name="logo" class="java.lang.String"/>
 	<parameter name="00" class="java.lang.String"/>
 	<parameter name="01" class="java.lang.String"/>
 	<parameter name="02" class="java.lang.String"/>
@@ -143,7 +144,7 @@
 		<band height="168" splitType="Stretch">
 			<image>
 				<reportElement x="14" y="0" width="300" height="138" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
-				<imageExpression><![CDATA["C:\\Users\\chrys\\Desktop\\Projetos\\famha\\src\\cih\\img\\logo.JPG"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
 				<reportElement x="638" y="0" width="164" height="20" uuid="2812826b-f575-46f4-80bf-fa5eec0d7b75"/>
