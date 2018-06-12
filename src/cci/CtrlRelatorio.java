@@ -16,6 +16,7 @@ import cih.relatorio.JDRelatorioTurma;
 import java.awt.Frame;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRRuntimeException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -271,7 +273,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     public Turma gerarTurmaVazia(){
         
         Turma turma = new Turma();
-        turma.setNome("--");
+        turma.setNome("");
         
         return turma;
     }
@@ -280,7 +282,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         Alocacao alocacao = new Alocacao();
         alocacao.setProfessor1(gerarProfessorVazio());
-        alocacao.setProfessor2(gerarProfessorVazio());
+        alocacao.setProfessor2(null);
         alocacao.setDisciplina(gerarDisciplinaVazia());
         
         return alocacao;
@@ -290,7 +292,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         Disciplina disciplina = new Disciplina();
         disciplina.setNome("");
-        disciplina.setSigla("--");
+        disciplina.setSigla("");
         
         return disciplina;
     }
@@ -301,9 +303,8 @@ public class CtrlRelatorio extends CtrlGenerica{
         return professor;
     }
     
-    public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport) throws JRException{
-        
-            
+    public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport) throws JRException, FileNotFoundException, JRRuntimeException{
+           
         InputStream arquivo = Aula.class.getResourceAsStream("/cih/relatorio/" + nomeRelatorio + ".jrxml");
 
         JasperReport report = JasperCompileManager.compileReport(arquivo);

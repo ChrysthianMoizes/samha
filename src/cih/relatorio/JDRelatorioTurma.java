@@ -63,7 +63,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         char tipo = (char) grpFiltros.getSelection().getMnemonic();
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlRelatorioTurma().identificarFiltroRelatorioTurma(cbxEixo, cbxCurso, cbxTurma, ano, semestre, tipo);
+        ctrlPrincipal.getCtrlRelatorioTurma().identificarFiltroRelatorioTurma(cbxEixo, cbxCurso, cbxTurma, ano, semestre, tipo, this);
     }
     
     public void ativarFiltroNenhum(){
@@ -99,6 +99,16 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
             cbxTurma.removeAllItems();
             cbxTurno.setEnabled(opcao);
         }    
+    }
+    
+    public void gerandoRelatorio(){
+        btnGerar.setText("Gerando Relatório...");
+        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
+    }
+    
+    public void relatorioGerado(){
+        btnGerar.setText("Gerar Relatório");
+        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png")));
     }
     
     @SuppressWarnings("unchecked")
@@ -137,6 +147,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         rbtnTurma = new javax.swing.JRadioButton();
         rbtnCurso = new javax.swing.JRadioButton();
         rbtnEixo = new javax.swing.JRadioButton();
+        btnAbrirPasta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de Turmas");
@@ -431,6 +442,17 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        btnAbrirPasta.setBackground(new java.awt.Color(255, 255, 255));
+        btnAbrirPasta.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnAbrirPasta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/pasta.png"))); // NOI18N
+        btnAbrirPasta.setText("Abrir Pasta");
+        btnAbrirPasta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAbrirPasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirPastaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
         pnlConfiguracoesLayout.setHorizontalGroup(
@@ -440,12 +462,15 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEixo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCurso1)
-                    .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
+                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEixo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCurso1)
+                            .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnAbrirPasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
@@ -469,7 +494,9 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
-                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAbrirPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEixo)
@@ -575,7 +602,16 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         ativarFiltroTurma(true);
     }//GEN-LAST:event_rbtnTurmaActionPerformed
 
+    private void btnAbrirPastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPastaActionPerformed
+             
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlRelatorioTurma().abrirPastaTurma(ano, semestre, this);
+    }//GEN-LAST:event_btnAbrirPastaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrirPasta;
     private javax.swing.JButton btnGerar;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxEixo;

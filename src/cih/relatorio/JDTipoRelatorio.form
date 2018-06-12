@@ -159,7 +159,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="112"/>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Professor"/>
+                <Property name="text" type="java.lang.String" value="Professores"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbtnCurso">
@@ -177,7 +177,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="116"/>
-                <Property name="text" type="java.lang.String" value="Turma"/>
+                <Property name="text" type="java.lang.String" value="Turmas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnEntrar">

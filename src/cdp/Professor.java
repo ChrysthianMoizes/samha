@@ -38,8 +38,11 @@ public class Professor extends Servidor implements Comparable<Object>{
     
     public String getPrimeiroNome(){
         int espaco = this.getNome().indexOf(" ");
-        String primeiroNome = this.getNome().substring(0, espaco);
-        return primeiroNome;
+        if(espaco > 0){
+            String primeiroNome = this.getNome().substring(0, espaco);
+            return primeiroNome;
+        }
+        return getNome();
     }
 
     public int getCargaHoraria() {

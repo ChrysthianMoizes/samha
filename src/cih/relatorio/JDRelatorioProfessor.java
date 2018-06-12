@@ -51,7 +51,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        ctrlPrincipal.getCtrlRelatorioProfessor().identificarFiltroRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo);
+        ctrlPrincipal.getCtrlRelatorioProfessor().identificarFiltroRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo, this);
     }
     
     public void ativarFiltroNenhum(){
@@ -85,6 +85,16 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         
         preencherTabelaProfessor();
     }
+    
+    public void gerandoRelatorio(){
+        btnGerar.setText("Gerando Relatório...");
+        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
+    }
+    
+    public void relatorioGerado(){
+        btnGerar.setText("Gerar Relatório");
+        btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png")));
+    }
        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -108,6 +118,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         lblAno = new javax.swing.JLabel();
         rbtnProfessor = new javax.swing.JRadioButton();
         btnGerar = new javax.swing.JButton();
+        btnAbrirPasta = new javax.swing.JButton();
         pnlProfessor = new javax.swing.JPanel();
         pnlDiasProfessor = new javax.swing.JPanel();
         lblSexta1 = new javax.swing.JLabel();
@@ -270,7 +281,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         btnGerar.setBackground(new java.awt.Color(255, 255, 255));
@@ -281,6 +292,17 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         btnGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarActionPerformed(evt);
+            }
+        });
+
+        btnAbrirPasta.setBackground(new java.awt.Color(255, 255, 255));
+        btnAbrirPasta.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnAbrirPasta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/pasta.png"))); // NOI18N
+        btnAbrirPasta.setText("Abrir Pasta");
+        btnAbrirPasta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAbrirPasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirPastaActionPerformed(evt);
             }
         });
 
@@ -307,7 +329,11 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                                 .addComponent(lblProfessor)
                                 .addGap(0, 264, Short.MAX_VALUE))
                             .addComponent(cbxProfessor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(btnGerar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAbrirPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlConfiguracoesLayout.setVerticalGroup(
@@ -318,7 +344,9 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(btnAbrirPasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
@@ -540,7 +568,16 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         ativarFiltroProfessor(true);
     }//GEN-LAST:event_rbtnProfessorActionPerformed
 
+    private void btnAbrirPastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPastaActionPerformed
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlRelatorioProfessor().abrirPastaProfessor(ano, semestre, this);
+    }//GEN-LAST:event_btnAbrirPastaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrirPasta;
     private javax.swing.JButton btnGerar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxEixo;

@@ -63,14 +63,14 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         rbtnTurma.setForeground(new java.awt.Color(255, 255, 255));
         rbtnTurma.setMnemonic('p');
         rbtnTurma.setSelected(true);
-        rbtnTurma.setText("Professor");
+        rbtnTurma.setText("Professores");
 
         rbtnCurso.setBackground(new java.awt.Color(0, 153, 102));
         grpFiltros.add(rbtnCurso);
         rbtnCurso.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         rbtnCurso.setForeground(new java.awt.Color(255, 255, 255));
         rbtnCurso.setMnemonic('t');
-        rbtnCurso.setText("Turma");
+        rbtnCurso.setText("Turmas");
 
         btnEntrar.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         btnEntrar.setForeground(new java.awt.Color(255, 255, 255));

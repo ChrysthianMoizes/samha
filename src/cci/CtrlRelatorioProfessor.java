@@ -1,32 +1,41 @@
 package cci;
 
+import cdp.Aula;
 import cdp.Coordenadoria;
 import cdp.Eixo;
 import cdp.Professor;
+import cih.relatorio.JDRelatorioProfessor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRRuntimeException;
 
 public class CtrlRelatorioProfessor {
     
     private CtrlPrincipal ctrlPrincipal;
+    private String pastaRaiz = "Professores";
     
     public CtrlRelatorioProfessor(CtrlPrincipal ctrl){
         this.ctrlPrincipal = ctrl;
     }
     
-    public void identificarFiltroRelatorioProfessor(JComboBox cbxEixo, JComboBox cbxCoordenadoria, JComboBox cbxProfessor, int ano, int semestre, char tipo){
+    public void identificarFiltroRelatorioProfessor(JComboBox cbxEixo, JComboBox cbxCoordenadoria, JComboBox cbxProfessor, int ano, int semestre, char tipo, JDRelatorioProfessor janela){
         
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
+        janela.gerandoRelatorio();
+        
         try {
         
-            CtrlMensagem.exibirMensagemSucesso(null, "Gerando Relatório. Aguarde!");
-            
             switch(tipo){
 
                 case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
@@ -38,19 +47,23 @@ public class CtrlRelatorioProfessor {
                     if(professor != null)
                         gerarRelatorioPorProfessor(professor, ano, semestre);
                     else
-                        CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");
+                        CtrlMensagem.exibirMensagemErro(janela, "Professor não encontrado.");
                     break;
 
                 default: break;
             }
-            CtrlMensagem.exibirMensagemSucesso(null, "Relatório Gerado com Sucesso!");
+            CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
         
         } catch (JRException ex) {
-            CtrlMensagem.exibirMensagemErro(null, "Erro ao gerar Relatório: " + ex.getMessage());
+            CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
+            
+        } catch (FileNotFoundException | JRRuntimeException e){
+            CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");
         }
+        janela.relatorioGerado();
     }
     
-    public void gerarRelatorioTodosProfessores(int ano, int semestre) throws JRException{
+    public void gerarRelatorioTodosProfessores(int ano, int semestre) throws JRException, FileNotFoundException{
 
         List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
         for(Professor prof : listaProfessores){
@@ -58,7 +71,7 @@ public class CtrlRelatorioProfessor {
         }
     }
     
-    public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre) throws JRException{
+    public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre) throws JRException, FileNotFoundException{
         
         if(eixo != null){
             
@@ -70,7 +83,7 @@ public class CtrlRelatorioProfessor {
             CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado."); 
     }
     
-    public void gerarRelatorioPorCoordenadoria(Coordenadoria coordenadoria, int ano, int semestre) throws JRException{
+    public void gerarRelatorioPorCoordenadoria(Coordenadoria coordenadoria, int ano, int semestre) throws JRException, FileNotFoundException{
         
         if(coordenadoria != null){
 
@@ -82,32 +95,63 @@ public class CtrlRelatorioProfessor {
             CtrlMensagem.exibirMensagemErro(null, "Coordenadoria não encontrada.");
     }
     
-    public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre) throws JRException{
+    public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre) throws JRException, FileNotFoundException{
 
         if(professor != null){
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);
             List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
             
-            String nomeRelatorio = "relatorioTeste";
+            List relatorio = new ArrayList();
+            relatorio.add(new Aula());
             
-            Map parametros = gerarHashProfessor(professor, ano, semestre);
+            String nomeRelatorio = "relatorioGenerico";
             
-            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento("Professores", ano, semestre);
+            Map parametros = gerarHashProfessor(professor, ano, semestre, lista);
+            
+            String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
             String nomeExport = diretorio + professor.getNome() + "-" + ano + "-" + semestre + ".pdf";
             
-            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
+            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(relatorio, parametros, nomeRelatorio, nomeExport);
         }else
             CtrlMensagem.exibirMensagemErro(null, "Professor não encontrado.");
     }
     
-    public Map gerarHashProfessor(Professor professor, int ano, int semestre){
+    public Map gerarHashProfessor(Professor professor, int ano, int semestre, List lista){
         
         Map hash = new HashMap();
-        hash.put("professor", professor.getNome());
-        hash.put("coordenadoria", professor.getCoordenadoria().getNome());
-        String semestreCorrente = ano + "/" + semestre;
-        hash.put("ano", semestreCorrente);
+        
+        String anoSemestre = ano + "/" + semestre;
+        hash.put("ano", anoSemestre);
+        
+        hash.put("nome", professor.getNome());
+        hash.put("setor", professor.getCoordenadoria().getNome() + "\t" + anoSemestre);
+        hash.putAll(transformarListaEmHash(lista));
 
        return hash; 
+    }
+    
+    public Map transformarListaEmHash(List<Aula> lista){
+        
+        Map hash = new HashMap();
+        
+        for(Aula aula: lista){
+            String key = String.valueOf(aula.getDia()) + String.valueOf(aula.getNumero());
+            String turma = aula.getOferta().getTurma().getNome();
+            String sigla = aula.getAlocacao().getDisciplina().getSigla();
+            hash.put(key, turma + "\n" + sigla);
+        }
+        
+        return hash;
+    }
+    
+    public void abrirPastaProfessor(int ano, int semestre, JDRelatorioProfessor janela){
+        
+        String diretorio = ctrlPrincipal.getCtrlRelatorio().criarDiretorioArquivamento(pastaRaiz, ano, semestre);
+        try {  
+            Runtime.getRuntime().exec("explorer.exe " + diretorio.replace("/", "\\"));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            CtrlMensagem.exibirMensagemErro(janela, "Não foi possível encontrar a pasta especificada.");
+        }
     }
 }
