@@ -57,12 +57,15 @@ public class CtrlRelatorioTurma {
                         default: break;    
                     }
 
-                    CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
                     janela.relatorioGerado();
+                    CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
+                    
                 }catch(JRException ex){
+                    janela.relatorioGerado();
                     CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
 
                 } catch (FileNotFoundException | JRRuntimeException e){
+                    janela.relatorioGerado();
                     CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Turmas antes de iniciar.");
                 }  
             }

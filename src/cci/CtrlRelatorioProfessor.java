@@ -58,10 +58,12 @@ public class CtrlRelatorioProfessor {
                     CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
                     janela.relatorioGerado();
                 } catch (JRException ex) {
+                    janela.relatorioGerado();
                     CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
 
                 } catch (FileNotFoundException | JRRuntimeException e){
-                    CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");
+                    janela.relatorioGerado();
+                    CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");  
                 }
             }
         }.start();
