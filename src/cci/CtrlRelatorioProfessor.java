@@ -29,37 +29,43 @@ public class CtrlRelatorioProfessor {
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
+        iniciarThreadRelatorioProfessor(janela, professor, coordenadoria, eixo, ano, semestre, tipo);
+    }
+    
+    public void iniciarThreadRelatorioProfessor(JDRelatorioProfessor janela, Professor professor, Coordenadoria coordenadoria, Eixo eixo, int ano, int semestre, char tipo){
         
-        janela.gerandoRelatorio();
-        
-        try {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    janela.gerandoRelatorio();
+                    switch(tipo){
 
-            switch(tipo){
+                        case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
+                        case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
+                        case 'C': gerarRelatorioPorCoordenadoria(coordenadoria, ano, semestre); break;
 
-                case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
-                case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
-                case 'C': gerarRelatorioPorCoordenadoria(coordenadoria, ano, semestre); break;
+                        case 'P':
 
-                case 'P':
+                            if(professor != null)
+                                gerarRelatorioPorProfessor(professor, ano, semestre);
+                            else
+                                CtrlMensagem.exibirMensagemErro(janela, "Professor não encontrado.");
+                            break;
 
-                    if(professor != null)
-                        gerarRelatorioPorProfessor(professor, ano, semestre);
-                    else
-                        CtrlMensagem.exibirMensagemErro(janela, "Professor não encontrado.");
-                    break;
+                        default: break;
+                    }
+                    CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
+                    janela.relatorioGerado();
+                } catch (JRException ex) {
+                    CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
 
-                default: break;
+                } catch (FileNotFoundException | JRRuntimeException e){
+                    CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");
+                }
             }
-            CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
-
-        } catch (JRException ex) {
-            CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
-
-        } catch (FileNotFoundException | JRRuntimeException e){
-            CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Professores antes de iniciar.");
-        }
-
-        janela.relatorioGerado();
+        }.start();
+        
     }
     
     public void gerarRelatorioTodosProfessores(int ano, int semestre) throws JRException, FileNotFoundException{

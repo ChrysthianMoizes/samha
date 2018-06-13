@@ -87,11 +87,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }
     
     public void gerandoRelatorio(){
+        btnGerar.setEnabled(false);
         btnGerar.setText("Gerando Relatório...");
         btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
     }
     
     public void relatorioGerado(){
+        btnGerar.setEnabled(true);
         btnGerar.setText("Gerar Relatório");
         btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png")));
     }
@@ -298,7 +300,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         btnAbrirPasta.setBackground(new java.awt.Color(255, 255, 255));
         btnAbrirPasta.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnAbrirPasta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/pasta.png"))); // NOI18N
-        btnAbrirPasta.setText("Abrir Pasta");
+        btnAbrirPasta.setText("Mostrar Na Pasta");
         btnAbrirPasta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAbrirPasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

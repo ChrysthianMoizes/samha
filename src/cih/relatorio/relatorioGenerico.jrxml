@@ -50,7 +50,7 @@
 	</subDataset>
 	<parameter name="nome" class="java.lang.String"/>
 	<parameter name="setor" class="java.lang.String"/>
-        <parameter name="logo" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
 	<parameter name="00" class="java.lang.String"/>
 	<parameter name="01" class="java.lang.String"/>
 	<parameter name="02" class="java.lang.String"/>
@@ -142,8 +142,20 @@
 	</background>
 	<title>
 		<band height="168" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="20" width="322" height="148" uuid="b04f4099-6346-434a-8922-139ae550e2a1"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="322" y="20" width="470" height="148" uuid="189cd3ac-9c78-4663-a222-7f2ed96e2e66"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</rectangle>
 			<image>
-				<reportElement x="14" y="0" width="300" height="138" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
+				<reportElement x="13" y="31" width="287" height="127" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
@@ -151,14 +163,14 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="314" y="64" width="488" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
+				<reportElement x="322" y="64" width="470" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DialogInput" size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="314" y="101" width="488" height="37" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
+				<reportElement x="322" y="101" width="470" height="37" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DialogInput" size="16" isBold="true"/>
 				</textElement>
@@ -1671,6 +1683,42 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{26}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="322" y="0" width="1" height="360" uuid="f1c65109-2add-4ec7-8135-442e8aba0ccb"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="604" y="1" width="1" height="360" uuid="dcd1fc22-24a9-475b-8bbb-3d7cbf1b6d64"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="791" y="1" width="1" height="360" uuid="9419b417-4bf4-41d1-b0af-d69cf5bf8e13"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="1" width="1" height="360" uuid="f6d657d4-785d-4a4d-8747-3d6307145678"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="39" y="1" width="1" height="360" uuid="c5956e7e-a1f4-4cb9-8194-da05d2cadcc2"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="359" width="791" height="1" uuid="0e763b95-16d0-4f44-9cb8-97bd9a5b5e93"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
 		</band>
 	</detail>
 	<pageFooter>

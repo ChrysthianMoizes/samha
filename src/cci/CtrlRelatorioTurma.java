@@ -7,6 +7,7 @@ import cdp.Turma;
 import cih.relatorio.JDRelatorioTurma;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,37 +29,45 @@ public class CtrlRelatorioTurma {
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
+        iniciarThreadRelatorioTurma(janela, turma, curso, eixo, ano, semestre, tipo);
+    }
+    
+    public void iniciarThreadRelatorioTurma(JDRelatorioTurma janela, Turma turma, Curso curso, Eixo eixo, int ano, int semestre, char tipo){
         
-        janela.gerandoRelatorio();
-        
-        try{
+        new Thread(){
+            @Override
+            public void run() {
+                
+                try{
             
-            switch(tipo){
+                    janela.gerandoRelatorio();
+                    switch(tipo){
 
-                case 'A': gerarRelatorioTodasTurmas(ano, semestre); break;
-                case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
-                case 'C': gerarRelatorioPorCurso(curso, ano, semestre); break;
-                case 'T': 
+                        case 'A': gerarRelatorioTodasTurmas(ano, semestre); break;
+                        case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
+                        case 'C': gerarRelatorioPorCurso(curso, ano, semestre); break;
+                        case 'T': 
 
-                    if(turma != null)
-                       gerarRelatorioPorTurma(turma, ano, semestre); 
-                    else
-                        CtrlMensagem.exibirMensagemErro(janela, "Turma não encontrada.");
-                    break;
+                            if(turma != null)
+                               gerarRelatorioPorTurma(turma, ano, semestre); 
+                            else
+                                CtrlMensagem.exibirMensagemErro(janela, "Turma não encontrada.");
+                            break;
 
-                default: break;    
+                        default: break;    
+                    }
+
+                    CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
+                    janela.relatorioGerado();
+                }catch(JRException ex){
+                    CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
+
+                } catch (FileNotFoundException | JRRuntimeException e){
+                    CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Turmas antes de iniciar.");
+                }  
             }
+        }.start();
         
-            CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
-            
-        }catch(JRException ex){
-            CtrlMensagem.exibirMensagemErro(janela, "Erro ao gerar Relatório: " + ex.getMessage());
-            
-        } catch (FileNotFoundException | JRRuntimeException e){
-            CtrlMensagem.exibirMensagemAviso(janela, "Feche todos os relatórios de Turmas antes de iniciar.");
-        }
-        
-        janela.relatorioGerado();
     }
     
     public void gerarRelatorioTodasTurmas(int ano, int semestre) throws JRException, FileNotFoundException{
@@ -101,6 +110,9 @@ public class CtrlRelatorioTurma {
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
             List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
             
+            List relatorio = new ArrayList();
+            relatorio.add(new Aula());
+            
             String nomeRelatorio = "relatorioGenerico";
             
             Map parametros = gerarHashTurma(turma, ano, semestre, lista);
@@ -108,7 +120,7 @@ public class CtrlRelatorioTurma {
             String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
             String nomeExport = diretorio + turma.getNome() + "-" + ano + "-" + semestre + ".pdf";
             
-            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(lista, parametros, nomeRelatorio, nomeExport);
+            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(relatorio, parametros, nomeRelatorio, nomeExport);
         }else
             CtrlMensagem.exibirMensagemErro(null, "Turma não encontrada.");
     }
