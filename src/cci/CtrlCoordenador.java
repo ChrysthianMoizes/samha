@@ -56,9 +56,9 @@ public class CtrlCoordenador extends CtrlGenerica{
         cadastraCoord.setVisible(true);  
     }
 
-    public void cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
+    public void cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula, String email) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenador().cadastrar(professor, curso, tipo, login, senha, nome, matricula);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenador().cadastrar(professor, curso, tipo, login, senha, nome, matricula, email);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Cadastrado Com sucesso!");
@@ -69,9 +69,9 @@ public class CtrlCoordenador extends CtrlGenerica{
         }
     }
 
-    public void alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
+    public void alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula, String email) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenador().alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtCoordenador().alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula, email);
         if (resposta.equals(Constantes.ALTERADO)) {
             CtrlMensagem.exibirMensagemSucesso(cadastraCoord, "Alterado Com sucesso!");
             cadastraCoord.desabilitarComboTipoCoordenador(false);
@@ -136,16 +136,16 @@ public class CtrlCoordenador extends CtrlGenerica{
         }
     }
     
-    public void validarOperacao(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula){  
+    public void validarOperacao(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula, String email){  
         
         Usuario coordenador = cadastraCoord.getCoordenador();
         
         if(validarCampos(nome, matricula, login, senha)){
             
             if(coordenador == null)   
-                cadastrar(professor, curso, tipo, login, senha, nome, matricula);  
+                cadastrar(professor, curso, tipo, login, senha, nome, matricula, email);  
             else
-                alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula);
+                alterar(coordenador, professor, curso, tipo, login, senha, nome, matricula, email);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraCoord, "Todos os campos devem ser preenchidos");
     }

@@ -49,6 +49,8 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         txtMatricula = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         lblNome1 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -108,7 +110,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                     .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlCoordenadorLayout.createSequentialGroup()
                         .addComponent(lblProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 307, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(cbxProfessor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -139,22 +141,29 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         lblNome1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lblNome1.setText("Nome:");
 
+        lblEmail.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblEmail.setText("Email:");
+
+        txtEmail.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome))
-                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(lblMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addComponent(txtNome))
                 .addContainerGap())
         );
         pnlDadosPessoaisLayout.setVerticalGroup(
@@ -167,7 +176,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -208,7 +219,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         pnlRodapeLayout.setHorizontalGroup(
             pnlRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRodapeLayout.createSequentialGroup()
-                .addContainerGap(423, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,17 +255,14 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         pnlAcessoLayout.setHorizontalGroup(
             pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAcessoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAcessoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblSenha)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlAcessoLayout.createSequentialGroup()
-                        .addComponent(lblLogin)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUsuario)))
+                    .addComponent(lblLogin, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSenha, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(txtUsuario))
                 .addContainerGap())
         );
         pnlAcessoLayout.setVerticalGroup(
@@ -265,9 +273,9 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlAcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -289,7 +297,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         pnlGeralLayout.setVerticalGroup(
             pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGeralLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addComponent(pnlCoordenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -323,12 +331,15 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         if(coordenador instanceof CoordenadorAcademico){
             txtNome.setText(((CoordenadorAcademico) coordenador).getServidor().getNome());
             txtMatricula.setText(((CoordenadorAcademico) coordenador).getServidor().getMatricula());
+            txtEmail.setText(((CoordenadorAcademico) coordenador).getServidor().getEmail());
         }else if(coordenador instanceof CoordenadorCurso){
             txtNome.setText(((CoordenadorCurso) coordenador).getProfessor().getNome());
             txtMatricula.setText(((CoordenadorCurso) coordenador).getProfessor().getMatricula());
+            txtEmail.setText(((CoordenadorCurso) coordenador).getProfessor().getEmail());
         }else{
             txtNome.setText(((CoordenadorPedagogico) coordenador).getServidor().getNome());
             txtMatricula.setText(((CoordenadorPedagogico) coordenador).getServidor().getMatricula());
+            txtEmail.setText(((CoordenadorPedagogico) coordenador).getServidor().getEmail());
         }
     }
     
@@ -337,6 +348,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         alterarComboTipo();
         txtSenha.setText("");
         txtUsuario.setText("");
+        txtEmail.setText("");
     }
     
     public void alterarComboTipo(){
@@ -379,6 +391,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         cbxTipo.setEnabled(false);
         txtNome.setEnabled(false);
         txtMatricula.setEnabled(false);
+        txtEmail.setEnabled(false);
         txtSenha.setEnabled(false);
         txtUsuario.setEnabled(false);
         btnSalvar.setEnabled(false);
@@ -395,6 +408,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
             cbxTipo.setEnabled(false);
             txtNome.setEditable(false);
             txtMatricula.setEditable(false);
+            txtEmail.setEnabled(false);
         }else
             cbxTipo.setSelectedIndex(2); 
     }
@@ -435,12 +449,13 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         String tipo = (String) cbxTipo.getSelectedItem();
         String nome = txtNome.getText();
         String matricula = txtMatricula.getText();
+        String email = txtEmail.getText();
         String login = txtUsuario.getText();
         String senha = txtSenha.getText();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         
-        ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, curso, tipo, login, senha, nome, matricula);
+        ctrlPrincipal.getCtrlCoordenador().validarOperacao(professor, curso, tipo, login, senha, nome, matricula, email);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -476,6 +491,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxProfessor;
     private javax.swing.JComboBox<String> cbxTipo;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNome1;
@@ -487,6 +503,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
     private javax.swing.JPanel pnlDadosPessoais;
     private javax.swing.JPanel pnlGeral;
     private javax.swing.JPanel pnlRodape;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;

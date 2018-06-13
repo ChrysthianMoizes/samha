@@ -70,9 +70,9 @@ public class CtrlProfessor extends CtrlGenerica{
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorEixo(id);
     }
 
-    public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
+    public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria, email);
         
         if (resposta.equals(Constantes.CADASTRADO)) {
             
@@ -84,13 +84,13 @@ public class CtrlProfessor extends CtrlGenerica{
             cadastraProf.habilitarCamposRestricao(true);
             buscaProf.atualizarTabela();
             
-        } else
+        }else
             CtrlMensagem.exibirMensagemErro(cadastraProf, resposta);     
     }
 
-    public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email);
         
         if (resposta.equals(Constantes.ALTERADO)) { 
             
@@ -141,16 +141,16 @@ public class CtrlProfessor extends CtrlGenerica{
     
     //================================================= TELA DE CADASTRO ====================================================
     
-    public void validarOperacao(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria){  
+    public void validarOperacao(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email){  
         
         Professor professor = cadastraProf.getProfessor();
         
         if(validarCampos(nome, matricula, cargaHoraria, coordenadoria)){
             
             if(professor == null)   
-                cadastrar(nome, matricula, cargaHoraria, coordenadoria);
+                cadastrar(nome, matricula, cargaHoraria, coordenadoria, email);
             else
-                alterar(nome, matricula, cargaHoraria, coordenadoria, professor);
+                alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraProf, "Todos os campos devem ser preenchidos corretamente");
     }

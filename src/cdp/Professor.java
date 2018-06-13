@@ -24,14 +24,14 @@ public class Professor extends Servidor implements Comparable<Object>{
     public Professor() {
     }
 
-    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula) {
-        super(id, nome, matricula);
+    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula, String email) {
+        super(id, nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
     }
 
-    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula) {
-        super(nome, matricula);
+    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula, String email) {
+        super(nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
     }

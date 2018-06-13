@@ -3,7 +3,6 @@ package cgt;
 import cdp.CoordenadorCurso;
 import cdp.Coordenadoria;
 import cdp.Professor;
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class GtProfessor {
         setProfessorSelecionado(null);
     }
 
-    public String cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria) {
+    public String cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email) {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
@@ -25,6 +24,7 @@ public class GtProfessor {
             Professor professor = new Professor();
             professor.setNome(nome);
             professor.setMatricula(matricula);
+            professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gtPrincipal.getGdPrincipal().getGdProfessor().cadastrar(professor);
@@ -35,13 +35,14 @@ public class GtProfessor {
         }
     }
     
-    public String alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor) {
+    public String alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email) {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, matricula, coordenadoria);
             professor.setNome(nome);
             professor.setMatricula(matricula);
+            professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
             gtPrincipal.getGdPrincipal().getGdProfessor().alterar(professor);

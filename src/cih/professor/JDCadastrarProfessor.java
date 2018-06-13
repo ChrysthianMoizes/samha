@@ -57,6 +57,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxCoordenadoria = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         spnCargaHoraria = new javax.swing.JSpinner();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -97,7 +99,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
         lblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblCargaHoraria.setText("Carga Horária:");
+        lblCargaHoraria.setText("C.H.:");
 
         txtMatricula.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
@@ -116,10 +118,15 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         cbxCoordenadoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jLabel1.setText("Hrs.");
+        jLabel1.setText("Horas.");
 
         spnCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         spnCargaHoraria.setModel(new javax.swing.SpinnerNumberModel(40, 20, 40, 5));
+
+        lblEmail.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        lblEmail.setText("Email:");
+
+        txtEmail.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
@@ -127,22 +134,28 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
             pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCoordenadoria)
-                    .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCoordenadoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNome))
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome)
+                            .addComponent(txtEmail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMatricula1)
+                            .addComponent(lblCargaHoraria))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlDadosPessoaisLayout.setVerticalGroup(
@@ -151,16 +164,22 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(spnCargaHoraria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -524,6 +543,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     public void setarCamposComInstancia(Professor professor) {
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
+        txtEmail.setText(professor.getEmail());
         spnCargaHoraria.setValue(professor.getCargaHoraria());   
     }
     
@@ -613,6 +633,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     public void desabilitarCamposProfessor(boolean opcao) {
         txtNome.setEnabled(opcao);
         txtMatricula.setEnabled(opcao);
+        txtEmail.setEnabled(opcao);
         spnCargaHoraria.setEnabled(opcao);
         cbxCoordenadoria.setEnabled(opcao);
         btnSalvar.setEnabled(opcao);
@@ -713,13 +734,14 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         String nome = txtNome.getText();
         String matricula = txtMatricula.getText();
+        String email = txtEmail.getText();
         int cargaHoraria = (int) spnCargaHoraria.getValue();
         Coordenadoria coordenadoria = null;
         
         if(listaCoordenadorias.size() > 0)
             coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         
-        ctrlPrincipal.getCtrlProfessor().validarOperacao(nome, matricula, cargaHoraria, coordenadoria);
+        ctrlPrincipal.getCtrlProfessor().validarOperacao(nome, matricula, cargaHoraria, coordenadoria, email);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -777,6 +799,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JLabel lblCargaHoraria;
     private javax.swing.JLabel lblCoordenadoria;
     private javax.swing.JLabel lblDia;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblMatricula1;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNomeRestricao;
@@ -794,6 +817,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbtnMedia;
     private javax.swing.JSpinner spnCargaHoraria;
     private javax.swing.JTextArea txtAreaDescricao;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeRestricao;

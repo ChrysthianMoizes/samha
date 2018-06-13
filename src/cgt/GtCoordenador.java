@@ -21,7 +21,7 @@ public class GtCoordenador {
         gtPrincipal = gt;
     }
 
-    public String cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
+    public String cadastrar(Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula, String email) {
 
         try {
             gtPrincipal.identificarPermissaoAdmin();
@@ -45,6 +45,7 @@ public class GtCoordenador {
                 
                 servidor.setMatricula(matricula);
                 servidor.setNome(nome);
+                servidor.setEmail(email);
                             
                 if(tipo.toLowerCase().equals(Constantes.COORD_ACAD)){
 
@@ -70,7 +71,7 @@ public class GtCoordenador {
         }
     }
 
-    public String alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula) {
+    public String alterar(Usuario coordenador, Professor professor, Curso curso, String tipo, String login, String senha, String nome, String matricula, String email) {
 
         try {
             gtPrincipal.identificarPermissaoAdmin();
@@ -82,6 +83,7 @@ public class GtCoordenador {
                 
                 ((CoordenadorAcademico) coordenador).getServidor().setMatricula(matricula);
                 ((CoordenadorAcademico) coordenador).getServidor().setNome(nome);
+                ((CoordenadorAcademico) coordenador).getServidor().setEmail(email);
                 gtPrincipal.getGdPrincipal().getGdCoordenador().alterar(coordenador);
                 
             }else if(coordenador instanceof CoordenadorCurso){
@@ -95,6 +97,7 @@ public class GtCoordenador {
             }else{
                 ((CoordenadorPedagogico) coordenador).getServidor().setMatricula(matricula);
                 ((CoordenadorPedagogico) coordenador).getServidor().setNome(nome);
+                ((CoordenadorPedagogico) coordenador).getServidor().setEmail(email);
                 gtPrincipal.getGdPrincipal().getGdCoordenador().alterar(coordenador);
             }                       
             

@@ -17,19 +17,24 @@ public class Servidor implements Serializable{
     
     @Column(nullable = false, unique = false)
     private String matricula;
+    
+    @Column(nullable = true, unique = false)
+    private String email;
 
     public Servidor() {
     }
 
-    public Servidor(int id, String nome, String matricula) {
+    public Servidor(int id, String nome, String matricula, String email) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
+        this.email = email;
     }
 
-    public Servidor(String nome, String matricula) {
+    public Servidor(String nome, String matricula, String email) {
         this.nome = nome;
         this.matricula = matricula;
+        this.email = email;
     }
 
     public int getId() {
@@ -54,6 +59,14 @@ public class Servidor implements Serializable{
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     @Override
