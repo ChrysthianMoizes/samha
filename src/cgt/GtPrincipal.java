@@ -26,6 +26,7 @@ public class GtPrincipal {
     private GtAula gtAula;
     private GtConflito gtConflito;
     private GtInstituicao gtInstituicao;
+    private GtEmail gtEmail;
 
     public GtPrincipal() {
         gdPrincipal = new GdPrincipal();
@@ -43,6 +44,7 @@ public class GtPrincipal {
         gtAula = new GtAula(this);
         gtConflito = new GtConflito(this);
         gtInstituicao = new GtInstituicao(this);
+        gtEmail = new GtEmail(this);
         setPermissao(Constantes.PERMISSAO_NEGADA);
         setCoordAtual(null);
     }
@@ -188,5 +190,9 @@ public class GtPrincipal {
 
     public GtInstituicao getGtInstituicao() {
         return gtInstituicao;
+    }
+
+    public GtEmail getGtEmail() {
+        return gtEmail;
     }
 }

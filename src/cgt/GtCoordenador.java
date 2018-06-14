@@ -191,4 +191,16 @@ public class GtCoordenador {
             }    
         }
     }
+    
+    public String obterEmailCoordenadorAtual(){
+        
+        Usuario coord = gtPrincipal.getCoordAtual();
+        
+        if(coord instanceof CoordenadorAcademico)
+            return ((CoordenadorAcademico) coord).getServidor().getEmail();
+        else if(coord instanceof CoordenadorCurso)
+            return ((CoordenadorCurso) coord).getProfessor().getEmail();
+        else
+            return ((CoordenadorPedagogico) coord).getServidor().getEmail();
+    }
 }

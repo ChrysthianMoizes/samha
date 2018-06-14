@@ -54,6 +54,15 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorioProfessor().identificarFiltroRelatorioProfessor(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo, this);
     }
     
+    public void enviarEmails(){
+        
+        char tipo = (char) grpFiltros.getSelection().getMnemonic();
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlEmail().identificarProfessoresEnvioEmail(cbxEixo, cbxCoordenadoria, cbxProfessor, ano, semestre, tipo, this);
+    }
+    
     public void ativarFiltroNenhum(){
         ativarFiltroEixo(false);
         ativarFiltroCoordenadoria(false);
@@ -594,7 +603,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAbrirPastaActionPerformed
 
     private void btnEnviarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEmailActionPerformed
-        
+        enviarEmails();
     }//GEN-LAST:event_btnEnviarEmailActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
