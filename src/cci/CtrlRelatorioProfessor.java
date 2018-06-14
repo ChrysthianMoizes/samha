@@ -31,9 +31,12 @@ public class CtrlRelatorioProfessor {
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         List professores = obterListaProfessores(eixo, coordenadoria, professor, tipo);
         
-        if(professores != null)
-            iniciarThreadRelatorioProfessor(janela, professores, ano, semestre);
-
+        if(professores != null){
+            if(!professores.isEmpty())
+                iniciarThreadRelatorioProfessor(janela, professores, ano, semestre);
+            else
+                CtrlMensagem.exibirMensagemAviso(janela, "Nenhum professor encontrado.");
+        }
     }
     
     public void iniciarThreadRelatorioProfessor(JDRelatorioProfessor janela, List<Professor> listaProfessores, int ano, int semestre){
@@ -45,7 +48,7 @@ public class CtrlRelatorioProfessor {
                     janela.gerandoRelatorio();
                    
                     for(Professor prof : listaProfessores){
-                        gerarRelatorioPorProfessor(prof, ano, semestre);
+                        gerarRelatorioProfessor(prof, ano, semestre);
                     }
                     
                     CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
@@ -107,7 +110,7 @@ public class CtrlRelatorioProfessor {
         return null;
     }
     
-    public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre) throws JRException, FileNotFoundException{
+    public void gerarRelatorioProfessor(Professor professor, int ano, int semestre) throws JRException, FileNotFoundException{
 
         if(professor != null){
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);

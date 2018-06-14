@@ -29,10 +29,17 @@ public class CtrlRelatorioTurma {
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
-        iniciarThreadRelatorioTurma(janela, turma, curso, eixo, ano, semestre, tipo);
+        
+        List lista = obterListaTurmas(eixo, curso, turma, tipo);
+        if(lista != null){
+            if(!lista.isEmpty())
+                iniciarThreadRelatorioTurma(janela, lista, ano, semestre);
+            else
+                CtrlMensagem.exibirMensagemAviso(janela, "Nenhuma turma encontrada.");
+        }    
     }
     
-    public void iniciarThreadRelatorioTurma(JDRelatorioTurma janela, Turma turma, Curso curso, Eixo eixo, int ano, int semestre, char tipo){
+    public void iniciarThreadRelatorioTurma(JDRelatorioTurma janela, List<Turma> listaTurmas, int ano, int semestre){
         
         new Thread(){
             @Override
@@ -41,20 +48,9 @@ public class CtrlRelatorioTurma {
                 try{
             
                     janela.gerandoRelatorio();
-                    switch(tipo){
-
-                        case 'A': gerarRelatorioTodasTurmas(ano, semestre); break;
-                        case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
-                        case 'C': gerarRelatorioPorCurso(curso, ano, semestre); break;
-                        case 'T': 
-
-                            if(turma != null)
-                               gerarRelatorioPorTurma(turma, ano, semestre); 
-                            else
-                                CtrlMensagem.exibirMensagemErro(janela, "Turma não encontrada.");
-                            break;
-
-                        default: break;    
+                    
+                    for(Turma turma : listaTurmas){
+                        gerarRelatorioTurma(turma, ano, semestre);
                     }
 
                     janela.relatorioGerado();
@@ -73,40 +69,53 @@ public class CtrlRelatorioTurma {
         
     }
     
-    public void gerarRelatorioTodasTurmas(int ano, int semestre) throws JRException, FileNotFoundException{
+    public List obterListaTurmas(Eixo eixo, Curso curso, Turma turma, char tipo){
         
-        List<Turma> turmas = ctrlPrincipal.getCtrlTurma().listar();  
-        for(Turma turma : turmas){
-            gerarRelatorioPorTurma(turma, ano, semestre);
+        switch(tipo){
+
+            case 'A': return listarTodasTurmas();
+            case 'E': return listarTurmasEixo(eixo);
+            case 'C': return listarTurmasCurso(curso);
+            case 'T': 
+
+                    if(turma != null){
+                        List lista = new ArrayList();
+                        lista.add(turma);
+                        return lista;
+                    }
+            default: return null;    
         }
     }
     
-    public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre) throws JRException, FileNotFoundException{
+    public List listarTodasTurmas(){
+        
+        List<Turma> turmas = ctrlPrincipal.getCtrlTurma().listar();  
+        return turmas;
+    }
+    
+    public List listarTurmasEixo(Eixo eixo){
         
         if(eixo != null){
             
             List<Turma> turmas = ctrlPrincipal.getCtrlTurma().filtrarPorEixo(eixo.getId());
-            for(Turma turma : turmas){
-                gerarRelatorioPorTurma(turma, ano, semestre);
-            }
-               
+            return turmas;
         }else
-            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado."); 
+            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado.");
+        return null;
     }
     
-    public void gerarRelatorioPorCurso(Curso curso, int ano, int semestre) throws JRException, FileNotFoundException{
+    public List listarTurmasCurso(Curso curso){
         
         if(curso != null){
             
             List<Turma> turmas = ctrlPrincipal.getCtrlTurma().filtrarPorCurso(curso.getId());
-            for(Turma turma : turmas){
-                gerarRelatorioPorTurma(turma, ano, semestre);
-            }
+            return turmas;
         }else
             CtrlMensagem.exibirMensagemErro(null, "Curso não encontrado.");
+        return null;
     }
     
-    public void gerarRelatorioPorTurma(Turma turma, int ano, int semestre) throws JRException, FileNotFoundException{
+    public void gerarRelatorioTurma(Turma turma, int ano, int semestre) throws JRException, FileNotFoundException{
 
         if(turma != null){
             
