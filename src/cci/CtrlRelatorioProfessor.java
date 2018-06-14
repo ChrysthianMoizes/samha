@@ -29,32 +29,25 @@ public class CtrlRelatorioProfessor {
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
-        iniciarThreadRelatorioProfessor(janela, professor, coordenadoria, eixo, ano, semestre, tipo);
+        List professores = obterListaProfessores(eixo, coordenadoria, professor, tipo);
+        
+        if(professores != null)
+            iniciarThreadRelatorioProfessor(janela, professores, ano, semestre);
+
     }
     
-    public void iniciarThreadRelatorioProfessor(JDRelatorioProfessor janela, Professor professor, Coordenadoria coordenadoria, Eixo eixo, int ano, int semestre, char tipo){
+    public void iniciarThreadRelatorioProfessor(JDRelatorioProfessor janela, List<Professor> listaProfessores, int ano, int semestre){
         
         new Thread() {
             @Override
             public void run() {
                 try {
                     janela.gerandoRelatorio();
-                    switch(tipo){
-
-                        case 'A': gerarRelatorioTodosProfessores(ano, semestre); break;
-                        case 'E': gerarRelatorioPorEixo(eixo, ano, semestre); break;
-                        case 'C': gerarRelatorioPorCoordenadoria(coordenadoria, ano, semestre); break;
-
-                        case 'P':
-
-                            if(professor != null)
-                                gerarRelatorioPorProfessor(professor, ano, semestre);
-                            else
-                                CtrlMensagem.exibirMensagemErro(janela, "Professor não encontrado.");
-                            break;
-
-                        default: break;
+                   
+                    for(Professor prof : listaProfessores){
+                        gerarRelatorioPorProfessor(prof, ano, semestre);
                     }
+                    
                     CtrlMensagem.exibirMensagemSucesso(janela, "Relatório Gerado com Sucesso!");
                     janela.relatorioGerado();
                 } catch (JRException ex) {
@@ -70,36 +63,48 @@ public class CtrlRelatorioProfessor {
         
     }
     
-    public void gerarRelatorioTodosProfessores(int ano, int semestre) throws JRException, FileNotFoundException{
+    public List obterListaProfessores(Eixo eixo, Coordenadoria coordenadoria, Professor professor, char tipo){
+        
+        switch(tipo){
 
-        List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
-        for(Professor prof : listaProfessores){
-            gerarRelatorioPorProfessor(prof, ano, semestre);
+            case 'A': return listarTodosProfessores();
+            case 'E': return listarProfessoresEixo(eixo);
+            case 'C': return listarProfessoresCoordenadoria(coordenadoria);
+            case 'P': 
+                    if(professor != null){
+                        List lista = new ArrayList();
+                        lista.add(professor);
+                        return lista;
+                    }
+
+            default: return null;
         }
     }
     
-    public void gerarRelatorioPorEixo(Eixo eixo, int ano, int semestre) throws JRException, FileNotFoundException{
+    public List listarTodosProfessores(){
+        List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
+        return listaProfessores;
+    }
+    
+    public List listarProfessoresEixo(Eixo eixo){
         
         if(eixo != null){
             
             List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());  
-            for(Professor prof : listaProfessores){
-                gerarRelatorioPorProfessor(prof, ano, semestre);
-            }
+            return listaProfessores;
         }else
-            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado."); 
+            CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado.");
+        return null;
     }
     
-    public void gerarRelatorioPorCoordenadoria(Coordenadoria coordenadoria, int ano, int semestre) throws JRException, FileNotFoundException{
+    public List listarProfessoresCoordenadoria(Coordenadoria coordenadoria){
         
         if(coordenadoria != null){
-
             List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coordenadoria.getId());  
-            for(Professor prof : listaProfessores){
-                gerarRelatorioPorProfessor(prof, ano, semestre);
-            }            
+            return listaProfessores;
         }else
             CtrlMensagem.exibirMensagemErro(null, "Coordenadoria não encontrada.");
+        return null;
     }
     
     public void gerarRelatorioPorProfessor(Professor professor, int ano, int semestre) throws JRException, FileNotFoundException{

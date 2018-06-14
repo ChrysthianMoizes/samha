@@ -121,6 +121,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         rbtnProfessor = new javax.swing.JRadioButton();
         btnGerar = new javax.swing.JButton();
         btnAbrirPasta = new javax.swing.JButton();
+        btnEnviarEmail = new javax.swing.JButton();
         pnlProfessor = new javax.swing.JPanel();
         pnlDiasProfessor = new javax.swing.JPanel();
         lblSexta1 = new javax.swing.JLabel();
@@ -308,6 +309,17 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
             }
         });
 
+        btnEnviarEmail.setBackground(new java.awt.Color(255, 255, 255));
+        btnEnviarEmail.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        btnEnviarEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/email.png"))); // NOI18N
+        btnEnviarEmail.setText("Enviar por e-mail");
+        btnEnviarEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnEnviarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
         pnlConfiguracoesLayout.setHorizontalGroup(
@@ -331,11 +343,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                                 .addComponent(lblProfessor)
                                 .addGap(0, 264, Short.MAX_VALUE))
                             .addComponent(cbxProfessor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
+                    .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEnviarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAbrirPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlConfiguracoesLayout.setVerticalGroup(
@@ -347,8 +361,9 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnGerar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(btnAbrirPasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnGerar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(btnAbrirPasta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEnviarEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
@@ -578,8 +593,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorioProfessor().abrirPastaProfessor(ano, semestre, this);
     }//GEN-LAST:event_btnAbrirPastaActionPerformed
 
+    private void btnEnviarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEmailActionPerformed
+        
+    }//GEN-LAST:event_btnEnviarEmailActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrirPasta;
+    private javax.swing.JButton btnEnviarEmail;
     private javax.swing.JButton btnGerar;
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxEixo;

@@ -360,6 +360,7 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 cbxCurso.setEnabled(true);
                 txtNome.setEditable(false);
                 txtMatricula.setEditable(false);
+                txtEmail.setEditable(false);
                 break;
             default:
                 cbxProfessor.removeAllItems();
@@ -368,8 +369,10 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
                 cbxCurso.setEnabled(false);
                 txtNome.setEditable(true);
                 txtMatricula.setEditable(true);
+                txtEmail.setEditable(true);
                 txtMatricula.setText("");
                 txtNome.setText("");
+                txtEmail.setText("");
                 break;
         }
     }
