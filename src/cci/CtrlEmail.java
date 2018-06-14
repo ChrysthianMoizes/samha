@@ -47,7 +47,9 @@ public class CtrlEmail {
         String mensagem = "\u2022 O envio de email gera novamente os relatórios\n"
                         + "  dos professores do Filtro selecionado.\n"
                         + "\u2022 Só serão enviados emails para os professores\n"
-                        + "  que possuirem um email válido.\n\n"
+                        + "  que possuirem um email válido.\n"
+                        + "\u2022 Os e-mails serão enviados a partir do email cadastrado\n"
+                        + "  para o coordenador atualmente logado no sistema.\n\n"
                         + "\t\t Deseja continuar ?";
         
         return mensagem;
@@ -88,12 +90,13 @@ public class CtrlEmail {
         new Thread() {
             @Override
             public void run() { 
-                
+                janela.enviandoEmails();
                 for(Professor prof : professores){
                     File relatorio = obterRelatorioProfessor(prof, ano, semestre);
                     ctrlPrincipal.getGtPrincipal().getGtEmail().enviarEmailProfessor(prof, relatorio, senha);
                 }
-                CtrlMensagem.exibirMensagemSucesso(janela, "E-mail(s) enviado(s) com Sucesso!");
+                janela.emailEnviado();
+                //CtrlMensagem.exibirMensagemSucesso(janela, "E-mail(s) enviado(s) com Sucesso!");
             }
         }.start();   
     }

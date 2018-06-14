@@ -106,6 +106,16 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         btnGerar.setText("Gerar Relatório");
         btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png")));
     }
+    
+    public void enviandoEmails(){
+        btnEnviarEmail.setEnabled(false);
+        btnEnviarEmail.setText("Enviando Emails...");
+    }
+    
+    public void emailEnviado(){
+        btnEnviarEmail.setEnabled(true);
+        btnEnviarEmail.setText("Enviar por e-mail");
+    }
        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
