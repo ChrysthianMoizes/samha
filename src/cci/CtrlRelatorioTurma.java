@@ -36,7 +36,8 @@ public class CtrlRelatorioTurma {
                 iniciarThreadRelatorioTurma(janela, lista, ano, semestre);
             else
                 CtrlMensagem.exibirMensagemAviso(janela, "Nenhuma turma encontrada.");
-        }    
+        }else
+            CtrlMensagem.exibirMensagemAviso(janela, "Nenhuma turma encontrada.");    
     }
     
     public void iniciarThreadRelatorioTurma(JDRelatorioTurma janela, List<Turma> listaTurmas, int ano, int semestre){
@@ -120,7 +121,7 @@ public class CtrlRelatorioTurma {
         if(turma != null){
             
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
-            List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
+            List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
             
             List relatorio = new ArrayList();
             relatorio.add(new Aula());

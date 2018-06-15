@@ -138,7 +138,7 @@ public class CtrlEmail {
     
     public String obterNomeRelatorioProfessor(Professor professor, int ano, int semestre){
         
-        String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento("Professores", ano, semestre);
+        String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(ctrlPrincipal.getCtrlRelatorioProfessor().getPastaRaiz(), ano, semestre);
         String nomeArquivo = professor.getNome() + "-" + ano + "-" + semestre + ".pdf";
 
         return diretorio + nomeArquivo;

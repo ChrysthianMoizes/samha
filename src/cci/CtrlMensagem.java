@@ -28,6 +28,4 @@ public class CtrlMensagem {
     public static void exibirEntradaSenhaEmail(Component janela, Object mensagem){
         JOptionPane.showMessageDialog(janela, mensagem , "Senha de e-mail:", JOptionPane.PLAIN_MESSAGE);   
     }
-    
-    //return JOptionPane.showInputDialog(janela, "Informe sua senha:" , "Senha de e-mail:", JOptionPane.PLAIN_MESSAGE);
 }

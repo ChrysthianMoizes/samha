@@ -36,7 +36,8 @@ public class CtrlRelatorioProfessor {
                 iniciarThreadRelatorioProfessor(janela, professores, ano, semestre);
             else
                 CtrlMensagem.exibirMensagemAviso(janela, "Nenhum professor encontrado.");
-        }
+        }else
+            CtrlMensagem.exibirMensagemAviso(janela, "Nenhum professor encontrado.");
     }
     
     public void iniciarThreadRelatorioProfessor(JDRelatorioProfessor janela, List<Professor> listaProfessores, int ano, int semestre){
@@ -63,7 +64,6 @@ public class CtrlRelatorioProfessor {
                 }
             }
         }.start();
-        
     }
     
     public List obterListaProfessores(Eixo eixo, Coordenadoria coordenadoria, Professor professor, char tipo){
@@ -114,7 +114,7 @@ public class CtrlRelatorioProfessor {
 
         if(professor != null){
             List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);
-            List lista = ctrlPrincipal.getCtrlRelatorio().preencherListaAulasVazias(aulas);
+            List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
             
             List relatorio = new ArrayList();
             relatorio.add(new Aula());
@@ -168,5 +168,9 @@ public class CtrlRelatorioProfessor {
             System.out.println(ex.getMessage());
             CtrlMensagem.exibirMensagemErro(janela, "Não foi possível encontrar a pasta especificada.");
         }
+    }
+
+    public String getPastaRaiz() {
+        return pastaRaiz;
     }
 }

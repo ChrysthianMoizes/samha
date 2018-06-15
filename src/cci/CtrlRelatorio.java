@@ -1,10 +1,8 @@
 package cci;
 
-import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Coordenadoria;
 import cdp.Curso;
-import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.Oferta;
 import cdp.Professor;
@@ -18,7 +16,6 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -192,7 +189,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         }
     }
     
-    public void preencherTabelaProfessor(int ano, int semestre, JComboBox cbxProfessor, JTable tblProfessor){
+    public void identificarProfessor(int ano, int semestre, JComboBox cbxProfessor, JTable tblProfessor){
         
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
@@ -216,91 +213,6 @@ public class CtrlRelatorio extends CtrlGenerica{
             aula = (Aula) listaAulas.get(i);
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
         }
-    }
-    
-    public List preencherListaAulasVazias(List[] aulas){
-    
-        Aula aula;
-        Aula[] vetorAulas;
-        
-        List lista = new ArrayList<>();
-        
-        for(int dia = 0; dia < Constantes.LINHA; dia++){
-            
-            vetorAulas = preencherVetorAulas(aulas[dia]);
-            
-            for(int numero = 0; numero < 16; numero++){
-                
-                aula = vetorAulas[numero];
-                
-                if(aula == null){
-                    aula = gerarAulaVazia(dia, numero);
-                }
-                lista.add(aula);
-            }
-        }
-        return lista;
-    }
-    
-    public Aula[] preencherVetorAulas(List<Aula> lista){
-    
-        Aula[] vetorAulas = new Aula[16];
-        
-        for(Aula aula : lista){
-            vetorAulas[aula.getNumero()] = aula;
-        }
-        return vetorAulas;
-    }    
-    
-    public Aula gerarAulaVazia(int dia, int numero){
-        
-        Aula aula = new Aula();
-        
-        aula.setDia(dia);
-        aula.setNumero(numero);
-        aula.setAlocacao(gerarAlocacaoVazia());
-        aula.setOferta(gerarOfertaVazia());
-        return aula;
-    }
-    
-    public Oferta gerarOfertaVazia(){
-        
-        Oferta oferta = new Oferta();
-        oferta.setTurma(gerarTurmaVazia());
-        return oferta;
-    }
-    
-    public Turma gerarTurmaVazia(){
-        
-        Turma turma = new Turma();
-        turma.setNome("");
-        
-        return turma;
-    }
-    
-    public Alocacao gerarAlocacaoVazia(){
-        
-        Alocacao alocacao = new Alocacao();
-        alocacao.setProfessor1(gerarProfessorVazio());
-        alocacao.setProfessor2(null);
-        alocacao.setDisciplina(gerarDisciplinaVazia());
-        
-        return alocacao;
-    }
-    
-    public Disciplina gerarDisciplinaVazia(){
-        
-        Disciplina disciplina = new Disciplina();
-        disciplina.setNome("");
-        disciplina.setSigla("");
-        
-        return disciplina;
-    }
-    
-    public Professor gerarProfessorVazio(){
-        Professor professor = new Professor();
-        professor.setNome("");
-        return professor;
     }
     
     public void gerarRelatorio(List lista, Map parametros, String nomeRelatorio, String nomeExport) throws JRException, FileNotFoundException, JRRuntimeException{

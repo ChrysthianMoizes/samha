@@ -21,7 +21,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlRelatorio().preencherTabelaProfessor(ano, semestre, cbxProfessor, tblProfessor);
+        ctrlPrincipal.getCtrlRelatorio().identificarProfessor(ano, semestre, cbxProfessor, tblProfessor);
     }
     
     private void setarBackground(){

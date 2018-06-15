@@ -158,7 +158,12 @@ public class CtrlConflito {
     
     //============================================== VALIDAR QUANTIDADE DE AULAS DE DISCIPLINA ========================================================
     
-    public void validarQuantidadeAulasDisciplina(){
+    public void validarQuantidadeAulasDisciplina(){      
+        List aulas = identificarAulasIncorretas();
+        exibirNotificacoesDisciplina(aulas);     
+    }
+    
+    public List identificarAulasIncorretas(){
         
         Aula aula = null;
         boolean validado = true;
@@ -176,8 +181,8 @@ public class CtrlConflito {
                         aulas.add(aula);
                 }  
             }
-        }
-        exibirNotificacoesDisciplina(aulas);
+        }   
+        return aulas;   
     }
     
     public boolean existeDisciplinaLista(Aula aula, List aulas){
