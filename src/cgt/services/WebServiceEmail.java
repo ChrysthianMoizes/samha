@@ -9,15 +9,15 @@ import javax.mail.internet.*;
 
 public class WebServiceEmail {
 
-    public WebServiceEmail(String remetente, String senha, String dest, String titulo, String mensagem, String anexo) throws AddressException, MessagingException {
+    public WebServiceEmail(String remetente, String remetente2, String senha, String dest, String titulo, String mensagem, String anexo) throws AddressException, MessagingException {
 
         String[] destinatario = { dest };
-        enviarParaGmail(remetente, senha, destinatario, titulo, mensagem, anexo);
+        enviarParaGmail(remetente, remetente2, senha, destinatario, titulo, mensagem, anexo);
     }
 
-    private void enviarParaGmail(String remetente, String senha, String[] destinatario, String titulo ,String mensagem, String anexo) throws AddressException, MessagingException {
+    private void enviarParaGmail(String remetente, String remetente2, String senha, String[] destinatario, String titulo ,String mensagem, String anexo) throws AddressException, MessagingException {
         
-        Properties props = getProps(remetente, senha);
+        Properties props = getProps(remetente, remetente2, senha);
 
         Session session = Session.getDefaultInstance(props);
         MimeMessage message = new MimeMessage(session);
@@ -50,7 +50,7 @@ public class WebServiceEmail {
             message.setContent(mp);
             
             Transport transport = session.getTransport("smtp");
-            transport.connect(props.getProperty("mail.smtp.host"), remetente, senha);
+            transport.connect(props.getProperty("mail.smtp.host"), props.getProperty("mail.smtp.user"), senha);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }
@@ -62,7 +62,7 @@ public class WebServiceEmail {
         }
     }
     
-    private static Properties getProps(String remetente, String senha) {
+    private static Properties getProps(String remetente, String remetente2, String senha) {
         
         Properties p = System.getProperties();		
         p.put("mail.transport.protocol", "smtp");
@@ -83,6 +83,12 @@ public class WebServiceEmail {
             case 'h':
                 p.put("mail.smtp.host", "smtp.live.com");
                 break;
+                
+            case 'i':
+                p.put("mail.smtp.host", "smtp.ifes.edu.br");
+                p.put("mail.smtp.user", remetente2);
+                break;
+                
             default:
                 p.put("mail.smtp.host", "smtp.gmail.com");
                 break;

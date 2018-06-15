@@ -16,6 +16,7 @@ public class GtEmail {
     public void enviarEmailProfessor(Professor professor, String arquivo, String senha, int ano, int semestre) throws MessagingException, AddressException{
         
         String emailCoordenador = gtPrincipal.getGtCoordenador().obterEmailCoordenadorAtual();
+        String matriculaCoordenador = gtPrincipal.getGtCoordenador().obterMatriculaCoordenadorAtual();
         String emailProfessor = professor.getEmail();
         
         String titulo = "Horários de aula " + ano + "/" + semestre;
@@ -23,7 +24,7 @@ public class GtEmail {
                 + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":";
         
         if(emailProfessor != null){
-            new WebServiceEmail(emailCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
+            new WebServiceEmail(emailCoordenador, matriculaCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
         } 
     }
     
