@@ -110,11 +110,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     public void enviandoEmails(){
         btnEnviarEmail.setEnabled(false);
         btnEnviarEmail.setText("Enviando Emails...");
+        btnEnviarEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
     }
     
     public void emailEnviado(){
         btnEnviarEmail.setEnabled(true);
         btnEnviarEmail.setText("Enviar por e-mail");
+        btnEnviarEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/email.png")));
     }
        
     @SuppressWarnings("unchecked")

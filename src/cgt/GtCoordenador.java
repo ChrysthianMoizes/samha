@@ -101,6 +101,9 @@ public class GtCoordenador {
                 gtPrincipal.getGdPrincipal().getGdCoordenador().alterar(coordenador);
             }                       
             
+            if(gtPrincipal.getCoordAtual().getId() == coordenador.getId())
+                gtPrincipal.setCoordAtual(coordenador);
+            
             return Constantes.ALTERADO;
             
         } catch (Exception ex) {

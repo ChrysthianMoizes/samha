@@ -25,7 +25,9 @@ public class CtrlMensagem {
         return JOptionPane.showConfirmDialog(janela, mensagem, "Confirmar:", JOptionPane.YES_NO_CANCEL_OPTION);
     }
     
-    public static String exibirEntradaSenhaEmail(Component janela){
-        return JOptionPane.showInputDialog(janela, "Informe sua senha:" , "Senha de e-mail:", JOptionPane.PLAIN_MESSAGE);
+    public static void exibirEntradaSenhaEmail(Component janela, Object mensagem){
+        JOptionPane.showMessageDialog(janela, mensagem , "Senha de e-mail:", JOptionPane.PLAIN_MESSAGE);   
     }
+    
+    //return JOptionPane.showInputDialog(janela, "Informe sua senha:" , "Senha de e-mail:", JOptionPane.PLAIN_MESSAGE);
 }

@@ -1,7 +1,9 @@
 package cgt;
 
 import cdp.Professor;
-import java.io.File;
+import cgt.services.WebServiceEmail;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 public class GtEmail {
     
@@ -11,12 +13,18 @@ public class GtEmail {
         gtPrincipal = gt;
     }
     
-    public void enviarEmailProfessor(Professor professor, File arquivo, String senha){
+    public void enviarEmailProfessor(Professor professor, String arquivo, String senha, int ano, int semestre) throws MessagingException, AddressException{
         
         String emailCoordenador = gtPrincipal.getGtCoordenador().obterEmailCoordenadorAtual();
+        String emailProfessor = professor.getEmail();
         
+        String titulo = "Horários de aula " + ano + "/" + semestre;
+        String mensagem = "Olá " + professor.getPrimeiroNome() + "!\n\n"
+                + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":";
         
-        
+        if(emailProfessor != null){
+            new WebServiceEmail(emailCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
+        } 
     }
     
 }
