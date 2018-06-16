@@ -41,13 +41,17 @@ public class CtrlValidacaoTurmas {
         
         Turma turma;
         List listaAulas;
-       
+        
+        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(true);
+        
         for(int i = 0; i < listaTurmas.size(); i++){
             turma = (Turma) listaTurmas.get(i);
             listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
             if(!listaAulas.isEmpty())
                 identificarConflitos(turma, listaAulas);
-        } 
+        }
+        
+        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(false);
     }
     
     public void identificarConflitos(Turma turma, List listaAulas){

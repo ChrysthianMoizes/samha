@@ -13,6 +13,7 @@ public class GtInstituicao {
     
     private GtPrincipal gtPrincipal;
     private List[] vetorAulas;
+    private boolean validacaoGeral = false;
     
     public GtInstituicao(GtPrincipal gt){
         this.gtPrincipal = gt;  
@@ -47,18 +48,17 @@ public class GtInstituicao {
     }
     
     public void preencherVetorAulas(Aula aula, int idProfessor){
-        
-        int ano = aula.getAlocacao().getAno();
-        int semestre = aula.getAlocacao().getSemestre();
-        
+
         vetorAulas = new List[Constantes.LINHA];
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){
             
-            vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaAnoSemestre(linha, idProfessor, ano, semestre);
+            vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaAnoSemestre(linha, idProfessor, aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
             
-            identificarAlteracaoAula(linha, aula);
-            identificarNovaAula(linha, aula);
+            if(!validacaoGeral){
+                identificarAlteracaoAula(linha, aula);
+                identificarNovaAula(linha, aula);
+            }    
             Collections.sort(vetorAulas[linha]);
         }
     }
@@ -72,7 +72,7 @@ public class GtInstituicao {
             
             aulaBanco = (Aula) listaAulasBanco.get(indice);
             
-            if((aulaBanco.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){
+            if((aulaBanco.getOferta().getTurma().getId() == aula.getOferta().getTurma().getId())){ // VERIFICA SE SÃO DA MESMA TURMA
 
                 aulaMatriz = identificarAulaMatriz(aulaBanco);
                 
@@ -284,9 +284,11 @@ public class GtInstituicao {
             }else if(fim.getHour() < inicio.getHour()){
                 if(fim.getMinute() >= inicio.getMinute()){
                     return qtHoras;
+                }else{
+                    return qtHoras; // ISSO PODE DAR PROBLEMA, MAS SÓ VOU DESCOBRIR USANDO
                 }
-            }
-            return 24 - qtHoras;
+            }else
+                return 24 - qtHoras;
         }    
         return qtHoras;
     }
@@ -306,5 +308,9 @@ public class GtInstituicao {
             default:
                 return Constantes.SEXTA; 
         }  
+    }
+
+    public void setValidacaoGeral(boolean validacaoGeral) {
+        this.validacaoGeral = validacaoGeral;
     }
 }

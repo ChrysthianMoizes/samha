@@ -81,6 +81,9 @@ public class CtrlOferta extends CtrlGenerica{
                 }
         }
         
+        ctrlPrincipal.getCtrlConflito().limparCorCelulasTabelaTurma();
+        limparCorCelulasTabelaProfessor();
+        
         JTableUtil.limparCelulasTabela(tblTurma);
         jdOferta.limparNotificacoes();
         jdOferta.setarMensagem("");
@@ -289,9 +292,9 @@ public class CtrlOferta extends CtrlGenerica{
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
             
             if(identificarConflitoAulaProfessor(aula, idProfessor, numero))
-                pintarCelula(aula.getDia(), aula.getNumero(), corErro);
+                pintarCelulaTabelaProfessor(aula.getDia(), aula.getNumero(), corErro);
             else
-                pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
+                pintarCelulaTabelaProfessor(aula.getDia(), aula.getNumero(), Color.WHITE);
         }
         
         if(!vetorProfessores[indice])
@@ -315,15 +318,16 @@ public class CtrlOferta extends CtrlGenerica{
         return false;
     }
 
-    public void pintarCelula(int linha, int coluna, Color cor){
+    public void pintarCelulaTabelaProfessor(int linha, int coluna, Color cor){
         renderTabelaProfessor.setColorMatriz(linha, coluna, cor);
-        jdOferta.getTblProfessor().repaint();
+        if(jdOferta != null)
+            jdOferta.getTblProfessor().repaint();
     }
 
-    public void limparCelulasTabela(){
+    public void limparCorCelulasTabelaProfessor(){
         for(int linha = 0; linha < Constantes.LINHA; linha++){  
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                pintarCelula(linha, coluna, Color.WHITE);
+                pintarCelulaTabelaProfessor(linha, coluna, Color.WHITE);
             }   
         }
     }

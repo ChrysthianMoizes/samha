@@ -84,7 +84,7 @@ public class CtrlAula {
     
     public void arrastarAula(int linha, int coluna, Aula aula){
         
-        ctrlPrincipal.getCtrlConflito().pintarCelula(linha, coluna, Color.WHITE);
+        ctrlPrincipal.getCtrlConflito().pintarCelulaTabelaTurma(linha, coluna, Color.WHITE);
         
         String t = (String) jdOferta.getCbxTurno().getSelectedItem();
         int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(t);
@@ -92,7 +92,7 @@ public class CtrlAula {
         if(aula != null && !isDropInterno()){    // ARRASTAR DA LISTA         
             ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(aula);  
         }else if(aula != null && isDropInterno()){  // ARRASTAR DA TABELA
-            ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
+            ctrlPrincipal.getCtrlConflito().pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
             ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, turno, aula);  
         }else
             CtrlMensagem.exibirMensagemAviso(jdOferta, "Selecione uma aula válida.");
@@ -112,7 +112,7 @@ public class CtrlAula {
         
         ctrlPrincipal.getCtrlOferta().identificarProfessor(aula);
         
-        ctrlPrincipal.getCtrlConflito().pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
+        ctrlPrincipal.getCtrlConflito().pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
         ctrlPrincipal.getGtPrincipal().getGtAula().removerAula(aula);
         tblTurma.setValueAt(null, linha, coluna);
         setAulaSelecionada(null);
@@ -191,18 +191,18 @@ public class CtrlAula {
                 if (confirmacao == 0){ 
                     jdOferta.salvarAulas();
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
-                    ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
+                    ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
                     jdOferta.dispose();
                 }else if(confirmacao == 1){
                     setTemAlteracoes(false);
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
-                    ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
+                    ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
                     jdOferta.dispose();
                 }
                 
         }else{
             ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
-            ctrlPrincipal.getCtrlOferta().limparCelulasTabela();
+            ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
             jdOferta.dispose();
         }
         

@@ -71,7 +71,8 @@ public class RenderizadorCelulas extends DefaultTableCellRenderer{
     }
     
     public void setColorMatriz(int linha, int coluna, Color cor){
-        cores[linha][coluna] = cor;    
+        if(cores != null)
+            cores[linha][coluna] = cor;    
     }
 
     public void setTurno(int turno) {

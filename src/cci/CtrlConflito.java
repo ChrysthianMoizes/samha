@@ -43,14 +43,14 @@ public class CtrlConflito {
                     List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
                     
                     if(msg.isEmpty())
-                        pintarCelula(aula.getDia(), aula.getNumero(), Color.WHITE);
+                        pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
                     else
-                        pintarCelula(aula.getDia(), aula.getNumero(), corErro);
+                        pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), corErro);
                     
                     mensagens.addAll(msg);
                     exibirNotificacoesConflito(msg, aula);
                 }else
-                    pintarCelula(linha, coluna, Color.WHITE); 
+                    pintarCelulaTabelaTurma(linha, coluna, Color.WHITE); 
             }
         }
         
@@ -114,9 +114,18 @@ public class CtrlConflito {
         return null;
     }
     
-    public void pintarCelula(int linha, int coluna, Color cor){
+    public void pintarCelulaTabelaTurma(int linha, int coluna, Color cor){
         renderTabelaTurma.setColorMatriz(linha, coluna, cor);
-        jdOferta.getTblTurma().repaint();
+        if(jdOferta != null)
+            jdOferta.getTblTurma().repaint();
+    }
+    
+    public void limparCorCelulasTabelaTurma(){
+        for(int linha = 0; linha < Constantes.LINHA; linha++){  
+            for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
+                pintarCelulaTabelaTurma(linha, coluna, Color.WHITE);
+            }   
+        }
     }
     
     public void setJdOferta(JDOferta jdOferta) {
