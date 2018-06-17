@@ -34,7 +34,13 @@ public class DnDTabela extends TransferHandler{
         ctrlPrincipal.getCtrlAula().setAulaSelecionada(aula);
         ctrlPrincipal.getCtrlAula().setDropInterno(true);
         
-        StringSelection transferable = new StringSelection(aula.toString());
+        StringSelection transferable = null;
+        
+        if(aula != null)
+            transferable = new StringSelection(aula.toString());
+        else
+            transferable = new StringSelection("");
+        
         return transferable;
 
     }
