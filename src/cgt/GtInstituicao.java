@@ -277,18 +277,16 @@ public class GtInstituicao {
         if(flag == Constantes.INTERVALO_MINIMO){
             
             if(fim.getHour() == inicio.getHour()){
+                
                 if(fim.getMinute() < inicio.getMinute()){
                     return qtHoras;
-                } 
+                }
                 
             }else if(fim.getHour() < inicio.getHour()){
-                if(fim.getMinute() >= inicio.getMinute()){
-                    return qtHoras;
-                }else{
-                    return qtHoras; // ISSO PODE DAR PROBLEMA, MAS SÓ VOU DESCOBRIR USANDO
-                }
-            }else
-                return 24 - qtHoras;
+                return qtHoras; 
+            }
+            
+            return 24 - qtHoras;
         }    
         return qtHoras;
     }
