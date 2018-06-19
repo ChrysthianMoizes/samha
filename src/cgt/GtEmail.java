@@ -23,9 +23,46 @@ public class GtEmail {
         String mensagem = "Olá " + professor.getPrimeiroNome() + "!\n\n"
                 + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":";
         
+        String host = identificarHost(emailCoordenador);
+        String remetente = identificarRemetente(emailCoordenador, matriculaCoordenador);
+        
         if(emailProfessor != null){
-            new WebServiceEmail(emailCoordenador, matriculaCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
+            new WebServiceEmail(remetente, host, senha, emailProfessor, titulo, mensagem, arquivo);
         } 
     }
     
+    public String identificarRemetente(String emailRemetente, String matriculaRemetente){
+        
+        String[] substring = emailRemetente.split("@", 2);
+        char host = substring[1].charAt(0);
+
+        switch (host) {
+
+            case 'i':
+                return matriculaRemetente;
+            default:
+                return emailRemetente;
+        }
+    }
+    
+    public String identificarHost(String remetente){
+        
+        String[] substring = remetente.split("@", 2);
+        char host = substring[1].charAt(0);
+        
+        switch (host) {
+            
+            case 'g':
+                return "smtp.gmail.com";
+ 
+            case 'h':
+                return "smtp.live.com";
+                
+            case 'i':
+                return "smtp.ifes.edu.br";
+
+            default:
+                return "smtp.gmail.com";
+        }
+    }  
 }
