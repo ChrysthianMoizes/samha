@@ -123,7 +123,7 @@ public class CtrlEmail {
                         ctrlPrincipal.getGtPrincipal().getGtEmail().enviarEmailProfessor(prof, relatorio, senha, ano, semestre);
                         
                     } catch (MessagingException ex) {
-                        CtrlMensagem.exibirMensagemErro(janela, "Erro ao enviar: E-mail ou senha podem estar incorretos.");
+                        CtrlMensagem.exibirMensagemErro(janela, "Erro ao enviar: E-mail ou senha podem estar incorretos. " + ex.getMessage());
                         sucesso = false;
                         break;
                         

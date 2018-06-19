@@ -27,7 +27,7 @@ public class GtEmail {
         String remetente = identificarRemetente(emailCoordenador, matriculaCoordenador);
         
         if(emailProfessor != null){
-            new WebServiceEmail(remetente, host, senha, emailProfessor, titulo, mensagem, arquivo);
+            new WebServiceEmail(remetente, host, emailCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
         } 
     }
     

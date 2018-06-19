@@ -9,13 +9,13 @@ import javax.mail.internet.*;
 
 public class WebServiceEmail {
 
-    public WebServiceEmail(String remetente, String host, String senha, String dest, String titulo, String mensagem, String anexo) throws AddressException, MessagingException {
+    public WebServiceEmail(String remetente, String host, String email, String senha, String dest, String titulo, String mensagem, String anexo) throws AddressException, MessagingException {
 
         String[] destinatario = { dest };
-        enviarEmail(remetente, host, senha, destinatario, titulo, mensagem, anexo);
+        enviarEmail(remetente, host, email, senha, destinatario, titulo, mensagem, anexo);
     }
 
-    private void enviarEmail(String remetente, String host, String senha, String[] destinatario, String titulo ,String mensagem, String anexo) throws AddressException, MessagingException {
+    private void enviarEmail(String remetente, String host, String email, String senha, String[] destinatario, String titulo ,String mensagem, String anexo) throws AddressException, MessagingException {
         
         Properties props = obterPropriedades(remetente, host, senha);
 
@@ -24,7 +24,7 @@ public class WebServiceEmail {
 
         try {
             
-            message.setFrom(new InternetAddress(remetente));
+            message.setFrom(new InternetAddress(email));
             InternetAddress[] toAddress = new InternetAddress[destinatario.length];
 
             for( int i = 0; i < destinatario.length; i++ ) {
@@ -72,7 +72,7 @@ public class WebServiceEmail {
         p.put("mail.smtp.user", remetente);
         p.put("mail.smtp.password", senha);
         p.put("mail.smtp.host", host);
-
+    
         return p;
     }
 }
