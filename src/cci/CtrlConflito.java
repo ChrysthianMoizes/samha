@@ -24,41 +24,41 @@ public class CtrlConflito {
     
     public void validarOferta(JTable tabela, JDOferta tela){
         
-        renderTabelaTurma.gerarMatrizCores();
-        
         setJdOferta(tela);
+        renderTabelaTurma.gerarMatrizCores();
+
         List mensagens = new ArrayList<>();
         jdOferta.limparNotificacoes();
         Aula aula;
-        
+
         instanciarVetoresRestricaoInstituicao();
-        
+
         for(int linha = 0; linha < Constantes.LINHA; linha++){ 
             for(int coluna = 0; coluna < Constantes.COLUNA; coluna++){
-                
+
                 aula = (Aula) ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
-                
+
                 if(aula != null){
-                    
+
                     List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
-                    
+
                     if(msg.isEmpty())
                         pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
                     else
                         pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), corErro);
-                    
+
                     mensagens.addAll(msg);
                     exibirNotificacoesConflito(msg, aula);
                 }else
                     pintarCelulaTabelaTurma(linha, coluna, Color.WHITE); 
             }
         }
-        
+
         if(mensagens.isEmpty()){
             jdOferta.limparNotificacoes();
             jdOferta.exibirNotificacao("Nenhum conflito encontrado!\n\n", ctrlPrincipal.setarCorPanelExterior()); 
         }
-        
+
         jdOferta.validarOferta(false);
     }
     

@@ -61,6 +61,36 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma, btnCQD);
     }
     
+    public void validarTurmas(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlValidacao().confirmarValidacaoTurmas(ano, semestre);
+    }
+    
+    public void validandoOferta(){
+        btnValidarOferta.setText("Validando...");
+        btnValidarOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
+    }
+    
+    public void ofertaValidada(){
+        btnValidarOferta.setText("Validar");
+        btnValidarOferta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/validar.png")));
+    }
+    
+    public void validandoTurmas(){
+        btnValidarTurmas.setText("Validando Turmas ...");
+        btnValidarTurmas.setEnabled(false);
+        btnValidarTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/aguarde.png")));
+    }
+    
+    public void turmasValidadas(){
+        btnValidarTurmas.setText("Validar Turmas");
+        btnValidarTurmas.setEnabled(true);
+        btnValidarTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/validar.png")));
+    }
+    
     public void atualizarOferta(){
         
         int tempo = (int) spnTempoMaximo.getValue();
@@ -180,15 +210,7 @@ public class JDOferta extends javax.swing.JDialog {
     public JLabel getLblNomeProfessor() {
         return lblNomeProfessor;
     }
-    
-    public void validarTurmas(){
-        
-        int ano = (int) spnAno.getValue();
-        int semestre = (int) spnSemestre.getValue();
-        
-        ctrlPrincipal.getCtrlValidacao().confirmarValidacaoTurmas(ano, semestre);
-    }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

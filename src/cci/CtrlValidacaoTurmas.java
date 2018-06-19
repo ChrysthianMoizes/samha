@@ -4,6 +4,7 @@ import cdp.Aula;
 import cdp.Turma;
 import cih.oferta.JDOferta;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CtrlValidacaoTurmas {
@@ -36,33 +37,55 @@ public class CtrlValidacaoTurmas {
     
     public void validarTurmas(int ano, int semestre){
         
-        List listaTurmas = ctrlPrincipal.getCtrlTurma().listar();
-        telaOferta.limparNotificacoes();
-        
-        Turma turma;
-        List listaAulas;
-        
-        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(true);
-        
-        for(int i = 0; i < listaTurmas.size(); i++){
-            turma = (Turma) listaTurmas.get(i);
-            listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
-            if(!listaAulas.isEmpty())
-                identificarConflitos(turma, listaAulas);
-        }
-        
-        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(false);
+        new Thread() {
+            @Override
+            public void run() {
+                
+                telaOferta.validandoTurmas();
+                
+                List listaTurmas = ctrlPrincipal.getCtrlTurma().listar();
+                telaOferta.limparNotificacoes();
+
+                Turma turma;
+                List listaAulas;
+
+                ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(true);
+
+                List mensagens = new ArrayList<>();
+                
+                for(int i = 0; i < listaTurmas.size(); i++){
+                    turma = (Turma) listaTurmas.get(i);
+                    listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
+                    if(!listaAulas.isEmpty())
+                        mensagens.addAll(identificarConflitos(turma, listaAulas));
+                }
+
+                ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(false);
+                
+                if(mensagens.isEmpty()){
+                    telaOferta.limparNotificacoes();
+                    telaOferta.exibirNotificacao("Nenhum conflito encontrado!\n\n", ctrlPrincipal.setarCorPanelExterior()); 
+                }
+                
+                telaOferta.turmasValidadas();
+            }
+        }.start();
+ 
     }
     
-    public void identificarConflitos(Turma turma, List listaAulas){
+    public List identificarConflitos(Turma turma, List listaAulas){
+        
+        List mensagens = new ArrayList<>();
         
         Aula aula;
         
         for(int i = 0; i < listaAulas.size(); i++){
             aula = (Aula) listaAulas.get(i);
-            List mensagens = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
-            exibirMensagens(mensagens, aula, turma);
+            List msg = ctrlPrincipal.getGtPrincipal().getGtConflito().validarAula(aula);
+            exibirMensagens(msg, aula, turma);
+            mensagens.addAll(msg);
         }
+        return mensagens;
     }
     
     public void exibirMensagens(List mensagens, Aula aula, Turma turma){

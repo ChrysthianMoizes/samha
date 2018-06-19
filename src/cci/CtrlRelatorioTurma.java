@@ -120,20 +120,26 @@ public class CtrlRelatorioTurma {
 
         if(turma != null){
             
-            List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
-            List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
+            //boolean estahAtiva = ctrlPrincipal.getGtPrincipal().getGtRelatorio().verificarTurmaAtiva(turma, ano, semestre);
             
-            List relatorio = new ArrayList();
-            relatorio.add(new Aula());
+            if(true){
             
-            String nomeRelatorio = "relatorioGenerico";
+                List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
+                List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
+
+                List relatorio = new ArrayList();
+                relatorio.add(new Aula());
+
+                String nomeRelatorio = "relatorioGenerico";
+
+                Map parametros = gerarHashTurma(turma, ano, semestre, lista);
+
+                String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
+                String nomeExport = diretorio + turma.getNome() + "-" + ano + "-" + semestre + ".pdf";
+
+                ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(relatorio, parametros, nomeRelatorio, nomeExport);
+            }
             
-            Map parametros = gerarHashTurma(turma, ano, semestre, lista);
-            
-            String diretorio = ctrlPrincipal.getCtrlRelatorio().obterDiretorioArquivamento(pastaRaiz, ano, semestre);
-            String nomeExport = diretorio + turma.getNome() + "-" + ano + "-" + semestre + ".pdf";
-            
-            ctrlPrincipal.getCtrlRelatorio().gerarRelatorio(relatorio, parametros, nomeRelatorio, nomeExport);
         }else
             CtrlMensagem.exibirMensagemErro(null, "Turma não encontrada.");
     }
@@ -142,8 +148,10 @@ public class CtrlRelatorioTurma {
         
         Map hash = new HashMap();
         
+        String periodoAtual = ctrlPrincipal.getGtPrincipal().getGtRelatorio().obterAnoPeriodoAtual(ano, semestre, turma);
         String anoSemestre = ano + "/" + semestre;
-        hash.put("nome", turma.getNome());
+        
+        hash.put("nome", turma.getNome() + " - " + periodoAtual);
         hash.put("setor", turma.getMatriz().getCurso().getNome() + "\t" + anoSemestre);
         hash.putAll(transformarListaEmHash(lista));
         return hash;
