@@ -120,9 +120,9 @@ public class CtrlRelatorioTurma {
 
         if(turma != null){
             
-            //boolean estahAtiva = ctrlPrincipal.getGtPrincipal().getGtRelatorio().verificarTurmaAtiva(turma, ano, semestre);
+            boolean estahAtiva = ctrlPrincipal.getGtPrincipal().getGtRelatorio().verificarTurmaAtiva(turma, ano, semestre);
             
-            if(true){
+            if(estahAtiva){
             
                 List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
                 List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
