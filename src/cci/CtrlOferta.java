@@ -311,7 +311,10 @@ public class CtrlOferta extends CtrlGenerica{
         if(conflitoRestricaoProfessor != null)
             return true;
         
+        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(true);
         List conflitoInstituicao = ctrlPrincipal.getGtPrincipal().getGtInstituicao().identificarConflitoRestricaoInstituicao(aula, numero);
+        ctrlPrincipal.getGtPrincipal().getGtInstituicao().setValidacaoGeral(false);
+        
         if(!conflitoInstituicao.isEmpty())
             return true;
         
