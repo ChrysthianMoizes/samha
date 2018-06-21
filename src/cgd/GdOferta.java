@@ -1,6 +1,7 @@
 package cgd;
 
 import cdp.Oferta;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -23,5 +24,17 @@ public class GdOferta extends GdGenerico{
         sessao.getTransaction().commit();
         sessao.close();
         return oferta;
+    }
+    
+    public List filtrarOfertaTurma(int idTurma) {
+        Criteria crit = criarSessao().createCriteria(Oferta.class);
+        sessao.beginTransaction();
+        crit.createAlias("turma", "t");
+        crit.add( Restrictions.eq("t.id", idTurma));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
     }
 }

@@ -70,7 +70,7 @@ public class CtrlEmail {
                         + "  dos professores do Filtro selecionado.\n"
                         + "\u2022 Certifique-se de que os professores selecionados\n"
                         + "  possuem um email válido. Caso contrário, estes professores\n"
-                        + "  não receberão e-mail."
+                        + "  não receberão e-mail.\n"
                         + "\u2022 Os e-mails serão enviados a partir do email cadastrado\n"
                         + "  para o coordenador atualmente logado no sistema.\n\n"
                         + "\t\t Deseja continuar ?";

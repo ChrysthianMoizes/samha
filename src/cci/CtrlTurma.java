@@ -8,8 +8,10 @@ import cih.turma.JDBuscarTurma;
 import cih.turma.JDCadastrarTurma;
 import java.awt.Frame;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -79,9 +81,16 @@ public class CtrlTurma extends CtrlGenerica{
             CtrlMensagem.exibirMensagemErro(cadastraTurma, resposta);
     }
     
-    public void listarTurmas(String coluna, String texto, JTable tabela){
+    public void listarTurmas(String coluna, String texto, JTable tabela, JCheckBox chxAtiva){
         
         List listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().buscar(coluna, texto);
+        
+        if(chxAtiva.isSelected()){
+            int ano = buscaTurma.getAno();
+            int semestre = buscaTurma.getSemestre();
+            listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, ano, semestre);
+        }
+        
         listarEmTabela(listaTurmas, tabela, buscaTurma, "toArray");
         
         if(listaTurmas.isEmpty())

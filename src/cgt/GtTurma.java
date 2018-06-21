@@ -3,6 +3,7 @@ package cgt;
 import cdp.MatrizCurricular;
 import cdp.Turma;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -91,9 +92,9 @@ public class GtTurma {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            //verificar se a turma possui oferta
-            List oferta = null; 
-            if(oferta == null){
+            List listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertaTurma(turma.getId()); 
+            
+            if(listaOfertas.isEmpty()){
                 gtPrincipal.getGdPrincipal().getGdTurma().excluir(turma);
                 return Constantes.EXCLUIDO;
             }else
@@ -113,6 +114,82 @@ public class GtTurma {
         
         if(matriz == null)
             throw new SAMHAException(13);
+    }
+    
+    public List filtrarTurmasAtivas(List<Turma> listaTurmas, int ano, int semestre){
+        
+        List turmasAtivas = new ArrayList();
+        
+        for(Turma turma : listaTurmas){
+            if(verificarTurmaAtiva(turma, ano, semestre)){
+                turmasAtivas.add(turma);
+            }
+        }
+        return turmasAtivas;
+    }
+    
+    public boolean verificarTurmaAtiva(Turma turma, int anoAtual, int semestreAtual){
+        
+        int anoInicial = turma.getAno();
+        int semestreInicial = turma.getSemestre();
+        String p = null;
+        
+        if(turma.getMatriz().getCurso().getNivel().equals("ENSINO MÉDIO INTEGRADO")){
+         
+            p = calcularAnoAtual(anoAtual, anoInicial);
+        }else{
+
+            p = calcularPeriodoAtual(anoAtual, semestreAtual, anoInicial, semestreInicial);
+        }
+        
+        int anoPeriodo = Integer.valueOf(p);
+        
+        if(anoPeriodo > turma.getMatriz().getCurso().getQtPeriodos())
+            return false;
+        
+        return true;
+    }
+    
+    public String obterAnoPeriodoAtual(int anoAtual, int semestreAtual, Turma turma){
+        
+        int anoInicial = turma.getAno();
+        int semestreInicial = turma.getSemestre();
+        
+        String nivel = null;
+        String periodoAtual = null;
+        
+        if(turma.getMatriz().getCurso().getNivel().equals("ENSINO MÉDIO INTEGRADO")){
+            nivel = "º ANO";
+            periodoAtual = calcularAnoAtual(anoAtual, anoInicial);
+        }else{
+            nivel = "º PERÍODO";
+            periodoAtual = calcularPeriodoAtual(anoAtual, semestreAtual, anoInicial, semestreInicial);
+        }
+
+        return periodoAtual + nivel;
+    }
+    
+    public String calcularAnoAtual(int anoAtual, int anoInicial){
+        
+        int qtAnos = (anoAtual - anoInicial) + 1;
+        String ano = String.valueOf(qtAnos);
+        
+        return ano;
+    }
+    
+    public String calcularPeriodoAtual(int anoAtual, int semestreAtual, int anoInicial, int semestreInicial){
+        
+        int qtAnos = ((anoAtual - anoInicial) * 2);
+        
+        if(semestreAtual == semestreInicial){
+            qtAnos+=1;
+        }else if(semestreAtual == 2 && semestreInicial == 1){
+            qtAnos+=2;
+        }
+        
+        String periodo = String.valueOf(qtAnos);
+        
+        return periodo;
     }
     
 }

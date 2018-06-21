@@ -113,7 +113,11 @@ public class Turma implements Serializable, Comparable<Object> {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
+        return new Object[] { this, getAnoSemestre(), getMatriz().getNome(), getMatriz().getCurso().getNome(), getTurno() };
+    }
+    
+    public String getAnoSemestre(){
+        return String.valueOf(getAno()) + "/" + String.valueOf(getSemestre());
     }
 
     @Override

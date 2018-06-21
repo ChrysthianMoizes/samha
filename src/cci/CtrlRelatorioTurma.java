@@ -120,7 +120,7 @@ public class CtrlRelatorioTurma {
 
         if(turma != null){
             
-            boolean estahAtiva = ctrlPrincipal.getGtPrincipal().getGtRelatorio().verificarTurmaAtiva(turma, ano, semestre);
+            boolean estahAtiva = ctrlPrincipal.getGtPrincipal().getGtTurma().verificarTurmaAtiva(turma, ano, semestre);
             
             if(estahAtiva){
             
@@ -148,7 +148,7 @@ public class CtrlRelatorioTurma {
         
         Map hash = new HashMap();
         
-        String periodoAtual = ctrlPrincipal.getGtPrincipal().getGtRelatorio().obterAnoPeriodoAtual(ano, semestre, turma);
+        String periodoAtual = ctrlPrincipal.getGtPrincipal().getGtTurma().obterAnoPeriodoAtual(ano, semestre, turma);
         String anoSemestre = ano + "/" + semestre;
         
         hash.put("nome", turma.getNome() + " - " + periodoAtual);
