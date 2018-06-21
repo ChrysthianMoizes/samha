@@ -71,22 +71,8 @@ public class CtrlOferta extends CtrlGenerica{
     public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, int periodo,
             JComboBox cbxTurma, JComboBox cbxTurno, JList lstAlocacoes, JTable tblTurma, JToggleButton btnCQD){
         
-        
-        if(ctrlPrincipal.getCtrlAula().isTemAlteracoes()){
-            String mensagem = "Deseja salvar as alterações feitas ?";
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
-                if (confirmacao == 0) {
-                    jdOferta.salvarAulas();
-                    ctrlPrincipal.getCtrlAula().setTemAlteracoes(false);
-                }
-        }
-        
-        ctrlPrincipal.getCtrlConflito().limparCorCelulasTabelaTurma();
-        limparCorCelulasTabelaProfessor();
-        
-        JTableUtil.limparCelulasTabela(tblTurma);
-        jdOferta.limparNotificacoes();
-        jdOferta.setarMensagem("");
+        verificarAulasPendentes();
+        limparTela(tblTurma);
         
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         
@@ -103,6 +89,28 @@ public class CtrlOferta extends CtrlGenerica{
         
         preencherListaAlocacoes(ano, semestre, periodo, turma, lstAlocacoes, tblTurma);
         setarAlocacao();
+    }
+    
+    public void verificarAulasPendentes(){
+        
+        if(ctrlPrincipal.getCtrlAula().isTemAlteracoes()){
+            String mensagem = "Deseja salvar as alterações feitas ?";
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
+            if (confirmacao == 0) {
+                jdOferta.salvarAulas();
+                ctrlPrincipal.getCtrlAula().setTemAlteracoes(false);
+            }
+        }
+    }
+    
+    public void limparTela(JTable tabela){
+        
+        ctrlPrincipal.getCtrlConflito().limparCorCelulasTabelaTurma();
+        limparCorCelulasTabelaProfessor();
+        
+        JTableUtil.limparCelulasTabela(tabela);
+        jdOferta.limparNotificacoes();
+        jdOferta.setarMensagem("");
     }
     
     public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
@@ -133,8 +141,8 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void setarAlocacao(){
         if(listaAlocacoes != null && !listaAlocacoes.isEmpty()){
-                jdOferta.getLstAlocacoes().setSelectedIndex(0);
-                jdOferta.preencherHorarioProfessor();
+            jdOferta.getLstAlocacoes().setSelectedIndex(0);
+            jdOferta.preencherHorarioProfessor();
         }else
             zerarTabelaProfessor();   
     }
@@ -258,7 +266,6 @@ public class CtrlOferta extends CtrlGenerica{
     public void alterarProfessorCombo(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
         
         int numero = cbxQuantidadeProfessor.getSelectedIndex();
-        List listaAulas;
         int indice = lstAlocacoes.getSelectedIndex();
         
         if(indice >= 0){
@@ -271,7 +278,7 @@ public class CtrlOferta extends CtrlGenerica{
             if(numero == 1)
                 professor = alocacao.getProfessor2();
 
-            listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
             
             jdOferta.setarProfessor(professor.getNome());
             setNomeProfessor(professor.getNome());

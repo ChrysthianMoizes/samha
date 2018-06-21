@@ -48,7 +48,7 @@ public class GdAula extends GdGenerico{
         }     
     }
     
-    public List identificarConflitoAula(int ano, int semestre, int idProfessor, int numero, int dia) {
+    public List filtrarAulasProfessorNumeroDiaAnoSemestre(int ano, int semestre, int idProfessor, int numero, int dia) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         crit.createAlias("alocacao", "a");
         crit.createAlias("a.professor1", "p");
@@ -91,7 +91,7 @@ public class GdAula extends GdGenerico{
         return lista;
     }
     
-    public List filtrarAulasProfessor2DiaAnoSemestre(int dia, int idProfessor, int ano, int semestre) {
+    public List filtrarAulasProfessor2DiaAnoSemestre(int dia, int idProfessor, int ano      , int semestre) {
         Criteria crit = criarSessao().createCriteria(Aula.class);
         sessao.beginTransaction();
         crit.createAlias("alocacao", "a");

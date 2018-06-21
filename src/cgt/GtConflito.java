@@ -47,14 +47,17 @@ public class GtConflito {
     }
     
     public String identificarConflitoTurma(Aula aula, int idProfessor){
-           
-        List listaAulasBanco = gtPrincipal.getGdPrincipal().getGdAula().identificarConflitoAula(aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre(), idProfessor, aula.getNumero(), aula.getDia());
-        listaAulasBanco = removerAulaListaBanco(listaAulasBanco, aula);
         
-        if(listaAulasBanco.isEmpty())
+        int ano = aula.getAlocacao().getAno();
+        int semestre = aula.getAlocacao().getSemestre();
+        
+        List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaAnoSemestre(ano, semestre, idProfessor, aula.getNumero(), aula.getDia());
+        listaAulas = removerAulaListaBanco(listaAulas, aula);
+        
+        if(listaAulas.isEmpty())
             return null;
         else
-            return montarMensagemConflitoTurma(listaAulasBanco);
+            return montarMensagemConflitoTurma(listaAulas);
     }
     
     public List removerAulaListaBanco(List listaAulasBanco, Aula aula){

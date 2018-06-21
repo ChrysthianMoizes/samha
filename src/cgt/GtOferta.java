@@ -3,7 +3,6 @@ package cgt;
 import cdp.Oferta;
 import cdp.Turma;
 import java.sql.SQLException;
-import java.util.List;
 
 public class GtOferta {
 
