@@ -894,11 +894,11 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        atualizarTela();
+        preencherComboTurma();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        atualizarTela();
+        preencherComboTurma();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed

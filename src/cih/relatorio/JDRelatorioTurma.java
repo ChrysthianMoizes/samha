@@ -48,7 +48,11 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     }
     
     public void preencherComboTurma(){
-        ctrlPrincipal.getCtrlRelatorio().preencherComboTurma(cbxCurso, cbxTurma);    
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlRelatorio().preencherComboTurma(cbxCurso, cbxTurma, ano, semestre);    
     }
     
     public void setarTurma(String nome){
@@ -559,10 +563,12 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
+        preencherComboTurma();
         identificarOferta();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
+        preencherComboTurma();
         identificarOferta();
     }//GEN-LAST:event_spnSemestreStateChanged
 

@@ -118,12 +118,13 @@ public class CtrlRelatorio extends CtrlGenerica{
         }
     }
     
-    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma) {
+    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, int ano, int semestre) {
         
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         
         if(curso != null){
             List listaTurmas = ctrlPrincipal.getCtrlTurma().filtrarPorCurso(curso.getId());
+            listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, ano, semestre);
             preencherCombo(cbxTurma, listaTurmas);           
         }  
     }
