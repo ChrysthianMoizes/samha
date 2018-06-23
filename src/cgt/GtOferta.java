@@ -17,14 +17,13 @@ public class GtOferta {
         
         Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, turma.getId());
         
-        if(oferta == null)
+        if(oferta == null && gtPrincipal.getGtTurma().verificarTurmaAtiva(turma, ano, semestre)){
             oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);
-
-        setOfertaSelecionada(oferta);
-        
-        if(oferta != null){
-            gtPrincipal.getGtAula().preencherMatrizOferta(oferta);
         }
+        
+        setOfertaSelecionada(oferta);
+        gtPrincipal.getGtAula().preencherMatrizOferta(oferta);
+        
     }
     
     public void atualizarOferta(int tempoMaximo, int intervaloMinimo){
@@ -64,5 +63,9 @@ public class GtOferta {
 
     public void setOfertaSelecionada(Oferta ofertaSelecionada) {
         this.ofertaSelecionada = ofertaSelecionada;
+    }
+    
+    public Oferta filtrarUltimaOfertaTurma(int idTurma){
+        return gtPrincipal.getGdPrincipal().getGdOferta().filtrarUltimaOfertaTurma(idTurma);
     }
 }

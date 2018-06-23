@@ -90,10 +90,14 @@ public class GtAula {
     public String salvarAulas(){
 
         try {
-            
-            gtPrincipal.getGdPrincipal().getGdAula().salvarAulasOferta(matriz, listaAulasRemovidas);
-            preencherMatrizOferta(gtPrincipal.getGtOferta().getOfertaSelecionada());
-            return Constantes.CADASTRADO;
+            if(gtPrincipal.getGtOferta().getOfertaSelecionada() != null){
+                gtPrincipal.getGdPrincipal().getGdAula().salvarAulasOferta(matriz, listaAulasRemovidas);
+                preencherMatrizOferta(gtPrincipal.getGtOferta().getOfertaSelecionada());
+                return Constantes.CADASTRADO;
+            }else{
+                gerarEstruturasArmazenamento();
+                return "Esta turma não está ativa neste ano/período.";
+            }
             
         } catch (Exception ex) {
             return ex.getMessage();
@@ -102,17 +106,21 @@ public class GtAula {
     
     public void preencherMatrizOferta(Oferta oferta){
         
-        preencherListaAulasAnoSemestre(oferta.getAno(), oferta.getSemestre());
         gerarEstruturasArmazenamento();
-
-        List lista = filtrarAulasOfertaLista(oferta.getId());
         
-        Aula aula;
-        for(int linha = 0; linha < lista.size(); linha++){
-            aula = (Aula) lista.get(linha);
-            aula.setOferta(oferta);
-            setAulaMatriz(aula.getDia(), aula.getNumero(), aula);   
-        }  
+        if(oferta != null){
+            
+            preencherListaAulasAnoSemestre(oferta.getAno(), oferta.getSemestre());
+
+            List lista = filtrarAulasOfertaLista(oferta.getId());
+
+            Aula aula;
+            for(int linha = 0; linha < lista.size(); linha++){
+                aula = (Aula) lista.get(linha);
+                aula.setOferta(oferta);
+                setAulaMatriz(aula.getDia(), aula.getNumero(), aula);   
+            }
+        }
     }
     
     public void preencherListaAulasAnoSemestre(int ano, int semestre){
@@ -172,74 +180,7 @@ public class GtAula {
     public void setListaAulasRemovidas(List listaAulasRemovidas) {
         this.listaAulasRemovidas = listaAulasRemovidas;
     }
-    
-//    public List filtrarAulasOferta(int idOferta){
-//        return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(idOferta);
-//    }
-//    
-//    public List filtrarAulasProfessorNumeroDiaAnoSemestre(int ano, int semestre, int idProfessor, int numero, int dia){
-//        List aulasProf1 =  gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1NumeroDiaAnoSemestre(ano, semestre, idProfessor, numero, dia);
-//        List aulasProf2 =  gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2NumeroDiaAnoSemestre(ano, semestre, idProfessor, numero, dia);
-//        aulasProf1.addAll(aulasProf2);
-//        return aulasProf1;
-//    }
-//    
-//    public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
-//        
-//        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1AnoSemestre(id, ano, semestre);
-//        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2AnoSemestre(id, ano, semestre);
-//        
-//        aulasProf1.addAll(aulasProf2);
-//        
-//        return aulasProf1;
-//    }
-//    
-//    public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
-//        
-//        List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurmaAnoSemestre(id, ano, semestre);
-//        return aulas;
-//    }
-//    
-//    public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int idTurma, int ano, int semestre){
-//        
-//        List[] aulas = new List[Constantes.LINHA];
-//        
-//        for(int dia = 0; dia < Constantes.LINHA; dia++){
-//            List lista = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasTurmaDiaAnoSemestre(idTurma, ano, semestre, dia);
-//            Collections.sort(lista);
-//            aulas[dia] = lista;
-//        }
-//        return aulas;
-//    }
-//    
-//    public List filtrarAulasProfessorDiaAnoSemestre(int dia, int idProfessor, int ano, int semestre){
-//        
-//        List aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1DiaAnoSemestre(dia, idProfessor, ano, semestre);
-//        List aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2DiaAnoSemestre(dia, idProfessor, ano, semestre);
-//        
-//        aulasProf1.addAll(aulasProf2);
-//        
-//        return aulasProf1;
-//    }
-//    
-//    public List[] filtrarOrdenarAulasProfessorDiaAnoSemestre(int idProfessor, int ano, int semestre){
-//
-//        List[] aulas = new List[Constantes.LINHA];
-//        
-//        List aulasProf1, aulasProf2; 
-//        
-//        for(int dia = 0; dia < Constantes.LINHA; dia++){
-//            aulasProf1 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1DiaAnoSemestre(dia, idProfessor, ano, semestre);
-//            aulasProf2 = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2DiaAnoSemestre(dia, idProfessor, ano, semestre);
-//            aulasProf1.addAll(aulasProf2);
-//            Collections.sort(aulasProf1);
-//            aulas[dia] = aulasProf1;
-//        }
-//        return aulas;
-//    }
-    
-    // ========================================================================= TESTE DE REFATORAÇÃO DE CONSULTAS ================================================================
-    
+
     public List filtrarAulasOfertaLista(int idOferta){
         
         List aulas = new ArrayList<>();

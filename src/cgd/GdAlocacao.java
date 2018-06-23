@@ -45,6 +45,7 @@ public class GdAlocacao extends GdGenerico{
     public Alocacao filtrarUltimaAlocacao() {
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         crit.addOrder(Order.desc("ano"));
+        crit.addOrder(Order.desc("semestre"));
         crit.setMaxResults(1);
         Alocacao alocacao = (Alocacao) crit.uniqueResult();
         sessao.close();

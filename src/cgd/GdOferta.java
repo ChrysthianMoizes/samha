@@ -3,6 +3,7 @@ package cgd;
 import cdp.Oferta;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class GdOferta extends GdGenerico{
@@ -11,6 +12,17 @@ public class GdOferta extends GdGenerico{
     
     public GdOferta(GdPrincipal gdPrincipal){
         this.gdPrincipal = gdPrincipal;
+    }
+    
+    public Oferta filtrarUltimaOfertaTurma(int idTurma) {
+        Criteria crit = criarSessao().createCriteria(Oferta.class);
+        crit.add( Restrictions.eq("turma.id", idTurma));
+        crit.addOrder(Order.desc("ano"));
+        crit.addOrder(Order.desc("semestre"));
+        crit.setMaxResults(1);
+        Oferta oferta = (Oferta) crit.uniqueResult();
+        sessao.close();
+        return oferta;
     }
     
     public Oferta filtrarOferta(int ano, int semestre, int idTurma) {

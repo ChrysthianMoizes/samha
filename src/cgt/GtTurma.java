@@ -144,7 +144,7 @@ public class GtTurma {
         
         int anoPeriodo = Integer.valueOf(p);
         
-        if(anoPeriodo > turma.getMatriz().getCurso().getQtPeriodos())
+        if(anoPeriodo > turma.getMatriz().getCurso().getQtPeriodos() || anoPeriodo < 0)
             return false;
         
         return true;

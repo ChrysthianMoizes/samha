@@ -53,10 +53,10 @@ public class CtrlOferta extends CtrlGenerica{
         preencherCombo(cbxCurso, listaCursos);
         
         if(listaCursos.size() > 0)
-            preencherComboTurma(cbxCurso, cbxTurma);  
+            preencherComboTurma(cbxCurso, cbxTurma, true);  
     }
     
-    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma) {
+    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, boolean abrindoTela) {
         
         jdOferta.setarTurma("");
         Curso curso = (Curso) cbxCurso.getSelectedItem();
@@ -65,8 +65,30 @@ public class CtrlOferta extends CtrlGenerica{
             List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
             listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, jdOferta.getAno(), jdOferta.getSemestre());
             preencherCombo(cbxTurma, listaTurmas);
+            if(abrindoTela)
+                identificarUltimaOfertaTurma(cbxTurma);
             jdOferta.atualizarTela();
         }  
+    }
+    
+    public void identificarUltimaOfertaTurma(JComboBox cbxTurma){
+        Turma turma = (Turma) cbxTurma.getSelectedItem();
+        if(turma != null){
+            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
+            atualizarAnoSemestre(oferta);
+        }    
+    }
+    
+    public void atualizarAnoSemestre(Oferta oferta){
+        if(oferta != null){
+            jdOferta.getSpnAno().setEnabled(false);
+            jdOferta.getSpnAno().setValue(oferta.getAno());
+            jdOferta.getSpnAno().setEnabled(true);
+
+            jdOferta.getSpnSemestre().setEnabled(false);
+            jdOferta.getSpnSemestre().setValue(oferta.getSemestre());
+            jdOferta.getSpnSemestre().setEnabled(true);    
+        }
     }
     
     public void atualizarTela(int ano, int semestre, int tempoMaximo, int intervaloMinimo, int periodo,
@@ -156,9 +178,11 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.setarTurma(turma.getNome());
         
         Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada();
-        atualizarTempoMaximoIntervaloMinimo(oferta);
         
-        ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma, turno);
+        if(oferta != null){
+            atualizarTempoMaximoIntervaloMinimo(oferta);
+            ctrlPrincipal.getCtrlAula().preencherTabelaAulas(tblTurma, turno);
+        }
     }
     
     public void atualizarTempoMaximoIntervaloMinimo(Oferta oferta){
@@ -166,7 +190,7 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.getSpnTempoMaximo().setEnabled(false);
         jdOferta.setarTempoMaximo((int) oferta.getTempoMaximoTrabalho());
         jdOferta.getSpnTempoMaximo().setEnabled(true);
-        
+
         jdOferta.getSpnIntervalo().setEnabled(false);
         jdOferta.setarIntervaloMinimo((int) oferta.getIntervaloMinimo());
         jdOferta.getSpnIntervalo().setEnabled(true);
@@ -215,12 +239,16 @@ public class CtrlOferta extends CtrlGenerica{
     }    
     
     public void validarOferta(JTable tabela, JToggleButton btnCQD){
-        ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
-        if(btnCQD.isSelected()){
-            btnCQD.setBackground(Color.BLUE);
-            ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
-        }else
-            btnCQD.setBackground(new Color(240, 240, 240));
+        
+        if(ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada() != null){
+            
+            ctrlPrincipal.getCtrlConflito().validarOferta(tabela, jdOferta);
+            if(btnCQD.isSelected()){
+                btnCQD.setBackground(Color.BLUE);
+                ctrlPrincipal.getCtrlConflito().validarQuantidadeAulasDisciplina();
+            }else
+                btnCQD.setBackground(new Color(240, 240, 240));
+        }
     }
 
     public List getListaAlocacoes() {
@@ -247,7 +275,7 @@ public class CtrlOferta extends CtrlGenerica{
     
     public void preencherHorarioProfessor(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
         
-        if (!listaAlocacoes.isEmpty()) {
+        if (listaAlocacoes != null && !listaAlocacoes.isEmpty()) {
             
             int indice = lstAlocacoes.getSelectedIndex();
             Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);

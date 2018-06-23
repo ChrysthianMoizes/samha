@@ -24,13 +24,13 @@
       <Font name="DialogInput" size="14" style="0"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1400, 788]"/>
+      <Dimension value="[1400, 825]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1600, 800]"/>
+      <Dimension value="[1600, 810]"/>
     </Property>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1366, 788]"/>
+      <Dimension value="[1366, 800]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -47,7 +47,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-10,0,0,5,105"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,15,0,0,5,-123"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -79,7 +79,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="pnlTurma" max="32767" attributes="0"/>
-                      <Component id="pnlProfessor" pref="834" max="32767" attributes="0"/>
+                      <Component id="pnlProfessor" pref="844" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="pnlNotificacoes" min="-2" max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pnlTurma" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="pnlProfessor" pref="312" max="32767" attributes="0"/>
+                          <Component id="pnlProfessor" pref="323" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -210,13 +210,13 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="pnlDiasTurma" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" min="-2" pref="355" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -776,27 +776,28 @@
                           <Component id="jSeparator2" max="32767" attributes="0"/>
                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnValidarTurmas" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblMensagem" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="cbxCurso" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblAno" max="32767" attributes="0"/>
                                   <Component id="cbxTurma" max="32767" attributes="0"/>
+                                  <Component id="lblAno" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbxTurno" pref="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="spnAno" pref="47" max="32767" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="spnSemestre" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="spnAno" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="spnSemestre" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton1" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblIntervaloMinimo" max="32767" attributes="0"/>
+                                  <Component id="lblIntervaloMinimo" pref="141" max="32767" attributes="0"/>
                                   <Component id="lblTempoMaximo" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -821,6 +822,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="spnPeriodo" min="-2" pref="64" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lblMensagem" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -839,21 +841,24 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblAno" max="32767" attributes="0"/>
-                          <Component id="spnAno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="spnSemestre" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="spnAno" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="spnSemestre" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButton1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblMensagem" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="spnPeriodo" max="32767" attributes="0"/>
                           <Component id="lblPeriodo" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="226" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnValidarOferta" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="btnCQD" min="-2" pref="39" max="-2" attributes="0"/>
@@ -879,8 +884,8 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnValidarTurmas" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="btnValidarTurmas" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1011,7 +1016,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ano/Semeste:"/>
+                <Property name="text" type="java.lang.String" value="Ano/Semestre:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -1187,6 +1192,20 @@
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnPeriodoStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="DialogInput" size="12" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/cih/img/recarregar.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Revalidar Turmas Ativas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

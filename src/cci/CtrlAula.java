@@ -26,19 +26,25 @@ public class CtrlAula {
     public void identificarOrigem(int linha, int coluna){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
-        jdOferta.validarOferta(true);
         
-        int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
-        
-        ctrlPrincipal.getCtrlOferta().desatualizarVetorProfessor(indice);
-        
-        if(indice >= 0 && !isDropInterno())
-            jdOferta.gerarAula();
+        if(ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada() != null){
+            
+            jdOferta.validarOferta(true);
 
-        arrastarAula(linha, coluna, getAulaSelecionada());
-        preencherTabelaAulas(jdOferta.getTblTurma(), (String) jdOferta.getCbxTurno().getSelectedItem());
-        setAulaSelecionada(null);
-        setTemAlteracoes(true);
+            int indice = jdOferta.getLstAlocacoes().getSelectedIndex();
+
+            ctrlPrincipal.getCtrlOferta().desatualizarVetorProfessor(indice);
+
+            if(indice >= 0 && !isDropInterno())
+                jdOferta.gerarAula();
+
+            arrastarAula(linha, coluna, getAulaSelecionada());
+            preencherTabelaAulas(jdOferta.getTblTurma(), (String) jdOferta.getCbxTurno().getSelectedItem());
+            setAulaSelecionada(null);
+            setTemAlteracoes(true);
+        }else{
+            CtrlMensagem.exibirMensagemErro(jdOferta, "Esta turma não está ativa neste ano/período.");
+        }
     }
     
     public void preencherTabelaAulas(JTable tblTurma, String turno){

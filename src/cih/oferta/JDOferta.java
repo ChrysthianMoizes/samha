@@ -120,7 +120,7 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void preencherComboTurma(){
-        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma);    
+        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma, false);    
     }
     
     public void setarPeriodoMaximo(int maximo){
@@ -193,6 +193,14 @@ public class JDOferta extends javax.swing.JDialog {
 
     public JSpinner getSpnTempoMaximo() {
         return spnTempoMaximo;
+    }
+
+    public JSpinner getSpnAno() {
+        return spnAno;
+    }
+
+    public JSpinner getSpnSemestre() {
+        return spnSemestre;
     }
     
     public void sair(){
@@ -278,6 +286,7 @@ public class JDOferta extends javax.swing.JDialog {
         btnDesfazer = new javax.swing.JButton();
         lblPeriodo = new javax.swing.JLabel();
         spnPeriodo = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
 
         itemRemover.setText("jMenuItem1");
         itemRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -289,9 +298,9 @@ public class JDOferta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(1400, 788));
-        setPreferredSize(new java.awt.Dimension(1600, 800));
-        setSize(new java.awt.Dimension(1366, 788));
+        setMinimumSize(new java.awt.Dimension(1400, 825));
+        setPreferredSize(new java.awt.Dimension(1600, 810));
+        setSize(new java.awt.Dimension(1366, 800));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
         pnlPrincipal.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -451,12 +460,12 @@ public class JDOferta extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pnlTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlTurmaLayout.createSequentialGroup()
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlDiasTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -651,7 +660,7 @@ public class JDOferta extends javax.swing.JDialog {
         lblMensagem.setForeground(new java.awt.Color(229, 0, 0));
 
         lblAno.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        lblAno.setText("Ano/Semeste:");
+        lblAno.setText("Ano/Semestre:");
         lblAno.setToolTipText("");
 
         btnValidarTurmas.setBackground(new java.awt.Color(255, 255, 255));
@@ -745,6 +754,15 @@ public class JDOferta extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/recarregar.png"))); // NOI18N
+        jButton1.setToolTipText("Revalidar Turmas Ativas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
         pnlAlocacoes.setLayout(pnlAlocacoesLayout);
         pnlAlocacoesLayout.setHorizontalGroup(
@@ -755,23 +773,24 @@ public class JDOferta extends javax.swing.JDialog {
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnValidarTurmas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(cbxCurso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxTurma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbxTurma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxTurno, 0, 1, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlocacoesLayout.createSequentialGroup()
-                                .addComponent(spnAno, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlAlocacoesLayout.createSequentialGroup()
+                                .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                     .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                             .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -788,7 +807,8 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlocacoesLayout.createSequentialGroup()
                         .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spnPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlAlocacoesLayout.setVerticalGroup(
@@ -803,19 +823,21 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnAno)
-                    .addComponent(spnSemestre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(spnPeriodo)
                     .addComponent(lblPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnValidarOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCQD, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -836,8 +858,8 @@ public class JDOferta extends javax.swing.JDialog {
                         .addGap(5, 5, 5)
                         .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnValidarTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(7, 7, 7))
+                .addComponent(btnValidarTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -850,7 +872,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -865,7 +887,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -885,6 +907,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
+        ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaTurma(cbxTurma);
         atualizarTela();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
@@ -894,11 +917,11 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        preencherComboTurma();
+        atualizarTela();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        preencherComboTurma();
+        atualizarTela();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
@@ -950,6 +973,10 @@ public class JDOferta extends javax.swing.JDialog {
         validarTurmas();
     }//GEN-LAST:event_btnValidarTurmasActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        preencherComboTurma();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
     private javax.swing.JButton btnDesfazer;
@@ -961,6 +988,7 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JComboBox<String> cbxTurno;
     private javax.swing.JMenuItem itemRemover;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
