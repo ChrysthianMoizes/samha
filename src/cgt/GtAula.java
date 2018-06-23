@@ -12,6 +12,7 @@ public class GtAula {
     private GtPrincipal gtPrincipal;
     private Aula[][] matriz;
     private List listaAulasRemovidas;
+    private List<Aula> listaAulasAnoSemestre;
 
     public GtAula(GtPrincipal gt) {
         this.gtPrincipal = gt;
@@ -101,9 +102,10 @@ public class GtAula {
     
     public void preencherMatrizOferta(Oferta oferta){
         
+        preencherListaAulasAnoSemestre(oferta);
         gerarEstruturasArmazenamento();
-        
-        List lista = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
+
+        List lista = filtrarAulasOferta(oferta.getId());
         
         Aula aula;
         for(int linha = 0; linha < lista.size(); linha++){
@@ -113,6 +115,10 @@ public class GtAula {
         }  
     }
     
+    public void preencherListaAulasAnoSemestre(Oferta oferta){
+        listaAulasAnoSemestre = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasAnoSemestre(oferta.getAno(), oferta.getSemestre());
+    }
+
     public void gerarEstruturasArmazenamento(){
         if(matriz == null){
            matriz = new Aula[Constantes.LINHA][Constantes.COLUNA];
@@ -149,6 +155,10 @@ public class GtAula {
     public void setAulaMatriz(int linha, int coluna, Aula aula){
         matriz[linha][coluna] = aula;    
     }
+
+    public List getListaAulasAnoSemestre() {
+        return listaAulasAnoSemestre;
+    }
     
     public List getListaAulasRemovidas() {
         return listaAulasRemovidas;
@@ -158,8 +168,15 @@ public class GtAula {
         this.listaAulasRemovidas = listaAulasRemovidas;
     }
     
+    public List filtrarAulasOferta(int idOferta){
+        return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(idOferta);
+    }
+    
     public List filtrarAulasProfessorNumeroDiaAnoSemestre(int ano, int semestre, int idProfessor, int numero, int dia){
-        return gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessorNumeroDiaAnoSemestre(ano, semestre, idProfessor, numero, dia);
+        List aulasProf1 =  gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor1NumeroDiaAnoSemestre(ano, semestre, idProfessor, numero, dia);
+        List aulasProf2 =  gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasProfessor2NumeroDiaAnoSemestre(ano, semestre, idProfessor, numero, dia);
+        aulasProf1.addAll(aulasProf2);
+        return aulasProf1;
     }
     
     public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
@@ -215,4 +232,121 @@ public class GtAula {
         }
         return aulas;
     }
+    
+    // ========================================================================= TESTE DE REFATORAÇÃO DE CONSULTAS ================================================================
+    
+    public List filtrarAulasOfertaLista(int idOferta){
+        
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getOferta().getId() == idOferta){
+                aulas.add(aula);
+            }
+        }
+        return aulas;
+    }
+    
+    public List filtrarAulasProfessorNumeroDiaLista(int idProfessor, int numero, int dia){
+
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getAlocacao().getProfessor1().getId() == idProfessor 
+                    || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor)){
+                if(aula.getDia() == dia && aula.getNumero() == numero){
+                    aulas.add(aula);
+                }  
+            }
+        }
+        return aulas;
+        
+    }
+    
+    public List filtrarAulasProfessorLista(int idProfessor){
+        
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getAlocacao().getProfessor1().getId() == idProfessor 
+                    || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor)){
+                aulas.add(aula);   
+            }
+        }
+        return aulas;
+    }
+    
+    public List filtrarAulasTurmaLista(int idTurma){
+        
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getOferta().getTurma().getId() == idTurma){
+                aulas.add(aula);   
+            }
+        }
+        return aulas;
+    }
+    
+    public List[] filtrarOrdenarAulasTurmaDiaLista(int idTurma){
+        
+        List<Aula> listaAulasTurma = new ArrayList<>();
+     
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getOferta().getTurma().getId() == idTurma){
+                listaAulasTurma.add(aula);   
+            }
+        }
+        
+        List[] aulas = new List[Constantes.LINHA];
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+
+            for(Aula aula : listaAulasTurma){
+                if(aula.getDia() == dia){
+                    aulas[dia].add(aula);   
+                }
+            }
+            Collections.sort(aulas[dia]);
+        }
+        return aulas;
+    }
+    
+    public List filtrarAulasProfessorDiaLista(int dia, int idProfessor){
+        
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getDia() == dia && (aula.getAlocacao().getProfessor1().getId() == idProfessor 
+                    || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor))){
+                aulas.add(aula);     
+            }
+        }
+        return aulas;
+    }
+    
+    public List[] filtrarOrdenarAulasProfessorDiaLista(int idProfessor){
+
+        List<Aula> listaAulasProfessor = new ArrayList<>();
+     
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getAlocacao().getProfessor1().getId() == idProfessor 
+                    || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor)){
+                listaAulasProfessor.add(aula);     
+            }
+        }
+        
+        List[] aulas = new List[Constantes.LINHA];
+        
+        for(int dia = 0; dia < Constantes.LINHA; dia++){
+
+            for(Aula aula : listaAulasProfessor){
+                if(aula.getDia() == dia){
+                    aulas[dia].add(aula);   
+                }
+            }
+            Collections.sort(aulas[dia]);
+        }
+        return aulas;
+    } 
 }
