@@ -25,7 +25,7 @@ public class GdOferta extends GdGenerico{
         return oferta;
     }
     
-    public Oferta filtrarOferta(int ano, int semestre, int idTurma) {
+    public Oferta filtrarOfertaAnoSemestreTurma(int ano, int semestre, int idTurma) {
         Criteria crit = criarSessao().createCriteria(Oferta.class);
         sessao.beginTransaction();
         crit.add( Restrictions.eq("ano", ano));

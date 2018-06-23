@@ -791,7 +791,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="spnSemestre" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton1" pref="0" max="32767" attributes="0"/>
+                                      <Component id="btnRevalidarTurmas" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -845,7 +845,7 @@
                               <Component id="spnAno" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="spnSemestre" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="btnRevalidarTurmas" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -1194,7 +1194,7 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnPeriodoStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnRevalidarTurmas">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DialogInput" size="12" style="0"/>
@@ -1205,7 +1205,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Revalidar Turmas Ativas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRevalidarTurmasActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -15,7 +15,7 @@ public class GtOferta {
     
     public void identificarOferta(int ano, int semestre, int tempoMaximo, int intervaloMinimo, String turno, Turma turma){
         
-        Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, turma.getId());
+        Oferta oferta = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertaAnoSemestreTurma(ano, semestre, turma.getId());
         
         if(oferta == null && gtPrincipal.getGtTurma().verificarTurmaAtiva(turma, ano, semestre)){
             oferta = gerarOferta(ano, semestre, tempoMaximo, intervaloMinimo, turma);

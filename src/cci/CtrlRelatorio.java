@@ -157,11 +157,9 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         if(turma != null){
             jdRelatorioTurma.setarTurma(turma.getNome());
-            oferta = ctrlPrincipal.getGtPrincipal().getGdPrincipal().getGdOferta().filtrarOferta(ano, semestre, turma.getId());
+            oferta = ctrlPrincipal.getGtPrincipal().getGdPrincipal().getGdOferta().filtrarOfertaAnoSemestreTurma(ano, semestre, turma.getId());
+            ctrlPrincipal.getGtPrincipal().getGtAula().preencherMatrizOferta(oferta);
             
-            if(oferta != null){
-                ctrlPrincipal.getGtPrincipal().getGtAula().preencherMatrizOferta(oferta);
-            }
         }else
             jdRelatorioTurma.setarTurma("Turma");
         
@@ -196,7 +194,6 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         if(professor != null){
             jdRelatorioProfessor.setarProfessor(professor.getNome());
-            //List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
             List listaAulas = ctrlPrincipal.getGtPrincipal().getGtRelatorio().listarAulasProfessor(ano, semestre, professor.getId());
             preencherTabelaProfessor(tblProfessor, listaAulas);
             

@@ -30,6 +30,8 @@ public class CtrlRelatorioTurma {
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         
+        ctrlPrincipal.getGtPrincipal().getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+        
         List lista = obterListaTurmas(eixo, curso, turma, tipo);
         if(lista != null){
             if(!lista.isEmpty())

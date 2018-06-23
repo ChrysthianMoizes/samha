@@ -286,7 +286,7 @@ public class JDOferta extends javax.swing.JDialog {
         btnDesfazer = new javax.swing.JButton();
         lblPeriodo = new javax.swing.JLabel();
         spnPeriodo = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        btnRevalidarTurmas = new javax.swing.JButton();
 
         itemRemover.setText("jMenuItem1");
         itemRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -754,12 +754,12 @@ public class JDOferta extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/recarregar.png"))); // NOI18N
-        jButton1.setToolTipText("Revalidar Turmas Ativas");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRevalidarTurmas.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        btnRevalidarTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/recarregar.png"))); // NOI18N
+        btnRevalidarTurmas.setToolTipText("Revalidar Turmas Ativas");
+        btnRevalidarTurmas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRevalidarTurmasActionPerformed(evt);
             }
         });
 
@@ -787,7 +787,7 @@ public class JDOferta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addComponent(btnRevalidarTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                     .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
@@ -826,7 +826,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRevalidarTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -973,13 +973,14 @@ public class JDOferta extends javax.swing.JDialog {
         validarTurmas();
     }//GEN-LAST:event_btnValidarTurmasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRevalidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevalidarTurmasActionPerformed
         preencherComboTurma();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRevalidarTurmasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
     private javax.swing.JButton btnDesfazer;
+    private javax.swing.JButton btnRevalidarTurmas;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidarOferta;
     private javax.swing.JButton btnValidarTurmas;
@@ -988,7 +989,6 @@ public class JDOferta extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JComboBox<String> cbxTurno;
     private javax.swing.JMenuItem itemRemover;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
