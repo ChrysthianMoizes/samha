@@ -53,7 +53,8 @@ public class GtInstituicao {
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){
             
-            vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaAnoSemestre(linha, idProfessor, aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
+            //vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaAnoSemestre(linha, idProfessor, aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
+            vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaLista(linha, idProfessor);
             
             if(!validacaoGeral){
                 identificarAlteracaoAula(linha, aula);

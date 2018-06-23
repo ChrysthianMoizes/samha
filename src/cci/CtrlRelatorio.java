@@ -195,7 +195,8 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         if(professor != null){
             jdRelatorioProfessor.setarProfessor(professor.getNome());
-            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            //List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtRelatorio().listarAulasProfessor(ano, semestre, professor.getId());
             preencherTabelaProfessor(tblProfessor, listaAulas);
             
         }else{

@@ -210,6 +210,14 @@ public class JDOferta extends javax.swing.JDialog {
     public JLabel getLblNomeProfessor() {
         return lblNomeProfessor;
     }
+    
+    public int getAno(){
+        return (int) spnAno.getValue();
+    }
+    
+    public int getSemestre(){
+        return (int) spnSemestre.getValue();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

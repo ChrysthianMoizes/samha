@@ -63,6 +63,7 @@ public class CtrlOferta extends CtrlGenerica{
         if(curso != null){
             jdOferta.setarPeriodoMaximo(curso.getQtPeriodos());
             List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
+            listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, jdOferta.getAno(), jdOferta.getSemestre());
             preencherCombo(cbxTurma, listaTurmas);
             jdOferta.atualizarTela();
         }  
@@ -278,7 +279,8 @@ public class CtrlOferta extends CtrlGenerica{
             if(numero == 1)
                 professor = alocacao.getProfessor2();
 
-            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            //List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorLista(professor.getId());
             
             jdOferta.setarProfessor(professor.getNome());
             setNomeProfessor(professor.getNome());

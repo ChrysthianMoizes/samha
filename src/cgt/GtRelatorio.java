@@ -17,6 +17,12 @@ public class GtRelatorio {
         gtPrincipal = gt;
     }
     
+    public List listarAulasProfessor(int ano, int semestre, int idProfessor){
+        
+        gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+        return gtPrincipal.getGtAula().filtrarAulasProfessorLista(idProfessor);
+    }
+    
     public List preencherListaAulasVazias(List[] aulas){
     
         Aula aula;

@@ -224,18 +224,22 @@ public class CtrlAula {
     }
     
     public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
-        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, id);
+        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, id);
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorLista(id);
     }
     
     public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
-        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaAnoSemestre(ano, semestre, id);
+        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaAnoSemestre(ano, semestre, id);
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaLista(id);
     }
     
     public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int id, int ano, int semestre){
-        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(id, ano, semestre);
+        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(id, ano, semestre);
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaLista(id);
     }
     
     public List[] filtrarOrdenarAulasDiaProfessorAnoSemestre(int idProfessor, int ano, int semestre){
-        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaAnoSemestre(idProfessor, ano, semestre);
+        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaAnoSemestre(idProfessor, ano, semestre);
+        return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaLista(idProfessor);
     }
 }

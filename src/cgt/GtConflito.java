@@ -9,6 +9,7 @@ import java.util.List;
 public class GtConflito {
     
     private GtPrincipal gtPrincipal;
+    private List<RestricaoProfessor> listaRestricoes;
     
     public GtConflito(GtPrincipal gt) {
         this.gtPrincipal = gt;
@@ -51,7 +52,8 @@ public class GtConflito {
         int ano = aula.getAlocacao().getAno();
         int semestre = aula.getAlocacao().getSemestre();
         
-        List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaAnoSemestre(ano, semestre, idProfessor, aula.getNumero(), aula.getDia());
+        //List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaAnoSemestre(ano, semestre, idProfessor, aula.getNumero(), aula.getDia());
+        List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaLista(idProfessor, aula.getNumero(), aula.getDia());
         listaAulas = removerAulaListaBanco(listaAulas, aula);
         
         if(listaAulas.isEmpty())
@@ -91,12 +93,29 @@ public class GtConflito {
         }     
         return novaMensagem;
     }
+    
+    public void preencherListaRestricoesProfessor(){
+        listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().consultar(RestricaoProfessor.class);
+    }
+    
+    public List filtrarRestricoesProfessorDiaTurno(int idProfessor, int dia, String turno){
+        
+        List restricoes = new ArrayList<>();
+        
+        for(RestricaoProfessor restricao : listaRestricoes){
+            if(restricao.getProfessor().getId() == idProfessor && restricao.getDia() == dia && restricao.getTurno().equals(turno)){
+                restricoes.add(restricao);
+            }
+        }
+        return restricoes;
+    }
         
     public String identificarConflitoRestricaoProfessor(Aula aula, int idProfessor){
         
         String turno = obterStringTurno(aula.getTurno());
         
-        List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), turno);
+        //List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), turno);
+        List listaRestricoes = filtrarRestricoesProfessorDiaTurno(idProfessor, aula.getDia(), turno);
         
         if(listaRestricoes.isEmpty())
             return null;
