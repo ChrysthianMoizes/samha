@@ -49,10 +49,6 @@ public class GtConflito {
     
     public String identificarConflitoTurma(Aula aula, int idProfessor){
         
-        int ano = aula.getAlocacao().getAno();
-        int semestre = aula.getAlocacao().getSemestre();
-        
-        //List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaAnoSemestre(ano, semestre, idProfessor, aula.getNumero(), aula.getDia());
         List listaAulas = gtPrincipal.getGtAula().filtrarAulasProfessorNumeroDiaLista(idProfessor, aula.getNumero(), aula.getDia());
         listaAulas = removerAulaListaBanco(listaAulas, aula);
         
@@ -95,6 +91,10 @@ public class GtConflito {
     }
     
     public void preencherListaRestricoesProfessor(){
+        
+        if(listaRestricoes != null)
+            listaRestricoes.clear();
+        
         listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().consultar(RestricaoProfessor.class);
     }
     
@@ -113,8 +113,7 @@ public class GtConflito {
     public String identificarConflitoRestricaoProfessor(Aula aula, int idProfessor){
         
         String turno = obterStringTurno(aula.getTurno());
-        
-        //List listaRestricoes = gtPrincipal.getGdPrincipal().getGdRestricao().identificarConflitoRestricao(idProfessor, aula.getDia(), turno);
+
         List listaRestricoes = filtrarRestricoesProfessorDiaTurno(idProfessor, aula.getDia(), turno);
         
         if(listaRestricoes.isEmpty())

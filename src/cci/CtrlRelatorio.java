@@ -150,41 +150,31 @@ public class CtrlRelatorio extends CtrlGenerica{
         }
     }
     
-    public void identificarOferta(int ano, int semestre, JComboBox cbxTurma){
-
+    public void identificarOferta(int ano, int semestre, JComboBox cbxTurma, JComboBox cbxTurno, JTable tblTurma){
+        
         Turma turma = (Turma) cbxTurma.getSelectedItem();
-        Oferta oferta = null;
+        
+        String t = (String) cbxTurno.getSelectedItem();        
+        int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(t);
         
         if(turma != null){
             jdRelatorioTurma.setarTurma(turma.getNome());
-            oferta = ctrlPrincipal.getGtPrincipal().getGdPrincipal().getGdOferta().filtrarOfertaAnoSemestreTurma(ano, semestre, turma.getId());
-            ctrlPrincipal.getGtPrincipal().getGtAula().preencherMatrizOferta(oferta);
-            
-        }else
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtRelatorio().listarAulasTurma(ano, semestre, turma.getId(), turno);
+            preencherTabelaTurma(tblTurma, listaAulas);
+        }else{
             jdRelatorioTurma.setarTurma("Turma");
-        
-        jdRelatorioTurma.preencherTabelaTurma(oferta);
+            JTableUtil.limparCelulasTabela(tblTurma);
+        }
     }
     
-    public void preencherTabelaTurma(JTable tblTurma, JComboBox cbxTurno, Oferta oferta){
+    public void preencherTabelaTurma(JTable tblTurma, List listaAulas){
         
         JTableUtil.limparCelulasTabela(tblTurma);
-
-        if(oferta != null){
-            
-            String turno = (String) cbxTurno.getSelectedItem();        
-            int t = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(turno);
-            
-            Aula aula;
-
-            for(int linha = 0; linha < Constantes.LINHA; linha++){
-
-                for(int coluna = t; coluna < (Constantes.AULAS + t); coluna++){
-                    aula = ctrlPrincipal.getGtPrincipal().getGtAula().getAulaMatriz(linha, coluna);
-                    if(aula != null)
-                        tblTurma.setValueAt(aula, linha, aula.getNumero() - t);
-                }  
-            }
+        
+        Aula aula;        
+        for(int i = 0; i < listaAulas.size(); i++){
+            aula = (Aula) listaAulas.get(i);
+            tblTurma.setValueAt(aula, aula.getDia(), aula.getNumero() - aula.getTurno());
         }
     }
     
@@ -201,6 +191,10 @@ public class CtrlRelatorio extends CtrlGenerica{
             jdRelatorioProfessor.setarProfessor("Professor");
             JTableUtil.limparCelulasTabela(tblProfessor);
         }    
+    }
+    
+    public void atualizarAulasAnoSemestre(int ano, int semestre){
+        ctrlPrincipal.getGtPrincipal().getGtRelatorio().atualizarAulasAnoSemestre(ano, semestre);
     }
     
     public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas){

@@ -24,6 +24,13 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorio().identificarProfessor(ano, semestre, cbxProfessor, tblProfessor);
     }
     
+    public void atualizarAulasProfessor(){
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlRelatorio().atualizarAulasAnoSemestre(ano, semestre);
+        ctrlPrincipal.getCtrlRelatorio().identificarProfessor(ano, semestre, cbxProfessor, tblProfessor);
+    }
+    
     private void setarBackground(){
         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
         pnlConfiguracoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
@@ -277,10 +284,9 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
+                        .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(rbtnTodos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -289,7 +295,8 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                         .addComponent(rbtnCoordenadoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbtnProfessor)
-                        .addContainerGap(10, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +372,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                                 .addGap(0, 264, Short.MAX_VALUE))
                             .addComponent(cbxProfessor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 194, Short.MAX_VALUE)
                         .addComponent(btnEnviarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAbrirPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,7 +549,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -568,11 +575,11 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCoordenadoriaActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        preencherTabelaProfessor();
+        atualizarAulasProfessor();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        preencherTabelaProfessor();
+        atualizarAulasProfessor();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEixoActionPerformed

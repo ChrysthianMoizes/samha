@@ -30,8 +30,6 @@ public class CtrlRelatorioTurma {
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         
-        ctrlPrincipal.getGtPrincipal().getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
-        
         List lista = obterListaTurmas(eixo, curso, turma, tipo);
         if(lista != null){
             if(!lista.isEmpty())
@@ -126,7 +124,7 @@ public class CtrlRelatorioTurma {
             
             if(estahAtiva){
             
-                List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId(), ano, semestre);
+                List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(turma.getId());
                 List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
 
                 List relatorio = new ArrayList();

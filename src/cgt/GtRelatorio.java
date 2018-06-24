@@ -18,9 +18,21 @@ public class GtRelatorio {
     }
     
     public List listarAulasProfessor(int ano, int semestre, int idProfessor){
+        if(gtPrincipal.getGtAula().getListaAulasAnoSemestre() == null)
+            atualizarAulasAnoSemestre(ano, semestre);
         
-        gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
         return gtPrincipal.getGtAula().filtrarAulasProfessorLista(idProfessor);
+    }
+    
+    public List listarAulasTurma(int ano, int semestre, int idTurma, int turno){
+        if(gtPrincipal.getGtAula().getListaAulasAnoSemestre() == null)
+            atualizarAulasAnoSemestre(ano, semestre);
+        
+        return gtPrincipal.getGtAula().filtrarAulasTurmaTurnoLista(idTurma, turno);
+    }
+    
+    public void atualizarAulasAnoSemestre(int ano, int semestre){
+        gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
     }
     
     public List preencherListaAulasVazias(List[] aulas){

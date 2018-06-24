@@ -124,6 +124,10 @@ public class GtAula {
     }
     
     public void preencherListaAulasAnoSemestre(int ano, int semestre){
+        
+        if(listaAulasAnoSemestre != null)
+            listaAulasAnoSemestre.clear();
+        
         listaAulasAnoSemestre = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasAnoSemestre(ano, semestre);
         gtPrincipal.getGtConflito().preencherListaRestricoesProfessor();
     }
@@ -228,6 +232,18 @@ public class GtAula {
         
         for(Aula aula : listaAulasAnoSemestre){
             if(aula.getOferta().getTurma().getId() == idTurma){
+                aulas.add(aula);   
+            }
+        }
+        return aulas;
+    }
+    
+    public List filtrarAulasTurmaTurnoLista(int idTurma, int turno){
+        
+        List aulas = new ArrayList<>();
+        
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getOferta().getTurma().getId() == idTurma && aula.getTurno() == turno){
                 aulas.add(aula);   
             }
         }

@@ -55,7 +55,7 @@ public class CtrlValidacaoTurmas {
                 
                 for(int i = 0; i < listaTurmas.size(); i++){
                     turma = (Turma) listaTurmas.get(i);
-                    listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(ano, semestre, turma.getId());
+                    listaAulas = ctrlPrincipal.getCtrlAula().filtrarAulasTurmaAnoSemestre(turma.getId());
                     if(!listaAulas.isEmpty())
                         mensagens.addAll(identificarConflitos(turma, listaAulas));
                 }

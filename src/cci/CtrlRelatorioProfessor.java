@@ -113,7 +113,7 @@ public class CtrlRelatorioProfessor {
     public void gerarRelatorioProfessor(Professor professor, int ano, int semestre) throws JRException, FileNotFoundException{
 
         if(professor != null){
-            List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId(), ano, semestre);
+            List[] aulas = ctrlPrincipal.getCtrlAula().filtrarOrdenarAulasDiaProfessorAnoSemestre(professor.getId());
             List lista = ctrlPrincipal.getGtPrincipal().getGtRelatorio().preencherListaAulasVazias(aulas);
             
             List relatorio = new ArrayList();

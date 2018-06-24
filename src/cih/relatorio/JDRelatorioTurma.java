@@ -2,7 +2,6 @@ package cih.relatorio;
 
 import cci.CtrlPrincipal;
 import cci.RenderizadorCelulas;
-import cdp.Oferta;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,16 +17,19 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         setarBackground();
     }
     
-    public void preencherTabelaTurma(Oferta oferta){
-        ctrlPrincipal.getCtrlRelatorio().preencherTabelaTurma(tblTurma, cbxTurno, oferta);
-    }
-    
     public void identificarOferta(){
         
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
         
-        ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma);
+        ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma, cbxTurno, tblTurma);
+    }
+    
+    public void atualizarAulasTurma(){
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlRelatorio().atualizarAulasAnoSemestre(ano, semestre);
+        ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma, cbxTurno, tblTurma);
     }
     
     private void setarBackground(){
@@ -576,11 +578,11 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        identificarOferta();
+        atualizarAulasTurma();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        identificarOferta();
+        atualizarAulasTurma();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed
@@ -632,6 +634,8 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
     private void btnRevalidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevalidarTurmasActionPerformed
         if(cbxTurma.isEnabled())
             preencherComboTurma();
+        identificarOferta();
+        setarTurno();
     }//GEN-LAST:event_btnRevalidarTurmasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

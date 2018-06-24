@@ -49,10 +49,10 @@ public class CtrlAula {
     
     public void preencherTabelaAulas(JTable tblTurma, String turno){
         
-        if(ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada() != null){
+        JTableUtil.limparCelulasTabela(tblTurma);
         
-            JTableUtil.limparCelulasTabela(tblTurma);
-
+        if(ctrlPrincipal.getGtPrincipal().getGtOferta().getOfertaSelecionada() != null){
+            
             int t = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(turno);
             ctrlPrincipal.getCtrlConflito().getRender().setTurno(t);
             
@@ -229,23 +229,19 @@ public class CtrlAula {
             CtrlMensagem.exibirMensagemAviso(jdOferta, "Nenhuma alteração encontrada.");
     }
     
-    public List filtrarAulasProfessorAnoSemestre(int ano, int semestre, int id){
-        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, id);
+    public List filtrarAulasProfessorAnoSemestre(int id){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorLista(id);
     }
     
-    public List filtrarAulasTurmaAnoSemestre(int ano, int semestre, int id){
-        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaAnoSemestre(ano, semestre, id);
+    public List filtrarAulasTurmaAnoSemestre(int id){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaLista(id);
     }
     
-    public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int id, int ano, int semestre){
-        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaAnoSemestre(id, ano, semestre);
+    public List[] filtrarOrdenarAulasTurmaDiaAnoSemestre(int id){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasTurmaDiaLista(id);
     }
     
-    public List[] filtrarOrdenarAulasDiaProfessorAnoSemestre(int idProfessor, int ano, int semestre){
-        //return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaAnoSemestre(idProfessor, ano, semestre);
+    public List[] filtrarOrdenarAulasDiaProfessorAnoSemestre(int idProfessor){
         return ctrlPrincipal.getGtPrincipal().getGtAula().filtrarOrdenarAulasProfessorDiaLista(idProfessor);
     }
 }
