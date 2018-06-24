@@ -7,7 +7,6 @@ import cdp.Eixo;
 import cdp.Oferta;
 import cdp.Professor;
 import cdp.Turma;
-import cgt.Constantes;
 import cih.relatorio.JDTipoRelatorio;
 import cih.relatorio.JDRelatorioProfessor;
 import cih.relatorio.JDRelatorioTurma;
@@ -48,7 +47,8 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioTurma.preencherComboCurso();
         jdRelatorioTurma.preencherComboTurma();
         jdRelatorioTurma.setarTurno();
-        jdRelatorioTurma.identificarOferta();
+        jdRelatorioTurma.identificarUltimaOfertaTurma();
+        jdRelatorioTurma.atualizarAulasTurma();
         jdRelatorioTurma.ativarFiltroNenhum();
         jdRelatorioTurma.setVisible(true);
     }
@@ -167,6 +167,26 @@ public class CtrlRelatorio extends CtrlGenerica{
         }
     }
     
+    public void identificarUltimaOfertaTurma(JComboBox cbxTurma){
+        Turma turma = (Turma) cbxTurma.getSelectedItem();
+        if(turma != null){
+            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
+            atualizarAnoSemestreEmTela(oferta);
+        }    
+    }
+    
+    public void atualizarAnoSemestreEmTela(Oferta oferta){
+        if(oferta != null){
+            jdRelatorioTurma.getSpnAno().setEnabled(false);
+            jdRelatorioTurma.getSpnAno().setValue(oferta.getAno());
+            jdRelatorioTurma.getSpnAno().setEnabled(true);
+
+            jdRelatorioTurma.getSpnSemestre().setEnabled(false);
+            jdRelatorioTurma.getSpnSemestre().setValue(oferta.getSemestre());
+            jdRelatorioTurma.getSpnSemestre().setEnabled(true);    
+        }
+    }
+    
     public void preencherTabelaTurma(JTable tblTurma, List listaAulas){
         
         JTableUtil.limparCelulasTabela(tblTurma);
@@ -193,7 +213,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         }    
     }
     
-    public void atualizarAulasAnoSemestre(int ano, int semestre){
+    public void atualizarListaAulasAnoSemestre(int ano, int semestre){
         ctrlPrincipal.getGtPrincipal().getGtRelatorio().atualizarAulasAnoSemestre(ano, semestre);
     }
     

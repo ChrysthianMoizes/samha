@@ -25,10 +25,14 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma, cbxTurno, tblTurma);
     }
     
+    public void identificarUltimaOfertaTurma(){
+        ctrlPrincipal.getCtrlRelatorio().identificarUltimaOfertaTurma(cbxTurma);
+    }
+    
     public void atualizarAulasTurma(){
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlRelatorio().atualizarAulasAnoSemestre(ano, semestre);
+        ctrlPrincipal.getCtrlRelatorio().atualizarListaAulasAnoSemestre(ano, semestre);
         ctrlPrincipal.getCtrlRelatorio().identificarOferta(ano, semestre, cbxTurma, cbxTurno, tblTurma);
     }
     
@@ -119,6 +123,14 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
         btnGerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/relatorio-botao.png")));
     }
     
+    public JSpinner getSpnAno() {
+        return spnAno;
+    }
+
+    public JSpinner getSpnSemestre() {
+        return spnSemestre;
+    }
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -551,7 +563,7 @@ public class JDRelatorioTurma extends javax.swing.JDialog {
                 .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
 
         getContentPane().add(pnlPrincipal, java.awt.BorderLayout.CENTER);

@@ -172,7 +172,7 @@
 			<textField>
 				<reportElement x="322" y="101" width="470" height="37" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DialogInput" size="16" isBold="true"/>
+					<font fontName="DialogInput" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{setor}]]></textFieldExpression>
 			</textField>

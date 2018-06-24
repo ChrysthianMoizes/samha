@@ -27,7 +27,7 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
     public void atualizarAulasProfessor(){
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
-        ctrlPrincipal.getCtrlRelatorio().atualizarAulasAnoSemestre(ano, semestre);
+        ctrlPrincipal.getCtrlRelatorio().atualizarListaAulasAnoSemestre(ano, semestre);
         ctrlPrincipal.getCtrlRelatorio().identificarProfessor(ano, semestre, cbxProfessor, tblProfessor);
     }
     

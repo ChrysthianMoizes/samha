@@ -57,6 +57,10 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, periodo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma, btnCQD);
     }
     
+    public void identificarUltimaOfertaTurma(){
+        ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaTurma(cbxTurma);
+    }
+    
     public void validarAulas(){
         ctrlPrincipal.getCtrlOferta().validarOferta(tblTurma, btnCQD);
     }
@@ -120,7 +124,7 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void preencherComboTurma(){
-        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma, false);    
+        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma);    
     }
     
     public void setarPeriodoMaximo(int maximo){
@@ -908,13 +912,13 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
-        ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaTurma(cbxTurma);
         atualizarTela();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
         preencherComboTurma();
+        atualizarTela();
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
@@ -976,6 +980,7 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void btnRevalidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevalidarTurmasActionPerformed
         preencherComboTurma();
+        atualizarTela();
     }//GEN-LAST:event_btnRevalidarTurmasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

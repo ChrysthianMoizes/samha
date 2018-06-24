@@ -39,6 +39,8 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta = new JDOferta(pai, true, ctrlPrincipal);
         jdOferta.setIconImage(setarIconeJanela());
         jdOferta.preencherComboCurso();
+        jdOferta.identificarUltimaOfertaTurma();
+        jdOferta.atualizarTela();
         jdOferta.setVisible(true);
     }
     
@@ -53,10 +55,11 @@ public class CtrlOferta extends CtrlGenerica{
         preencherCombo(cbxCurso, listaCursos);
         
         if(listaCursos.size() > 0)
-            preencherComboTurma(cbxCurso, cbxTurma, true);  
+            preencherComboTurma(cbxCurso, cbxTurma);
+            
     }
     
-    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, boolean abrindoTela) {
+    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma) {
         
         jdOferta.setarTurma("");
         Curso curso = (Curso) cbxCurso.getSelectedItem();
@@ -65,9 +68,6 @@ public class CtrlOferta extends CtrlGenerica{
             List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
             listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, jdOferta.getAno(), jdOferta.getSemestre());
             preencherCombo(cbxTurma, listaTurmas);
-            if(abrindoTela)
-                identificarUltimaOfertaTurma(cbxTurma);
-            jdOferta.atualizarTela();
         }  
     }
     
@@ -75,11 +75,11 @@ public class CtrlOferta extends CtrlGenerica{
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         if(turma != null){
             Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
-            atualizarAnoSemestre(oferta);
+            atualizarAnoSemestreEmTela(oferta);
         }    
     }
     
-    public void atualizarAnoSemestre(Oferta oferta){
+    public void atualizarAnoSemestreEmTela(Oferta oferta){
         if(oferta != null){
             jdOferta.getSpnAno().setEnabled(false);
             jdOferta.getSpnAno().setValue(oferta.getAno());
