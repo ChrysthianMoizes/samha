@@ -57,6 +57,13 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().atualizarTela(ano, semestre, tempo, intervalo, periodo, cbxTurma, cbxTurno, lstAlocacoes, tblTurma, btnCQD);
     }
     
+    public void atualizarAulasTurma(){
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlOferta().atualizarListaAulasAnoSemestre(ano, semestre);
+        atualizarTela();
+    }
+    
     public void identificarUltimaOfertaTurma(){
         ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaTurma(cbxTurma);
     }
@@ -922,11 +929,11 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
-        atualizarTela();
+        atualizarAulasTurma();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
-        atualizarTela();
+        atualizarAulasTurma();
     }//GEN-LAST:event_spnSemestreStateChanged
 
     private void cbxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurnoActionPerformed

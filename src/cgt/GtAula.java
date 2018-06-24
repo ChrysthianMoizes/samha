@@ -92,6 +92,7 @@ public class GtAula {
         try {
             if(gtPrincipal.getGtOferta().getOfertaSelecionada() != null){
                 gtPrincipal.getGdPrincipal().getGdAula().salvarAulasOferta(matriz, listaAulasRemovidas);
+                setListaAulasAnoSemestre(null);
                 preencherMatrizOferta(gtPrincipal.getGtOferta().getOfertaSelecionada());
                 return Constantes.CADASTRADO;
             }else{
@@ -110,7 +111,8 @@ public class GtAula {
         
         if(oferta != null){
             
-            preencherListaAulasAnoSemestre(oferta.getAno(), oferta.getSemestre());
+            if(listaAulasAnoSemestre == null)
+                preencherListaAulasAnoSemestre(oferta.getAno(), oferta.getSemestre());
 
             List lista = filtrarAulasOfertaLista(oferta.getId());
 
@@ -173,8 +175,11 @@ public class GtAula {
         return listaAulasAnoSemestre;
     }
 
-    public void setListaAulasAnoSemestre(List<Aula> listaAulasAnoSemestre) {
-        this.listaAulasAnoSemestre = listaAulasAnoSemestre;
+    public void setListaAulasAnoSemestre(List<Aula> lista) {
+        if(listaAulasAnoSemestre != null)
+            listaAulasAnoSemestre.clear();
+        
+        this.listaAulasAnoSemestre = lista;
     }
     
     public List getListaAulasRemovidas() {

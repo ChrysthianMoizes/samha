@@ -114,6 +114,10 @@ public class CtrlOferta extends CtrlGenerica{
         setarAlocacao();
     }
     
+    public void atualizarListaAulasAnoSemestre(int ano, int semestre){
+        ctrlPrincipal.getGtPrincipal().getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+    }
+    
     public void verificarAulasPendentes(){
         
         if(ctrlPrincipal.getCtrlAula().isTemAlteracoes()){
