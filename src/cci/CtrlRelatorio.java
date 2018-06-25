@@ -1,5 +1,6 @@
 package cci;
 
+import cdp.Alocacao;
 import cdp.Aula;
 import cdp.Coordenadoria;
 import cdp.Curso;
@@ -59,6 +60,8 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioProfessor.preencherComboEixo();
         jdRelatorioProfessor.preencherComboCoordenadoria();
         jdRelatorioProfessor.preencherComboProfessor();
+        jdRelatorioProfessor.identificarUltimaAlocacao();
+        jdRelatorioProfessor.atualizarAulasProfessor();
         jdRelatorioProfessor.preencherTabelaProfessor();
         jdRelatorioProfessor.ativarFiltroNenhum();
         jdRelatorioProfessor.setVisible(true);
@@ -171,11 +174,11 @@ public class CtrlRelatorio extends CtrlGenerica{
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         if(turma != null){
             Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
-            atualizarAnoSemestreEmTela(oferta);
+            atualizarAnoSemestreTurma(oferta);
         }    
     }
     
-    public void atualizarAnoSemestreEmTela(Oferta oferta){
+    public void atualizarAnoSemestreTurma(Oferta oferta){
         if(oferta != null){
             jdRelatorioTurma.getSpnAno().setEnabled(false);
             jdRelatorioTurma.getSpnAno().setValue(oferta.getAno());
@@ -184,6 +187,26 @@ public class CtrlRelatorio extends CtrlGenerica{
             jdRelatorioTurma.getSpnSemestre().setEnabled(false);
             jdRelatorioTurma.getSpnSemestre().setValue(oferta.getSemestre());
             jdRelatorioTurma.getSpnSemestre().setEnabled(true);    
+        }
+    }
+    
+    public void identificarUltimaAlocacaoProfessor(JComboBox cbxProfessor){
+        Professor professor = (Professor) cbxProfessor.getSelectedItem();
+        if(professor != null){
+            Alocacao alocacao = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarUltimaAlocacao();
+            atualizarAnoSemestreProfessor(alocacao);
+        } 
+    }
+    
+    public void atualizarAnoSemestreProfessor(Alocacao alocacao){
+        if(alocacao != null){
+            jdRelatorioProfessor.getSpnAno().setEnabled(false);
+            jdRelatorioProfessor.getSpnAno().setValue(alocacao.getAno());
+            jdRelatorioProfessor.getSpnAno().setEnabled(true);
+
+            jdRelatorioProfessor.getSpnSemestre().setEnabled(false);
+            jdRelatorioProfessor.getSpnSemestre().setValue(alocacao.getSemestre());
+            jdRelatorioProfessor.getSpnSemestre().setEnabled(true);    
         }
     }
     

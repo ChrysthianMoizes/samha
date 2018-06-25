@@ -198,20 +198,22 @@ public class CtrlAula {
                     jdOferta.salvarAulas();
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
                     ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
+                    ctrlPrincipal.getGtPrincipal().getGtAula().setListaAulasAnoSemestre(null);
                     jdOferta.dispose();
                 }else if(confirmacao == 1){
                     setTemAlteracoes(false);
                     ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
                     ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
+                    ctrlPrincipal.getGtPrincipal().getGtAula().setListaAulasAnoSemestre(null);
                     jdOferta.dispose();
                 }
                 
         }else{
             ctrlPrincipal.getGtPrincipal().getGtAula().gerarEstruturasArmazenamento();
             ctrlPrincipal.getCtrlOferta().limparCorCelulasTabelaProfessor();
+            ctrlPrincipal.getGtPrincipal().getGtAula().setListaAulasAnoSemestre(null);
             jdOferta.dispose();
         }
-        
     } 
     
     public void desfazer(String turma){

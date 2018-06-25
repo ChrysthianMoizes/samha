@@ -31,6 +31,10 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorio().identificarProfessor(ano, semestre, cbxProfessor, tblProfessor);
     }
     
+    public void identificarUltimaAlocacao(){
+        ctrlPrincipal.getCtrlRelatorio().identificarUltimaAlocacaoProfessor(cbxProfessor);
+    }
+    
     private void setarBackground(){
         pnlPrincipal.setBackground(ctrlPrincipal.setarCorPanelExterior());
         pnlConfiguracoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
@@ -124,6 +128,14 @@ public class JDRelatorioProfessor extends javax.swing.JDialog {
         btnEnviarEmail.setEnabled(true);
         btnEnviarEmail.setText("Enviar por e-mail");
         btnEnviarEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/email.png")));
+    }
+    
+    public JSpinner getSpnAno() {
+        return spnAno;
+    }
+
+    public JSpinner getSpnSemestre() {
+        return spnSemestre;
     }
        
     @SuppressWarnings("unchecked")
