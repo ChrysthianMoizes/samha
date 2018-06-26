@@ -3,6 +3,7 @@ package cgt;
 import cdp.Oferta;
 import cdp.Turma;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GtOferta {
 
@@ -65,7 +66,18 @@ public class GtOferta {
         this.ofertaSelecionada = ofertaSelecionada;
     }
     
-    public Oferta filtrarUltimaOfertaTurma(int idTurma){
-        return gtPrincipal.getGdPrincipal().getGdOferta().filtrarUltimaOfertaTurma(idTurma);
+    public Oferta filtrarUltimaOfertaValidaTurma(int idTurma){
+        
+        List<Oferta> listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertasTurma(idTurma);
+        
+        if(!listaOfertas.isEmpty()){
+            for(Oferta oferta : listaOfertas){
+                List aulasOferta = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
+                if(!aulasOferta.isEmpty())
+                    return oferta;
+            }
+            return listaOfertas.get(0);
+        }
+        return null;
     }
 }

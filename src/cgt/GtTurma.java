@@ -92,7 +92,7 @@ public class GtTurma {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            List listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertaTurma(turma.getId()); 
+            List listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertasTurma(turma.getId()); 
             
             if(listaOfertas.isEmpty()){
                 gtPrincipal.getGdPrincipal().getGdTurma().excluir(turma);

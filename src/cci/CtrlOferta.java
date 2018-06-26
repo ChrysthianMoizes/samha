@@ -55,26 +55,29 @@ public class CtrlOferta extends CtrlGenerica{
         preencherCombo(cbxCurso, listaCursos);
         
         if(listaCursos.size() > 0)
-            preencherComboTurma(cbxCurso, cbxTurma);
+            preencherComboTurma(cbxCurso, cbxTurma, false);
             
     }
     
-    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma) {
+    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, boolean alterandoAnoSemestre) {
+        
+        Turma turmaSelecionada = (Turma) cbxTurma.getSelectedItem();
         
         jdOferta.setarTurma("");
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
             jdOferta.setarPeriodoMaximo(curso.getQtPeriodos());
-            List listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
+            List<Turma> listaTurmas = ctrlPrincipal.getCtrlTurma().buscar("curso", String.valueOf(curso.getId()));
             listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, jdOferta.getAno(), jdOferta.getSemestre());
             preencherCombo(cbxTurma, listaTurmas);
+            ctrlPrincipal.getCtrlTurma().setarTurmaSelecionada(turmaSelecionada, listaTurmas, cbxTurma, alterandoAnoSemestre); 
         }  
     }
     
-    public void identificarUltimaOfertaTurma(JComboBox cbxTurma){
+    public void identificarUltimaOfertaValidaTurma(JComboBox cbxTurma){
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         if(turma != null){
-            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
+            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaValidaTurma(turma.getId());
             atualizarAnoSemestreEmTela(oferta);
         }    
     }

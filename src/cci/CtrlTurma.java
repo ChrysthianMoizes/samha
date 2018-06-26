@@ -8,7 +8,6 @@ import cih.turma.JDBuscarTurma;
 import cih.turma.JDCadastrarTurma;
 import java.awt.Frame;
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -129,7 +128,20 @@ public class CtrlTurma extends CtrlGenerica{
         } catch (Exception ex) {
             CtrlMensagem.exibirMensagemErro(buscaTurma, "Selecione uma turma");
         }   
-    } 
+    }
+    
+    public void setarTurmaSelecionada(Turma turmaSelecionada, List<Turma> listaTurmas, JComboBox cbxTurma, boolean alterandoAnoSemestre){
+        
+        if(alterandoAnoSemestre && turmaSelecionada != null){
+            for(int indice = 0; indice < listaTurmas.size(); indice++){
+                Turma turmaLista = listaTurmas.get(indice);
+                if(turmaLista.getId() == turmaSelecionada.getId()){
+                    cbxTurma.setSelectedIndex(indice);
+                    break;
+                }
+            }
+        }
+    }
     
     // ========================================= TELA DE CADASTRO ======================================================
     

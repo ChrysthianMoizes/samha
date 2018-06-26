@@ -65,7 +65,7 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void identificarUltimaOfertaTurma(){
-        ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaTurma(cbxTurma);
+        ctrlPrincipal.getCtrlOferta().identificarUltimaOfertaValidaTurma(cbxTurma);
     }
     
     public void validarAulas(){
@@ -130,8 +130,8 @@ public class JDOferta extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlOferta().preencherComboCurso(cbxCurso, cbxTurma);
     }
     
-    public void preencherComboTurma(){
-        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma);    
+    public void preencherComboTurma(boolean opcao){
+        ctrlPrincipal.getCtrlOferta().preencherComboTurma(cbxCurso, cbxTurma, opcao);    
     }
     
     public void setarPeriodoMaximo(int maximo){
@@ -297,7 +297,6 @@ public class JDOferta extends javax.swing.JDialog {
         btnDesfazer = new javax.swing.JButton();
         lblPeriodo = new javax.swing.JLabel();
         spnPeriodo = new javax.swing.JSpinner();
-        btnRevalidarTurmas = new javax.swing.JButton();
 
         itemRemover.setText("jMenuItem1");
         itemRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -765,15 +764,6 @@ public class JDOferta extends javax.swing.JDialog {
             }
         });
 
-        btnRevalidarTurmas.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        btnRevalidarTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/recarregar.png"))); // NOI18N
-        btnRevalidarTurmas.setToolTipText("Revalidar Turmas Ativas");
-        btnRevalidarTurmas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRevalidarTurmasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlAlocacoesLayout = new javax.swing.GroupLayout(pnlAlocacoes);
         pnlAlocacoes.setLayout(pnlAlocacoesLayout);
         pnlAlocacoesLayout.setHorizontalGroup(
@@ -794,14 +784,12 @@ public class JDOferta extends javax.swing.JDialog {
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxTurno, 0, 1, Short.MAX_VALUE)
                             .addGroup(pnlAlocacoesLayout.createSequentialGroup()
-                                .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spnAno, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRevalidarTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addComponent(spnSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnlAlocacoesLayout.createSequentialGroup()
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(lblIntervaloMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTempoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -836,9 +824,8 @@ public class JDOferta extends javax.swing.JDialog {
                 .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlAlocacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnRevalidarTurmas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(spnSemestre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                        .addComponent(spnAno, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(spnSemestre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(spnAno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -884,7 +871,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -899,7 +886,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -924,15 +911,17 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
-        preencherComboTurma();
+        preencherComboTurma(false);
         atualizarTela();
     }//GEN-LAST:event_cbxCursoActionPerformed
 
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
+        preencherComboTurma(true);
         atualizarAulasTurma();
     }//GEN-LAST:event_spnAnoStateChanged
 
     private void spnSemestreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnSemestreStateChanged
+        preencherComboTurma(true);
         atualizarAulasTurma();
     }//GEN-LAST:event_spnSemestreStateChanged
 
@@ -985,15 +974,9 @@ public class JDOferta extends javax.swing.JDialog {
         validarTurmas();
     }//GEN-LAST:event_btnValidarTurmasActionPerformed
 
-    private void btnRevalidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevalidarTurmasActionPerformed
-        preencherComboTurma();
-        atualizarTela();
-    }//GEN-LAST:event_btnRevalidarTurmasActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;
     private javax.swing.JButton btnDesfazer;
-    private javax.swing.JButton btnRevalidarTurmas;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnValidarOferta;
     private javax.swing.JButton btnValidarTurmas;

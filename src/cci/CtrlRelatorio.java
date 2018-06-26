@@ -46,7 +46,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         jdRelatorioTurma.setIconImage(setarIconeJanela());
         jdRelatorioTurma.preencherComboEixo();
         jdRelatorioTurma.preencherComboCurso();
-        jdRelatorioTurma.preencherComboTurma();
+        jdRelatorioTurma.preencherComboTurma(false);
         jdRelatorioTurma.setarTurno();
         jdRelatorioTurma.identificarUltimaOfertaTurma();
         jdRelatorioTurma.atualizarAulasTurma();
@@ -121,14 +121,16 @@ public class CtrlRelatorio extends CtrlGenerica{
         }
     }
     
-    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, int ano, int semestre) {
+    public void preencherComboTurma(JComboBox cbxCurso, JComboBox cbxTurma, int ano, int semestre, boolean alterandoAnoSemestre) {
         
         Curso curso = (Curso) cbxCurso.getSelectedItem();
+        Turma turmaSelecionada = (Turma) cbxTurma.getSelectedItem();
         
         if(curso != null){
             List listaTurmas = ctrlPrincipal.getCtrlTurma().filtrarPorCurso(curso.getId());
             listaTurmas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(listaTurmas, ano, semestre);
-            preencherCombo(cbxTurma, listaTurmas);           
+            preencherCombo(cbxTurma, listaTurmas);
+            ctrlPrincipal.getCtrlTurma().setarTurmaSelecionada(turmaSelecionada, listaTurmas, cbxTurma, alterandoAnoSemestre);
         }  
     }
     
@@ -173,7 +175,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     public void identificarUltimaOfertaTurma(JComboBox cbxTurma){
         Turma turma = (Turma) cbxTurma.getSelectedItem();
         if(turma != null){
-            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaTurma(turma.getId());
+            Oferta oferta = ctrlPrincipal.getGtPrincipal().getGtOferta().filtrarUltimaOfertaValidaTurma(turma.getId());
             atualizarAnoSemestreTurma(oferta);
         }    
     }

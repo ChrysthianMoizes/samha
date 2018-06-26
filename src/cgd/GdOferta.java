@@ -38,11 +38,13 @@ public class GdOferta extends GdGenerico{
         return oferta;
     }
     
-    public List filtrarOfertaTurma(int idTurma) {
+    public List filtrarOfertasTurma(int idTurma) {
         Criteria crit = criarSessao().createCriteria(Oferta.class);
         sessao.beginTransaction();
         crit.createAlias("turma", "t");
         crit.add( Restrictions.eq("t.id", idTurma));
+        crit.addOrder(Order.desc("ano"));
+        crit.addOrder(Order.desc("semestre"));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
         sessao.getTransaction().commit();
