@@ -114,12 +114,12 @@ public class GtConflito {
         
         String turno = obterStringTurno(aula.getTurno());
 
-        List listaRestricoes = filtrarRestricoesProfessorDiaTurno(idProfessor, aula.getDia(), turno);
+        List lista = filtrarRestricoesProfessorDiaTurno(idProfessor, aula.getDia(), turno);
         
-        if(listaRestricoes.isEmpty())
+        if(lista.isEmpty())
             return null;
         else
-            return montarMensagemConflitoRestricaoProfessor(listaRestricoes, aula);
+            return montarMensagemConflitoRestricaoProfessor(lista, aula);
     }
     
     public String montarMensagemConflitoRestricaoProfessor(List lista, Aula aula){

@@ -83,6 +83,10 @@ public class JDAlocacao extends javax.swing.JDialog {
         lblMensagem.setText(mensagem);
     }
     
+    public void setarAtalho(String mensagem){
+        lblAtalho.setText(mensagem);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,6 +105,7 @@ public class JDAlocacao extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstProfessores = new javax.swing.JList<>();
         jSeparator2 = new javax.swing.JSeparator();
+        lblAtalho = new javax.swing.JLabel();
         pnlAlocacao = new javax.swing.JPanel();
         pnlAnoSemestre = new javax.swing.JPanel();
         spnSemestre = new javax.swing.JSpinner();
@@ -150,6 +155,11 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         lstDisciplinas.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         lstDisciplinas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstDisciplinas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstDisciplinasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstDisciplinas);
 
         javax.swing.GroupLayout pnlDisciplinaLayout = new javax.swing.GroupLayout(pnlDisciplina);
@@ -202,6 +212,8 @@ public class JDAlocacao extends javax.swing.JDialog {
         lstProfessores.setToolTipText("");
         jScrollPane2.setViewportView(lstProfessores);
 
+        lblAtalho.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout pnlProfessorLayout = new javax.swing.GroupLayout(pnlProfessor);
         pnlProfessor.setLayout(pnlProfessorLayout);
         pnlProfessorLayout.setHorizontalGroup(
@@ -210,8 +222,9 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                    .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAtalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProfessorLayout.setVerticalGroup(
@@ -219,7 +232,9 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(18, 18, 18)
+                .addComponent(lblAtalho, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,6 +455,10 @@ public class JDAlocacao extends javax.swing.JDialog {
         atualizarTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void lstDisciplinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDisciplinasMouseClicked
+        ctrlPrincipal.getCtrlAlocacao().identificarDisciplinaEspecial(lstDisciplinas);
+    }//GEN-LAST:event_lstDisciplinasMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnBuscar;
@@ -453,6 +472,7 @@ public class JDAlocacao extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblAtalho;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblPeriodo;
     private javax.swing.JList<String> lstDisciplinas;

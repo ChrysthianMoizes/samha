@@ -40,6 +40,7 @@ public class CtrlOferta extends CtrlGenerica{
         jdOferta.setIconImage(setarIconeJanela());
         jdOferta.preencherComboCurso();
         jdOferta.identificarUltimaOfertaTurma();
+        jdOferta.setarPeriodo();
         jdOferta.atualizarTela();
         jdOferta.setVisible(true);
     }
@@ -115,6 +116,20 @@ public class CtrlOferta extends CtrlGenerica{
         
         preencherListaAlocacoes(ano, semestre, periodo, turma, lstAlocacoes, tblTurma);
         setarAlocacao();
+    }
+    
+    public void setarPeriodoTurma(int ano, int semestre, JComboBox cbxTurma){
+        
+        Turma turma = (Turma) cbxTurma.getSelectedItem();
+        jdOferta.getSpnPeriodo().setEnabled(false);
+        
+        if(turma != null){
+            int periodo = ctrlPrincipal.getGtPrincipal().getGtTurma().obterInteiroAnoSemestreAtual(ano, semestre, turma);
+            jdOferta.getSpnPeriodo().setValue(periodo);
+        }else
+            jdOferta.getSpnPeriodo().setValue(1);
+        
+        jdOferta.getSpnPeriodo().setEnabled(true);
     }
     
     public void atualizarListaAulasAnoSemestre(int ano, int semestre){
@@ -307,14 +322,10 @@ public class CtrlOferta extends CtrlGenerica{
         if(indice >= 0){
             
             Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);
-            int ano = alocacao.getAno();
-            int semestre = alocacao.getSemestre();
             Professor professor = alocacao.getProfessor1();
             
             if(numero == 1)
                 professor = alocacao.getProfessor2();
-
-            //List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorAnoSemestre(ano, semestre, professor.getId());
             List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorLista(professor.getId());
             
             jdOferta.setarProfessor(professor.getNome());

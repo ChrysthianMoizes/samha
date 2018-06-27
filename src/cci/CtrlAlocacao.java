@@ -20,7 +20,7 @@ import javax.swing.JTable;
 public class CtrlAlocacao extends CtrlGenerica{
     
     private CtrlPrincipal ctrlPrincipal;
-    private JDAlocacao cadastraAlocacao;
+    private JDAlocacao jdAlocacao;
     private JDCargaHoraria jdCargaHoraria;
     private Eixo eixoSelecionado;
 
@@ -34,13 +34,13 @@ public class CtrlAlocacao extends CtrlGenerica{
     }
     
     public void instanciarTelaAlocacao(Frame pai) {
-        cadastraAlocacao = new JDAlocacao(pai, true, ctrlPrincipal);
-        cadastraAlocacao.setIconImage(setarIconeJanela());
-        cadastraAlocacao.preencherComboCurso();
-        cadastraAlocacao.preencherComboEixo();
+        jdAlocacao = new JDAlocacao(pai, true, ctrlPrincipal);
+        jdAlocacao.setIconImage(setarIconeJanela());
+        jdAlocacao.preencherComboCurso();
+        jdAlocacao.preencherComboEixo();
         identificarUltimaAlocacao();
-        cadastraAlocacao.atualizarTabela();
-        cadastraAlocacao.setVisible(true);
+        jdAlocacao.atualizarTabela();
+        jdAlocacao.setVisible(true);
         
     }
      
@@ -61,8 +61,8 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         Alocacao ultimaAlocacao = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarUltimaAlocacao();
         if(ultimaAlocacao != null){
-            cadastraAlocacao.setAno(ultimaAlocacao.getAno());
-            cadastraAlocacao.setSemestre(ultimaAlocacao.getSemestre());
+            jdAlocacao.setAno(ultimaAlocacao.getAno());
+            jdAlocacao.setSemestre(ultimaAlocacao.getSemestre());
         }
     }
     
@@ -76,9 +76,9 @@ public class CtrlAlocacao extends CtrlGenerica{
         String resposta = ctrlPrincipal.getGtPrincipal().getGtAlocacao().cadastrar(professores, disciplina, ano, semestre);
 
         if (resposta.equals(Constantes.CADASTRADO)) {
-            cadastraAlocacao.atualizarTabela();
+            jdAlocacao.atualizarTabela();
         } else {
-            CtrlMensagem.exibirMensagemErro(cadastraAlocacao, resposta);
+            CtrlMensagem.exibirMensagemErro(jdAlocacao, resposta);
         }
     }
     
@@ -89,16 +89,16 @@ public class CtrlAlocacao extends CtrlGenerica{
         if(matriz != null){
             
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz.getId());
-            listarEmTabela(listaAlocacoes, tabela, cadastraAlocacao, "toArray");
+            listarEmTabela(listaAlocacoes, tabela, jdAlocacao, "toArray");
                
         if( listaAlocacoes.isEmpty())
-                cadastraAlocacao.setarMensagem("Nenhuma alocação encontrada.");
+                jdAlocacao.setarMensagem("Nenhuma alocação encontrada.");
         
         if(jdCargaHoraria != null)
             jdCargaHoraria.atualizarTabela();
         
         }else
-            cadastraAlocacao.setarMensagem("Matriz Curricular não foi selecionada.");
+            jdAlocacao.setarMensagem("Matriz Curricular não foi selecionada.");
 
     }
     
@@ -108,8 +108,8 @@ public class CtrlAlocacao extends CtrlGenerica{
             
             List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(getEixoSelecionado().getId());
             
-            int ano = cadastraAlocacao.getAno();
-            int semestre = cadastraAlocacao.getSemestre();
+            int ano = jdAlocacao.getAno();
+            int semestre = jdAlocacao.getSemestre();
             
             List listaCargasHorarias = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
             listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
@@ -124,17 +124,17 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         try {
             Alocacao alocacao = (Alocacao) JTableUtil.getDadosLinhaSelecionada(tabela);
-            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this.cadastraAlocacao, "Confirmar Remoção ?");
+            int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(this.jdAlocacao, "Confirmar Remoção ?");
             if (confirmacao == 0) {
                 String resposta = ctrlPrincipal.getGtPrincipal().getGtAlocacao().excluir(alocacao);
                 if (resposta.equals(Constantes.EXCLUIDO)){ 
-                    cadastraAlocacao.atualizarTabela();
+                    jdAlocacao.atualizarTabela();
                 }else 
-                    CtrlMensagem.exibirMensagemErro(this.cadastraAlocacao, resposta);   
+                    CtrlMensagem.exibirMensagemErro(this.jdAlocacao, resposta);   
             }    
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            CtrlMensagem.exibirMensagemErro(cadastraAlocacao, "Selecione uma alocação");
+            CtrlMensagem.exibirMensagemErro(jdAlocacao, "Selecione uma alocação");
         }
     }
     
@@ -151,11 +151,11 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         Curso curso = (Curso) cbxCurso.getSelectedItem();
         if(curso != null){
-            cadastraAlocacao.setarPeriodoMaximo(curso.getQtPeriodos());
+            jdAlocacao.setarPeriodoMaximo(curso.getQtPeriodos());
             List listaMatriz = ctrlPrincipal.getCtrlMatriz().filtrarMatrizCurso(curso.getId());
             preencherCombo(cbxMatriz, listaMatriz); 
-            cadastraAlocacao.preencherListaDisciplinas();
-            cadastraAlocacao.atualizarTabela();
+            jdAlocacao.preencherListaDisciplinas();
+            jdAlocacao.atualizarTabela();
         }    
     }
     
@@ -165,7 +165,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         preencherCombo(cbxEixo, listaEixos);
         
         if(listaEixos.size() > 0)
-            cadastraAlocacao.preencherListaProfessores();  
+            jdAlocacao.preencherListaProfessores();  
     }
     
     public void preencherListaDisciplinas(JComboBox cbxMatriz, JList lstDisciplinas, JSpinner spnPeriodo) {
@@ -177,7 +177,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         if(matriz != null)
             listaDisciplinas = ctrlPrincipal.getCtrlDisciplina().filtrarPorMatrizPeriodo(matriz.getId(), periodo);     
         else
-            cadastraAlocacao.setarMensagem("Curso não possui matriz cadastrada.");
+            jdAlocacao.setarMensagem("Curso não possui matriz cadastrada.");
         
         preencherJList(listaDisciplinas, lstDisciplinas); 
     }
@@ -196,7 +196,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
             preencherJList(listaProfessores, lstProfessores);
         }else
-            cadastraAlocacao.setarMensagem("Eixo não selecionado.");
+            jdAlocacao.setarMensagem("Eixo não selecionado.");
     }
 
     public Eixo getEixoSelecionado() {
@@ -205,5 +205,18 @@ public class CtrlAlocacao extends CtrlGenerica{
 
     public void setEixoSelecionado(Eixo eixo) {
         this.eixoSelecionado = eixo;
+    }
+    
+    public void identificarDisciplinaEspecial(JList lstDisciplinas){
+        
+        Disciplina disciplina = (Disciplina) lstDisciplinas.getSelectedValue();
+        
+        if(disciplina != null){
+            if(disciplina.getTipo().equals(Constantes.ESPECIAL))
+                jdAlocacao.setarAtalho("Pressione Ctrl para selecionar 2 professores.");
+            else
+                jdAlocacao.setarAtalho("Selecione 1 professor.");
+        }
+        
     }
 }

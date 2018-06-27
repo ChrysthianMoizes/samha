@@ -162,7 +162,15 @@ public class JDOferta extends javax.swing.JDialog {
     
     public void setarIntervaloMinimo(int intervalo){
         spnIntervalo.setValue(intervalo);
-    }    
+    }
+
+    public void setarPeriodo(){
+        
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        
+        ctrlPrincipal.getCtrlOferta().setarPeriodoTurma(ano, semestre, cbxTurma);
+    }
     
     public void exibirNotificacao(String mensagem, Color cor){
         txtAreaNotificacoes.setForeground(cor);
@@ -212,6 +220,10 @@ public class JDOferta extends javax.swing.JDialog {
 
     public JSpinner getSpnSemestre() {
         return spnSemestre;
+    }
+
+    public JSpinner getSpnPeriodo() {
+        return spnPeriodo;
     }
     
     public void sair(){
@@ -308,8 +320,8 @@ public class JDOferta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Montar Oferta");
         setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(1400, 795));
-        setPreferredSize(new java.awt.Dimension(1600, 795));
+        setMinimumSize(new java.awt.Dimension(1400, 800));
+        setPreferredSize(new java.awt.Dimension(1600, 820));
         setSize(new java.awt.Dimension(1600, 788));
 
         pnlPrincipal.setBackground(new java.awt.Color(53, 151, 48));
@@ -866,7 +878,7 @@ public class JDOferta extends javax.swing.JDialog {
                 .addComponent(pnlAlocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
+                    .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                     .addComponent(pnlTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -880,7 +892,7 @@ public class JDOferta extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(pnlTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                        .addComponent(pnlProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
                     .addComponent(pnlAlocacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -902,12 +914,14 @@ public class JDOferta extends javax.swing.JDialog {
 
     private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
+        setarPeriodo();
         atualizarTela();
     }//GEN-LAST:event_cbxTurmaActionPerformed
 
     private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
         ctrlPrincipal.getCtrlOferta().setAbrindoTela(true);
         preencherComboTurma(false);
+        setarPeriodo();
         atualizarTela();
     }//GEN-LAST:event_cbxCursoActionPerformed
 

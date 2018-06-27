@@ -25,7 +25,7 @@ public class GtInstituicao {
         int dia = aula.getDia();
         List mensagens = new ArrayList<>();
         
-        if(numeroProfessor != 1)
+        if(numeroProfessor != 1 && aula.getAlocacao().getProfessor2() != null)
             idProfessor = aula.getAlocacao().getProfessor2().getId();
         
         preencherVetorAulas(aula, idProfessor);

@@ -148,7 +148,7 @@ public class CtrlRelatorioTurma {
         
         Map hash = new HashMap();
         
-        String periodoAtual = ctrlPrincipal.getGtPrincipal().getGtTurma().obterAnoPeriodoAtual(ano, semestre, turma);
+        String periodoAtual = ctrlPrincipal.getGtPrincipal().getGtTurma().obterStringAnoPeriodoAtual(ano, semestre, turma);
         String anoSemestre = ano + "/" + semestre;
         
         hash.put("nome", turma.getNome() + " - " + periodoAtual);

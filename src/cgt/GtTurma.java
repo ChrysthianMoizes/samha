@@ -150,7 +150,7 @@ public class GtTurma {
         return true;
     }
     
-    public String obterAnoPeriodoAtual(int anoAtual, int semestreAtual, Turma turma){
+    public String obterStringAnoPeriodoAtual(int anoAtual, int semestreAtual, Turma turma){
         
         int anoInicial = turma.getAno();
         int semestreInicial = turma.getSemestre();
@@ -167,6 +167,21 @@ public class GtTurma {
         }
 
         return periodoAtual + nivel;
+    }
+    
+    public int obterInteiroAnoSemestreAtual(int anoAtual, int semestreAtual, Turma turma){
+        
+        int anoInicial = turma.getAno();
+        int semestreInicial = turma.getSemestre();
+        
+        String p = null;
+        
+        if(turma.getMatriz().getCurso().getNivel().equals("ENSINO MÉDIO INTEGRADO"))
+            p = calcularAnoAtual(anoAtual, anoInicial);
+        else
+            p = calcularPeriodoAtual(anoAtual, semestreAtual, anoInicial, semestreInicial);
+         
+        return Integer.valueOf(p);
     }
     
     public String calcularAnoAtual(int anoAtual, int anoInicial){
