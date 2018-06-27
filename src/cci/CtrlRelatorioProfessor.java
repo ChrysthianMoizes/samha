@@ -74,7 +74,7 @@ public class CtrlRelatorioProfessor {
             case 'E': return listarProfessoresEixo(eixo);
             case 'C': return listarProfessoresCoordenadoria(coordenadoria);
             case 'P': 
-                    if(professor != null){
+                    if(professor != null && professor.isAtivo()){
                         List lista = new ArrayList();
                         lista.add(professor);
                         return lista;
@@ -85,7 +85,7 @@ public class CtrlRelatorioProfessor {
     }
     
     public List listarTodosProfessores(){
-        List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
+        List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().consultarAtivos();
         return listaProfessores;
     }
     
@@ -93,7 +93,7 @@ public class CtrlRelatorioProfessor {
         
         if(eixo != null){
             
-            List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());  
+            List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorEixo(eixo.getId());  
             return listaProfessores;
         }else
             CtrlMensagem.exibirMensagemErro(null, "Eixo não encontrado.");
@@ -103,7 +103,7 @@ public class CtrlRelatorioProfessor {
     public List listarProfessoresCoordenadoria(Coordenadoria coordenadoria){
         
         if(coordenadoria != null){
-            List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coordenadoria.getId());  
+            List<Professor> listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorCoordenadoria(coordenadoria.getId());  
             return listaProfessores;
         }else
             CtrlMensagem.exibirMensagemErro(null, "Coordenadoria não encontrada.");

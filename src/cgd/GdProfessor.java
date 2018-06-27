@@ -16,6 +16,16 @@ public class GdProfessor extends GdGenerico{
         this.gdPrincipal = gdPrincipal;
     }
     
+    public List consultarAtivos() {
+        Criteria crit = criarSessao().createCriteria(Professor.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("ativo", true) );
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public List buscar(String coluna, String texto) {
         Criteria crit = criarSessao().createCriteria(Professor.class);
         sessao.beginTransaction();
@@ -38,11 +48,37 @@ public class GdProfessor extends GdGenerico{
         return lista;
     }
     
+    public List filtrarAtivosPorCoordenadoria(int id) {
+        Criteria crit = criarSessao().createCriteria(Professor.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("ativo", true) );
+        crit.add( Restrictions.eq("coordenadoria.id", id) );
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public List filtrarPorEixo(int id) {
         Criteria crit = criarSessao().createCriteria(Professor.class);
         sessao.beginTransaction();
         crit.createAlias("coordenadoria", "c");
         crit.createAlias("c.eixo", "e");
+        crit.add( Restrictions.eq("e.id", id));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
+    public List filtrarAtivosPorEixo(int id) {
+        Criteria crit = criarSessao().createCriteria(Professor.class);
+        sessao.beginTransaction();
+        crit.createAlias("coordenadoria", "c");
+        crit.createAlias("c.eixo", "e");
+        crit.add( Restrictions.eq("ativo", true) );
         crit.add( Restrictions.eq("e.id", id));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();

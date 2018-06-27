@@ -66,13 +66,21 @@ public class CtrlProfessor extends CtrlGenerica{
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorCoordenadoria(id);
     }
     
+    public List<Professor> filtrarAtivosPorCoordenadoria(int id){
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarAtivosPorCoordenadoria(id);
+    }
+    
     public List<Professor> filtrarPorEixo(int id){
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorEixo(id);
     }
+    
+    public List<Professor> filtrarAtivosPorEixo(int id){
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarAtivosPorEixo(id);
+    }
 
-    public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email) {
+    public void cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email, boolean ativo) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria, email);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().cadastrar(nome, matricula, cargaHoraria, coordenadoria, email, ativo);
         
         if (resposta.equals(Constantes.CADASTRADO)) {
             
@@ -88,9 +96,9 @@ public class CtrlProfessor extends CtrlGenerica{
             CtrlMensagem.exibirMensagemErro(cadastraProf, resposta);     
     }
 
-    public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email) {
+    public void alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email, boolean ativo) {
 
-        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email);
+        String resposta = ctrlPrincipal.getGtPrincipal().getGtProfessor().alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email, ativo);
         
         if (resposta.equals(Constantes.ALTERADO)) { 
             
@@ -108,6 +116,10 @@ public class CtrlProfessor extends CtrlGenerica{
 
     public List<Professor> consultar() {
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().consultar();
+    }
+    
+    public List<Professor> consultarAtivos() {
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().consultarAtivos();
     }
 
     public void excluir(JTable tblProfessor) {
@@ -141,16 +153,16 @@ public class CtrlProfessor extends CtrlGenerica{
     
     //================================================= TELA DE CADASTRO ====================================================
     
-    public void validarOperacao(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email){  
+    public void validarOperacao(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email, boolean ativo){  
         
         Professor professor = cadastraProf.getProfessor();
         
         if(validarCampos(nome, matricula, cargaHoraria, coordenadoria)){
             
             if(professor == null)   
-                cadastrar(nome, matricula, cargaHoraria, coordenadoria, email);
+                cadastrar(nome, matricula, cargaHoraria, coordenadoria, email, ativo);
             else
-                alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email);
+                alterar(nome, matricula, cargaHoraria, coordenadoria, professor, email, ativo);
         }else
             CtrlMensagem.exibirMensagemAviso(cadastraProf, "Todos os campos devem ser preenchidos corretamente");
     }

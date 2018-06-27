@@ -59,6 +59,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         spnCargaHoraria = new javax.swing.JSpinner();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        chxAtivo = new javax.swing.JCheckBox();
         pnlRodape = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -128,6 +129,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
 
         txtEmail.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
 
+        chxAtivo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        chxAtivo.setSelected(true);
+        chxAtivo.setText("Ativo");
+
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
@@ -140,7 +145,6 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                     .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome)
@@ -155,7 +159,11 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                             .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                                 .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
+                        .addComponent(cbxCoordenadoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(chxAtivo)))
                 .addContainerGap())
         );
         pnlDadosPessoaisLayout.setVerticalGroup(
@@ -171,10 +179,10 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spnCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosPessoaisLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +190,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCoordenadoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chxAtivo))
                 .addContainerGap())
         );
 
@@ -544,7 +553,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
         txtEmail.setText(professor.getEmail());
-        spnCargaHoraria.setValue(professor.getCargaHoraria());   
+        spnCargaHoraria.setValue(professor.getCargaHoraria());
+        chxAtivo.setSelected(professor.isAtivo());
     }
     
     public void setarCoordenadoria(){
@@ -636,6 +646,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtEmail.setEnabled(opcao);
         spnCargaHoraria.setEnabled(opcao);
         cbxCoordenadoria.setEnabled(opcao);
+        chxAtivo.setEnabled(opcao);
         btnSalvar.setEnabled(opcao);
         btnCancelar.setText("Sair");
     }
@@ -736,12 +747,14 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         String matricula = txtMatricula.getText();
         String email = txtEmail.getText();
         int cargaHoraria = (int) spnCargaHoraria.getValue();
+        boolean ativo = chxAtivo.isSelected();
+        
         Coordenadoria coordenadoria = null;
         
         if(listaCoordenadorias.size() > 0)
             coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         
-        ctrlPrincipal.getCtrlProfessor().validarOperacao(nome, matricula, cargaHoraria, coordenadoria, email);
+        ctrlPrincipal.getCtrlProfessor().validarOperacao(nome, matricula, cargaHoraria, coordenadoria, email, ativo);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSalvarKeyPressed
@@ -786,6 +799,7 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxCoordenadoria;
     private javax.swing.JComboBox<String> cbxDias;
     private javax.swing.JComboBox<String> cbxTurnos;
+    private javax.swing.JCheckBox chxAtivo;
     private javax.swing.JCheckBox chxAula1;
     private javax.swing.JCheckBox chxAula2;
     private javax.swing.JCheckBox chxAula3;

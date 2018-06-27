@@ -15,6 +15,9 @@ public class Professor extends Servidor implements Comparable<Object>{
     @Column(nullable = false)
     private int cargaHoraria;
     
+    @Column(nullable = false, unique = false)
+    private boolean ativo;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -24,16 +27,20 @@ public class Professor extends Servidor implements Comparable<Object>{
     public Professor() {
     }
 
-    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula, String email) {
+    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula, 
+            String email, boolean ativo) {
         super(id, nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
+        this.ativo = ativo;
     }
 
-    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, String nome, String matricula, String email) {
+    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, 
+            String nome, String matricula, String email, boolean ativo) {
         super(nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
         this.coordenadoria = coordenadoria;
+        this.ativo = ativo;
     }
     
     public String getPrimeiroNome(){
@@ -59,6 +66,14 @@ public class Professor extends Servidor implements Comparable<Object>{
 
     public void setCoordenadoria(Coordenadoria coordenadoria) {
         this.coordenadoria = coordenadoria;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
     
     public Object[] toArray() {

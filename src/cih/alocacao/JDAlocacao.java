@@ -56,7 +56,10 @@ public class JDAlocacao extends javax.swing.JDialog {
     }
     
     public void preencherListaProfessores(){
-        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxEixo, lstProfessores);
+        
+        char filtro = (char) btnGroupProfessor.getSelection().getMnemonic();
+        
+        ctrlPrincipal.getCtrlAlocacao().preencherListaProfessores(cbxEixo, lstProfessores, filtro);
     }
     
     public void setarPeriodoMaximo(int maximo){
@@ -91,6 +94,7 @@ public class JDAlocacao extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupProfessor = new javax.swing.ButtonGroup();
         pnlPrincipal = new javax.swing.JPanel();
         pnlDisciplina = new javax.swing.JPanel();
         cbxCurso = new javax.swing.JComboBox<>();
@@ -106,6 +110,8 @@ public class JDAlocacao extends javax.swing.JDialog {
         lstProfessores = new javax.swing.JList<>();
         jSeparator2 = new javax.swing.JSeparator();
         lblAtalho = new javax.swing.JLabel();
+        rbtnTodos = new javax.swing.JRadioButton();
+        rbtnEixo = new javax.swing.JRadioButton();
         pnlAlocacao = new javax.swing.JPanel();
         pnlAnoSemestre = new javax.swing.JPanel();
         spnSemestre = new javax.swing.JSpinner();
@@ -214,6 +220,27 @@ public class JDAlocacao extends javax.swing.JDialog {
 
         lblAtalho.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
 
+        btnGroupProfessor.add(rbtnTodos);
+        rbtnTodos.setFont(new java.awt.Font("DialogInput", 0, 13)); // NOI18N
+        rbtnTodos.setMnemonic('t');
+        rbtnTodos.setText("Todos");
+        rbtnTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnTodosActionPerformed(evt);
+            }
+        });
+
+        btnGroupProfessor.add(rbtnEixo);
+        rbtnEixo.setFont(new java.awt.Font("DialogInput", 0, 13)); // NOI18N
+        rbtnEixo.setMnemonic('e');
+        rbtnEixo.setSelected(true);
+        rbtnEixo.setText("Eixo");
+        rbtnEixo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEixoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlProfessorLayout = new javax.swing.GroupLayout(pnlProfessor);
         pnlProfessor.setLayout(pnlProfessorLayout);
         pnlProfessorLayout.setHorizontalGroup(
@@ -222,6 +249,11 @@ public class JDAlocacao extends javax.swing.JDialog {
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProfessorLayout.createSequentialGroup()
+                        .addComponent(rbtnEixo)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnTodos)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                     .addComponent(cbxEixo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblAtalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -231,9 +263,13 @@ public class JDAlocacao extends javax.swing.JDialog {
             pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProfessorLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnlProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtnTodos)
+                    .addComponent(rbtnEixo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxEixo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblAtalho, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAtalho, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -459,10 +495,19 @@ public class JDAlocacao extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlAlocacao().identificarDisciplinaEspecial(lstDisciplinas);
     }//GEN-LAST:event_lstDisciplinasMouseClicked
 
+    private void rbtnEixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEixoActionPerformed
+        preencherComboEixo();
+    }//GEN-LAST:event_rbtnEixoActionPerformed
+
+    private void rbtnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTodosActionPerformed
+        preencherListaProfessores();
+    }//GEN-LAST:event_rbtnTodosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCargaHoraria;
+    private javax.swing.ButtonGroup btnGroupProfessor;
     private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxEixo;
@@ -482,6 +527,8 @@ public class JDAlocacao extends javax.swing.JDialog {
     private javax.swing.JPanel pnlDisciplina;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlProfessor;
+    private javax.swing.JRadioButton rbtnEixo;
+    private javax.swing.JRadioButton rbtnTodos;
     private javax.swing.JSpinner spnAno;
     private javax.swing.JSpinner spnPeriodo;
     private javax.swing.JSpinner spnSemestre;

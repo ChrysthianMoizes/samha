@@ -16,7 +16,7 @@ public class GtProfessor {
         setProfessorSelecionado(null);
     }
 
-    public String cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email) {
+    public String cadastrar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email, boolean ativo) {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
@@ -27,6 +27,7 @@ public class GtProfessor {
             professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
+            professor.setAtivo(ativo);
             gtPrincipal.getGdPrincipal().getGdProfessor().cadastrar(professor);
             setProfessorSelecionado(professor);
             return Constantes.CADASTRADO;
@@ -35,7 +36,7 @@ public class GtProfessor {
         }
     }
     
-    public String alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email) {
+    public String alterar(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, Professor professor, String email, boolean ativo) {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
@@ -45,6 +46,7 @@ public class GtProfessor {
             professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
             professor.setCoordenadoria(coordenadoria);
+            professor.setAtivo(ativo);
             gtPrincipal.getGdPrincipal().getGdProfessor().alterar(professor);
             setProfessorSelecionado(professor);
             return Constantes.ALTERADO;
@@ -67,15 +69,35 @@ public class GtProfessor {
         return lista;
     }
     
+    public List<Professor> filtrarAtivosPorCoordenadoria(int id){
+        
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().filtrarAtivosPorCoordenadoria(id);
+        Collections.sort(lista);
+        return lista;
+    }
+    
     public List<Professor> filtrarPorEixo(int id){
         
         List lista = gtPrincipal.getGdPrincipal().getGdProfessor().filtrarPorEixo(id);
         Collections.sort(lista);
         return lista;
     }
+    
+    public List<Professor> filtrarAtivosPorEixo(int id){
+        
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().filtrarAtivosPorEixo(id);
+        Collections.sort(lista);
+        return lista;
+    }
 
     public List<Professor> consultar() {
         List lista = gtPrincipal.getGdPrincipal().getGdProfessor().consultar(Professor.class);
+        Collections.sort(lista);
+        return lista;
+    }
+    
+    public List<Professor> consultarAtivos() {
+        List lista = gtPrincipal.getGdPrincipal().getGdProfessor().consultarAtivos();
         Collections.sort(lista);
         return lista;
     }

@@ -140,7 +140,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     
         if(coord != null){
             
-            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorCoordenadoria(coord.getId());
+            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorCoordenadoria(coord.getId());
             preencherCombo(cbxProfessor, listaProfessores);   
         }
     

@@ -182,7 +182,26 @@ public class CtrlAlocacao extends CtrlGenerica{
         preencherJList(listaDisciplinas, lstDisciplinas); 
     }
     
-    public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores) {
+    public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores, char filtro){
+        
+        List listaProfessores = null;
+        
+        switch(filtro){
+            case 'E': 
+                cbxEixo.setEnabled(true);
+                listaProfessores = listarProfessoresEixo(cbxEixo); break;
+            
+            case 'T':
+                cbxEixo.setEnabled(false);
+                cbxEixo.removeAllItems();
+                listaProfessores = listarTodosProfessores(); break;
+            default:break;
+        }
+
+        preencherJList(listaProfessores, lstProfessores);
+    }
+    
+    public List listarProfessoresEixo(JComboBox cbxEixo){
         
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         
@@ -193,10 +212,18 @@ public class CtrlAlocacao extends CtrlGenerica{
             if(jdCargaHoraria != null)
                 jdCargaHoraria.atualizarTabela();      
 
-            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(eixo.getId());
-            preencherJList(listaProfessores, lstProfessores);
+            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorEixo(eixo.getId());
+            return listaProfessores;
+            
         }else
             jdAlocacao.setarMensagem("Eixo não selecionado.");
+        
+        return null;
+    }
+    
+    public List listarTodosProfessores(){
+        List listaProfessores = ctrlPrincipal.getCtrlProfessor().consultarAtivos();
+        return listaProfessores;
     }
 
     public Eixo getEixoSelecionado() {
