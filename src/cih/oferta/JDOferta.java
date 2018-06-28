@@ -955,7 +955,7 @@ public class JDOferta extends javax.swing.JDialog {
     }//GEN-LAST:event_lstAlocacoesMouseClicked
 
     private void cbxQuantidadeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantidadeProfessorActionPerformed
-        ctrlPrincipal.getCtrlOferta().alterarProfessorCombo(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
+        ctrlPrincipal.getCtrlOferta().identificarProfessorSelecionado(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
     }//GEN-LAST:event_cbxQuantidadeProfessorActionPerformed
 
     private void spnTempoMaximoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTempoMaximoStateChanged

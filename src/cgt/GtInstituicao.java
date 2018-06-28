@@ -53,7 +53,6 @@ public class GtInstituicao {
         
         for(int linha = 0; linha < Constantes.LINHA; linha++){
             
-            //vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaAnoSemestre(linha, idProfessor, aula.getAlocacao().getAno(), aula.getAlocacao().getSemestre());
             vetorAulas[linha] = gtPrincipal.getGtAula().filtrarAulasProfessorDiaLista(linha, idProfessor);
             
             if(!validacaoGeral){
@@ -275,21 +274,25 @@ public class GtInstituicao {
         
         int qtHoras = Integer.parseInt(horas[0]);
         
-        if(flag == Constantes.INTERVALO_MINIMO){
+        if(flag == Constantes.INTERVALO_MINIMO)
+            return calcularDiferencaHorasIntervaloMinimo(fim, inicio, qtHoras);
+        else    
+            return qtHoras;
+    }
+    
+    public int calcularDiferencaHorasIntervaloMinimo(LocalTime fim, LocalTime inicio, int qtHoras){
             
-            if(fim.getHour() == inicio.getHour()){
-                
-                if(fim.getMinute() < inicio.getMinute()){
-                    return qtHoras;
-                }
-                
-            }else if(fim.getHour() < inicio.getHour()){
-                return qtHoras; 
+        if(fim.getHour() == inicio.getHour()){
+
+            if(fim.getMinute() < inicio.getMinute()){
+                return qtHoras;
             }
-            
-            return 24 - qtHoras;
-        }    
-        return qtHoras;
+
+        }else if(fim.getHour() < inicio.getHour()){
+            return qtHoras; 
+        }
+
+        return 24 - qtHoras; 
     }
     
     public String obterStringDia(int dia){

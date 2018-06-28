@@ -303,18 +303,21 @@ public class CtrlOferta extends CtrlGenerica{
             Alocacao alocacao = (Alocacao) listaAlocacoes.get(indice);
             
             Disciplina disciplina = alocacao.getDisciplina();
-
-            if(disciplina.getTipo().equals(Constantes.ESPECIAL))
-                cbxQuantidadeProfessor.setEnabled(true);
-            else{
-                cbxQuantidadeProfessor.setEnabled(false);
-                cbxQuantidadeProfessor.setSelectedIndex(0);
-            }
-            alterarProfessorCombo(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
+            habilitarComboProfessor(disciplina, cbxQuantidadeProfessor);
+            identificarProfessorSelecionado(lstAlocacoes, tblProfessor, cbxQuantidadeProfessor);
         }
     }
     
-    public void alterarProfessorCombo(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
+    public void habilitarComboProfessor(Disciplina disciplina, JComboBox cbxProfessor){
+        if(disciplina.getTipo().equals(Constantes.ESPECIAL))
+            cbxProfessor.setEnabled(true);
+        else{
+            cbxProfessor.setEnabled(false);
+            cbxProfessor.setSelectedIndex(0);
+        }
+    }
+    
+    public void identificarProfessorSelecionado(JList lstAlocacoes, JTable tblProfessor, JComboBox cbxQuantidadeProfessor){
         
         int numero = cbxQuantidadeProfessor.getSelectedIndex();
         int indice = lstAlocacoes.getSelectedIndex();
@@ -326,15 +329,17 @@ public class CtrlOferta extends CtrlGenerica{
             
             if(numero == 1)
                 professor = alocacao.getProfessor2();
+            
             List listaAulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasProfessorLista(professor.getId());
             
             jdOferta.setarProfessor(professor.getNome());
             setNomeProfessor(professor.getNome());
-            preencherTabelaProfessor(tblProfessor, listaAulas, indice, professor.getId(), (numero + 1));
+            
+            preencherTabelaProfessor(tblProfessor, listaAulas, indice, professor.getId());
         } 
     }
     
-    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas, int indice, int idProfessor, int numero){
+    public void preencherTabelaProfessor(JTable tblProfessor, List listaAulas, int indice, int idProfessor){
  
         Color corErro = new Color(255, 73, 73);
         renderTabelaProfessor.gerarMatrizCores();
@@ -346,7 +351,7 @@ public class CtrlOferta extends CtrlGenerica{
             
             tblProfessor.setValueAt(aula.getOferta().getTurma().getNome(), aula.getDia(), aula.getNumero());
             
-            if(identificarConflitoAulaProfessor(aula, idProfessor, numero))
+            if(identificarConflitoAulaProfessor(aula, idProfessor))
                 pintarCelulaTabelaProfessor(aula.getDia(), aula.getNumero(), corErro);
             else
                 pintarCelulaTabelaProfessor(aula.getDia(), aula.getNumero(), Color.WHITE);
@@ -356,7 +361,9 @@ public class CtrlOferta extends CtrlGenerica{
             exibirMensagemProfessorDesatualizado();
     }
     
-    public boolean identificarConflitoAulaProfessor(Aula aula, int idProfessor, int numero){
+    public boolean identificarConflitoAulaProfessor(Aula aula, int idProfessor){
+        
+        int numero = identificarNumeroProfessor(aula, idProfessor);
         
         String conflitoTurma = ctrlPrincipal.getGtPrincipal().getGtConflito().identificarConflitoTurma(aula, idProfessor);
         if(conflitoTurma != null)
@@ -374,6 +381,13 @@ public class CtrlOferta extends CtrlGenerica{
             return true;
         
         return false;
+    }
+    
+    public int identificarNumeroProfessor(Aula aula, int idProfessor){
+     
+        if(aula.getAlocacao().getProfessor1().getId() == idProfessor)
+            return 1;
+        return 2;
     }
 
     public void pintarCelulaTabelaProfessor(int linha, int coluna, Color cor){
