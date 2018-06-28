@@ -157,7 +157,7 @@ public class GtInstituicao {
                 primeiraAula = aula;
             }
 
-            tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.TEMPO_MAXIMO);
+            tempo = obterQuantidadeHoras(primeiraAula, ultimaAula, Constantes.TEMPO_MAXIMO);
             
             if(tempo > oferta.getTempoMaximoTrabalho())
                 return montarMensagemTempoMaximo(ultimaAula, primeiraAula, tempo);          
@@ -211,7 +211,7 @@ public class GtInstituicao {
                 primeiraAula = aula;
             }
 
-            tempo = calcularDiferencaHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
+            tempo = obterQuantidadeHoras(primeiraAula, ultimaAula, Constantes.INTERVALO_MINIMO);
 
             if(tempo < oferta.getIntervaloMinimo())
                 return montarMensagemIntervaloMinimo(ultimaAula, primeiraAula, tempo);                 
@@ -257,7 +257,7 @@ public class GtInstituicao {
         return horarioFinal;
     }
     
-    public int calcularDiferencaHoras(Aula primeira, Aula ultima, int flag){
+    public int obterQuantidadeHoras(Aula primeira, Aula ultima, int flag){
         
         String horarioInicial = obterHorarioInicial(primeira);
         String horarioFinal = obterHorarioFinal(ultima);
@@ -266,21 +266,26 @@ public class GtInstituicao {
         
         LocalTime inicio = LocalTime.parse(horarioInicial, formato);
         LocalTime fim = LocalTime.parse(horarioFinal, formato);
+
+        int qtHoras = calcularDiferencaHoras(inicio, fim, formato);
+        
+        if(flag == Constantes.INTERVALO_MINIMO)
+            return modificarQuantidadeHorasIntervaloMinimo(fim, inicio, qtHoras);
+        else    
+            return qtHoras;
+    }
+    
+    public int calcularDiferencaHoras(LocalTime inicio, LocalTime fim, DateTimeFormatter formato){
         
         LocalTime diferenca = fim.minusHours(inicio.getHour()).minusMinutes(inicio.getMinute());
         String dif = diferenca.format(formato);
 
         String[] horas = dif.split(":");
         
-        int qtHoras = Integer.parseInt(horas[0]);
-        
-        if(flag == Constantes.INTERVALO_MINIMO)
-            return calcularDiferencaHorasIntervaloMinimo(fim, inicio, qtHoras);
-        else    
-            return qtHoras;
+        return Integer.parseInt(horas[0]);
     }
-    
-    public int calcularDiferencaHorasIntervaloMinimo(LocalTime fim, LocalTime inicio, int qtHoras){
+     
+    public int modificarQuantidadeHorasIntervaloMinimo(LocalTime fim, LocalTime inicio, int qtHoras){
             
         if(fim.getHour() == inicio.getHour()){
 
