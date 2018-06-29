@@ -231,7 +231,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             if(disciplina.getTipo().equals(Constantes.ESPECIAL))
                 jdAlocacao.setarAtalho("Pressione Ctrl para selecionar 2 professores.");
             else
-                jdAlocacao.setarAtalho("Selecione 1 professor.");
+                jdAlocacao.setarAtalho("Selecione apenas 1 professor.");
         }
         
     }

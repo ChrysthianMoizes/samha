@@ -77,20 +77,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         ImageIcon icone = new ImageIcon("build/classes/cih/img/relatorio.png");
         return icone.getImage();
     }
-    
-    public void identificarTipoRelatorio(Frame pai, char tipo){  
-        switch(tipo){
-            
-            case 'P': 
-                instanciarTelaRelatorioProfessor(pai);
-                break;
-            case 'T': 
-                instanciarTelaRelatorioTurma(pai);
-                break;
-            default: break;
-        }          
-    }
-    
+     
     public void preencherComboEixos(JComboBox cbxEixo){ 
         
         List listaEixos = ctrlPrincipal.getCtrlEixo().consultar();
