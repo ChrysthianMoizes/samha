@@ -165,7 +165,7 @@
 			<textField>
 				<reportElement x="322" y="64" width="470" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DialogInput" size="24" isBold="true"/>
+					<font fontName="DialogInput" size="22" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nome}]]></textFieldExpression>
 			</textField>

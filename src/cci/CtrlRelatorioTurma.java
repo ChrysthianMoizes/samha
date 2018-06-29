@@ -168,7 +168,7 @@ public class CtrlRelatorioTurma {
             String sigla = aula.getAlocacao().getDisciplina().getSigla();
             
             if(aula.getAlocacao().getProfessor2() != null){
-                professor = professor + "|" + aula.getAlocacao().getProfessor2().getPrimeiroNome();
+                professor = professor + "|\n" + aula.getAlocacao().getProfessor2().getPrimeiroNome();
             }  
             hash.put(key, sigla + "\n" + professor);
         }

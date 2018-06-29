@@ -1,6 +1,7 @@
 package cgt;
 
 import cdp.MatrizCurricular;
+import cdp.Oferta;
 import cdp.Turma;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -92,13 +93,24 @@ public class GtTurma {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            List listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertasTurma(turma.getId()); 
+            List<Oferta> listaOfertas = gtPrincipal.getGdPrincipal().getGdOferta().filtrarOfertasTurma(turma.getId()); 
             
-            if(listaOfertas.isEmpty()){
+            boolean semAulas = true;
+            
+            for(Oferta oferta : listaOfertas){
+                List aulas = gtPrincipal.getGdPrincipal().getGdAula().filtrarAulasOferta(oferta.getId());
+                if(!aulas.isEmpty()){
+                    semAulas = false;
+                    break;
+                }
+                gtPrincipal.getGdPrincipal().getGdOferta().excluir(oferta);
+            }
+            
+            if(semAulas){
                 gtPrincipal.getGdPrincipal().getGdTurma().excluir(turma);
                 return Constantes.EXCLUIDO;
             }else
-                return "Turma possui ofertas cadastradas";
+                return "Turma possui aulas associadas";
         } catch (SAMHAException | ClassNotFoundException | SQLException ex) {
             return ex.getMessage();
         }

@@ -58,7 +58,7 @@ public class GtAlocacao {
 
         try {
             gtPrincipal.identificarPermissaoPadrao();
-            validarCampos(listaProfessores, disciplina);
+            validarCampos(listaProfessores, disciplina);    
             Alocacao alocacao = new Alocacao(); 
             alocacao.setAno(ano);
             alocacao.setDisciplina(disciplina);
@@ -70,7 +70,7 @@ public class GtAlocacao {
                 Professor professor2 = (Professor) listaProfessores.get(1);
                 alocacao.setProfessor2(professor2);
             }
-            
+
             gtPrincipal.getGdPrincipal().getGdAlocacao().cadastrar(alocacao);
             return Constantes.CADASTRADO;
             

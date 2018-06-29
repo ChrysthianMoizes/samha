@@ -70,6 +70,10 @@ public class CtrlProfessor extends CtrlGenerica{
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarAtivosPorCoordenadoria(id);
     }
     
+    public List<Professor> filtrarAtivos(){
+        return ctrlPrincipal.getGtPrincipal().getGtProfessor().consultarAtivos();
+    }
+    
     public List<Professor> filtrarPorEixo(int id){
         return ctrlPrincipal.getGtPrincipal().getGtProfessor().filtrarPorEixo(id);
     }

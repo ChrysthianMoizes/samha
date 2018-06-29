@@ -54,10 +54,12 @@ public class GtConflito {
         
         if(listaAulas.isEmpty())
             return null;
-        else
-            return montarMensagemConflitoTurma(listaAulas);
+        else{
+            String nomeProfessor = obterNomeProfessor(aula, idProfessor);
+            return montarMensagemConflitoTurma(listaAulas, nomeProfessor);
+        }    
     }
-    
+ 
     public List removerAulaListaBanco(List listaAulasBanco, Aula aula){
         
         Aula aulaLista;
@@ -78,10 +80,10 @@ public class GtConflito {
         return listaAulasBanco;
     }
     
-    public String montarMensagemConflitoTurma(List aulas){
+    public String montarMensagemConflitoTurma(List aulas, String nomeProfessor){
         
         Aula aulaLista;
-        String novaMensagem = "Este Professor está em outra(s) turma(s) neste horário: ";
+        String novaMensagem = nomeProfessor + " está em outra(s) turma(s) neste horário: ";
 
         for(int i = 0; i < aulas.size(); i++){
             aulaLista = (Aula) aulas.get(i);
@@ -133,7 +135,7 @@ public class GtConflito {
             resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
 
             if(resposta) 
-                return restricao.getProfessor().getPrimeiroNome().toUpperCase() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+                return restricao.getProfessor().getPrimeiroNome() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
         }
         return null;
     }
@@ -162,6 +164,14 @@ public class GtConflito {
             case 6: return Constantes.VESPERTINO;
             default: return Constantes.NOTURNO;    
         }
+    }
+    
+    public String obterNomeProfessor(Aula aula, int idProfessor){
+        
+        if(aula.getAlocacao().getProfessor1().getId() == idProfessor)
+            return aula.getAlocacao().getProfessor1().getPrimeiroNome();
+        else
+            return aula.getAlocacao().getProfessor2().getPrimeiroNome();
     }
     
     public boolean validarQuantidadeAulasDisciplina(Aula aula){

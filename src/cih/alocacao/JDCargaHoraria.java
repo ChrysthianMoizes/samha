@@ -16,7 +16,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
     }
 
     public void alterarLarguraTabela(){
-        tblCargaHoraria.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tblCargaHoraria.getColumnModel().getColumn(0).setPreferredWidth(250);
         tblCargaHoraria.getColumnModel().getColumn(1).setPreferredWidth(10);
     }
     
@@ -32,9 +32,10 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         tblCargaHoraria = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Professores");
+        setTitle("Carga Horária - Professores");
+        setMinimumSize(new java.awt.Dimension(50, 50));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        setPreferredSize(new java.awt.Dimension(452, 250));
+        setPreferredSize(new java.awt.Dimension(452, 500));
 
         tblCargaHoraria.setBackground(new java.awt.Color(0, 153, 102));
         tblCargaHoraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));

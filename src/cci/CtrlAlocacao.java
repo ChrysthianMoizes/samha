@@ -104,20 +104,17 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void listarCargaHorariaProfessores(JTable tabela){
         
-        if(getEixoSelecionado() != null){
-            
-            List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarPorEixo(getEixoSelecionado().getId());
-            
-            int ano = jdAlocacao.getAno();
-            int semestre = jdAlocacao.getSemestre();
-            
-            List listaCargasHorarias = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
-            listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
-
-        }else{
-            jdCargaHoraria = null;
-            CtrlMensagem.exibirMensagemAviso(jdCargaHoraria, "Selecione uma coordenadoria");
-        }
+        List listaProfessores = null;
+        int ano = jdAlocacao.getAno();
+        int semestre = jdAlocacao.getSemestre();
+        
+        if(getEixoSelecionado() != null)
+            listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorEixo(getEixoSelecionado().getId());
+        else
+            listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivos();
+        
+        List listaCargasHorarias = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
+        listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
     }
     
     public void excluir(JTable tabela) {
@@ -222,6 +219,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     }
     
     public List listarTodosProfessores(){
+        setEixoSelecionado(null);
         List listaProfessores = ctrlPrincipal.getCtrlProfessor().consultarAtivos();
         return listaProfessores;
     }

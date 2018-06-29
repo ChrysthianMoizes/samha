@@ -177,7 +177,7 @@ public class CtrlTurma extends CtrlGenerica{
             cadastraTurma.setListaCursos(listaCursos);
         preencherCombo(cbxCurso, listaCursos);
         
-        if((cadastraTurma != null) && (cadastraTurma.isVisible())){
+        if(cadastraTurma != null){
             if(listaCursos.size() > 0){
                 Curso curso = (Curso) cbxCurso.getSelectedItem();
                 preencherComboMatriz(curso.getId(), cbxMatriz);
