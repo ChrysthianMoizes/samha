@@ -24,26 +24,29 @@ public class GtAlocacao {
         Professor professor;
         boolean adicionado;
         
-        for(int i = 0; i < listaProfessores.size(); i++){
-            
-            professor = (Professor) listaProfessores.get(i);
-            professor.setCargaHoraria(0);
-            adicionado = false;
-            
-            for(int j = 0; j < listaAlocacoes.size(); j++){
-                
-                alocacao = (Alocacao) listaAlocacoes.get(j);
-                
-                if(alocacao.getProfessor1().getId() == professor.getId())
-                    adicionado = somarCargaHoraria(professor, alocacao);
-                
-                if(alocacao.getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
-                    if(alocacao.getProfessor2().getId() == professor.getId())
-                        adicionado = somarCargaHoraria(professor, alocacao);  
-                }               
+        if(listaProfessores != null){
+        
+            for(int i = 0; i < listaProfessores.size(); i++){
+
+                professor = (Professor) listaProfessores.get(i);
+                professor.setCargaHoraria(0);
+                adicionado = false;
+
+                for(int j = 0; j < listaAlocacoes.size(); j++){
+
+                    alocacao = (Alocacao) listaAlocacoes.get(j);
+
+                    if(alocacao.getProfessor1().getId() == professor.getId())
+                        adicionado = somarCargaHoraria(professor, alocacao);
+
+                    if(alocacao.getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
+                        if(alocacao.getProfessor2().getId() == professor.getId())
+                            adicionado = somarCargaHoraria(professor, alocacao);  
+                    }               
+                }
+                if(adicionado)
+                    listaCargaHoraria.add(professor);
             }
-            if(adicionado)
-                listaCargaHoraria.add(professor);
         }
         return listaCargaHoraria;
     }

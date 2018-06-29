@@ -22,7 +22,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDAlocacao jdAlocacao;
     private JDCargaHoraria jdCargaHoraria;
-    private Eixo eixoSelecionado;
+    private List listaProfessores;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
         ctrlPrincipal = ctrl;
@@ -104,14 +104,8 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void listarCargaHorariaProfessores(JTable tabela){
         
-        List listaProfessores = null;
         int ano = jdAlocacao.getAno();
         int semestre = jdAlocacao.getSemestre();
-        
-        if(getEixoSelecionado() != null)
-            listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorEixo(getEixoSelecionado().getId());
-        else
-            listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivos();
         
         List listaCargasHorarias = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, listaProfessores);
         listarEmTabela(listaCargasHorarias, tabela, jdCargaHoraria, "toArrayCargaHoraria");
@@ -181,21 +175,23 @@ public class CtrlAlocacao extends CtrlGenerica{
     
     public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores, char filtro){
         
-        List listaProfessores = null;
+        List professores = null;
         
         switch(filtro){
             case 'E': 
                 cbxEixo.setEnabled(true);
-                listaProfessores = listarProfessoresEixo(cbxEixo); break;
+                professores = listarProfessoresEixo(cbxEixo); break;
             
-            case 'T':
+            default:
                 cbxEixo.setEnabled(false);
                 cbxEixo.removeAllItems();
-                listaProfessores = listarTodosProfessores(); break;
-            default:break;
+                professores = listarTodosProfessores(); break;
         }
+        
+        if(jdCargaHoraria != null && listaProfessores != null)
+            jdCargaHoraria.atualizarTabela();
 
-        preencherJList(listaProfessores, lstProfessores);
+        preencherJList(professores, lstProfessores);
     }
     
     public List listarProfessoresEixo(JComboBox cbxEixo){
@@ -203,13 +199,8 @@ public class CtrlAlocacao extends CtrlGenerica{
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         
         if(eixo != null){
-            
-            setEixoSelecionado(eixo);
-        
-            if(jdCargaHoraria != null)
-                jdCargaHoraria.atualizarTabela();      
-
             List listaProfessores = ctrlPrincipal.getCtrlProfessor().filtrarAtivosPorEixo(eixo.getId());
+            setListaProfessores(listaProfessores);
             return listaProfessores;
             
         }else
@@ -219,17 +210,17 @@ public class CtrlAlocacao extends CtrlGenerica{
     }
     
     public List listarTodosProfessores(){
-        setEixoSelecionado(null);
         List listaProfessores = ctrlPrincipal.getCtrlProfessor().consultarAtivos();
+        setListaProfessores(listaProfessores);
         return listaProfessores;
     }
 
-    public Eixo getEixoSelecionado() {
-        return eixoSelecionado;
+    public List getListaProfessores() {
+        return listaProfessores;
     }
 
-    public void setEixoSelecionado(Eixo eixo) {
-        this.eixoSelecionado = eixo;
+    public void setListaProfessores(List listaProfessores) {
+        this.listaProfessores = listaProfessores;
     }
     
     public void identificarDisciplinaEspecial(JList lstDisciplinas){
