@@ -7,6 +7,7 @@ import org.hibernate.annotations.CascadeType;
 
 
 @Entity
+@Table(name = "coordenadoria")
 public class Coordenadoria implements Serializable, Comparable<Object> {
     
     @Id

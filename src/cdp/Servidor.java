@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "servidor")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Servidor implements Serializable{
     
