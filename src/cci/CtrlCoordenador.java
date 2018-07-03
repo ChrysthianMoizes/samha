@@ -123,16 +123,31 @@ public class CtrlCoordenador extends CtrlGenerica{
     
     public void identificarOrigem(Usuario coordenador){
         
+        cadastraCoord.setCoordenador(coordenador);
+        
         if(coordenador != null){
-            cadastraCoord.setCoordenador(coordenador);
             cadastraCoord.selecionarTipoCoordenador(coordenador);
-            cadastraCoord.setarCamposComInstancia(coordenador);
             cadastraCoord.desabilitarComboTipoCoordenador(false);
+            cadastraCoord.alterarComboTipo();
             cadastraCoord.desabilitarComboCurso(false);
+            cadastraCoord.setarCamposComInstancia(coordenador);
             if(coordenador instanceof CoordenadorCurso)
                 cadastraCoord.desabilitarComboProfessor(true);
             else
                 cadastraCoord.desabilitarComboProfessor(false);
+        }
+    }
+    
+    public void setarCursoCoordenador(JComboBox cbxCurso, CoordenadorCurso coordenador, List<Curso> listaCursos){
+        
+        if(coordenador != null){
+            for(Curso curso : listaCursos){
+                if(curso.getCoordenador() != null){
+                    if(curso.getCoordenador().getId() == coordenador.getId()){
+                        cbxCurso.setSelectedItem(curso);
+                    }
+                }
+            }
         }
     }
     
@@ -175,9 +190,10 @@ public class CtrlCoordenador extends CtrlGenerica{
         }
     }
     
-    public void preencherComboCurso(JComboBox cbxCurso){      
+    public List preencherComboCurso(JComboBox cbxCurso){      
         List listaCursos = ctrlPrincipal.getCtrlCurso().listar();
-        preencherCombo(cbxCurso, listaCursos);     
+        preencherCombo(cbxCurso, listaCursos);
+        return listaCursos;
     }
     
     public List listarProfessoresNaoCoordenadores(){

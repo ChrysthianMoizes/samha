@@ -355,7 +355,8 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
         switch (cbxTipo.getSelectedIndex()) {
             case 1:
                 ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
-                ctrlPrincipal.getCtrlCoordenador().preencherComboCurso(cbxCurso);
+                List listaCursos = ctrlPrincipal.getCtrlCoordenador().preencherComboCurso(cbxCurso);
+                ctrlPrincipal.getCtrlCoordenador().setarCursoCoordenador(cbxCurso, (CoordenadorCurso) coordenador, listaCursos);
                 cbxProfessor.setEnabled(true);
                 cbxCurso.setEnabled(true);
                 txtNome.setEditable(false);
@@ -407,8 +408,8 @@ public class JDCadastrarCoordenador extends javax.swing.JDialog {
             cbxTipo.setSelectedIndex(0);
         }else if( coordenador instanceof CoordenadorCurso){
             ctrlPrincipal.getCtrlCoordenador().preencherComboProfessor(cbxProfessor);
-            cbxTipo.setSelectedIndex(1);
             cbxTipo.setEnabled(false);
+            cbxTipo.setSelectedIndex(1);
             txtNome.setEditable(false);
             txtMatricula.setEditable(false);
             txtEmail.setEnabled(false);
