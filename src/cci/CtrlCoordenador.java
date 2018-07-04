@@ -198,7 +198,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     
     public List listarProfessoresNaoCoordenadores(){
         
-        List listaProfessores = ctrlPrincipal.getCtrlProfessor().consultar();
+        List listaProfessores = ctrlPrincipal.getCtrlProfessor().consultarAtivos();
         List listaCoordenadores = ctrlPrincipal.getGtPrincipal().getGtCoordenador().buscarCoordenadoresPorTipo(Constantes.COORD_CURSO);
         List novaListaProfessores = new ArrayList<>();
         

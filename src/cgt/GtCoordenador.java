@@ -34,9 +34,10 @@ public class GtCoordenador {
                 coordCurso.setSenha(senha);
                 coordCurso.setProfessor(professor);
                 
-                if(curso.getCoordenador() == null)
-                    gtPrincipal.getGdPrincipal().getGdCoordenador().cadastrarCoordenadorCurso(curso, coordCurso);
-                else
+                if(curso.getCoordenador() == null){
+                    int idCurso = curso.getId();
+                    gtPrincipal.getGdPrincipal().getGdCoordenador().cadastrarCoordenadorCurso(idCurso, coordCurso);
+                }else
                     return "Curso já possui coordenador associado.";
  
             }else{
@@ -67,6 +68,7 @@ public class GtCoordenador {
             return Constantes.CADASTRADO;
             
         } catch (Exception ex) {
+            curso.setCoordenador(null);
             return ex.getMessage();
         }
     }
@@ -118,8 +120,7 @@ public class GtCoordenador {
             gtPrincipal.identificarPermissaoAdmin();
             
             if(usuario instanceof CoordenadorCurso)
-                gtPrincipal.getGdPrincipal().getGdCoordenador().excluirCoordenadorCurso((CoordenadorCurso)usuario);
-            
+                gtPrincipal.getGdPrincipal().getGdCoordenador().excluirCoordenadorCurso((CoordenadorCurso)usuario);   
             else{
                 if(gtPrincipal.getCoordAtual().getId() != usuario.getId())
                     gtPrincipal.getGdPrincipal().getGdCoordenador().excluir(usuario);

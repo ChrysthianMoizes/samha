@@ -64,13 +64,17 @@ public class GdCoordenador extends GdGenerico{
         return lista;
     }
     
-    public void cadastrarCoordenadorCurso(Curso curso, CoordenadorCurso coordenador){
-        
+    public void cadastrarCoordenadorCurso(int idCurso, CoordenadorCurso coordenador){
+      
         try {
+            
             sessao = criarSessao();
             sessao.beginTransaction();
 
             sessao.save(coordenador);
+            
+            Curso curso = gdPrincipal.getGdCurso().filtrarCursoUnico("id", idCurso);
+            
             curso.setCoordenador(coordenador);
             sessao.update(curso);
             
@@ -81,32 +85,7 @@ public class GdCoordenador extends GdGenerico{
             sessao.getTransaction().rollback();
             sessao.close();
             throw e;
-        }
-        
-    }
-    
-    public void alterarCoordenadorCurso(Curso curso, CoordenadorCurso coordenador){
-        
-        try {
-            sessao = criarSessao();
-            sessao.beginTransaction();
-            
-            //excection: "A different object with the same identifier value was already associated with the session (Coordenadoria)"
-            // tenho 2 objetos coordenadoria em memoria, um dentro de curso e outro dentro de coordenador, dai o erro, 2 ids iguais na mesma sessao.
-            
-            sessao.update(coordenador);
-            //curso.setCoordenador(coordenador);
-            //sessao.update(curso);
-
-            sessao.getTransaction().commit();        
-            sessao.close();
-
-        } catch (HibernateException e) {
-            sessao.getTransaction().rollback();
-            sessao.close();
-            throw e;
-        }
-        
+        }   
     }
     
     public void excluirCoordenadorCurso(CoordenadorCurso coordenador){
