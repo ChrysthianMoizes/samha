@@ -257,7 +257,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public String obterDiretorioArquivamento(String tipo, int ano, int semestre){
         
-        String caminho = obterDiretorioRelatorio() + "Relatorios/" + tipo + "/" + ano + "-" + semestre;
+        String caminho = obterDiretorioRelatorio() + tipo + "/" + ano + "-" + semestre;
         File diretorio = new File(caminho);
             
         if (!diretorio.exists())
@@ -268,7 +268,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public String obterDiretorioRelatorio(){
         
-        String caminho = "C:/";
+        String caminho = "C:/SysAcad/Relatórios/";
         return caminho;
     }
     
