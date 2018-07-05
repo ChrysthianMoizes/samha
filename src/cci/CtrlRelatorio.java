@@ -274,7 +274,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     
     public String obterDiretorioLogoRelatorio(){
         
-        String logo = obterDiretorioInicializacao() + "src/cih/img/logo_ifes.JPG";
+        String logo = obterDiretorioInicializacao() + "src/cih/img/logo_ifes.png";
         return logo.replace("/", "\\");
     }
     
