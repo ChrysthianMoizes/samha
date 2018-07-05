@@ -37,18 +37,22 @@ public class GtEmail {
     public String montarMensagemEmail(Professor professor, int ano, int semestre){
         
         String mensagem = "\nOlá " + professor.getPrimeiroNome() + "!\n"
-            + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":\n\n";
+            + "Segue em anexo o arquivo contendo seus horários de aulas para o semestre de " + ano + "/" + semestre + ".\n\n"
+            + "Você trabalhará as seguintes disciplinas:\n\n";
         
         List<Aula> aulas = gtPrincipal.getGtAula().filtrarAulasProfessorLista(professor.getId());
         List<Disciplina> disciplinas = new ArrayList<>();
         
         for(Aula aula : aulas){
             if(!disciplinas.contains(aula.getAlocacao().getDisciplina())){
-                mensagem = mensagem + aula.getOferta().getTurma().getNome() + ": "
+                mensagem = mensagem + "=> " + aula.getOferta().getTurma().getNome() + ": "
                         + aula.getAlocacao().getDisciplina().getSigla() + " - " + aula.getAlocacao().getDisciplina().getNome() + ".\n";
                 disciplinas.add(aula.getAlocacao().getDisciplina());
             }
         }
+        
+        mensagem = mensagem + "\nQualquer dúvida procure seu coordenador de curso.\n\n"
+                + "Atenciosamente";
         
         return mensagem;
     }
