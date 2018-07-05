@@ -67,7 +67,7 @@ public class CtrlEmail {
     public String obterMensagemEnvioEmail(){
         
         String mensagem = "\u2022 O envio de e-mail gera novamente os relatórios\n"
-                        + "  dos professores do Filtro selecionado.\n"
+                        + "  dos professores ativos do Filtro selecionado.\n"
                         + "\u2022 Certifique-se de que os professores selecionados\n"
                         + "  possuem um email válido. Caso contrário, estes professores\n"
                         + "  não receberão e-mail.\n"

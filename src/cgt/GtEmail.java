@@ -1,7 +1,11 @@
 package cgt;
 
+import cdp.Aula;
+import cdp.Disciplina;
 import cdp.Professor;
 import cgt.services.WebServiceEmail;
+import java.util.ArrayList;
+import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
@@ -20,8 +24,7 @@ public class GtEmail {
         String emailProfessor = professor.getEmail();
         
         String titulo = "Horários de aula " + ano + "/" + semestre;
-        String mensagem = "Olá " + professor.getPrimeiroNome() + "!\n\n"
-                + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":";
+        String mensagem = montarMensagemEmail(professor, ano, semestre);
         
         String host = identificarHost(emailCoordenador);
         String remetente = identificarRemetente(emailCoordenador, matriculaCoordenador);
@@ -29,6 +32,25 @@ public class GtEmail {
         if(emailProfessor != null){
             new WebServiceEmail(remetente, host, emailCoordenador, senha, emailProfessor, titulo, mensagem, arquivo);
         } 
+    }
+    
+    public String montarMensagemEmail(Professor professor, int ano, int semestre){
+        
+        String mensagem = "\nOlá " + professor.getPrimeiroNome() + "!\n"
+            + "Segue em anexo seus horários de aulas de " + ano + "/" + semestre + ":\n\n";
+        
+        List<Aula> aulas = gtPrincipal.getGtAula().filtrarAulasProfessorLista(professor.getId());
+        List<Disciplina> disciplinas = new ArrayList<>();
+        
+        for(Aula aula : aulas){
+            if(!disciplinas.contains(aula.getAlocacao().getDisciplina())){
+                mensagem = mensagem + aula.getOferta().getTurma().getNome() + ": "
+                        + aula.getAlocacao().getDisciplina().getSigla() + " - " + aula.getAlocacao().getDisciplina().getNome() + ".\n";
+                disciplinas.add(aula.getAlocacao().getDisciplina());
+            }
+        }
+        
+        return mensagem;
     }
     
     public String identificarRemetente(String emailRemetente, String matriculaRemetente){
