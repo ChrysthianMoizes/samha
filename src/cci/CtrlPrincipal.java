@@ -85,7 +85,7 @@ public final class CtrlPrincipal {
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/logo-white.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/logo-white.png");
         return icone.getImage();
     }
     
@@ -112,15 +112,6 @@ public final class CtrlPrincipal {
         frmInicio.atualizarInfoSistema();
         frmInicio.setExtendedState(Frame.MAXIMIZED_BOTH);
         frmInicio.setVisible(true);
-    }
-    
-    public BufferedImage setarBackground() {
-        try {
-            return ImageIO.read(new File("build/classes/cih/img/background.jpg"));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return null;
     }
 
     public void validarAcesso(String login, String senha) {

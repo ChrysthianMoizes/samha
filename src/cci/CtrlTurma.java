@@ -25,7 +25,7 @@ public class CtrlTurma extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/turma.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/turma.png");
         return icone.getImage();
     }
     

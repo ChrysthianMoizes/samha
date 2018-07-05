@@ -74,7 +74,7 @@ public class CtrlRelatorio extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/relatorio.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/relatorio.png");
         return icone.getImage();
     }
      

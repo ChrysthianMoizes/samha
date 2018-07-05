@@ -25,7 +25,7 @@ public class CtrlProfessor extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/professor.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/professor.png");
         return icone.getImage();
     }
     

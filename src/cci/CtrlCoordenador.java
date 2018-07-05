@@ -26,7 +26,7 @@ public class CtrlCoordenador extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/coordenador.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/coordenador.png");
         return icone.getImage();
     }
     

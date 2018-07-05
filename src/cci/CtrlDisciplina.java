@@ -25,7 +25,7 @@ public class CtrlDisciplina extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        ImageIcon icone = new ImageIcon("build/classes/cih/img/matriz_curricular.png");
+        ImageIcon icone = new ImageIcon("src/cih/img/matriz_curricular.png");
         return icone.getImage();
     }
     
