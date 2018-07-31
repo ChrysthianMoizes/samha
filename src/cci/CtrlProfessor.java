@@ -155,6 +155,19 @@ public class CtrlProfessor extends CtrlGenerica{
             buscaProf.setarMensagem("Nenhum professor encontrado.");
     }
     
+    public void removerTodasRestricoesProfessores(){
+        int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(buscaProf, "Este processo remove TODAS as restrições cadastradas.\nDesaja confirmar essa operação ?");
+        if(confirmacao == 0){
+            
+            String resposta = ctrlPrincipal.getGtPrincipal().getGtRestricao().excluirTodasRestricoes();
+            
+            if (resposta.equals(Constantes.EXCLUIDO)) {
+                CtrlMensagem.exibirMensagemSucesso(buscaProf, "Restrições removidas com sucesso!");
+            }else
+                CtrlMensagem.exibirMensagemErro(buscaProf, resposta);  
+        }
+    }
+    
     //================================================= TELA DE CADASTRO ====================================================
     
     public void validarOperacao(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria, String email, boolean ativo){  

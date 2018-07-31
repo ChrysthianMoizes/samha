@@ -45,7 +45,7 @@ public class CtrlRelatorioDisciplina extends CtrlGenerica{
         entUsuario.add(spnAno);
         entUsuario.add(spnSemestre);
 
-        String titulo = "Informe o ano e semestre:";
+        String titulo = "Deseja gerar os relatórios de disciplinas?";
         int resposta = CtrlMensagem.exibirMensagemInputDados(janela, entUsuario, titulo);
         int ano = (int) spnAno.getValue();
         int semestre = (int) spnSemestre.getValue();
@@ -56,6 +56,8 @@ public class CtrlRelatorioDisciplina extends CtrlGenerica{
     public void identificarResposta(int resposta, int ano, int semestre){
         
         if(resposta == 0){
+            String mensagem = "Este processo pode demorar um pouco, pressione o botão 'OK' e aguarde.\nA pasta com seus relatórios será aberta em seguida.";
+            CtrlMensagem.exibirMensagemRetornoDados(null, mensagem, "Atenção");
             ctrlPrincipal.getGtPrincipal().getGtRelatorio().atualizarAulasAnoSemestre(ano, semestre);
             List turmas = ctrlPrincipal.getCtrlTurma().listar();
             List turmasAtivas = ctrlPrincipal.getGtPrincipal().getGtTurma().filtrarTurmasAtivas(turmas, ano, semestre);

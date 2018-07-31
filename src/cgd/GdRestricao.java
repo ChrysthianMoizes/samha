@@ -36,4 +36,19 @@ public class GdRestricao extends GdGenerico{
         sessao.close();
         return lista;
     }
+    
+    public void excluirTodasRestricoes(){
+        
+        List<RestricaoProfessor> listaRestricoes = consultar(RestricaoProfessor.class);
+        
+        Criteria crit = criarSessao().createCriteria(RestricaoProfessor.class);
+        sessao.beginTransaction();
+        
+        listaRestricoes.forEach((restricao) -> {
+            sessao.delete(restricao);
+        });
+        
+        sessao.getTransaction().commit();
+        sessao.close();
+    }
 }

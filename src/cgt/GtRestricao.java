@@ -54,6 +54,16 @@ public class GtRestricao {
             return ex.getMessage();
         }
     }
+    
+    public String excluirTodasRestricoes(){
+        try {
+            gtPrincipal.identificarPermissaoPadrao();
+            gtPrincipal.getGdPrincipal().getGdRestricao().excluirTodasRestricoes();
+            return Constantes.EXCLUIDO;
+        } catch (SAMHAException ex) {
+            return ex.getMessage();
+        }
+    }
 
     public void validarCampos(String nome, String descricao) throws Exception {
         if (nome.equals("")) {
