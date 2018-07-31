@@ -52,7 +52,7 @@ public class GtEmail {
         }
         
         mensagem = mensagem + "\nQualquer dúvida procure seu coordenador de curso.\n\n"
-                + "Atenciosamente";
+                + "Atenciosamente,";
         
         return mensagem;
     }

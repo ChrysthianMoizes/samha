@@ -8,10 +8,6 @@ import cih.principal.FrmValidarAcesso;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -41,6 +37,7 @@ public final class CtrlPrincipal {
     private CtrlRelatorioProfessor ctrlRelatorioProfessor;
     private CtrlRelatorioTurma ctrlRelatorioTurma;
     private CtrlEmail ctrlEmail;
+    private CtrlRelatorioDisciplina ctrlRelatorioDisciplina;
 
     public CtrlPrincipal() {
         config = new Config();
@@ -63,6 +60,7 @@ public final class CtrlPrincipal {
         ctrlRelatorioProfessor = new CtrlRelatorioProfessor(this);
         ctrlRelatorioTurma = new CtrlRelatorioTurma(this);
         ctrlEmail = new CtrlEmail(this);
+        ctrlRelatorioDisciplina = new CtrlRelatorioDisciplina(this);
         instanciarFrameValidarAcesso();
     }
 
@@ -227,5 +225,9 @@ public final class CtrlPrincipal {
 
     public CtrlEmail getCtrlEmail() {
         return ctrlEmail;
+    }
+
+    public CtrlRelatorioDisciplina getCtrlRelatorioDisciplina() {
+        return ctrlRelatorioDisciplina;
     }
 }

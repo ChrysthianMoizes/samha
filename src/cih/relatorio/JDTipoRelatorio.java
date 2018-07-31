@@ -30,6 +30,7 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         pnlConfiguracoes = new javax.swing.JPanel();
         btnProfessores = new javax.swing.JButton();
         btnTurmas = new javax.swing.JButton();
+        btnDisciplinas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tipos de Relatórios");
@@ -71,32 +72,48 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
             }
         });
 
+        btnDisciplinas.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        btnDisciplinas.setForeground(new java.awt.Color(255, 255, 255));
+        btnDisciplinas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/disciplina_reduzido.png"))); // NOI18N
+        btnDisciplinas.setText("Disciplinas");
+        btnDisciplinas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDisciplinas.setContentAreaFilled(false);
+        btnDisciplinas.setFocusable(false);
+        btnDisciplinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisciplinasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlConfiguracoesLayout = new javax.swing.GroupLayout(pnlConfiguracoes);
         pnlConfiguracoes.setLayout(pnlConfiguracoesLayout);
         pnlConfiguracoesLayout.setHorizontalGroup(
             pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfiguracoesLayout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnProfessores, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(btnTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(92, 92, 92))
+            .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         pnlConfiguracoesLayout.setVerticalGroup(
             pnlConfiguracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlConfiguracoesLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(btnProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlConfiguracoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -123,7 +140,12 @@ public class JDTipoRelatorio extends javax.swing.JDialog {
         ctrlPrincipal.getCtrlRelatorio().instanciarTelaRelatorioTurma(pai);
     }//GEN-LAST:event_btnTurmasActionPerformed
 
+    private void btnDisciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplinasActionPerformed
+        ctrlPrincipal.getCtrlRelatorioDisciplina().exibirTelaAnoSemestre(this);
+    }//GEN-LAST:event_btnDisciplinasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDisciplinas;
     private javax.swing.JButton btnProfessores;
     private javax.swing.JButton btnTurmas;
     private javax.swing.ButtonGroup grpFiltros;

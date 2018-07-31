@@ -24,7 +24,7 @@ public class GtRelatorio {
         return gtPrincipal.getGtAula().filtrarAulasProfessorLista(idProfessor);
     }
     
-    public List listarAulasTurma(int ano, int semestre, int idTurma, int turno){
+    public List listarAulasTurmaPorTurno(int ano, int semestre, int idTurma, int turno){
         if(gtPrincipal.getGtAula().getListaAulasAnoSemestre() == null)
             atualizarAulasAnoSemestre(ano, semestre);
         

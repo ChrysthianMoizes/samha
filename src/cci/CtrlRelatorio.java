@@ -151,7 +151,7 @@ public class CtrlRelatorio extends CtrlGenerica{
         
         if(turma != null){
             jdRelatorioTurma.setarTurma(turma.getNome());
-            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtRelatorio().listarAulasTurma(ano, semestre, turma.getId(), turno);
+            List listaAulas = ctrlPrincipal.getGtPrincipal().getGtRelatorio().listarAulasTurmaPorTurno(ano, semestre, turma.getId(), turno);
             preencherTabelaTurma(tblTurma, listaAulas);
         }else{
             jdRelatorioTurma.setarTurma("Turma");
@@ -288,4 +288,4 @@ public class CtrlRelatorio extends CtrlGenerica{
         }else 
             return caminho + "/";  
     }
-}
+} 

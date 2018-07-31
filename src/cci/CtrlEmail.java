@@ -58,7 +58,8 @@ public class CtrlEmail {
         entUsuario.add(rotulo);
         entUsuario.add(password);
         
-        CtrlMensagem.exibirEntradaSenhaEmail(janela, entUsuario);
+        String titulo = "Senha de e-mail:";
+        CtrlMensagem.exibirMensagemRetornoDados(janela, entUsuario, titulo);
         
         String senha = password.getText();
         return senha;
