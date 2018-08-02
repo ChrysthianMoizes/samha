@@ -96,7 +96,8 @@ public class CtrlAula {
         int turno = ctrlPrincipal.getGtPrincipal().getGtAula().obterNumeroTurno(t);
         
         if(aula != null && !isDropInterno()){    // ARRASTAR DA LISTA         
-            ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(aula);  
+            ctrlPrincipal.getGtPrincipal().getGtAula().importarAulaLista(aula);
+            ctrlPrincipal.getCtrlConflito().pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
         }else if(aula != null && isDropInterno()){  // ARRASTAR DA TABELA
             ctrlPrincipal.getCtrlConflito().pintarCelulaTabelaTurma(aula.getDia(), aula.getNumero(), Color.WHITE);
             ctrlPrincipal.getGtPrincipal().getGtAula().moverAulaMatriz(linha, coluna, turno, aula);  
@@ -216,7 +217,7 @@ public class CtrlAula {
         }
     } 
     
-    public void desfazer(String turma){
+    public void desfazer(String turma, int ano, int semestre){
         
         setJdOferta(ctrlPrincipal.getCtrlOferta().getJdOferta());
         
@@ -225,6 +226,7 @@ public class CtrlAula {
             int confirmacao = CtrlMensagem.exibirMensagemConfirmacao(jdOferta, mensagem);
                 if (confirmacao == 0) {
                     setTemAlteracoes(false);
+                    ctrlPrincipal.getGtPrincipal().getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
                     jdOferta.atualizarTela();
                 }
         }else

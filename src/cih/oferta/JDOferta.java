@@ -231,7 +231,9 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void desfazer(){
-        ctrlPrincipal.getCtrlAula().desfazer(lblNomeTurma.getText());
+        int ano = (int) spnAno.getValue();
+        int semestre = (int) spnSemestre.getValue();
+        ctrlPrincipal.getCtrlAula().desfazer(lblNomeTurma.getText(), ano, semestre);
     }
     
     public void preencherHorarioProfessor(){
