@@ -88,7 +88,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("SysAcad");
+        jLabel2.setText("SAMHA");
 
         javax.swing.GroupLayout pnlExteriorLayout = new javax.swing.GroupLayout(pnlExterior);
         pnlExterior.setLayout(pnlExteriorLayout);
