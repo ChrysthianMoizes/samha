@@ -112,9 +112,9 @@ public class Aula implements Serializable, Comparable<Object> {
     
     @Override
     public String toString() { 
-        String retorno = getAlocacao().getDisciplina().getSigla() + " - " + getAlocacao().getProfessor1().getPrimeiroNome();
+        String retorno = getAlocacao().getDisciplina().getSigla() + " - " + getAlocacao().getProfessor1().obterNomeAbreviado();
         if(getAlocacao().getDisciplina().getTipo().toUpperCase().equals("ESPECIAL")){
-            retorno = retorno + "/" + getAlocacao().getProfessor2().getPrimeiroNome();
+            retorno = retorno + "/" + getAlocacao().getProfessor2().obterNomeAbreviado();
         }
         return retorno;
     }

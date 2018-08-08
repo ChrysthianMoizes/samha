@@ -163,12 +163,12 @@ public class CtrlRelatorioTurma {
         
         for(Aula aula: lista){
             
-            String professor = aula.getAlocacao().getProfessor1().getPrimeiroNome();
+            String professor = aula.getAlocacao().getProfessor1().obterNomeAbreviado();
             String key = String.valueOf(aula.getDia()) + String.valueOf(aula.getNumero());
             String sigla = aula.getAlocacao().getDisciplina().getSigla();
             
             if(aula.getAlocacao().getProfessor2() != null){
-                professor = professor + "|\n" + aula.getAlocacao().getProfessor2().getPrimeiroNome();
+                professor = professor + "\n" + aula.getAlocacao().getProfessor2().obterNomeAbreviado();
             }  
             hash.put(key, sigla + "\n" + professor);
         }

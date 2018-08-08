@@ -135,7 +135,7 @@ public class GtConflito {
             resposta = identificarNumeroAulaConflitante(restricao, aula.getNumero());
 
             if(resposta) 
-                return restricao.getProfessor().getPrimeiroNome() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
+                return restricao.getProfessor().obterNomeAbreviado() + " possui uma restrição neste horário: " + restricao.getNome().toUpperCase();    
         }
         return null;
     }
@@ -169,9 +169,9 @@ public class GtConflito {
     public String obterNomeProfessor(Aula aula, int idProfessor){
         
         if(aula.getAlocacao().getProfessor1().getId() == idProfessor)
-            return aula.getAlocacao().getProfessor1().getPrimeiroNome();
+            return aula.getAlocacao().getProfessor1().obterNomeAbreviado();
         else
-            return aula.getAlocacao().getProfessor2().getPrimeiroNome();
+            return aula.getAlocacao().getProfessor2().obterNomeAbreviado();
     }
     
     public boolean validarQuantidadeAulasDisciplina(Aula aula){

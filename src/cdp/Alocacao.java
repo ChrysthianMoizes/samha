@@ -118,9 +118,9 @@ public class Alocacao implements Serializable, Comparable<Object>{
     @Override
     public String toString() {
         
-        String retorno = disciplina.getSigla()+ " - " + professor1.getPrimeiroNome();
+        String retorno = disciplina.getSigla()+ " - " + professor1.obterNomeAbreviado();
         if(disciplina.getTipo().toUpperCase().equals("ESPECIAL")){
-            retorno = retorno + "/" + professor2.getPrimeiroNome();
+            retorno = retorno + "/" + professor2.obterNomeAbreviado();
         }
         return retorno;
     }
