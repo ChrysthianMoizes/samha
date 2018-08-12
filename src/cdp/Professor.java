@@ -64,6 +64,16 @@ public class Professor extends Servidor implements Comparable<Object>{
         }
         return getNome();
     }
+    
+    public String obterPrimeiroNome(){
+        
+        int espaco = this.getNome().indexOf(" ");
+        
+        if(espaco > 0)           
+            return this.getNome().substring(0, espaco);      
+        
+        return getNome();
+    }
 
     public int getCargaHoraria() {
         return cargaHoraria;

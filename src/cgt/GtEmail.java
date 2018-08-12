@@ -36,7 +36,7 @@ public class GtEmail {
     
     public String montarMensagemEmail(Professor professor, int ano, int semestre){
         
-        String mensagem = "\nOlá " + professor.obterNomeAbreviado() + "!\n"
+        String mensagem = "\nOlá " + professor.obterPrimeiroNome()+ "!\n"
             + "Segue em anexo o arquivo contendo seus horários de aulas para o semestre de " + ano + "/" + semestre + ".\n\n"
             + "Você trabalhará as seguintes disciplinas:\n\n";
         
