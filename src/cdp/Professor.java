@@ -60,7 +60,7 @@ public class Professor extends Servidor implements Comparable<Object>{
                 }
             }
             
-            return nomeAbreviado + ".";
+            return nomeAbreviado;
         }
         return getNome();
     }

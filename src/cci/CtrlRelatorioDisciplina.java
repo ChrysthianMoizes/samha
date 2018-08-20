@@ -3,6 +3,7 @@ package cci;
 import cdp.Aula;
 import cdp.Disciplina;
 import cdp.Turma;
+import cgt.Constantes;
 import cih.relatorio.JDTipoRelatorio;
 import java.awt.Font;
 import java.io.FileNotFoundException;
@@ -30,7 +31,7 @@ public class CtrlRelatorioDisciplina extends CtrlGenerica{
 
         JSpinner spnAno = new JSpinner();
         spnAno.setFont(new java.awt.Font("DialogInput", 0, 16));
-        spnAno.setModel(new javax.swing.SpinnerNumberModel(2018, 2000, null, 1));
+        spnAno.setModel(new javax.swing.SpinnerNumberModel(2019, 2000, null, 1));
         spnAno.setEditor(new JSpinner.NumberEditor(spnAno, "####"));
 
         JSpinner spnSemestre = new JSpinner();
@@ -75,8 +76,9 @@ public class CtrlRelatorioDisciplina extends CtrlGenerica{
             mensagem = "\n\t\t\t\t\t\t" + turma.getNome() + " - " + ano + "/" + semestre + "\n\n\n";
             
             List aulas = ctrlPrincipal.getGtPrincipal().getGtAula().filtrarAulasTurmaLista(turma.getId());
-            mensagem = mensagem + obterSiglaDisciplina(aulas) + "\n";
+            mensagem = mensagem + obterSiglaDisciplina(aulas) + "\n";     
             gerarRelatorioDisciplinas(mensagem, ano, semestre, turma);
+            mensagem = "";
         }
     }
     
@@ -106,7 +108,15 @@ public class CtrlRelatorioDisciplina extends CtrlGenerica{
         
         for(Aula aula : aulas){
             if(!disciplinas.contains(aula.getAlocacao().getDisciplina())){
+                
                 mensagem = mensagem + "\t" + aula.getAlocacao().getDisciplina().getSigla() + " - " + aula.getAlocacao().getDisciplina().getNome() + ".\n";
+                mensagem = mensagem + "\tProfessor da Disciplina: " + aula.getAlocacao().getProfessor1().getNome() + " (" + aula.getAlocacao().getProfessor1().obterNomeAbreviado() + ").\n";
+                
+                if(aula.getAlocacao().getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
+                   mensagem = mensagem + "\tProfessor da Disciplina: " + aula.getAlocacao().getProfessor2().getNome() + " (" + aula.getAlocacao().getProfessor2().obterNomeAbreviado() + ").\n"; 
+                }
+                
+                mensagem = mensagem + "\n";
                 disciplinas.add(aula.getAlocacao().getDisciplina());
             }
         }

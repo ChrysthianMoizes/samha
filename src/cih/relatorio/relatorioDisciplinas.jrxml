@@ -9,17 +9,17 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="104" splitType="Stretch">
+		<band height="92" splitType="Stretch">
 			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
 				<reportElement x="391" y="0" width="164" height="20" uuid="837906bc-6248-47ed-9ca5-262f91225f8e"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="0" y="0" width="267" height="104" uuid="5639fa46-cf95-4c98-a7ea-d53e35dcf35a"/>
+				<reportElement x="0" y="0" width="267" height="92" uuid="5639fa46-cf95-4c98-a7ea-d53e35dcf35a"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Opaque" x="267" y="35" width="288" height="69" backcolor="#FFFFFF" uuid="004ad59d-162a-460c-9883-fb5292f8d2ec"/>
+				<reportElement mode="Opaque" x="267" y="35" width="288" height="57" backcolor="#FFFFFF" uuid="004ad59d-162a-460c-9883-fb5292f8d2ec"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -28,7 +28,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="18" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Disciplinas por Turma]]></text>
 			</staticText>
@@ -41,17 +41,14 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="217" splitType="Stretch">
+		<band height="578" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="555" height="217" uuid="a5659ca2-705e-4a79-a350-ccc8262acdbc"/>
+				<reportElement x="0" y="0" width="555" height="578" uuid="a5659ca2-705e-4a79-a350-ccc8262acdbc"/>
 				<textElement>
-					<font fontName="Arial" size="13"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mensagem}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
