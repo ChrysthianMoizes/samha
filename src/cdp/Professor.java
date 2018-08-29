@@ -13,7 +13,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Professor extends Servidor implements Comparable<Object>{
     
     @Column(nullable = false)
-    private int cargaHoraria;
+    private double cargaHoraria;
     
     @Column(nullable = false, unique = false)
     private boolean ativo;
@@ -27,7 +27,7 @@ public class Professor extends Servidor implements Comparable<Object>{
     public Professor() {
     }
 
-    public Professor(int cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula, 
+    public Professor(double cargaHoraria, Coordenadoria coordenadoria, int id, String nome, String matricula, 
             String email, boolean ativo) {
         super(id, nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
@@ -35,7 +35,7 @@ public class Professor extends Servidor implements Comparable<Object>{
         this.ativo = ativo;
     }
 
-    public Professor(int cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, 
+    public Professor(double cargaHoraria, Collection<RestricaoProfessor> restricoes, Coordenadoria coordenadoria, 
             String nome, String matricula, String email, boolean ativo) {
         super(nome, matricula, email);
         this.cargaHoraria = cargaHoraria;
@@ -75,11 +75,11 @@ public class Professor extends Servidor implements Comparable<Object>{
         return getNome();
     }
 
-    public int getCargaHoraria() {
+    public double getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
+    public void setCargaHoraria(double cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 

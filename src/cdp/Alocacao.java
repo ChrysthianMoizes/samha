@@ -38,13 +38,11 @@ public class Alocacao implements Serializable, Comparable<Object>{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor1_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor1;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor2_id", nullable = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Professor professor2;
 
     public Alocacao() {

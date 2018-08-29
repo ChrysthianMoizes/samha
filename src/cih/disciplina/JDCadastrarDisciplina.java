@@ -578,13 +578,13 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxCursoItemStateChanged
 
     private void spnCargaHorariaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnCargaHorariaStateChanged
-        int cargaHoraria = (int) spnCargaHoraria.getValue();
-        spnAulas.setValue((cargaHoraria /15));
+//        int cargaHoraria = (int) spnCargaHoraria.getValue();
+//        spnAulas.setValue((cargaHoraria /15));
     }//GEN-LAST:event_spnCargaHorariaStateChanged
 
     private void spnAulasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAulasStateChanged
-        int qtAulas = (int) spnAulas.getValue();
-        spnCargaHoraria.setValue(qtAulas * 15); 
+//        int qtAulas = (int) spnAulas.getValue();
+//        spnCargaHoraria.setValue(qtAulas * 15); 
     }//GEN-LAST:event_spnAulasStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

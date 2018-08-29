@@ -553,7 +553,8 @@ public class JDCadastrarProfessor extends javax.swing.JDialog {
         txtNome.setText(professor.getNome());
         txtMatricula.setText(professor.getMatricula());
         txtEmail.setText(professor.getEmail());
-        spnCargaHoraria.setValue(professor.getCargaHoraria());
+        int ch = (int) professor.getCargaHoraria();
+        spnCargaHoraria.setValue(ch);
         chxAtivo.setSelected(professor.isAtivo());
     }
     

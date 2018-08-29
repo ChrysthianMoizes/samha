@@ -4,6 +4,7 @@ import cdp.Alocacao;
 import cdp.Disciplina;
 import cdp.Professor;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,8 +53,18 @@ public class GtAlocacao {
     }
     
     public boolean somarCargaHoraria(Professor professor, Alocacao alocacao){
-        int cargaHoraria = professor.getCargaHoraria();
-        professor.setCargaHoraria(cargaHoraria + alocacao.getDisciplina().getQtAulas());
+        
+        double cargaHoraria = professor.getCargaHoraria();
+        double qtAulas = (double) alocacao.getDisciplina().getCargaHoraria() / (double) 15;
+        double total = cargaHoraria + qtAulas;
+        
+        DecimalFormat df = new DecimalFormat("0.##");
+        String valor = df.format(total);
+
+        double valorFormatado = Double.parseDouble(valor.replace(",", "."));
+        
+        professor.setCargaHoraria(valorFormatado);
+        
         return true;
     }
     
