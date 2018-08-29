@@ -131,6 +131,7 @@
 	<parameter name="413" class="java.lang.String"/>
 	<parameter name="414" class="java.lang.String"/>
 	<parameter name="415" class="java.lang.String"/>
+	<parameter name="aulas" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -163,18 +164,25 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="322" y="64" width="470" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
+				<reportElement x="322" y="45" width="470" height="37" uuid="efcd3337-45d2-439d-ad1d-bcabd7f1d887"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DialogInput" size="22" isBold="true"/>
+					<font fontName="DialogInput" size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="322" y="101" width="470" height="37" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
+				<reportElement x="322" y="82" width="470" height="37" uuid="f016232b-8896-498c-bfa1-9cc6dc24b299"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DialogInput" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{setor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="123" width="468" height="35" uuid="1d1b93b4-743e-4657-bccc-bcb0fc91d41c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{aulas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

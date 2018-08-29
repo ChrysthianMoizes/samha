@@ -29,7 +29,7 @@ public class CtrlRelatorioProfessor {
         Eixo eixo = (Eixo) cbxEixo.getSelectedItem();
         Coordenadoria coordenadoria = (Coordenadoria) cbxCoordenadoria.getSelectedItem();
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
-        List professores = obterListaProfessores(eixo, coordenadoria, professor, tipo);
+        List professores = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, obterListaProfessores(eixo, coordenadoria, professor, tipo));
         
         if(professores != null){
             if(!professores.isEmpty())
@@ -137,7 +137,7 @@ public class CtrlRelatorioProfessor {
         
         String anoSemestre = ano + "/" + semestre;
         hash.put("ano", anoSemestre);
-        
+        hash.put("aulas", professor.getCargaHoraria() + " aulas semanais");
         hash.put("nome", professor.getNome());
         hash.put("setor", professor.getCoordenadoria().getNome() + "\t" + anoSemestre);
         hash.putAll(transformarListaEmHash(lista));
