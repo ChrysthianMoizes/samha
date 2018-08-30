@@ -152,6 +152,7 @@ public class CtrlRelatorioTurma {
         String anoSemestre = ano + "/" + semestre;
         
         hash.put("nome", turma.getNome() + " - " + periodoAtual);
+        hash.put("aulas", "");
         hash.put("setor", turma.getMatriz().getCurso().getNome() + "\t" + anoSemestre);
         hash.putAll(transformarListaEmHash(lista));
         return hash;

@@ -56,6 +56,7 @@ public class GtAlocacao {
         
         double cargaHoraria = professor.getCargaHoraria();
         double qtAulas = (double) alocacao.getDisciplina().getCargaHoraria() / (double) 15;
+  
         double total = cargaHoraria + qtAulas;
         
         DecimalFormat df = new DecimalFormat("0.##");

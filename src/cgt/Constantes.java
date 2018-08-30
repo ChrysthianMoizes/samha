@@ -33,4 +33,11 @@ public abstract class Constantes {
     public static final String VESPERTINO = "VESPERTINO";
     public static final String NOTURNO = "NOTURNO";
     
+    public static final String ENSINO_MEDIO = "ENSINO MÉDIO INTEGRADO";
+    public static final String TECNICO = "TÉCNICO";
+    public static final String GRADUACAO = "GRADUAÇÃO";
+    public static final String POS_GRADUACAO = "PÓS-GRADUAÇÃO";
+    public static final String MESTRADO = "MESTRADO";
+    public static final String DOUTORADO = "DOUTORADO";
+    
 }

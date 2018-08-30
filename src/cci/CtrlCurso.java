@@ -190,23 +190,26 @@ public class CtrlCurso extends CtrlGenerica{
         
         switch (curso.getNivel()) {
             
-            case "ENSINO MÉDIO INTEGRADO":
+            case Constantes.ENSINO_MEDIO:
                 cbxNivel.setSelectedIndex(0);
                 break;
-            case "TÉCNICO":
+            case Constantes.TECNICO:
                 cbxNivel.setSelectedIndex(1);
                 break;
-            case "GRADUAÇÃO":
+            case Constantes.GRADUACAO:
                 cbxNivel.setSelectedIndex(2);
                 break;
-            case "PÓS-GRADUAÇÃO":
+            case Constantes.POS_GRADUACAO:
                 cbxNivel.setSelectedIndex(3);
                 break;
-            case "MESTRADO":
+            case Constantes.MESTRADO:
                 cbxNivel.setSelectedIndex(4);
                 break;
-            default:
+            case Constantes.DOUTORADO:
                 cbxNivel.setSelectedIndex(5);
+                break;
+            default:
+                CtrlMensagem.exibirMensagemErro(cadastraCurso, "ERRO AO SELECIONAR NÍVEL");
                 break;
         }
     }
