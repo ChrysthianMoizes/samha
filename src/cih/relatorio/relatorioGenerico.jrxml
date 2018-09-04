@@ -156,7 +156,7 @@
 				</graphicElement>
 			</rectangle>
 			<image>
-				<reportElement x="13" y="31" width="287" height="127" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
+				<reportElement x="18" y="31" width="287" height="127" uuid="0417f647-87cd-4c9a-a945-0c37fd495dd4"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">

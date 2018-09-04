@@ -136,10 +136,9 @@ public class CtrlRelatorioProfessor {
         Map hash = new HashMap();
         
         String anoSemestre = ano + "/" + semestre;
-        hash.put("ano", anoSemestre);
-        hash.put("aulas", professor.getCargaHoraria() + " aulas semanais");
         hash.put("nome", professor.getNome());
-        hash.put("setor", professor.getCoordenadoria().getNome() + "\t" + anoSemestre);
+        hash.put("setor", professor.getCoordenadoria().getNome());
+        hash.put("aulas", professor.getCargaHoraria() + " aulas semanais" + "\t" + anoSemestre);
         hash.putAll(transformarListaEmHash(lista));
 
        return hash; 
