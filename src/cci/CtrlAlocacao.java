@@ -29,7 +29,6 @@ public class CtrlAlocacao extends CtrlGenerica{
     }
     
     public Image setarIconeJanela() {
-        //ImageIcon icone = new ImageIcon("build/classes/cih/img/alocacao.png");
         ImageIcon icone = new ImageIcon("src/cih/img/alocacao.png");
         return icone.getImage();
     }
@@ -62,6 +61,7 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         Alocacao ultimaAlocacao = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarUltimaAlocacao();
         if(ultimaAlocacao != null){
+            
             jdAlocacao.setAno(ultimaAlocacao.getAno());
             jdAlocacao.setSemestre(ultimaAlocacao.getSemestre());
         }
@@ -88,8 +88,8 @@ public class CtrlAlocacao extends CtrlGenerica{
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
         if(matriz != null){
-            
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz.getId());
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(ano, semestre, listaAlocacoes);
             listarEmTabela(listaAlocacoes, tabela, jdAlocacao, "toArray");
                
         if( listaAlocacoes.isEmpty())

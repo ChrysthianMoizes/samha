@@ -1,9 +1,10 @@
 package cih.alocacao;
 
 import cci.CtrlPrincipal;
-import cdp.Curso;
 import java.awt.Frame;
 import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDAlocacao extends javax.swing.JDialog {
 
@@ -338,17 +339,25 @@ public class JDAlocacao extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Disciplina / Professor", "Período"
+                "Disciplina / Professor", "Período", "Completa"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        ((DefaultTableCellRenderer)tblAlocacao.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(tblAlocacao);
 
         btnAdicionar.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N

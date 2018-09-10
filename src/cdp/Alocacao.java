@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
@@ -28,6 +29,9 @@ public class Alocacao implements Serializable, Comparable<Object>{
     
     @Column(nullable = false)
     private int semestre;
+    
+    @Transient
+    private boolean completa;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_id")
@@ -112,6 +116,14 @@ public class Alocacao implements Serializable, Comparable<Object>{
     public void setProfessor2(Professor professor2) {
         this.professor2 = professor2;
     }
+
+    public boolean isCompleta() {
+        return completa;
+    }
+
+    public void setCompleta(boolean completa) {
+        this.completa = completa;
+    }
     
     @Override
     public String toString() {
@@ -124,7 +136,7 @@ public class Alocacao implements Serializable, Comparable<Object>{
     }
     
     public Object[] toArray() {
-        return new Object[] { this, disciplina.getPeriodo() };
+        return new Object[] { this, disciplina.getPeriodo(), isCompleta() };
     }
 
     @Override

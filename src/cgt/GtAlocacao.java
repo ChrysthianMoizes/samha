@@ -1,8 +1,10 @@
 package cgt;
 
 import cdp.Alocacao;
+import cdp.Aula;
 import cdp.Disciplina;
 import cdp.Professor;
+import cdp.Turma;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -19,8 +21,11 @@ public class GtAlocacao {
     
     public List calcularCargaHorariaProfessor(int ano, int semestre, List listaProfessores){
         
+        atualizarListaAulasAnoSemestre(ano, semestre);
+        
         List listaAlocacoes = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestre(ano, semestre);
         List listaCargaHoraria = new ArrayList<>();
+        
         Alocacao alocacao;
         Professor professor;
         boolean adicionado;
@@ -37,12 +42,14 @@ public class GtAlocacao {
 
                     alocacao = (Alocacao) listaAlocacoes.get(j);
 
+                    int qtTurmas = filtrarQuantidadeTurmasAlocacao(alocacao.getId());
+                    
                     if(alocacao.getProfessor1().getId() == professor.getId())
-                        adicionado = somarCargaHoraria(professor, alocacao);
+                        adicionado = somarCargaHoraria(professor, alocacao, qtTurmas);
 
                     if(alocacao.getDisciplina().getTipo().equals(Constantes.ESPECIAL)){
                         if(alocacao.getProfessor2().getId() == professor.getId())
-                            adicionado = somarCargaHoraria(professor, alocacao);  
+                            adicionado = somarCargaHoraria(professor, alocacao, qtTurmas);  
                     }               
                 }
                 if(adicionado)
@@ -52,22 +59,73 @@ public class GtAlocacao {
         return listaCargaHoraria;
     }
     
-    public boolean somarCargaHoraria(Professor professor, Alocacao alocacao){
+    public boolean somarCargaHoraria(Professor professor, Alocacao alocacao, double qtTurmas){
         
         double cargaHoraria = professor.getCargaHoraria();
         double qtAulas = (double) alocacao.getDisciplina().getCargaHoraria() / (double) 15;
   
-        double total = cargaHoraria + qtAulas;
+        double total = cargaHoraria + (qtAulas * qtTurmas);
         
         DecimalFormat df = new DecimalFormat("0.##");
         String valor = df.format(total);
 
-        double valorFormatado = Double.parseDouble(valor.replace(",", "."));
-        
+        double valorFormatado = Double.parseDouble(valor.replace(",", "."));    
         professor.setCargaHoraria(valorFormatado);
         
         return true;
     }
+    
+    public int filtrarQuantidadeTurmasAlocacao(int idAlocacao){
+
+        List<Aula> listaAulas = gtPrincipal.getGtAula().filtrarAulasAlocacao(idAlocacao);
+        
+        List<Turma> listaTurmas = new ArrayList<>();
+        
+        for(Aula aula : listaAulas){
+            Turma turma = aula.getOferta().getTurma();
+            if(!listaTurmas.contains(turma)){
+                listaTurmas.add(turma);
+            }
+        }
+        
+        if(listaTurmas.size() <= 1)
+            return 1;
+
+        return listaTurmas.size();
+    }
+    
+    public List identificarQuantidadeUsoEmAulas(int ano, int semestre, List<Alocacao> listaAlocacoes){
+        
+        atualizarListaAulasAnoSemestre(ano, semestre);
+        
+        List aulas;
+        int qtTurmas;
+        
+        for(Alocacao alocacao : listaAlocacoes){
+            alocacao.setCompleta(false);
+            qtTurmas = filtrarQuantidadeTurmasAlocacao(alocacao.getId());
+            aulas = gtPrincipal.getGtAula().filtrarAulasAlocacao(alocacao.getId());
+            if(aulas.size() == (alocacao.getDisciplina().getQtAulas() * qtTurmas)){
+                alocacao.setCompleta(true);
+            }
+        }
+        
+        return listaAlocacoes;
+    }
+    
+    
+   public void atualizarListaAulasAnoSemestre(int ano, int semestre){
+       if(gtPrincipal.getGtAula().getListaAulasAnoSemestre() == null){
+            gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+       }else{
+           if(!gtPrincipal.getGtAula().getListaAulasAnoSemestre().isEmpty()){
+               Aula aula = (Aula) gtPrincipal.getGtAula().getListaAulasAnoSemestre().get(0);
+               if(aula.getOferta().getAno() != ano || aula.getOferta().getSemestre() != semestre)
+                   gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+           }else
+               gtPrincipal.getGtAula().preencherListaAulasAnoSemestre(ano, semestre);
+       }
+   }
     
     public String cadastrar(List listaProfessores, Disciplina disciplina, int ano, int semestre) {
 

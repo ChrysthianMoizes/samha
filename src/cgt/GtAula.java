@@ -319,5 +319,19 @@ public class GtAula {
             Collections.sort(aulas[dia]);
         }
         return aulas;
-    } 
+    }
+    
+    public List filtrarAulasAlocacao(int idAlocacao){
+        
+        List<Aula> listaAulas = new ArrayList<>();
+     
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getAlocacao().getId() == idAlocacao) {
+                listaAulas.add(aula);     
+            }
+        }
+        
+        return listaAulas;
+    }
+ 
 }
