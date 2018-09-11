@@ -98,42 +98,43 @@ public class GtAlocacao {
         
         List<Alocacao> listaAlocacoes = new ArrayList<>();
         List<Aula> listaAulasAnoSemestre = gtPrincipal.getGtAula().getListaAulasAnoSemestre();
-     
+           
         for(Aula aula : listaAulasAnoSemestre){
             if(aula.getAlocacao().getProfessor1().getId() == idProfessor 
                     || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor)) {
                 
-                if(listaAlocacoes.contains(aula.getAlocacao())){
-                    boolean contem = true;
+                if(!listaAlocacoes.contains(aula.getAlocacao())){
                     
-                    for(Alocacao aloc : listaAlocacoes){
-                        
-                        if(aloc.getId() == aula.getAlocacao().getId()){
-                            if(aloc.getTurma().getId() == aula.getOferta().getTurma().getId()){
-                                contem = false;
-                                break;
-                            }
-                        }  
-                    }
-                    
-                    if(contem){
-                        Alocacao alocacao = aula.getAlocacao();
-                        alocacao.setTurma(aula.getOferta().getTurma());
-                        listaAlocacoes.add(alocacao);
-                    }
-                    
-                }else{
                     Alocacao alocacao = aula.getAlocacao();
                     alocacao.setTurma(aula.getOferta().getTurma());
                     listaAlocacoes.add(aula.getAlocacao());
                 }
+                
+                /*boolean contem = false;
+                Alocacao aloc;
+
+                for(int i = 0; i < listaAlocacoes.size(); i++){
+                    aloc = listaAlocacoes.get(i);
+                    if(aloc.getId() == aula.getAlocacao().getId()){
+                        
+                        if(aloc.getTurma().getId() == aula.getOferta().getTurma().getId()){
+                            contem = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if(!contem){
+                    Alocacao alocacao = aula.getAlocacao();
+                    alocacao.setTurma(aula.getOferta().getTurma());
+                    listaAlocacoes.add(aula.getAlocacao());
+                }*/
             }
         }
-        
         return listaAlocacoes;
     }
     
-    public List identificarQuantidadeUsoEmAulas(List<Alocacao> listaAlocacoes){
+    public List identificarQuantidadeAulasTodasTurmas(List<Alocacao> listaAlocacoes){
 
         List aulas;
         int qtTurmas;
@@ -150,6 +151,20 @@ public class GtAlocacao {
         return listaAlocacoes;
     }
     
+    public List identificarQuantidadeAulasPorTurma(List<Alocacao> listaAlocacoes){
+
+        List aulas;
+        
+        for(Alocacao alocacao : listaAlocacoes){
+            alocacao.setCompleta(false);
+            aulas = gtPrincipal.getGtAula().filtrarAulasAlocacaoTurma(alocacao.getId(), alocacao.getTurma().getId());
+            if(aulas.size() == alocacao.getDisciplina().getQtAulas()){
+                alocacao.setCompleta(true);
+            }
+        }
+        
+        return listaAlocacoes;
+    }
     
    public void atualizarListaAulasAnoSemestre(int ano, int semestre){
        if(gtPrincipal.getGtAula().getListaAulasAnoSemestre() == null){

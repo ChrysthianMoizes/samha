@@ -334,4 +334,18 @@ public class GtAula {
         return listaAulas;
     }
     
+    public List filtrarAulasAlocacaoTurma(int idAlocacao, int idTurma){
+        
+        List<Aula> listaAulas = new ArrayList<>();
+     
+        for(Aula aula : listaAulasAnoSemestre){
+            if(aula.getAlocacao().getId() == idAlocacao) {
+                if(aula.getOferta().getTurma().getId() == idTurma){
+                    listaAulas.add(aula);
+                }   
+            }
+        }        
+        return listaAulas;
+    }
+    
 }

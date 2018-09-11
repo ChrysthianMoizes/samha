@@ -74,7 +74,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             instanciarTelaAlocacaoProfessor(pai, professor);
             
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesProfessor(professor.getId());
-            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(listaAlocacoes);
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasTodasTurmas(listaAlocacoes);
             
             listarEmTabela(listaAlocacoes, jdAlocacaoProfessor.getTableAlocacoes(), jdAlocacaoProfessor, "toArrayAlocacao");
             
@@ -120,7 +120,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz.getId());
             ctrlPrincipal.getGtPrincipal().getGtAlocacao().atualizarListaAulasAnoSemestre(ano, semestre);
-            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(listaAlocacoes);
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasTodasTurmas(listaAlocacoes);
             listarEmTabela(listaAlocacoes, tabela, jdAlocacao, "toArray");
                
         if( listaAlocacoes.isEmpty())
