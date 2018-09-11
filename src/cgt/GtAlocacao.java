@@ -2,7 +2,9 @@ package cgt;
 
 import cdp.Alocacao;
 import cdp.Aula;
+import cdp.Curso;
 import cdp.Disciplina;
+import cdp.MatrizCurricular;
 import cdp.Professor;
 import cdp.Turma;
 import java.sql.SQLException;
@@ -99,22 +101,16 @@ public class GtAlocacao {
         List<Alocacao> listaAlocacoes = new ArrayList<>();
         List<Aula> listaAulasAnoSemestre = gtPrincipal.getGtAula().getListaAulasAnoSemestre();
            
+        boolean contem;
+        
         for(Aula aula : listaAulasAnoSemestre){
             if(aula.getAlocacao().getProfessor1().getId() == idProfessor 
                     || (aula.getAlocacao().getProfessor2() != null && aula.getAlocacao().getProfessor2().getId() == idProfessor)) {
                 
-                if(!listaAlocacoes.contains(aula.getAlocacao())){
-                    
-                    Alocacao alocacao = aula.getAlocacao();
-                    alocacao.setTurma(aula.getOferta().getTurma());
-                    listaAlocacoes.add(aula.getAlocacao());
-                }
-                
-                /*boolean contem = false;
-                Alocacao aloc;
+                contem = false;
 
-                for(int i = 0; i < listaAlocacoes.size(); i++){
-                    aloc = listaAlocacoes.get(i);
+                for(Alocacao aloc : listaAlocacoes){
+                    
                     if(aloc.getId() == aula.getAlocacao().getId()){
                         
                         if(aloc.getTurma().getId() == aula.getOferta().getTurma().getId()){
@@ -124,14 +120,40 @@ public class GtAlocacao {
                     }
                 }
                 
-                if(!contem){
-                    Alocacao alocacao = aula.getAlocacao();
-                    alocacao.setTurma(aula.getOferta().getTurma());
-                    listaAlocacoes.add(aula.getAlocacao());
-                }*/
+                if(!contem)
+                    listaAlocacoes.add(preencherNovaAlocacao(aula));
             }
         }
         return listaAlocacoes;
+    }
+    
+    public Alocacao preencherNovaAlocacao(Aula aula){
+        
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(aula.getAlocacao().getDisciplina().getNome());
+        disciplina.setSigla(aula.getAlocacao().getDisciplina().getSigla());
+        disciplina.setPeriodo(aula.getAlocacao().getDisciplina().getPeriodo());
+        disciplina.setQtAulas(aula.getAlocacao().getDisciplina().getQtAulas());
+
+        Turma turma = new Turma();
+        turma.setNome(aula.getOferta().getTurma().getNome());
+        turma.setId(aula.getOferta().getTurma().getId());
+
+        Curso curso = new Curso();
+        curso.setNome(aula.getAlocacao().getDisciplina().getMatriz().getCurso().getNome());
+        
+        MatrizCurricular matriz = new MatrizCurricular();
+        matriz.setCurso(curso);
+        
+        disciplina.setMatriz(matriz);
+        
+        Alocacao alocacao = new Alocacao();
+        
+        alocacao.setId(aula.getAlocacao().getId());
+        alocacao.setDisciplina(disciplina);
+        alocacao.setTurma(turma);
+        
+        return alocacao;
     }
     
     public List identificarQuantidadeAulasTodasTurmas(List<Alocacao> listaAlocacoes){
@@ -163,6 +185,7 @@ public class GtAlocacao {
             }
         }
         
+        Collections.sort(listaAlocacoes);
         return listaAlocacoes;
     }
     

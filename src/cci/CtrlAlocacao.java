@@ -74,7 +74,7 @@ public class CtrlAlocacao extends CtrlGenerica{
             instanciarTelaAlocacaoProfessor(pai, professor);
             
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesProfessor(professor.getId());
-            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasTodasTurmas(listaAlocacoes);
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasPorTurma(listaAlocacoes);
             
             listarEmTabela(listaAlocacoes, jdAlocacaoProfessor.getTableAlocacoes(), jdAlocacaoProfessor, "toArrayAlocacao");
             
