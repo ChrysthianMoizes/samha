@@ -41,10 +41,10 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         setTitle("Carga Horária - Professores");
         setMinimumSize(new java.awt.Dimension(50, 50));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        setPreferredSize(new java.awt.Dimension(452, 500));
+        setPreferredSize(new java.awt.Dimension(600, 402));
 
         tblCargaHoraria.setBackground(new java.awt.Color(240, 240, 240));
-        tblCargaHoraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tblCargaHoraria.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         tblCargaHoraria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

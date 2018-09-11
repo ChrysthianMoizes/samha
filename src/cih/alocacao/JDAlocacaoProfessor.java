@@ -45,7 +45,7 @@ public class JDAlocacaoProfessor extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(800, 200));
 
         tblAlocacoes.setBackground(new java.awt.Color(240, 240, 240));
-        tblAlocacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tblAlocacoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblAlocacoes.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         tblAlocacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
