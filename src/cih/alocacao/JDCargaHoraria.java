@@ -1,17 +1,23 @@
 package cih.alocacao;
 
 import cci.CtrlPrincipal;
+import java.awt.Frame;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class JDCargaHoraria extends javax.swing.JDialog {
     
     private CtrlPrincipal ctrlPrincipal;
-
+    private Frame pai;
+    
     public JDCargaHoraria(java.awt.Frame parent, boolean modal, CtrlPrincipal ctrl) {
         super(parent, modal);
         initComponents();
+        this.pai = parent;
         this.ctrlPrincipal = ctrl;
         this.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         this.setModalityType(ModalityType.MODELESS);
+        tblCargaHoraria.setBackground(ctrlPrincipal.setarCorPanelInterior());
         alterarLarguraTabela();
     }
 
@@ -37,10 +43,9 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(452, 500));
 
-        tblCargaHoraria.setBackground(new java.awt.Color(0, 153, 102));
+        tblCargaHoraria.setBackground(new java.awt.Color(240, 240, 240));
         tblCargaHoraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
-        tblCargaHoraria.setForeground(new java.awt.Color(255, 255, 255));
+        tblCargaHoraria.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         tblCargaHoraria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -58,6 +63,12 @@ public class JDCargaHoraria extends javax.swing.JDialog {
             }
         });
         tblCargaHoraria.setRowHeight(25);
+        tblCargaHoraria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCargaHorariaMouseClicked(evt);
+            }
+        });
+        ((DefaultTableCellRenderer)tblCargaHoraria.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane2.setViewportView(tblCargaHoraria);
 
         getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -65,6 +76,12 @@ public class JDCargaHoraria extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblCargaHorariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCargaHorariaMouseClicked
+       if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlAlocacao().listarAlocacoesProfessor(pai, tblCargaHoraria);
+        }
+    }//GEN-LAST:event_tblCargaHorariaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;

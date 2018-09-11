@@ -5,8 +5,10 @@ import cdp.Curso;
 import cdp.Disciplina;
 import cdp.Eixo;
 import cdp.MatrizCurricular;
+import cdp.Professor;
 import cgt.Constantes;
 import cih.alocacao.JDAlocacao;
+import cih.alocacao.JDAlocacaoProfessor;
 import cih.alocacao.JDCargaHoraria;
 import java.awt.Frame;
 import java.awt.Image;
@@ -22,6 +24,7 @@ public class CtrlAlocacao extends CtrlGenerica{
     private CtrlPrincipal ctrlPrincipal;
     private JDAlocacao jdAlocacao;
     private JDCargaHoraria jdCargaHoraria;
+    private JDAlocacaoProfessor jdAlocacaoProfessor;
     private List listaProfessores;
 
     public CtrlAlocacao(CtrlPrincipal ctrl) {
@@ -31,6 +34,12 @@ public class CtrlAlocacao extends CtrlGenerica{
     public Image setarIconeJanela() {
         ImageIcon icone = new ImageIcon("src/cih/img/alocacao.png");
         return icone.getImage();
+    }
+    
+    public void instanciarTelaAlocacaoProfessor(Frame pai, Professor professor) {
+        jdAlocacaoProfessor = new JDAlocacaoProfessor(pai, true, ctrlPrincipal);
+        jdAlocacaoProfessor.setIconImage(setarIconeJanela());
+        jdAlocacaoProfessor.setTitle(professor.getNome());
     }
     
     public void instanciarTelaAlocacao(Frame pai) {
@@ -55,6 +64,26 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         if(jdCargaHoraria != null)
             jdCargaHoraria.setVisible(true);             
+    }
+    
+    public void listarAlocacoesProfessor(Frame pai, JTable tabela){
+        
+        try {
+            
+            Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tabela);
+            instanciarTelaAlocacaoProfessor(pai, professor);
+            
+            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesProfessor(professor.getId());
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(listaAlocacoes);
+            
+            listarEmTabela(listaAlocacoes, jdAlocacaoProfessor.getTableAlocacoes(), jdAlocacaoProfessor, "toArrayAlocacao");
+            
+            jdAlocacaoProfessor.setVisible(true); 
+            
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            CtrlMensagem.exibirMensagemErro(jdCargaHoraria, "Selecione um professor");
+        }
     }
     
     public void identificarUltimaAlocacao(){
@@ -88,8 +117,10 @@ public class CtrlAlocacao extends CtrlGenerica{
         MatrizCurricular matriz = (MatrizCurricular) cbxMatriz.getSelectedItem();
         
         if(matriz != null){
+            
             List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarPorAnoSemestreMatriz(ano, semestre, periodo, matriz.getId());
-            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(ano, semestre, listaAlocacoes);
+            ctrlPrincipal.getGtPrincipal().getGtAlocacao().atualizarListaAulasAnoSemestre(ano, semestre);
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeUsoEmAulas(listaAlocacoes);
             listarEmTabela(listaAlocacoes, tabela, jdAlocacao, "toArray");
                
         if( listaAlocacoes.isEmpty())

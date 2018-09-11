@@ -33,6 +33,9 @@ public class Alocacao implements Serializable, Comparable<Object>{
     @Transient
     private boolean completa;
     
+    @Transient
+    private Turma turma;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -124,6 +127,14 @@ public class Alocacao implements Serializable, Comparable<Object>{
     public void setCompleta(boolean completa) {
         this.completa = completa;
     }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
     
     @Override
     public String toString() {
@@ -137,6 +148,11 @@ public class Alocacao implements Serializable, Comparable<Object>{
     
     public Object[] toArray() {
         return new Object[] { this, disciplina.getPeriodo(), isCompleta() };
+    }
+    
+    public Object[] toArrayAlocacao() {
+        return new Object[] { getDisciplina().getNome(), getTurma().getNome(), getDisciplina().getSigla(), 
+            getDisciplina().getPeriodo(), getDisciplina().getMatriz().getCurso().getNome(), getDisciplina().getQtAulas(), isCompleta() };
     }
 
     @Override
