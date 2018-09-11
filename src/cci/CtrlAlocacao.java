@@ -70,10 +70,14 @@ public class CtrlAlocacao extends CtrlGenerica{
         
         try {
             
+            int ano = jdAlocacao.getAno();
+            int semestre = jdAlocacao.getSemestre();
+            
             Professor professor = (Professor) JTableUtil.getDadosLinhaSelecionada(tabela);
             instanciarTelaAlocacaoProfessor(pai, professor);
             
-            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesProfessor(professor.getId());
+            List listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesComAula(professor.getId());
+            listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().filtrarAlocacoesSemAula(professor.getId(), listaAlocacoes, ano, semestre);
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasPorTurma(listaAlocacoes);
             
             listarEmTabela(listaAlocacoes, jdAlocacaoProfessor.getTableAlocacoes(), jdAlocacaoProfessor, "toArrayAlocacao");

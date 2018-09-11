@@ -96,7 +96,7 @@ public class GtAlocacao {
         return listaTurmas.size();
     }
     
-    public List filtrarAlocacoesProfessor(int idProfessor){
+    public List filtrarAlocacoesComAula(int idProfessor){
         
         List<Alocacao> listaAlocacoes = new ArrayList<>();
         List<Aula> listaAulasAnoSemestre = gtPrincipal.getGtAula().getListaAulasAnoSemestre();
@@ -121,13 +121,13 @@ public class GtAlocacao {
                 }
                 
                 if(!contem)
-                    listaAlocacoes.add(preencherNovaAlocacao(aula));
+                    listaAlocacoes.add(preencherAlocacaoComAula(aula));
             }
         }
         return listaAlocacoes;
     }
     
-    public Alocacao preencherNovaAlocacao(Aula aula){
+    public Alocacao preencherAlocacaoComAula(Aula aula){
         
         Disciplina disciplina = new Disciplina();
         disciplina.setNome(aula.getAlocacao().getDisciplina().getNome());
@@ -154,6 +154,34 @@ public class GtAlocacao {
         alocacao.setTurma(turma);
         
         return alocacao;
+    }
+    
+    public List filtrarAlocacoesSemAula(int idProfessor, List<Alocacao> listaAlocacoes, int ano, int semestre){
+        
+        List<Alocacao> listaBanco = gtPrincipal.getGdPrincipal().getGdAlocacao().filtrarPorAnoSemestreProfessor(ano, semestre, idProfessor);
+        
+        boolean contem = false;
+        
+        for(Alocacao alocacao : listaBanco){
+            
+            contem = false;
+            
+            for(Alocacao aloc : listaAlocacoes){
+                if(alocacao.getId() == aloc.getId()){
+                    contem = true;
+                    break;
+                }
+            }
+            
+            if(!contem){
+                Turma turma = new Turma();
+                turma.setNome("S/A");
+                alocacao.setTurma(turma);
+                listaAlocacoes.add(alocacao);
+            } 
+        }
+        
+        return listaAlocacoes;
     }
     
     public List identificarQuantidadeAulasTodasTurmas(List<Alocacao> listaAlocacoes){

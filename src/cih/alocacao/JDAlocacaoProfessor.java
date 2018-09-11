@@ -13,6 +13,8 @@ public class JDAlocacaoProfessor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ctrlPrincipal = ctrl;
+        this.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+        this.setModalityType(ModalityType.MODELESS);
         tblAlocacoes.setBackground(ctrlPrincipal.setarCorPanelInterior());
         alterarLarguraTabela();
     }

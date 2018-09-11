@@ -51,7 +51,7 @@ public class JDCargaHoraria extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Carga Horária"
+                "Nome", "Carga Horária /h"
             }
         ) {
             boolean[] canEdit = new boolean [] {

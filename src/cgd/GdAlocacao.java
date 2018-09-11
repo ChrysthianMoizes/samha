@@ -42,6 +42,19 @@ public class GdAlocacao extends GdGenerico{
         return lista;
     }
     
+    public List filtrarPorAnoSemestreProfessor(int ano, int semestre, int idProfessor){
+        Criteria crit = criarSessao().createCriteria(Alocacao.class);
+        sessao.beginTransaction();
+        crit.add( Restrictions.eq("ano", ano));
+        crit.add( Restrictions.eq("semestre", semestre));
+        crit.add(Restrictions.or(Restrictions.eq("professor1.id", idProfessor), Restrictions.eq("professor2.id", idProfessor)));
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List lista = crit.list();
+        sessao.getTransaction().commit();
+        sessao.close();
+        return lista;
+    }
+    
     public Alocacao filtrarUltimaAlocacao() {
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         crit.addOrder(Order.desc("ano"));
@@ -66,7 +79,6 @@ public class GdAlocacao extends GdGenerico{
     public List filtrarPorProfessor(int id){
         Criteria crit = criarSessao().createCriteria(Alocacao.class);
         sessao.beginTransaction();
-        //crit.add( Restrictions.eq("professor1.id", id));
         crit.add(Restrictions.or(Restrictions.eq("professor1.id", id), Restrictions.eq("professor2.id", id)));
         crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List lista = crit.list();
