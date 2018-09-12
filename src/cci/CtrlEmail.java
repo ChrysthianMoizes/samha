@@ -30,6 +30,7 @@ public class CtrlEmail {
         Professor professor = (Professor) cbxProfessor.getSelectedItem();
         
         List professores = ctrlPrincipal.getCtrlRelatorioProfessor().obterListaProfessores(eixo, coordenadoria, professor, tipo);
+        professores = ctrlPrincipal.getGtPrincipal().getGtAlocacao().calcularCargaHorariaProfessor(ano, semestre, professores);
         confirmarEnvioEmail(janela, professores, ano, semestre);
     }
     
