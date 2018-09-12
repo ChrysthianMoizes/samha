@@ -265,6 +265,11 @@ public class JDBuscarTurma extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblTurma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTurmaMouseClicked(evt);
+            }
+        });
         jScrollPaneTurmas.setViewportView(tblTurma);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
@@ -473,6 +478,12 @@ public class JDBuscarTurma extends javax.swing.JDialog {
     private void spnAnoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAnoStateChanged
         atualizarTabela();
     }//GEN-LAST:event_spnAnoStateChanged
+
+    private void tblTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmaMouseClicked
+        if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlTurma().transitarTelas(tblTurma, pai);
+        }
+    }//GEN-LAST:event_tblTurmaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

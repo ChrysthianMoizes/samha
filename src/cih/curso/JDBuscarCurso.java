@@ -269,6 +269,11 @@ public class JDBuscarCurso extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCursoMouseClicked(evt);
+            }
+        });
         jScrollPaneProfessores.setViewportView(tblCurso);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
@@ -527,6 +532,12 @@ public class JDBuscarCurso extends javax.swing.JDialog {
     private void rbtnTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTecnicoActionPerformed
         atualizarTabela();
     }//GEN-LAST:event_rbtnTecnicoActionPerformed
+
+    private void tblCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCursoMouseClicked
+        if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlCurso().transitarTelas(tblCurso, pai);
+        }
+    }//GEN-LAST:event_tblCursoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

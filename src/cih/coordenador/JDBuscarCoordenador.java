@@ -230,6 +230,11 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblCoordenador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCoordenadorMouseClicked(evt);
+            }
+        });
         jScrollPaneCoordenadores.setViewportView(tblCoordenador);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
@@ -427,6 +432,13 @@ public class JDBuscarCoordenador extends javax.swing.JDialog {
     private void rdbCoordenadorPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCoordenadorPedagogicoActionPerformed
         atualizarTabela();
     }//GEN-LAST:event_rdbCoordenadorPedagogicoActionPerformed
+
+    private void tblCoordenadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCoordenadorMouseClicked
+        if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlCoordenador().transitarTelas(tblCoordenador, pai);
+        }
+    }//GEN-LAST:event_tblCoordenadorMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;

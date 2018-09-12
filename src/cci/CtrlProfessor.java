@@ -174,7 +174,7 @@ public class CtrlProfessor extends CtrlGenerica{
         
         Professor professor = cadastraProf.getProfessor();
         
-        if(validarCampos(nome, matricula, cargaHoraria, coordenadoria)){
+        if(validarCampos(nome, matricula, coordenadoria)){
             
             if(professor == null)   
                 cadastrar(nome, matricula, cargaHoraria, coordenadoria, email, ativo);
@@ -267,13 +267,11 @@ public class CtrlProfessor extends CtrlGenerica{
         }
     }
     
-    public boolean validarCampos(String nome, String matricula, int cargaHoraria, Coordenadoria coordenadoria){
+    public boolean validarCampos(String nome, String matricula, Coordenadoria coordenadoria){
         
         if((nome.equals("")))
             return false;
         if(matricula.equals(""))
-            return false;
-        if(cargaHoraria < 20)
             return false;
         if(coordenadoria == null)
             return false;

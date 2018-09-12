@@ -206,7 +206,9 @@ public class CtrlAlocacao extends CtrlGenerica{
         else
             jdAlocacao.setarMensagem("Curso não possui matriz cadastrada.");
         
-        preencherJList(listaDisciplinas, lstDisciplinas); 
+        preencherJList(listaDisciplinas, lstDisciplinas);
+        
+        jdAlocacao.atualizarTabela();
     }
     
     public void preencherListaProfessores(JComboBox cbxEixo, JList lstProfessores, char filtro){

@@ -256,6 +256,11 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblDisciplina.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDisciplinaMouseClicked(evt);
+            }
+        });
         jScrollPaneDisciplinas.setViewportView(tblDisciplina);
 
         btnGroup.add(rbtnEspecial);
@@ -473,6 +478,12 @@ public class JDBuscarDisciplina extends javax.swing.JDialog {
     private void spnPeriodoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnPeriodoStateChanged
         atualizarTabela();
     }//GEN-LAST:event_spnPeriodoStateChanged
+
+    private void tblDisciplinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDisciplinaMouseClicked
+        if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlDisciplina().transitarTelas(tblDisciplina, pai);
+        }
+    }//GEN-LAST:event_tblDisciplinaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

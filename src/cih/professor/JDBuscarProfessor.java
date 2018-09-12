@@ -247,6 +247,11 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblProfessor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProfessorMouseClicked(evt);
+            }
+        });
         jScrollPaneProfessores.setViewportView(tblProfessor);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/img/icone-pesquisar-reduzido.png"))); // NOI18N
@@ -421,6 +426,12 @@ public class JDBuscarProfessor extends javax.swing.JDialog {
     private void menuItemRemoverRestricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRemoverRestricoesActionPerformed
         ctrlPrincipal.getCtrlProfessor().removerTodasRestricoesProfessores();
     }//GEN-LAST:event_menuItemRemoverRestricoesActionPerformed
+
+    private void tblProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProfessorMouseClicked
+        if(evt.getClickCount() == 2){
+            ctrlPrincipal.getCtrlProfessor().transitarTelas(tblProfessor, pai);
+        }
+    }//GEN-LAST:event_tblProfessorMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
