@@ -152,7 +152,8 @@ public class Alocacao implements Serializable, Comparable<Object>{
     
     public Object[] toArrayAlocacao() {
         return new Object[] { getDisciplina().getNome(), getTurma().getNome(), getDisciplina().getSigla(), 
-            getDisciplina().getPeriodo(), getDisciplina().getMatriz().getCurso().getNome(), getDisciplina().getQtAulas(), isCompleta() };
+            getDisciplina().getPeriodo(), getDisciplina().getMatriz().getCurso().getNome(), getDisciplina().getQtAulas(), 
+            getDisciplina().getCargaHoraria(), isCompleta() };
     }
 
     @Override

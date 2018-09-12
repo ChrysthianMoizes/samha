@@ -3,6 +3,7 @@ package cih.oferta;
 import cci.CtrlPrincipal;
 import cdp.Aula;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -110,6 +111,18 @@ public class JDOferta extends javax.swing.JDialog {
     }
     
     public void removerAula(int x, int y){
+
+        Aula aula = obterAulaCelula();
+
+        if(aula != null){
+            itemRemover.setText("Remover");
+            popUpRemover.add(itemRemover);
+            popUpRemover.show(tblTurma, x, y);
+        
+        }
+    }
+    
+    public Aula obterAulaCelula(){
         
         int coluna = tblTurma.getSelectedColumn();
         int linha = tblTurma.getSelectedRow();
@@ -117,13 +130,10 @@ public class JDOferta extends javax.swing.JDialog {
         if((linha >= 0) && (coluna >= 0)){
 
             Aula aula = (Aula) tblTurma.getValueAt(linha, coluna);
-
-            if(aula != null){
-                itemRemover.setText("Remover");
-                popUpRemover.add(itemRemover);
-                popUpRemover.show(tblTurma, x, y);
-            }
+            return aula;
         }
+        
+        return null;
     }
     
     public void preencherComboCurso(){ 
@@ -450,6 +460,11 @@ public class JDOferta extends javax.swing.JDialog {
         tblTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTurmaMouseClicked(evt);
+            }
+        });
+        tblTurma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblTurmaKeyPressed(evt);
             }
         });
         jScrollPane2.setViewportView(tblTurma);
@@ -985,6 +1000,14 @@ public class JDOferta extends javax.swing.JDialog {
     private void btnValidarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarTurmasActionPerformed
         validarTurmas();
     }//GEN-LAST:event_btnValidarTurmasActionPerformed
+
+    private void tblTurmaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTurmaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+            Aula aula = obterAulaCelula();
+            if(aula != null)
+                ctrlPrincipal.getCtrlAula().removerAula(tblTurma);
+        }
+    }//GEN-LAST:event_tblTurmaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCQD;

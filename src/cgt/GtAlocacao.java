@@ -134,6 +134,7 @@ public class GtAlocacao {
         disciplina.setSigla(aula.getAlocacao().getDisciplina().getSigla());
         disciplina.setPeriodo(aula.getAlocacao().getDisciplina().getPeriodo());
         disciplina.setQtAulas(aula.getAlocacao().getDisciplina().getQtAulas());
+        disciplina.setCargaHoraria(aula.getAlocacao().getDisciplina().getCargaHoraria());
 
         Turma turma = new Turma();
         turma.setNome(aula.getOferta().getTurma().getNome());

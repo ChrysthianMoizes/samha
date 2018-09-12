@@ -27,6 +27,7 @@ public class JDAlocacaoProfessor extends javax.swing.JDialog {
         tblAlocacoes.getColumnModel().getColumn(4).setPreferredWidth(100);
         tblAlocacoes.getColumnModel().getColumn(5).setPreferredWidth(10);
         tblAlocacoes.getColumnModel().getColumn(6).setPreferredWidth(10);
+        tblAlocacoes.getColumnModel().getColumn(7).setPreferredWidth(10);
     }
    
     public JTable getTableAlocacoes(){
@@ -54,14 +55,14 @@ public class JDAlocacaoProfessor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Disciplina", "Turma", "Sigla", "Período", "Curso", "Qt. Aulas", "Completa"
+                "Disciplina", "Turma", "Sigla", "Período", "Curso", "Qt. Aulas", "C.H.", "Completa"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
