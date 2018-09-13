@@ -127,11 +127,11 @@ public class CtrlAlocacao extends CtrlGenerica{
             listaAlocacoes = ctrlPrincipal.getGtPrincipal().getGtAlocacao().identificarQuantidadeAulasTodasTurmas(listaAlocacoes);
             listarEmTabela(listaAlocacoes, tabela, jdAlocacao, "toArray");
                
-        if( listaAlocacoes.isEmpty())
-                jdAlocacao.setarMensagem("Nenhuma alocação encontrada.");
-        
-        if(jdCargaHoraria != null)
-            jdCargaHoraria.atualizarTabela();
+            if( listaAlocacoes.isEmpty())
+                    jdAlocacao.setarMensagem("Nenhuma alocação encontrada.");
+
+            if(jdCargaHoraria != null)
+                jdCargaHoraria.atualizarTabela();
         
         }else
             jdAlocacao.setarMensagem("Matriz Curricular não foi selecionada.");

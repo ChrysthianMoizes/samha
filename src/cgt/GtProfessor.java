@@ -22,7 +22,7 @@ public class GtProfessor {
             gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, matricula, coordenadoria);
             Professor professor = new Professor();
-            professor.setNome(nome);
+            professor.setNome(nome.trim());
             professor.setMatricula(matricula);
             professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
@@ -41,7 +41,7 @@ public class GtProfessor {
         try {
             gtPrincipal.identificarPermissaoPadrao();
             validarCampos(nome, matricula, coordenadoria);
-            professor.setNome(nome);
+            professor.setNome(nome.trim());
             professor.setMatricula(matricula);
             professor.setEmail(email);
             professor.setCargaHoraria(cargaHoraria);
