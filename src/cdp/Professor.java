@@ -51,7 +51,7 @@ public class Professor extends Servidor implements Comparable<Object>{
 
             String nomeAbreviado = this.getNome().substring(0, espaco) + " ";
             
-            for(int indice = espaco; indice < this.getNome().length(); indice++){
+            for(int indice = espaco; indice < this.getNome().length() - 1; indice++){
                 char caractere = this.getNome().charAt(indice);
                 if(caractere == ' '){
                     char letra = this.getNome().charAt(indice + 1);
