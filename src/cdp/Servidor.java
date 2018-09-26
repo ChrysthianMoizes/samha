@@ -19,7 +19,7 @@ public class Servidor implements Serializable{
     @Column(nullable = false, unique = false)
     private String matricula;
     
-    @Column(nullable = true, unique = false)
+    @Column(nullable = true, unique = true)
     private String email;
 
     public Servidor() {
