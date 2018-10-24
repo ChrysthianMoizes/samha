@@ -475,6 +475,7 @@ public class JDCadastrarDisciplina extends javax.swing.JDialog {
         btnRemoverMatriz.setEnabled(false);
         spnAno.setEnabled(false);
         spnSemestre.setEnabled(false);
+        cbxTipo.setEnabled(false);
     }
     
     public void limparCampos(){
