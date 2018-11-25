@@ -3,6 +3,7 @@ package cci;
 import cgd.Config;
 import cgt.GtPrincipal;
 import cgt.Constantes;
+import cih.principal.FrmAutor;
 import cih.principal.FrmInicio;
 import cih.principal.FrmValidarAcesso;
 import java.awt.Color;
@@ -15,6 +16,7 @@ public final class CtrlPrincipal {
 
     private Config config;
     private FrmValidarAcesso frmValidarAcesso;
+    private FrmAutor frmAutor;
     private FrmInicio frmInicio;
     private static int permissao;
     
@@ -101,6 +103,12 @@ public final class CtrlPrincipal {
         frmValidarAcesso = new FrmValidarAcesso(this);
         frmValidarAcesso.setIconImage(setarIconeJanela());
         frmValidarAcesso.setVisible(true);
+    }
+    
+    public void instanciarFrameAutor() {
+        frmAutor = new FrmAutor(this);
+        frmAutor.setIconImage(setarIconeJanela());
+        frmAutor.setVisible(true);
     }
 
     public void instanciarFrameInicio() {
