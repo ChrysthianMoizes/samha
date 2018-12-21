@@ -41,13 +41,14 @@ public class GtEmail {
             + "Você trabalhará as seguintes disciplinas:\n\n";
         
         List<Aula> aulas = gtPrincipal.getGtAula().filtrarAulasProfessorLista(professor.getId());
-        List<Disciplina> disciplinas = new ArrayList<>();
+        List<Aula> aulasBanco = new ArrayList<>();
         
         for(Aula aula : aulas){
-            if(!disciplinas.contains(aula.getAlocacao().getDisciplina())){
+            //disciplinas.contains(aula.getAlocacao().getDisciplina())
+            if(!verificarDisciplinaExistente(aulasBanco, aula)){
                 mensagem = mensagem + "=> " + aula.getOferta().getTurma().getNome() + ": "
                         + aula.getAlocacao().getDisciplina().getSigla() + " - " + aula.getAlocacao().getDisciplina().getNome() + ".\n";
-                disciplinas.add(aula.getAlocacao().getDisciplina());
+                aulasBanco.add(aula);
             }
         }
         
@@ -55,6 +56,22 @@ public class GtEmail {
                 + "Atenciosamente,";
         
         return mensagem;
+    }
+    
+    public boolean verificarDisciplinaExistente(List<Aula> aulasBanco, Aula aula){
+        
+        for(int i = 0; i < aulasBanco.size(); i++){
+                      
+            Aula aulaAtual = aulasBanco.get(i);
+            
+            if(aula.getAlocacao().getDisciplina().getId() == aulaAtual.getAlocacao().getDisciplina().getId() && 
+                    aula.getOferta().getTurma().getId() == aulaAtual.getOferta().getTurma().getId()){
+                
+                return true;
+            }   
+        }
+        
+        return false;
     }
     
     public String identificarRemetente(String emailRemetente, String matriculaRemetente){
